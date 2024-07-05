@@ -1,2 +1,4 @@
-gradlew --refresh-dependencies&&gradlew eclipse --info --stacktrace
+2>output.txt (call refresh_cmds.bat)
+pause
+
 

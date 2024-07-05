@@ -1,23 +1,17 @@
 plugins {
     id 'java-library'
-	id 'eclipse'
-	id 'maven-publish'
-	id 'net.neoforged.gradle.userdev' version "${forge_gradle_version}"
-    id 'com.matthewprenger.cursegradle' version "${cursegradle_version}"
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.0.145'
 }
 
-repositories {
-	mavenLocal()
-	maven {
-       // location of the maven that hosts JEI files since January 2023
-       name = "Jared's maven"
-       url = "https://maven.blamejared.com/"
-    }
-    maven {
-       // location of a maven mirror for JEI files, as a fallback
-       name = "ModMaven"
-       url = "https://modmaven.dev"
-    }
+tasks.named('wrapper', Wrapper).configure {
+    // Define wrapper values here so as to not have to always do so when updating gradlew.properties.
+    // Switching this to Wrapper.DistributionType.ALL will download the full gradle sources that comes with
+    // documentation attached on cursor hover of gradle classes and methods. However, this comes with increased
+    // file size for Gradle. If you do switch this to ALL, run the Gradle wrapper task twice afterwards.
+    // (Verify by checking gradle/wrapper/gradle-wrapper.properties to see if distributionUrl now points to `-all`)
+    distributionType = Wrapper.DistributionType.BIN
 }
 
 group = mod_group_id
@@ -26,13 +20,15 @@ version = "${minecraft_version}-" + mod_version
 libsDirName = "../output"
 distsDirName = "../output"
 
-base {
-
-	archivesName = mod_name
-
+repositories {
+    mavenLocal()
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
@@ -43,217 +39,95 @@ minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/
 runs {
 
     configureEach {
-    
-        workingDirectory project.file('run')
-        
-        systemProperty 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-        
+
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+
         systemProperty 'forge.logging.console.level', 'debug'
-        
-        systemProperty 'mixin.debug.export', 'true'
-        
+
         modSource project.sourceSets.main
-    
-    }
-    
-    client {
-    
-    }
-    
-    server {
-    
-    }
-    
-    data {
-    
-        programArguments.addAll '--mod', project.group, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
-    
     }
 
+    client {
+
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+
+    }
+
+    server {
+
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        programArgument '--nogui'
+
+    }
+
+    gameTestServer {
+
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+
+    }
+
+    data {
+
+        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+
+    }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-/*
-
-minecraft {
-    mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            arg "-mixin.config=electrodynamics.mixins.json"
-
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            property 'forge.logging.console.level', 'debug'
-
-			property 'mixin.debug.export', 'true'
-
-            mods {
-                electrodynamics {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            arg "-mixin.config=electrodynamics.mixins.json"
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-			
-			property 'mixin.debug.export', 'true'
-            
-            mods {
-                electrodynamics {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            arg "-mixin.config=electrodynamics.mixins.json"
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'electrodynamics', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                electrodynamics {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
 }
-
-*/
 
 dependencies {
-	implementation("net.neoforged:neoforge:${forge_version}")
-    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
-     // at runtime, use the full JEI jar for NeoForge
-    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+    implementation "net.neoforged:neoforge:${neo_version}"
+    compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
+    localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+   
 }
-
-
 
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
-            minecraft_version : minecraft_version, 
-            minecraft_version_range : minecraft_version_range,
-            neo_version : forge_version, 
-            neo_version_range : forge_version_range,
-            loader_version_range : loader_version_range,
-            mod_id : mod_id, 
-            mod_name : mod_name, 
-            mod_license : mod_license, 
-            mod_version : version,
-            credits : mod_credits,
-            mod_authors : mod_authors, 
-            mod_description: mod_desc,
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description
     ]
     inputs.properties replaceProperties
 
-    filesMatching(['META-INF/mods.toml']) {
-        expand replaceProperties + [project: project]
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
     }
-}
-
-
-task getDeps(type: Copy) {
-	duplicatesStrategy 'exclude'
-}
-
-/*
-tasks.named('jar', Jar).configure {
-	
-	manifest {
-        attributes([
-            "Specification-Title": "electrodynamics",
-            "Specification-Vendor": "aurilisdev",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": project.jar.archiveVersion,
-            "Implementation-Vendor" :"aurilisdev",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-            "MixinConfigs": "electrodynamics.mixins.json"
-        ])
-    }
-
-}
-
-*/
-tasks.register('sourcesJar', Jar).configure {
-	dependsOn classes
-	from sourceSets.main.allSource
-	archiveClassifier = 'sources'
-}
-
-tasks.register('deobfJar', Jar).configure {
-	from sourceSets.main.output
-	archiveClassifier = 'deobf'
-}
-
-/*
-task sourcesJar(type: Jar, dependsOn: classes) {
-	from sourceSets.main.allSource
-	classifier = 'sources'
-}
-task deobfJar(type: Jar) {
-	from sourceSets.main.output
-	classifier = 'deobf'
-}
-*/
-
-artifacts {
-	archives sourcesJar
-	archives deobfJar
 }
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+        register('mavenJava', MavenPublication) {
+            from components.java
         }
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "file://${project.projectDir}/repo"
         }
     }
 }
 
-tasks.curseforge.dependsOn jar
-
-curseforge {
-  apiKey = System.getenv("CURSEFORGE_KEY")
-  project {
-    id = '316867'
-    changelog = 'You can find changelog at: https://aurilis.dev/'
-    releaseType = 'release'
-    addGameVersion "${minecraft_version}"
-
-    mainArtifact(jar) {
-      displayName=project.name+" ${mod_version}"
-    }
-  }
-}
-
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
 }
