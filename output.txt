@@ -594,4 +594,4 @@ Caused by: org.gradle.internal.component.NoMatchingGraphVariantsException: No ma
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
 
 
-BUILD FAILED in 12s
+BUILD FAILED in 8s
