@@ -127,9 +127,9 @@ public class Electrodynamics {
         return event -> {
             ServerPlayer player = event.getPlayer();
             if(player == null){
-                PacketDistributor.sendToAllPlayers(new PacketResetGuidebookPages());
+                PacketDistributor.sendToAllPlayers(PacketResetGuidebookPages.PACKET);
             } else {
-                PacketDistributor.sendToPlayer(player, new PacketResetGuidebookPages());
+                PacketDistributor.sendToPlayer(player, PacketResetGuidebookPages.PACKET);
             }
         };
 

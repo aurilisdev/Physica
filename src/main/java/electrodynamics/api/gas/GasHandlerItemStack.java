@@ -49,7 +49,7 @@ public class GasHandlerItemStack implements IGasHandlerItem {
     @Override
     public GasStack getGasInTank(int tank) {
 
-        return container.get(ElectrodynamicsDataComponentTypes.GAS_STACK);
+        return container.getOrDefault(ElectrodynamicsDataComponentTypes.GAS_STACK, GasStack.EMPTY);
     }
 
     @Override

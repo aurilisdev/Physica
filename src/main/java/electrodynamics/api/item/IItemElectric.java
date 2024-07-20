@@ -1,6 +1,7 @@
 package electrodynamics.api.item;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -284,6 +285,18 @@ public interface IItemElectric {
                 ElectricItemData::new
         );
 
+        @Override
+        public boolean equals(Object obj) {
+            if(obj instanceof ElectricItemData data){
+                return joulesStored == data.joulesStored && maxJoules == data.maxJoules && voltage == data.voltage && receiveCap == data.receiveCap && extractCap == data.extractCap && battery == data.battery;
+            }
+            return false;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(joulesStored, maxJoules, voltage, receiveCap, extractCap, battery);
+        }
     }
 
 }

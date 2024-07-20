@@ -2,6 +2,7 @@ package electrodynamics.registers;
 
 import com.mojang.serialization.Codec;
 import electrodynamics.api.References;
+import electrodynamics.api.fluid.FluidStackComponent;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.item.IItemElectric;
 import electrodynamics.common.item.gear.armor.types.ItemJetpack;
@@ -11,7 +12,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -51,7 +51,7 @@ public class ElectrodynamicsDataComponentTypes {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TIMER = DATA_COMPONENT_TYPES.register(NBTUtils.TIMER, () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Location>> LOCATION_1 = DATA_COMPONENT_TYPES.register(NBTUtils.LOCATION + "1", () -> DataComponentType.<Location>builder().persistent(Location.CODEC).networkSynchronized(Location.STREAM_CODEC).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Location>> LOCATION_2 = DATA_COMPONENT_TYPES.register(NBTUtils.LOCATION + "2", () -> DataComponentType.<Location>builder().persistent(Location.CODEC).networkSynchronized(Location.STREAM_CODEC).cacheEncoding().build());
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<FluidStack>> FLUID_STACK = DATA_COMPONENT_TYPES.register("fluidstack", () -> DataComponentType.<FluidStack>builder().persistent(FluidStack.CODEC).networkSynchronized(FluidStack.STREAM_CODEC).cacheEncoding().build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<FluidStackComponent>> FLUID_STACK = DATA_COMPONENT_TYPES.register("fluidstack", () -> DataComponentType.<FluidStackComponent>builder().persistent(FluidStackComponent.CODEC).networkSynchronized(FluidStackComponent.STREAM_CODEC).cacheEncoding().build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<Direction>>> DIRECTIONS = DATA_COMPONENT_TYPES.register("direction_list", () -> DataComponentType.<List<Direction>>builder().persistent(Direction.CODEC.listOf()).networkSynchronized(ByteBufCodecs.fromCodec(Direction.CODEC.listOf())).cacheEncoding().build());
 

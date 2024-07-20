@@ -78,15 +78,15 @@ public abstract class ElectrodynamicsRecipe implements Recipe<ElectrodynamicsRec
     }
 
     public boolean hasItemBiproducts() {
-        return !itemBiproducts.isEmpty();
+        return itemBiproducts.size() != 0;
     }
 
     public boolean hasFluidBiproducts() {
-        return !fluidBiproducts.isEmpty();
+        return fluidBiproducts.size() != 0;
     }
 
     public boolean hasGasBiproducts() {
-        return !gasBiproducts.isEmpty();
+        return gasBiproducts.size() != 0;
     }
 
     @Nullable

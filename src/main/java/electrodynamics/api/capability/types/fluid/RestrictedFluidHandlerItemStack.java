@@ -2,6 +2,7 @@ package electrodynamics.api.capability.types.fluid;
 
 import java.util.function.Predicate;
 
+import electrodynamics.api.fluid.FluidStackComponent;
 import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import org.jetbrains.annotations.NotNull;
 
@@ -130,11 +131,11 @@ public class RestrictedFluidHandlerItemStack implements IFluidHandlerItem {
 
     @NotNull
     public FluidStack getFluid() {
-        return container.getOrDefault(ElectrodynamicsDataComponentTypes.FLUID_STACK, FluidStack.EMPTY);
+        return container.getOrDefault(ElectrodynamicsDataComponentTypes.FLUID_STACK, FluidStackComponent.EMPTY).fluid;
     }
 
     public void setFluid(FluidStack fluid) {
-        container.set(ElectrodynamicsDataComponentTypes.FLUID_STACK, fluid);
+        container.set(ElectrodynamicsDataComponentTypes.FLUID_STACK, new FluidStackComponent(fluid));
     }
 
     public void setContainerToEmpty() {

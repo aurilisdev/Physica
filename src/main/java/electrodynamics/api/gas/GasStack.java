@@ -11,6 +11,8 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.Objects;
+
 /**
  * An implementation of a FluidStack-like object for gases
  *
@@ -208,6 +210,11 @@ public class GasStack {
             return other.gas.equals(gas) && other.amount == amount && other.temperature == temperature && other.pressure == pressure;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(gas, amount, temperature, pressure, isEmpty);
     }
 
     @Override

@@ -9,9 +9,10 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PacketResetGuidebookPages implements CustomPacketPayload {
 
+    public static final PacketResetGuidebookPages PACKET = new PacketResetGuidebookPages();
     public static final ResourceLocation PACKET_RESETGUIDEBOOKPAGES_PACKETID = NetworkHandler.id("packetresetguidebookpages");
     public static final Type<PacketResetGuidebookPages> TYPE = new Type<>(PACKET_RESETGUIDEBOOKPAGES_PACKETID);
-    public static final StreamCodec<FriendlyByteBuf, PacketResetGuidebookPages> CODEC = StreamCodec.unit(new PacketResetGuidebookPages());
+    public static final StreamCodec<FriendlyByteBuf, PacketResetGuidebookPages> CODEC = StreamCodec.unit(PACKET);
 
     public static void handle(PacketResetGuidebookPages message, IPayloadContext context) {
         ClientBarrierMethods.handlerSetGuidebookInitFlag();
