@@ -1,9 +1,0 @@
-{
-  "sources": [
-    {
-      "type": "minecraft:directory",
-      "prefix": "custom/",
-      "source": "custom"
-    }
-  ]
-}

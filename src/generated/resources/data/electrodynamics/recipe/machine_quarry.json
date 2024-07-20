@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/elite"
+    },
+    "D": {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "PCP",
+    "CDC",
+    "PCP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:quarry"
+  }
+}

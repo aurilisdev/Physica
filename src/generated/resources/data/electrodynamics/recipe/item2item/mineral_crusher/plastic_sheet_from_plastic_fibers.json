@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "experience": 0.10000000149011612,
+  "fluidinputs": [
+    {
+      "count": 1,
+      "ingreident": {
+        "item": "electrodynamics:plasticfibers"
+      }
+    }
+  ],
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 1.0,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:oxidechromiumdisilicide"
+      }
+    }
+  ],
+  "output": {
+    "count": 2,
+    "id": "electrodynamics:sheetplastic"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

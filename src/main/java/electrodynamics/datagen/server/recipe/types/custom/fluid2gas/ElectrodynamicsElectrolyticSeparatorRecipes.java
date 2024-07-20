@@ -30,11 +30,11 @@ public class ElectrodynamicsElectrolyticSeparatorRecipes extends AbstractRecipeG
 	@Override
 	public void addRecipes(RecipeOutput output) {
 
-		newRecipe(new GasStack(ElectrodynamicsGases.OXYGEN.get(), 1000, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL), 0, 200, 250.0, "water_to_hydrogen_and_oxygen", modID)
+		newRecipe(new GasStack(ElectrodynamicsGases.OXYGEN.value(), 1000, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL), 0, 200, 250.0, "water_to_hydrogen_and_oxygen", modID)
 				//
 				.addFluidTagInput(FluidTags.WATER, 1000)
 				//
-				.addGasBiproduct(new ProbableGas(new GasStack(ElectrodynamicsGases.HYDROGEN.get(), 2000, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL), 1))
+				.addGasBiproduct(new ProbableGas(new GasStack(ElectrodynamicsGases.HYDROGEN.value(), 2000, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL), 1))
 				//
 				.save(output);
 

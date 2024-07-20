@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:storage_blocks/lapis"
+    },
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "G": {
+      "tag": "c:ingots/gold"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "CBC",
+    "GGG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:circuitelite"
+  }
+}

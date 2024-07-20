@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "type": "electrodynamics:enchantmentingredient",
+      "enchantments": [
+        "c:silk_touch"
+      ],
+      "ingredient": {
+        "item": "minecraft:enchanted_book"
+      },
+      "isStrict": false
+    },
+    "C": {
+      "tag": "c:circuits/ultimate"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "PCP",
+    "CBC",
+    "PCP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:upgradesilktouch"
+  }
+}

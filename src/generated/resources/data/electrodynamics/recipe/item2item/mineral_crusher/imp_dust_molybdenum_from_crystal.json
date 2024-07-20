@@ -1,0 +1,27 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "fluidinputs": [
+    {
+      "count": 1,
+      "ingreident": {
+        "item": "electrodynamics:crystalmolybdenum"
+      }
+    }
+  ],
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.05,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:oxidetrisulfur"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:impuredustmolybdenum"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

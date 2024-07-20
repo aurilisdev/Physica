@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/lead"
+    }
+  },
+  "pattern": [
+    "II",
+    "II"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:platelead"
+  }
+}

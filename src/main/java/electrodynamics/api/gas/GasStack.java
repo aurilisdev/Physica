@@ -49,7 +49,7 @@ public class GasStack {
     public static final double ABSOLUTE_ZERO = 1; // zero technically, but that makes volumes a pain in the ass
     public static final int VACUUM = 1; // zero technically, but that makes volumes a pain in the ass
 
-    private Holder<Gas> gas = Holder.direct(ElectrodynamicsGases.EMPTY.get());
+    private Holder<Gas> gas = ElectrodynamicsGases.EMPTY;
     private double amount = 0; // mB
     private double temperature = Gas.ROOM_TEMPERATURE;
     private int pressure = Gas.PRESSURE_AT_SEA_LEVEL; // ATM
@@ -62,7 +62,7 @@ public class GasStack {
 
     public GasStack(Gas gas) {
         this.gas = Holder.direct(gas);
-        if (gas == ElectrodynamicsGases.EMPTY.get()) {
+        if (gas == ElectrodynamicsGases.EMPTY) {
             isEmpty = true;
         }
     }
@@ -107,7 +107,7 @@ public class GasStack {
         }
         this.amount -= Math.min(Math.abs(amount), this.amount);
         if (this.amount == 0) {
-            gas = Holder.direct(ElectrodynamicsGases.EMPTY.get());
+            gas = ElectrodynamicsGases.EMPTY;
             this.amount = 0;
             isEmpty = true;
         }

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "electrodynamics:energizedalloyer"
+    },
+    "C": {
+      "item": "electrodynamics:compositeplating"
+    },
+    "S": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "T": {
+      "item": "electrodynamics:titaniumheatcoil"
+    }
+  },
+  "pattern": [
+    "CSC",
+    "SAS",
+    "CTC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:reinforcedalloyer"
+  }
+}

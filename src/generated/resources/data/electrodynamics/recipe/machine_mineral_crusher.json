@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "G": {
+      "tag": "c:gears/bronze"
+    },
+    "P": {
+      "tag": "c:plates/bronze"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "W": {
+      "item": "electrodynamics:wirecopper"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "GPG",
+    "SWS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:mineralcrusher"
+  }
+}

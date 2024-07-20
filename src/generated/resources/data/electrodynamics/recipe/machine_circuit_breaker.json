@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "electrodynamics:relay"
+    },
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "F": {
+      "item": "electrodynamics:ceramicfuse"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "SCS",
+    "FBF",
+    "SCS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:circuitbreaker"
+  }
+}

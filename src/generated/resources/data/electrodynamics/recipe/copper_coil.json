@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "W": {
+      "item": "electrodynamics:wirecopper"
+    }
+  },
+  "pattern": [
+    " W ",
+    "WIW",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:coil"
+  }
+}

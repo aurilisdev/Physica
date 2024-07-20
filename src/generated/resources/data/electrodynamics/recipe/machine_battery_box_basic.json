@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "electrodynamics:battery"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "W": {
+      "tag": "c:wires/insulated_copper"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "SWS",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:batterybox"
+  }
+}

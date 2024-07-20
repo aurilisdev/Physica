@@ -301,7 +301,7 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 
 		GENERATED(),
 		HANDHELD(),
-		FORGE_DEFAULT("forge", "item/default");
+		FORGE_DEFAULT("neoforge", "item/default");
 
 		@Nullable
 		private final ResourceLocation loc;

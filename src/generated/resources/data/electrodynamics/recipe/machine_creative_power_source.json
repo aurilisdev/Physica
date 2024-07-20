@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bedrock"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BNB",
+    "BBB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:creativepowersource"
+  }
+}

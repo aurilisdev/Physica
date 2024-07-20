@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "P": {
+      "item": "electrodynamics:ceramicplate"
+    }
+  },
+  "pattern": [
+    "P P",
+    "PBP",
+    "P P"
+  ],
+  "result": {
+    "count": 6,
+    "id": "electrodynamics:insulationceramic"
+  }
+}

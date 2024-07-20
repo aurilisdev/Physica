@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    " M ",
+    "WSW",
+    "PSP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:hydroelectricgenerator"
+  }
+}

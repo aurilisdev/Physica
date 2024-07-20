@@ -28,9 +28,9 @@ public class ElectrodynamicsGasTagsProvider extends IntrinsicHolderTagsProvider<
 
 	@Override
 	protected void addTags(Provider pProvider) {
-		tag(ElectrodynamicsTags.Gases.HYDROGEN).add(ElectrodynamicsGases.HYDROGEN.get());
-		tag(ElectrodynamicsTags.Gases.OXYGEN).add(ElectrodynamicsGases.OXYGEN.get());
-		tag(ElectrodynamicsTags.Gases.STEAM).add(ElectrodynamicsGases.STEAM.get());
+		tag(ElectrodynamicsTags.Gases.HYDROGEN).add(ElectrodynamicsGases.HYDROGEN.value());
+		tag(ElectrodynamicsTags.Gases.OXYGEN).add(ElectrodynamicsGases.OXYGEN.value());
+		tag(ElectrodynamicsTags.Gases.STEAM).add(ElectrodynamicsGases.STEAM.value());
 
 		tag(ElectrodynamicsTags.Gases.IS_CORROSIVE);
 	}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "D": {
+      "item": "electrodynamics:downgradetransformer"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "U": {
+      "item": "electrodynamics:upgradetransformer"
+    }
+  },
+  "pattern": [
+    "SAS",
+    "DCU",
+    "SAS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:currentregulator"
+  }
+}

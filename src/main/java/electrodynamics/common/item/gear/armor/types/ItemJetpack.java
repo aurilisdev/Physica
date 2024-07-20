@@ -109,7 +109,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
             return;
         }
 
-        GasStack gas = new GasStack(ElectrodynamicsGases.HYDROGEN.get(), MAX_CAPACITY, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL);
+        GasStack gas = new GasStack(ElectrodynamicsGases.HYDROGEN.value(), MAX_CAPACITY, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL);
 
         handler.fillTank(0, gas, GasAction.EXECUTE);
 
@@ -275,7 +275,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     }
 
     public static Predicate<GasStack> getGasValidator() {
-        return gas -> gas.getGas().equals(ElectrodynamicsGases.HYDROGEN.get());
+        return gas -> gas.getGas().equals(ElectrodynamicsGases.HYDROGEN.value());
     }
 
     @Override

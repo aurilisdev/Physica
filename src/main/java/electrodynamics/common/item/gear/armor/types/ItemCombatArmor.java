@@ -133,7 +133,7 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
             }
             ItemStack full = new ItemStack(this);
 
-            GasStack gas = new GasStack(ElectrodynamicsGases.HYDROGEN.get(), ItemJetpack.MAX_CAPACITY, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL);
+            GasStack gas = new GasStack(ElectrodynamicsGases.HYDROGEN.value(), ItemJetpack.MAX_CAPACITY, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL);
 
             IGasHandlerItem handler = full.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
 

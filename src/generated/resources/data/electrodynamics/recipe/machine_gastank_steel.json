@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "electrodynamics:compressoraddontank"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "V": {
+      "item": "electrodynamics:mechanicalvalve"
+    }
+  },
+  "pattern": [
+    " V ",
+    "SPS",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:gastanksteel"
+  }
+}

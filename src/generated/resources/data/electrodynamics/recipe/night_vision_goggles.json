@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "electrodynamics:battery"
+    },
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "G": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "L": {
+      "tag": "c:leathers"
+    },
+    "P": {
+      "item": "minecraft:lime_stained_glass_pane"
+    }
+  },
+  "pattern": [
+    "LLL",
+    "PCP",
+    "GBG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:nightvisiongoggles"
+  }
+}

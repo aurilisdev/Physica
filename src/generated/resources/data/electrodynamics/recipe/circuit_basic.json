@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    },
+    "W": {
+      "tag": "c:wires/insulated_copper"
+    }
+  },
+  "pattern": [
+    "WRW",
+    "RPR",
+    "WRW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:circuitbasic"
+  }
+}

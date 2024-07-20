@@ -1,5 +1,6 @@
 {
   "parent": "electrodynamics:parent/wire_side",
+  "render_type": "minecraft:cutout",
   "textures": {
     "conductor": "electrodynamics:block/wire/iron",
     "particle": "#conductor"

@@ -42,8 +42,8 @@ import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsFluids;
 import electrodynamics.registers.ElectrodynamicsGases;
 import electrodynamics.registers.ElectrodynamicsItems;
-import electrodynamics.registers.ElectrodynamicsRegistries;
 import electrodynamics.registers.ElectrodynamicsSounds;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -1828,8 +1828,8 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 		add("fluid." + modID + "." + BuiltInRegistries.FLUID.getKey(fluid).getPath(), translation);
 	}
 
-	public void addGas(DeferredHolder<Gas, Gas> gas, String translation) {
-		addGas(gas.get(), translation);
+	public void addGas(Holder<Gas> gas, String translation) {
+		addGas(gas.value(), translation);
 	}
 
 	public void addGas(Gas gas, String translation) {

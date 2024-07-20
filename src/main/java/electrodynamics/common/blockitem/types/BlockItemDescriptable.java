@@ -60,7 +60,10 @@ public class BlockItemDescriptable extends BlockItemElectrodynamics {
 
     @Override
     public int getMaxStackSize(ItemStack stack) {
-        return stack.get(DataComponents.BLOCK_ENTITY_DATA).copyTag().getDouble("joules") > 0 ? 1 : super.getMaxStackSize(stack);
+        if (stack.has(DataComponents.BLOCK_ENTITY_DATA) && stack.get(DataComponents.BLOCK_ENTITY_DATA).copyTag().getDouble("joules") > 0) {
+            return 1;
+        }
+        return super.getMaxStackSize(stack);
     }
 
     public static void addDescription(Supplier<Block> block, MutableComponent description) {

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "electrodynamics:compositearmorboots"
+    },
+    "H": {
+      "item": "electrodynamics:hydraulicboots"
+    },
+    "S": {
+      "tag": "c:plates/hslasteel"
+    },
+    "T": {
+      "tag": "c:plates/titaniumcarbide"
+    }
+  },
+  "pattern": [
+    "THT",
+    "TST",
+    "TBT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:combatarmorboots"
+  }
+}

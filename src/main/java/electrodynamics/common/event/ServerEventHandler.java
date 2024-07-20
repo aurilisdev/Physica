@@ -21,7 +21,6 @@ import electrodynamics.common.packet.types.server.PacketPlayerInformation;
 import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
 import electrodynamics.common.reloadlistener.ThermoelectricGeneratorHeatRegister;
-import electrodynamics.registers.ElectrodynamicsGases;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -100,7 +99,6 @@ public class ServerEventHandler {
 	public static void serverStartedHandler(ServerStartedEvent event) {
 		CoalGeneratorFuelRegister.INSTANCE.generateTagValues();
 		ThermoelectricGeneratorHeatRegister.INSTANCE.generateTagValues();
-		Electrodynamics.LOGGER.info(ElectrodynamicsGases.EMPTY.get());
 	}
 
 	// TODO: Why was this commented?

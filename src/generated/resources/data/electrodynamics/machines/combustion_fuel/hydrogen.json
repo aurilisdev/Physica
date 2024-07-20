@@ -1,5 +1,5 @@
 {
-  "fluid_tag": "forge:hydrogen",
+  "fluid_tag": "c:hydrogen",
   "power_multiplier": 1.0,
   "usage_per_burn": 1000
 }

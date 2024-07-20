@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "T": {
+      "item": "electrodynamics:tanksteel"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "STS",
+    "SCS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:coolantresavoir"
+  }
+}

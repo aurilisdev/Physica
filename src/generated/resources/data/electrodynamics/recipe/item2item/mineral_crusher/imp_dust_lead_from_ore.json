@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "experience": 0.30000001192092896,
+  "fluidinputs": [
+    {
+      "count": 1,
+      "ingreident": {
+        "tag": "c:ores/lead"
+      }
+    }
+  ],
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.4,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:impuredustsilver"
+      }
+    }
+  ],
+  "output": {
+    "count": 3,
+    "id": "electrodynamics:impuredustlead"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

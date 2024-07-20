@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_custom_data",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Items",
+                  "target": "BlockEntityTag"
+                },
+                {
+                  "op": "replace",
+                  "source": "itemproperty_size",
+                  "target": "BlockEntityTag"
+                },
+                {
+                  "op": "replace",
+                  "source": "joules",
+                  "target": "BlockEntityTag.joules"
+                }
+              ],
+              "source": "block_entity"
+            },
+            {
+              "component": "minecraft:container",
+              "entries": [
+                {
+                  "type": "minecraft:dynamic",
+                  "name": "minecraft:contents"
+                }
+              ],
+              "function": "minecraft:set_contents"
+            }
+          ],
+          "name": "electrodynamics:wiremill"
+        }
+      ],
+      "name": "wiremill",
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "electrodynamics:blocks/wiremill"
+}

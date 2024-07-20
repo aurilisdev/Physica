@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "electrodynamics:glassclear"
+    },
+    "S": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "T": {
+      "item": "electrodynamics:tanksteel"
+    }
+  },
+  "pattern": [
+    "SGS",
+    "GTG",
+    "SGS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:tankreinforced"
+  }
+}

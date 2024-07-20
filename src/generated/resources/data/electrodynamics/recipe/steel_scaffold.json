@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "tag": "c:rods/steel"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "S S",
+    "SSS"
+  ],
+  "result": {
+    "count": 32,
+    "id": "electrodynamics:steelscaffold"
+  }
+}

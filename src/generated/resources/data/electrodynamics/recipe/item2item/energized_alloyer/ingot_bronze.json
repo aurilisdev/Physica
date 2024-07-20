@@ -1,0 +1,34 @@
+{
+  "type": "electrodynamics:energized_alloyer_recipe",
+  "experience": 0.3499999940395355,
+  "fluidinputs": [
+    {
+      "count": 1,
+      "ingreident": {
+        "tag": "c:ingots/tin"
+      }
+    },
+    {
+      "count": 4,
+      "ingreident": {
+        "tag": "c:ingots/copper"
+      }
+    }
+  ],
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.5,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:slag"
+      }
+    }
+  ],
+  "output": {
+    "count": 5,
+    "id": "electrodynamics:ingotbronze"
+  },
+  "ticks": 50,
+  "usagepertick": 50.0
+}

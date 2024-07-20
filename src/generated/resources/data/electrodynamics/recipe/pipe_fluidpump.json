@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "P": {
+      "item": "electrodynamics:pipesteel"
+    },
+    "V": {
+      "item": "electrodynamics:mechanicalvalve"
+    }
+  },
+  "pattern": [
+    " C ",
+    "VPV",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:fluidpipepump"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "S": {
+      "item": "electrodynamics:solarpanel"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SPS",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:advancedsolarpanel"
+  }
+}

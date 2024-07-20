@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": {
+      "item": "electrodynamics:compositearmorhelmet"
+    },
+    "N": {
+      "item": "electrodynamics:nightvisiongoggles"
+    },
+    "S": {
+      "tag": "c:plates/hslasteel"
+    },
+    "T": {
+      "tag": "c:plates/titaniumcarbide"
+    }
+  },
+  "pattern": [
+    "TNT",
+    "TST",
+    "THT"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:combatarmorhelmet"
+  }
+}

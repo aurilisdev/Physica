@@ -1,0 +1,25 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.30000001192092896,
+  "fluidinputs": [
+    {
+      "count": 1,
+      "ingreident": {
+        "tag": "c:oxides/chromium"
+      }
+    },
+    {
+      "count": 1,
+      "ingreident": {
+        "tag": "c:dusts/silica"
+      }
+    }
+  ],
+  "group": "electrodynamics",
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:oxidechromiumdisilicide"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

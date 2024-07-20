@@ -63,7 +63,7 @@ public class Gas {
 	}
 
 	public boolean isEmpty() {
-		return this == ElectrodynamicsGases.EMPTY.get();
+		return this == ElectrodynamicsGases.EMPTY;
 	}
 
 	public double getCondensationTemp() {

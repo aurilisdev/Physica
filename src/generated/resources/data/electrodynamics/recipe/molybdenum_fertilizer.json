@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "tag": "c:dusts/molybdenum"
+    },
+    {
+      "tag": "c:dusts/molybdenum"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "id": "electrodynamics:molybdenumfertilizer"
+  }
+}

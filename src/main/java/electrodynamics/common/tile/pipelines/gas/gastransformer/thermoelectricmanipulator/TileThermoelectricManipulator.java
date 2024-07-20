@@ -253,7 +253,7 @@ public class TileThermoelectricManipulator extends GenericTileGasTransformer {
             return new ManipulatorStatusCheckWrapper(false, ManipulatorHeatingStatus.OFF, false);
         }
 
-        evaporatedGas = ElectrodynamicsGases.MAPPED_GASSES.getOrDefault(inputTank.getFluid().getFluid(), ElectrodynamicsGases.EMPTY.get());
+        evaporatedGas = ElectrodynamicsGases.MAPPED_GASSES.getOrDefault(inputTank.getFluid().getFluid(), ElectrodynamicsGases.EMPTY.value());
 
         if (evaporatedGas.isEmpty()) {
             return new ManipulatorStatusCheckWrapper(false, ManipulatorHeatingStatus.OFF, false);

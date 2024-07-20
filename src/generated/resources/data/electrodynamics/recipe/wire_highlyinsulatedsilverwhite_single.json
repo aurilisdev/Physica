@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:wires/thick_silver"
+    },
+    {
+      "tag": "c:dyes/white"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:wirehighlyinsulatedsilverwhite"
+  }
+}

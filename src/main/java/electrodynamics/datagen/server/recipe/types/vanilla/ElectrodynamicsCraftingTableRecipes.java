@@ -761,13 +761,13 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "upgrade_improved_solar_cell").save(output);
 
-        ShapedCraftingRecipeBuilder.start(UPGRADES[SubtypeItemUpgrade.iteminput.ordinal()], 4)
+        ShapedCraftingRecipeBuilder.start(UPGRADES[SubtypeItemUpgrade.iteminput.ordinal()], 1)
                 //
-                .addPattern("ACA")
+                .addPattern("C")
                 //
-                .addPattern("CPC")
+                .addPattern("P")
                 //
-                .addPattern("ACA")
+                .addPattern("A")
                 //
                 .addKey('A', ElectrodynamicsTags.Items.PLATE_ALUMINUM)
                 //
@@ -777,13 +777,13 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "upgrade_item_input").save(output);
 
-        ShapedCraftingRecipeBuilder.start(UPGRADES[SubtypeItemUpgrade.itemoutput.ordinal()], 4)
+        ShapedCraftingRecipeBuilder.start(UPGRADES[SubtypeItemUpgrade.itemoutput.ordinal()], 1)
                 //
-                .addPattern("ACA")
+                .addPattern("C")
                 //
-                .addPattern("CPC")
+                .addPattern("P")
                 //
-                .addPattern("ACA")
+                .addPattern("A")
                 //
                 .addKey('A', ElectrodynamicsTags.Items.PLATE_ALUMINUM)
                 //
@@ -793,13 +793,13 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "upgrade_item_output").save(output);
 
-        ShapedCraftingRecipeBuilder.start(UPGRADES[SubtypeItemUpgrade.itemvoid.ordinal()], 4)
+        ShapedCraftingRecipeBuilder.start(UPGRADES[SubtypeItemUpgrade.itemvoid.ordinal()], 1)
                 //
-                .addPattern("PCP")
+                .addPattern("C")
                 //
-                .addPattern("CBC")
+                .addPattern("B")
                 //
-                .addPattern("PCP")
+                .addPattern("P")
                 //
                 .addKey('P', ElectrodynamicsTags.Items.PLATE_STEEL)
                 //
@@ -2294,13 +2294,13 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
 
     private void addGear(RecipeOutput output) {
 
-        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_CANISTERREINFORCED.get(), 4)
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_CANISTERREINFORCED.get(), 1)
                 //
-                .addPattern("SSS")
+                .addPattern("S")
                 //
-                .addPattern("A A")
+                .addPattern("A")
                 //
-                .addPattern("SSS")
+                .addPattern("S")
                 //
                 .addKey('S', ElectrodynamicsTags.Items.PLATE_STAINLESSSTEEL)
                 //
@@ -2308,13 +2308,13 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "reinforced_canister").save(output);
 
-        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get(), 4)
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get(), 1)
                 //
-                .addPattern("SVS")
+                .addPattern("V")
                 //
-                .addPattern("S S")
+                .addPattern("S")
                 //
-                .addPattern("SSS")
+                .addPattern("S")
                 //
                 .addKey('S', ElectrodynamicsTags.Items.PLATE_STAINLESSSTEEL)
                 //

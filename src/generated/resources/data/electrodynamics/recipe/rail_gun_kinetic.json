@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:storage_blocks/stainlesssteel"
+    },
+    "C": {
+      "tag": "c:circuits/elite"
+    },
+    "L": {
+      "item": "electrodynamics:lithiumbattery"
+    },
+    "P": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "R": {
+      "tag": "c:rods/stainlesssteel"
+    },
+    "S": {
+      "item": "electrodynamics:wiresuperconductive"
+    },
+    "X": {
+      "item": "electrodynamics:upgradetransformer"
+    }
+  },
+  "pattern": [
+    "CXS",
+    "LPR",
+    "BCS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:railgunkinetic"
+  }
+}

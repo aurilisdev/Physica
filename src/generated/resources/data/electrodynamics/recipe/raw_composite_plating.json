@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "electrodynamics:ceramicplate"
+    },
+    "P": {
+      "tag": "c:plastic"
+    },
+    "T": {
+      "tag": "c:plates/titanium"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "CCC",
+    "PPP"
+  ],
+  "result": {
+    "count": 6,
+    "id": "electrodynamics:compositeplatingraw"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:gears/bronze"
+    },
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "G": {
+      "tag": "c:ingots/gold"
+    },
+    "M": {
+      "item": "electrodynamics:mineralgrinder"
+    }
+  },
+  "pattern": [
+    "CGC",
+    "BMB",
+    "CGC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:mineralgrinderdouble"
+  }
+}

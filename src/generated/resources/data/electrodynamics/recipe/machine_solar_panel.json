@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "S": {
+      "item": "electrodynamics:solarpanelplate"
+    },
+    "W": {
+      "item": "electrodynamics:wirecopper"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "CIC",
+    "IWI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:solarpanel"
+  }
+}

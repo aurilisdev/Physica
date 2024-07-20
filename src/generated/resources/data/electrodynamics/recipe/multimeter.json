@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "S": {
+      "tag": "c:ingots/steel"
+    },
+    "W": {
+      "tag": "c:wires/insulated_copper"
+    }
+  },
+  "pattern": [
+    "SWS",
+    "SCS",
+    "SWS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:multimeter"
+  }
+}

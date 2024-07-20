@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "G": {
+      "tag": "c:gears/copper"
+    },
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "PCP",
+    "GMG",
+    "PGP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:mineralgrinder"
+  }
+}

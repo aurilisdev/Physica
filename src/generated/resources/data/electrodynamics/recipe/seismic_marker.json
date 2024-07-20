@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:gems/amethyst"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    " P ",
+    "PAP",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:seismicmarker"
+  }
+}

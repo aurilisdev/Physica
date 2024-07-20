@@ -1,0 +1,25 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.10000000149011612,
+  "fluidinputs": [
+    {
+      "count": 1,
+      "ingreident": {
+        "tag": "c:sands"
+      }
+    },
+    {
+      "count": 1,
+      "ingreident": {
+        "tag": "c:coal_coke"
+      }
+    }
+  ],
+  "group": "electrodynamics",
+  "output": {
+    "count": 3,
+    "id": "electrodynamics:dustsilica"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

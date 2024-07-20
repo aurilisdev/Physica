@@ -1,0 +1,25 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.10000000149011612,
+  "fluidinputs": [
+    {
+      "count": 1,
+      "ingreident": {
+        "item": "minecraft:bone_meal"
+      }
+    },
+    {
+      "count": 1,
+      "ingreident": {
+        "tag": "c:oxides/sodiumcarbonate"
+      }
+    }
+  ],
+  "group": "electrodynamics",
+  "output": {
+    "count": 2,
+    "id": "electrodynamics:oxidecalciumcarbonate"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

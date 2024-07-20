@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "electrodynamics:compositeplating"
+    },
+    "S": {
+      "tag": "c:plastic"
+    }
+  },
+  "pattern": [
+    "PSP",
+    "PPP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:compositearmorchestplate"
+  }
+}

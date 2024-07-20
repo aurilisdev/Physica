@@ -1,0 +1,19 @@
+{
+  "type": "electrodynamics:wire_mill_recipe",
+  "experience": 0.10000000149011612,
+  "fluidinputs": [
+    {
+      "count": 9,
+      "ingreident": {
+        "tag": "c:ingots/titanium"
+      }
+    }
+  ],
+  "group": "electrodynamics",
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:titaniumheatcoil"
+  },
+  "ticks": 200,
+  "usagepertick": 125.0
+}
