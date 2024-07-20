@@ -63,6 +63,8 @@ public class ElectrodynamicsBlockTagsProvider extends BlockTagsProvider {
 		for (SubtypeOre ore : SubtypeOre.values()) {
 			ores.addTag(ore.blockTag);
 		}
+
+		tag(ElectrodynamicsTags.Blocks.ELECTRIC_DRILL_BLOCKS).addTags(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.MINEABLE_WITH_SHOVEL);
 	}
 
 }

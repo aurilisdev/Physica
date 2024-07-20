@@ -3,7 +3,7 @@ package electrodynamics.common.tile.pipelines;
 import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.GenericTile;
@@ -26,7 +26,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 public class TileElectricPump extends GenericTile implements ITickableSound {
 
-	private Property<Boolean> isGenerating = property(new Property<>(PropertyType.Boolean, "isGenerating", false));
+	private Property<Boolean> isGenerating = property(new Property<>(PropertyTypes.BOOLEAN, "isGenerating", false));
 
 	private boolean isSoundPlaying = false;
 

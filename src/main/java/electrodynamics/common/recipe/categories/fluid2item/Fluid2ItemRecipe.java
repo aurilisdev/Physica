@@ -13,9 +13,7 @@ import electrodynamics.common.recipe.recipeutils.ProbableItem;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
-import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 
 public abstract class Fluid2ItemRecipe extends AbstractMaterialRecipe {
 
@@ -39,17 +37,8 @@ public abstract class Fluid2ItemRecipe extends AbstractMaterialRecipe {
     }
 
     @Override
-    public ItemStack getItemOutputNoAccess() {
+    public ItemStack getItemRecipeOutput() {
         return outputItem;
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> list = NonNullList.create();
-        for (Ingredient ing : inputFluids) {
-            list.add(ing);
-        }
-        return list;
     }
 
     @Override

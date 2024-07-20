@@ -27,7 +27,7 @@ import net.minecraft.sounds.SoundEvents;
  */
 public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends ScreenComponentGeneric {
 
-    public static final WidgetSprites VANILLA_BUTTON_SPRITES = new WidgetSprites(new ResourceLocation("widget/button"), new ResourceLocation("widget/button_disabled"), new ResourceLocation("widget/button_highlighted"));
+    public static final WidgetSprites VANILLA_BUTTON_SPRITES = new WidgetSprites(ResourceLocation.withDefaultNamespace("widget/button"), ResourceLocation.withDefaultNamespace("widget/button_disabled"), ResourceLocation.withDefaultNamespace("widget/button_highlighted"));
 
     public final boolean isVanillaRender;
 

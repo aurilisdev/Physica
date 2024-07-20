@@ -36,8 +36,8 @@ public class ItemRailgun extends ItemElectric implements IItemTemperate {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		super.appendHoverText(stack, worldIn, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+		super.appendHoverText(stack, context, tooltip, flagIn);
 		tooltip.add(ElectroTextUtils.tooltip("railguntemp", ChatFormatter.getChatDisplayShort(IItemTemperate.getTemperature(stack), DisplayUnit.TEMPERATURE_CELCIUS)).withStyle(ChatFormatting.YELLOW));
 		tooltip.add(ElectroTextUtils.tooltip("railgunmaxtemp", ChatFormatter.getChatDisplayShort(overheatTemperature, DisplayUnit.TEMPERATURE_CELCIUS)).withStyle(ChatFormatting.YELLOW));
 		if (IItemTemperate.getTemperature(stack) >= getOverheatTemp()) {

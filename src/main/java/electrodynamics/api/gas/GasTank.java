@@ -333,7 +333,7 @@ public class GasTank implements IGasTank, IGasHandler {
 
 	public void writeToBuffer(FriendlyByteBuf buffer) {
 
-		getGas().writeToBuffer(buffer);
+		GasStack.STREAM_CODEC.encode(buffer, getGas());
 
 		buffer.writeDouble(getCapacity());
 
@@ -345,7 +345,7 @@ public class GasTank implements IGasTank, IGasHandler {
 
 	public static GasTank readFromBuffer(FriendlyByteBuf buffer) {
 
-		GasStack stack = GasStack.readFromBuffer(buffer);
+		GasStack stack = GasStack.STREAM_CODEC.decode(buffer);
 
 		GasTank tank = new GasTank(buffer.readDouble(), buffer.readDouble(), buffer.readInt());
 

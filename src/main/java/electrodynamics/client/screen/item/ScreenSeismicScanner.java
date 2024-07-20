@@ -13,8 +13,8 @@ import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
 import electrodynamics.prefab.utilities.object.Location;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
@@ -31,8 +31,8 @@ public class ScreenSeismicScanner extends GenericScreen<ContainerSeismicScanner>
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
 			ItemStack ownerItem = menu.getOwnerItem();
 
-			Location playerLoc = ownerItem.hasTag() ? Location.readFromNBT(ownerItem.getTag(), NBTUtils.LOCATION + ItemSeismicScanner.PLAY_LOC) : new Location(0, 0, 0);
-			Location blockLoc = ownerItem.hasTag() ? Location.readFromNBT(ownerItem.getTag(), NBTUtils.LOCATION + ItemSeismicScanner.BLOCK_LOC) : new Location(0, 0, 0);
+			Location playerLoc = ownerItem.getOrDefault(ElectrodynamicsDataComponentTypes.LOCATION_1, new Location(0, 0, 0));
+			Location blockLoc = ownerItem.getOrDefault(ElectrodynamicsDataComponentTypes.LOCATION_2, new Location(0, 0, 0));
 
 			if (blockLoc.equals(playerLoc)) {
 				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.xcoordna"), 95, 35, 4210752, false);

@@ -7,6 +7,7 @@ import java.util.List;
 import electrodynamics.api.References;
 import electrodynamics.client.guidebook.ModuleElectrodynamics;
 import electrodynamics.client.guidebook.ScreenGuidebook;
+import electrodynamics.client.modelbakers.bakerytypes.CableModelLoader;
 import electrodynamics.client.particle.plasmaball.ParticlePlasmaBall;
 import electrodynamics.client.reloadlistener.ReloadListenerResetGuidebook;
 import electrodynamics.client.render.entity.RenderEnergyBlast;
@@ -105,21 +106,17 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod.EventBusSubscriber;
-import net.neoforged.fml.common.Mod.EventBusSubscriber.Bus;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional;
-import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
-import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = References.ID, bus = Bus.MOD, value = { Dist.CLIENT })
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD, value = { Dist.CLIENT })
 public class ClientRegister {
 
     private static final String BLOCK_LOC = References.ID + ":block/";
@@ -149,7 +146,7 @@ public class ClientRegister {
     // for registration purposes only!
     private static final List<ResourceLocation> CUSTOM_TEXTURES = new ArrayList<>();
 
-    public static final ResourceLocation ON = new ResourceLocation("on");
+    public static final ResourceLocation ON = ResourceLocation.withDefaultNamespace("on");
 
     @SubscribeEvent
     public static void onModelEvent(RegisterAdditional event) {
@@ -192,56 +189,56 @@ public class ClientRegister {
         event.register(MODEL_QUARRYWHEEL_ROT);
     }
 
-    public static final ResourceLocation MODEL_ADVSOLARTOP = new ResourceLocation(BLOCK_LOC + "advancedsolarpaneltop");
-    public static final ResourceLocation MODEL_BATTERYBOX = new ResourceLocation(BLOCK_LOC + "batterybox");
-    public static final ResourceLocation MODEL_BATTERYBOX2 = new ResourceLocation(BLOCK_LOC + "batterybox2");
-    public static final ResourceLocation MODEL_BATTERYBOX3 = new ResourceLocation(BLOCK_LOC + "batterybox3");
-    public static final ResourceLocation MODEL_BATTERYBOX4 = new ResourceLocation(BLOCK_LOC + "batterybox4");
-    public static final ResourceLocation MODEL_BATTERYBOX5 = new ResourceLocation(BLOCK_LOC + "batterybox5");
-    public static final ResourceLocation MODEL_BATTERYBOX6 = new ResourceLocation(BLOCK_LOC + "batterybox6");
-    public static final ResourceLocation MODEL_BATTERYBOX7 = new ResourceLocation(BLOCK_LOC + "batterybox7");
-    public static final ResourceLocation MODEL_LITHIUMBATTERYBOX = new ResourceLocation(BLOCK_LOC + "lithiumbatterybox");
-    public static final ResourceLocation MODEL_LITHIUMBATTERYBOX2 = new ResourceLocation(BLOCK_LOC + "lithiumbatterybox2");
-    public static final ResourceLocation MODEL_LITHIUMBATTERYBOX3 = new ResourceLocation(BLOCK_LOC + "lithiumbatterybox3");
-    public static final ResourceLocation MODEL_LITHIUMBATTERYBOX4 = new ResourceLocation(BLOCK_LOC + "lithiumbatterybox4");
-    public static final ResourceLocation MODEL_LITHIUMBATTERYBOX5 = new ResourceLocation(BLOCK_LOC + "lithiumbatterybox5");
-    public static final ResourceLocation MODEL_LITHIUMBATTERYBOX6 = new ResourceLocation(BLOCK_LOC + "lithiumbatterybox6");
-    public static final ResourceLocation MODEL_LITHIUMBATTERYBOX7 = new ResourceLocation(BLOCK_LOC + "lithiumbatterybox7");
-    public static final ResourceLocation MODEL_CARBYNEBATTERYBOX = new ResourceLocation(BLOCK_LOC + "carbynebatterybox");
-    public static final ResourceLocation MODEL_CARBYNEBATTERYBOX2 = new ResourceLocation(BLOCK_LOC + "carbynebatterybox2");
-    public static final ResourceLocation MODEL_CARBYNEBATTERYBOX3 = new ResourceLocation(BLOCK_LOC + "carbynebatterybox3");
-    public static final ResourceLocation MODEL_CARBYNEBATTERYBOX4 = new ResourceLocation(BLOCK_LOC + "carbynebatterybox4");
-    public static final ResourceLocation MODEL_CARBYNEBATTERYBOX5 = new ResourceLocation(BLOCK_LOC + "carbynebatterybox5");
-    public static final ResourceLocation MODEL_CARBYNEBATTERYBOX6 = new ResourceLocation(BLOCK_LOC + "carbynebatterybox6");
-    public static final ResourceLocation MODEL_CARBYNEBATTERYBOX7 = new ResourceLocation(BLOCK_LOC + "carbynebatterybox7");
-    public static final ResourceLocation MODEL_CHEMICALMIXERBASE = new ResourceLocation(BLOCK_LOC + "chemicalmixerbase");
-    public static final ResourceLocation MODEL_HYDROELECTRICGENERATORBLADES = new ResourceLocation(BLOCK_LOC + "hydroelectricgeneratorblades");
-    public static final ResourceLocation MODEL_WINDMILLBLADES = new ResourceLocation(BLOCK_LOC + "windmillblades");
-    public static final ResourceLocation MODEL_MINERALCRUSHERHANDLE = new ResourceLocation(BLOCK_LOC + "mineralcrusherhandle");
-    public static final ResourceLocation MODEL_MINERALCRUSHERDOUBLEHANDLE = new ResourceLocation(BLOCK_LOC + "mineralcrusherdoublehandle");
-    public static final ResourceLocation MODEL_MINERALCRUSHERTRIPLEHANDLE = new ResourceLocation(BLOCK_LOC + "mineralcrushertriplehandle");
-    public static final ResourceLocation MODEL_MINERALGRINDERWHEEL = new ResourceLocation(BLOCK_LOC + "mineralgrinderwheel");
-    public static final ResourceLocation MODEL_CHEMICALMIXERBLADES = new ResourceLocation(BLOCK_LOC + "chemicalmixerblades");
-    public static final ResourceLocation MODEL_LATHESHAFT = new ResourceLocation(BLOCK_LOC + "latheshaft");
-    public static final ResourceLocation MODEL_MOTORCOMPLEXROTOR = new ResourceLocation(BLOCK_LOC + "motorcomplexrotor");
+    public static final ModelResourceLocation MODEL_ADVSOLARTOP = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "advancedsolarpaneltop"));
+    public static final ModelResourceLocation MODEL_BATTERYBOX = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "batterybox"));
+    public static final ModelResourceLocation MODEL_BATTERYBOX2 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "batterybox2"));
+    public static final ModelResourceLocation MODEL_BATTERYBOX3 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "batterybox3"));
+    public static final ModelResourceLocation MODEL_BATTERYBOX4 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "batterybox4"));
+    public static final ModelResourceLocation MODEL_BATTERYBOX5 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "batterybox5"));
+    public static final ModelResourceLocation MODEL_BATTERYBOX6 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "batterybox6"));
+    public static final ModelResourceLocation MODEL_BATTERYBOX7 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "batterybox7"));
+    public static final ModelResourceLocation MODEL_LITHIUMBATTERYBOX = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "lithiumbatterybox"));
+    public static final ModelResourceLocation MODEL_LITHIUMBATTERYBOX2 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "lithiumbatterybox2"));
+    public static final ModelResourceLocation MODEL_LITHIUMBATTERYBOX3 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "lithiumbatterybox3"));
+    public static final ModelResourceLocation MODEL_LITHIUMBATTERYBOX4 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "lithiumbatterybox4"));
+    public static final ModelResourceLocation MODEL_LITHIUMBATTERYBOX5 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "lithiumbatterybox5"));
+    public static final ModelResourceLocation MODEL_LITHIUMBATTERYBOX6 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "lithiumbatterybox6"));
+    public static final ModelResourceLocation MODEL_LITHIUMBATTERYBOX7 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "lithiumbatterybox7"));
+    public static final ModelResourceLocation MODEL_CARBYNEBATTERYBOX = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "carbynebatterybox"));
+    public static final ModelResourceLocation MODEL_CARBYNEBATTERYBOX2 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "carbynebatterybox2"));
+    public static final ModelResourceLocation MODEL_CARBYNEBATTERYBOX3 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "carbynebatterybox3"));
+    public static final ModelResourceLocation MODEL_CARBYNEBATTERYBOX4 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "carbynebatterybox4"));
+    public static final ModelResourceLocation MODEL_CARBYNEBATTERYBOX5 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "carbynebatterybox5"));
+    public static final ModelResourceLocation MODEL_CARBYNEBATTERYBOX6 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "carbynebatterybox6"));
+    public static final ModelResourceLocation MODEL_CARBYNEBATTERYBOX7 = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "carbynebatterybox7"));
+    public static final ModelResourceLocation MODEL_CHEMICALMIXERBASE = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "chemicalmixerbase"));
+    public static final ModelResourceLocation MODEL_HYDROELECTRICGENERATORBLADES = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "hydroelectricgeneratorblades"));
+    public static final ModelResourceLocation MODEL_WINDMILLBLADES = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "windmillblades"));
+    public static final ModelResourceLocation MODEL_MINERALCRUSHERHANDLE = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "mineralcrusherhandle"));
+    public static final ModelResourceLocation MODEL_MINERALCRUSHERDOUBLEHANDLE = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "mineralcrusherdoublehandle"));
+    public static final ModelResourceLocation MODEL_MINERALCRUSHERTRIPLEHANDLE = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "mineralcrushertriplehandle"));
+    public static final ModelResourceLocation MODEL_MINERALGRINDERWHEEL = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "mineralgrinderwheel"));
+    public static final ModelResourceLocation MODEL_CHEMICALMIXERBLADES = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "chemicalmixerblades"));
+    public static final ModelResourceLocation MODEL_LATHESHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "latheshaft"));
+    public static final ModelResourceLocation MODEL_MOTORCOMPLEXROTOR = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motorcomplexrotor"));
 
-    public static final ResourceLocation MODEL_RODSTEEL = new ResourceLocation(References.ID + ":entity/rodsteel");
-    public static final ResourceLocation MODEL_RODSTAINLESSSTEEL = new ResourceLocation(References.ID + ":entity/rodstainlesssteel");
-    public static final ResourceLocation MODEL_RODHSLASTEEL = new ResourceLocation(References.ID + ":entity/rodhslasteel");
+    public static final ModelResourceLocation MODEL_RODSTEEL = ModelResourceLocation.standalone(ResourceLocation.parse(References.ID + ":entity/rodsteel"));
+    public static final ModelResourceLocation MODEL_RODSTAINLESSSTEEL = ModelResourceLocation.standalone(ResourceLocation.parse(References.ID + ":entity/rodstainlesssteel"));
+    public static final ModelResourceLocation MODEL_RODHSLASTEEL = ModelResourceLocation.standalone(ResourceLocation.parse(References.ID + ":entity/rodhslasteel"));
 
-    public static final ResourceLocation TEXTURE_RODSTEEL = new ResourceLocation(References.ID + ":textures/entity/projectile/rodsteel.png");
-    public static final ResourceLocation TEXTURE_RODSTAINLESSSTEEL = new ResourceLocation(References.ID + ":textures/entity/projectile/rodstainlesssteel.png");
-    public static final ResourceLocation TEXTURE_RODHSLASTEEL = new ResourceLocation(References.ID + ":textures/entity/projectile/rodhslasteel.png");
+    public static final ResourceLocation TEXTURE_RODSTEEL = ResourceLocation.parse(References.ID + ":textures/entity/projectile/rodsteel.png");
+    public static final ResourceLocation TEXTURE_RODSTAINLESSSTEEL = ResourceLocation.parse(References.ID + ":textures/entity/projectile/rodstainlesssteel.png");
+    public static final ResourceLocation TEXTURE_RODHSLASTEEL = ResourceLocation.parse(References.ID + ":textures/entity/projectile/rodhslasteel.png");
 
-    public static final ResourceLocation MODEL_QUARRYWHEEL_STILL = new ResourceLocation(BLOCK_LOC + "quarrywheelstill");
-    public static final ResourceLocation MODEL_QUARRYWHEEL_ROT = new ResourceLocation(BLOCK_LOC + "quarrywheelrot");
+    public static final ModelResourceLocation MODEL_QUARRYWHEEL_STILL = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "quarrywheelstill"));
+    public static final ModelResourceLocation MODEL_QUARRYWHEEL_ROT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "quarrywheelrot"));
 
     // Custom Textures
-    public static final ResourceLocation TEXTURE_WHITE = new ResourceLocation("forge", "white");
-    public static final ResourceLocation TEXTURE_QUARRYARM = new ResourceLocation(References.ID, "block/custom/quarryarm");
-    public static final ResourceLocation TEXTURE_QUARRYARM_DARK = new ResourceLocation(References.ID, "block/custom/quarrydark");
-    public static final ResourceLocation TEXTURE_MERCURY = new ResourceLocation(References.ID, "block/custom/mercury");
-    public static final ResourceLocation TEXTURE_GAS = new ResourceLocation(References.ID, "block/custom/gastexture");
+    public static final ResourceLocation TEXTURE_WHITE = ResourceLocation.fromNamespaceAndPath("forge", "white");
+    public static final ResourceLocation TEXTURE_QUARRYARM = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/quarryarm");
+    public static final ResourceLocation TEXTURE_QUARRYARM_DARK = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/quarrydark");
+    public static final ResourceLocation TEXTURE_MERCURY = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/mercury");
+    public static final ResourceLocation TEXTURE_GAS = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/gastexture");
 
     public static void setup() {
         ClientEvents.init();
@@ -373,8 +370,13 @@ public class ClientRegister {
 
     @SubscribeEvent
     public static void registerClientReloadListeners(RegisterClientReloadListenersEvent event) {
-        event.registerReloadListener(AtlasHolderElectrodynamicsCustom.INSTANCE = new AtlasHolderElectrodynamicsCustom(Minecraft.getInstance().textureManager));
+        event.registerReloadListener(AtlasHolderElectrodynamicsCustom.INSTANCE = new AtlasHolderElectrodynamicsCustom(Minecraft.getInstance().getTextureManager()));
         event.registerReloadListener(new ReloadListenerResetGuidebook());
+    }
+
+    @SubscribeEvent
+    public static void registerGeometryLoaders(final ModelEvent.RegisterGeometryLoaders event) {
+        event.register(CableModelLoader.ID, CableModelLoader.INSTANCE);
     }
 
 }

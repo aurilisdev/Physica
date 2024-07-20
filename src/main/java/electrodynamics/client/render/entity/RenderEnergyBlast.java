@@ -63,7 +63,7 @@ public class RenderEnergyBlast extends EntityRenderer<EntityEnergyBlast> {
 
 	@Override
 	public @NotNull ResourceLocation getTextureLocation(@NotNull EntityEnergyBlast entity) {
-		return new ResourceLocation(References.ID, "custom/plasmaorb");
+		return ResourceLocation.fromNamespaceAndPath(References.ID, "custom/plasmaorb");
 	}
 
 }

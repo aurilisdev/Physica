@@ -57,7 +57,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.COAL_COKE, 1)
 				//
-				.addItemTagInput(Tags.Items.SAND, 16)
+				.addItemTagInput(Tags.Items.SANDS, 16)
 				//
 				.save(output);
 
@@ -85,7 +85,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.addItemTagInput(Tags.Items.INGOTS, 1)
 				//
-				.addItemTagInput(Tags.Items.SAND, 1)
+				.addItemTagInput(Tags.Items.SANDS, 1)
 				//
 				.save(output);
 

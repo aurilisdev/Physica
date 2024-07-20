@@ -71,7 +71,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -211,7 +211,7 @@ public class ElectrodynamicsItems {
 	public static final DeferredHolder<Item, Item> ITEM_COMPOSITELEGGINGS = ITEMS.register("compositearmorleggings", () -> new ItemCompositeArmor(Type.LEGGINGS));
 	public static final DeferredHolder<Item, Item> ITEM_COMPOSITEBOOTS = ITEMS.register("compositearmorboots", () -> new ItemCompositeArmor(Type.BOOTS));
 
-	public static final DeferredHolder<Item, Item> ITEM_RUBBERBOOTS = ITEMS.register("rubberboots", () -> new ItemRubberArmor(Type.BOOTS, new Item.Properties().stacksTo(1).defaultDurability(100000), () -> ElectrodynamicsCreativeTabs.MAIN.get()));
+	public static final DeferredHolder<Item, Item> ITEM_RUBBERBOOTS = ITEMS.register("rubberboots", () -> new ItemRubberArmor(Type.BOOTS, new Item.Properties().stacksTo(1).durability(100000), () -> ElectrodynamicsCreativeTabs.MAIN.get()));
 
 	public static final DeferredHolder<Item, Item> ITEM_NIGHTVISIONGOGGLES = ITEMS.register("nightvisiongoggles", () -> new ItemNightVisionGoggles((ElectricItemProperties) new ElectricItemProperties().capacity(1666666.66667).extract(TransferPack.joulesVoltage(1666666.66667 / (120.0 * 20.0), 120)).receive(TransferPack.joulesVoltage(1666666.66667 / (120.0 * 20.0), 120)).stacksTo(1), () -> ElectrodynamicsCreativeTabs.MAIN.get()));
 	public static final DeferredHolder<Item, Item> ITEM_HYDRAULICBOOTS = ITEMS.register("hydraulicboots", ItemHydraulicBoots::new);
@@ -248,7 +248,7 @@ public class ElectrodynamicsItems {
 		return SUBTYPEITEMREGISTER_MAPPINGS.get(value).get();
 	}
 
-	@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+	@EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 	private static class ElectroCreativeRegistry {
 
 		@SubscribeEvent

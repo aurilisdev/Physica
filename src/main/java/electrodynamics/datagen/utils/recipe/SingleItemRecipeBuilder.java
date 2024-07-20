@@ -45,7 +45,7 @@ public class SingleItemRecipeBuilder implements RecipeBuilder {
     }
 
     public SingleItemRecipeBuilder complete(String parent, String name) {
-        id = new ResourceLocation(parent, name);
+        id = ResourceLocation.fromNamespaceAndPath(parent, name);
         return this;
     }
 

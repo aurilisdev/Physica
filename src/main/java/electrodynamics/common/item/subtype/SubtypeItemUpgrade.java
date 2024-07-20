@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import org.apache.logging.log4j.util.TriConsumer;
 
 import electrodynamics.api.ISubtype;
@@ -15,7 +16,6 @@ import electrodynamics.prefab.utilities.ItemUtils;
 import electrodynamics.prefab.utilities.NBTUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -53,22 +53,21 @@ public enum SubtypeItemUpgrade implements ISubtype {
             return;
         }
 
-        CompoundTag tag = upgrade.getOrCreateTag();
-        int tickNumber = tag.getInt(NBTUtils.TIMER);
+        int tickNumber = upgrade.getOrDefault(ElectrodynamicsDataComponentTypes.TIMER, 0);
 
         if (tickNumber < 4) {
-            tag.putInt(NBTUtils.TIMER, tag.getInt(NBTUtils.TIMER) + 1);
+            upgrade.set(ElectrodynamicsDataComponentTypes.TIMER, tickNumber + 1);
             return;
         }
 
-        tag.putInt(NBTUtils.TIMER, 0);
+        upgrade.set(ElectrodynamicsDataComponentTypes.TIMER, 0);
         List<Direction> dirs = NBTUtils.readDirectionList(upgrade);
 
-        if (dirs.size() <= 0) {
+        if (dirs.size() == 0) {
             return;
         }
 
-        if (tag.getBoolean(NBTUtils.SMART)) {
+        if (upgrade.getOrDefault(ElectrodynamicsDataComponentTypes.SMART, false)) {
 
             int index = 0;
             Direction dir = Direction.DOWN;
@@ -93,14 +92,14 @@ public enum SubtypeItemUpgrade implements ISubtype {
             return;
         }
 
-        CompoundTag tag = upgrade.getOrCreateTag();
-        int tickNumber = tag.getInt(NBTUtils.TIMER);
+        int tickNumber = upgrade.getOrDefault(ElectrodynamicsDataComponentTypes.TIMER, 0);
+
         if (tickNumber < 4) {
-            tag.putInt(NBTUtils.TIMER, tag.getInt(NBTUtils.TIMER) + 1);
+            upgrade.set(ElectrodynamicsDataComponentTypes.TIMER, tickNumber + 1);
             return;
         }
 
-        tag.putInt(NBTUtils.TIMER, 0);
+        upgrade.set(ElectrodynamicsDataComponentTypes.TIMER, 0);
 
         List<Direction> dirs = NBTUtils.readDirectionList(upgrade);
 
@@ -108,7 +107,7 @@ public enum SubtypeItemUpgrade implements ISubtype {
             return;
         }
 
-        if (tag.getBoolean(NBTUtils.SMART)) {
+        if (upgrade.getOrDefault(ElectrodynamicsDataComponentTypes.SMART, false)) {
 
             int size = 0;
             Direction dir = Direction.DOWN;

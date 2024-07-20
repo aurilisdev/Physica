@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -50,7 +51,7 @@ public abstract class AbstractTileRenderer<T extends GenericTile> implements Blo
 		return minecraft().level;
 	}
 
-	public BakedModel getModel(ResourceLocation model) {
+	public BakedModel getModel(ModelResourceLocation model) {
 		return Minecraft.getInstance().getModelManager().getModel(model);
 	}
 

@@ -11,7 +11,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.HolderSet.Named;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
@@ -56,7 +56,7 @@ public class ElectrodynamicsFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_URANIUM_CONFIGURED = configured("ore_uranium");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_VANADIUM_CONFIGURED = configured("ore_vanadium");
 
-	public static void registerConfigured(BootstapContext<ConfiguredFeature<?, ?>> context) {
+	public static void registerConfigured(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 
 		FeatureUtils.register(context, ORE_ALUMINUM_CONFIGURED, Feature.ORE, dualOre(SubtypeOre.aluminum, SubtypeOreDeepslate.aluminum));
 		FeatureUtils.register(context, ORE_CHROMIUM_CONFIGURED, Feature.ORE, dualOre(SubtypeOre.chromium, SubtypeOreDeepslate.chromium));
@@ -79,7 +79,7 @@ public class ElectrodynamicsFeatures {
 	}
 
 	private static ResourceKey<ConfiguredFeature<?, ?>> configured(String name) {
-		return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(References.ID, name));
+		return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(References.ID, name));
 	}
 
 	private static OreConfiguration dualOre(SubtypeOre ore, SubtypeOreDeepslate deepOre) {
@@ -106,7 +106,7 @@ public class ElectrodynamicsFeatures {
 	public static final ResourceKey<PlacedFeature> ORE_URANIUM_PLACED = placed("ore_uranium");
 	public static final ResourceKey<PlacedFeature> ORE_VANADIUM_PLACED = placed("ore_vanadium");
 
-	public static void registerPlaced(BootstapContext<PlacedFeature> context) {
+	public static void registerPlaced(BootstrapContext<PlacedFeature> context) {
 
 		HolderGetter<ConfiguredFeature<?, ?>> holderGetter = context.lookup(Registries.CONFIGURED_FEATURE);
 
@@ -131,7 +131,7 @@ public class ElectrodynamicsFeatures {
 	}
 
 	private static ResourceKey<PlacedFeature> placed(String name) {
-		return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(References.ID, name));
+		return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(References.ID, name));
 	}
 
 	private static List<PlacementModifier> orePlacement(int count, int minY, int maxY) {
@@ -158,7 +158,7 @@ public class ElectrodynamicsFeatures {
 	public static final ResourceKey<BiomeModifier> ORE_URANIUM_MODIFIER = modifier("ore_uranium");
 	public static final ResourceKey<BiomeModifier> ORE_VANADIUM_MODIFIER = modifier("ore_vanadium");
 
-	public static void registerModifiers(BootstapContext<BiomeModifier> context) {
+	public static void registerModifiers(BootstrapContext<BiomeModifier> context) {
 
 		HolderGetter<Biome> biomeLookup = context.lookup(Registries.BIOME);
 		HolderGetter<PlacedFeature> placedLookup = context.lookup(Registries.PLACED_FEATURE);
@@ -185,7 +185,7 @@ public class ElectrodynamicsFeatures {
 	}
 
 	private static ResourceKey<BiomeModifier> modifier(String name) {
-		return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(References.ID, name));
+		return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(References.ID, name));
 	}
 
 }

@@ -16,10 +16,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 public class BlockItemWire extends BlockItemElectrodynamics {
@@ -35,8 +34,8 @@ public class BlockItemWire extends BlockItemElectrodynamics {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		super.appendHoverText(stack, worldIn, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+		super.appendHoverText(stack, context, tooltip, flagIn);
 		tooltip.add(ElectroTextUtils.tooltip("itemwire.resistance", ChatFormatter.getChatDisplayShort(wire.wire.resistance, DisplayUnit.RESISTANCE)).withStyle(ChatFormatting.GRAY));
 		tooltip.add(ElectroTextUtils.tooltip("itemwire.maxamps", ChatFormatter.getChatDisplayShort(wire.wire.conductor.ampacity, DisplayUnit.AMPERE)).withStyle(ChatFormatting.GRAY));
 		if (wire.wire.insulation.shockVoltage == 0) {
@@ -52,7 +51,7 @@ public class BlockItemWire extends BlockItemElectrodynamics {
 		}
 	}
 
-	@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+	@EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 	private static class ColorHandler {
 
 		@SubscribeEvent

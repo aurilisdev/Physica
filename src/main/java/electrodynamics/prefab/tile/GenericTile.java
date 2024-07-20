@@ -2,6 +2,8 @@ package electrodynamics.prefab.tile;
 
 import java.util.UUID;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.ItemInteractionResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -12,8 +14,6 @@ import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.common.item.ItemUpgrade;
 import electrodynamics.prefab.block.GenericEntityBlock;
-import electrodynamics.prefab.properties.IPropertyType.TagReader;
-import electrodynamics.prefab.properties.IPropertyType.TagWriter;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyManager;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
@@ -44,7 +44,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.util.TriPredicate;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -121,15 +120,11 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
         return this;
     }
 
+
     @Override
-    public void load(@NotNull CompoundTag compound) {
-        super.load(compound);
-        for (Property<?> prop : propertyManager.getProperties()) {
-            if (prop.shouldSave()) {
-                prop.load(prop.getType().readFromTag(new TagReader(prop, compound)));
-                compound.remove(prop.getName());
-            }
-        }
+    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
+        propertyManager.loadFromTag(compound, getLevel());
         for (IComponent component : components) {
             if (component != null) {
                 component.holder(this);
@@ -142,16 +137,11 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 pr.loadFromNBT(compound);
             }
         }
-
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag compound) {
-        for (Property<?> prop : propertyManager.getProperties()) {
-            if (prop.shouldSave()) {
-                prop.getType().writeToTag(new TagWriter(prop, compound));
-            }
-        }
+    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        propertyManager.saveToTag(compound, getLevel());
         for (IComponent component : components) {
             if (component != null) {
                 component.holder(this);
@@ -164,7 +154,7 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 pr.saveToNBT(compound);
             }
         }
-        super.saveAdditional(compound);
+        super.saveAdditional(compound, registries);
     }
 
     @Override
@@ -234,9 +224,9 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
     }
 
     @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        CompoundTag tag = super.getUpdateTag();
-        saveAdditional(tag);
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
+        saveAdditional(tag, registries);
         return tag;
     }
 
@@ -293,7 +283,7 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
 
     /**
      * NORTH is defined as the default direction
-     * 
+     *
      * @return
      */
     public Direction getFacing() {
@@ -325,57 +315,59 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
 
     }
 
-    // This is ceded to the tile to allow for greater control with the use function
-    public InteractionResult use(Player player, InteractionHand handIn, BlockHitResult hit) {
+    public InteractionResult useWithoutItem(Player player, BlockHitResult hit) {
+        if (hasComponent(IComponentType.ContainerProvider)) {
 
-        ItemStack stack = player.getItemInHand(handIn);
-        if (stack.getItem() instanceof ItemUpgrade upgrade && hasComponent(IComponentType.Inventory)) {
+            if (!level.isClientSide) {
+
+                player.openMenu(getComponent(IComponentType.ContainerProvider));
+
+                player.awardStat(Stats.INTERACT_WITH_FURNACE);
+
+            }
+
+            return InteractionResult.CONSUME;
+
+        }
+        return InteractionResult.PASS;
+    }
+
+    public ItemInteractionResult useWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (used.getItem() instanceof ItemUpgrade upgrade && hasComponent(IComponentType.Inventory)) {
 
             ComponentInventory inv = getComponent(IComponentType.Inventory);
             // null check for safety
             if (inv != null && inv.upgrades() > 0) {
                 int upgradeIndex = inv.getUpgradeSlotStartIndex();
                 for (int i = 0; i < inv.upgrades(); i++) {
-                    if (inv.canPlaceItem(upgradeIndex + i, stack)) {
+                    if (inv.canPlaceItem(upgradeIndex + i, used)) {
                         ItemStack upgradeStack = inv.getItem(upgradeIndex + i);
                         if (upgradeStack.isEmpty()) {
                             if (!level.isClientSide()) {
-                                inv.setItem(upgradeIndex + i, stack.copy());
-                                stack.shrink(stack.getCount());
+                                inv.setItem(upgradeIndex + i, used.copy());
+                                used.shrink(used.getCount());
                             }
-                            return InteractionResult.CONSUME;
+                            return ItemInteractionResult.CONSUME;
                         }
                         if (ItemUtils.testItems(upgrade, upgradeStack.getItem())) {
                             int room = upgradeStack.getMaxStackSize() - upgradeStack.getCount();
                             if (room > 0) {
                                 if (!level.isClientSide()) {
-                                    int accepted = room > stack.getCount() ? stack.getCount() : room;
+                                    int accepted = room > used.getCount() ? used.getCount() : room;
                                     upgradeStack.grow(accepted);
-                                    stack.shrink(accepted);
+                                    used.shrink(accepted);
                                 }
-                                return InteractionResult.CONSUME;
+                                return ItemInteractionResult.CONSUME;
                             }
                         }
                     }
                 }
             }
 
-        } else if (!(stack.getItem() instanceof IWrenchItem)) {
-            if (hasComponent(IComponentType.ContainerProvider)) {
+        } else if (!(used.getItem() instanceof IWrenchItem)) {
 
-                if (!level.isClientSide) {
-
-                    player.openMenu(getComponent(IComponentType.ContainerProvider));
-
-                    player.awardStat(Stats.INTERACT_WITH_FURNACE);
-
-                }
-
-                return InteractionResult.CONSUME;
-
-            }
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     public void onBlockDestroyed() {
@@ -435,7 +427,7 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
 
     /**
      * This method will never have air as the newState unless something has gone horribly horribly wrong!
-     * 
+     *
      * @param oldState
      * @param newState
      */

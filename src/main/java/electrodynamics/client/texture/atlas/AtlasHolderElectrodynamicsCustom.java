@@ -17,7 +17,7 @@ public class AtlasHolderElectrodynamicsCustom extends TextureAtlasHolder {
 //	public static final ResourceLocation TEXTURE_GAS = create("gastexture");
 
 	public AtlasHolderElectrodynamicsCustom(TextureManager textureManager) {
-		super(textureManager, new ResourceLocation(References.ID, "textures/" + References.ID + "/" + ElectrodynamicsTextureAtlases.ELECTRODYNAMICS_CUSTOM_NAME + ".png"), ElectrodynamicsTextureAtlases.ELECTRODYNAMICS_CUSTOM);
+		super(textureManager, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/" + References.ID + "/" + ElectrodynamicsTextureAtlases.ELECTRODYNAMICS_CUSTOM_NAME + ".png"), ElectrodynamicsTextureAtlases.ELECTRODYNAMICS_CUSTOM);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class AtlasHolderElectrodynamicsCustom extends TextureAtlasHolder {
 
 	@SuppressWarnings("unused")
 	private static ResourceLocation create(String name) {
-		return new ResourceLocation(References.ID, "custom/" + name);
+		return ResourceLocation.fromNamespaceAndPath(References.ID, "custom/" + name);
 	}
 
 }

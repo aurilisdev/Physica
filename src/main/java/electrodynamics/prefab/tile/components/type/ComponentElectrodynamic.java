@@ -7,13 +7,13 @@ import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
+import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.item.IItemElectric;
 import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponent;
@@ -69,9 +69,9 @@ public class ComponentElectrodynamic implements IComponent, ICapabilityElectrody
         acceptsEnergy = isReceiver;
 
         holder(source);
-        voltage = source.property(new Property<>(PropertyType.Double, "voltage", ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
-        maxJoules = source.property(new Property<>(PropertyType.Double, "maxJoules", 0.0));
-        joules = source.property(new Property<>(PropertyType.Double, "joules", 0.0));
+        voltage = source.property(new Property<>(PropertyTypes.DOUBLE, "voltage", ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
+        maxJoules = source.property(new Property<>(PropertyTypes.DOUBLE, "maxJoules", 0.0));
+        joules = source.property(new Property<>(PropertyTypes.DOUBLE, "joules", 0.0));
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -36,8 +37,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -105,28 +104,18 @@ public class ItemMechanizedCrossbow extends ProjectileWeaponItem implements IIte
 	}
 
 	@Override
-	public boolean canBeDepleted() {
-		return false;
-	}
-
-	@Override
 	public boolean isEnchantable(ItemStack stack) {
 		return false;
 	}
 
 	private static AbstractArrow getArrow(Level world, LivingEntity entity, ItemStack crossbow, ItemStack ammo) {
 		ArrowItem arrowitem = (ArrowItem) (ammo.getItem() instanceof ArrowItem ? ammo.getItem() : Items.ARROW);
-		AbstractArrow abstractarrow = arrowitem.createArrow(world, ammo, entity);
+		AbstractArrow abstractarrow = arrowitem.createArrow(world, ammo, entity, crossbow);
 		if (entity instanceof Player) {
 			abstractarrow.setCritArrow(true);
 		}
 
 		abstractarrow.setSoundEvent(SoundEvents.CROSSBOW_HIT);
-		abstractarrow.setShotFromCrossbow(true);
-		int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PIERCING, crossbow);
-		if (i > 0) {
-			abstractarrow.setPierceLevel((byte) i);
-		}
 
 		return abstractarrow;
 	}
@@ -173,11 +162,11 @@ public class ItemMechanizedCrossbow extends ProjectileWeaponItem implements IIte
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		super.appendHoverText(stack, worldIn, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+		super.appendHoverText(stack, context, tooltip, flagIn);
 		tooltip.add(ElectroTextUtils.tooltip("item.electric.info", ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY));
 		tooltip.add(ElectroTextUtils.tooltip("item.electric.voltage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE), ChatFormatter.getChatDisplayShort(properties.extract.getVoltage(), DisplayUnit.VOLTAGE))).withStyle(ChatFormatting.RED));
-		IItemElectric.addBatteryTooltip(stack, worldIn, tooltip);
+		IItemElectric.addBatteryTooltip(stack, context, tooltip);
 	}
 
 	@Override
@@ -193,6 +182,11 @@ public class ItemMechanizedCrossbow extends ProjectileWeaponItem implements IIte
 	@Override
 	public int getDefaultProjectileRange() {
 		return PROJECTILE_RANGE;
+	}
+
+	@Override
+	protected void shootProjectile(LivingEntity pShooter, Projectile pProjectile, int pIndex, float pVelocity, float pInaccuracy, float pAngle, @Nullable LivingEntity pTarget) {
+
 	}
 
 	@Override

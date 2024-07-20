@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-//import javax.annotation.Nullable;
-
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.client.guidebook.ScreenGuidebook;
@@ -71,7 +69,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 @JeiPlugin
@@ -84,7 +81,7 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 
 	@Override
 	public ResourceLocation getPluginUid() {
-		return new ResourceLocation(electrodynamics.api.References.ID, "jei");
+		return ResourceLocation.fromNamespaceAndPath(electrodynamics.api.References.ID, "jei");
 	}
 
 	@Override
@@ -231,13 +228,13 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 		// Items
 		for (Item item : TileCoalGenerator.getValidItems()) {
 			ItemStack fuelStack = new ItemStack(item);
-			registration.addIngredientInfo(fuelStack, VanillaTypes.ITEM_STACK, ElectroTextUtils.jeiItemTranslated("coalgeneratorfuelsource", ChatFormatter.getChatDisplayShort(CommonHooks.getBurnTime(fuelStack, null) / 20.0, DisplayUnit.TIME_SECONDS)));
+			registration.addIngredientInfo(fuelStack, VanillaTypes.ITEM_STACK, ElectroTextUtils.jeiItemTranslated("coalgeneratorfuelsource", ChatFormatter.getChatDisplayShort(fuelStack.getBurnTime(null) / 20.0, DisplayUnit.TIME_SECONDS)));
 		}
 
 		// Fluids
 		for (CombustionFuelSource fuel : CombustionFuelRegister.INSTANCE.getFuels()) {
 			for (FluidStack fluid : fuel.getFuels()) {
-				registration.addIngredientInfo(new FluidStack(fluid, FULL_FLUID_SQUARE), NeoForgeTypes.FLUID_STACK, ElectroTextUtils.jeiFluidTranslated("combustionchamberfuel", ChatFormatter.getChatDisplayShort(fuel.getPowerMultiplier() * Constants.COMBUSTIONCHAMBER_JOULES_PER_TICK * 20 / 1000.0, DisplayUnit.WATT), ChatFormatter.formatFluidMilibuckets(fluid.getAmount())));
+				registration.addIngredientInfo(new FluidStack(fluid.getFluidHolder(), FULL_FLUID_SQUARE), NeoForgeTypes.FLUID_STACK, ElectroTextUtils.jeiFluidTranslated("combustionchamberfuel", ChatFormatter.getChatDisplayShort(fuel.getPowerMultiplier() * Constants.COMBUSTIONCHAMBER_JOULES_PER_TICK * 20 / 1000.0, DisplayUnit.WATT), ChatFormatter.formatFluidMilibuckets(fluid.getAmount())));
 			}
 		}
 

@@ -27,9 +27,11 @@ import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -88,7 +90,7 @@ public class ElectrodynamicsAdvancementProvider implements DataProvider {
     }
 
     public AdvancementBuilder advancement(String name) {
-        AdvancementBuilder builder = create(new ResourceLocation(modID, name));
+        AdvancementBuilder builder = create(ResourceLocation.fromNamespaceAndPath(modID, name));
         builders.add(builder);
         return builder;
     }
@@ -99,7 +101,7 @@ public class ElectrodynamicsAdvancementProvider implements DataProvider {
                 //
                 .addCriterion("SpawnIn", PlayerTrigger.TriggerInstance.tick())
                 //
-                .rewards(Builder.loot(new ResourceLocation("advancement_reward/electroguidebook")))
+                .rewards(Builder.loot(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("advancement_reward/electroguidebook"))))
                 //
                 .condition(new ConfigCondition());
 

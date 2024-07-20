@@ -1,6 +1,5 @@
 package electrodynamics.client.render.event.guipost;
 
-import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import electrodynamics.api.electricity.formatting.ChatFormatter;
@@ -9,18 +8,18 @@ import electrodynamics.api.item.IItemTemperate;
 import electrodynamics.common.item.gear.tools.electric.utils.ItemRailgun;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.gui.overlay.NamedGuiOverlay;
 
 public class HandlerRailgunTemperature extends AbstractPostGuiOverlayHandler {
 
 	@Override
-	public void renderToScreen(NamedGuiOverlay overlay, GuiGraphics graphics, Window window, Minecraft minecraft, float partialTicks) {
+	public void renderToScreen(GuiGraphics graphics, DeltaTracker tracker, Minecraft minecraft) {
 		Player player = minecraft.player;
 		ItemStack gunStackMainHand = player.getItemBySlot(EquipmentSlot.MAINHAND);
 		ItemStack gunStackOffHand = player.getItemBySlot(EquipmentSlot.OFFHAND);

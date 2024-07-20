@@ -1,4 +1,4 @@
-package electrodynamics.common.event.types.living.hurt;
+package electrodynamics.common.event.types.living.damage;
 
 import electrodynamics.prefab.utilities.ItemUtils;
 import electrodynamics.registers.ElectrodynamicsItems;
@@ -9,14 +9,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 
-public class HandlerHydraulicBoots extends AbstractLivingHurtHandler {
+public class HandlerHydraulicBoots extends AbstractLivingDamageHandler {
 
     @Override
-    public void handle(LivingHurtEvent event) {
+    public void handle(LivingDamageEvent.Pre event) {
         LivingEntity entity = event.getEntity();
         if (!event.getSource().is(DamageTypes.FALL)) {
             return;
@@ -27,7 +27,7 @@ public class HandlerHydraulicBoots extends AbstractLivingHurtHandler {
             return;
         }
 
-        int fluidRequired = (int) Math.log10(event.getAmount());
+        int fluidRequired = (int) Math.log10(event.getOriginalDamage());
 
         IFluidHandlerItem handler = playerBoots.getCapability(Capabilities.FluidHandler.ITEM);
 
@@ -35,7 +35,7 @@ public class HandlerHydraulicBoots extends AbstractLivingHurtHandler {
             return;
         }
 
-        event.setCanceled(true);
+        event.setNewDamage(0);
 
         handler.drain(fluidRequired, FluidAction.EXECUTE);
 

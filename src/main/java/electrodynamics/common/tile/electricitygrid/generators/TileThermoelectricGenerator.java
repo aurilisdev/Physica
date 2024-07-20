@@ -3,7 +3,7 @@ package electrodynamics.common.tile.electricitygrid.generators;
 import electrodynamics.common.reloadlistener.ThermoelectricGeneratorHeatRegister;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -21,9 +21,9 @@ public class TileThermoelectricGenerator extends GenericTile {
 
 	protected CachedTileOutput output;
 
-	public Property<Boolean> hasHeat = property(new Property<>(PropertyType.Boolean, "hasheat", false));
-	public Property<Double> heatMultipler = property(new Property<>(PropertyType.Double, "multiplier", 0.0));
-	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	public Property<Boolean> hasHeat = property(new Property<>(PropertyTypes.BOOLEAN, "hasheat", false));
+	public Property<Double> heatMultipler = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 0.0));
+	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 
 	public TileThermoelectricGenerator(BlockPos worldPosition, BlockState blockState) {
 		super(ElectrodynamicsBlockTypes.TILE_THERMOELECTRICGENERATOR.get(), worldPosition, blockState);

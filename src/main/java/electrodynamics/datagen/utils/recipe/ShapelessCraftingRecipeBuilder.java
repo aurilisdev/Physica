@@ -15,6 +15,7 @@ import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 
 public class ShapelessCraftingRecipeBuilder implements RecipeBuilder {
 
@@ -41,8 +42,13 @@ public class ShapelessCraftingRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
+    public ShapelessCraftingRecipeBuilder addIngredient(ICustomIngredient ing) {
+        ingredients.add(new Ingredient(ing));
+        return this;
+    }
+
     public ShapelessCraftingRecipeBuilder addIngredient(String parent, String tag) {
-        ingredients.add(Ingredient.of(itemTag(new ResourceLocation(parent, tag))));
+        ingredients.add(Ingredient.of(itemTag(ResourceLocation.fromNamespaceAndPath(parent, tag))));
         return this;
     }
 
@@ -66,7 +72,7 @@ public class ShapelessCraftingRecipeBuilder implements RecipeBuilder {
     }
 
     public ShapelessCraftingRecipeBuilder complete(String parent, String name) {
-        id = new ResourceLocation(parent, name);
+        id = ResourceLocation.fromNamespaceAndPath(parent, name);
         return this;
     }
 

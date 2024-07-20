@@ -19,7 +19,6 @@ import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.common.tile.pipelines.gas.TileGasPipePump;
 import electrodynamics.prefab.network.AbstractNetwork;
 import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.entity.BlockEntity;

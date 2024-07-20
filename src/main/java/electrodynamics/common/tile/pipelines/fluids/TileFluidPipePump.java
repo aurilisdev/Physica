@@ -1,12 +1,12 @@
 package electrodynamics.common.tile.pipelines.fluids;
 
+import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.common.inventory.container.tile.ContainerFluidPipePump;
 import electrodynamics.common.network.type.FluidNetwork;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -31,7 +31,7 @@ public class TileFluidPipePump extends GenericTile {
 
     private boolean isLocked = false;
 
-    public final Property<Integer> priority = property(new Property<>(PropertyType.Integer, "pumppriority", 0).onChange((prop, oldval) -> {
+    public final Property<Integer> priority = property(new Property<>(PropertyTypes.INTEGER, "pumppriority", 0).onChange((prop, oldval) -> {
 
         if (level.isClientSide) {
             return;

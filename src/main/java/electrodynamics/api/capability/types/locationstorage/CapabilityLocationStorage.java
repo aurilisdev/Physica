@@ -5,6 +5,7 @@ import java.util.List;
 
 import electrodynamics.prefab.utilities.object.Location;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 
@@ -18,7 +19,7 @@ public class CapabilityLocationStorage implements ILocationStorage, INBTSerializ
 	}
 
 	@Override
-	public CompoundTag serializeNBT() {
+	public CompoundTag serializeNBT(HolderLookup.Provider provider) {
 		if (ElectrodynamicsCapabilities.CAPABILITY_LOCATIONSTORAGE_ITEM != null) {
 			CompoundTag nbt = new CompoundTag();
 			nbt.putInt("size", locations.size());
@@ -31,7 +32,7 @@ public class CapabilityLocationStorage implements ILocationStorage, INBTSerializ
 	}
 
 	@Override
-	public void deserializeNBT(CompoundTag nbt) {
+	public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
 		if (ElectrodynamicsCapabilities.CAPABILITY_LOCATIONSTORAGE_ITEM != null) {
 			locations.clear();
 			for (int i = 0; i < nbt.getInt("size"); i++) {

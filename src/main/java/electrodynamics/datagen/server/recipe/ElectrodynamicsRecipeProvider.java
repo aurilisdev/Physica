@@ -27,9 +27,12 @@ import net.minecraft.data.recipes.RecipeProvider;
 public class ElectrodynamicsRecipeProvider extends RecipeProvider {
 
 	public final List<AbstractRecipeGenerator> GENERATORS = new ArrayList<>();
+	private final CompletableFuture<HolderLookup.Provider> lookupProvider;
+
 
 	public ElectrodynamicsRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
 		super(output, lookupProvider);
+		this.lookupProvider = lookupProvider;
 		addRecipes();
 	}
 
@@ -52,6 +55,7 @@ public class ElectrodynamicsRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput output) {
+
         for (AbstractRecipeGenerator generator : GENERATORS) {
             generator.addRecipes(output);
         }

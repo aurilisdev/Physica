@@ -4,7 +4,7 @@ import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodyn
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerPotentiometer;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TilePotentiometer extends GenericTile {
 
-	public final Property<Double> powerConsumption = property(new Property<>(PropertyType.Double, "consumption", -1.0)).onChange((prop, oldval) -> {
+	public final Property<Double> powerConsumption = property(new Property<>(PropertyTypes.DOUBLE, "consumption", -1.0)).onChange((prop, oldval) -> {
 		if (level.isClientSide) {
 			return;
 		}

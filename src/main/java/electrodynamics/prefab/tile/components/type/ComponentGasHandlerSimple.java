@@ -19,7 +19,6 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.state.BlockState;

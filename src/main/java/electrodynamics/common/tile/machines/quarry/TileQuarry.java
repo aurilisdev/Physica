@@ -11,7 +11,9 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
-import org.jetbrains.annotations.NotNull;
+import electrodynamics.prefab.properties.PropertyTypes;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 
 import electrodynamics.api.tile.IPlayerStorable;
 import electrodynamics.client.render.event.levelstage.HandlerQuarryArm;
@@ -26,7 +28,6 @@ import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.block.GenericMachineBlock;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -164,33 +165,33 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 	public TileQuarry(BlockPos pos, BlockState state) {
 		super(ElectrodynamicsBlockTypes.TILE_QUARRY.get(), pos, state);
 
-		hasMotorComplex = property(new Property<>(PropertyType.Boolean, "hasmotorcomplex", false));
-		hasCoolantResavoir = property(new Property<>(PropertyType.Boolean, "hascoolantresavoir", false));
-		hasSeismicRelay = property(new Property<>(PropertyType.Boolean, "hasseismicrelay", false));
-		hasRing = property(new Property<>(PropertyType.Boolean, "hasring", false));
-		cornerOnRight = property(new Property<>(PropertyType.Boolean, "corneronright", false));
-		isAreaCleared = property(new Property<>(PropertyType.Boolean, "areaClear", false));
+		hasMotorComplex = property(new Property<>(PropertyTypes.BOOLEAN, "hasmotorcomplex", false));
+		hasCoolantResavoir = property(new Property<>(PropertyTypes.BOOLEAN, "hascoolantresavoir", false));
+		hasSeismicRelay = property(new Property<>(PropertyTypes.BOOLEAN, "hasseismicrelay", false));
+		hasRing = property(new Property<>(PropertyTypes.BOOLEAN, "hasring", false));
+		cornerOnRight = property(new Property<>(PropertyTypes.BOOLEAN, "corneronright", false));
+		isAreaCleared = property(new Property<>(PropertyTypes.BOOLEAN, "areaClear", false));
 
-		corners = property(new Property<>(PropertyType.BlockPosList, "corners", List.of(OUT_OF_REACH, OUT_OF_REACH, OUT_OF_REACH, OUT_OF_REACH)));
-		miningPos = property(new Property<>(PropertyType.BlockPos, "miningpos", OUT_OF_REACH));
-		prevMiningPos = property(new Property<>(PropertyType.BlockPos, "prevminingpos", OUT_OF_REACH));
+		corners = property(new Property<>(PropertyTypes.BLOCK_POS_LIST, "corners", List.of(OUT_OF_REACH, OUT_OF_REACH, OUT_OF_REACH, OUT_OF_REACH)));
+		miningPos = property(new Property<>(PropertyTypes.BLOCK_POS, "miningpos", OUT_OF_REACH));
+		prevMiningPos = property(new Property<>(PropertyTypes.BLOCK_POS, "prevminingpos", OUT_OF_REACH));
 
-		quarryPowerUsage = property(new Property<>(PropertyType.Double, "quarrypowerusage", 0.0));
-		setupPowerUsage = property(new Property<>(PropertyType.Double, "setuppowerusage", 0.0));
-		isPowered = property(new Property<>(PropertyType.Boolean, "ispowered", false));
-		hasHead = property(new Property<>(PropertyType.Boolean, "hashead", false));
-		currHead = property(new Property<>(PropertyType.Integer, "headtype", -1));
+		quarryPowerUsage = property(new Property<>(PropertyTypes.DOUBLE, "quarrypowerusage", 0.0));
+		setupPowerUsage = property(new Property<>(PropertyTypes.DOUBLE, "setuppowerusage", 0.0));
+		isPowered = property(new Property<>(PropertyTypes.BOOLEAN, "ispowered", false));
+		hasHead = property(new Property<>(PropertyTypes.BOOLEAN, "hashead", false));
+		currHead = property(new Property<>(PropertyTypes.INTEGER, "headtype", -1));
 
-		hasItemVoid = property(new Property<>(PropertyType.Boolean, "hasitemvoid", false));
-		fortuneLevel = property(new Property<>(PropertyType.Integer, "fortunelevel", 0));
-		silkTouchLevel = property(new Property<>(PropertyType.Integer, "silktouchlevel", 0));
-		unbreakingLevel = property(new Property<>(PropertyType.Integer, "unbreakinglevel", 0));
+		hasItemVoid = property(new Property<>(PropertyTypes.BOOLEAN, "hasitemvoid", false));
+		fortuneLevel = property(new Property<>(PropertyTypes.INTEGER, "fortunelevel", 0));
+		silkTouchLevel = property(new Property<>(PropertyTypes.INTEGER, "silktouchlevel", 0));
+		unbreakingLevel = property(new Property<>(PropertyTypes.INTEGER, "unbreakinglevel", 0));
 
-		isFinished = property(new Property<>(PropertyType.Boolean, "isfinished", false));
-		speed = property(new Property<>(PropertyType.Integer, "speed", 0));
-		progressCounter = property(new Property<>(PropertyType.Integer, "progresscounter", 0));
-		running = property(new Property<>(PropertyType.Boolean, "isrunning", false));
-		isTryingToMineFrame = property(new Property<>(PropertyType.Boolean, "istryingtomineframe", false));
+		isFinished = property(new Property<>(PropertyTypes.BOOLEAN, "isfinished", false));
+		speed = property(new Property<>(PropertyTypes.INTEGER, "speed", 0));
+		progressCounter = property(new Property<>(PropertyTypes.INTEGER, "progresscounter", 0));
+		running = property(new Property<>(PropertyTypes.BOOLEAN, "isrunning", false));
+		isTryingToMineFrame = property(new Property<>(PropertyTypes.BOOLEAN, "istryingtomineframe", false));
 
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
@@ -512,9 +513,9 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 			// TODO make this work with custom mining tiers
 			ItemStack pickaxe = new ItemStack(Items.NETHERITE_PICKAXE);
 			if (silkTouchLevel.get() > 0) {
-				pickaxe.enchant(Enchantments.SILK_TOUCH, silkTouchLevel.get());
+				pickaxe.enchant(level.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.SILK_TOUCH), silkTouchLevel.get());
 			} else if (fortuneLevel.get() > 0) {
-				pickaxe.enchant(Enchantments.BLOCK_FORTUNE, fortuneLevel.get());
+				pickaxe.enchant(level.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.FORTUNE), fortuneLevel.get());
 			}
 			List<ItemStack> lootItems = Block.getDrops(state, (ServerLevel) world, pos, null, null, pickaxe);
 			List<ItemStack> voidItemStacks = inv.getInputContents().subList(1, inv.getInputContents().size());
@@ -878,9 +879,8 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound) {
-		super.saveAdditional(compound);
-
+	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.saveAdditional(compound, registries);
 		CompoundTag data = new CompoundTag();
 
 		data.putBoolean("bottomStrip", hasBottomStrip);
@@ -944,9 +944,8 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag compound) {
-		super.load(compound);
-
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
 		CompoundTag data = compound.getCompound("quarrydata");
 
 		hasBottomStrip = data.getBoolean("bottomStrip");
@@ -995,14 +994,14 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 
 		int brokenSize = data.getInt("brokenframecount");
 		for (int i = 0; i < brokenSize; i++) {
-			BlockPos pos = NbtUtils.readBlockPos(data.getCompound("brokenframe" + i));
+			BlockPos pos = NbtUtils.readBlockPos(data, "brokenframe" + i).get();
 			BlockState state = BlockFrame.readFromNbt(data.getCompound("brokenstate" + i));
 			brokenFrames.put(pos, state);
 		}
 
 		int repairSize = data.getInt("repairedframecount");
 		for (int i = 0; i < repairSize; i++) {
-			repairedFrames.add(NbtUtils.readBlockPos(data.getCompound("repairedframe" + i)));
+			repairedFrames.add(NbtUtils.readBlockPos(data, "repairedframe" + i).get());
 		}
 
 		compound.remove("quarrydata");

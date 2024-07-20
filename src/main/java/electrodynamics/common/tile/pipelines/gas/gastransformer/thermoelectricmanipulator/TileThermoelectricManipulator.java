@@ -14,7 +14,7 @@ import electrodynamics.common.tile.pipelines.gas.gastransformer.GenericTileGasTr
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerAddonTank;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerSideBlock;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -50,7 +50,7 @@ public class TileThermoelectricManipulator extends GenericTileGasTransformer {
      */
     private static final double HEAT_TRANSFER = 10.0; // degrees kelvin
 
-    public final Property<Double> targetTemperature = property(new Property<>(PropertyType.Double, "targettemperature", Gas.ROOM_TEMPERATURE));
+    public final Property<Double> targetTemperature = property(new Property<>(PropertyTypes.DOUBLE, "targettemperature", Gas.ROOM_TEMPERATURE));
 
     private boolean isFluid = false;
     private boolean changeState = false;

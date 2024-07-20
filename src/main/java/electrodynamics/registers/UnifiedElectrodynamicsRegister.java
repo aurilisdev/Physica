@@ -27,6 +27,8 @@ public class UnifiedElectrodynamicsRegister {
 		ElectrodynamicsRecipeInit.INGREDIENT_TYPES.register(bus);
 		ElectrodynamicsRecipeInit.RECIPE_TYPES.register(bus);
         ElectrodynamicsRecipeInit.RECIPE_SERIALIZER.register(bus);
+		ElectrodynamicsDataComponentTypes.DATA_COMPONENT_TYPES.register(bus);
+		ElectrodynamicsArmorMaterials.ARMOR_MATERIALS.register(bus);
 	}
 
 	static {

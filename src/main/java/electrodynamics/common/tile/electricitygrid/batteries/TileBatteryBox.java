@@ -1,5 +1,6 @@
 package electrodynamics.common.tile.electricitygrid.batteries;
 
+import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.common.block.subtype.SubtypeMachine;
@@ -8,7 +9,6 @@ import electrodynamics.common.item.ItemUpgrade;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.prefab.item.ItemElectric;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -38,8 +38,8 @@ public class TileBatteryBox extends GenericTile implements IEnergyStorage {
 
     public final Property<Double> powerOutput;
     public final Property<Double> maxJoules;
-    public Property<Double> currentCapacityMultiplier = property(new Property<>(PropertyType.Double, "currentCapacityMultiplier", 1.0));
-    public Property<Double> currentVoltageMultiplier = property(new Property<>(PropertyType.Double, "currentVoltageMultiplier", 1.0));
+    public Property<Double> currentCapacityMultiplier = property(new Property<>(PropertyTypes.DOUBLE, "currentCapacityMultiplier", 1.0));
+    public Property<Double> currentVoltageMultiplier = property(new Property<>(PropertyTypes.DOUBLE, "currentVoltageMultiplier", 1.0));
     protected Property<Double> receiveLimitLeft;
     protected CachedTileOutput output;
 
@@ -52,9 +52,9 @@ public class TileBatteryBox extends GenericTile implements IEnergyStorage {
     public TileBatteryBox(BlockEntityType<?> type, SubtypeMachine machine, int baseVoltage, double output, double max, BlockPos worldPosition, BlockState blockState) {
         super(type, worldPosition, blockState);
         this.baseVoltage = baseVoltage;
-        powerOutput = property(new Property<>(PropertyType.Double, "powerOutput", output));
-        maxJoules = property(new Property<>(PropertyType.Double, "maxJoulesStored", max));
-        receiveLimitLeft = property(new Property<>(PropertyType.Double, "receiveLimitLeft", output * currentCapacityMultiplier.get()));
+        powerOutput = property(new Property<>(PropertyTypes.DOUBLE, "powerOutput", output));
+        maxJoules = property(new Property<>(PropertyTypes.DOUBLE, "maxJoulesStored", max));
+        receiveLimitLeft = property(new Property<>(PropertyTypes.DOUBLE, "receiveLimitLeft", output * currentCapacityMultiplier.get()));
         addComponent(new ComponentTickable(this).tickServer(this::tickServer));
         addComponent(new ComponentPacketHandler(this));
         addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1).upgrades(3)).validUpgrades(ContainerBatteryBox.VALID_UPGRADES).valid((i, s, c) -> i == 0 ? s.getItem() instanceof ItemElectric : machineValidator().test(i, s, c)));

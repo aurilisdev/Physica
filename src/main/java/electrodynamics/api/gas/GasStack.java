@@ -4,34 +4,43 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
 /**
  * An implementation of a FluidStack-like object for gases
- * 
- * @author skip999
  *
+ * @author skip999
  */
 public class GasStack {
 
     public static final Codec<GasStack> CODEC = RecordCodecBuilder.create(instance ->
-    //
-    instance.group(
-            //
-            ElectrodynamicsGases.GAS_REGISTRY.byNameCodec().fieldOf("gas").forGetter(instance0 -> instance0.gas),
-            //
-            Codec.DOUBLE.fieldOf("amount").forGetter(instance0 -> instance0.amount),
-            //
+                    //
+                    instance.group(
+                            //
+                            ElectrodynamicsGases.GAS_REGISTRY.byNameCodec().fieldOf("gas").forGetter(instance0 -> instance0.gas),
+                            //
+                            Codec.DOUBLE.fieldOf("amount").forGetter(instance0 -> instance0.amount),
+                            //
 
-            Codec.DOUBLE.fieldOf("temp").forGetter(instance0 -> instance0.temperature),
-            //
-            Codec.INT.fieldOf("pressure").forGetter(instance0 -> instance0.pressure)
-    //
-    ).apply(instance, GasStack::new)
+                            Codec.DOUBLE.fieldOf("temp").forGetter(instance0 -> instance0.temperature),
+                            //
+                            Codec.INT.fieldOf("pressure").forGetter(instance0 -> instance0.pressure)
+                            //
+                    ).apply(instance, GasStack::new)
 //        
+    );
+
+    public static final StreamCodec<FriendlyByteBuf, GasStack> STREAM_CODEC = StreamCodec.composite(
+
+            ByteBufCodecs.fromCodec(ElectrodynamicsGases.GAS_REGISTRY.byNameCodec()), GasStack::getGas,
+            ByteBufCodecs.DOUBLE, GasStack::getAmount,
+            ByteBufCodecs.DOUBLE, GasStack::getTemperature,
+            ByteBufCodecs.INT, GasStack::getPressure,
+            GasStack::new
     );
 
     public static final GasStack EMPTY = new GasStack();
@@ -49,7 +58,7 @@ public class GasStack {
     private GasStack() {
         isEmpty = true;
     }
-    
+
     public GasStack(Gas gas) {
         this.gas = gas;
         if (gas == ElectrodynamicsGases.EMPTY.get()) {
@@ -112,9 +121,9 @@ public class GasStack {
 
     /**
      * A negative temperature is analogous to cooling
-     * 
+     * <p>
      * Temperatures cannot drop below 1 degree Kelvin
-     * 
+     *
      * @param deltaTemp The change in temperature
      */
     public void heat(double deltaTemp) {
@@ -124,7 +133,7 @@ public class GasStack {
 
     /**
      * Sets the pressure of this GasStack to the desired pressure and updates the volume accordingly
-     * 
+     *
      * @param atm
      */
     public void bringPressureTo(int atm) {
@@ -205,7 +214,6 @@ public class GasStack {
         return gas.toString() + ", amount: " + amount + " mB, temp: " + temperature + " K, pressure: " + pressure + " ATM";
     }
 
-    // This is assumed to be a new tag
     public CompoundTag writeToNbt() {
         CompoundTag tag = new CompoundTag();
         tag.putString("name", ElectrodynamicsGases.GAS_REGISTRY.getKey(getGas()).toString());
@@ -216,36 +224,21 @@ public class GasStack {
     }
 
     public static GasStack readFromNbt(CompoundTag tag) {
-        Gas gas = ElectrodynamicsGases.GAS_REGISTRY.get(new ResourceLocation(tag.getString("name")));
+        Gas gas = ElectrodynamicsGases.GAS_REGISTRY.get(ResourceLocation.parse(tag.getString("name")));
         double amount = tag.getDouble("amount");
         double temperature = tag.getDouble("temperature");
         int pressure = tag.getInt("pressure");
         return new GasStack(gas, amount, temperature, pressure);
     }
 
-    public void writeToBuffer(FriendlyByteBuf buffer) {
-        buffer.writeId(ElectrodynamicsGases.GAS_REGISTRY, gas);
-        buffer.writeDouble(amount);
-        buffer.writeDouble(temperature);
-        buffer.writeInt(pressure);
-    }
-
-    public static GasStack readFromBuffer(FriendlyByteBuf buffer) {
-        Gas gas = buffer.readById(ElectrodynamicsGases.GAS_REGISTRY);
-        double amount = buffer.readDouble();
-        double temperature = buffer.readDouble();
-        int pressure = buffer.readInt();
-        return new GasStack(gas, amount, temperature, pressure);
-    }
-
     /**
      * Equalizes the temperature of two gas stacks to their respective median values and adjusts the volume of the resulting
      * stack accordingly
-     * 
+     * <p>
      * The gas with the greater volume becomes the ruling pressure
-     * 
+     * <p>
      * It is assumed you have checked none of the gas stacks are unmodifiable
-     * 
+     *
      * @param stack1 : The first stack
      * @param stack2 : The second stack
      * @return A gas stack that has the average temperature and pressure of the two stacks with the corresponding volume
@@ -278,11 +271,11 @@ public class GasStack {
     /**
      * Determines how much gas from stack 2 could be accepted into a container once stack1 and stack2 have equalized
      * temperatures and pressures
-     * 
+     * <p>
      * The gas stack with the greater volume becomes the ruling pressure
-     * 
+     * <p>
      * It is assumed you have checked none of the gas stacks are unmodifiable
-     * 
+     *
      * @param stack1        : The existing GasStack in the container
      * @param stack2        : The gas attempting to be inserted into the container
      * @param maximumAccept : The capacity of the container

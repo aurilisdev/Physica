@@ -1,27 +1,22 @@
 package electrodynamics.common.item.gear.armor.types;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 
 import electrodynamics.api.References;
 import electrodynamics.client.ClientRegister;
 import electrodynamics.client.render.model.armor.types.ModelCompositeArmor;
-import electrodynamics.common.item.gear.armor.ICustomArmor;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
-import electrodynamics.registers.ElectrodynamicsCreativeTabs;
-import electrodynamics.registers.ElectrodynamicsItems;
-import electrodynamics.registers.ElectrodynamicsSounds;
+import electrodynamics.registers.*;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -34,13 +29,21 @@ import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
+
+	public static final EnumMap<Type, Integer> DEFENSE_MAP = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+		map.put(Type.HELMET, 6);
+		map.put(Type.CHESTPLATE, 12);
+		map.put(Type.LEGGINGS, 16);
+		map.put(Type.BOOTS, 6);
+	});
 
 	public static final String ARMOR_TEXTURE_LOCATION = References.ID + ":textures/model/armor/compositearmor.png";
 
 	public ItemCompositeArmor(Type slot) {
-		super(CompositeArmor.COMPOSITE_ARMOR, slot, new Item.Properties().stacksTo(1).fireResistant().setNoRepair(), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+		super(ElectrodynamicsArmorMaterials.COMPOSITE_ARMOR, slot, new Item.Properties().stacksTo(1).fireResistant().setNoRepair().durability(2000), () -> ElectrodynamicsCreativeTabs.MAIN.get());
 	}
 
 	@Override
@@ -90,16 +93,15 @@ public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
 
 		if (getEquipmentSlot() == EquipmentSlot.CHEST) {
 			ItemStack filled = new ItemStack(this);
-			CompoundTag tag = filled.getOrCreateTag();
-			tag.putInt(NBTUtils.PLATES, 2);
+			filled.set(ElectrodynamicsDataComponentTypes.PLATES, 2);
 			items.add(filled);
 		}
 
 	}
 
 	@Override
-	public boolean canBeDepleted() {
-		return false;
+	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken) {
+		return 0;
 	}
 
 	@Override
@@ -113,24 +115,25 @@ public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		super.appendHoverText(stack, worldIn, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+		super.appendHoverText(stack, context, tooltip, flagIn);
 		if (((ArmorItem) stack.getItem()).getEquipmentSlot() == EquipmentSlot.CHEST) {
-			staticAppendHoverText(stack, worldIn, tooltip, flagIn);
+			staticAppendHoverText(stack, context, tooltip, flagIn);
 		}
 	}
 
-	protected static void staticAppendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		int plates = stack.hasTag() ? stack.getTag().getInt(NBTUtils.PLATES) : 0;
-		tooltip.add(ElectroTextUtils.tooltip("ceramicplatecount", Component.translatable(plates + "")).withStyle(ChatFormatting.AQUA));
+	protected static void staticAppendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+		tooltip.add(ElectroTextUtils.tooltip("ceramicplatecount", Component.translatable(stack.getOrDefault(ElectrodynamicsDataComponentTypes.PLATES, 0) + "")).withStyle(ChatFormatting.AQUA));
 	}
 
+
 	@Override
-	public void onArmorTick(ItemStack stack, Level world, Player player) {
-		super.onArmorTick(stack, world, player);
+	public void onWearingTick(ItemStack stack, Level world, Player player, int slotId, boolean isSelected) {
+		super.onWearingTick(stack, world, player, slotId, isSelected);
 		player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20));
 	}
 
+	/*
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
 		return ARMOR_TEXTURE_LOCATION;
@@ -181,4 +184,6 @@ public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
 		}
 
 	}
+
+	 */
 }

@@ -263,7 +263,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 
 		newRecipe(new ItemStack(Items.COBBLESTONE, 1), 0.01F, 200, 350.0, "cobblestone_from_stone", modID)
 				//
-				.addItemTagInput(Tags.Items.STONE, 1)
+				.addItemTagInput(Tags.Items.STONES, 1)
 				//
 				.addItemBiproduct(new ProbableItem(new ItemStack(Items.GRAVEL), 0.4))
 				//
@@ -271,7 +271,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 
 		newRecipe(new ItemStack(Items.GRAVEL, 1), 0.01F, 200, 350.0, "gravel_from_cobblestone", modID)
 				//
-				.addItemTagInput(Tags.Items.COBBLESTONE, 1)
+				.addItemTagInput(Tags.Items.COBBLESTONES, 1)
 				//
 				.addItemBiproduct(new ProbableItem(new ItemStack(Items.SAND), 0.4))
 				//
@@ -279,7 +279,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 
 		newRecipe(new ItemStack(Items.SAND, 1), 0.01F, 200, 350.0, "sand_from_gravel", modID)
 				//
-				.addItemTagInput(Tags.Items.GRAVEL, 1)
+				.addItemTagInput(Tags.Items.GRAVELS, 1)
 				//
 				.save(output);
 

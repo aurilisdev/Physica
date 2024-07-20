@@ -21,6 +21,7 @@ import electrodynamics.common.tile.electricitygrid.GenericTileWire;
 import electrodynamics.common.tile.electricitygrid.TileLogisticalWire;
 import electrodynamics.common.tile.electricitygrid.TileWire;
 import electrodynamics.common.tile.electricitygrid.transformer.TileGenericTransformer;
+import electrodynamics.prefab.tile.types.GenericConnectTile;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.Scheduler;
 import electrodynamics.prefab.utilities.math.Color;
@@ -34,8 +35,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -52,11 +54,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.common.Tags;
 
@@ -92,19 +93,16 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-
-        ItemStack stack = player.getItemInHand(hand);
-
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (stack.isEmpty() || state.isAir()) {
-            return InteractionResult.FAIL;
+            return ItemInteractionResult.FAIL;
         }
 
         Item item = stack.getItem();
 
         boolean isServerSide = !level.isClientSide;
 
-        BlockPlaceContext newCtx = new BlockPlaceContext(player, hand, stack, hit);
+        BlockPlaceContext newCtx = new BlockPlaceContext(player, hand, stack, hitResult);
 
         if (item == Items.SHEARS) {
 
@@ -120,15 +118,14 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
 
                         handlePlayerItemDrops(player, ElectrodynamicsItems.ITEM_CERAMICINSULATION.get());
 
-                        stack.hurtAndBreak(1, player, pl -> {
-                        });
+                        stack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
 
                     }
 
                     level.playSound(null, pos, SoundEvents.TUFF_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
                 }
 
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
 
             }
 
@@ -150,8 +147,7 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
 
                         }
 
-                        stack.hurtAndBreak(1, player, pl -> {
-                        });
+                        stack.hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
 
                     }
 
@@ -159,11 +155,11 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
 
                 }
 
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
 
             }
 
-            return InteractionResult.FAIL;
+            return ItemInteractionResult.FAIL;
 
         }
 
@@ -188,11 +184,11 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
                     level.playSound(null, pos, SoundEvents.WOOL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 }
 
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
 
             }
 
-            return InteractionResult.FAIL;
+            return ItemInteractionResult.FAIL;
 
         }
 
@@ -215,7 +211,7 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
                 level.playSound(null, pos, SoundEvents.TUFF_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
 
-            return InteractionResult.CONSUME;
+            return ItemInteractionResult.CONSUME;
 
         }
 
@@ -238,7 +234,7 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
                 level.playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
 
-            return InteractionResult.CONSUME;
+            return ItemInteractionResult.CONSUME;
 
         }
 
@@ -263,11 +259,10 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
                 level.playSound(null, pos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
 
-            return InteractionResult.CONSUME;
+            return ItemInteractionResult.CONSUME;
 
         }
-
-        return super.use(state, level, pos, player, hand, hit);
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     private void handleDataCopyAndSet(BlockState newWire, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack, BlockState oldWire) {
@@ -361,20 +356,22 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
     }
 
     @Override
-    public BlockState refreshConnections(BlockState otherState, BlockEntity tile, BlockState state, Direction dir) {
-        EnumProperty<EnumConnectType> property = FACING_TO_PROPERTY_MAP.get(dir);
-        if (tile instanceof IConductor conductor) {
-            if (conductor.getWireType().isDefaultColor() || wire.isDefaultColor() || conductor.getWireColor() == wire.color) {
-                return state.setValue(property, EnumConnectType.WIRE);
+    public BlockState refreshConnections(BlockState otherState, BlockEntity otherTile, BlockState state, BlockEntity thisTile, Direction dir) {
+        if(!(thisTile instanceof GenericConnectTile)) {
+            return state;
+        }
+        GenericConnectTile thisConnect = (GenericConnectTile) thisTile;
+        EnumConnectType connection = EnumConnectType.NONE;
+        if (otherTile instanceof IConductor conductor) {
+            if(conductor.getWireType().isDefaultColor() || wire.isDefaultColor() || conductor.getWireColor() == wire.color) {
+                connection = EnumConnectType.WIRE;
+            } else {
+                connection = EnumConnectType.NONE;
             }
-            return state.setValue(property, EnumConnectType.NONE);
+        } else if (ElectricityUtils.isElectricReceiver(otherTile, dir.getOpposite()) || checkRedstone(otherState)) {
+            connection = EnumConnectType.INVENTORY;
         }
-        if (ElectricityUtils.isElectricReceiver(tile, dir.getOpposite()) || checkRedstone(otherState)) {
-            return state.setValue(property, EnumConnectType.INVENTORY);
-        }
-        if (state.hasProperty(property)) {
-            return state.setValue(property, EnumConnectType.NONE);
-        }
+        thisConnect.writeConnection(dir, connection);
         return state;
     }
 
@@ -389,6 +386,7 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
         }
         return null;
     }
+
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
@@ -504,7 +502,7 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
 
     }
 
-    @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
     private static class ColorHandlerInternal {
 
         @SubscribeEvent

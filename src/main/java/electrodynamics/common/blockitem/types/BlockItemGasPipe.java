@@ -25,8 +25,8 @@ public class BlockItemGasPipe extends BlockItemElectrodynamics {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level level, List<Component> tooltips, TooltipFlag advanced) {
-		super.appendHoverText(stack, level, tooltips, advanced);
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltips, TooltipFlag advanced) {
+		super.appendHoverText(stack, context, tooltips, advanced);
 		tooltips.add(ElectroTextUtils.tooltip("pipematerial", pipe.pipe.pipeMaterial.getTranslatedName()).withStyle(ChatFormatting.GRAY));
 		// tooltips.add(TextUtils.tooltip("pipeinsulationmaterial", pipe.pipe.insulationMaterial.getTranslatedName()).withStyle(ChatFormatting.GRAY));
 		tooltips.add(ElectroTextUtils.tooltip("pipemaximumpressure", ChatFormatter.getChatDisplayShort(pipe.pipe.pipeMaterial.maxPressure, DisplayUnit.PRESSURE_ATM)).withStyle(ChatFormatting.GRAY));

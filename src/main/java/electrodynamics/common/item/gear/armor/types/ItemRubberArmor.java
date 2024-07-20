@@ -1,30 +1,29 @@
 package electrodynamics.common.item.gear.armor.types;
 
+import java.util.EnumMap;
 import java.util.function.Supplier;
 
-import electrodynamics.api.References;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
-import electrodynamics.registers.ElectrodynamicsItems;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ArmorMaterial;
+import electrodynamics.registers.ElectrodynamicsArmorMaterials;
+import net.minecraft.Util;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 
 public class ItemRubberArmor extends ItemElectrodynamicsArmor {
 
-	public ItemRubberArmor(Type slot, Properties properties, Supplier<CreativeModeTab> creativeTab) {
-		super(ArmorMaterialRubber.rubber, slot, properties, creativeTab);
+	public static final EnumMap<Type, Integer> DEFENSE_MAP = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+		map.put(Type.HELMET, 0);
+		map.put(Type.CHESTPLATE, 0);
+		map.put(Type.LEGGINGS, 0);
+		map.put(Type.BOOTS, 2);
+	});
+
+	public ItemRubberArmor(ArmorItem.Type type, Properties properties, Supplier<CreativeModeTab> creativeTab) {
+		super(ElectrodynamicsArmorMaterials.RUBBER_BOOTS, type, properties, creativeTab);
 	}
 
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-		return References.ID + ":textures/model/armor/rubberarmor.png";
-	}
 
+	/*
 	public enum ArmorMaterialRubber implements ArmorMaterial {
 		rubber;
 
@@ -69,4 +68,6 @@ public class ItemRubberArmor extends ItemElectrodynamicsArmor {
 		}
 
 	}
+
+	 */
 }

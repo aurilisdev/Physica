@@ -11,6 +11,7 @@ import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.common.tile.pipelines.fluids.TileFluidPipe;
+import electrodynamics.prefab.tile.types.GenericConnectTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -39,17 +40,18 @@ public class BlockFluidPipe extends AbstractRefreshingConnectBlock {
     }
 
     @Override
-    public BlockState refreshConnections(BlockState otherState, BlockEntity tile, BlockState state, Direction dir) {
-        EnumProperty<EnumConnectType> property = FACING_TO_PROPERTY_MAP.get(dir);
-        if (tile instanceof IFluidPipe) {
-            return state.setValue(property, EnumConnectType.WIRE);
+    public BlockState refreshConnections(BlockState otherState, BlockEntity otherTile, BlockState state, BlockEntity thisTile, Direction dir) {
+        if(!(thisTile instanceof GenericConnectTile)) {
+            return state;
         }
-        if (FluidUtilities.isFluidReceiver(tile, dir.getOpposite())) {
-            return state.setValue(property, EnumConnectType.INVENTORY);
+        GenericConnectTile thisConnect = (GenericConnectTile) thisTile;
+        EnumConnectType connection = EnumConnectType.NONE;
+        if (otherTile instanceof IFluidPipe) {
+            connection = EnumConnectType.WIRE;
+        } else if (FluidUtilities.isFluidReceiver(otherTile, dir.getOpposite())) {
+            connection = EnumConnectType.INVENTORY;
         }
-        if (state.hasProperty(property)) {
-            return state.setValue(property, EnumConnectType.NONE);
-        }
+        thisConnect.writeConnection(dir, connection);
         return state;
     }
 

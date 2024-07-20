@@ -8,7 +8,6 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 public class FluidEthanol extends FluidNonPlaceable {
 
-	public static final String FORGE_TAG = "ethanol";
 	private final FluidType type;
 
 	public FluidEthanol() {

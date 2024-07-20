@@ -7,7 +7,7 @@ import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -38,13 +38,13 @@ public class TileCombustionChamber extends GenericMaterialTile implements IElect
 
 	public static final int TICKS_PER_MILLIBUCKET = 200;
 	public static final int TANK_CAPACITY = 1000;
-	public Property<Boolean> running = property(new Property<>(PropertyType.Boolean, "running", false));
-	public Property<Integer> burnTime = property(new Property<>(PropertyType.Integer, "burnTime", 0));
+	public Property<Boolean> running = property(new Property<>(PropertyTypes.BOOLEAN, "running", false));
+	public Property<Integer> burnTime = property(new Property<>(PropertyTypes.INTEGER, "burnTime", 0));
 	private double fuelMultiplier = 1;
 	private CachedTileOutput output;
 	// for future upgrades
-	private Property<Double> multiplier = property(new Property<>(PropertyType.Double, "multiplier", 1.0));
-	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	private Property<Double> multiplier = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 1.0));
+	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 
 	private boolean isSoundPlaying = false;
 

@@ -27,8 +27,8 @@ public interface ITexture {
 
 	enum Textures implements ITexture {
 		NONE(0, 0, 0, 0, 0, 0, null),
-		CONDENSER_COLUMN(32, 47, 0, 0, 32, 47, new ResourceLocation(References.ID + ":textures/screen/component/condensercolumn.png")),
-		TRANSFORMER_SYMBOL(25, 33, 0, 0, 25, 33, new ResourceLocation(References.ID + ":textures/screen/component/transformercoil.png"));
+		CONDENSER_COLUMN(32, 47, 0, 0, 32, 47, ResourceLocation.parse(References.ID + ":textures/screen/component/condensercolumn.png")),
+		TRANSFORMER_SYMBOL(25, 33, 0, 0, 25, 33, ResourceLocation.parse(References.ID + ":textures/screen/component/transformercoil.png"));
 
 		private final int textureWidth;
 		private final int textureHeight;

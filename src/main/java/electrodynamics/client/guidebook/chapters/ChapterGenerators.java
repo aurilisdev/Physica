@@ -239,7 +239,7 @@ public class ChapterGenerators extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.generators.fuels").withStyle(ChatFormatting.UNDERLINE)).setSeparateStart());
 		for (Item item : CoalGeneratorFuelRegister.INSTANCE.getFuels()) {
 			pageData.add(new TextWrapperObject(item.getDescription()).setSeparateStart());
-			pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.generators.burntime", ChatFormatter.getChatDisplayShort(CommonHooks.getBurnTime(new ItemStack(item), null) / 20.0, DisplayUnit.TIME_SECONDS))).setIndentions(1).setSeparateStart());
+			pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.generators.burntime", ChatFormatter.getChatDisplayShort(new ItemStack(item).getBurnTime(null) / 20.0, DisplayUnit.TIME_SECONDS))).setIndentions(1).setSeparateStart());
 		}
 
 		// Hydroelectric Generator

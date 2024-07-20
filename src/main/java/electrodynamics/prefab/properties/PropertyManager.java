@@ -7,7 +7,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 /**
@@ -89,6 +91,23 @@ public class PropertyManager {
 
 	public BlockEntity getOwner() {
 		return owner;
+	}
+
+	public void saveToTag(CompoundTag tag, Level world) {
+		for (Property<?> prop : getProperties()) {
+			if (prop.shouldSave()) {
+				prop.saveToTag(tag, world);
+			}
+		}
+	}
+
+	public void loadFromTag(CompoundTag tag, Level world) {
+		for (Property<?> prop : getProperties()) {
+			if (prop.shouldSave()) {
+				prop.loadFromTag(tag, world);
+				tag.remove(prop.getName());
+			}
+		}
 	}
 
 	public static record PropertyWrapper(int index, IPropertyType type, Object value, @Nullable Property<?> property) {

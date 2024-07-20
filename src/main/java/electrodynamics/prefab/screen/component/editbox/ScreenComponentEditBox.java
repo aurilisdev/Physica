@@ -10,7 +10,6 @@ import javax.annotation.Nullable;
 import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
-import net.minecraft.SharedConstants;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -21,6 +20,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
+import net.minecraft.util.StringUtil;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
@@ -34,7 +34,7 @@ import net.neoforged.api.distmarker.OnlyIn;
  */
 public class ScreenComponentEditBox extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/textinputbar.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/textinputbar.png");
 
 	public static final char[] POSITIVE_DECIMAL = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.' };
 	public static final char[] DECIMAL = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-' };
@@ -136,7 +136,7 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 		int min = Math.min(this.cursorPos, this.highlightPos);
 		int max = Math.max(this.cursorPos, this.highlightPos);
 		int length = this.maxLength - this.value.length() - (min - max);
-		String filtered = SharedConstants.filterText(textToWrite);
+		String filtered = StringUtil.filterText(textToWrite);
 		int filteredLength = filtered.length();
 		if (length < filteredLength) {
 			filtered = filtered.substring(0, length);
@@ -379,7 +379,7 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 		if (!this.canConsumeInput()) {
 			return false;
 		}
-		if (!SharedConstants.isAllowedChatCharacter(codePoint)) {
+		if (!StringUtil.isAllowedChatCharacter(codePoint)) {
 			return false;
 		}
 		if (this.isEditable) {

@@ -2,6 +2,7 @@ package electrodynamics.common.recipe.recipeutils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
@@ -9,17 +10,20 @@ import javax.annotation.Nullable;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 import net.neoforged.neoforge.common.crafting.IngredientType;
+import net.neoforged.neoforge.common.util.NeoForgeExtraCodecs;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 /**
@@ -28,11 +32,11 @@ import net.neoforged.neoforge.fluids.FluidStack;
  * @author skip999
  *
  */
-public class FluidIngredient extends Ingredient {
+public class FluidIngredient implements Predicate<FluidStack>, ICustomIngredient {
 
     // Mojank...
 
-    public static final Codec<FluidIngredient> CODEC_DIRECT_FLUID = RecordCodecBuilder.create(instance ->
+    public static final MapCodec<FluidIngredient> CODEC_DIRECT_FLUID = RecordCodecBuilder.mapCodec(instance ->
     //
     instance.group(
             //
@@ -46,7 +50,7 @@ public class FluidIngredient extends Ingredient {
 
     );
 
-    public static final Codec<FluidIngredient> CODEC_TAGGED_FLUID = RecordCodecBuilder.create(instance ->
+    public static final MapCodec<FluidIngredient> CODEC_TAGGED_FLUID = RecordCodecBuilder.mapCodec(instance ->
     //
     instance.group(
             //
@@ -61,7 +65,7 @@ public class FluidIngredient extends Ingredient {
 
     );
 
-    public static final Codec<FluidIngredient> CODEC = ExtraCodecs.xor(CODEC_TAGGED_FLUID, CODEC_DIRECT_FLUID).xmap(either -> either.map(tag -> tag, fluid -> fluid), value -> {
+    public static final MapCodec<FluidIngredient> CODEC = NeoForgeExtraCodecs.xor(CODEC_TAGGED_FLUID, CODEC_DIRECT_FLUID).xmap(either -> either.map(tag -> tag, fluid -> fluid), value -> {
         //
 
         if (value.tag != null) {
@@ -74,7 +78,51 @@ public class FluidIngredient extends Ingredient {
 
     });
 
-    public static final Codec<List<FluidIngredient>> LIST_CODEC = CODEC.listOf();
+    public static final Codec<List<FluidIngredient>> LIST_CODEC = CODEC.codec().listOf();
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, FluidIngredient> STREAM_CODEC = new StreamCodec<>() {
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf buf, FluidIngredient ing) {
+            List<FluidStack> fluidStacks = ing.getMatchingFluids();
+            buf.writeInt(fluidStacks.size());
+            for (FluidStack stack : fluidStacks) {
+                FluidStack.STREAM_CODEC.encode(buf, stack);
+            }
+        }
+
+        @Override
+        public FluidIngredient decode(RegistryFriendlyByteBuf buf) {
+            List<FluidStack> stacks = new ArrayList<>();
+            int count = buf.readInt();
+            for (int i = 0; i < count; i++) {
+                stacks.add(FluidStack.STREAM_CODEC.decode(buf));
+            }
+            return new FluidIngredient(stacks);
+        }
+    };
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<FluidIngredient>> LIST_STREAM_CODEC = new StreamCodec<>() {
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf buf, List<FluidIngredient> ings) {
+            buf.writeInt(ings.size());
+            for (FluidIngredient ing : ings) {
+                STREAM_CODEC.encode(buf, ing);
+            }
+        }
+
+        @Override
+        public List<FluidIngredient> decode(RegistryFriendlyByteBuf buf) {
+            int length = buf.readInt();
+            List<FluidIngredient> ings = new ArrayList<>();
+            for (int i = 0; i < length; i++) {
+                ings.add(STREAM_CODEC.decode(buf));
+            }
+            return ings;
+        }
+    };
+
 
     @Nonnull
     private List<FluidStack> fluidStacks;
@@ -86,7 +134,6 @@ public class FluidIngredient extends Ingredient {
     private int amount;
 
     public FluidIngredient(FluidStack fluidStack) {
-        super(Stream.empty());
         this.fluid = fluidStack.getFluid();
         this.amount = fluidStack.getAmount();
     }
@@ -96,7 +143,6 @@ public class FluidIngredient extends Ingredient {
     }
 
     public FluidIngredient(List<FluidStack> fluidStack) {
-        super(Stream.empty());
         fluidStacks = fluidStack;
         FluidStack fluid = getFluidStack();
         this.fluid = fluid.getFluid();
@@ -104,10 +150,24 @@ public class FluidIngredient extends Ingredient {
     }
 
     public FluidIngredient(TagKey<Fluid> tag, int amount) {
-        super(Stream.empty());
         this.tag = tag;
         this.amount = amount;
 
+    }
+
+    @Override
+    public boolean test(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public Stream<ItemStack> getItems() {
+        return Stream.empty();
+    }
+
+    @Override
+    public boolean isSimple() {
+        return false;
     }
 
     @Override
@@ -115,50 +175,20 @@ public class FluidIngredient extends Ingredient {
         return ElectrodynamicsRecipeInit.FLUID_INGREDIENT_TYPE.get();
     }
 
-    public boolean testFluid(@Nullable FluidStack t) {
-        if (t != null) {
-            for (FluidStack stack : getMatchingFluids()) {
-                if (t.getAmount() >= stack.getAmount()) {
-                    if (t.getFluid().isSame(stack.getFluid())) {
-                        return true;
-                    }
+    @Override
+    public boolean test(@Nullable FluidStack t) {
+        if(t == null){
+            return false;
+        }
+
+        for (FluidStack stack : getMatchingFluids()) {
+            if (t.getAmount() >= stack.getAmount()) {
+                if (t.getFluid().isSame(stack.getFluid())) {
+                    return true;
                 }
             }
         }
         return false;
-    }
-
-    public static FluidIngredient read(FriendlyByteBuf input) {
-        List<FluidStack> stacks = new ArrayList<>();
-        int count = input.readInt();
-        for (int i = 0; i < count; i++) {
-            stacks.add(input.readFluidStack());
-        }
-        return new FluidIngredient(stacks);
-    }
-
-    public static List<FluidIngredient> readList(FriendlyByteBuf buffer) {
-        int length = buffer.readInt();
-        List<FluidIngredient> ings = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
-            ings.add(read(buffer));
-        }
-        return ings;
-    }
-
-    public void write(FriendlyByteBuf output) {
-        fluidStacks = getMatchingFluids();
-        output.writeInt(fluidStacks.size());
-        for (FluidStack stack : fluidStacks) {
-            output.writeFluidStack(stack);
-        }
-    }
-
-    public static void writeList(FriendlyByteBuf buffer, List<FluidIngredient> list) {
-        buffer.writeInt(list.size());
-        for (FluidIngredient ing : list) {
-            ing.write(buffer);
-        }
     }
 
     public List<FluidStack> getMatchingFluids() {

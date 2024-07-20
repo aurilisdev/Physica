@@ -2,11 +2,7 @@ package electrodynamics.datagen.server.tags;
 
 import java.util.concurrent.CompletableFuture;
 
-import electrodynamics.datagen.server.tags.types.ElectrodynamicsBlockTagsProvider;
-import electrodynamics.datagen.server.tags.types.ElectrodynamicsDamageTagsProvider;
-import electrodynamics.datagen.server.tags.types.ElectrodynamicsFluidTagsProvider;
-import electrodynamics.datagen.server.tags.types.ElectrodynamicsGasTagsProvider;
-import electrodynamics.datagen.server.tags.types.ElectrodynamicsItemTagsProvider;
+import electrodynamics.datagen.server.tags.types.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -21,6 +17,7 @@ public class ElectrodynamicsTagsProvider {
 		generator.addProvider(true, new ElectrodynamicsFluidTagsProvider(output, lookupProvider, helper));
 		generator.addProvider(true, new ElectrodynamicsGasTagsProvider(output, lookupProvider, helper));
 		generator.addProvider(true, new ElectrodynamicsDamageTagsProvider(output, lookupProvider, helper));
+		generator.addProvider(true, new ElectrodynamicsEnchantmentTagsProvider(output, lookupProvider, helper));
 	}
 
 }

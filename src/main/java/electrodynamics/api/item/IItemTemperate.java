@@ -1,17 +1,18 @@
 package electrodynamics.api.item;
 
 import electrodynamics.prefab.item.TemperateItemProperties;
-import electrodynamics.prefab.utilities.NBTUtils;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import net.minecraft.world.item.ItemStack;
 
 public interface IItemTemperate {
 
 	public static void setTemperature(ItemStack stack, double amount) {
-		stack.getOrCreateTag().putDouble(NBTUtils.TEMPERATURE, amount);
+		stack.set(ElectrodynamicsDataComponentTypes.HEAT_STORED, amount);
 	}
 
 	public static double getTemperature(ItemStack stack) {
-		return stack.getOrCreateTag().getDouble(NBTUtils.TEMPERATURE);
+
+		return stack.getOrDefault(ElectrodynamicsDataComponentTypes.HEAT_STORED, 0.0);
 	}
 
 	/**
@@ -24,7 +25,7 @@ public interface IItemTemperate {
 	 * @return The actual amount the item was cooled
 	 */
 	default double loseHeat(ItemStack stack, double amount, double minTemp, boolean debug) {
-		if (!stack.hasTag() || amount < 0) {
+		if (getTemperature(stack) < 0) {
 			return 0;
 		}
 

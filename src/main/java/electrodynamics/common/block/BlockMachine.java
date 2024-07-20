@@ -153,7 +153,7 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
         ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
         BlockEntity tile = level.getBlockEntity(pos);
         if (tile != null) {
-            tile.saveToItem(stack);
+            tile.saveToItem(stack, level.registryAccess());
         }
         return stack;
     }

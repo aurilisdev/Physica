@@ -3,6 +3,8 @@ package electrodynamics.prefab.properties;
 import java.util.function.BiConsumer;
 
 import electrodynamics.common.packet.types.server.PacketSendUpdatePropertiesServer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 /**
@@ -76,7 +78,7 @@ public class Property<T> {
     public Property<T> set(Object updated) {
         checkForChange((T) updated);
         T old = value;
-        value = (T) type.attemptCast(updated);
+        value = (T) updated;
         if (isDirty() && manager.getOwner().getLevel() != null) {
             if (!manager.getOwner().getLevel().isClientSide()) {
                 manager.setDirty(this);
@@ -118,11 +120,11 @@ public class Property<T> {
         return shouldUpdate;
     }
 
-    public void load(Object val) {
+    public void load(T val) {
         if (val == null) {
             val = value;
         }
-        value = (T) type.attemptCast(val);
+        value = val;
         onLoad.accept(this, value);
     }
 
@@ -161,10 +163,18 @@ public class Property<T> {
         this.index = index;
     }
 
+    public void loadFromTag(CompoundTag tag, Level world) {
+        load((T) getType().readFromTag(new IPropertyType.TagReader(this, tag, world)));
+    }
+
+    public void saveToTag(CompoundTag tag, Level world) {
+        getType().writeToTag(new IPropertyType.TagWriter<>(this, tag, world));
+    }
+
     public void updateServer() {
 
         if (manager.getOwner() != null) {
-            PacketDistributor.SERVER.noArg().send(new PacketSendUpdatePropertiesServer(this, manager.getOwner().getBlockPos()));
+            PacketDistributor.sendToServer(new PacketSendUpdatePropertiesServer(this, manager.getOwner().getBlockPos()));
         }
 
     }

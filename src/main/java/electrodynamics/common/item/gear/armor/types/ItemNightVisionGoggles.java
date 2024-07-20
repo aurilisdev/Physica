@@ -1,5 +1,6 @@
 package electrodynamics.common.item.gear.armor.types;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -10,18 +11,17 @@ import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.item.IItemElectric;
 import electrodynamics.client.ClientRegister;
 import electrodynamics.client.render.model.armor.types.ModelNightVisionGoggles;
-import electrodynamics.common.item.gear.armor.ICustomArmor;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
+import electrodynamics.registers.ElectrodynamicsArmorMaterials;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -31,27 +31,32 @@ import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemNightVisionGoggles extends ItemElectrodynamicsArmor implements IItemElectric {
+
+	public static final EnumMap<Type, Integer> DEFENSE_MAP = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+		map.put(Type.HELMET, 1);
+		map.put(Type.CHESTPLATE, 0);
+		map.put(Type.LEGGINGS, 0);
+		map.put(Type.BOOTS, 0);
+	});
 
 	private final ElectricItemProperties properties;
 
 	public static final int JOULES_PER_TICK = 5;
 	public static final int DURATION_SECONDS = 12;
 
-	private static final String ARMOR_TEXTURE_OFF = References.ID + ":textures/model/armor/nightvisiongogglesoff.png";
-	private static final String ARMOR_TEXTURE_ON = References.ID + ":textures/model/armor/nightvisiongoggleson.png";
+	private static final ResourceLocation ARMOR_TEXTURE_OFF = ResourceLocation.parse(References.ID + ":textures/model/armor/nightvisiongogglesoff.png");
+	private static final ResourceLocation ARMOR_TEXTURE_ON = ResourceLocation.parse(References.ID + ":textures/model/armor/nightvisiongoggleson.png");
 
 	public ItemNightVisionGoggles(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
-		super(NightVisionGoggles.NVGS, Type.HELMET, properties, creativeTab);
+		super(ElectrodynamicsArmorMaterials.NVGS, Type.HELMET, properties, creativeTab);
 		this.properties = properties;
 	}
 
@@ -73,16 +78,15 @@ public class ItemNightVisionGoggles extends ItemElectrodynamicsArmor implements 
 	}
 
 	@Override
-	public void onArmorTick(ItemStack stack, Level world, Player player) {
-		super.onArmorTick(stack, world, player);
-		armorTick(stack, world, player);
+	public void onWearingTick(ItemStack stack, Level level, Player player, int slotId, boolean isSelected) {
+		super.onWearingTick(stack, level, player, slotId, isSelected);
+		wearingTick(stack, level, player);
 	}
 
-	protected static void armorTick(ItemStack stack, Level world, Player player) {
+	protected static void wearingTick(ItemStack stack, Level world, Player player) {
 		if (!world.isClientSide) {
 			IItemElectric nvgs = (IItemElectric) stack.getItem();
-			CompoundTag tag = stack.getOrCreateTag();
-			if (tag.getBoolean(NBTUtils.ON) && nvgs.getJoulesStored(stack) >= JOULES_PER_TICK) {
+			if (stack.getOrDefault(ElectrodynamicsDataComponentTypes.ON, false) && nvgs.getJoulesStored(stack) >= JOULES_PER_TICK) {
 				nvgs.extractPower(stack, JOULES_PER_TICK, false);
 				player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, DURATION_SECONDS * 20, 0, false, false, false));
 			}
@@ -105,8 +109,8 @@ public class ItemNightVisionGoggles extends ItemElectrodynamicsArmor implements 
 	}
 
 	@Override
-	public boolean canBeDepleted() {
-		return false;
+	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken) {
+		return 0;
 	}
 
 	@Override
@@ -120,16 +124,16 @@ public class ItemNightVisionGoggles extends ItemElectrodynamicsArmor implements 
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flagIn) {
-		super.appendHoverText(stack, world, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+		super.appendHoverText(stack, context, tooltip, flagIn);
 		tooltip.add(ElectroTextUtils.tooltip("item.electric.info", ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY));
 		tooltip.add(ElectroTextUtils.tooltip("item.electric.voltage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE), ChatFormatter.getChatDisplayShort(properties.extract.getVoltage(), DisplayUnit.VOLTAGE))).withStyle(ChatFormatting.RED));
-		if (stack.hasTag() && stack.getTag().getBoolean(NBTUtils.ON)) {
+		if (stack.getOrDefault(ElectrodynamicsDataComponentTypes.ON, false)) {
 			tooltip.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.on").withStyle(ChatFormatting.GREEN)));
 		} else {
 			tooltip.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.off").withStyle(ChatFormatting.RED)));
 		}
-		IItemElectric.addBatteryTooltip(stack, world, tooltip);
+		IItemElectric.addBatteryTooltip(stack, context, tooltip);
 	}
 
 	@Override
@@ -151,14 +155,14 @@ public class ItemNightVisionGoggles extends ItemElectrodynamicsArmor implements 
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-		boolean isOn = stack.hasTag() && stack.getTag().getBoolean(NBTUtils.ON);
-		if (isOn) {
+	public ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+		if (stack.getOrDefault(ElectrodynamicsDataComponentTypes.ON, false)) {
 			return ARMOR_TEXTURE_ON;
 		}
 		return ARMOR_TEXTURE_OFF;
 	}
 
+	/*
 	public enum NightVisionGoggles implements ICustomArmor {
 		NVGS;
 
@@ -193,6 +197,8 @@ public class ItemNightVisionGoggles extends ItemElectrodynamicsArmor implements 
 		}
 
 	}
+
+	 */
 
 	@Override
 	public Item getDefaultStorageBattery() {

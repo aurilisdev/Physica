@@ -3,17 +3,14 @@ package electrodynamics.common.recipe.recipeutils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsRegistries;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 
 public class ProbableGas {
 
@@ -35,6 +32,42 @@ public class ProbableGas {
     );
 
     public static final Codec<List<ProbableGas>> LIST_CODEC = CODEC.listOf();
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, ProbableGas> STREAM_CODEC = new StreamCodec<>() {
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf buf, ProbableGas gas) {
+            GasStack.STREAM_CODEC.encode(buf, gas.gas);
+            buf.writeDouble(gas.chance);
+        }
+
+        @Override
+        public ProbableGas decode(RegistryFriendlyByteBuf buf) {
+            return new ProbableGas(GasStack.STREAM_CODEC.decode(buf), buf.readDouble());
+        }
+    };
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<ProbableGas>> LIST_STREAM_CODEC = new StreamCodec<>() {
+        @Override
+        public List<ProbableGas> decode(RegistryFriendlyByteBuf buf) {
+            int count = buf.readInt();
+            List<ProbableGas> fluids = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                fluids.add(STREAM_CODEC.decode(buf));
+            }
+            return fluids;
+        }
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf buf, List<ProbableGas> probable) {
+            buf.writeInt(probable.size());
+            for (ProbableGas gas : probable) {
+                STREAM_CODEC.encode(buf, gas);
+            }
+        }
+    };
+
+    public static final List<ProbableGas> NONE = new ArrayList<>();
 
     private GasStack gas;
     // 0: 0% chance
@@ -65,38 +98,6 @@ public class ProbableGas {
             return new GasStack(gas.getGas(), amount, gas.getTemperature(), gas.getPressure());
         }
         return GasStack.EMPTY;
-    }
-
-    public static ProbableGas deserialize(JsonObject json) {
-        ResourceLocation resourceLocation = new ResourceLocation(GsonHelper.getAsString(json, "gas"));
-        GasStack gas = new GasStack(ElectrodynamicsGases.GAS_REGISTRY.get(resourceLocation), GsonHelper.getAsDouble(json, "amount"), GsonHelper.getAsDouble(json, "temp"), GsonHelper.getAsInt(json, "pressure"));
-        double chance = json.get("chance").getAsDouble();
-        return new ProbableGas(gas, chance);
-    }
-
-    public static ProbableGas read(FriendlyByteBuf buf) {
-        return new ProbableGas(GasStack.readFromBuffer(buf), buf.readDouble());
-    }
-
-    public static List<ProbableGas> readList(FriendlyByteBuf buf) {
-        int count = buf.readInt();
-        List<ProbableGas> fluids = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            fluids.add(ProbableGas.read(buf));
-        }
-        return fluids;
-    }
-
-    public void write(FriendlyByteBuf buf) {
-        getFullStack().writeToBuffer(buf);
-        buf.writeDouble(chance);
-    }
-
-    public static void writeList(FriendlyByteBuf buf, List<ProbableGas> gases) {
-        buf.writeInt(gases.size());
-        for (ProbableGas fluid : gases) {
-            fluid.write(buf);
-        }
     }
 
 }

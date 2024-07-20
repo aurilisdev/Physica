@@ -9,7 +9,7 @@ import electrodynamics.common.inventory.container.tile.ContainerCoalGenerator;
 import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -31,17 +31,16 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.CommonHooks;
 
 public class TileCoalGenerator extends GenericGeneratorTile {
 	protected CachedTileOutput output;
 	protected TransferPack currentOutput = TransferPack.EMPTY;
-	public PropertyTargetValue heat = new PropertyTargetValue(property(new Property<>(PropertyType.Double, "heat", 27.0)));
-	public Property<Integer> burnTime = property(new Property<>(PropertyType.Integer, "burnTime", 0));
-	public Property<Integer> maxBurnTime = property(new Property<>(PropertyType.Integer, "maxBurnTime", 1));
+	public PropertyTargetValue heat = new PropertyTargetValue(property(new Property<>(PropertyTypes.DOUBLE, "heat", 27.0)));
+	public Property<Integer> burnTime = property(new Property<>(PropertyTypes.INTEGER, "burnTime", 0));
+	public Property<Integer> maxBurnTime = property(new Property<>(PropertyTypes.INTEGER, "maxBurnTime", 1));
 	// for future planned upgrades
-	private Property<Double> multiplier = property(new Property<>(PropertyType.Double, "multiplier", 1.0));
-	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	private Property<Double> multiplier = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 1.0));
+	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 
 	public TileCoalGenerator(BlockPos worldPosition, BlockState blockState) {
 		super(ElectrodynamicsBlockTypes.TILE_COALGENERATOR.get(), worldPosition, blockState, 1.0);
@@ -69,7 +68,7 @@ public class TileCoalGenerator extends GenericGeneratorTile {
 		ComponentInventory inv = getComponent(IComponentType.Inventory);
 		ItemStack fuel = inv.getItem(0);
 		if (burnTime.get() <= 0 && !fuel.isEmpty()) {
-			burnTime.set(CommonHooks.getBurnTime(fuel, null));
+			burnTime.set(fuel.getBurnTime(null));
 			fuel.shrink(1);
 			maxBurnTime.set(Math.max(burnTime.get(), 1));
 		}

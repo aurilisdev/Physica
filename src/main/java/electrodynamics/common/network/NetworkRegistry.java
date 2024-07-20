@@ -7,12 +7,10 @@ import java.util.Iterator;
 import electrodynamics.api.References;
 import electrodynamics.api.network.ITickableNetwork;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod.EventBusSubscriber;
-import net.neoforged.fml.common.Mod.EventBusSubscriber.Bus;
-import net.neoforged.neoforge.event.TickEvent.Phase;
-import net.neoforged.neoforge.event.TickEvent.ServerTickEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
-@EventBusSubscriber(modid = References.ID, bus = Bus.FORGE)
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.GAME)
 public class NetworkRegistry {
 	private static final HashSet<ITickableNetwork> networks = new HashSet<>();
 	private static final HashSet<ITickableNetwork> remove = new HashSet<>();
@@ -28,10 +26,7 @@ public class NetworkRegistry {
 	}
 
 	@SubscribeEvent
-	public static void update(ServerTickEvent event) {
-		if (event.phase != Phase.END) {
-			return;
-		}
+	public static void update(ServerTickEvent.Post event) {
 
 		try {
 			networks.removeAll(remove);

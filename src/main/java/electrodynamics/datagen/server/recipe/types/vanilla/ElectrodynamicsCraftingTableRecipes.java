@@ -1,5 +1,6 @@
 package electrodynamics.datagen.server.recipe.types.vanilla;
 
+import com.google.common.collect.Lists;
 import electrodynamics.api.References;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
@@ -22,6 +23,7 @@ import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.item.subtype.SubtypeNugget;
 import electrodynamics.common.item.subtype.SubtypeOxide;
 import electrodynamics.common.item.subtype.SubtypePlate;
+import electrodynamics.common.recipe.recipeutils.EnchantmentIngredient;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
 import electrodynamics.datagen.utils.recipe.ShapedCraftingRecipeBuilder;
@@ -30,13 +32,9 @@ import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.EnchantedBookItem;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantmentInstance;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.crafting.NBTIngredient;
 
 public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator {
 
@@ -131,7 +129,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .addPattern("SCS")
                 //
-                .addKey('S', Tags.Items.SAND)
+                .addKey('S', Tags.Items.SANDS)
                 //
                 .addKey('C', Items.CLAY_BALL)
                 //
@@ -729,8 +727,6 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "upgrade_experience").save(output);
 
-        ItemStack fortuneBook = new ItemStack(Items.ENCHANTED_BOOK);
-        EnchantedBookItem.addEnchantment(fortuneBook, new EnchantmentInstance(Enchantments.BLOCK_FORTUNE, 1));
         ShapedCraftingRecipeBuilder.start(UPGRADES[SubtypeItemUpgrade.fortune.ordinal()], 1)
                 //
                 .addPattern("PCP")
@@ -743,7 +739,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .addKey('C', ElectrodynamicsTags.Items.CIRCUITS_ELITE)
                 //
-                .addKey('B', NBTIngredient.of(false, fortuneBook.getTag(), fortuneBook.getItem()))
+                .addKey('B', new EnchantmentIngredient(Ingredient.of(Items.ENCHANTED_BOOK), Lists.newArrayList(Tags.Enchantments.INCREASE_BLOCK_DROPS), false))
                 //
                 .complete(References.ID, "upgrade_fortune").save(output);
 
@@ -829,8 +825,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "upgrade_range").save(output);
 
-        ItemStack silkTouchBook = new ItemStack(Items.ENCHANTED_BOOK);
-        EnchantedBookItem.addEnchantment(silkTouchBook, new EnchantmentInstance(Enchantments.SILK_TOUCH, 1));
+
         ShapedCraftingRecipeBuilder.start(UPGRADES[SubtypeItemUpgrade.silktouch.ordinal()], 1)
                 //
                 .addPattern("PCP")
@@ -843,7 +838,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .addKey('C', ElectrodynamicsTags.Items.CIRCUITS_ULTIMATE)
                 //
-                .addKey('B', NBTIngredient.of(false, silkTouchBook.getTag(), silkTouchBook.getItem()))
+                .addKey('B', new EnchantmentIngredient(Ingredient.of(Items.ENCHANTED_BOOK), Lists.newArrayList(ElectrodynamicsTags.Enchantments.SILK_TOUCH), false))
                 //
                 .complete(References.ID, "upgrade_silk_touch").save(output);
 
@@ -863,8 +858,6 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "upgrade_stator").save(output);
 
-        ItemStack unbreakingBook = new ItemStack(Items.ENCHANTED_BOOK);
-        EnchantedBookItem.addEnchantment(unbreakingBook, new EnchantmentInstance(Enchantments.UNBREAKING, 1));
         ShapedCraftingRecipeBuilder.start(UPGRADES[SubtypeItemUpgrade.unbreaking.ordinal()], 1)
                 //
                 .addPattern("PCP")
@@ -877,7 +870,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .addKey('C', ElectrodynamicsTags.Items.CIRCUITS_ADVANCED)
                 //
-                .addKey('B', NBTIngredient.of(false, unbreakingBook.getTag(), unbreakingBook.getItem()))
+                .addKey('B', new EnchantmentIngredient(Ingredient.of(Items.ENCHANTED_BOOK), Lists.newArrayList(ElectrodynamicsTags.Enchantments.UNBREAKING), false))
                 //
                 .complete(References.ID, "upgrade_unbreaking").save(output);
 
@@ -952,7 +945,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
 
         ShapelessCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_INSULATION.get(), 6)
                 //
-                .addIngredient(Tags.Items.LEATHER)
+                .addIngredient(Tags.Items.LEATHERS)
                 //
                 .complete(References.ID, "insulation_from_leather").save(output);
 
@@ -1941,7 +1934,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .addKey('S', ElectrodynamicsTags.Items.PLATE_STEEL)
                 //
-                .addKey('G', Tags.Items.GLASS)
+                .addKey('G', Tags.Items.GLASS_BLOCKS)
                 //
                 .addKey('C', Items.CAULDRON)
                 //
@@ -2607,7 +2600,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .addPattern("GBG")
                 //
-                .addKey('L', Tags.Items.LEATHER)
+                .addKey('L', Tags.Items.LEATHERS)
                 //
                 .addKey('P', Items.LIME_STAINED_GLASS_PANE)
                 //

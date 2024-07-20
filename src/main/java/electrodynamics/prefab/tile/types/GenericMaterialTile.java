@@ -14,7 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -35,13 +35,11 @@ public class GenericMaterialTile extends GenericTile {
     }
 
     @Override
-    public InteractionResult use(Player player, InteractionHand handIn, BlockHitResult hit) {
-
-        ItemStack stack = player.getItemInHand(handIn);
+    public ItemInteractionResult useWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit) {
 
         Level world = getLevel();
 
-        IFluidHandlerItem handlerFluidItem = stack.getCapability(Capabilities.FluidHandler.ITEM);
+        IFluidHandlerItem handlerFluidItem = used.getCapability(Capabilities.FluidHandler.ITEM);
 
         if (handlerFluidItem != null && hasComponent(IComponentType.FluidHandler)) {
 
@@ -70,11 +68,11 @@ public class GenericMaterialTile extends GenericTile {
 
                     world.playSound(null, player.blockPosition(), SoundEvents.BUCKET_EMPTY, SoundSource.PLAYERS, 1, 1);
 
-                    player.setItemInHand(handIn, handlerFluidItem.getContainer());
+                    player.setItemInHand(hand, handlerFluidItem.getContainer());
 
                 }
 
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
 
             }
             // now try to fill it
@@ -94,16 +92,16 @@ public class GenericMaterialTile extends GenericTile {
 
                     world.playSound(null, player.blockPosition(), SoundEvents.BUCKET_FILL, SoundSource.PLAYERS, 1, 1);
 
-                    player.setItemInHand(handIn, handlerFluidItem.getContainer());
+                    player.setItemInHand(hand, handlerFluidItem.getContainer());
 
                 }
 
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
 
             }
         }
 
-        IGasHandlerItem handlerGasItem = stack.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
+        IGasHandlerItem handlerGasItem = used.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
 
         if (handlerGasItem != null && hasComponent(IComponentType.GasHandler)) {
 
@@ -132,11 +130,11 @@ public class GenericMaterialTile extends GenericTile {
 
                     world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), SoundSource.PLAYERS, 1, 1);
 
-                    player.setItemInHand(handIn, handlerGasItem.getContainer());
+                    player.setItemInHand(hand, handlerGasItem.getContainer());
 
                 }
 
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
 
             }
             // now try to fill it
@@ -156,15 +154,15 @@ public class GenericMaterialTile extends GenericTile {
 
                     world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), SoundSource.PLAYERS, 1, 1);
 
-                    player.setItemInHand(handIn, handlerGasItem.getContainer());
+                    player.setItemInHand(hand, handlerGasItem.getContainer());
 
                 }
 
-                return InteractionResult.CONSUME;
+                return ItemInteractionResult.CONSUME;
 
             }
         }
-        return super.use(player, handIn, hit);
+        return super.useWithItem(used, player, hand, hit);
     }
 
 }

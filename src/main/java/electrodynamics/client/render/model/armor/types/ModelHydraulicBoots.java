@@ -20,7 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class ModelHydraulicBoots<T extends LivingEntity> extends GenericArmorModel<T> {
 
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(References.ID, "hydraulic_boots"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(References.ID, "hydraulic_boots"), "main");
 
 	public ModelHydraulicBoots(ModelPart root) {
 		super(root);
@@ -53,7 +53,7 @@ public class ModelHydraulicBoots<T extends LivingEntity> extends GenericArmorMod
 	}
 
 	@Override
-	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, int light) {
 		parentRightLeg.render(poseStack, buffer, packedLight, packedOverlay);
 		parentLeftLeg.render(poseStack, buffer, packedLight, packedOverlay);
 	}

@@ -6,7 +6,7 @@ import java.util.List;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerCreativePowerSource;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -24,9 +24,9 @@ public class TileCreativePowerSource extends GenericTile {
 
 	private static final int POWER_MULTIPLIER = 1000000;
 
-	public Property<Integer> voltage = property(new Property<>(PropertyType.Integer, "setvoltage", 0));
-	public Property<Double> power = property(new Property<>(PropertyType.Double, "setpower", 0.0));
-	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	public Property<Integer> voltage = property(new Property<>(PropertyTypes.INTEGER, "setvoltage", 0));
+	public Property<Double> power = property(new Property<>(PropertyTypes.DOUBLE, "setpower", 0.0));
+	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 
 	protected List<CachedTileOutput> outputs;
 

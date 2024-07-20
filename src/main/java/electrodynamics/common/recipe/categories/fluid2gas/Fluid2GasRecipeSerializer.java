@@ -2,7 +2,11 @@ package electrodynamics.common.recipe.categories.fluid2gas;
 
 import java.util.List;
 
-import org.jetbrains.annotations.Nullable;
+import com.mojang.serialization.MapCodec;
+import electrodynamics.prefab.utilities.CodecUtils;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -13,48 +17,69 @@ import electrodynamics.common.recipe.recipeutils.FluidIngredient;
 import electrodynamics.common.recipe.recipeutils.ProbableFluid;
 import electrodynamics.common.recipe.recipeutils.ProbableGas;
 import electrodynamics.common.recipe.recipeutils.ProbableItem;
-import net.minecraft.network.FriendlyByteBuf;
 
 public class Fluid2GasRecipeSerializer<T extends Fluid2GasRecipe> extends ElectrodynamicsRecipeSerializer<T> {
 
     private final Fluid2GasRecipe.Factory<T> factory;
-    private Codec<T> codec;
+    private final MapCodec<T> codec;
+
+    private final StreamCodec<RegistryFriendlyByteBuf, T> streamCodec;
 
     public Fluid2GasRecipeSerializer(Fluid2GasRecipe.Factory<T> factory) {
         this.factory = factory;
-        codec = RecordCodecBuilder.create(instance -> instance.group(
-                //
-                Codec.STRING.fieldOf(GROUP).forGetter(instance0 -> instance0.getGroup()),
-                //
-                FluidIngredient.LIST_CODEC.fieldOf(FLUID_INPUTS).forGetter(instance0 -> instance0.getFluidIngredients()),
-                //
-                GasStack.CODEC.fieldOf(OUTPUT).forGetter(instance0 -> instance0.getGasRecipeOutput()),
-                //
-                Codec.DOUBLE.optionalFieldOf(EXPERIENCE, 0.0).forGetter(instance0 -> instance0.getXp()),
-                //
-                Codec.INT.fieldOf(TICKS).forGetter(instance0 -> instance0.getTicks()),
-                //
-                Codec.DOUBLE.fieldOf(USAGE_PER_TICK).forGetter(instance0 -> instance0.getUsagePerTick()),
-                //
-                ProbableItem.LIST_CODEC.optionalFieldOf(ITEM_BIPRODUCTS, null).forGetter(instance0 -> instance0.getItemBiproducts()),
-                //
-                ProbableFluid.LIST_CODEC.optionalFieldOf(FLUID_BIPRODUCTS, null).forGetter(instance0 -> instance0.getFluidBiproducts()),
-                //
-                ProbableGas.LIST_CODEC.optionalFieldOf(GAS_BIPRODUCTS, null).forGetter(instance0 -> instance0.getGasBiproducts())
-        //
+        codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                                //
+                                Codec.STRING.fieldOf(GROUP).forGetter(T::getGroup),
+                                //
+                                FluidIngredient.LIST_CODEC.fieldOf(FLUID_INPUTS).forGetter(T::getFluidIngredients),
+                                //
+                                GasStack.CODEC.fieldOf(OUTPUT).forGetter(T::getGasRecipeOutput),
+                                //
+                                Codec.DOUBLE.optionalFieldOf(EXPERIENCE, 0.0).forGetter(T::getXp),
+                                //
+                                Codec.INT.fieldOf(TICKS).forGetter(T::getTicks),
+                                //
+                                Codec.DOUBLE.fieldOf(USAGE_PER_TICK).forGetter(T::getUsagePerTick),
+                                //
+                                ProbableItem.LIST_CODEC.optionalFieldOf(ITEM_BIPRODUCTS, ProbableItem.NONE).forGetter(T::getItemBiproducts),
+                                //
+                                ProbableFluid.LIST_CODEC.optionalFieldOf(FLUID_BIPRODUCTS, ProbableFluid.NONE).forGetter(T::getFluidBiproducts),
+                                //
+                                ProbableGas.LIST_CODEC.optionalFieldOf(GAS_BIPRODUCTS, ProbableGas.NONE).forGetter(T::getGasBiproducts)
+                                //
 
-        )
-                //
-                .apply(instance, factory::create)
+                        )
+                        //
+                        .apply(instance, factory::create)
+
+        );
+
+        streamCodec = CodecUtils.composite(
+                ByteBufCodecs.STRING_UTF8, T::getGroup,
+                FluidIngredient.LIST_STREAM_CODEC, T::getFluidIngredients,
+                GasStack.STREAM_CODEC, T::getGasRecipeOutput,
+                ByteBufCodecs.DOUBLE, T::getXp,
+                ByteBufCodecs.INT, T::getTicks,
+                ByteBufCodecs.DOUBLE, T::getUsagePerTick,
+                ProbableItem.LIST_STREAM_CODEC, T::getItemBiproducts,
+                ProbableFluid.LIST_STREAM_CODEC, T::getFluidBiproducts,
+                ProbableGas.LIST_STREAM_CODEC, T::getGasBiproducts,
+                factory::create
 
         );
     }
 
     @Override
-    public Codec<T> codec() {
+    public MapCodec<T> codec() {
         return codec;
     }
 
+    @Override
+    public StreamCodec<RegistryFriendlyByteBuf, T> streamCodec() {
+        return streamCodec;
+    }
+
+    /*
     @Override
     public @Nullable T fromNetwork(FriendlyByteBuf buffer) {
         String group = buffer.readUtf();
@@ -103,5 +128,5 @@ public class Fluid2GasRecipeSerializer<T extends Fluid2GasRecipe> extends Electr
             ProbableGas.writeList(buffer, recipe.getGasBiproducts());
         }
     }
-
+    */
 }

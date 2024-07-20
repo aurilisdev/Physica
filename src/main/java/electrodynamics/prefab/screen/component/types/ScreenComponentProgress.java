@@ -12,7 +12,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ScreenComponentProgress extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/progress.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/progress.png");
 
 	private final DoubleSupplier progressInfoHandler;
 	private final ProgressBars bar;
@@ -96,7 +96,7 @@ public class ScreenComponentProgress extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = new ResourceLocation(References.ID + ":textures/screen/component/progress/" + name + ".png");
+			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/progress/" + name + ".png");
 		}
 
 		@Override

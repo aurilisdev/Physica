@@ -7,7 +7,7 @@ import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerGasTankGeneric;
 import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentGasHandlerSimple;
@@ -30,7 +30,7 @@ public class GenericTileGasTank extends GenericGasTile {
 
 	public static final double HEAT_LOSS = 0.0025; // .05 / 20
 
-	public final Property<Double> insulationBonus = property(new Property<>(PropertyType.Double, "insulationbonus", 1.0));
+	public final Property<Double> insulationBonus = property(new Property<>(PropertyTypes.DOUBLE, "insulationbonus", 1.0));
 
 	public GenericTileGasTank(BlockEntityType<?> type, BlockPos pos, BlockState state, SubtypeMachine machine, double capacity, int maxPressure, double maxTemperature) {
 		super(type, pos, state);

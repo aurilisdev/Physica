@@ -4,7 +4,7 @@ import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerCircuitMonitor;
 import electrodynamics.common.network.type.ElectricNetwork;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -19,10 +19,10 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TileCircuitMonitor extends GenericTile {
 
-	public final Property<Integer> networkProperty = property(new Property<>(PropertyType.Integer, "networkproperty", 0));
-	public final Property<Integer> booleanOperator = property(new Property<>(PropertyType.Integer, "booleanoperator", 0));
-	public final Property<Double> value = property(new Property<>(PropertyType.Double, "value", 0.0));
-	public final Property<Boolean> redstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false)).setNoUpdateClient().onChange((prop, old) -> {
+	public final Property<Integer> networkProperty = property(new Property<>(PropertyTypes.INTEGER, "networkproperty", 0));
+	public final Property<Integer> booleanOperator = property(new Property<>(PropertyTypes.INTEGER, "booleanoperator", 0));
+	public final Property<Double> value = property(new Property<>(PropertyTypes.DOUBLE, "value", 0.0));
+	public final Property<Boolean> redstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false)).setNoUpdateClient().onChange((prop, old) -> {
 		if (level.isClientSide) {
 			return;
 		}

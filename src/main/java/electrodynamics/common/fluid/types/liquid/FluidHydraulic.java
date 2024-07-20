@@ -8,8 +8,6 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 public class FluidHydraulic extends FluidNonPlaceable {
 
-	public static final String FORGE_TAG = "hydraulic_fluid";
-
 	private final FluidType type;
 
 	public FluidHydraulic() {

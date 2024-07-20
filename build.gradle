@@ -81,9 +81,9 @@ configurations {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
-    localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
    
 }
 
@@ -129,5 +129,18 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
+    }
+}
+
+repositories {
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
     }
 }

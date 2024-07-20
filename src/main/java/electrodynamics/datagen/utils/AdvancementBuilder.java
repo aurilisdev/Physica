@@ -13,7 +13,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 
-import net.minecraft.Util;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -169,7 +168,7 @@ public class AdvancementBuilder implements IAdvancementBuilderExtension {
             build();
         }
 
-        JsonElement jsonElement = Util.getOrThrow(Advancement.CODEC.encodeStart(JsonOps.INSTANCE, holder.value()), IllegalStateException::new);
+        JsonElement jsonElement = Advancement.CODEC.encodeStart(JsonOps.INSTANCE, holder.value()).getOrThrow();
 
         if (!jsonElement.isJsonObject()) {
             throw new UnsupportedOperationException("Advancement " + holder.id().toString() + " is not a Json Object!");
@@ -192,11 +191,11 @@ public class AdvancementBuilder implements IAdvancementBuilderExtension {
 
         NONE(null),
         // Vanilla
-        ADVENTURE(new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png")), //
-        END(new ResourceLocation("textures/gui/advancements/backgrounds/end.png")), //
-        HUSBANDRY(new ResourceLocation("textures/gui/advancements/backgrounds/husbandry.png")), //
-        NETHER(new ResourceLocation("textures/gui/advancements/backgrounds/nether.png")), //
-        STONE(new ResourceLocation("textures/gui/advancements/backgrounds/stone.png")); //
+        ADVENTURE(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/adventure.png")), //
+        END(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/end.png")), //
+        HUSBANDRY(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/husbandry.png")), //
+        NETHER(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/nether.png")), //
+        STONE(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png")); //
 
         public final ResourceLocation loc;
 

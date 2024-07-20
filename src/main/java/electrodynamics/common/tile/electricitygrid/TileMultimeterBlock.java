@@ -4,7 +4,7 @@ import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodyn
 import electrodynamics.api.network.cable.type.IConductor;
 import electrodynamics.common.network.type.ElectricNetwork;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
@@ -18,11 +18,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TileMultimeterBlock extends GenericTile {
 
-	public Property<Double> voltage = property(new Property<>(PropertyType.Double, "voltageNew", 0.0).setNoSave());
-	public Property<Double> minVoltage = property(new Property<>(PropertyType.Double, "minvoltage", 0.0).setNoSave());
-	public Property<Double> joules = property(new Property<>(PropertyType.Double, "joulesNew", 0.0).setNoSave());
-	public Property<Double> resistance = property(new Property<>(PropertyType.Double, "resistanceNew", 0.0).setNoSave());
-	public Property<Double> loss = property(new Property<>(PropertyType.Double, "lossNew", 0.0).setNoSave());
+	public Property<Double> voltage = property(new Property<>(PropertyTypes.DOUBLE, "voltageNew", 0.0).setNoSave());
+	public Property<Double> minVoltage = property(new Property<>(PropertyTypes.DOUBLE, "minvoltage", 0.0).setNoSave());
+	public Property<Double> joules = property(new Property<>(PropertyTypes.DOUBLE, "joulesNew", 0.0).setNoSave());
+	public Property<Double> resistance = property(new Property<>(PropertyTypes.DOUBLE, "resistanceNew", 0.0).setNoSave());
+	public Property<Double> loss = property(new Property<>(PropertyTypes.DOUBLE, "lossNew", 0.0).setNoSave());
 
 	public CachedTileOutput input;
 

@@ -1,21 +1,21 @@
-package electrodynamics.common.event.types.living.hurt;
+package electrodynamics.common.event.types.living.damage;
 
 import java.util.ArrayList;
 
-import electrodynamics.common.item.gear.armor.types.ItemJetpack;
 import electrodynamics.prefab.utilities.ItemUtils;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.event.entity.living.LivingHurtEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
-public class HandlerJetpackDamage extends AbstractLivingHurtHandler {
+public class HandlerJetpackDamage extends AbstractLivingDamageHandler {
 
 	// this way we know the impulse was because of the player being hurt
 	@Override
-	public void handle(LivingHurtEvent event) {
+	public void handle(LivingDamageEvent.Pre event) {
 
-		Entity entity = event.getEntity();
+		LivingEntity entity = event.getEntity();
 		ArrayList<ItemStack> armor = new ArrayList<>();
 		entity.getArmorSlots().forEach(armor::add);
 		if (armor.size() < 3) {
@@ -27,7 +27,7 @@ public class HandlerJetpackDamage extends AbstractLivingHurtHandler {
 			return;
 		}
 
-		chestplate.getOrCreateTag().putBoolean(ItemJetpack.WAS_HURT_KEY, true);
+		chestplate.set(ElectrodynamicsDataComponentTypes.HURT, true);
 
 	}
 

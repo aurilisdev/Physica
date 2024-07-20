@@ -26,7 +26,6 @@ import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.math.MathUtils;
 import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.crafting.RecipeHolder;

@@ -20,7 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class ModelNightVisionGoggles<T extends LivingEntity> extends GenericArmorModel<T> {
 
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(References.ID, "night_vision_goggles"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(References.ID, "night_vision_goggles"), "main");
 
 	public ModelNightVisionGoggles(ModelPart root) {
 		super(root);
@@ -53,7 +53,7 @@ public class ModelNightVisionGoggles<T extends LivingEntity> extends GenericArmo
 	}
 
 	@Override
-	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, int light) {
 		parentHead.render(poseStack, buffer, packedLight, packedOverlay);
 	}
 }

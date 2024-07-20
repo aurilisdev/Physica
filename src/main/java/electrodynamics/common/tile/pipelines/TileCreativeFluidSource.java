@@ -42,7 +42,7 @@ public class TileCreativeFluidSource extends GenericTile {
         ItemStack input = inv.getItem(0);
         ItemStack output = inv.getItem(1);
 
-        simple.setFluid(new FluidStack(simple.getFluid(), simple.getCapacity()));
+        simple.setFluid(new FluidStack(simple.getFluid().getFluidHolder(), simple.getCapacity()));
 
         // set tank fluid from slot 1
         if (!input.isEmpty()) {
@@ -51,7 +51,7 @@ public class TileCreativeFluidSource extends GenericTile {
 
             if (handler != null) {
 
-                simple.setFluid(new FluidStack(handler.drain(Integer.MAX_VALUE, FluidAction.SIMULATE), simple.getCapacity()));
+                simple.setFluid(new FluidStack(handler.drain(Integer.MAX_VALUE, FluidAction.SIMULATE).getFluidHolder(), simple.getCapacity()));
 
             }
 

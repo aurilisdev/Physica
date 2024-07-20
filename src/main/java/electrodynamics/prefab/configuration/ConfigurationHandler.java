@@ -20,13 +20,12 @@ import electrodynamics.api.configuration.IntValue;
 import electrodynamics.api.configuration.LongValue;
 import electrodynamics.api.configuration.StringValue;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod.EventBusSubscriber;
-import net.neoforged.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLConfig;
 import net.neoforged.fml.loading.FMLPaths;
 
-@EventBusSubscriber(modid = References.ID, bus = Bus.MOD)
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 public class ConfigurationHandler {
 	private static final HashSet<Class<?>> configurationMappings = new HashSet<>();
 	// to help keep log spam down

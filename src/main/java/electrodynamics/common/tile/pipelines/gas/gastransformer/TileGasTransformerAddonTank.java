@@ -1,6 +1,8 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer;
 
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.item.ItemStack;
 
 import electrodynamics.common.tile.machines.quarry.TileQuarry;
 import electrodynamics.prefab.tile.GenericTile;
@@ -76,23 +78,31 @@ public class TileGasTransformerAddonTank extends GenericTile {
 	}
 
 	@Override
-	public InteractionResult use(Player player, InteractionHand handIn, BlockHitResult hit) {
+	public ItemInteractionResult useWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (getLevel().getBlockEntity(ownerPos) instanceof TileGasTransformerSideBlock compressor) {
-			return compressor.use(player, handIn, hit);
+			return compressor.useWithItem(used, player, hand, hit);
+		}
+		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+	}
+
+	@Override
+	public InteractionResult useWithoutItem(Player player, BlockHitResult hit) {
+		if (getLevel().getBlockEntity(ownerPos) instanceof TileGasTransformerSideBlock compressor) {
+			return compressor.useWithoutItem(player, hit);
 		}
 		return InteractionResult.FAIL;
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound) {
-		super.saveAdditional(compound);
+	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.saveAdditional(compound, registries);
 		compound.put("owner", NbtUtils.writeBlockPos(ownerPos));
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag compound) {
-		super.load(compound);
-		ownerPos = NbtUtils.readBlockPos(compound.getCompound("owner"));
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
+		ownerPos = NbtUtils.readBlockPos(compound, "owner").get();
 	}
 
 }

@@ -2,6 +2,7 @@ package electrodynamics.common.fluid.types;
 
 import java.util.function.Consumer;
 
+import net.minecraft.world.level.pathfinder.PathType;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -11,7 +12,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -33,7 +33,7 @@ public class SimpleWaterBasedFluidType extends FluidType {
 	}
 
 	@Override
-	public @Nullable BlockPathTypes getBlockPathType(FluidState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, boolean canFluidLog) {
+	public @Nullable PathType getBlockPathType(FluidState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, boolean canFluidLog) {
 		return canFluidLog ? super.getBlockPathType(state, level, pos, mob, true) : null;
 	}
 
@@ -43,12 +43,12 @@ public class SimpleWaterBasedFluidType extends FluidType {
 
 			@Override
 			public ResourceLocation getStillTexture() {
-				return new ResourceLocation(modId + ":block/fluid/" + fluidName.replaceFirst("fluid", ""));
+				return ResourceLocation.parse(modId + ":block/fluid/" + fluidName.replaceFirst("fluid", ""));
 			}
 
 			@Override
 			public ResourceLocation getFlowingTexture() {
-				return new ResourceLocation(modId + ":block/fluid/" + fluidName.replaceFirst("fluid", ""));
+				return ResourceLocation.parse(modId + ":block/fluid/" + fluidName.replaceFirst("fluid", ""));
 			}
 
 			@Override

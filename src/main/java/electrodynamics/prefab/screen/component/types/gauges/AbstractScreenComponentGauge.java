@@ -20,7 +20,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractScreenComponentGauge extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/fluid.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/fluid.png");
 
 	public AbstractScreenComponentGauge(int x, int y) {
 		super(GaugeTextures.BACKGROUND_DEFAULT, x, y);

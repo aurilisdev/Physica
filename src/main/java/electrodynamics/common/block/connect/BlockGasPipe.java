@@ -14,6 +14,7 @@ import electrodynamics.common.block.subtype.SubtypeGasPipe.InsulationMaterial;
 import electrodynamics.common.network.type.GasNetwork;
 import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.common.tile.pipelines.gas.TileGasPipe;
+import electrodynamics.prefab.tile.types.GenericConnectTile;
 import electrodynamics.prefab.utilities.Scheduler;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.BlockPos;
@@ -96,17 +97,18 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
     }
 
     @Override
-    public BlockState refreshConnections(BlockState otherState, BlockEntity tile, BlockState state, Direction dir) {
-        EnumProperty<EnumConnectType> property = FACING_TO_PROPERTY_MAP.get(dir);
-        if (tile instanceof IGasPipe) {
-            return state.setValue(property, EnumConnectType.WIRE);
+    public BlockState refreshConnections(BlockState otherState, BlockEntity otherTile, BlockState state, BlockEntity thisTile, Direction dir) {
+        if(!(thisTile instanceof GenericConnectTile)) {
+            return state;
         }
-        if (GasUtilities.isGasReciever(tile, dir.getOpposite())) {
-            return state.setValue(property, EnumConnectType.INVENTORY);
+        GenericConnectTile thisConnect = (GenericConnectTile) thisTile;
+        EnumConnectType connection = EnumConnectType.NONE;
+        if (otherTile instanceof IGasPipe) {
+            connection = EnumConnectType.WIRE;
+        } else if (GasUtilities.isGasReciever(otherTile, dir.getOpposite())) {
+            connection = EnumConnectType.INVENTORY;
         }
-        if (state.hasProperty(property)) {
-            return state.setValue(property, EnumConnectType.NONE);
-        }
+        thisConnect.writeConnection(dir, connection);
         return state;
     }
 
@@ -117,6 +119,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
         }
         return null;
     }
+
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {

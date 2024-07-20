@@ -18,6 +18,7 @@ import electrodynamics.common.recipe.categories.item2item.specificmachines.Oxida
 import electrodynamics.common.recipe.categories.item2item.specificmachines.ReinforcedAlloyerRecipe;
 import electrodynamics.common.recipe.categories.item2item.specificmachines.WireMillRecipe;
 import electrodynamics.common.recipe.recipeutils.CountableIngredient;
+import electrodynamics.common.recipe.recipeutils.EnchantmentIngredient;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
 import electrodynamics.common.recipe.recipeutils.GasIngredient;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -44,6 +45,7 @@ public class ElectrodynamicsRecipeInit {
     public static final DeferredHolder<IngredientType<?>, IngredientType<CountableIngredient>> COUNTABLE_INGREDIENT_TYPE = INGREDIENT_TYPES.register("countableingredient", () -> new IngredientType<>(CountableIngredient.CODEC));
     public static final DeferredHolder<IngredientType<?>, IngredientType<FluidIngredient>> FLUID_INGREDIENT_TYPE = INGREDIENT_TYPES.register("fluidingredient", () -> new IngredientType<>(FluidIngredient.CODEC));
     public static final DeferredHolder<IngredientType<?>, IngredientType<GasIngredient>> GAS_INGREDIENT_TYPE = INGREDIENT_TYPES.register("gasingredient", () -> new IngredientType<>(GasIngredient.CODEC));
+    public static final DeferredHolder<IngredientType<?>, IngredientType<EnchantmentIngredient>> ENCHANTMENT_INGREDIENT_TYPE = INGREDIENT_TYPES.register("enchantmentingredient", () -> new IngredientType<>(EnchantmentIngredient.CODEC));
     
     /* RECIPE TYPES */
 

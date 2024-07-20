@@ -1,5 +1,8 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.api.capability.types.gas.IGasHandler;
@@ -87,16 +90,16 @@ public class TileGasTransformerSideBlock extends GenericTile {
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag compound) {
-        super.saveAdditional(compound);
+    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.saveAdditional(compound, registries);
         compound.put("owner", NbtUtils.writeBlockPos(ownerPos));
         compound.putBoolean("isleft", isLeft);
     }
 
     @Override
-    public void load(@NotNull CompoundTag compound) {
-        super.load(compound);
-        ownerPos = NbtUtils.readBlockPos(compound.getCompound("owner"));
+    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
+        ownerPos = NbtUtils.readBlockPos(compound, "owner").get();
         isLeft = compound.getBoolean("isleft");
     }
 
@@ -135,9 +138,17 @@ public class TileGasTransformerSideBlock extends GenericTile {
     }
 
     @Override
-    public InteractionResult use(Player player, InteractionHand handIn, BlockHitResult hit) {
+    public ItemInteractionResult useWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit) {
         if (getLevel().getBlockEntity(ownerPos) instanceof GenericTileGasTransformer compressor) {
-            return compressor.use(player, handIn, hit);
+            return compressor.useWithItem(used, player, hand, hit);
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public InteractionResult useWithoutItem(Player player, BlockHitResult hit) {
+        if (getLevel().getBlockEntity(ownerPos) instanceof GenericTileGasTransformer compressor) {
+            return compressor.useWithoutItem(player, hit);
         }
         return InteractionResult.FAIL;
     }

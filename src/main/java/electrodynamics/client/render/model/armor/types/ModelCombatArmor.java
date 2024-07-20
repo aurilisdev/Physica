@@ -99,9 +99,9 @@ public class ModelCombatArmor<T extends LivingEntity> extends GenericArmorModel<
 	}
 
 	@Override
-	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, int light) {
 		if (parentHead.visible) {
-			parentHead.render(poseStack, getCustomConsumer(RenderType.entityTranslucent(new ResourceLocation(ItemCombatArmor.ARMOR_TEXTURE_LOCATION))), packedLight, packedOverlay);
+			parentHead.render(poseStack, getCustomConsumer(RenderType.entityTranslucent(ResourceLocation.parse(ItemCombatArmor.ARMOR_TEXTURE_LOCATION))), packedLight, packedOverlay);
 		}
 		if (parentChest.visible) {
 			parentChest.render(poseStack, buffer, packedLight, packedOverlay);

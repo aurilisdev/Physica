@@ -3,6 +3,7 @@ package electrodynamics.common.event.types.living.equipmentchange;
 import electrodynamics.common.packet.types.client.PacketJetpackEquipedSound;
 import electrodynamics.prefab.utilities.ItemUtils;
 import electrodynamics.registers.ElectrodynamicsItems;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +19,7 @@ public class HandlerJetpackEquiped extends AbstractEquipmentChangeHandler {
         if (event.getSlot() == EquipmentSlot.CHEST && entity instanceof Player player) {
             ItemStack chest = event.getTo();
             if (event.getFrom().isEmpty() && (ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_JETPACK.get()) || ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get()))) {
-                PacketDistributor.TRACKING_ENTITY_AND_SELF.with(player).send(new PacketJetpackEquipedSound(player.getUUID()));
+                PacketDistributor.sendToPlayer((ServerPlayer) player, new PacketJetpackEquipedSound(player.getUUID()));
             }
         }
 

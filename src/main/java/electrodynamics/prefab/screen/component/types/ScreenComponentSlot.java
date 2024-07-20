@@ -120,7 +120,7 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = new ResourceLocation(References.ID + ":textures/screen/component/slot/" + name + ".png");
+			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/slot/" + name + ".png");
 
 			this.xOffset = xOffset;
 			this.yOffset = yOffset;
@@ -209,7 +209,7 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = new ResourceLocation(References.ID + ":textures/screen/component/icon/" + name + ".png");
+			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/icon/" + name + ".png");
 		}
 
 		@Override

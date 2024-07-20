@@ -3,6 +3,7 @@ package electrodynamics.client.render.event.levelstage;
 import java.util.HashMap;
 import java.util.List;
 
+import net.minecraft.client.DeltaTracker;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -32,7 +33,7 @@ public class HandlerMarkerLines extends AbstractLevelStageHandler {
 	}
 
 	@Override
-	public void render(Camera camera, Frustum frustum, LevelRenderer renderer, PoseStack stack, Matrix4f projectionMatrix, Minecraft minecraft, int renderTick, float partialTick) {
+	public void render(Camera camera, Frustum frustum, LevelRenderer renderer, PoseStack stack, Matrix4f projectionMatrix, Minecraft minecraft, int renderTick, DeltaTracker deltaTracker) {
 
 		MultiBufferSource.BufferSource buffer = minecraft.renderBuffers().bufferSource();
 		RenderType beaconType = RenderingUtils.beaconType();

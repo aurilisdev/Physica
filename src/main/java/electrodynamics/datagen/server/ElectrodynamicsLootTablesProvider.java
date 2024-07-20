@@ -16,6 +16,7 @@ import electrodynamics.datagen.utils.AbstractLootTableProvider;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.registers.ElectrodynamicsBlockTypes;
 import electrodynamics.registers.ElectrodynamicsBlocks;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -24,12 +25,12 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider {
 
-	public ElectrodynamicsLootTablesProvider(String modID) {
-		super(modID);
+	public ElectrodynamicsLootTablesProvider(String modID, HolderLookup.Provider provider) {
+		super(provider, modID);
 	}
 
-	public ElectrodynamicsLootTablesProvider() {
-		this(References.ID);
+	public ElectrodynamicsLootTablesProvider(HolderLookup.Provider provider) {
+		this(References.ID, provider);
 	}
 
 	@Override

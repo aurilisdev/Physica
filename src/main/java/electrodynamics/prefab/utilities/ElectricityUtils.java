@@ -9,6 +9,7 @@ import electrodynamics.registers.ElectrodynamicsDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -21,14 +22,14 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 public class ElectricityUtils {
 
     public static void electrecuteEntity(Entity entity, TransferPack transfer) {
-        if (transfer.getVoltage() <= 960.0) {
+        if (transfer.getVoltage() <= 960.0 && entity instanceof LivingEntity living) {
             Ingredient insulatingItems = Ingredient.of(ElectrodynamicsTags.Items.INSULATES_PLAYER_FEET);
-            for (ItemStack armor : entity.getArmorSlots()) {
+            for (ItemStack armor : living.getArmorSlots()) {
                 if (ItemUtils.isIngredientMember(insulatingItems, armor.getItem())) {
                     float damage = (float) transfer.getAmps() / 10.0f;
                     if (Math.random() < damage) {
                         int integerDamage = (int) Math.max(1, damage);
-                        if (armor.getDamageValue() > armor.getMaxDamage() || armor.hurt(integerDamage, entity.level().random, null)) {
+                        if (armor.getDamageValue() > armor.getMaxDamage()) {
                             armor.setCount(0);
                         }
                     }

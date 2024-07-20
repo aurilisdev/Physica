@@ -9,7 +9,7 @@ import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tile.TileMultiSubnode;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -29,18 +29,20 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class TileWindmill extends GenericGeneratorTile implements IMultiblockParentTile, ITickableSound {
 
 	protected CachedTileOutput output;
-	private Property<Boolean> isGenerating = property(new Property<>(PropertyType.Boolean, "isGenerating", false));
-	public Property<Boolean> directionFlag = property(new Property<>(PropertyType.Boolean, "directionFlag", false));
-	public Property<Double> generating = property(new Property<>(PropertyType.Double, "generating", 0.0));
-	private Property<Double> multiplier = property(new Property<>(PropertyType.Double, "multiplier", 1.0));
-	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	private Property<Boolean> isGenerating = property(new Property<>(PropertyTypes.BOOLEAN, "isGenerating", false));
+	public Property<Boolean> directionFlag = property(new Property<>(PropertyTypes.BOOLEAN, "directionFlag", false));
+	public Property<Double> generating = property(new Property<>(PropertyTypes.DOUBLE, "generating", 0.0));
+	private Property<Double> multiplier = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 1.0));
+	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 	public double savedTickRotation;
 	public double rotationSpeed;
 
@@ -143,8 +145,13 @@ public class TileWindmill extends GenericGeneratorTile implements IMultiblockPar
 	}
 
 	@Override
-	public InteractionResult onSubnodeUse(Player player, InteractionHand hand, BlockHitResult hit, TileMultiSubnode subnode) {
-		return use(player, hand, hit);
+	public ItemInteractionResult onSubnodeUseWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit, TileMultiSubnode subnode) {
+		return useWithItem(used, player, hand, hit);
+	}
+
+	@Override
+	public InteractionResult onSubnodeUseWithoutItem(Player player, BlockHitResult hit, TileMultiSubnode subnode) {
+		return useWithoutItem(player, hit);
 	}
 
 	@Override

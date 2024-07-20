@@ -1,5 +1,6 @@
 package electrodynamics.prefab.inventory.container;
 
+import electrodynamics.api.capability.types.itemhandler.CapabilityItemStackHandler;
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotNoModification;
 import net.minecraft.world.Container;
@@ -15,13 +16,14 @@ import net.neoforged.neoforge.items.IItemHandler;
 
 public abstract class GenericContainerItem extends GenericContainer {
 
-    private IItemHandler handler;
+    private CapabilityItemStackHandler handler;
     private Player player;
 
-    public GenericContainerItem(MenuType<?> type, int id, Inventory playerinv, IItemHandler handler) {
+    public GenericContainerItem(MenuType<?> type, int id, Inventory playerinv, CapabilityItemStackHandler handler) {
         // the items have to be stored in the handler, so the container is just for indexing purposes
         super(type, id, playerinv, new SimpleContainer(handler.getSlots()));
         this.handler = handler;
+        handler.setLevelAccess(playerinv.player.level(), playerinv.player.getOnPos());
         addSafePlayerInventory(playerinv);
         addItemInventorySlots(inventory, playerinv);
         player = playerinv.player;

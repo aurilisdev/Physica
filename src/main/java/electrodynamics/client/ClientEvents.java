@@ -19,15 +19,16 @@ import electrodynamics.client.render.event.levelstage.HandlerQuarryArm;
 import electrodynamics.client.render.event.levelstage.HandlerSeismicScanner;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.InputEvent.Key;
-import net.neoforged.neoforge.client.event.RenderGuiOverlayEvent;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@EventBusSubscriber
 public class ClientEvents {
 
 	private static final List<AbstractKeyPressHandler> KEY_PRESS_HANDLERS = new ArrayList<>();
@@ -50,8 +51,8 @@ public class ClientEvents {
 	}
 
 	@SubscribeEvent
-	public static void handlerGuiOverlays(RenderGuiOverlayEvent.Post event) {
-		POST_GUI_OVERLAY_HANDLERS.forEach(handler -> handler.renderToScreen(event.getOverlay(), event.getGuiGraphics(), event.getWindow(), Minecraft.getInstance(), event.getPartialTick()));
+	public static void handlerGuiOverlays(RenderGuiEvent.Post event) {
+		POST_GUI_OVERLAY_HANDLERS.forEach(handler -> handler.renderToScreen(event.getGuiGraphics(), event.getPartialTick(), Minecraft.getInstance()));
 	}
 
 	@SubscribeEvent

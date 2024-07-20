@@ -1,18 +1,18 @@
 package electrodynamics.common.tile.pipelines.fluids;
 
-import org.jetbrains.annotations.NotNull;
+import electrodynamics.prefab.properties.PropertyTypes;
+import net.minecraft.core.HolderLookup;
 
 import electrodynamics.common.block.connect.BlockFluidPipe;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.registers.ElectrodynamicsBlockTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TileFluidPipe extends GenericTileFluidPipe {
-	public Property<Double> transmit = property(new Property<>(PropertyType.Double, "transmit", 0.0));
+	public Property<Double> transmit = property(new Property<>(PropertyTypes.DOUBLE, "transmit", 0.0));
 
 	public TileFluidPipe(BlockPos pos, BlockState state) {
 		super(ElectrodynamicsBlockTypes.TILE_PIPE.get(), pos, state);
@@ -29,14 +29,15 @@ public class TileFluidPipe extends GenericTileFluidPipe {
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound) {
+	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
 		compound.putInt("ord", getPipeType().ordinal());
-		super.saveAdditional(compound);
+		super.saveAdditional(compound, registries);
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag compound) {
-		super.load(compound);
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
 		pipe = SubtypeFluidPipe.values()[compound.getInt("ord")];
 	}
+
 }

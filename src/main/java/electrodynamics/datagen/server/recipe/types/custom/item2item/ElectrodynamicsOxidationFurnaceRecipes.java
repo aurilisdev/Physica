@@ -81,7 +81,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
 
         newRecipe(new ItemStack(DUSTS[SubtypeDust.silica.ordinal()], 3), 0.1F, 200, 350.0, "dust_silica", modID)
                 //
-                .addItemTagInput(Tags.Items.SAND, 1)
+                .addItemTagInput(Tags.Items.SANDS, 1)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.COAL_COKE, 1)
                 //
@@ -141,7 +141,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.PLASTIC, 1)
                 //
-                .addItemTagInput(Tags.Items.GLASS, 1)
+                .addItemTagInput(Tags.Items.GLASS_BLOCKS, 1)
                 //
                 .save(output);
 

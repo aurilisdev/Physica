@@ -20,7 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class ModelServoLeggings<T extends LivingEntity> extends GenericArmorModel<T> {
 
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(References.ID, "servoleggings"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(References.ID, "servoleggings"), "main");
 
 	public ModelServoLeggings(ModelPart root) {
 		super(root);
@@ -54,7 +54,7 @@ public class ModelServoLeggings<T extends LivingEntity> extends GenericArmorMode
 	}
 
 	@Override
-	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, int light) {
 		rightLeg.render(poseStack, buffer, packedLight, packedOverlay);
 		leftLeg.render(poseStack, buffer, packedLight, packedOverlay);
 	}

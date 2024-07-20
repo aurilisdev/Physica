@@ -33,7 +33,7 @@ import net.minecraft.util.FormattedCharSequence;
 
 public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/gas.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/gas.png");
 
 	public final Supplier<IGasTank> gasTank;
 
@@ -119,13 +119,9 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 		minV = maxV - deltaV * progress;
 
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
-		bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-		bufferbuilder.vertex(matrix, x1, y2, 0).uv(minU, maxV).endVertex();
-		bufferbuilder.vertex(matrix, x2, y2, 0).uv(maxU, maxV).endVertex();
-		bufferbuilder.vertex(matrix, x2, y1, 0).uv(maxU, minV).endVertex();
-		bufferbuilder.vertex(matrix, x1, y1, 0).uv(minU, minV).endVertex();
-		BufferUploader.drawWithShader(bufferbuilder.end());
+		BufferBuilder bufferbuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferbuilder.addVertex(matrix, x1, y2, 0).setUv(minU, maxV).addVertex(matrix, x2, y2, 0).setUv(maxU, maxV).addVertex(matrix, x2, y1, 0).setUv(maxU, minV).addVertex(matrix, x1, y1, 0).setUv(minU, minV);
+		BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
 
 	}
 

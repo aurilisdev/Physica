@@ -176,7 +176,7 @@ public class ScreenComponentInventoryIO extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			this.loc = new ResourceLocation(References.ID + ":textures/screen/component/io/" + name + ".png");
+			this.loc = ResourceLocation.parse(References.ID + ":textures/screen/component/io/" + name + ".png");
 		}
 
 		@Override

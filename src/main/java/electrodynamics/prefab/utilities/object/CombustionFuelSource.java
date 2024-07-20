@@ -18,7 +18,7 @@ public class CombustionFuelSource {
 	public static final String USAGE_AMOUNT = "usage_per_burn";
 	public static final String POWER_MULTIPLIER = "power_multiplier";
 
-	public static final CombustionFuelSource EMPTY = new CombustionFuelSource(FluidTags.create(new ResourceLocation("air")), 0, 0);
+	public static final CombustionFuelSource EMPTY = new CombustionFuelSource(FluidTags.create(ResourceLocation.withDefaultNamespace("air")), 0, 0);
 
 	private FluidIngredient fuel;
 	private double powerMultiplier;
@@ -35,7 +35,7 @@ public class CombustionFuelSource {
 	}
 
 	public boolean isFuelSource(FluidStack stack) {
-		return fuel.testFluid(stack);
+		return fuel.test(stack);
 	}
 
 	public List<FluidStack> getFuels() {
@@ -55,7 +55,7 @@ public class CombustionFuelSource {
 	}
 
 	public static CombustionFuelSource fromJson(JsonObject json) {
-		TagKey<Fluid> tag = FluidTags.create(new ResourceLocation(json.get(FLUID_KEY).getAsString()));
+		TagKey<Fluid> tag = FluidTags.create(ResourceLocation.parse(json.get(FLUID_KEY).getAsString()));
 		return new CombustionFuelSource(tag, json.get(USAGE_AMOUNT).getAsInt(), json.get(POWER_MULTIPLIER).getAsDouble());
 	}
 
@@ -74,7 +74,7 @@ public class CombustionFuelSource {
 	}
 
 	public static CombustionFuelSource readFromBuffer(FriendlyByteBuf buffer) {
-		TagKey<Fluid> tag = FluidTags.create(new ResourceLocation(buffer.readUtf()));
+		TagKey<Fluid> tag = FluidTags.create(ResourceLocation.parse(buffer.readUtf()));
 		return new CombustionFuelSource(tag, buffer.readInt(), buffer.readDouble());
 	}
 

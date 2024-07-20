@@ -4,7 +4,7 @@ import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodyn
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic.LoadProfile;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.GenericTile;
@@ -23,8 +23,10 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -38,8 +40,8 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
 
     public CachedTileOutput output;
 
-    public final Property<TransferPack> lastTransfer = property(new Property<>(PropertyType.Transferpack, "lasttransfer", TransferPack.EMPTY)).setNoSave();
-    public final Property<Long> lastTransferTime = property(new Property<>(PropertyType.Long, "lasttransfertime", 0L)).setNoSave();
+    public final Property<TransferPack> lastTransfer = property(new Property<>(PropertyTypes.TRANSFER_PACK, "lasttransfer", TransferPack.EMPTY)).setNoSave();
+    public final Property<Long> lastTransferTime = property(new Property<>(PropertyTypes.LONG, "lasttransfertime", 0L)).setNoSave();
 
     public boolean locked = false;
 
@@ -219,8 +221,13 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
         }
 
         @Override
-        public InteractionResult use(Player player, InteractionHand handIn, BlockHitResult hit) {
+        public InteractionResult useWithoutItem(Player player, BlockHitResult hit) {
             return InteractionResult.FAIL;
+        }
+
+        @Override
+        public ItemInteractionResult useWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit) {
+            return ItemInteractionResult.FAIL;
         }
 
     }
@@ -237,8 +244,13 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
         }
 
         @Override
-        public InteractionResult use(Player player, InteractionHand handIn, BlockHitResult hit) {
+        public InteractionResult useWithoutItem(Player player, BlockHitResult hit) {
             return InteractionResult.FAIL;
+        }
+
+        @Override
+        public ItemInteractionResult useWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit) {
+            return ItemInteractionResult.FAIL;
         }
 
     }

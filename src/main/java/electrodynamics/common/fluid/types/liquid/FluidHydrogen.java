@@ -8,8 +8,6 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 public class FluidHydrogen extends FluidNonPlaceable {
 
-	public static final String FORGE_TAG = "hydrogen";
-
 	private final FluidType type;
 
 	public FluidHydrogen() {

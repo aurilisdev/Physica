@@ -3,18 +3,18 @@ package electrodynamics.common.item.gear.tools.electric;
 import java.util.List;
 import java.util.function.Supplier;
 
+import electrodynamics.api.capability.types.itemhandler.CapabilityItemStackHandler;
 import electrodynamics.common.inventory.container.item.ContainerSeismicScanner;
 import electrodynamics.common.packet.types.client.PacketAddClientRenderInfo;
 import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.prefab.item.ItemElectric;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
 import electrodynamics.prefab.utilities.WorldUtils;
 import electrodynamics.prefab.utilities.object.Location;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -31,7 +31,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ItemSeismicScanner extends ItemElectric {
@@ -51,11 +50,11 @@ public class ItemSeismicScanner extends ItemElectric {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltips, TooltipFlag flag) {
-        super.appendHoverText(stack, world, tooltips, flag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltips, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltips, flag);
         tooltips.add(ElectroTextUtils.tooltip("seismicscanner.use"));
         tooltips.add(ElectroTextUtils.tooltip("seismicscanner.opengui").withStyle(ChatFormatting.GRAY));
-        boolean onCooldown = stack.hasTag() && stack.getTag().getInt(NBTUtils.TIMER) > 0;
+        boolean onCooldown = stack.getOrDefault(ElectrodynamicsDataComponentTypes.TIMER, 0) > 0;
         if (onCooldown) {
             tooltips.add(ElectroTextUtils.tooltip("seismicscanner.oncooldown").withStyle(ChatFormatting.BOLD, ChatFormatting.RED));
         } else {
@@ -65,31 +64,25 @@ public class ItemSeismicScanner extends ItemElectric {
     }
 
     @Override
-    public boolean canBeDepleted() {
-        return false;
-    }
-
-    @Override
     public InteractionResultHolder<ItemStack> use(final Level world, Player player, InteractionHand hand) {
         if (!world.isClientSide) {
             ItemStack scanner = player.getItemInHand(hand);
             ItemSeismicScanner seismic = (ItemSeismicScanner) scanner.getItem();
-            CompoundTag tag = scanner.getOrCreateTag();
-            boolean isTimerUp = tag.getInt(NBTUtils.TIMER) <= 0;
+            boolean isTimerUp = scanner.getOrDefault(ElectrodynamicsDataComponentTypes.TIMER, 0) <= 0;
             boolean isPowered = seismic.getJoulesStored(scanner) >= JOULES_PER_SCAN;
             IItemHandler handler = scanner.getCapability(Capabilities.ItemHandler.ITEM);
 
             ItemStack ore = handler == null ? ItemStack.EMPTY : handler.getStackInSlot(0);
             if (player.isShiftKeyDown() && isTimerUp && isPowered && !ore.isEmpty()) {
                 extractPower(scanner, getElectricProperties().extract.getJoules(), false);
-                tag.putInt(NBTUtils.TIMER, COOLDOWN_SECONDS * 20);
+                scanner.set(ElectrodynamicsDataComponentTypes.TIMER, COOLDOWN_SECONDS * 20);
                 world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_SEISMICSCANNER.get(), SoundSource.PLAYERS, 1, 1);
                 if (ore.getItem() instanceof BlockItem oreBlockItem) {
                     Location playerPos = new Location(player.getOnPos());
                     Location blockPos = new Location(WorldUtils.getClosestBlockToCenter(world, playerPos.toBlockPos(), RADUIS_BLOCKS, oreBlockItem.getBlock()));
-                    playerPos.writeToNBT(tag, NBTUtils.LOCATION + PLAY_LOC);
-                    blockPos.writeToNBT(tag, NBTUtils.LOCATION + BLOCK_LOC);
-                    PacketDistributor.PLAYER.with((ServerPlayer) player).send(new PacketAddClientRenderInfo(player.getUUID(), blockPos.toBlockPos()));
+                    scanner.set(ElectrodynamicsDataComponentTypes.LOCATION_1, playerPos);
+                    scanner.set(ElectrodynamicsDataComponentTypes.LOCATION_2, blockPos);
+                    PacketDistributor.sendToPlayer((ServerPlayer) player, new PacketAddClientRenderInfo(player.getUUID(), blockPos.toBlockPos()));
                 }
             } else {
                 player.openMenu(getMenuProvider(world, player, scanner));
@@ -100,9 +93,9 @@ public class ItemSeismicScanner extends ItemElectric {
 
     public MenuProvider getMenuProvider(Level world, Player player, ItemStack stack) {
         return new SimpleMenuProvider((id, inv, play) -> {
-            IItemHandler handler = stack.getCapability(Capabilities.ItemHandler.ITEM);
+            CapabilityItemStackHandler handler = (CapabilityItemStackHandler) stack.getCapability(Capabilities.ItemHandler.ITEM);
             if (handler == null) {
-                handler = new ItemStackHandler(SLOT_COUNT);
+                handler = new CapabilityItemStackHandler(SLOT_COUNT, stack);
             }
             return new ContainerSeismicScanner(id, player.getInventory(), handler);
         }, CONTAINER_TITLE);
@@ -111,10 +104,9 @@ public class ItemSeismicScanner extends ItemElectric {
     @Override
     public void inventoryTick(ItemStack stack, Level world, Entity entity, int itemSlot, boolean isSelected) {
         if (!world.isClientSide) {
-            CompoundTag tag = stack.getOrCreateTag();
-            int time = tag.getInt(NBTUtils.TIMER);
+            int time = stack.getOrDefault(ElectrodynamicsDataComponentTypes.TIMER, 0);
             if (time > 0) {
-                tag.putInt(NBTUtils.TIMER, time - 1);
+                stack.set(ElectrodynamicsDataComponentTypes.TIMER, time - 1);
             }
         }
         super.inventoryTick(stack, world, entity, itemSlot, isSelected);

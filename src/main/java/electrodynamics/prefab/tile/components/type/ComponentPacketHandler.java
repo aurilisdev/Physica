@@ -49,7 +49,7 @@ public class ComponentPacketHandler implements IComponent {
 
             PacketSendUpdatePropertiesClient packet = new PacketSendUpdatePropertiesClient(holder);
 
-            players.forEach(p -> PacketDistributor.PLAYER.with(p).send(packet));
+            players.forEach(p -> PacketDistributor.sendToPlayer(p, packet));
 
             holder.getPropertyManager().clean();
         }

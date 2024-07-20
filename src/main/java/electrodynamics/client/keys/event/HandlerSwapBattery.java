@@ -18,7 +18,7 @@ public class HandlerSwapBattery extends AbstractKeyPressHandler {
         if (KeyBinds.swapBattery.matches(event.getKey(), event.getScanCode()) && KeyBinds.swapBattery.isDown()) {
             ItemStack playerHand = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (playerHand.getItem() instanceof IItemElectric) {
-                PacketDistributor.SERVER.noArg().send(new PacketSwapBattery(player.getUUID()));
+                PacketDistributor.sendToServer(new PacketSwapBattery(player.getUUID()));
             }
         }
     }

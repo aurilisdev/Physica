@@ -19,7 +19,7 @@ public class ElectrodynamicsGases {
 
     public static final ConcurrentHashMap<Fluid, Gas> MAPPED_GASSES = new ConcurrentHashMap<>();
 
-    public static final ResourceLocation GAS_REGISTRY_LOC = new ResourceLocation(References.ID, "gases");
+    public static final ResourceLocation GAS_REGISTRY_LOC = ResourceLocation.fromNamespaceAndPath(References.ID, "gases");
     public static final ResourceKey<Registry<Gas>> GAS_REGISTRY_KEY = ResourceKey.createRegistryKey(GAS_REGISTRY_LOC);
     public static final DeferredRegister<Gas> GASES = DeferredRegister.create(GAS_REGISTRY_KEY, References.ID);
     public static final Registry<Gas> GAS_REGISTRY = ElectrodynamicsGases.GASES.makeRegistry(builder -> builder.sync(true));

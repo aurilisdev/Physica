@@ -17,6 +17,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
@@ -102,7 +103,7 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
 
         List<FormattedCharSequence> tooltips = new ArrayList<>();
 
-        tooltips.add(property.get().getDisplayName().getVisualOrderText());
+        tooltips.add(Component.translatable(property.get().getFluidType().getDescriptionId()).getVisualOrderText());
 
         graphics.renderTooltip(gui.getFontRenderer(), tooltips, xAxis, yAxis);
     }

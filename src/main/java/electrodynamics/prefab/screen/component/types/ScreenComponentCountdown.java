@@ -20,7 +20,7 @@ public class ScreenComponentCountdown extends AbstractScreenComponentInfo {
 	private final DoubleSupplier progressInfoHandler;
 	private TextPropertySupplier tooltip;
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/countdown.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/countdown.png");
 
 	public ScreenComponentCountdown(TextPropertySupplier tooltip, DoubleSupplier progressInfoHandler, int x, int y) {
 		super(CountdownTextures.BACKGROUND_DEFAULT, AbstractScreenComponentInfo.EMPTY, x, y);

@@ -35,7 +35,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.PacketDistributor.PacketTarget;
 
 public class ThermoelectricGeneratorHeatRegister extends SimplePreparableReloadListener<JsonObject> {
 
@@ -68,7 +67,7 @@ public class ThermoelectricGeneratorHeatRegister extends SimplePreparableReloadL
             final String filePath = loc.getPath();
             final String dataPath = filePath.substring(FOLDER.length() + 1, filePath.length() - JSON_EXTENSION_LENGTH);
 
-            final ResourceLocation jsonFile = new ResourceLocation(namespace, dataPath);
+            final ResourceLocation jsonFile = ResourceLocation.fromNamespaceAndPath(namespace, dataPath);
 
             Resource resource = entry.getValue();
             try (final InputStream inputStream = resource.open(); final Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));) {
@@ -105,11 +104,11 @@ public class ThermoelectricGeneratorHeatRegister extends SimplePreparableReloadL
 
                 key = key.substring(1);
 
-                tags.put(FluidTags.create(new ResourceLocation(key)), value);
+                tags.put(FluidTags.create(ResourceLocation.parse(key)), value);
 
             } else {
 
-                heatSources.put(BuiltInRegistries.FLUID.get(new ResourceLocation(key)), value);
+                heatSources.put(BuiltInRegistries.FLUID.get(ResourceLocation.parse(key)), value);
 
             }
 
@@ -159,8 +158,11 @@ public class ThermoelectricGeneratorHeatRegister extends SimplePreparableReloadL
             generateTagValues();
             ServerPlayer player = event.getPlayer();
             PacketSetClientThermoGenSources packet = new PacketSetClientThermoGenSources(heatSources);
-            PacketTarget target = player == null ? PacketDistributor.ALL.noArg() : PacketDistributor.PLAYER.with(player);
-            target.send(packet);
+            if (player == null) {
+                PacketDistributor.sendToAllPlayers(packet);
+            } else {
+                PacketDistributor.sendToPlayer(player, packet);
+            }
         };
     }
 

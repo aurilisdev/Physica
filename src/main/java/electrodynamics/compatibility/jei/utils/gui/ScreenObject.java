@@ -6,11 +6,11 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ScreenObject {
 
-	protected static final ResourceLocation BACKGROUND = new ResourceLocation(References.ID, "textures/screen/jei/background.png");
-	protected static final ResourceLocation ITEM_SLOTS = new ResourceLocation(References.ID, "textures/screen/jei/itemslots.png");
-	protected static final ResourceLocation FLUID_GAUGES = new ResourceLocation(References.ID, "textures/screen/jei/fluidgauges.png");
-	protected static final ResourceLocation ARROWS = new ResourceLocation(References.ID, "textures/screen/jei/arrows.png");
-	protected static final ResourceLocation GAS_GAUGES = new ResourceLocation(References.ID, "textures/screen/jei/gasgauges.png");
+	protected static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/background.png");
+	protected static final ResourceLocation ITEM_SLOTS = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/itemslots.png");
+	protected static final ResourceLocation FLUID_GAUGES = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/fluidgauges.png");
+	protected static final ResourceLocation ARROWS = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/arrows.png");
+	protected static final ResourceLocation GAS_GAUGES = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/gasgauges.png");
 
 	protected ITexture texture;
 	protected int x;

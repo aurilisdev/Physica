@@ -1,6 +1,7 @@
 package electrodynamics.common.item.gear.armor.types;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -19,16 +20,11 @@ import electrodynamics.client.render.model.armor.types.ModelCombatArmor;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
-import electrodynamics.registers.ElectrodynamicsCapabilities;
-import electrodynamics.registers.ElectrodynamicsFluids;
-import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsItems;
+import electrodynamics.registers.*;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
@@ -48,8 +44,16 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemElectric {
+
+    public static final EnumMap<Type, Integer> DEFENSE_MAP = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+        map.put(Type.HELMET, 6);
+        map.put(Type.CHESTPLATE, 12);
+        map.put(Type.LEGGINGS, 16);
+        map.put(Type.BOOTS, 6);
+    });
 
     public static final String ARMOR_TEXTURE_LOCATION = References.ID + ":textures/model/armor/combatarmor.png";
 
@@ -58,7 +62,7 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
     public static final float OFFSET = 0.2F;
 
     public ItemCombatArmor(Properties properties, Type type, Supplier<CreativeModeTab> creativeTab) {
-        super(ItemCompositeArmor.CompositeArmor.COMPOSITE_ARMOR, type, properties, creativeTab);
+        super(ElectrodynamicsArmorMaterials.COMPOSITE_ARMOR, type, properties, creativeTab);
         switch (type) {
         case HELMET, LEGGINGS:
             this.properties = (ElectricItemProperties) properties;
@@ -139,8 +143,7 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
 
             handler.fillTank(0, gas, GasAction.EXECUTE);
 
-            CompoundTag tag = full.getOrCreateTag();
-            tag.putInt(NBTUtils.PLATES, 2);
+            full.set(ElectrodynamicsDataComponentTypes.PLATES, 2);
 
             items.add(full);
             break;
@@ -171,27 +174,27 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flagin) {
-        super.appendHoverText(stack, level, tooltip, flagin);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagin) {
+        super.appendHoverText(stack, context, tooltip, flagin);
         switch (((ArmorItem) stack.getItem()).getEquipmentSlot()) {
         case HEAD:
             tooltip.add(ElectroTextUtils.tooltip("item.electric.info", ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY));
             tooltip.add(ElectroTextUtils.tooltip("item.electric.voltage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE), ChatFormatter.getChatDisplayShort(properties.extract.getVoltage(), DisplayUnit.VOLTAGE))).withStyle(ChatFormatting.RED));
-            if (stack.hasTag() && stack.getTag().getBoolean(NBTUtils.ON)) {
+            if (stack.getOrDefault(ElectrodynamicsDataComponentTypes.ON, false)) {
                 tooltip.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.on").withStyle(ChatFormatting.GREEN)));
             } else {
                 tooltip.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.off").withStyle(ChatFormatting.RED)));
             }
-            IItemElectric.addBatteryTooltip(stack, level, tooltip);
+            IItemElectric.addBatteryTooltip(stack, context, tooltip);
             break;
         case CHEST:
-            ItemJetpack.staticAppendHoverText(stack, level, tooltip, flagin);
-            ItemCompositeArmor.staticAppendHoverText(stack, level, tooltip, flagin);
+            ItemJetpack.staticAppendHoverText(stack, context, tooltip, flagin);
+            ItemCompositeArmor.staticAppendHoverText(stack, context, tooltip, flagin);
             break;
         case LEGS:
             tooltip.add(ElectroTextUtils.tooltip("item.electric.info", ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY));
             tooltip.add(ElectroTextUtils.tooltip("item.electric.voltage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE), ChatFormatter.getChatDisplayShort(properties.extract.getVoltage(), DisplayUnit.VOLTAGE))).withStyle(ChatFormatting.RED));
-            ItemServoLeggings.staticAppendTooltips(stack, level, tooltip, flagin);
+            ItemServoLeggings.staticAppendTooltips(stack, context, tooltip, flagin);
             break;
         case FEET:
             if (Capabilities.FluidHandler.ITEM == null) {
@@ -211,18 +214,18 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, Level world, Player player) {
-        super.onArmorTick(stack, world, player);
+    public void onWearingTick(ItemStack stack, Level level, Player player, int slotId, boolean isSelected) {
+        super.onWearingTick(stack, level, player, slotId, isSelected);
         ItemCombatArmor combat = (ItemCombatArmor) stack.getItem();
         switch (combat.getEquipmentSlot()) {
         case HEAD:
-            ItemNightVisionGoggles.armorTick(stack, world, player);
+            ItemNightVisionGoggles.wearingTick(stack, level, player);
             break;
         case CHEST:
-            ItemJetpack.armorTick(stack, world, player, OFFSET, true);
+            ItemJetpack.wearingTick(stack, level, player, OFFSET, true);
             break;
         case LEGS:
-            ItemServoLeggings.armorTick(stack, world, player);
+            ItemServoLeggings.wearingTick(stack, level, player);
             break;
         default:
             break;
@@ -260,13 +263,8 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return ARMOR_TEXTURE_LOCATION;
-    }
-
-    @Override
-    public boolean canBeDepleted() {
-        return false;
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken) {
+        return 0;
     }
 
     @Override

@@ -23,7 +23,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class ModelCompositeArmor<T extends LivingEntity> extends GenericArmorModel<T> {
 
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(References.ID, "composite_armor"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(References.ID, "composite_armor"), "main");
 
 	public ModelCompositeArmor(ModelPart root, EquipmentSlot slot) {
 		super(root);
@@ -111,9 +111,9 @@ public class ModelCompositeArmor<T extends LivingEntity> extends GenericArmorMod
 
 	@Override
 	// Call me a butcher, because I am hacking this game
-	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, int light) {
 		if (parentHead.visible) {
-			parentHead.render(poseStack, getCustomConsumer(RenderType.entityTranslucent(new ResourceLocation(ItemCompositeArmor.ARMOR_TEXTURE_LOCATION))), packedLight, packedOverlay);
+			parentHead.render(poseStack, getCustomConsumer(RenderType.entityTranslucent(ResourceLocation.parse(ItemCompositeArmor.ARMOR_TEXTURE_LOCATION))), packedLight, packedOverlay);
 		}
 		if (parentChest.visible) {
 			parentChest.render(poseStack, buffer, packedLight, packedOverlay);

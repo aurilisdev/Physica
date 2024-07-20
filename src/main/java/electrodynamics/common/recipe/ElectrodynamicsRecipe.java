@@ -18,249 +18,263 @@ import electrodynamics.common.recipe.recipeutils.ProbableFluid;
 import electrodynamics.common.recipe.recipeutils.ProbableGas;
 import electrodynamics.common.recipe.recipeutils.ProbableItem;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
-public abstract class ElectrodynamicsRecipe implements Recipe<RecipeWrapper> {
+public abstract class ElectrodynamicsRecipe implements Recipe<ElectrodynamicsRecipe>, RecipeInput {
 
-	private final String group;
+    private final String group;
 
-	private final double xp;
-	private final int ticks;
-	private final double usagePerTick;
+    private final double xp;
+    private final int ticks;
+    private final double usagePerTick;
 
-	@Nullable
-	private final List<ProbableItem> itemBiproducts;
-	@Nullable
-	private final List<ProbableFluid> fluidBiproducts;
-	@Nullable
-	private final List<ProbableGas> gasBiproducts;
+    private final List<ProbableItem> itemBiproducts;
+    private final List<ProbableFluid> fluidBiproducts;
 
-	private final HashMap<Integer, List<Integer>> itemArrangements = new HashMap<>();
-	@Nullable
-	private List<Integer> fluidArrangement;
-	@Nullable
-	private List<Integer> gasArrangement;
+    private final List<ProbableGas> gasBiproducts;
 
-	public ElectrodynamicsRecipe(String recipeGroup, double experience, int ticks, double usagePerTick, List<ProbableItem> itemBiproducts, List<ProbableFluid> fluidBiproducts, List<ProbableGas> gasBiproducts) {
-		group = recipeGroup;
-		xp = experience;
-		this.ticks = ticks;
-		this.usagePerTick = usagePerTick;
-		this.itemBiproducts = itemBiproducts;
-		this.fluidBiproducts = fluidBiproducts;
-		this.gasBiproducts = gasBiproducts;
-	}
+    private final HashMap<Integer, List<Integer>> itemArrangements = new HashMap<>();
+    @Nullable
+    private List<Integer> fluidArrangement;
+    @Nullable
+    private List<Integer> gasArrangement;
 
-	/**
-	 * NEVER USE THIS METHOD!
-	 */
-	@Override
-	@Deprecated
-	public boolean matches(RecipeWrapper inv, Level world) {
-		return false;
-	}
+    public ElectrodynamicsRecipe(String recipeGroup, double experience, int ticks, double usagePerTick, List<ProbableItem> itemBiproducts, List<ProbableFluid> fluidBiproducts, List<ProbableGas> gasBiproducts) {
+        group = recipeGroup;
+        xp = experience;
+        this.ticks = ticks;
+        this.usagePerTick = usagePerTick;
+        this.itemBiproducts = itemBiproducts;
+        this.fluidBiproducts = fluidBiproducts;
+        this.gasBiproducts = gasBiproducts;
+    }
 
-	@Override
-	public boolean canCraftInDimensions(int width, int height) {
-		return false;
-	}
+    /**
+     * NEVER USE THIS METHOD!
+     */
+    @Override
+    public boolean matches(ElectrodynamicsRecipe recipe, Level world) {
+        return false;
+    }
 
-	@Override
-	public boolean isSpecial() {
-		return true;
-	}
+    @Override
+    public boolean canCraftInDimensions(int width, int height) {
+        return false;
+    }
 
-	@Override
-	public String getGroup() {
-	    return group;
-	}
+    @Override
+    public boolean isSpecial() {
+        return true;
+    }
 
-	public boolean hasItemBiproducts() {
-		return itemBiproducts != null;
-	}
+    @Override
+    public String getGroup() {
+        return group;
+    }
 
-	public boolean hasFluidBiproducts() {
-		return fluidBiproducts != null;
-	}
+    public boolean hasItemBiproducts() {
+        return !itemBiproducts.isEmpty();
+    }
 
-	public boolean hasGasBiproducts() {
-		return gasBiproducts != null;
-	}
+    public boolean hasFluidBiproducts() {
+        return !fluidBiproducts.isEmpty();
+    }
 
-	@Nullable
-	public List<ProbableItem> getItemBiproducts() {
-		return itemBiproducts;
-	}
+    public boolean hasGasBiproducts() {
+        return !gasBiproducts.isEmpty();
+    }
 
-	@Nullable
-	public List<ProbableFluid> getFluidBiproducts() {
-		return fluidBiproducts;
-	}
+    @Nullable
+    public List<ProbableItem> getItemBiproducts() {
+        return itemBiproducts;
+    }
 
-	@Nullable
-	public List<ProbableGas> getGasBiproducts() {
-		return gasBiproducts;
-	}
+    @Nullable
+    public List<ProbableFluid> getFluidBiproducts() {
+        return fluidBiproducts;
+    }
 
-	public ItemStack[] getFullItemBiStacks() {
-		ItemStack[] items = new ItemStack[getItemBiproductCount()];
-		for (int i = 0; i < getItemBiproductCount(); i++) {
-			items[i] = itemBiproducts.get(i).getFullStack();
-		}
-		return items;
-	}
+    @Nullable
+    public List<ProbableGas> getGasBiproducts() {
+        return gasBiproducts;
+    }
 
-	public FluidStack[] getFullFluidBiStacks() {
-		FluidStack[] fluids = new FluidStack[getFluidBiproductCount()];
-		for (int i = 0; i < getFluidBiproductCount(); i++) {
-			fluids[i] = fluidBiproducts.get(i).getFullStack();
-		}
-		return fluids;
-	}
+    public ItemStack[] getFullItemBiStacks() {
+        ItemStack[] items = new ItemStack[getItemBiproductCount()];
+        for (int i = 0; i < getItemBiproductCount(); i++) {
+            items[i] = itemBiproducts.get(i).getFullStack();
+        }
+        return items;
+    }
 
-	public GasStack[] getFullGasBiStacks() {
-		GasStack[] gases = new GasStack[getGasBiproductCount()];
-		for (int i = 0; i < getGasBiproductCount(); i++) {
-			gases[i] = gasBiproducts.get(i).getFullStack();
-		}
-		return gases;
-	}
+    public FluidStack[] getFullFluidBiStacks() {
+        FluidStack[] fluids = new FluidStack[getFluidBiproductCount()];
+        for (int i = 0; i < getFluidBiproductCount(); i++) {
+            fluids[i] = fluidBiproducts.get(i).getFullStack();
+        }
+        return fluids;
+    }
 
-	public int getItemBiproductCount() {
-		return itemBiproducts.size();
-	}
+    public GasStack[] getFullGasBiStacks() {
+        GasStack[] gases = new GasStack[getGasBiproductCount()];
+        for (int i = 0; i < getGasBiproductCount(); i++) {
+            gases[i] = gasBiproducts.get(i).getFullStack();
+        }
+        return gases;
+    }
 
-	public int getFluidBiproductCount() {
-		return fluidBiproducts.size();
-	}
+    public int getItemBiproductCount() {
+        return itemBiproducts.size();
+    }
 
-	public int getGasBiproductCount() {
-		return gasBiproducts.size();
-	}
+    public int getFluidBiproductCount() {
+        return fluidBiproducts.size();
+    }
 
-	public double getXp() {
-		return xp;
-	}
+    public int getGasBiproductCount() {
+        return gasBiproducts.size();
+    }
 
-	public int getTicks() {
-		return ticks;
-	}
+    public double getXp() {
+        return xp;
+    }
 
-	public double getUsagePerTick() {
-		return usagePerTick;
-	}
+    public int getTicks() {
+        return ticks;
+    }
 
-	public void setItemArrangement(Integer procNumber, List<Integer> arrangement) {
-		itemArrangements.put(procNumber, arrangement);
-	}
+    public double getUsagePerTick() {
+        return usagePerTick;
+    }
 
-	public List<Integer> getItemArrangment(Integer procNumber) {
-		return itemArrangements.get(procNumber);
-	}
+    public void setItemArrangement(Integer procNumber, List<Integer> arrangement) {
+        itemArrangements.put(procNumber, arrangement);
+    }
 
-	public void setFluidArrangement(List<Integer> arrangement) {
-		fluidArrangement = arrangement;
-	}
+    public List<Integer> getItemArrangment(Integer procNumber) {
+        return itemArrangements.get(procNumber);
+    }
 
-	public List<Integer> getFluidArrangement() {
-		return fluidArrangement;
-	}
+    public void setFluidArrangement(List<Integer> arrangement) {
+        fluidArrangement = arrangement;
+    }
 
-	public void setGasArrangement(List<Integer> arrangement) {
-		gasArrangement = arrangement;
-	}
+    public List<Integer> getFluidArrangement() {
+        return fluidArrangement;
+    }
 
-	public List<Integer> getGasArrangement() {
-		return gasArrangement;
-	}
+    public void setGasArrangement(List<Integer> arrangement) {
+        gasArrangement = arrangement;
+    }
 
-	public static List<RecipeHolder<ElectrodynamicsRecipe>> findRecipesbyType(RecipeType<? extends ElectrodynamicsRecipe> typeIn, Level world) {
-		return world != null ? world.getRecipeManager().getAllRecipesFor((RecipeType<ElectrodynamicsRecipe>) typeIn) : Collections.emptyList();
-	}
+    public List<Integer> getGasArrangement() {
+        return gasArrangement;
+    }
 
-	@Nullable
-	public static ElectrodynamicsRecipe getRecipe(ComponentProcessor pr, List<RecipeHolder<ElectrodynamicsRecipe>> cachedRecipes) {
-		for (RecipeHolder<ElectrodynamicsRecipe> recipe : cachedRecipes) {
-			if (recipe.value().matchesRecipe(pr)) {
-				return recipe.value();
-			}
-		}
-		return null;
-	}
+    public static List<RecipeHolder<ElectrodynamicsRecipe>> findRecipesbyType(RecipeType<? extends ElectrodynamicsRecipe> typeIn, Level world) {
+        return world != null ? world.getRecipeManager().getAllRecipesFor((RecipeType<ElectrodynamicsRecipe>) typeIn) : Collections.emptyList();
+    }
 
-	public static Pair<List<Integer>, Boolean> areItemsValid(List<CountableIngredient> ingredients, List<ItemStack> stacks) {
-		Boolean valid = true;
-		List<Integer> slotOreintation = new ArrayList<>();
-		for (int i = 0; i < ingredients.size(); i++) {
-			CountableIngredient ing = ingredients.get(i);
-			int slotNum = -1;
-			for (int j = 0; j < stacks.size(); j++) {
-				if (ing.test(stacks.get(j))) {
-					slotNum = j;
-					break;
-				}
-			}
-			if (slotNum > -1 && !slotOreintation.contains(slotNum)) {
-				slotOreintation.add(slotNum);
-			}
-		}
-		if (slotOreintation.size() < ingredients.size()) {
-			valid = false;
-		}
-		return Pair.of(slotOreintation, valid);
-	}
+    @Nullable
+    public static ElectrodynamicsRecipe getRecipe(ComponentProcessor pr, List<RecipeHolder<ElectrodynamicsRecipe>> cachedRecipes) {
+        for (RecipeHolder<ElectrodynamicsRecipe> recipe : cachedRecipes) {
+            if (recipe.value().matchesRecipe(pr)) {
+                return recipe.value();
+            }
+        }
+        return null;
+    }
 
-	public static Pair<List<Integer>, Boolean> areFluidsValid(List<FluidIngredient> ingredients, FluidTank[] fluidTanks) {
-		Boolean valid = true;
-		List<Integer> tankOrientation = new ArrayList<>();
-		for (int i = 0; i < ingredients.size(); i++) {
-			FluidIngredient ing = ingredients.get(i);
-			int tankNum = -1;
-			for (int j = 0; j < fluidTanks.length; j++) {
-				if (ing.testFluid(fluidTanks[i].getFluid())) {
-					tankNum = j;
-					break;
-				}
-			}
-			if (tankNum > -1 && !tankOrientation.contains(tankNum)) {
-				tankOrientation.add(tankNum);
-			}
-		}
-		if (tankOrientation.size() < ingredients.size()) {
-			valid = false;
-		}
-		return Pair.of(tankOrientation, valid);
-	}
+    public static Pair<List<Integer>, Boolean> areItemsValid(List<CountableIngredient> ingredients, List<ItemStack> stacks) {
+        Boolean valid = true;
+        List<Integer> slotOreintation = new ArrayList<>();
+        for (int i = 0; i < ingredients.size(); i++) {
+            CountableIngredient ing = ingredients.get(i);
+            int slotNum = -1;
+            for (int j = 0; j < stacks.size(); j++) {
+                if (ing.test(stacks.get(j))) {
+                    slotNum = j;
+                    break;
+                }
+            }
+            if (slotNum > -1 && !slotOreintation.contains(slotNum)) {
+                slotOreintation.add(slotNum);
+            }
+        }
+        if (slotOreintation.size() < ingredients.size()) {
+            valid = false;
+        }
+        return Pair.of(slotOreintation, valid);
+    }
 
-	public static Pair<List<Integer>, Boolean> areGasesValid(List<GasIngredient> ingredients, GasTank[] gasTanks) {
-		Boolean valid = true;
-		List<Integer> tankOrientation = new ArrayList<>();
-		for (int i = 0; i < ingredients.size(); i++) {
-			GasIngredient ing = ingredients.get(i);
-			int tankNum = -1;
-			for (int j = 0; j < gasTanks.length; j++) {
-				if (ing.testGas(gasTanks[i].getGas(), true, true)) {
-					tankNum = j;
-					break;
-				}
-			}
-			if (tankNum > -1 && !tankOrientation.contains(tankNum)) {
-				tankOrientation.add(tankNum);
-			}
-		}
-		if (tankOrientation.size() < ingredients.size()) {
-			valid = false;
-		}
-		return Pair.of(tankOrientation, valid);
-	}
+    public static Pair<List<Integer>, Boolean> areFluidsValid(List<FluidIngredient> ingredients, FluidTank[] fluidTanks) {
+        Boolean valid = true;
+        List<Integer> tankOrientation = new ArrayList<>();
+        for (int i = 0; i < ingredients.size(); i++) {
+            FluidIngredient ing = ingredients.get(i);
+            int tankNum = -1;
+            for (int j = 0; j < fluidTanks.length; j++) {
+                if (ing.test(fluidTanks[i].getFluid())) {
+                    tankNum = j;
+                    break;
+                }
+            }
+            if (tankNum > -1 && !tankOrientation.contains(tankNum)) {
+                tankOrientation.add(tankNum);
+            }
+        }
+        if (tankOrientation.size() < ingredients.size()) {
+            valid = false;
+        }
+        return Pair.of(tankOrientation, valid);
+    }
 
-	public abstract boolean matchesRecipe(ComponentProcessor pr);
+    public static Pair<List<Integer>, Boolean> areGasesValid(List<GasIngredient> ingredients, GasTank[] gasTanks) {
+        Boolean valid = true;
+        List<Integer> tankOrientation = new ArrayList<>();
+        for (int i = 0; i < ingredients.size(); i++) {
+            GasIngredient ing = ingredients.get(i);
+            int tankNum = -1;
+            for (int j = 0; j < gasTanks.length; j++) {
+                if (ing.testGas(gasTanks[i].getGas(), true, true)) {
+                    tankNum = j;
+                    break;
+                }
+            }
+            if (tankNum > -1 && !tankOrientation.contains(tankNum)) {
+                tankOrientation.add(tankNum);
+            }
+        }
+        if (tankOrientation.size() < ingredients.size()) {
+            valid = false;
+        }
+        return Pair.of(tankOrientation, valid);
+    }
 
+    public abstract boolean matchesRecipe(ComponentProcessor pr);
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public ItemStack getItem(int p_346128_) {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public int size() {
+        return 0;
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return NonNullList.create();
+    }
 }

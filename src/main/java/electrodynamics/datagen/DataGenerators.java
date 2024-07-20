@@ -29,13 +29,13 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = References.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
 	@SubscribeEvent
@@ -49,9 +49,10 @@ public class DataGenerators {
 
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
+
 		if (event.includeServer()) {
-			generator.addProvider(true, new LootTableProvider(output, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(ElectrodynamicsLootTablesProvider::new, LootContextParamSets.BLOCK))));
-			generator.addProvider(true, new ElectrodynamicsRecipeProvider(output, lookupProvider));
+			generator.addProvider(true, new LootTableProvider(output, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(ElectrodynamicsLootTablesProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+
 			generator.addProvider(true, new CombustionChamberFuelSourceProvider(output));
 			generator.addProvider(true, new CoalGeneratorFuelSourceProvider(output));
 			generator.addProvider(true, new ThermoelectricGenHeatSourceProvider(output));
@@ -71,6 +72,7 @@ public class DataGenerators {
 
 			generator.addProvider(true, datapacks);
 			ElectrodynamicsTagsProvider.addTagProviders(generator, output, datapacks.getRegistryProvider(), helper);
+			generator.addProvider(true, new ElectrodynamicsRecipeProvider(output, lookupProvider));
 		}
 		if (event.includeClient()) {
 			generator.addProvider(true, new ElectrodynamicsBlockStateProvider(output, helper));

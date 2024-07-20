@@ -3,7 +3,6 @@ package electrodynamics.prefab.utilities;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.platform.Lighting;
@@ -77,14 +76,14 @@ public class RenderingUtils {
 				float f3 = random.nextFloat() * 20.0F + 1.0F;
 				float f4 = random.nextFloat() * 2.0F + 1.0F + (star ? 0 : 100);
 				Matrix4f matrix4f = stack.last().pose();
-				vertexconsumer2.vertex(matrix4f, 0.0F, 0.0F, 0.0F).color((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a)).endVertex();
-				vertexconsumer2.vertex(matrix4f, -0.866f * f4, f3, -0.5F * f4).color((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a)).endVertex();
-				vertexconsumer2.vertex(matrix4f, -0.866f * f4, f3, -0.5F * f4).color((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a)).endVertex();
-				vertexconsumer2.vertex(matrix4f, 0.0F, 0.0F, 0.0F).color((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a)).endVertex();
-				vertexconsumer2.vertex(matrix4f, -0.866f * f4, f3, -0.5F * f4).color((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a)).endVertex();
-				vertexconsumer2.vertex(matrix4f, 0.0F, f3, 1.0F * f4).color((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a)).endVertex();
-				vertexconsumer2.vertex(matrix4f, 0.0F, 0.0F, 0.0F).color((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a)).endVertex();
-				vertexconsumer2.vertex(matrix4f, -0.866f * f4, f3, -0.5F * f4).color((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a)).endVertex();
+				vertexconsumer2.addVertex(matrix4f, 0.0F, 0.0F, 0.0F).setColor((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a));
+				vertexconsumer2.addVertex(matrix4f, -0.866f * f4, f3, -0.5F * f4).setColor((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a));
+				vertexconsumer2.addVertex(matrix4f, -0.866f * f4, f3, -0.5F * f4).setColor((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a));
+				vertexconsumer2.addVertex(matrix4f, 0.0F, 0.0F, 0.0F).setColor((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a));
+				vertexconsumer2.addVertex(matrix4f, -0.866f * f4, f3, -0.5F * f4).setColor((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a));
+				vertexconsumer2.addVertex(matrix4f, 0.0F, f3, 1.0F * f4).setColor((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a));
+				vertexconsumer2.addVertex(matrix4f, 0.0F, 0.0F, 0.0F).setColor((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a));
+				vertexconsumer2.addVertex(matrix4f, -0.866f * f4, f3, -0.5F * f4).setColor((int) (255 * r), (int) (255 * g), (int) (255 * b), (int) (255 * a));
 			}
 
 			stack.popPose();
@@ -120,7 +119,7 @@ public class RenderingUtils {
 	}
 
 	public static void renderSolidColorBox(PoseStack stack, Minecraft minecraft, VertexConsumer builder, AABB box, float r, float g, float b, float a, int light, int overlay) {
-		TextureAtlasSprite sp = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(new ResourceLocation("block/white_wool"));
+		TextureAtlasSprite sp = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.withDefaultNamespace("block/white_wool"));
 		renderFilledBox(stack, builder, box, r, g, b, a, sp.getU0(), sp.getV0(), sp.getU1(), sp.getV1(), light, overlay);
 	}
 
@@ -134,7 +133,7 @@ public class RenderingUtils {
 
 	public static void renderFilledBox(PoseStack stack, VertexConsumer builder, AABB box, float r, float g, float b, float a, float uMin, float vMin, float uMax, float vMax, int light, int overlay) {
 		Matrix4f matrix4f = stack.last().pose();
-		Matrix3f matrix3f = stack.last().normal();
+		PoseStack.Pose pose = stack.last();
 
 		float minX = (float) box.minX;
 		float minY = (float) box.minY;
@@ -144,46 +143,46 @@ public class RenderingUtils {
 		float maxZ = (float) box.maxZ;
 
 		// bottom
-		builder.vertex(matrix4f, minX, minY, minZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, -1, 0).endVertex();
-		builder.vertex(matrix4f, maxX, minY, minZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, -1, 0).endVertex();
-		builder.vertex(matrix4f, maxX, minY, maxZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, -1, 0).endVertex();
-		builder.vertex(matrix4f, minX, minY, maxZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, -1, 0).endVertex();
+		builder.addVertex(matrix4f, minX, minY, minZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 0, -1, 0);
+		builder.addVertex(matrix4f, maxX, minY, minZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 0, -1, 0);
+		builder.addVertex(matrix4f, maxX, minY, maxZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 0, -1, 0);
+		builder.addVertex(matrix4f, minX, minY, maxZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 0, -1, 0);
 
 		// top
-		builder.vertex(matrix4f, maxX, maxY, minZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 1, 0).endVertex();
-		builder.vertex(matrix4f, minX, maxY, minZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 1, 0).endVertex();
-		builder.vertex(matrix4f, minX, maxY, maxZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 1, 0).endVertex();
-		builder.vertex(matrix4f, maxX, maxY, maxZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 1, 0).endVertex();
+		builder.addVertex(matrix4f, maxX, maxY, minZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 0, 1, 0);
+		builder.addVertex(matrix4f, minX, maxY, minZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 0, 1, 0);
+		builder.addVertex(matrix4f, minX, maxY, maxZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 0, 1, 0);
+		builder.addVertex(matrix4f, maxX, maxY, maxZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 0, 1, 0);
 
 		// North
-		builder.vertex(matrix4f, minX, maxY, minZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 0, -1).endVertex();
-		builder.vertex(matrix4f, maxX, maxY, minZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 0, -1).endVertex();
-		builder.vertex(matrix4f, maxX, minY, minZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 0, -1).endVertex();
-		builder.vertex(matrix4f, minX, minY, minZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 0, -1).endVertex();
+		builder.addVertex(matrix4f, minX, maxY, minZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 0, 0, -1);
+		builder.addVertex(matrix4f, maxX, maxY, minZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 0, 0, -1);
+		builder.addVertex(matrix4f, maxX, minY, minZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 0, 0, -1);
+		builder.addVertex(matrix4f, minX, minY, minZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 0, 0, -1);
 
 		// South
-		builder.vertex(matrix4f, maxX, maxY, maxZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 0, 1).endVertex();
-		builder.vertex(matrix4f, minX, maxY, maxZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 0, 1).endVertex();
-		builder.vertex(matrix4f, minX, minY, maxZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 0, 1).endVertex();
-		builder.vertex(matrix4f, maxX, minY, maxZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 0, 0, 1).endVertex();
+		builder.addVertex(matrix4f, maxX, maxY, maxZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 0, 0, 1);
+		builder.addVertex(matrix4f, minX, maxY, maxZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 0, 0, 1);
+		builder.addVertex(matrix4f, minX, minY, maxZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 0, 0, 1);
+		builder.addVertex(matrix4f, maxX, minY, maxZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 0, 0, 1);
 
 		// East
-		builder.vertex(matrix4f, maxX, maxY, minZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 1, 0, 0).endVertex();
-		builder.vertex(matrix4f, maxX, maxY, maxZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, 1, 0, 0).endVertex();
-		builder.vertex(matrix4f, maxX, minY, maxZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 1, 0, 0).endVertex();
-		builder.vertex(matrix4f, maxX, minY, minZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, 1, 0, 0).endVertex();
+		builder.addVertex(matrix4f, maxX, maxY, minZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 1, 0, 0);
+		builder.addVertex(matrix4f, maxX, maxY, maxZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(overlay).setLight(light).setNormal(pose, 1, 0, 0);
+		builder.addVertex(matrix4f, maxX, minY, maxZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 1, 0, 0);
+		builder.addVertex(matrix4f, maxX, minY, minZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(overlay).setLight(light).setNormal(pose, 1, 0, 0);
 
 		// West
-		builder.vertex(matrix4f, minX, maxY, maxZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, -1, 0, 0).endVertex();
-		builder.vertex(matrix4f, minX, maxY, minZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(overlay).uv2(light).normal(matrix3f, -1, 0, 0).endVertex();
-		builder.vertex(matrix4f, minX, minY, minZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, -1, 0, 0).endVertex();
-		builder.vertex(matrix4f, minX, minY, maxZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(overlay).uv2(light).normal(matrix3f, -1, 0, 0).endVertex();
+		builder.addVertex(matrix4f, minX, maxY, maxZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(overlay).setLight(light).setNormal(pose, -1, 0, 0);
+		builder.addVertex(matrix4f, minX, maxY, minZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(overlay).setLight(light).setNormal(pose, -1, 0, 0);
+		builder.addVertex(matrix4f, minX, minY, minZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(overlay).setLight(light).setNormal(pose, -1, 0, 0);
+		builder.addVertex(matrix4f, minX, minY, maxZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(overlay).setLight(light).setNormal(pose, -1, 0, 0);
 
 	}
 
 	public static void renderFilledBoxNoOverlay(PoseStack stack, VertexConsumer builder, AABB box, float r, float g, float b, float a, float uMin, float vMin, float uMax, float vMax, int light) {
 		Matrix4f matrix4f = stack.last().pose();
-		Matrix3f matrix3f = stack.last().normal();
+		PoseStack.Pose pose = stack.last();
 
 		float minX = (float) box.minX;
 		float minY = (float) box.minY;
@@ -193,40 +192,40 @@ public class RenderingUtils {
 		float maxZ = (float) box.maxZ;
 
 		// bottom
-		builder.vertex(matrix4f, minX, minY, minZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, -1, 0).endVertex();
-		builder.vertex(matrix4f, maxX, minY, minZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, -1, 0).endVertex();
-		builder.vertex(matrix4f, maxX, minY, maxZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, -1, 0).endVertex();
-		builder.vertex(matrix4f, minX, minY, maxZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, -1, 0).endVertex();
+		builder.addVertex(matrix4f, minX, minY, minZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, -1, 0);
+		builder.addVertex(matrix4f, maxX, minY, minZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, -1, 0);
+		builder.addVertex(matrix4f, maxX, minY, maxZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, -1, 0);
+		builder.addVertex(matrix4f, minX, minY, maxZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, -1, 0);
 
 		// top
-		builder.vertex(matrix4f, maxX, maxY, minZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 1, 0).endVertex();
-		builder.vertex(matrix4f, minX, maxY, minZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 1, 0).endVertex();
-		builder.vertex(matrix4f, minX, maxY, maxZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 1, 0).endVertex();
-		builder.vertex(matrix4f, maxX, maxY, maxZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 1, 0).endVertex();
+		builder.addVertex(matrix4f, maxX, maxY, minZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 1, 0);
+		builder.addVertex(matrix4f, minX, maxY, minZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 1, 0);
+		builder.addVertex(matrix4f, minX, maxY, maxZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 1, 0);
+		builder.addVertex(matrix4f, maxX, maxY, maxZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 1, 0);
 
 		// North
-		builder.vertex(matrix4f, minX, maxY, minZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 0, -1).endVertex();
-		builder.vertex(matrix4f, maxX, maxY, minZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 0, -1).endVertex();
-		builder.vertex(matrix4f, maxX, minY, minZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 0, -1).endVertex();
-		builder.vertex(matrix4f, minX, minY, minZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 0, -1).endVertex();
+		builder.addVertex(matrix4f, minX, maxY, minZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 0, -1);
+		builder.addVertex(matrix4f, maxX, maxY, minZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 0, -1);
+		builder.addVertex(matrix4f, maxX, minY, minZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 0, -1);
+		builder.addVertex(matrix4f, minX, minY, minZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 0, -1);
 
 		// South
-		builder.vertex(matrix4f, maxX, maxY, maxZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 0, 1).endVertex();
-		builder.vertex(matrix4f, minX, maxY, maxZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 0, 1).endVertex();
-		builder.vertex(matrix4f, minX, minY, maxZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 0, 1).endVertex();
-		builder.vertex(matrix4f, maxX, minY, maxZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 0, 0, 1).endVertex();
+		builder.addVertex(matrix4f, maxX, maxY, maxZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 0, 1);
+		builder.addVertex(matrix4f, minX, maxY, maxZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 0, 1);
+		builder.addVertex(matrix4f, minX, minY, maxZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 0, 1);
+		builder.addVertex(matrix4f, maxX, minY, maxZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 0, 0, 1);
 
 		// East
-		builder.vertex(matrix4f, maxX, maxY, minZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 1, 0, 0).endVertex();
-		builder.vertex(matrix4f, maxX, maxY, maxZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 1, 0, 0).endVertex();
-		builder.vertex(matrix4f, maxX, minY, maxZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 1, 0, 0).endVertex();
-		builder.vertex(matrix4f, maxX, minY, minZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, 1, 0, 0).endVertex();
+		builder.addVertex(matrix4f, maxX, maxY, minZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 1, 0, 0);
+		builder.addVertex(matrix4f, maxX, maxY, maxZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 1, 0, 0);
+		builder.addVertex(matrix4f, maxX, minY, maxZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 1, 0, 0);
+		builder.addVertex(matrix4f, maxX, minY, minZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, 1, 0, 0);
 
 		// West
-		builder.vertex(matrix4f, minX, maxY, maxZ).color(r, g, b, a).uv(uMin, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, -1, 0, 0).endVertex();
-		builder.vertex(matrix4f, minX, maxY, minZ).color(r, g, b, a).uv(uMax, vMin).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, -1, 0, 0).endVertex();
-		builder.vertex(matrix4f, minX, minY, minZ).color(r, g, b, a).uv(uMax, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, -1, 0, 0).endVertex();
-		builder.vertex(matrix4f, minX, minY, maxZ).color(r, g, b, a).uv(uMin, vMax).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(matrix3f, -1, 0, 0).endVertex();
+		builder.addVertex(matrix4f, minX, maxY, maxZ).setColor(r, g, b, a).setUv(uMin, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, -1, 0, 0);
+		builder.addVertex(matrix4f, minX, maxY, minZ).setColor(r, g, b, a).setUv(uMax, vMin).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, -1, 0, 0);
+		builder.addVertex(matrix4f, minX, minY, minZ).setColor(r, g, b, a).setUv(uMax, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, -1, 0, 0);
+		builder.addVertex(matrix4f, minX, minY, maxZ).setColor(r, g, b, a).setUv(uMin, vMax).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(pose, -1, 0, 0);
 
 	}
 
@@ -244,7 +243,7 @@ public class RenderingUtils {
 		poseStack.translate(x + 8, y + 8, (150));
 
 		try {
-			poseStack.mulPoseMatrix(ITEM_MATRIX);
+			poseStack.mulPose(ITEM_MATRIX);
 			poseStack.scale(16.0F, 16.0F, 16.0F);
 			poseStack.scale(scale, scale, scale);
 			boolean flag = !model.usesBlockLight();
@@ -261,9 +260,7 @@ public class RenderingUtils {
 			CrashReport crashreport = CrashReport.forThrowable(throwable, "Rendering item");
 			CrashReportCategory crashreportcategory = crashreport.addCategory("Item being rendered");
 			crashreportcategory.setDetail("Item Type", () -> String.valueOf(stack.getItem()));
-			crashreportcategory.setDetail("Registry Name", () -> String.valueOf(BuiltInRegistries.ITEM.getKey(stack.getItem())));
-			crashreportcategory.setDetail("Item Damage", () -> String.valueOf(stack.getDamageValue()));
-			crashreportcategory.setDetail("Item NBT", () -> String.valueOf(stack.getTag()));
+			crashreportcategory.setDetail("Item Components", () -> String.valueOf(stack.getComponents()));
 			crashreportcategory.setDetail("Item Foil", () -> String.valueOf(stack.hasFoil()));
 			throw new ReportedException(crashreport);
 		}
@@ -294,16 +291,14 @@ public class RenderingUtils {
 
 		RenderSystem.setShader(shader);
 
-		BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
+		BufferBuilder bufferbuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
 
-		bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferbuilder.addVertex(matrix, x0, y1, blitOffset).setUv(minU, maxV);
+		bufferbuilder.addVertex(matrix, x1, y1, blitOffset).setUv(maxU, maxV);
+		bufferbuilder.addVertex(matrix, x1, y0, blitOffset).setUv(maxU, minV);
+		bufferbuilder.addVertex(matrix, x0, y0, blitOffset).setUv(minU, minV);
 
-		bufferbuilder.vertex(matrix, x0, y1, blitOffset).uv(minU, maxV).endVertex();
-		bufferbuilder.vertex(matrix, x1, y1, blitOffset).uv(maxU, maxV).endVertex();
-		bufferbuilder.vertex(matrix, x1, y0, blitOffset).uv(maxU, minV).endVertex();
-		bufferbuilder.vertex(matrix, x0, y0, blitOffset).uv(minU, minV).endVertex();
-
-		BufferUploader.drawWithShader(bufferbuilder.end());
+		BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
 
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
@@ -318,7 +313,7 @@ public class RenderingUtils {
 	}
 
 	public static RenderType beaconType() {
-		return RenderType.beaconBeam(new ResourceLocation("textures/entity/beacon_beam.png"), true);
+		return RenderType.beaconBeam(ResourceLocation.withDefaultNamespace("textures/entity/beacon_beam.png"), true);
 	}
 
 	public static void resetShaderColor() {

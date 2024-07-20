@@ -89,7 +89,7 @@ public class ScreenComponentFluidGaugeInput extends ScreenComponentFluidGauge {
 
         tank.updateServer();
 
-        PacketDistributor.SERVER.noArg().send(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray().getBlockPos(), Minecraft.getInstance().player.getUUID()));
+        PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray().getBlockPos(), Minecraft.getInstance().player.getUUID()));
 
     }
 

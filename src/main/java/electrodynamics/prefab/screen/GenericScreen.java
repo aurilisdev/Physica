@@ -30,7 +30,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class GenericScreen<T extends GenericContainer> extends AbstractContainerScreen<T> implements IScreenWrapper {
 
-	protected ResourceLocation defaultResource = new ResourceLocation(References.ID + ":textures/screen/component/base.png");
+	protected ResourceLocation defaultResource = ResourceLocation.parse(References.ID + ":textures/screen/component/base.png");
 	private Set<AbstractScreenComponent> components = new HashSet<>();
 	public List<ScreenComponentSlot> slots = new ArrayList<>();
 	private Set<ScreenComponentEditBox> editBoxes = new HashSet<>();

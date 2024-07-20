@@ -3,6 +3,7 @@ package electrodynamics.common.tile.pipelines.gas;
 import java.util.ArrayList;
 import java.util.List;
 
+import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.capability.types.gas.IGasHandler;
@@ -11,7 +12,6 @@ import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.inventory.container.tile.ContainerGasPipeFilter;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
@@ -34,15 +34,15 @@ public class TileGasPipeFilter extends GenericTile {
     @SuppressWarnings("rawtypes")
     public final Property[] filteredGases = {
             //
-            property(new Property<>(PropertyType.Gasstack, "gasone", GasStack.EMPTY)),
+            property(new Property<>(PropertyTypes.GAS_STACK, "gasone", GasStack.EMPTY)),
             //
-            property(new Property<>(PropertyType.Gasstack, "gastwo", GasStack.EMPTY)),
+            property(new Property<>(PropertyTypes.GAS_STACK, "gastwo", GasStack.EMPTY)),
             //
-            property(new Property<>(PropertyType.Gasstack, "gasthree", GasStack.EMPTY)),
+            property(new Property<>(PropertyTypes.GAS_STACK, "gasthree", GasStack.EMPTY)),
             //
-            property(new Property<>(PropertyType.Gasstack, "gasfour", GasStack.EMPTY)) };
+            property(new Property<>(PropertyTypes.GAS_STACK, "gasfour", GasStack.EMPTY)) };
 
-    public final Property<Boolean> isWhitelist = property(new Property<>(PropertyType.Boolean, "iswhitelist", false));
+    public final Property<Boolean> isWhitelist = property(new Property<>(PropertyTypes.BOOLEAN, "iswhitelist", false));
 
     public TileGasPipeFilter(BlockPos worldPos, BlockState blockState) {
         super(ElectrodynamicsBlockTypes.TILE_GASPIPEFILTER.get(), worldPos, blockState);

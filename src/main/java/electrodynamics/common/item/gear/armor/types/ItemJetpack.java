@@ -1,5 +1,6 @@
 package electrodynamics.common.item.gear.armor.types;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -15,25 +16,19 @@ import electrodynamics.api.gas.GasStack;
 import electrodynamics.client.ClientRegister;
 import electrodynamics.client.keys.KeyBinds;
 import electrodynamics.client.render.model.armor.types.ModelJetpack;
-import electrodynamics.common.item.gear.armor.ICustomArmor;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.common.packet.types.client.PacketRenderJetpackParticles;
 import electrodynamics.common.packet.types.server.PacketJetpackFlightServer;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
-import electrodynamics.registers.ElectrodynamicsCapabilities;
-import electrodynamics.registers.ElectrodynamicsCreativeTabs;
-import electrodynamics.registers.ElectrodynamicsGases;
+import electrodynamics.registers.*;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -48,10 +43,19 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemJetpack extends ItemElectrodynamicsArmor {
 
     // public static final Fluid EMPTY_FLUID = Fluids.EMPTY;
+
+    public static final EnumMap<Type, Integer> DEFENSE_MAP = Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+        map.put(Type.HELMET, 0);
+        map.put(Type.CHESTPLATE, 1);
+        map.put(Type.LEGGINGS, 0);
+        map.put(Type.BOOTS, 0);
+    });
+
     public static final int MAX_CAPACITY = 30000;
 
     public static final int USAGE_PER_TICK = 1;
@@ -68,7 +72,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     public static final String WAS_HURT_KEY = "washurt";
 
     public ItemJetpack() {
-        super(Jetpack.JETPACK, Type.CHESTPLATE, new Item.Properties().stacksTo(1), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+        super(ElectrodynamicsArmorMaterials.JETPACK, Type.CHESTPLATE, new Item.Properties().stacksTo(1), () -> ElectrodynamicsCreativeTabs.MAIN.get());
     }
 
     @Override
@@ -114,12 +118,12 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flagIn) {
-        staticAppendHoverText(stack, world, tooltip, flagIn);
-        super.appendHoverText(stack, world, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+        staticAppendHoverText(stack, context, tooltip, flagIn);
+        super.appendHoverText(stack, context, tooltip, flagIn);
     }
 
-    public static void staticAppendHoverText(ItemStack stack, Level world, List<Component> tooltips, TooltipFlag flagIn) {
+    public static void staticAppendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltips, TooltipFlag flagIn) {
         if (ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM != null) {
 
             IGasHandlerItem handler = stack.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
@@ -144,11 +148,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
             }
         }
         // cheesing sync issues one line of code at a time
-        if (stack.hasTag()) {
-            tooltips.add(getModeText(stack.getTag().getInt(NBTUtils.MODE)));
-        } else {
-            tooltips.add(ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("jetpack.moderegular").withStyle(ChatFormatting.GREEN)));
-        }
+        tooltips.add(getModeText(stack.getOrDefault(ElectrodynamicsDataComponentTypes.MODE, 0)));
     }
 
     public static Component getModeText(int mode) {
@@ -162,20 +162,20 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, Level world, Player player) {
-        super.onArmorTick(stack, world, player);
-        armorTick(stack, world, player, OFFSET, false);
+    public void onWearingTick(ItemStack stack, Level level, Player player, int slotId, boolean isSelected) {
+        super.onWearingTick(stack, level, player, slotId, isSelected);
+        wearingTick(stack, level, player, OFFSET, false);
     }
 
-    public static void armorTick(ItemStack stack, Level world, Player player, float particleZ, boolean isCombat) {
+    public static void wearingTick(ItemStack stack, Level world, Player player, float particleZ, boolean isCombat) {
         if (world.isClientSide) {
 
             Electrodynamics.LOGGER.info(player.getDeltaMovement().y);
 
             ArmorItem item = (ArmorItem) stack.getItem();
-            if (item.getEquipmentSlot() == EquipmentSlot.CHEST && stack.hasTag()) {
+            if (item.getEquipmentSlot() == EquipmentSlot.CHEST) {
                 boolean isDown = KeyBinds.jetpackAscend.isDown();
-                int mode = stack.hasTag() ? stack.getTag().getInt(NBTUtils.MODE) : 0;
+                int mode = stack.getOrDefault(ElectrodynamicsDataComponentTypes.MODE, 0);
 
                 IGasHandlerItem handler = stack.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
 
@@ -191,7 +191,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
                         double deltaY = moveWithJetpack(ItemJetpack.VERT_SPEED_INCREASE / 2.0 * pressure, ItemJetpack.TERMINAL_VERTICAL_VELOCITY / 2.0 * pressure, player, stack);
                         renderClientParticles(world, player, particleZ);
                         sendPacket(player, true, deltaY);
-                    } else if (mode == 1 && player.getFeetBlockState().isAir()) {
+                    } else if (mode == 1 && player.getBlockStateOn().isAir()) {
                         double deltaY = hoverWithJetpack(pressure, player, stack);
                         renderClientParticles(world, player, particleZ);
                         sendPacket(player, true, deltaY);
@@ -209,13 +209,11 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
                 sendPacket(player, false, player.getDeltaMovement().y);
             }
         } else {
-            CompoundTag tag = stack.getOrCreateTag();
-            boolean hasRan = tag.getBoolean(NBTUtils.USED);
-            tag.putBoolean(NBTUtils.PLAYING_SOUND, tag.getBoolean(NBTUtils.PLAYING_SOUND));
+            boolean hasRan = stack.getOrDefault(ElectrodynamicsDataComponentTypes.USED, false);
             if (hasRan) {
                 drainHydrogen(stack);
 
-                PacketDistributor.TRACKING_ENTITY_AND_SELF.with(player).send(new PacketRenderJetpackParticles(player.getUUID(), isCombat));
+                PacketDistributor.sendToPlayer((ServerPlayer) player, new PacketRenderJetpackParticles(player.getUUID(), isCombat));
 
                 player.resetFallDistance();
             }
@@ -223,8 +221,8 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     }
 
     @Override
-    public boolean canBeDepleted() {
-        return false;
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Consumer<Item> onBroken) {
+        return 0;
     }
 
     @Override
@@ -286,7 +284,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     }
 
     public static boolean staticCanElytraFly(ItemStack stack, LivingEntity entity) {
-        int mode = stack.hasTag() ? stack.getTag().getInt(NBTUtils.MODE) : 0;
+        int mode = stack.getOrDefault(ElectrodynamicsDataComponentTypes.MODE, 0);
 
         if (mode != 2) {
             return false;
@@ -398,20 +396,15 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     }
 
     protected static void sendPacket(Player player, boolean state, double prevDeltaMove) {
-        PacketDistributor.SERVER.noArg().send(new PacketJetpackFlightServer(player.getUUID(), state, prevDeltaMove));
+        PacketDistributor.sendToServer(new PacketJetpackFlightServer(player.getUUID(), state, prevDeltaMove));
     }
 
     protected static double getPrevDeltaY(ItemStack stack) {
-        return stack.getOrCreateTag().getDouble(DELTA_Y_KEY);
+        return stack.getOrDefault(ElectrodynamicsDataComponentTypes.DELTA_Y, 0.0);
     }
 
     protected static boolean wasEntityHurt(ItemStack stack) {
-        return stack.getOrCreateTag().getBoolean(WAS_HURT_KEY);
-    }
-
-    @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
-        return ARMOR_TEXTURE_LOCATION;
+        return stack.getOrDefault(ElectrodynamicsDataComponentTypes.HURT, false);
     }
 
     // we need to do this based upon some testing I did
@@ -424,6 +417,8 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
         }
         return deg;
     }
+
+    /*
 
     public enum Jetpack implements ICustomArmor {
         JETPACK;
@@ -459,5 +454,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
         }
 
     }
+    */
+
 
 }

@@ -210,13 +210,13 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
 
         newRecipe(new ItemStack(DUSTS[SubtypeDust.obsidian.ordinal()], 2), 0.1F, 200, 450.0, "dust_obsidian_from_obsidian", modID)
                 //
-                .addItemTagInput(Tags.Items.OBSIDIAN, 1)
+                .addItemTagInput(Tags.Items.OBSIDIANS, 1)
                 //
                 .save(output);
 
         newRecipe(new ItemStack(Items.FLINT, 1), 0.1F, 200, 450.0, "flint_from_gravel", modID)
                 //
-                .addItemTagInput(Tags.Items.GRAVEL, 1)
+                .addItemTagInput(Tags.Items.GRAVELS, 1)
                 //
                 .addItemBiproduct(new ProbableItem(new ItemStack(Items.SAND), 0.2))
                 //

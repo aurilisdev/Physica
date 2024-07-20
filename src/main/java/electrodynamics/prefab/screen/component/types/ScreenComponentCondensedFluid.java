@@ -105,7 +105,7 @@ public class ScreenComponentCondensedFluid extends ScreenComponentGeneric {
 
         stack = handler.getContainer();
 
-        PacketDistributor.SERVER.noArg().send(new PacketUpdateCarriedItemServer(stack.copy(), owner.getBlockPos(), Minecraft.getInstance().player.getUUID()));
+        PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), owner.getBlockPos(), Minecraft.getInstance().player.getUUID()));
 
     }
 

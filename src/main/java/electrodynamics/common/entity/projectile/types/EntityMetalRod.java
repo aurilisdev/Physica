@@ -7,6 +7,7 @@ import electrodynamics.registers.ElectrodynamicsEntities;
 import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -97,13 +98,13 @@ public class EntityMetalRod extends EntityCustomProjectile {
 	}
 
 	@Override
-	public void writeSpawnData(FriendlyByteBuf buffer) {
+	public void writeSpawnData(RegistryFriendlyByteBuf buffer) {
 		super.writeSpawnData(buffer);
 		buffer.writeInt(number);
 	}
 
 	@Override
-	public void readSpawnData(FriendlyByteBuf additionalData) {
+	public void readSpawnData(RegistryFriendlyByteBuf additionalData) {
 		super.readSpawnData(additionalData);
 		number = additionalData.readInt();
 	}

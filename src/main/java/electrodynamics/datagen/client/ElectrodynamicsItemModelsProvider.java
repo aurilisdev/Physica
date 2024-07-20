@@ -311,11 +311,11 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 		}
 
 		Parent(String id, String loc) {
-			this.loc = new ResourceLocation(id, loc);
+			this.loc = ResourceLocation.fromNamespaceAndPath(id, loc);
 		}
 
 		public ResourceLocation loc() {
-			return loc == null ? new ResourceLocation(toString().toLowerCase(Locale.ROOT)) : loc;
+			return loc == null ? ResourceLocation.parse(toString().toLowerCase(Locale.ROOT)) : loc;
 		}
 	}
 

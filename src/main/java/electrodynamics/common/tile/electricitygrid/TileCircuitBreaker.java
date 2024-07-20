@@ -1,5 +1,7 @@
 package electrodynamics.common.tile.electricitygrid;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistryAccess;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.Electrodynamics;
@@ -227,16 +229,16 @@ public class TileCircuitBreaker extends GenericTile {
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag compound) {
-        super.saveAdditional(compound);
+    public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.saveAdditional(compound, registries);
         compound.putBoolean("hasredstonesignal", recievedRedstoneSignal);
         compound.putBoolean("tripped", tripped);
         compound.putInt("timer", tripCurveTimer);
     }
 
     @Override
-    public void load(@NotNull CompoundTag compound) {
-        super.load(compound);
+    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
         recievedRedstoneSignal = compound.getBoolean("hasredstonesignal");
         tripped = compound.getBoolean("tripped");
         tripCurveTimer = compound.getInt("timer");

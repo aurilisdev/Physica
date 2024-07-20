@@ -67,7 +67,7 @@ public class ElectrodynamicsEnergizedAlloyerRecipes extends AbstractRecipeGenera
 				//
 				.addItemTagInput(Tags.Items.INGOTS, 1)
 				//
-				.addItemTagInput(Tags.Items.SAND, 1)
+				.addItemTagInput(Tags.Items.SANDS, 1)
 				//
 				.save(output);
 

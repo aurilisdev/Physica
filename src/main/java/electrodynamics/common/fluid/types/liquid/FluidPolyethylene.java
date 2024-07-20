@@ -8,8 +8,6 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 public class FluidPolyethylene extends FluidNonPlaceable {
 
-	public static final String FORGE_TAG = "polyethylene";
-
 	private final FluidType type;
 
 	public FluidPolyethylene() {

@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.capability.types.itemhandler.IndexedSidedInvWrapper;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponent;
@@ -125,7 +125,7 @@ public class ComponentInventory implements IComponent, WorldlyContainer {
 
         }
 
-        items = holder.property(new Property<>(PropertyType.InventoryItems, "itemproperty", NonNullList.withSize(getContainerSize(), ItemStack.EMPTY)));
+        items = holder.property(new Property<>(PropertyTypes.INVENTORY_ITEMS, "itemproperty", NonNullList.withSize(getContainerSize(), ItemStack.EMPTY)));
 
     }
 

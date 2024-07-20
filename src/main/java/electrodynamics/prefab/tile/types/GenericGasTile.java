@@ -5,7 +5,7 @@ import java.util.function.BiConsumer;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -16,56 +16,56 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 public class GenericGasTile extends GenericMaterialTile {
 
-	public static final int MAX_CONDENSED_AMOUNT = 10000;
+    public static final int MAX_CONDENSED_AMOUNT = 10000;
 
-	public final Property<FluidStack> condensedFluidFromGas = property(new Property<>(PropertyType.Fluidstack, "condensedfluidfromgas", FluidStack.EMPTY));
+    public final Property<FluidStack> condensedFluidFromGas = property(new Property<>(PropertyTypes.FLUID_STACK, "condensedfluidfromgas", FluidStack.EMPTY));
 
-	public GenericGasTile(BlockEntityType<?> tileEntityTypeIn, BlockPos worldPos, BlockState blockState) {
-		super(tileEntityTypeIn, worldPos, blockState);
-	}
+    public GenericGasTile(BlockEntityType<?> tileEntityTypeIn, BlockPos worldPos, BlockState blockState) {
+        super(tileEntityTypeIn, worldPos, blockState);
+    }
 
-	public BiConsumer<GasTank, GenericTile> getCondensedHandler() {
+    public BiConsumer<GasTank, GenericTile> getCondensedHandler() {
 
-		return (tank, tile) -> {
+        return (tank, tile) -> {
 
-			GasStack tankGas = tank.getGas().copy();
+            GasStack tankGas = tank.getGas().copy();
 
-			tank.setGas(GasStack.EMPTY);
+            tank.setGas(GasStack.EMPTY);
 
-			if (tankGas.isEmpty()) {
-				return;
-			}
+            if (tankGas.isEmpty()) {
+                return;
+            }
 
-			Fluid condensedFluid = tankGas.getGas().getCondensedFluid();
+            Fluid condensedFluid = tankGas.getGas().getCondensedFluid();
 
-			if (condensedFluid.isSame(Fluids.EMPTY)) {
-				return;
-			}
+            if (condensedFluid.isSame(Fluids.EMPTY)) {
+                return;
+            }
 
-			tankGas.bringPressureTo(GasStack.VACUUM);
+            tankGas.bringPressureTo(GasStack.VACUUM);
 
-			FluidStack currentCondensate = condensedFluidFromGas.get();
+            FluidStack currentCondensate = condensedFluidFromGas.get();
 
-			if (currentCondensate.getFluid().isSame(condensedFluid)) {
+            if (currentCondensate.getFluid().isSame(condensedFluid)) {
 
-				int room = Math.max(0, MAX_CONDENSED_AMOUNT - currentCondensate.getAmount());
+                int room = Math.max(0, MAX_CONDENSED_AMOUNT - currentCondensate.getAmount());
 
-				int taken = Math.min(room, (int) tankGas.getAmount());
+                int taken = Math.min(room, (int) tankGas.getAmount());
 
-				currentCondensate.setAmount(currentCondensate.getAmount() + taken);
+                currentCondensate.setAmount(currentCondensate.getAmount() + taken);
 
-				condensedFluidFromGas.set(currentCondensate);
+                condensedFluidFromGas.set(currentCondensate);
 
-			} else {
+            } else {
 
-				FluidStack newFluid = new FluidStack(condensedFluid, Math.min((int) tankGas.getAmount(), MAX_CONDENSED_AMOUNT));
+                FluidStack newFluid = new FluidStack(condensedFluid, Math.min((int) tankGas.getAmount(), MAX_CONDENSED_AMOUNT));
 
-				condensedFluidFromGas.set(newFluid);
+                condensedFluidFromGas.set(newFluid);
 
-			}
+            }
 
-		};
+        };
 
-	}
+    }
 
 }

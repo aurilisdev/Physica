@@ -34,7 +34,7 @@ public abstract class ElectrodynamicsRecipeBuilder<T extends ElectrodynamicsReci
     public final List<ProbableGas> gasBiproducts = new ArrayList<>();
 
     public ElectrodynamicsRecipeBuilder(RecipeCategory category, String parent, String name, String group, double experience, int processTime, double usagePerTick) {
-        this.id = new ResourceLocation(parent, category.category() + "/" + name);
+        this.id = ResourceLocation.fromNamespaceAndPath(parent, category.category() + "/" + name);
         this.group = group;
         this.experience = experience;
         this.processTime = processTime;

@@ -20,6 +20,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.common.crafting.ICustomIngredient;
 
 public class ShapedCraftingRecipeBuilder implements RecipeBuilder {
 
@@ -58,13 +59,18 @@ public class ShapedCraftingRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
+    public ShapedCraftingRecipeBuilder addKey(Character key, ICustomIngredient ing) {
+        keys.put(key, new Ingredient(ing));
+        return this;
+    }
+
     public ShapedCraftingRecipeBuilder addKey(Character key, TagKey<Item> ing) {
         keys.put(key, Ingredient.of(ing));
         return this;
     }
 
     public ShapedCraftingRecipeBuilder addKey(Character key, String parent, String tag) {
-        keys.put(key, Ingredient.of(itemTag(new ResourceLocation(parent, tag))));
+        keys.put(key, Ingredient.of(itemTag(ResourceLocation.fromNamespaceAndPath(parent, tag))));
         return this;
     }
 
@@ -88,7 +94,7 @@ public class ShapedCraftingRecipeBuilder implements RecipeBuilder {
                 throw new UnsupportedOperationException("The key " + character + " is defined by never used!");
             }
         }
-        id = new ResourceLocation(parent, name);
+        id = ResourceLocation.fromNamespaceAndPath(parent, name);
         return this;
     }
 

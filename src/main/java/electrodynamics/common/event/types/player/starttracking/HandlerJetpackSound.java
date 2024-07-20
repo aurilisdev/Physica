@@ -20,7 +20,7 @@ public class HandlerJetpackSound extends AbstractPlayerStartTrackingHandler {
 			ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
 			if (!chest.isEmpty() && (ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_JETPACK.get()) || ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get()))) {
 				ServerPlayer server = (ServerPlayer) event.getEntity();
-				PacketDistributor.PLAYER.with(server).send(new PacketJetpackEquipedSound(player.getUUID()));
+				PacketDistributor.sendToPlayer(server, new PacketJetpackEquipedSound(player.getUUID()));
 			}
 		}
 	}

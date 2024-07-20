@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -67,11 +68,6 @@ public interface IMultiblockParentTile {
 
 		}
 
-		/*
-		 * 
-		 * Iterator<Subnode> it = getSubNodes().iterator(); while (it.hasNext()) { BlockPos inPos = it.next().pos(); BlockPos offset = pos.offset(inPos); BlockState inState = world.getBlockState(offset); Block inBlock = inState.getBlock(); if (update) { if (inState.getMaterial().isReplaceable()) { world.setBlockAndUpdate(offset, ElectrodynamicsBlocks.multi.defaultBlockState()); } TileMultiSubnode subnode = (TileMultiSubnode) world.getBlockEntity(offset); if (subnode != null) { subnode.nodePos.set(pos); } } else if (inBlock instanceof IMultiblockChildBlock) { TileMultiSubnode subnode = (TileMultiSubnode) world.getBlockEntity(offset); if (subnode != null && subnode.nodePos.get().equals(pos)) { world.setBlockAndUpdate(offset, Blocks.AIR.defaultBlockState()); } } }
-		 * 
-		 */
 	}
 
 	default void onNodePlaced(Level world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
@@ -84,8 +80,12 @@ public interface IMultiblockParentTile {
 
 	}
 
-	default InteractionResult onSubnodeUse(Player player, InteractionHand hand, BlockHitResult hit, TileMultiSubnode subnode) {
+	default InteractionResult onSubnodeUseWithoutItem(Player player, BlockHitResult hit, TileMultiSubnode subnode) {
 		return InteractionResult.FAIL;
+	}
+
+	default ItemInteractionResult onSubnodeUseWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit, TileMultiSubnode subnode) {
+		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 
 	default void onSubnodePlace(TileMultiSubnode subnode, BlockState oldSubnodeState, boolean isSubnodeMoving) {

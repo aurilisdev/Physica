@@ -4,7 +4,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -34,10 +34,10 @@ public class PropertyGasTank extends GasTank {
 
 		this.holder = holder;
 
-		gasProperty = holder.property(new Property<>(PropertyType.Gasstack, "propertygastankstack" + key, GasStack.EMPTY));
-		capacityProperty = holder.property(new Property<>(PropertyType.Double, "propertygastankcapacity" + key, capacity));
-		maxTemperatureProperty = holder.property(new Property<>(PropertyType.Double, "propertygastankmaxtemperature" + key, maxTemperature));
-		maxPressureProperty = holder.property(new Property<>(PropertyType.Integer, "propertygastankmaxpressure" + key, maxPressure));
+		gasProperty = holder.property(new Property<>(PropertyTypes.GAS_STACK, "propertygastankstack" + key, GasStack.EMPTY));
+		capacityProperty = holder.property(new Property<>(PropertyTypes.DOUBLE, "propertygastankcapacity" + key, capacity));
+		maxTemperatureProperty = holder.property(new Property<>(PropertyTypes.DOUBLE, "propertygastankmaxtemperature" + key, maxTemperature));
+		maxPressureProperty = holder.property(new Property<>(PropertyTypes.INTEGER, "propertygastankmaxpressure" + key, maxPressure));
 	}
 
 	public PropertyGasTank(GenericTile holder, String key, double capacity, double maxTemperature, int maxPressure, Predicate<GasStack> isGasValid) {
@@ -45,10 +45,10 @@ public class PropertyGasTank extends GasTank {
 
 		this.holder = holder;
 
-		gasProperty = holder.property(new Property<>(PropertyType.Gasstack, "propertygastankstack" + key, GasStack.EMPTY));
-		capacityProperty = holder.property(new Property<>(PropertyType.Double, "propertygastankcapacity" + key, capacity));
-		maxTemperatureProperty = holder.property(new Property<>(PropertyType.Double, "propertygastankmaxtemperature" + key, maxTemperature));
-		maxPressureProperty = holder.property(new Property<>(PropertyType.Integer, "propertygastankmaxpressure" + key, maxPressure));
+		gasProperty = holder.property(new Property<>(PropertyTypes.GAS_STACK, "propertygastankstack" + key, GasStack.EMPTY));
+		capacityProperty = holder.property(new Property<>(PropertyTypes.DOUBLE, "propertygastankcapacity" + key, capacity));
+		maxTemperatureProperty = holder.property(new Property<>(PropertyTypes.DOUBLE, "propertygastankmaxtemperature" + key, maxTemperature));
+		maxPressureProperty = holder.property(new Property<>(PropertyTypes.INTEGER, "propertygastankmaxpressure" + key, maxPressure));
 
 	}
 

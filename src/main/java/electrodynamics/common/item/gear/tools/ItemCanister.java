@@ -82,17 +82,17 @@ public class ItemCanister extends ItemElectrodynamics {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
         if (Capabilities.FluidHandler.ITEM == null) {
 
-            super.appendHoverText(stack, worldIn, tooltip, flagIn);
+            super.appendHoverText(stack, context, tooltip, flagIn);
 
             return;
         }
         IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
 
         if (handler == null) {
-            super.appendHoverText(stack, worldIn, tooltip, flagIn);
+            super.appendHoverText(stack, context, tooltip, flagIn);
 
             return;
         }
@@ -100,9 +100,9 @@ public class ItemCanister extends ItemElectrodynamics {
         RestrictedFluidHandlerItemStack restricted = (RestrictedFluidHandlerItemStack) handler;
 
         tooltip.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(restricted.getFluidInTank(0).getAmount()), ChatFormatter.formatFluidMilibuckets(MAX_FLUID_CAPACITY)).withStyle(ChatFormatting.GRAY));
-        tooltip.add(restricted.getFluid().getDisplayName().copy().withStyle(ChatFormatting.DARK_GRAY));
+        tooltip.add(restricted.getFluid().getFluidType().getDescription().copy().withStyle(ChatFormatting.DARK_GRAY));
 
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, context, tooltip, flagIn);
     }
 
     @Override

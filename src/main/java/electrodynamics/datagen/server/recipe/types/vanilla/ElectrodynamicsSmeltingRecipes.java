@@ -26,13 +26,13 @@ public class ElectrodynamicsSmeltingRecipes extends AbstractRecipeGenerator {
 		for (SubtypeDust dust : SubtypeDust.values()) {
 
 			if (dust.smeltedItem != null) {
-				ElectrodynamicsCookingRecipe.smeltingRecipe(new ResourceLocation(References.ID, SMELTING_LOC + dust.name() + "_ingot_from_dust"), References.ID, dust.smeltedItem.get(), 0, dust.smeltTime)
+				ElectrodynamicsCookingRecipe.smeltingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, SMELTING_LOC + dust.name() + "_ingot_from_dust"), References.ID, dust.smeltedItem.get(), 0, dust.smeltTime)
 						//
 						.input(dust.tag)
 						//
 						.save(output);
 
-				ElectrodynamicsCookingRecipe.blastingRecipe(new ResourceLocation(References.ID, BLASTING_LOC + dust.name() + "_ingot_from_dust"), References.ID, dust.smeltedItem.get(), 0, dust.smeltTime / 2)
+				ElectrodynamicsCookingRecipe.blastingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, BLASTING_LOC + dust.name() + "_ingot_from_dust"), References.ID, dust.smeltedItem.get(), 0, dust.smeltTime / 2)
 						//
 						.input(dust.tag)
 						//
@@ -43,13 +43,13 @@ public class ElectrodynamicsSmeltingRecipes extends AbstractRecipeGenerator {
 
 		for (SubtypeOre ore : SubtypeOre.values()) {
 			if (ore.smeltingItem != null) {
-				ElectrodynamicsCookingRecipe.smeltingRecipe(new ResourceLocation(References.ID, SMELTING_LOC + ore.name() + "_ingot_from_ore"), References.ID, ore.smeltingItem.get(), (float) ore.smeltingXp, ore.smeltingTime)
+				ElectrodynamicsCookingRecipe.smeltingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, SMELTING_LOC + ore.name() + "_ingot_from_ore"), References.ID, ore.smeltingItem.get(), (float) ore.smeltingXp, ore.smeltingTime)
 						//
 						.input(ore.itemTag)
 						//
 						.save(output);
 
-				ElectrodynamicsCookingRecipe.blastingRecipe(new ResourceLocation(References.ID, BLASTING_LOC + ore.name() + "_ingot_from_ore"), References.ID, ore.smeltingItem.get(), (float) ore.smeltingXp, ore.smeltingTime / 2)
+				ElectrodynamicsCookingRecipe.blastingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, BLASTING_LOC + ore.name() + "_ingot_from_ore"), References.ID, ore.smeltingItem.get(), (float) ore.smeltingXp, ore.smeltingTime / 2)
 						//
 						.input(ore.itemTag)
 						//
@@ -59,19 +59,19 @@ public class ElectrodynamicsSmeltingRecipes extends AbstractRecipeGenerator {
 
 		// Coal Coke
 
-		ElectrodynamicsCookingRecipe.smeltingRecipe(new ResourceLocation(References.ID, SMELTING_LOC + "coal_coke"), References.ID, ElectrodynamicsItems.ITEM_COAL_COKE.get(), 0.1F, 200)
+		ElectrodynamicsCookingRecipe.smeltingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, SMELTING_LOC + "coal_coke"), References.ID, ElectrodynamicsItems.ITEM_COAL_COKE.get(), 0.1F, 200)
 				//
 				.input(ItemTags.COALS)
 				//
 				.save(output);
 
-		ElectrodynamicsCookingRecipe.blastingRecipe(new ResourceLocation(References.ID, BLASTING_LOC + "coal_coke"), References.ID, ElectrodynamicsItems.ITEM_COAL_COKE.get(), 0.1F, 100)
+		ElectrodynamicsCookingRecipe.blastingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, BLASTING_LOC + "coal_coke"), References.ID, ElectrodynamicsItems.ITEM_COAL_COKE.get(), 0.1F, 100)
 				//
 				.input(ItemTags.COALS)
 				//
 				.save(output);
 
-		ElectrodynamicsCookingRecipe.blastingRecipe(new ResourceLocation(References.ID, BLASTING_LOC + "cooked_ceramic"), References.ID, CERAMICS[SubtypeCeramic.cooked.ordinal()], 0.1F, 300)
+		ElectrodynamicsCookingRecipe.blastingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, BLASTING_LOC + "cooked_ceramic"), References.ID, CERAMICS[SubtypeCeramic.cooked.ordinal()], 0.1F, 300)
 				//
 				.input(CERAMICS[SubtypeCeramic.wet.ordinal()])
 				//
@@ -79,20 +79,20 @@ public class ElectrodynamicsSmeltingRecipes extends AbstractRecipeGenerator {
 
 		// Clear Glass
 
-		ElectrodynamicsCookingRecipe.smeltingRecipe(new ResourceLocation(References.ID, SMELTING_LOC + "clear_glass"), References.ID, CUSTOM_GLASS[SubtypeGlass.clear.ordinal()], 0.1F, 200)
+		ElectrodynamicsCookingRecipe.smeltingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, SMELTING_LOC + "clear_glass"), References.ID, CUSTOM_GLASS[SubtypeGlass.clear.ordinal()], 0.1F, 200)
 				//
 				.input(ElectrodynamicsTags.Items.DUST_SILICA)
 				//
 				.save(output);
 
-		ElectrodynamicsCookingRecipe.blastingRecipe(new ResourceLocation(References.ID, BLASTING_LOC + "clear_glass"), References.ID, CUSTOM_GLASS[SubtypeGlass.clear.ordinal()], 0.1F, 100)
+		ElectrodynamicsCookingRecipe.blastingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, BLASTING_LOC + "clear_glass"), References.ID, CUSTOM_GLASS[SubtypeGlass.clear.ordinal()], 0.1F, 100)
 				//
 				.input(ElectrodynamicsTags.Items.DUST_SILICA)
 				//
 				.save(output);
 
 		// Steel Ingot
-		ElectrodynamicsCookingRecipe.blastingRecipe(new ResourceLocation(References.ID, BLASTING_LOC + "steel_ingot_from_iron_ingot"), References.ID, INGOTS[SubtypeIngot.steel.ordinal()], 0.1F, 100)
+		ElectrodynamicsCookingRecipe.blastingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, BLASTING_LOC + "steel_ingot_from_iron_ingot"), References.ID, INGOTS[SubtypeIngot.steel.ordinal()], 0.1F, 100)
 				//
 				.input(Tags.Items.INGOTS_IRON)
 				//
@@ -100,13 +100,13 @@ public class ElectrodynamicsSmeltingRecipes extends AbstractRecipeGenerator {
 
 		// Tin Raw Ore
 
-		ElectrodynamicsCookingRecipe.smeltingRecipe(new ResourceLocation(References.ID, SMELTING_LOC + "tin_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.tin.ordinal()], 0.1F, 200)
+		ElectrodynamicsCookingRecipe.smeltingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, SMELTING_LOC + "tin_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.tin.ordinal()], 0.1F, 200)
 				//
 				.input(ElectrodynamicsTags.Items.RAW_ORE_TIN)
 				//
 				.save(output);
 
-		ElectrodynamicsCookingRecipe.blastingRecipe(new ResourceLocation(References.ID, BLASTING_LOC + "tin_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.tin.ordinal()], 0.1F, 100)
+		ElectrodynamicsCookingRecipe.blastingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, BLASTING_LOC + "tin_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.tin.ordinal()], 0.1F, 100)
 				//
 				.input(ElectrodynamicsTags.Items.RAW_ORE_TIN)
 				//
@@ -114,13 +114,13 @@ public class ElectrodynamicsSmeltingRecipes extends AbstractRecipeGenerator {
 
 		// Silver Raw Ore
 
-		ElectrodynamicsCookingRecipe.smeltingRecipe(new ResourceLocation(References.ID, SMELTING_LOC + "silver_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.silver.ordinal()], 0.7F, 200)
+		ElectrodynamicsCookingRecipe.smeltingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, SMELTING_LOC + "silver_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.silver.ordinal()], 0.7F, 200)
 				//
 				.input(ElectrodynamicsTags.Items.RAW_ORE_SILVER)
 				//
 				.save(output);
 
-		ElectrodynamicsCookingRecipe.blastingRecipe(new ResourceLocation(References.ID, BLASTING_LOC + "silver_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.silver.ordinal()], 0.7F, 100)
+		ElectrodynamicsCookingRecipe.blastingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, BLASTING_LOC + "silver_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.silver.ordinal()], 0.7F, 100)
 				//
 				.input(ElectrodynamicsTags.Items.RAW_ORE_SILVER)
 				//
@@ -128,13 +128,13 @@ public class ElectrodynamicsSmeltingRecipes extends AbstractRecipeGenerator {
 
 		// Lead Raw Ore
 
-		ElectrodynamicsCookingRecipe.smeltingRecipe(new ResourceLocation(References.ID, SMELTING_LOC + "lead_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.lead.ordinal()], 0.7F, 200)
+		ElectrodynamicsCookingRecipe.smeltingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, SMELTING_LOC + "lead_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.lead.ordinal()], 0.7F, 200)
 				//
 				.input(ElectrodynamicsTags.Items.RAW_ORE_LEAD)
 				//
 				.save(output);
 
-		ElectrodynamicsCookingRecipe.blastingRecipe(new ResourceLocation(References.ID, BLASTING_LOC + "lead_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.lead.ordinal()], 0.7F, 100)
+		ElectrodynamicsCookingRecipe.blastingRecipe(ResourceLocation.fromNamespaceAndPath(References.ID, BLASTING_LOC + "lead_ingot_from_raw_ore"), References.ID, INGOTS[SubtypeIngot.lead.ordinal()], 0.7F, 100)
 				//
 				.input(ElectrodynamicsTags.Items.RAW_ORE_LEAD)
 				//

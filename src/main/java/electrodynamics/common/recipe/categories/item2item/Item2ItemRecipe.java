@@ -12,11 +12,8 @@ import electrodynamics.common.recipe.recipeutils.ProbableItem;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 
 public abstract class Item2ItemRecipe extends ElectrodynamicsRecipe {
 
@@ -40,26 +37,17 @@ public abstract class Item2ItemRecipe extends ElectrodynamicsRecipe {
     }
 
     @Override
-    public ItemStack assemble(RecipeWrapper pContainer, RegistryAccess pRegistryAccess) {
-        return getItemOutputNoAccess();
+    public ItemStack assemble(ElectrodynamicsRecipe p_345149_, HolderLookup.Provider p_346030_) {
+        return getItemRecipeOutput();
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
-        return getItemOutputNoAccess();
+    public ItemStack getResultItem(HolderLookup.Provider pRegistries) {
+        return getItemRecipeOutput();
     }
 
-    public ItemStack getItemOutputNoAccess() {
+    public ItemStack getItemRecipeOutput() {
         return outputItem;
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> list = NonNullList.create();
-        for (CountableIngredient ing : inputItems) {
-            list.add(ing);
-        }
-        return list;
     }
 
     public List<CountableIngredient> getCountedIngredients() {

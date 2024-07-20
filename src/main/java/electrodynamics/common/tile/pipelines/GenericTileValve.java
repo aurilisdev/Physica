@@ -1,6 +1,6 @@
 package electrodynamics.common.tile.pipelines;
 
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.core.HolderLookup;
 
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
@@ -59,17 +59,15 @@ public class GenericTileValve extends GenericTile {
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound) {
-		super.saveAdditional(compound);
+	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.saveAdditional(compound, registries);
 
 		compound.putBoolean("valveisclosed", isClosed);
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag compound) {
-		super.load(compound);
-
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
 		isClosed = compound.getBoolean("valveisclosed");
 	}
-
 }

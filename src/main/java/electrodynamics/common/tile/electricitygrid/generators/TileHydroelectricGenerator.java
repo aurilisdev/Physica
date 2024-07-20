@@ -5,7 +5,7 @@ import electrodynamics.common.inventory.container.tile.ContainerHydroelectricGen
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -30,10 +30,10 @@ import net.minecraft.world.level.material.Fluids;
 
 public class TileHydroelectricGenerator extends GenericGeneratorTile implements ITickableSound {
 	protected CachedTileOutput output;
-	public Property<Boolean> isGenerating = property(new Property<>(PropertyType.Boolean, "isGenerating", false));
-	public Property<Boolean> directionFlag = property(new Property<>(PropertyType.Boolean, "directionFlag", false));
-	public Property<Double> multiplier = property(new Property<>(PropertyType.Double, "multiplier", 1.0));
-	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	public Property<Boolean> isGenerating = property(new Property<>(PropertyTypes.BOOLEAN, "isGenerating", false));
+	public Property<Boolean> directionFlag = property(new Property<>(PropertyTypes.BOOLEAN, "directionFlag", false));
+	public Property<Double> multiplier = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 1.0));
+	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 	public double savedTickRotation;
 	public double rotationSpeed;
 

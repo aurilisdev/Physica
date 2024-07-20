@@ -8,9 +8,6 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 public class FluidHydrogenFluoride extends FluidNonPlaceable {
 
-	// Tags typically have underscores inbetween names!
-	public static final String FORGE_TAG = "hydrofluoric_acid";
-
 	private final FluidType type;
 
 	public FluidHydrogenFluoride() {

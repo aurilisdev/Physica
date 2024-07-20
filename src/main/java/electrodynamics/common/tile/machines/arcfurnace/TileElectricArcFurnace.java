@@ -21,19 +21,19 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
 import electrodynamics.registers.ElectrodynamicsBlockTypes;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TileElectricArcFurnace extends GenericTile implements ITickableSound {
@@ -83,8 +83,7 @@ public class TileElectricArcFurnace extends GenericTile implements ITickableSoun
 		inv.setItem(inv.getInputSlotsForProcessor(component.getProcessorNumber()).get(0), input.copy());
 		for (ItemStack stack : inv.getUpgradeContents()) {
 			if (!stack.isEmpty() && ((ItemUpgrade) stack.getItem()).subtype == SubtypeItemUpgrade.experience) {
-				CompoundTag tag = stack.getOrCreateTag();
-				tag.putDouble(NBTUtils.XP, tag.getDouble(NBTUtils.XP) + cachedRecipe[component.getProcessorNumber()].getExperience());
+				stack.set(ElectrodynamicsDataComponentTypes.XP, stack.getOrDefault(ElectrodynamicsDataComponentTypes.XP, 0.0) + cachedRecipe[component.getProcessorNumber()].getExperience());
 				break;
 			}
 		}
@@ -126,7 +125,7 @@ public class TileElectricArcFurnace extends GenericTile implements ITickableSoun
 			component.operatingTicks.set(0.0);
 		}
 
-		if (!cachedRecipe[component.getProcessorNumber()].matches(new SimpleContainer(input), level)) {
+		if (!cachedRecipe[component.getProcessorNumber()].matches(new SingleRecipeInput(input), level)) {
 			cachedRecipe[component.getProcessorNumber()] = null;
 			component.setShouldKeepProgress(false);
 			return false;
@@ -174,7 +173,7 @@ public class TileElectricArcFurnace extends GenericTile implements ITickableSoun
 
 	private BlastingRecipe getMatchedRecipe(ItemStack stack) {
 		for (RecipeHolder<BlastingRecipe> recipe : cachedRecipes) {
-			if (recipe.value().matches(new SimpleContainer(stack), level)) {
+			if (recipe.value().matches(new SingleRecipeInput(stack), level)) {
 				return recipe.value();
 			}
 		}

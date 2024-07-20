@@ -29,10 +29,10 @@ public class ItemGuidebook extends ItemElectrodynamics {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltips, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltips, TooltipFlag flag) {
 		tooltips.add(ElectroTextUtils.tooltip("info.guidebookuse").withStyle(ChatFormatting.LIGHT_PURPLE));
 		tooltips.add(ElectroTextUtils.tooltip("guidebookname").withStyle(ChatFormatting.GRAY));
-		super.appendHoverText(stack, world, tooltips, flag);
+		super.appendHoverText(stack, context, tooltips, flag);
 	}
 
 	@Override

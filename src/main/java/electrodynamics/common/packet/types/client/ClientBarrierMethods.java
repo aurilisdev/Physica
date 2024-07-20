@@ -1,4 +1,4 @@
-package electrodynamics.common.packet;
+package electrodynamics.common.packet.types.client;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,7 +31,7 @@ import net.minecraft.world.level.material.Fluid;
  * 
  * Place methods that need to use those here
  */
-public class BarrierMethods {
+public class ClientBarrierMethods {
 
     public static void handleAddClientRenderInfo(UUID playerId, BlockPos pos) {
         Minecraft minecraft = Minecraft.getInstance();
@@ -103,6 +103,11 @@ public class BarrierMethods {
     }
 
     public static void handlerSetGuidebookInitFlag() {
+        Minecraft minecraft = Minecraft.getInstance();
+        ClientLevel world = minecraft.level;
+        if (world == null || minecraft.player == null) {
+            return;
+        }
         ScreenGuidebook.setInitNotHappened();
     }
 

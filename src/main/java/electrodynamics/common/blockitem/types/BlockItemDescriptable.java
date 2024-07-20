@@ -10,6 +10,7 @@ import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.common.blockitem.BlockItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.CreativeModeTab;
@@ -20,55 +21,56 @@ import net.minecraft.world.level.block.Block;
 
 public class BlockItemDescriptable extends BlockItemElectrodynamics {
 
-	private static HashMap<Supplier<Block>, HashSet<MutableComponent>> descriptionMappings = new HashMap<>();
-	private static HashMap<Block, HashSet<MutableComponent>> processedDescriptionMappings = new HashMap<>();
+    private static HashMap<Supplier<Block>, HashSet<MutableComponent>> descriptionMappings = new HashMap<>();
+    private static HashMap<Block, HashSet<MutableComponent>> processedDescriptionMappings = new HashMap<>();
 
-	private static boolean initialized = false;
+    private static boolean initialized = false;
 
-	public BlockItemDescriptable(Supplier<Block> block, Properties properties, Supplier<CreativeModeTab> creativeTab) {
-		super(block.get(), properties, creativeTab);
-	}
+    public BlockItemDescriptable(Supplier<Block> block, Properties properties, Supplier<CreativeModeTab> creativeTab) {
+        super(block.get(), properties, creativeTab);
+    }
 
-	@Override
-	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		super.appendHoverText(stack, worldIn, tooltip, flagIn);
-		if (!initialized) {
-			BlockItemDescriptable.initialized = true;
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+        super.appendHoverText(stack, context, tooltip, flagIn);
+        if (!initialized) {
+            BlockItemDescriptable.initialized = true;
 
-			descriptionMappings.forEach((supplier, set) -> {
+            descriptionMappings.forEach((supplier, set) -> {
 
-				processedDescriptionMappings.put(supplier.get(), set);
+                processedDescriptionMappings.put(supplier.get(), set);
 
-			});
+            });
 
-		}
-		HashSet<MutableComponent> gotten = processedDescriptionMappings.get(getBlock());
-		if (gotten != null) {
-			for (MutableComponent s : gotten) {
-				tooltip.add(s.withStyle(ChatFormatting.GRAY));
-			}
-		}
-		if (stack.hasTag()) {
-			double joules = stack.getTag().getDouble("joules");
-			if (joules > 0) {
-				tooltip.add(ElectroTextUtils.gui("machine.stored", ChatFormatter.getChatDisplayShort(joules, DisplayUnit.JOULES)));
-			}
-		}
-	}
+        }
+        HashSet<MutableComponent> gotten = processedDescriptionMappings.get(getBlock());
+        if (gotten != null) {
+            for (MutableComponent s : gotten) {
+                tooltip.add(s.withStyle(ChatFormatting.GRAY));
+            }
+        }
 
-	@Override
-	public int getMaxStackSize(ItemStack stack) {
-		return stack.hasTag() && stack.getTag().getDouble("joules") > 0 ? 1 : super.getMaxStackSize(stack);
-	}
+        if (stack.has(DataComponents.BLOCK_ENTITY_DATA)) {
+            double joules = stack.get(DataComponents.BLOCK_ENTITY_DATA).copyTag().getDouble("joules");
+            if (joules > 0) {
+                tooltip.add(ElectroTextUtils.gui("machine.stored", ChatFormatter.getChatDisplayShort(joules, DisplayUnit.JOULES)));
+            }
+        }
+    }
 
-	public static void addDescription(Supplier<Block> block, MutableComponent description) {
+    @Override
+    public int getMaxStackSize(ItemStack stack) {
+        return stack.get(DataComponents.BLOCK_ENTITY_DATA).copyTag().getDouble("joules") > 0 ? 1 : super.getMaxStackSize(stack);
+    }
 
-		HashSet<MutableComponent> set = descriptionMappings.getOrDefault(block, new HashSet<>());
+    public static void addDescription(Supplier<Block> block, MutableComponent description) {
 
-		set.add(description);
+        HashSet<MutableComponent> set = descriptionMappings.getOrDefault(block, new HashSet<>());
 
-		descriptionMappings.put(block, set);
+        set.add(description);
 
-	}
+        descriptionMappings.put(block, set);
+
+    }
 
 }

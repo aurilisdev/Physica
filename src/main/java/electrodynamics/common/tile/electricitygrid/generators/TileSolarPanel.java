@@ -5,7 +5,7 @@ import electrodynamics.common.inventory.container.tile.ContainerSolarPanel;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -27,9 +27,9 @@ public class TileSolarPanel extends GenericGeneratorTile {
 
 	protected CachedTileOutput output;
 
-	protected Property<Boolean> generating = property(new Property<>(PropertyType.Boolean, "generating", false));
-	protected Property<Double> multiplier = property(new Property<>(PropertyType.Double, "multiplier", 1.0));
-	protected Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	protected Property<Boolean> generating = property(new Property<>(PropertyTypes.BOOLEAN, "generating", false));
+	protected Property<Double> multiplier = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 1.0));
+	protected Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 
 	@Override
 	public double getMultiplier() {

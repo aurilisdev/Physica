@@ -7,9 +7,6 @@ import electrodynamics.registers.ElectrodynamicsItems;
 import net.neoforged.neoforge.fluids.FluidType;
 
 public class FluidClay extends FluidNonPlaceable {
-
-	public static final String FORGE_TAG = "clay";
-
 	private final FluidType type;
 
 	public FluidClay() {

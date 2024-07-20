@@ -42,6 +42,6 @@ public class ElectrodynamicsSounds {
 	public static final DeferredHolder<SoundEvent, SoundEvent> SOUND_TRANSFORMERHUM = sound("transformerhum");
 
 	private static DeferredHolder<SoundEvent, SoundEvent> sound(String name) {
-		return SOUNDS.register(name, () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(References.ID + ":" + name), 16.0F));
+		return SOUNDS.register(name, () -> SoundEvent.createFixedRangeEvent(ResourceLocation.parse(References.ID + ":" + name), 16.0F));
 	}
 }

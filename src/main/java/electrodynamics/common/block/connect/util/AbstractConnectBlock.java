@@ -2,21 +2,15 @@ package electrodynamics.common.block.connect.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.block.GenericEntityBlockWaterloggable;
 import electrodynamics.prefab.tile.types.GenericConnectTile;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -27,9 +21,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -39,29 +33,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggable {
 
-	public static final Map<Direction, EnumProperty<EnumConnectType>> FACING_TO_PROPERTY_MAP = Util.make(Maps.newEnumMap(Direction.class), map -> {
-		map.put(Direction.NORTH, EnumConnectType.NORTH);
-		map.put(Direction.EAST, EnumConnectType.EAST);
-		map.put(Direction.SOUTH, EnumConnectType.SOUTH);
-		map.put(Direction.WEST, EnumConnectType.WEST);
-		map.put(Direction.UP, EnumConnectType.UP);
-		map.put(Direction.DOWN, EnumConnectType.DOWN);
-	});
-
-	public static final Map<Direction, EnumProperty<EnumConnectType>> DIRECTION_TO_CONNECTTYPE_MAP = Util.make(Maps.newEnumMap(Direction.class), map -> {
-		map.put(Direction.UP, EnumConnectType.UP);
-		map.put(Direction.DOWN, EnumConnectType.DOWN);
-		map.put(Direction.NORTH, EnumConnectType.NORTH);
-		map.put(Direction.EAST, EnumConnectType.EAST);
-		map.put(Direction.SOUTH, EnumConnectType.SOUTH);
-		map.put(Direction.WEST, EnumConnectType.WEST);
-	});
-
 	protected final VoxelShape[] boundingBoxes = new VoxelShape[7];
 
-	protected HashMap<HashSet<Direction>, VoxelShape> shapestates = new HashMap<>();
-	protected boolean locked = false;
-
+	protected HashMap<EnumConnectType[], VoxelShape> shapestates = new HashMap<>();
 	public AbstractConnectBlock(Properties properties, double radius) {
 		super(properties);
 		generateBoundingBoxes(radius);
@@ -96,36 +70,44 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 		if (state.getValue(ElectrodynamicsBlockStates.HAS_SCAFFOLDING) && worldIn.getBlockEntity(pos) instanceof GenericConnectTile connect) {
 
 			if (connect.isCamoAir()) {
-				camoShape = connect.getScaffoldBlock().getBlock().getShape(connect.getScaffoldBlock(), worldIn, pos, context);
+				camoShape = connect.getScaffoldBlock().getShape(worldIn, pos, context);
 			} else {
-				camoShape = connect.getCamoBlock().getBlock().getShape(connect.getCamoBlock(), worldIn, pos, context);
+				camoShape = connect.getCamoBlock().getShape(worldIn, pos, context);
 			}
 
 		}
 
 		VoxelShape shape = boundingBoxes[6];
-		HashSet<Direction> checked = new HashSet<>();
+		EnumConnectType[] checked = new EnumConnectType[6];
 
-		for (Direction dir : Direction.values()) {
+		BlockEntity entity = worldIn.getBlockEntity(pos);
 
-			if (!EnumConnectType.NONE.equals(state.getValue(DIRECTION_TO_CONNECTTYPE_MAP.get(dir)))) {
-				checked.add(dir);
+		if(!(entity instanceof GenericConnectTile)) {
+			return Shapes.empty();
+		}
+
+		EnumConnectType[] connections = ((GenericConnectTile) entity).readConnections();
+
+		for (int i = 0; i < 6; i++) {
+			EnumConnectType connection = connections[i];
+
+			if (connection != EnumConnectType.NONE) {
+				checked[i] = connection;
 			}
 
 		}
-		locked = true;
 		if (shapestates.containsKey(checked)) {
-			locked = false;
 			return Shapes.join(shapestates.get(checked), camoShape, BooleanOp.OR);
 		}
-		locked = false;
-		for (Direction dir : checked) {
-			if (dir != null) {
-				shape = Shapes.join(shape, boundingBoxes[dir.ordinal()], BooleanOp.OR);
+		for (int i = 0; i < 6; i++) {
+
+			EnumConnectType connection = checked[i];
+
+			if(connection == null) {
+				continue;
 			}
-		}
-		while (locked) {
-			System.out.println("Bounding box collided with another block's bounding box!");
+
+			shape = Shapes.join(shape, boundingBoxes[i], BooleanOp.OR);
 		}
 		shapestates.put(checked, shape);
 		if (shape == null) {
@@ -137,7 +119,6 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 	@Override
 	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		super.createBlockStateDefinition(builder);
-		builder.add(EnumConnectType.UP, EnumConnectType.DOWN, EnumConnectType.NORTH, EnumConnectType.EAST, EnumConnectType.SOUTH, EnumConnectType.WEST);
 		builder.add(ElectrodynamicsBlockStates.HAS_SCAFFOLDING);
 	}
 
@@ -175,15 +156,14 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		ItemStack stack = player.getItemInHand(hand);
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (stack.isEmpty()) {
-			return InteractionResult.FAIL;
+			return ItemInteractionResult.FAIL;
 		}
 
 		if (stack.getItem() instanceof BlockItem blockitem && level.getBlockEntity(pos) instanceof GenericConnectTile connect) {
 
-			BlockPlaceContext newCtx = new BlockPlaceContext(player, hand, stack, hit);
+			BlockPlaceContext newCtx = new BlockPlaceContext(player, hand, stack, hitResult);
 
 			if (blockitem.getBlock() instanceof BlockScaffold scaffold) {
 				if (!state.getValue(ElectrodynamicsBlockStates.HAS_SCAFFOLDING)) {
@@ -197,7 +177,7 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 						connect.setScaffoldBlock(scaffold.getStateForPlacement(newCtx));
 						level.playSound(null, pos, blockitem.getBlock().defaultBlockState().getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 					}
-					return InteractionResult.CONSUME;
+					return ItemInteractionResult.CONSUME;
 				}
 
 			} else if (!(blockitem.getBlock() instanceof AbstractConnectBlock) && state.getValue(ElectrodynamicsBlockStates.HAS_SCAFFOLDING)) {
@@ -211,7 +191,7 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 						level.playSound(null, pos, blockitem.getBlock().defaultBlockState().getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 						level.getChunkSource().getLightEngine().checkBlock(pos);
 					}
-					return InteractionResult.CONSUME;
+					return ItemInteractionResult.CONSUME;
 				}
 				if (!connect.getCamoBlock().is(blockitem.getBlock())) {
 					if (!level.isClientSide) {
@@ -225,14 +205,13 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 						connect.setCamoBlock(blockitem.getBlock().getStateForPlacement(newCtx));
 						level.playSound(null, pos, blockitem.getBlock().defaultBlockState().getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 					}
-					return InteractionResult.CONSUME;
+					return ItemInteractionResult.CONSUME;
 
 				}
 			}
 
 		}
-
-		return InteractionResult.FAIL;
+		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}
 
 	@Override
@@ -255,9 +234,9 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 
 		if (level.getBlockEntity(pos) instanceof GenericConnectTile connect) {
 			if (connect.isCamoAir()) {
-				return connect.getScaffoldBlock().getBlock().propagatesSkylightDown(connect.getScaffoldBlock(), level, pos);
+				return connect.getScaffoldBlock().propagatesSkylightDown(level, pos);
 			}
-			return connect.getCamoBlock().getBlock().propagatesSkylightDown(connect.getCamoBlock(), level, pos);
+			return connect.getCamoBlock().propagatesSkylightDown(level, pos);
 		}
 
 		return true;
@@ -286,9 +265,9 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 		}
 		if (level.getBlockEntity(pos) instanceof GenericConnectTile connect) {
 			if (connect.isCamoAir()) {
-				return connect.getScaffoldBlock().getBlock().getVisualShape(connect.getScaffoldBlock(), level, pos, context);
+				return connect.getScaffoldBlock().getVisualShape(level, pos, context);
 			}
-			return connect.getCamoBlock().getBlock().getVisualShape(connect.getCamoBlock(), level, pos, context);
+			return connect.getCamoBlock().getVisualShape(level, pos, context);
 		}
 		return super.getVisualShape(state, level, pos, context);
 	}

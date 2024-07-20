@@ -3,12 +3,13 @@ package electrodynamics.common.tile.machines.quarry;
 import java.util.ArrayList;
 import java.util.List;
 
+import electrodynamics.prefab.properties.PropertyTypes;
+import net.minecraft.core.HolderLookup;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerSeismicRelay;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -32,7 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TileSeismicRelay extends GenericTile {
 
-	public Property<List<BlockPos>> markerLocs = property(new Property<>(PropertyType.BlockPosList, "markerlocs", new ArrayList<>()));
+	public Property<List<BlockPos>> markerLocs = property(new Property<>(PropertyTypes.BLOCK_POS_LIST, "markerlocs", new ArrayList<>()));
 
 	public boolean cornerOnRight = false;
 
@@ -127,14 +128,14 @@ public class TileSeismicRelay extends GenericTile {
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound) {
-		super.saveAdditional(compound);
+	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.saveAdditional(compound, registries);
 		compound.putBoolean("onRight", cornerOnRight);
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag compound) {
-		super.load(compound);
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
 		cornerOnRight = compound.getBoolean("onRight");
 	}
 

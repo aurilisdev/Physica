@@ -36,7 +36,7 @@ public class FluidItem2GasRecipeCategory<T extends FluidItem2GasRecipe> extends 
         List<List<ItemStack>> ingredients = new ArrayList<>();
 
         for (CountableIngredient ing : recipe.getCountedIngredients()) {
-            ingredients.add(Arrays.asList(ing.getItems()));
+            ingredients.add(Arrays.asList(ing.getItemsArray()));
         }
 
         for (FluidIngredient ing : recipe.getFluidIngredients()) {

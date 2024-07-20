@@ -3,8 +3,8 @@ package electrodynamics.api.gas;
 import java.util.function.Predicate;
 
 import electrodynamics.api.capability.types.gas.IGasHandlerItem;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -43,21 +43,13 @@ public class GasHandlerItemStack implements IGasHandlerItem {
 
     public void setGas(GasStack gas) {
 
-        CompoundTag tag = container.getOrCreateTag();
-
-        tag.put(GAS_NBT_KEY, gas.writeToNbt());
+        container.set(ElectrodynamicsDataComponentTypes.GAS_STACK, gas);
     }
 
     @Override
     public GasStack getGasInTank(int tank) {
 
-        CompoundTag tag = container.getOrCreateTag();
-
-        if (!tag.contains(GAS_NBT_KEY)) {
-            return GasStack.EMPTY;
-        }
-
-        return GasStack.readFromNbt(tag.getCompound(GAS_NBT_KEY));
+        return container.get(ElectrodynamicsDataComponentTypes.GAS_STACK);
     }
 
     @Override
@@ -282,7 +274,7 @@ public class GasHandlerItemStack implements IGasHandlerItem {
     }
 
     public void setContainerToEmpty() {
-        container.getOrCreateTag().remove(GAS_NBT_KEY);
+        container.remove(ElectrodynamicsDataComponentTypes.GAS_STACK);
     }
 
     /**

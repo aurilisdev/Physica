@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import electrodynamics.prefab.utilities.ItemUtils;
 import electrodynamics.prefab.utilities.NBTUtils;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 
@@ -20,7 +22,7 @@ public class HandlerJetpackKnockbackImpulse extends AbstractLivingKnockbackHandl
 	@Override
 	public void handle(LivingKnockBackEvent event) {
 
-		Entity entity = event.getEntity();
+		LivingEntity entity = event.getEntity();
 		ArrayList<ItemStack> armor = new ArrayList<>();
 		entity.getArmorSlots().forEach(armor::add);
 		if (armor.size() < 3) {
@@ -28,7 +30,7 @@ public class HandlerJetpackKnockbackImpulse extends AbstractLivingKnockbackHandl
 		}
 		ItemStack chestplate = armor.get(3);
 
-		if (chestplate.isEmpty() || !ItemUtils.testItems(chestplate.getItem(), ElectrodynamicsItems.ITEM_JETPACK.get(), ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get()) || !chestplate.hasTag() || !chestplate.getTag().getBoolean(NBTUtils.USED)) {
+		if (chestplate.isEmpty() || !ItemUtils.testItems(chestplate.getItem(), ElectrodynamicsItems.ITEM_JETPACK.get(), ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get()) || chestplate.getOrDefault(ElectrodynamicsDataComponentTypes.USED, false)) {
 			return;
 		}
 

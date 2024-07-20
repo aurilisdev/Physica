@@ -6,16 +6,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import electrodynamics.api.References;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod.EventBusSubscriber;
-import net.neoforged.fml.common.Mod.EventBusSubscriber.Bus;
-import net.neoforged.neoforge.event.TickEvent.ServerTickEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
-@EventBusSubscriber(modid = References.ID, bus = Bus.FORGE)
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.GAME)
 public class Scheduler {
 	private static ConcurrentHashMap<Runnable, Integer> scheduled = new ConcurrentHashMap<>();
 
 	@SubscribeEvent
-	public static void onTick(ServerTickEvent event) {
+	public static void onTick(ServerTickEvent.Post event) {
 		if (!scheduled.isEmpty()) {
 			Iterator<Entry<Runnable, Integer>> it = scheduled.entrySet().iterator();
 			while (it.hasNext()) {

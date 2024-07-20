@@ -1,5 +1,9 @@
 package electrodynamics.prefab.utilities.object;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import org.joml.Vector3f;
 
 import net.minecraft.core.BlockPos;
@@ -15,222 +19,243 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public final class Location {
-	protected double x;
-	protected double y;
-	protected double z;
 
-	public Location() {
-	}
+    public static final Codec<Location> CODEC = RecordCodecBuilder.create(instance ->
+                    //
+                    instance.group(
+                            //
+                            Codec.DOUBLE.fieldOf("x").forGetter(Location::x),
+                            //
+                            Codec.DOUBLE.fieldOf("y").forGetter(Location::y),
+                            //
+                            Codec.DOUBLE.fieldOf("z").forGetter(Location::z)
+//
+                    ).apply(instance, Location::new)
+//
+    );
 
-	public Location(double x, double y, double z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
-	}
+    public static final StreamCodec<FriendlyByteBuf, Location> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.DOUBLE, Location::x,
+            ByteBufCodecs.DOUBLE, Location::y,
+            ByteBufCodecs.DOUBLE, Location::z,
+            Location::new
 
-	public double x() {
-		return x;
-	}
+    );
 
-	public double y() {
-		return y;
-	}
+    protected double x;
+    protected double y;
+    protected double z;
 
-	public double z() {
-		return z;
-	}
+    public Location() {
+    }
 
-	public int intX() {
-		return (int) Math.floor(x);
-	}
+    public Location(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 
-	public int intY() {
-		return (int) Math.floor(y);
-	}
+    public double x() {
+        return x;
+    }
 
-	public int intZ() {
-		return (int) Math.floor(z);
-	}
+    public double y() {
+        return y;
+    }
 
-	public Location(BlockPos pos) {
-		x = pos.getX() + 0.5;
-		y = pos.getY() + 0.5;
-		z = pos.getZ() + 0.5;
-	}
+    public double z() {
+        return z;
+    }
 
-	public Location(Vector3f vec) {
-		x = vec.x();
-		y = vec.y();
-		z = vec.z();
-	}
+    public int intX() {
+        return (int) Math.floor(x);
+    }
 
-	public Location(Vec3 vec) {
-		x = vec.x;
-		y = vec.y;
-		z = vec.z;
-	}
+    public int intY() {
+        return (int) Math.floor(y);
+    }
 
-	public Location(Location loc) {
-		x = loc.x;
-		y = loc.y;
-		z = loc.z;
-	}
+    public int intZ() {
+        return (int) Math.floor(z);
+    }
 
-	public Location(Entity entity) {
-		x = entity.getX();
-		y = entity.getY();
-		z = entity.getZ();
-	}
+    public Location(BlockPos pos) {
+        x = pos.getX() + 0.5;
+        y = pos.getY() + 0.5;
+        z = pos.getZ() + 0.5;
+    }
 
-	public Location mul(double val) {
-		x *= val;
-		y *= val;
-		z *= val;
-		return this;
-	}
+    public Location(Vector3f vec) {
+        x = vec.x();
+        y = vec.y();
+        z = vec.z();
+    }
 
-	public Location mul(double xval, double yval, double zval) {
-		x *= xval;
-		y *= yval;
-		z *= zval;
-		return this;
-	}
+    public Location(Vec3 vec) {
+        x = vec.x;
+        y = vec.y;
+        z = vec.z;
+    }
 
-	public Location mul(Location loc) {
-		x *= loc.x;
-		y *= loc.y;
-		z *= loc.z;
-		return this;
-	}
+    public Location(Location loc) {
+        x = loc.x;
+        y = loc.y;
+        z = loc.z;
+    }
 
-	public Location set(double x, double y, double z) {
-		this.x = x;
-		this.y = y;
-		this.z = z;
-		return this;
-	}
+    public Location(Entity entity) {
+        x = entity.getX();
+        y = entity.getY();
+        z = entity.getZ();
+    }
 
-	public Location set(Location loc) {
-		x = loc.x;
-		y = loc.y;
-		z = loc.z;
-		return this;
-	}
+    public Location mul(double val) {
+        x *= val;
+        y *= val;
+        z *= val;
+        return this;
+    }
 
-	public Location add(double x, double y, double z) {
-		this.x += x;
-		this.y += y;
-		this.z += z;
-		return this;
-	}
+    public Location mul(double xval, double yval, double zval) {
+        x *= xval;
+        y *= yval;
+        z *= zval;
+        return this;
+    }
 
-	public Location add(Location loc) {
-		x += loc.x;
-		y += loc.y;
-		z += loc.z;
-		return this;
-	}
+    public Location mul(Location loc) {
+        x *= loc.x;
+        y *= loc.y;
+        z *= loc.z;
+        return this;
+    }
 
-	public Location normalize() {
-		double dis = distance(new Location());
-		x /= dis;
-		y /= dis;
-		z /= dis;
-		return this;
-	}
+    public Location set(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        return this;
+    }
 
-	public double distanceSq(Location loc) {
-		return Math.pow(x - loc.x, 2) + Math.pow(y - loc.y, 2) + Math.pow(z - loc.z, 2);
-	}
+    public Location set(Location loc) {
+        x = loc.x;
+        y = loc.y;
+        z = loc.z;
+        return this;
+    }
 
-	public double distance(Location loc) {
-		return Math.sqrt(distanceSq(loc));
-	}
+    public Location add(double x, double y, double z) {
+        this.x += x;
+        this.y += y;
+        this.z += z;
+        return this;
+    }
 
-	public double distancelinear(Location loc) {
-		return Math.abs(x - loc.x) + Math.abs(y - loc.y) + Math.abs(z - loc.z);
-	}
+    public Location add(Location loc) {
+        x += loc.x;
+        y += loc.y;
+        z += loc.z;
+        return this;
+    }
 
-	public BlockPos toBlockPos() {
-		return new BlockPos((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z));
-	}
+    public Location normalize() {
+        double dis = distance(new Location());
+        x /= dis;
+        y /= dis;
+        z /= dis;
+        return this;
+    }
 
-	public BlockState getBlockState(BlockGetter reader) {
-		return reader.getBlockState(toBlockPos());
-	}
+    public double distanceSq(Location loc) {
+        return Math.pow(x - loc.x, 2) + Math.pow(y - loc.y, 2) + Math.pow(z - loc.z, 2);
+    }
 
-	public Block getBlock(BlockGetter reader) {
-		return getBlockState(reader).getBlock();
-	}
+    public double distance(Location loc) {
+        return Math.sqrt(distanceSq(loc));
+    }
 
-	public BlockEntity getTile(BlockGetter reader) {
-		return reader.getBlockEntity(toBlockPos());
-	}
+    public double distancelinear(Location loc) {
+        return Math.abs(x - loc.x) + Math.abs(y - loc.y) + Math.abs(z - loc.z);
+    }
 
-	public Location setBlockState(Level world, BlockState state) {
-		world.setBlockAndUpdate(toBlockPos(), state);
-		return this;
-	}
+    public BlockPos toBlockPos() {
+        return new BlockPos((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z));
+    }
 
-	public Location setBlock(Level world, Block block) {
-		return setBlockState(world, block.defaultBlockState());
-	}
+    public BlockState getBlockState(BlockGetter reader) {
+        return reader.getBlockState(toBlockPos());
+    }
 
-	public Location setAir(Level world) {
-		return setBlock(world, Blocks.AIR);
-	}
+    public Block getBlock(BlockGetter reader) {
+        return getBlockState(reader).getBlock();
+    }
 
-	public Location setAirFast(Level world) {
-		world.setBlock(toBlockPos(), Blocks.AIR.defaultBlockState(), 2 | 16);
-		return this;
-	}
+    public BlockEntity getTile(BlockGetter reader) {
+        return reader.getBlockEntity(toBlockPos());
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp = Double.doubleToLongBits(x);
-		result = prime * result + (int) (temp ^ temp >>> 32);
-		temp = Double.doubleToLongBits(y);
-		result = prime * result + (int) (temp ^ temp >>> 32);
-		temp = Double.doubleToLongBits(z);
-		return prime * result + (int) (temp ^ temp >>> 32);
-	}
+    public Location setBlockState(Level world, BlockState state) {
+        world.setBlockAndUpdate(toBlockPos(), state);
+        return this;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null || getClass() != obj.getClass()) {
-			return false;
-		}
-		Location other = (Location) obj;
-		return Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(z) == Double.doubleToLongBits(other.z);
-	}
+    public Location setBlock(Level world, Block block) {
+        return setBlockState(world, block.defaultBlockState());
+    }
 
-	@Override
-	public String toString() {
-		return "[" + intX() + ", " + intY() + ", " + intZ() + "]";
-	}
+    public Location setAir(Level world) {
+        return setBlock(world, Blocks.AIR);
+    }
 
-	public static Location readFromNBT(CompoundTag nbt, String name) {
-		return new Location(nbt.getDouble(name + "X"), nbt.getDouble(name + "Y"), nbt.getDouble(name + "Z"));
-	}
+    public Location setAirFast(Level world) {
+        world.setBlock(toBlockPos(), Blocks.AIR.defaultBlockState(), 2 | 16);
+        return this;
+    }
 
-	public void writeToNBT(CompoundTag nbt, String name) {
-		nbt.putDouble(name + "X", x);
-		nbt.putDouble(name + "Y", y);
-		nbt.putDouble(name + "Z", z);
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        long temp = Double.doubleToLongBits(x);
+        result = prime * result + (int) (temp ^ temp >>> 32);
+        temp = Double.doubleToLongBits(y);
+        result = prime * result + (int) (temp ^ temp >>> 32);
+        temp = Double.doubleToLongBits(z);
+        return prime * result + (int) (temp ^ temp >>> 32);
+    }
 
-	public void toBuffer(FriendlyByteBuf buffer) {
-		buffer.writeDouble(x);
-		buffer.writeDouble(y);
-		buffer.writeDouble(z);
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Location other = (Location) obj;
+        return Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x) && Double.doubleToLongBits(y) == Double.doubleToLongBits(other.y) && Double.doubleToLongBits(z) == Double.doubleToLongBits(other.z);
+    }
 
-	public static Location fromBuffer(FriendlyByteBuf buffer) {
-		return new Location(buffer.readDouble(), buffer.readDouble(), buffer.readDouble());
-	}
+    @Override
+    public String toString() {
+        return "[" + intX() + ", " + intY() + ", " + intZ() + "]";
+    }
+
+    public static Location readFromNBT(CompoundTag nbt, String name) {
+        return new Location(nbt.getDouble(name + "X"), nbt.getDouble(name + "Y"), nbt.getDouble(name + "Z"));
+    }
+
+    public void writeToNBT(CompoundTag nbt, String name) {
+        nbt.putDouble(name + "X", x);
+        nbt.putDouble(name + "Y", y);
+        nbt.putDouble(name + "Z", z);
+    }
+
+    public void toBuffer(FriendlyByteBuf buffer) {
+        STREAM_CODEC.encode(buffer, this);
+    }
+
+    public static Location fromBuffer(FriendlyByteBuf buffer) {
+        return STREAM_CODEC.decode(buffer);
+    }
 }

@@ -9,8 +9,6 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 public class FluidSulfate extends FluidNonPlaceable {
 
-	public static final String FORGE_TAG = "sulfate_";
-
 	public SubtypeSulfateFluid mineral;
 
 	public FluidSulfate(SubtypeSulfateFluid mineral) {

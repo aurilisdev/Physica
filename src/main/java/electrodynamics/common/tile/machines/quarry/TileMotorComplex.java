@@ -5,7 +5,7 @@ import electrodynamics.common.inventory.container.tile.ContainerMotorComplex;
 import electrodynamics.common.item.ItemUpgrade;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.GenericTile;
@@ -33,9 +33,9 @@ public class TileMotorComplex extends GenericTile implements ITickableSound {
 
 	private boolean isSoundPlaying = false;
 
-	public final Property<Integer> speed = property(new Property<>(PropertyType.Integer, "speed", DEFAULT_SPEED));
-	public final Property<Double> powerMultiplier = property(new Property<>(PropertyType.Double, "powerMultiplier", 1.0));
-	public final Property<Boolean> isPowered = property(new Property<>(PropertyType.Boolean, "isPowered", false));
+	public final Property<Integer> speed = property(new Property<>(PropertyTypes.INTEGER, "speed", DEFAULT_SPEED));
+	public final Property<Double> powerMultiplier = property(new Property<>(PropertyTypes.DOUBLE, "powerMultiplier", 1.0));
+	public final Property<Boolean> isPowered = property(new Property<>(PropertyTypes.BOOLEAN, "isPowered", false));
 
 	public TileMotorComplex(BlockPos pos, BlockState state) {
 		super(ElectrodynamicsBlockTypes.TILE_MOTORCOMPLEX.get(), pos, state);

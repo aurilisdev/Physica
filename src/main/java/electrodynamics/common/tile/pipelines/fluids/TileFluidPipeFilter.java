@@ -3,12 +3,12 @@ package electrodynamics.common.tile.pipelines.fluids;
 import java.util.ArrayList;
 import java.util.List;
 
+import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.common.inventory.container.tile.ContainerFluidPipeFilter;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
@@ -34,15 +34,15 @@ public class TileFluidPipeFilter extends GenericTile {
 	@SuppressWarnings("rawtypes")
 	public final Property[] filteredFluids = {
 			//
-			property(new Property<>(PropertyType.Fluidstack, "fluidone", FluidStack.EMPTY)),
+			property(new Property<>(PropertyTypes.FLUID_STACK, "fluidone", FluidStack.EMPTY)),
 			//
-			property(new Property<>(PropertyType.Fluidstack, "fluidtwo", FluidStack.EMPTY)),
+			property(new Property<>(PropertyTypes.FLUID_STACK, "fluidtwo", FluidStack.EMPTY)),
 			//
-			property(new Property<>(PropertyType.Fluidstack, "fluidthree", FluidStack.EMPTY)),
+			property(new Property<>(PropertyTypes.FLUID_STACK, "fluidthree", FluidStack.EMPTY)),
 			//
-			property(new Property<>(PropertyType.Fluidstack, "fluidfour", FluidStack.EMPTY)) };
+			property(new Property<>(PropertyTypes.FLUID_STACK, "fluidfour", FluidStack.EMPTY)) };
 
-	public final Property<Boolean> isWhitelist = property(new Property<>(PropertyType.Boolean, "iswhitelist", false));
+	public final Property<Boolean> isWhitelist = property(new Property<>(PropertyTypes.BOOLEAN, "iswhitelist", false));
 
 	public TileFluidPipeFilter(BlockPos worldPos, BlockState blockState) {
 		super(ElectrodynamicsBlockTypes.TILE_FLUIDPIPEFILTER.get(), worldPos, blockState);

@@ -1,6 +1,6 @@
 package electrodynamics.common.tile.electricitygrid;
 
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.core.HolderLookup;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic.LoadProfile;
@@ -142,14 +142,14 @@ public class TileRelay extends GenericTile {
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag compound) {
-        super.saveAdditional(compound);
+    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.saveAdditional(compound, registries);
         compound.putBoolean("hasredstonesignal", recievedRedstoneSignal);
     }
 
     @Override
-    public void load(@NotNull CompoundTag compound) {
-        super.load(compound);
+    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
         recievedRedstoneSignal = compound.getBoolean("hasredstonesignal");
     }
 
