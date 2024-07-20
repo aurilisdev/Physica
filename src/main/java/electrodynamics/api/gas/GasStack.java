@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import electrodynamics.registers.ElectrodynamicsGases;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -21,7 +22,7 @@ public class GasStack {
                     //
                     instance.group(
                             //
-                            ElectrodynamicsGases.GAS_REGISTRY.byNameCodec().fieldOf("gas").forGetter(instance0 -> instance0.gas),
+                            ElectrodynamicsGases.GAS_REGISTRY.byNameCodec().fieldOf("gas").forGetter(instance0 -> instance0.gas.value()),
                             //
                             Codec.DOUBLE.fieldOf("amount").forGetter(instance0 -> instance0.amount),
                             //
@@ -48,7 +49,7 @@ public class GasStack {
     public static final double ABSOLUTE_ZERO = 1; // zero technically, but that makes volumes a pain in the ass
     public static final int VACUUM = 1; // zero technically, but that makes volumes a pain in the ass
 
-    private Gas gas = ElectrodynamicsGases.EMPTY.get();
+    private Holder<Gas> gas = Holder.direct(ElectrodynamicsGases.EMPTY.get());
     private double amount = 0; // mB
     private double temperature = Gas.ROOM_TEMPERATURE;
     private int pressure = Gas.PRESSURE_AT_SEA_LEVEL; // ATM
@@ -60,7 +61,7 @@ public class GasStack {
     }
 
     public GasStack(Gas gas) {
-        this.gas = gas;
+        this.gas = Holder.direct(gas);
         if (gas == ElectrodynamicsGases.EMPTY.get()) {
             isEmpty = true;
         }
@@ -74,7 +75,7 @@ public class GasStack {
     }
 
     public Gas getGas() {
-        return gas;
+        return gas.value();
     }
 
     public double getAmount() {
@@ -90,7 +91,7 @@ public class GasStack {
     }
 
     public GasStack copy() {
-        return new GasStack(gas, amount, temperature, pressure);
+        return new GasStack(gas.value(), amount, temperature, pressure);
     }
 
     public void setAmount(double amount) {
@@ -106,7 +107,7 @@ public class GasStack {
         }
         this.amount -= Math.min(Math.abs(amount), this.amount);
         if (this.amount == 0) {
-            gas = ElectrodynamicsGases.EMPTY.get();
+            gas = Holder.direct(ElectrodynamicsGases.EMPTY.get());
             this.amount = 0;
             isEmpty = true;
         }
@@ -198,7 +199,7 @@ public class GasStack {
     }
 
     public boolean isCondensed() {
-        return temperature <= gas.getCondensationTemp();
+        return temperature <= gas.value().getCondensationTemp();
     }
 
     @Override
