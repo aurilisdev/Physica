@@ -107,6 +107,6 @@ public class ElectrodynamicsMenuTypes {
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerCircuitMonitor>> CONTAINER_CIRCUITMONITOR = register("circuitmonitor", ContainerCircuitMonitor::new);
 
 	private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>,MenuType<T>> register(String id, MenuSupplier<T> supplier) {
-		return MENU_TYPES.register(id, () -> new MenuType<>(supplier, FeatureFlags.VANILLA_SET));
+		return MENU_TYPES.register(id, () -> new MenuType<>(supplier, FeatureFlags.DEFAULT_FLAGS));
 	}
 }
