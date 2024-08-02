@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import electrodynamics.api.network.cable.IRefreshableCable;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -31,11 +33,6 @@ public abstract class AbstractRefreshingConnectBlock extends AbstractConnectBloc
 			stateIn = refreshConnections(worldIn.getBlockState(relPos), worldIn.getBlockEntity(relPos), stateIn, worldIn.getBlockEntity(pos), dir);
 		}
 		worldIn.setBlockAndUpdate(pos, stateIn);
-	}
-
-	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
-		return refreshConnections(facingState, world.getBlockEntity(facingPos), super.updateShape(stateIn, facing, facingState, world, currentPos, facingPos), world.getBlockEntity(currentPos), facing);
 	}
 
 	@Override
@@ -70,6 +67,7 @@ public abstract class AbstractRefreshingConnectBlock extends AbstractConnectBloc
 		if (conductor == null) {
 			return;
 		}
+		//refreshConnections(world.getBlockState(neighbor), world.getBlockEntity(neighbor), world.getBlockState(pos), world.getBlockEntity(pos), BlockEntityUtils.directionFromPos(pos, neighbor));
 		conductor.refreshNetworkIfChange();
 	}
 
@@ -77,5 +75,11 @@ public abstract class AbstractRefreshingConnectBlock extends AbstractConnectBloc
 
 	@Nullable
 	public abstract IRefreshableCable getCableIfValid(BlockEntity tile);
+
+	@Override
+	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighbor, boolean isMoving) {
+		super.neighborChanged(state, level, pos, block, neighbor, isMoving);
+		refreshConnections(level.getBlockState(neighbor), level.getBlockEntity(neighbor), level.getBlockState(pos), level.getBlockEntity(pos), BlockEntityUtils.directionFromPos(pos, neighbor));
+	}
 
 }

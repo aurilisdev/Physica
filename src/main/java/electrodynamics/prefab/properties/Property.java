@@ -1,9 +1,14 @@
 package electrodynamics.prefab.properties;
 
+import java.util.List;
 import java.util.function.BiConsumer;
 
+import electrodynamics.common.packet.types.client.PacketUpdateSpecificPropertyClient;
 import electrodynamics.common.packet.types.server.PacketSendUpdatePropertiesServer;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -21,6 +26,9 @@ public class Property<T> {
     private boolean isDirty = true;
     private boolean shouldSave = true;
     private boolean shouldUpdateClient = true;
+    //set this if you want to update a property without having a tile tick
+    //otherwise the property will be synced to the client upon change at the end of the tile's tick
+    private boolean shouldUpdateOnChange = false;
     private String name;
     private T value;
 
@@ -81,7 +89,11 @@ public class Property<T> {
         value = (T) updated;
         if (isDirty() && manager.getOwner().getLevel() != null) {
             if (!manager.getOwner().getLevel().isClientSide()) {
-                manager.setDirty(this);
+                if(shouldUpdateOnChange){
+                    updateClient();
+                } else {
+                    manager.setDirty(this);
+                }
             }
             onChange.accept(this, old);
         }
@@ -91,6 +103,7 @@ public class Property<T> {
 
     /**
      * This method should be used when working with more complex data types like arrays (InventoryItems for example)
+     * and is a hack to handle issues with Java arrays
      * 
      * If it is a single object (FluidStack for example), then do NOT used this method
      */
@@ -146,6 +159,11 @@ public class Property<T> {
         return this;
     }
 
+    public Property<T> setShouldUpdateOnChange() {
+        shouldUpdateOnChange = true;
+        return this;
+    }
+
     @Override
     public String toString() {
         return value == null ? "null" : value.toString();
@@ -169,6 +187,19 @@ public class Property<T> {
 
     public void saveToTag(CompoundTag tag, Level world) {
         getType().writeToTag(new IPropertyType.TagWriter<>(this, tag, world));
+    }
+
+    private void updateClient() {
+        ServerLevel level = (ServerLevel) manager.getOwner().getLevel();
+        List<ServerPlayer> players = level.getChunkSource().chunkMap.getPlayers(new ChunkPos(manager.getOwner().getBlockPos()), false);
+
+        if (players.isEmpty()) {
+            return;
+        }
+
+        PacketUpdateSpecificPropertyClient packet = new PacketUpdateSpecificPropertyClient(new PropertyManager.PropertyWrapper(getIndex(), getType(), get(), this), manager.getOwner().getBlockPos());
+
+        players.forEach(p -> PacketDistributor.sendToPlayer(p, packet));
     }
 
     public void updateServer() {

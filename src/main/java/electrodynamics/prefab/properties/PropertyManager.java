@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Nullable;
 
+import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -28,7 +29,7 @@ public class PropertyManager {
 		REGISTERED_PROPERTIES.putAll(propeties);
 	}
 
-	private final BlockEntity owner;
+	private final GenericTile owner;
 
 	private ArrayList<Property<?>> properties = new ArrayList<>();
 
@@ -36,7 +37,7 @@ public class PropertyManager {
 
 	private boolean isDirty = false;
 
-	public PropertyManager(BlockEntity owner) {
+	public PropertyManager(GenericTile owner) {
 		this.owner = owner;
 	}
 
@@ -89,7 +90,7 @@ public class PropertyManager {
 		return string;
 	}
 
-	public BlockEntity getOwner() {
+	public GenericTile getOwner() {
 		return owner;
 	}
 

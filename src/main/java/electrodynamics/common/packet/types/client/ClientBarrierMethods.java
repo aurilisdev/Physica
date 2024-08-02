@@ -127,4 +127,15 @@ public class ClientBarrierMethods {
         world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0);
     }
 
+    public static void handleUpdateSpecificPropertyClient(PropertyWrapper wrapper, BlockPos pos){
+        ClientLevel world = Minecraft.getInstance().level;
+        if (world == null) {
+            return;
+        }
+        BlockEntity tile = world.getBlockEntity(pos);
+        if (tile instanceof IPropertyHolderTile holder) {
+            holder.getPropertyManager().update(wrapper.index(), wrapper.value());
+        }
+    }
+
 }

@@ -26,7 +26,7 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
     public static final int WEST_MASK = 0b00000000000011110000000000000000;
     public static final int EAST_MASK = 0b00000000111100000000000000000000;
 
-    public final Property<Integer> connections = property(new Property<>(PropertyTypes.INTEGER, "connections", 0).onChange((property, old) -> {
+    public final Property<Integer> connections = property(new Property<>(PropertyTypes.INTEGER, "connections", 0).setShouldUpdateOnChange().onChange((property, old) -> {
         if (!level.isClientSide) {
             return;
         }

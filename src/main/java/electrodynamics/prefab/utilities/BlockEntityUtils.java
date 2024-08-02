@@ -31,4 +31,8 @@ public class BlockEntityUtils {
 		return false;
 	}
 
+	public static Direction directionFromPos(BlockPos thisPos, BlockPos otherPos){
+		return Direction.fromDelta(otherPos.getX() - thisPos.getX(), otherPos.getY() - thisPos.getY(), otherPos.getZ() - thisPos.getZ());
+	}
+
 }

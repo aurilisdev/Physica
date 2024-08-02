@@ -250,6 +250,7 @@ public class ClientRegister {
         ScreenGuidebook.addGuidebookModule(new ModuleElectrodynamics());
     }
 
+    @SubscribeEvent
     public static void registerMenus(RegisterMenuScreensEvent event) {
         event.register(ElectrodynamicsMenuTypes.CONTAINER_COALGENERATOR.get(), ScreenCoalGenerator::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_ELECTRICFURNACE.get(), ScreenElectricFurnace::new);

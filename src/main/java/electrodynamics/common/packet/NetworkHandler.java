@@ -21,6 +21,7 @@ import electrodynamics.common.packet.types.server.PacketServerUpdateTile;
 import electrodynamics.common.packet.types.server.PacketSwapBattery;
 import electrodynamics.common.packet.types.server.PacketToggleOnServer;
 import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
+import electrodynamics.common.packet.types.client.PacketUpdateSpecificPropertyClient;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -48,6 +49,7 @@ public class NetworkHandler {
         registry.playToClient(PacketSetClientCombustionFuel.TYPE, PacketSetClientCombustionFuel.CODEC, (packet, context) -> PacketSetClientCombustionFuel.handle(packet, context));
         registry.playToClient(PacketSetClientThermoGenSources.TYPE, PacketSetClientThermoGenSources.CODEC, (packet, context) -> PacketSetClientThermoGenSources.handle(packet, context));
         registry.playToClient(PacketSpawnSmokeParticle.TYPE, PacketSpawnSmokeParticle.CODEC, (packet, context) -> PacketSpawnSmokeParticle.handle(packet, context));
+        registry.playToClient(PacketUpdateSpecificPropertyClient.TYPE, PacketUpdateSpecificPropertyClient.CODEC, (packet, context) -> PacketUpdateSpecificPropertyClient.handle(packet, context));
 
         // SERVER
 
