@@ -67,7 +67,7 @@ public abstract class AbstractRefreshingConnectBlock extends AbstractConnectBloc
 		if (conductor == null) {
 			return;
 		}
-		//refreshConnections(world.getBlockState(neighbor), world.getBlockEntity(neighbor), world.getBlockState(pos), world.getBlockEntity(pos), BlockEntityUtils.directionFromPos(pos, neighbor));
+		refreshConnections(world.getBlockState(neighbor), world.getBlockEntity(neighbor), world.getBlockState(pos), world.getBlockEntity(pos), BlockEntityUtils.directionFromPos(pos, neighbor));
 		conductor.refreshNetworkIfChange();
 	}
 
@@ -79,7 +79,7 @@ public abstract class AbstractRefreshingConnectBlock extends AbstractConnectBloc
 	@Override
 	public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighbor, boolean isMoving) {
 		super.neighborChanged(state, level, pos, block, neighbor, isMoving);
-		refreshConnections(level.getBlockState(neighbor), level.getBlockEntity(neighbor), level.getBlockState(pos), level.getBlockEntity(pos), BlockEntityUtils.directionFromPos(pos, neighbor));
+		//refreshConnections(level.getBlockState(neighbor), level.getBlockEntity(neighbor), level.getBlockState(pos), level.getBlockEntity(pos), BlockEntityUtils.directionFromPos(pos, neighbor));
 	}
 
 }
