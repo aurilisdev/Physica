@@ -1,27 +1,18 @@
 package electrodynamics.prefab.tile.types;
 
-import electrodynamics.api.References;
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertyConnections;
 import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
-import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class GenericConnectTile extends GenericTile implements IConnectTile {
 
@@ -39,9 +30,6 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
             return;
         }
         requestModelDataUpdate();
-        //RefreshScheduler.schedule(10, () -> requestModelDataUpdate());
-    }).onLoad((prop, val) -> {
-        //RefreshScheduler.schedule(10, () -> requestModelDataUpdate());
     }));
     public final Property<BlockState> camoflaugedBlock = property(new Property<>(PropertyTypes.BLOCK_STATE, "camoflaugedblock", Blocks.AIR.defaultBlockState())).onChange((property, block) -> {
         level.getChunkSource().getLightEngine().checkBlock(worldPosition);
@@ -80,14 +68,6 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
 
     public boolean isScaffoldAir() {
         return getScaffoldBlock().isAir();
-    }
-
-    @Override
-    public void onPlace(BlockState oldState, boolean isMoving) {
-        super.onPlace(oldState, isMoving);
-        if (!level.isClientSide) {
-            this.<ComponentPacketHandler>getComponent(IComponentType.PacketHandler).sendProperties();
-        }
     }
 
     public EnumConnectType readConnection(Direction dir) {
@@ -171,31 +151,6 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
     @Override
     public @NotNull ModelData getModelData() {
         return ModelData.builder().with(ModelPropertyConnections.INSTANCE, readConnections()).build();
-    }
-
-    @EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.GAME)
-    private static class RefreshScheduler {
-        private static ConcurrentHashMap<Runnable, Integer> scheduled = new ConcurrentHashMap<>();
-
-        @SubscribeEvent
-        public static void onTick(ClientTickEvent.Post event) {
-            if (!scheduled.isEmpty()) {
-                Iterator<Map.Entry<Runnable, Integer>> it = scheduled.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry<Runnable, Integer> next = it.next();
-                    if (next.getValue() <= 0) {
-                        next.getKey().run();
-                        it.remove();
-                    } else {
-                        next.setValue(next.getValue() - 1);
-                    }
-                }
-            }
-        }
-
-        public static void schedule(int timeUntil, Runnable run) {
-            scheduled.put(run, timeUntil);
-        }
     }
 
 }

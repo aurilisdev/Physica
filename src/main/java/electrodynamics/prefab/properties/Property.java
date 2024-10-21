@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 /**
@@ -93,11 +94,11 @@ public class Property<T> {
         value = (T) updated;
         if (isDirty() && manager.getOwner().getLevel() != null) {
             if (!manager.getOwner().getLevel().isClientSide()) {
-                if(shouldUpdateOnChange){
-                    updateClient();
-                } else {
-                    manager.setDirty(this);
+                if(shouldUpdateOnChange) {
+                    manager.getOwner().getLevel().sendBlockUpdated(manager.getOwner().getBlockPos(), manager.getOwner().getBlockState(), manager.getOwner().getBlockState(), Block.UPDATE_CLIENTS);
+                    manager.getOwner().setChanged();
                 }
+                manager.setDirty(this);
             }
             onChange.accept(this, old);
         }
@@ -192,7 +193,10 @@ public class Property<T> {
         getType().writeToTag(new IPropertyType.TagWriter<>(this, tag, registries));
     }
 
+    /*
     private void updateClient() {
+
+
         ServerLevel level = (ServerLevel) manager.getOwner().getLevel();
         List<ServerPlayer> players = level.getChunkSource().chunkMap.getPlayers(new ChunkPos(manager.getOwner().getBlockPos()), false);
 
@@ -203,8 +207,10 @@ public class Property<T> {
         PacketUpdateSpecificPropertyClient packet = new PacketUpdateSpecificPropertyClient(new PropertyManager.PropertyWrapper(getIndex(), getType(), get(), this), manager.getOwner().getBlockPos());
 
         players.forEach(p -> PacketDistributor.sendToPlayer(p, packet));
-    }
 
+
+    }
+    */
     public void updateServer() {
 
         if (manager.getOwner() != null) {

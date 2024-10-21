@@ -26,7 +26,6 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentName;
-import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
 import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
@@ -125,6 +124,7 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
     }
 
 
+    // called when tile is created/loaded from memory
     @Override
     protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
         super.loadAdditional(compound, registries);
@@ -169,12 +169,13 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
         super.saveAdditional(compound, registries);
     }
 
+    //called either from initial client sync
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = super.getUpdateTag(registries);
         if(propertyManager != null) {
             CompoundTag propertyData = new CompoundTag();
-            propertyManager.saveDirtyPropsToTag(propertyData);
+            propertyManager.saveToTag(propertyData, registries);
             tag.put(PropertyManager.NBT_KEY, propertyData);
             propertyManager.clean();
         }
@@ -182,10 +183,17 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
         return tag;
     }
 
+    //Called when Level#sendBlockUpdated is called
     @Nullable
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
+        return ClientboundBlockEntityDataPacket.create(this, (tile, registries) -> {
+            CompoundTag tag = new CompoundTag();
+            CompoundTag data = new CompoundTag();
+            propertyManager.saveDirtyPropsToTag(data, registries);
+            tag.put(PropertyManager.NBT_KEY, data);
+            return tag;
+        });
     }
 
     @Override

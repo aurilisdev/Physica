@@ -8,6 +8,7 @@ import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponent;
 import electrodynamics.prefab.tile.components.IComponentType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
 public class ComponentTickable implements IComponent {
 
@@ -103,6 +104,8 @@ public class ComponentTickable implements IComponent {
 			if (holder != null && (holder.getPropertyManager().isDirty() || holder.isChanged)) {
 
 				holder.setChanged();
+
+				holder.getLevel().sendBlockUpdated(holder.getBlockPos(), holder.getBlockState(), holder.getBlockState(), Block.UPDATE_CLIENTS);
 
 				holder.isChanged = false;
 			}

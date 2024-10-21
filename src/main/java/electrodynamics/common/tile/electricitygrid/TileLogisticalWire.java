@@ -1,13 +1,10 @@
 package electrodynamics.common.tile.electricitygrid;
 
-import electrodynamics.Electrodynamics;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsBlockTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Arrays;
 
 public class TileLogisticalWire extends TileWire {
 
@@ -15,15 +12,10 @@ public class TileLogisticalWire extends TileWire {
 
 	public TileLogisticalWire(BlockPos pos, BlockState state) {
 		super(ElectrodynamicsBlockTypes.TILE_LOGISTICALWIRE.get(), pos, state);
-		forceComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
-	}
-
-	private void tickClient(ComponentTickable componentTickable) {
-		Electrodynamics.LOGGER.info(getBlockPos() + ", Client: " + Arrays.toString(readConnections()));
+		forceComponent(new ComponentTickable(this).tickServer(this::tickServer));
 	}
 
 	protected void tickServer(ComponentTickable component) {
-		Electrodynamics.LOGGER.info(getBlockPos() + ", Server: " + Arrays.toString(readConnections()));
 		if (component.getTicks() % 10 == 0) {
 			boolean shouldPower = getNetwork().getActiveTransmitted() > 0;
 			if (shouldPower != isPowered) {
