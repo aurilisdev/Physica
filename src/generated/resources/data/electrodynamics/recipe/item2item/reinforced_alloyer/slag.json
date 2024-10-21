@@ -3,13 +3,13 @@
   "fluidinputs": [
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ingots"
       }
     },
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:sands"
       }
     }

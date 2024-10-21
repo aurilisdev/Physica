@@ -4,7 +4,7 @@
   "fluidinputs": [
     {
       "count": 2,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ingots/stainlesssteel"
       }
     }

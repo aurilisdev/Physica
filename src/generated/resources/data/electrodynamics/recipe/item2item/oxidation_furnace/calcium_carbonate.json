@@ -4,13 +4,13 @@
   "fluidinputs": [
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "item": "minecraft:bone_meal"
       }
     },
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:oxides/sodiumcarbonate"
       }
     }

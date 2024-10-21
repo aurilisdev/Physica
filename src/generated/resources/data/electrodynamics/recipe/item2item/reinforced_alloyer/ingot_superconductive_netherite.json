@@ -4,13 +4,13 @@
   "fluidinputs": [
     {
       "count": 5,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ingots/silver"
       }
     },
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ingots/netherite"
       }
     }

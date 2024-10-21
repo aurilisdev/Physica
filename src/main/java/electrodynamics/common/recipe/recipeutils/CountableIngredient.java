@@ -25,7 +25,7 @@ public class CountableIngredient implements ICustomIngredient {
             //
             instance -> instance.group(
                             //
-                            Ingredient.CODEC_NONEMPTY.fieldOf("ingreident").forGetter(instance0 -> instance0.ingredient),
+                            Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(instance0 -> instance0.ingredient),
                             //
                             Codec.INT.fieldOf("count").forGetter(instance0 -> instance0.stackSize)
 

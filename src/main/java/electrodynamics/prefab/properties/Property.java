@@ -5,6 +5,7 @@ import java.util.function.BiConsumer;
 
 import electrodynamics.common.packet.types.client.PacketUpdateSpecificPropertyClient;
 import electrodynamics.common.packet.types.server.PacketSendUpdatePropertiesServer;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -84,6 +85,9 @@ public class Property<T> {
     }
 
     public Property<T> set(Object updated) {
+        if(!updated.getClass().equals(value.getClass())) {
+            throw new RuntimeException("Value " + updated + " being set for " + getName() + " on tile " + getPropertyManager().getOwner() + " is an invalid data type!");
+        }
         checkForChange((T) updated);
         T old = value;
         value = (T) updated;
@@ -134,10 +138,9 @@ public class Property<T> {
     }
 
     public void load(T val) {
-        if (val == null) {
-            val = value;
+        if (val != null) {
+            value = val;
         }
-        value = val;
         onLoad.accept(this, value);
     }
 
@@ -181,12 +184,12 @@ public class Property<T> {
         this.index = index;
     }
 
-    public void loadFromTag(CompoundTag tag, Level world) {
-        load((T) getType().readFromTag(new IPropertyType.TagReader(this, tag, world)));
+    public void loadFromTag(CompoundTag tag, HolderLookup.Provider registries) {
+        load((T) getType().readFromTag(new IPropertyType.TagReader(this, tag, registries)));
     }
 
-    public void saveToTag(CompoundTag tag, Level world) {
-        getType().writeToTag(new IPropertyType.TagWriter<>(this, tag, world));
+    public void saveToTag(CompoundTag tag, HolderLookup.Provider registries) {
+        getType().writeToTag(new IPropertyType.TagWriter<>(this, tag, registries));
     }
 
     private void updateClient() {

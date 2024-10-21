@@ -4,13 +4,13 @@
   "fluidinputs": [
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:dusts/sulfur"
       }
     },
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "minecraft:coals"
       }
     }

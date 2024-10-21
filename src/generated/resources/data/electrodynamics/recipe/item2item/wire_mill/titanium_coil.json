@@ -4,7 +4,7 @@
   "fluidinputs": [
     {
       "count": 9,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ingots/titanium"
       }
     }

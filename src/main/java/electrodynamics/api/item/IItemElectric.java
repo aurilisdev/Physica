@@ -35,7 +35,7 @@ public interface IItemElectric {
     public static final String EXTRACT_LIMIT = "extractlimit";
     public static final String CURRENT_BATTERY = "currentbattery";
 
-    static ElectricItemData defaultData(IItemElectric item){
+    static ElectricItemData defaultData(IItemElectric item) {
         return new ElectricItemData(0, item.getElectricProperties().capacity, item.getElectricProperties().extract.getVoltage(), item.getElectricProperties().receive.getJoules(), item.getElectricProperties().extract.getJoules(), new ItemStack(item.getDefaultStorageBattery()));
     }
 
@@ -89,7 +89,7 @@ public interface IItemElectric {
     }
 
     default TransferPack extractPower(ItemStack stack, double amount, boolean debug) {
-        if(getJoulesStored(stack) <= 0){
+        if (getJoulesStored(stack) <= 0) {
             return TransferPack.EMPTY;
         }
         double current = getJoulesStored(stack);
@@ -137,12 +137,14 @@ public interface IItemElectric {
         for (int i = 0; i < inv.items.size(); i++) {
             ItemStack playerItem = inv.getItem(i).copy();
 
-            if (!playerItem.isEmpty() && playerItem.getItem() instanceof IItemElectric electric && electric.isEnergyStorageOnly() && electric.getJoulesStored(playerItem) > 0 && electric.getElectricProperties().extract.getVoltage() == electricItem.getElectricProperties().extract.getVoltage()) {
+            // Only allow batteries that have the same receive and extract voltage
+            if (!playerItem.isEmpty() && playerItem.getItem() instanceof IItemElectric electric && electric.isEnergyStorageOnly() && electric.getJoulesStored(playerItem) > 0 && electric.getElectricProperties().extract.getVoltage() == electricItem.getElectricProperties().extract.getVoltage() && electric.getElectricProperties().receive.getVoltage() == electricItem.getElectricProperties().receive.getVoltage()) {
                 ItemStack currBattery = electricItem.getCurrentBattery(tool);
                 if (currBattery.isEmpty()) {
                     return;
                 }
                 double joulesStored = electricItem.getJoulesStored(tool);
+                electricItem.setCurrentBattery(tool, playerItem);
                 IItemElectric.setEnergyStored(tool, electric.getJoulesStored(playerItem));
                 IItemElectric.setEnergyStored(currBattery, joulesStored);
                 inv.setItem(i, ItemStack.EMPTY);
@@ -178,7 +180,7 @@ public interface IItemElectric {
         IItemElectric thisElectric = (IItemElectric) stack.getItem();
         IItemElectric otherElectric = (IItemElectric) other.getItem();
 
-        if (otherElectric.getJoulesStored(other) == 0 || otherElectric.getElectricProperties().receive.getVoltage() != thisElectric.getElectricProperties().receive.getVoltage()) {
+        if (otherElectric.getJoulesStored(other) == 0 || otherElectric.getElectricProperties().receive.getVoltage() != thisElectric.getElectricProperties().receive.getVoltage() || thisElectric.getElectricProperties().extract.getVoltage() != otherElectric.getElectricProperties().extract.getVoltage()) {
             return false;
         }
 
@@ -287,7 +289,7 @@ public interface IItemElectric {
 
         @Override
         public boolean equals(Object obj) {
-            if(obj instanceof ElectricItemData data){
+            if (obj instanceof ElectricItemData data) {
                 return joulesStored == data.joulesStored && maxJoules == data.maxJoules && voltage == data.voltage && receiveCap == data.receiveCap && extractCap == data.extractCap && battery == data.battery;
             }
             return false;

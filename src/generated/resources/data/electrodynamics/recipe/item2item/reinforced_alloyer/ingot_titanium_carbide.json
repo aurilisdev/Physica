@@ -4,13 +4,13 @@
   "fluidinputs": [
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ingots/titanium"
       }
     },
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:coal_coke"
       }
     }

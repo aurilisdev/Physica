@@ -4,13 +4,13 @@
   "fluidinputs": [
     {
       "count": 8,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ingots/steel"
       }
     },
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ingots/vanadium"
       }
     }

@@ -48,7 +48,7 @@ public abstract class GenericTileCharger extends GenericTile {
 			if (inventory.inputs() > 1) {
 				hasOvervolted = drainBatterySlots(inventory, electro);
 			}
-			double room = electricItem.getElectricProperties().capacity - electricItem.getJoulesStored(itemInput);
+			double room = electricItem.getMaximumCapacity(itemInput) - electricItem.getJoulesStored(itemInput);
 			if (electro.getJoulesStored() > 0 && !hasOvervolted && room > 0) {
 				double recieveVoltage = electricItem.getElectricProperties().receive.getVoltage();
 				double machineVoltage = electro.getVoltage();
@@ -60,7 +60,7 @@ public abstract class GenericTileCharger extends GenericTile {
 					electro.joules(electro.getJoulesStored() - electricItem.receivePower(itemInput, TransferPack.joulesVoltage(electro.getJoulesStored(), machineVoltage), false).getJoules());
 				} else {
 					float underVoltRatio = (float) ((float) machineVoltage / recieveVoltage);
-					float itemStoredRatio = (float) ((float) electricItem.getJoulesStored(itemInput) / electricItem.getElectricProperties().capacity);
+					float itemStoredRatio = (float) ((float) electricItem.getJoulesStored(itemInput) / electricItem.getMaximumCapacity(itemInput));
 
 					float x = Math.abs(itemStoredRatio / (itemStoredRatio - underVoltRatio + 0.00000001F/* ensures it's never zero */));
 					float reductionCoef = getRationalFunctionValue(x);
@@ -70,7 +70,7 @@ public abstract class GenericTileCharger extends GenericTile {
 						electro.joules(electro.getJoulesStored() - electricItem.receivePower(itemInput, TransferPack.joulesVoltage(electro.getJoulesStored() * reductionCoef, recieveVoltage), false).getJoules());
 					}
 				}
-				if (electricItem.getJoulesStored(itemInput) == electricItem.getElectricProperties().capacity && inventory.getItem(4).isEmpty()) {
+				if (electricItem.getJoulesStored(itemInput) == electricItem.getMaximumCapacity(itemInput) && inventory.getItem(4).isEmpty()) {
 					inventory.setItem(4, inventory.getItem(0).copy());
 					inventory.getItem(0).shrink(1);
 				}

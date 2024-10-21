@@ -78,7 +78,7 @@ public class ItemElectricDrill extends DiggerItem implements IItemElectric, Crea
         items.add(empty);
 
         ItemStack charged = new ItemStack(this);
-        IItemElectric.setEnergyStored(charged, properties.capacity);
+        IItemElectric.setEnergyStored(charged, getMaximumCapacity(charged));
         items.add(charged);
 
     }
@@ -89,7 +89,7 @@ public class ItemElectricDrill extends DiggerItem implements IItemElectric, Crea
             return 0;
         }
 
-        float normalized = (float) Math.max(1, getHead(stack).speedBoost * getSpeedBoost(stack) / 2.0);
+        float normalized = (float) Math.max(1, getHead(stack).speedBoost * getSpeedBoost(stack));
 
         return super.getDestroySpeed(stack, state) * normalized;
 
@@ -105,12 +105,12 @@ public class ItemElectricDrill extends DiggerItem implements IItemElectric, Crea
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        return (int) Math.round(13.0f * getJoulesStored(stack) / properties.capacity);
+        return (int) Math.round(13.0f * getJoulesStored(stack) / getMaximumCapacity(stack));
     }
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return getJoulesStored(stack) < properties.capacity;
+        return getJoulesStored(stack) < getMaximumCapacity(stack);
     }
 
     @Override

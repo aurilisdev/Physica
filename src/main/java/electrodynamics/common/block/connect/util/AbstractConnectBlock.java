@@ -35,7 +35,9 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 
 	protected final VoxelShape[] boundingBoxes = new VoxelShape[7];
 
-	protected HashMap<EnumConnectType[], VoxelShape> shapestates = new HashMap<>();
+	// 6 possible directions
+	int maxValue = 0b1000000;
+	protected VoxelShape[] shapestates = new VoxelShape[maxValue];
 	public AbstractConnectBlock(Properties properties, double radius) {
 		super(properties);
 		generateBoundingBoxes(radius);
@@ -77,9 +79,6 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 
 		}
 
-		VoxelShape shape = boundingBoxes[6];
-		EnumConnectType[] checked = new EnumConnectType[6];
-
 		BlockEntity entity = worldIn.getBlockEntity(pos);
 
 		if(!(entity instanceof GenericConnectTile)) {
@@ -87,33 +86,41 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 		}
 
 		EnumConnectType[] connections = ((GenericConnectTile) entity).readConnections();
-
-		for (int i = 0; i < 6; i++) {
-			EnumConnectType connection = connections[i];
-
-			if (connection != EnumConnectType.NONE) {
-				checked[i] = connection;
-			}
-
+		int hash = hashPresentSides(connections);
+		// Check for existing shape
+		if (shapestates[hash] != null) {
+			return getCamoShape(shapestates[hash], camoShape);
 		}
-		if (shapestates.containsKey(checked)) {
-			return Shapes.join(shapestates.get(checked), camoShape, BooleanOp.OR);
-		}
+		// Create new shape for connections
+		VoxelShape shape = boundingBoxes[6];
 		for (int i = 0; i < 6; i++) {
-
-			EnumConnectType connection = checked[i];
-
-			if(connection == null) {
+			if (connections[i] == EnumConnectType.NONE) {
 				continue;
 			}
 
 			shape = Shapes.join(shape, boundingBoxes[i], BooleanOp.OR);
 		}
-		shapestates.put(checked, shape);
+		shapestates[hash] = shape;
 		if (shape == null) {
 			return Shapes.empty();
 		}
-		return Shapes.join(camoShape, shape, BooleanOp.OR);
+		return getCamoShape(shape, camoShape);
+	}
+
+	private VoxelShape getCamoShape(VoxelShape wireShape, VoxelShape camoShape) {
+		if (camoShape == Shapes.empty()) return wireShape;
+		if (camoShape == Shapes.block()) return camoShape;
+		return Shapes.join(wireShape, camoShape, BooleanOp.OR);
+	}
+
+	private static int hashPresentSides(EnumConnectType[] connections) {
+		int flag = 0;
+		for (short i = 0; i < 6; i++) {
+			if (connections[i] != EnumConnectType.NONE) {
+				flag = flag | (1 << i);
+			}
+		}
+		return flag;
 	}
 
 	@Override

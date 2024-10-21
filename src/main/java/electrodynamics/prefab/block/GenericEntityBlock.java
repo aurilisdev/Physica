@@ -180,7 +180,7 @@ public abstract class GenericEntityBlock extends BaseEntityBlock implements IWre
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 		if (level.getBlockEntity(pos) instanceof GenericTile generic) {
-			generic.useWithoutItem(player, hitResult);
+			return generic.useWithoutItem(player, hitResult);
 		}
 		return super.useWithoutItem(state, level, pos, player, hitResult);
 	}
@@ -188,7 +188,7 @@ public abstract class GenericEntityBlock extends BaseEntityBlock implements IWre
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (level.getBlockEntity(pos) instanceof GenericTile generic) {
-			generic.useWithItem(stack, player, hand, hitResult);
+			return generic.useWithItem(stack, player, hand, hitResult);
 		}
 		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}

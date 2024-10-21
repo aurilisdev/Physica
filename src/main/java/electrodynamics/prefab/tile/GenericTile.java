@@ -3,6 +3,9 @@ package electrodynamics.prefab.tile;
 import java.util.UUID;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ItemInteractionResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -124,7 +127,11 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
     @Override
     protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
         super.loadAdditional(compound, registries);
-        propertyManager.loadFromTag(compound, getLevel());
+        if(propertyManager != null && compound.contains(PropertyManager.NBT_KEY)) {
+            CompoundTag propertyData = compound.getCompound(PropertyManager.NBT_KEY);
+            propertyManager.loadFromTag(propertyData, registries);
+            compound.remove(PropertyManager.NBT_KEY);
+        }
         for (IComponent component : components) {
             if (component != null) {
                 component.holder(this);
@@ -141,7 +148,11 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
 
     @Override
     protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-        propertyManager.saveToTag(compound, getLevel());
+        if(propertyManager != null) {
+            CompoundTag propertyData = new CompoundTag();
+            propertyManager.saveToTag(propertyData, registries);
+            compound.put(PropertyManager.NBT_KEY, propertyData);
+        }
         for (IComponent component : components) {
             if (component != null) {
                 component.holder(this);
@@ -158,6 +169,24 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
     }
 
     @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
+        if(propertyManager != null) {
+            CompoundTag propertyData = new CompoundTag();
+            propertyManager.saveDirtyPropsToTag(propertyData);
+            tag.put(PropertyManager.NBT_KEY, propertyData);
+        }
+
+        return tag;
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
     public void onLoad() {
         super.onLoad();
 
@@ -167,11 +196,6 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 component.onLoad();
             }
         }
-        /*
-         * if (hasComponent(ComponentType.PacketHandler)) {
-         * this.<ComponentPacketHandler>getComponent(ComponentType.PacketHandler).sendCustomPacket();
-         * this.<ComponentPacketHandler>getComponent(ComponentType.PacketHandler).sendGuiPacketToTracking(); }
-         */
     }
 
     @Override
@@ -224,19 +248,13 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        CompoundTag tag = super.getUpdateTag(registries);
-        saveAdditional(tag, registries);
-        return tag;
-    }
-
-    @Override
     public void setChanged() {
         super.setChanged();
         if (!level.isClientSide) {
-            if (hasComponent(IComponentType.PacketHandler)) {
-                this.<ComponentPacketHandler>getComponent(IComponentType.PacketHandler).sendProperties();
-            }
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), GenericEntityBlock.UPDATE_CLIENTS);
+            //if (hasComponent(IComponentType.PacketHandler)) {
+            //    this.<ComponentPacketHandler>getComponent(IComponentType.PacketHandler).sendProperties();
+            //}
         }
     }
 

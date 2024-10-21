@@ -141,19 +141,19 @@ public class ItemMechanizedCrossbow extends ProjectileWeaponItem implements IIte
 		items.add(empty);
 
 		ItemStack charged = new ItemStack(this);
-		IItemElectric.setEnergyStored(charged, properties.capacity);
+		IItemElectric.setEnergyStored(charged, getMaximumCapacity(charged));
 		items.add(charged);
 
 	}
 
 	@Override
 	public int getBarWidth(ItemStack stack) {
-		return (int) Math.round(13.0f * getJoulesStored(stack) / properties.capacity);
+		return (int) Math.round(13.0f * getJoulesStored(stack) / getMaximumCapacity(stack));
 	}
 
 	@Override
 	public boolean isBarVisible(ItemStack stack) {
-		return getJoulesStored(stack) < properties.capacity;
+		return getJoulesStored(stack) < getMaximumCapacity(stack);
 	}
 
 	@Override

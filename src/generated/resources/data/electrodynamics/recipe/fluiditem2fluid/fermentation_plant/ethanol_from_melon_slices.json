@@ -10,7 +10,7 @@
   "iteminputs": [
     {
       "count": 3,
-      "ingreident": {
+      "ingredient": {
         "item": "minecraft:melon_slice"
       }
     }

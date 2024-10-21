@@ -10,7 +10,7 @@
   "iteminputs": [
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ores/silver"
       }
     }

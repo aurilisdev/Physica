@@ -37,7 +37,13 @@ public class PropertyTypes {
     public static final PropertyType<Integer, ByteBuf> INTEGER = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "integer"), null, ByteBufCodecs.INT, writer -> writer.tag().putInt(writer.prop().getName(), writer.prop().get()), reader -> reader.tag().getInt(reader.prop().getName()));
     public static final PropertyType<Long, ByteBuf> LONG = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "long"), null, ByteBufCodecs.VAR_LONG, writer -> writer.tag().putLong(writer.prop().getName(), writer.prop().get()), reader -> reader.tag().getLong(reader.prop().getName()));
     public static final PropertyType<Float, ByteBuf> FLOAT = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "float"), null, ByteBufCodecs.FLOAT, writer -> writer.tag().putFloat(writer.prop().getName(), writer.prop().get()), reader -> reader.tag().getFloat(reader.prop().getName()));
-    public static final PropertyType<Double, ByteBuf> DOUBLE = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "double"), null, ByteBufCodecs.DOUBLE, writer -> writer.tag().putDouble(writer.prop().getName(), writer.prop().get()), reader -> reader.tag().getDouble(reader.prop().getName()));
+    public static final PropertyType<Double, ByteBuf> DOUBLE =
+            new PropertyType<>(ResourceLocation.fromNamespaceAndPath(
+                    References.ID, "double"),
+                    null,
+                    ByteBufCodecs.DOUBLE,
+                    writer -> writer.tag().putDouble(writer.prop().getName(),
+                            writer.prop().get()), reader -> reader.tag().getDouble(reader.prop().getName()));
     public static final PropertyType<UUID, ByteBuf> UUID = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "uuid"), null, UUIDUtil.STREAM_CODEC, writer -> writer.tag().putUUID(writer.prop().getName(), writer.prop().get()), reader -> reader.tag().getUUID(reader.prop().getName()));
     public static final PropertyType<CompoundTag, ByteBuf> COMPOUND_TAG = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "compoundtag"), null, ByteBufCodecs.fromCodec(CompoundTag.CODEC), writer -> writer.tag().put(writer.prop().getName(), writer.prop().get()), reader -> reader.tag().getCompound(reader.prop().getName()));
     public static final PropertyType<BlockPos, ByteBuf> BLOCK_POS = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "blockpos"), null, BlockPos.STREAM_CODEC, writer -> writer.tag().put(writer.prop().getName(), NbtUtils.writeBlockPos((writer.prop().get()))), reader -> NbtUtils.readBlockPos(reader.tag(), reader.prop().getName()).get());
@@ -56,17 +62,20 @@ public class PropertyTypes {
         return true;
     }, ByteBufCodecs.fromCodec(NonNullList.codecOf(ItemStack.CODEC)), writer -> {
         //
+        CompoundTag data = new CompoundTag();
         NonNullList<ItemStack> list = writer.prop().get();
-        writer.tag().putInt(writer.prop().getName() + "_size", list.size());
-        ContainerHelper.saveAllItems(writer.tag(), list, true, writer.world().registryAccess());
+        data.putInt(writer.prop().getName() + "_size", list.size());
+        ContainerHelper.saveAllItems(data, list, true, writer.registries());
+        writer.tag().put(writer.prop().getName(), data);
     }, reader -> {
         //
-        int size = reader.tag().getInt(reader.prop().getName() + "_size");
+        CompoundTag data = reader.tag().getCompound(reader.prop().getName());
+        int size = data.getInt(reader.prop().getName() + "_size");
         if (size == 0 || ((NonNullList<ItemStack>) reader.prop().get()).size() != size) {
             return null; // null is handled in function method caller and signals a bad writer.value() to be ignored
         }
         NonNullList<ItemStack> toBeFilled = NonNullList.<ItemStack>withSize(size, ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(reader.tag(), toBeFilled, reader.world().registryAccess());
+        ContainerHelper.loadAllItems(data, toBeFilled, reader.registries());
         return toBeFilled;
     });
 
@@ -112,9 +121,9 @@ public class PropertyTypes {
     });
     public static final PropertyType<Location, FriendlyByteBuf> LOCATION = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "location"), null, Location.STREAM_CODEC, writer -> writer.prop().get().writeToNBT(writer.tag(), writer.prop().getName()), reader -> Location.readFromNBT(reader.tag(), reader.prop().getName()));
     public static final PropertyType<GasStack, FriendlyByteBuf> GAS_STACK = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "gasstack"), null, GasStack.STREAM_CODEC, writer -> writer.tag().put(writer.prop().getName(), writer.prop().get().writeToNbt()), reader -> GasStack.readFromNbt(reader.tag().getCompound(reader.prop().getName())));
-    public static final PropertyType<ItemStack, RegistryFriendlyByteBuf> ITEM_STACK = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "itemstack"), (thisStack, otherStack) -> ItemStack.matches(thisStack, otherStack), ItemStack.STREAM_CODEC, writer -> writer.tag().put(writer.prop().getName(), writer.prop().get().save(writer.world().registryAccess())), reader -> ItemStack.CODEC.decode(NbtOps.INSTANCE, reader.tag().getCompound(reader.prop().getName())).getOrThrow().getFirst());
+    public static final PropertyType<ItemStack, RegistryFriendlyByteBuf> ITEM_STACK = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "itemstack"), (thisStack, otherStack) -> ItemStack.matches(thisStack, otherStack), ItemStack.STREAM_CODEC, writer -> writer.tag().put(writer.prop().getName(), writer.prop().get().save(writer.registries())), reader -> ItemStack.CODEC.decode(NbtOps.INSTANCE, reader.tag().getCompound(reader.prop().getName())).getOrThrow().getFirst());
     public static final PropertyType<Block, ByteBuf> BLOCK = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "block"), null, ByteBufCodecs.fromCodec(BuiltInRegistries.BLOCK.byNameCodec()), writer -> {
-        writer.tag().put(writer.prop().getName(), new ItemStack(writer.prop().get().asItem()).save(writer.world().registryAccess()));
+        writer.tag().put(writer.prop().getName(), new ItemStack(writer.prop().get().asItem()).save(writer.registries()));
     }, reader -> {
         ItemStack stack = ItemStack.CODEC.decode(NbtOps.INSTANCE, reader.tag().getCompound(reader.prop().getName())).getOrThrow().getFirst();
         if (stack.isEmpty()) {

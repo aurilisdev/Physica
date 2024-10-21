@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nullable;
 
 import electrodynamics.prefab.tile.GenericTile;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -22,6 +23,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
  */
 public class PropertyManager {
 
+	public static final String NBT_KEY = "propertydata";
+
 	public static final ConcurrentHashMap<ResourceLocation, IPropertyType> REGISTERED_PROPERTIES = new ConcurrentHashMap<>();
 
 	public static void registerProperties(Map<ResourceLocation, IPropertyType> propeties) {
@@ -34,6 +37,7 @@ public class PropertyManager {
 	private ArrayList<Property<?>> properties = new ArrayList<>();
 
 	private HashSet<PropertyWrapper> dirtyProperties = new HashSet<>();
+	private HashSet<Property<?>> dirtyPropertiesDirect = new HashSet<>();
 
 	private boolean isDirty = false;
 
@@ -58,12 +62,19 @@ public class PropertyManager {
 
 	}
 
+	public void saveDirtyPropsToTag(CompoundTag tag) {
+		for(Property<?> prop : dirtyPropertiesDirect){
+			prop.saveToTag(tag, owner.getLevel().registryAccess());
+		}
+	}
+
 	public void clean() {
 		isDirty = false;
 		dirtyProperties.forEach(wrapper -> {
 			wrapper.property.clean();
 		});
 		dirtyProperties.clear();
+		dirtyPropertiesDirect.clear();
 	}
 
 	public void update(int indexOf, Object value) {
@@ -77,6 +88,7 @@ public class PropertyManager {
 	public void setDirty(Property<?> dirtyProp) {
 		isDirty = true;
 		if (dirtyProp.shouldUpdateClient()) {
+			dirtyPropertiesDirect.add(dirtyProp);
 			dirtyProperties.add(new PropertyWrapper(dirtyProp.getIndex(), dirtyProp.getType(), dirtyProp.get(), dirtyProp));
 		}
 	}
@@ -94,18 +106,18 @@ public class PropertyManager {
 		return owner;
 	}
 
-	public void saveToTag(CompoundTag tag, Level world) {
+	public void saveToTag(CompoundTag tag, HolderLookup.Provider registries) {
 		for (Property<?> prop : getProperties()) {
 			if (prop.shouldSave()) {
-				prop.saveToTag(tag, world);
+				prop.saveToTag(tag, registries);
 			}
 		}
 	}
 
-	public void loadFromTag(CompoundTag tag, Level world) {
+	public void loadFromTag(CompoundTag tag, HolderLookup.Provider registries) {
 		for (Property<?> prop : getProperties()) {
-			if (prop.shouldSave()) {
-				prop.loadFromTag(tag, world);
+			if (prop.shouldSave() && tag.contains(prop.getName())) {
+				prop.loadFromTag(tag, registries);
 				tag.remove(prop.getName());
 			}
 		}

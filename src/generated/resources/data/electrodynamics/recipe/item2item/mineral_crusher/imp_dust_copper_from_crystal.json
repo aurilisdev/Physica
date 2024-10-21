@@ -3,7 +3,7 @@
   "fluidinputs": [
     {
       "count": 1,
-      "ingreident": {
+      "ingredient": {
         "item": "electrodynamics:crystalcopper"
       }
     }

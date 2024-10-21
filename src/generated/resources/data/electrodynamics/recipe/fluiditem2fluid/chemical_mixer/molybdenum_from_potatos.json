@@ -10,7 +10,7 @@
   "iteminputs": [
     {
       "count": 4,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:crops/potato"
       }
     }

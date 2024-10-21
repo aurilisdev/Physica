@@ -4,13 +4,13 @@
   "fluidinputs": [
     {
       "count": 4,
-      "ingreident": {
+      "ingredient": {
         "item": "minecraft:ender_eye"
       }
     },
     {
       "count": 5,
-      "ingreident": {
+      "ingredient": {
         "tag": "c:ingots/silver"
       }
     }
