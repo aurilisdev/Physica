@@ -11,8 +11,6 @@ import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
 /**
  * A wrapper class designed to react when properties change and take according action
@@ -37,7 +35,7 @@ public class PropertyManager {
 	private ArrayList<Property<?>> properties = new ArrayList<>();
 
 	private HashSet<PropertyWrapper> dirtyProperties = new HashSet<>();
-	private ArrayList<Property<?>> dirtyPropertiesDirect = new ArrayList<>();
+	private HashSet<Property<?>> dirtyPropertiesDirect = new HashSet<>();
 
 	private boolean isDirty = false;
 
@@ -89,7 +87,7 @@ public class PropertyManager {
 		isDirty = true;
 		if (dirtyProp.shouldUpdateClient()) {
 			dirtyPropertiesDirect.add(dirtyProp);
-			dirtyProperties.add(new PropertyWrapper(dirtyProp.getIndex(), dirtyProp.getType(), dirtyProp.get(), dirtyProp));
+			//dirtyProperties.add(new PropertyWrapper(dirtyProp.getIndex(), dirtyProp.getType(), dirtyProp.get(), dirtyProp));
 		}
 	}
 
