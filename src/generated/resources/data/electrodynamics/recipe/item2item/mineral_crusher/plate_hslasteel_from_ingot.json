@@ -1,7 +1,8 @@
 {
   "type": "electrodynamics:mineral_crusher_recipe",
   "experience": 0.10000000149011612,
-  "fluidinputs": [
+  "group": "electrodynamics",
+  "iteminputs": [
     {
       "count": 1,
       "ingredient": {
@@ -9,7 +10,6 @@
       }
     }
   ],
-  "group": "electrodynamics",
   "output": {
     "count": 1,
     "id": "electrodynamics:platehslasteel"

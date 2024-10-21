@@ -1,14 +1,6 @@
 {
   "type": "electrodynamics:wire_mill_recipe",
   "experience": 0.10000000149011612,
-  "fluidinputs": [
-    {
-      "count": 1,
-      "ingredient": {
-        "tag": "c:ingots/iron"
-      }
-    }
-  ],
   "group": "electrodynamics",
   "itembi": [
     {
@@ -16,6 +8,14 @@
       "item": {
         "count": 1,
         "id": "minecraft:iron_nugget"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/iron"
       }
     }
   ],

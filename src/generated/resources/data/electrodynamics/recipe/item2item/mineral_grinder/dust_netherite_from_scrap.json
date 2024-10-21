@@ -1,6 +1,7 @@
 {
   "type": "electrodynamics:mineral_grinder_recipe",
-  "fluidinputs": [
+  "group": "electrodynamics",
+  "iteminputs": [
     {
       "count": 1,
       "ingredient": {
@@ -8,7 +9,6 @@
       }
     }
   ],
-  "group": "electrodynamics",
   "output": {
     "count": 1,
     "id": "electrodynamics:dustnetherite"

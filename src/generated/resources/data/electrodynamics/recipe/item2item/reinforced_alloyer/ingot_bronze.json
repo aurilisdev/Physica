@@ -1,7 +1,17 @@
 {
   "type": "electrodynamics:reinforced_alloyer_recipe",
   "experience": 0.10000000149011612,
-  "fluidinputs": [
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.5,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:slag"
+      }
+    }
+  ],
+  "iteminputs": [
     {
       "count": 1,
       "ingredient": {
@@ -12,16 +22,6 @@
       "count": 4,
       "ingredient": {
         "tag": "c:ingots/copper"
-      }
-    }
-  ],
-  "group": "electrodynamics",
-  "itembi": [
-    {
-      "chance": 0.5,
-      "item": {
-        "count": 1,
-        "id": "electrodynamics:slag"
       }
     }
   ],

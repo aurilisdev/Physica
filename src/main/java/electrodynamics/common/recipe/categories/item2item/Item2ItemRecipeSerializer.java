@@ -27,7 +27,7 @@ public class Item2ItemRecipeSerializer<T extends Item2ItemRecipe> extends Electr
                                 //
                                 Codec.STRING.fieldOf(GROUP).forGetter(T::getGroup),
                                 //
-                                CountableIngredient.LIST_CODEC.fieldOf(FLUID_INPUTS).forGetter(T::getCountedIngredients),
+                                CountableIngredient.LIST_CODEC.fieldOf(ITEM_INPUTS).forGetter(T::getCountedIngredients),
                                 //
                                 ItemStack.CODEC.fieldOf(OUTPUT).forGetter(T::getItemRecipeOutput),
                                 //

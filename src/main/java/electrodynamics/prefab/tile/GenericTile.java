@@ -7,6 +7,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -175,6 +176,7 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
             CompoundTag propertyData = new CompoundTag();
             propertyManager.saveDirtyPropsToTag(propertyData);
             tag.put(PropertyManager.NBT_KEY, propertyData);
+            propertyManager.clean();
         }
 
         return tag;
@@ -251,7 +253,7 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
     public void setChanged() {
         super.setChanged();
         if (!level.isClientSide) {
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), GenericEntityBlock.UPDATE_CLIENTS);
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
             //if (hasComponent(IComponentType.PacketHandler)) {
             //    this.<ComponentPacketHandler>getComponent(IComponentType.PacketHandler).sendProperties();
             //}

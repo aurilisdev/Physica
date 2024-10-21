@@ -1,14 +1,6 @@
 {
   "type": "electrodynamics:wire_mill_recipe",
   "experience": 0.20000000298023224,
-  "fluidinputs": [
-    {
-      "count": 1,
-      "ingredient": {
-        "tag": "c:ingots/gold"
-      }
-    }
-  ],
   "group": "electrodynamics",
   "itembi": [
     {
@@ -16,6 +8,14 @@
       "item": {
         "count": 1,
         "id": "minecraft:gold_nugget"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/gold"
       }
     }
   ],

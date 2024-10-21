@@ -104,8 +104,6 @@ public class ComponentTickable implements IComponent {
 
 				holder.setChanged();
 
-				holder.getPropertyManager().clean();
-
 				holder.isChanged = false;
 			}
 		}

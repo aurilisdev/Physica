@@ -1,7 +1,17 @@
 {
   "type": "electrodynamics:energized_alloyer_recipe",
   "experience": 0.5,
-  "fluidinputs": [
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.25,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:slag"
+      }
+    }
+  ],
+  "iteminputs": [
     {
       "count": 1,
       "ingredient": {
@@ -12,16 +22,6 @@
       "count": 1,
       "ingredient": {
         "tag": "c:dusts/saltpeter"
-      }
-    }
-  ],
-  "group": "electrodynamics",
-  "itembi": [
-    {
-      "chance": 0.25,
-      "item": {
-        "count": 1,
-        "id": "electrodynamics:slag"
       }
     }
   ],

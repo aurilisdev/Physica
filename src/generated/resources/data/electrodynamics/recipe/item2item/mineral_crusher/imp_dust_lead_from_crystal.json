@@ -1,13 +1,5 @@
 {
   "type": "electrodynamics:mineral_crusher_recipe",
-  "fluidinputs": [
-    {
-      "count": 1,
-      "ingredient": {
-        "item": "electrodynamics:crystallead"
-      }
-    }
-  ],
   "group": "electrodynamics",
   "itembi": [
     {
@@ -15,6 +7,14 @@
       "item": {
         "count": 1,
         "id": "electrodynamics:oxidetrisulfur"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "electrodynamics:crystallead"
       }
     }
   ],

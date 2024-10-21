@@ -1,14 +1,6 @@
 {
   "type": "electrodynamics:mineral_grinder_recipe",
   "experience": 0.20000000298023224,
-  "fluidinputs": [
-    {
-      "count": 1,
-      "ingredient": {
-        "tag": "c:ores/sulfur"
-      }
-    }
-  ],
   "group": "electrodynamics",
   "itembi": [
     {
@@ -16,6 +8,14 @@
       "item": {
         "count": 1,
         "id": "minecraft:coal"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/sulfur"
       }
     }
   ],

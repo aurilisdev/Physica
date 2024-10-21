@@ -1,6 +1,7 @@
 {
   "type": "electrodynamics:energized_alloyer_recipe",
-  "fluidinputs": [
+  "group": "electrodynamics",
+  "iteminputs": [
     {
       "count": 1,
       "ingredient": {
@@ -14,7 +15,6 @@
       }
     }
   ],
-  "group": "electrodynamics",
   "output": {
     "count": 1,
     "id": "electrodynamics:slag"

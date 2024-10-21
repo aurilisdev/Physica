@@ -37,7 +37,7 @@ public class PropertyManager {
 	private ArrayList<Property<?>> properties = new ArrayList<>();
 
 	private HashSet<PropertyWrapper> dirtyProperties = new HashSet<>();
-	private HashSet<Property<?>> dirtyPropertiesDirect = new HashSet<>();
+	private ArrayList<Property<?>> dirtyPropertiesDirect = new ArrayList<>();
 
 	private boolean isDirty = false;
 

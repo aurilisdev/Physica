@@ -80,7 +80,7 @@ public class CountableIngredient implements ICustomIngredient {
 
     @Override
     public boolean test(ItemStack stack) {
-        return ingredient.test(stack) && stackSize >= stack.getCount();
+        return ingredient.test(stack) && stackSize <= stack.getCount();
     }
 
     @Override
@@ -90,6 +90,7 @@ public class CountableIngredient implements ICustomIngredient {
             for (ItemStack item : items) {
                 item.setCount(stackSize);
             }
+            countedItems = items;
         }
         return Stream.of(countedItems);
     }
@@ -100,6 +101,7 @@ public class CountableIngredient implements ICustomIngredient {
             for (ItemStack item : items) {
                 item.setCount(stackSize);
             }
+            countedItems = items;
         }
         return countedItems;
     }
@@ -120,7 +122,7 @@ public class CountableIngredient implements ICustomIngredient {
 
     @Override
     public String toString() {
-        return getItemsArray()[0].toString();
+        return getItemsArray().length == 0 ? "empty" : getItemsArray()[0].toString();
     }
 
     @Override

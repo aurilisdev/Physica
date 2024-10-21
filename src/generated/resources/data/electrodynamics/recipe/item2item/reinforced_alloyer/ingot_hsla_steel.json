@@ -1,7 +1,17 @@
 {
   "type": "electrodynamics:reinforced_alloyer_recipe",
   "experience": 0.30000001192092896,
-  "fluidinputs": [
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 1.0,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:slag"
+      }
+    }
+  ],
+  "iteminputs": [
     {
       "count": 1,
       "ingredient": {
@@ -12,16 +22,6 @@
       "count": 1,
       "ingredient": {
         "tag": "c:ingots/molybdenum"
-      }
-    }
-  ],
-  "group": "electrodynamics",
-  "itembi": [
-    {
-      "chance": 1.0,
-      "item": {
-        "count": 1,
-        "id": "electrodynamics:slag"
       }
     }
   ],
