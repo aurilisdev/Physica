@@ -24,7 +24,6 @@ import electrodynamics.common.settings.OreConfig;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.prefab.configuration.ConfigurationHandler;
 import electrodynamics.prefab.properties.PropertyManager;
-import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.UnifiedElectrodynamicsRegister;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.api.distmarker.Dist;
@@ -35,7 +34,6 @@ import net.neoforged.fml.ModLoader;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -82,12 +80,6 @@ public class Electrodynamics {
             PropertyManager.registerProperties(properties.getRegisteredProperties());
         });
         ElectrodynamicsVoxelShapeRegistry.init();
-
-    }
-
-    @SubscribeEvent
-    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        ElectrodynamicsCapabilities.register(event);
 
     }
 

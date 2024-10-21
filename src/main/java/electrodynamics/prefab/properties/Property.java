@@ -1,16 +1,10 @@
 package electrodynamics.prefab.properties;
 
-import java.util.List;
 import java.util.function.BiConsumer;
 
-import electrodynamics.common.packet.types.client.PacketUpdateSpecificPropertyClient;
 import electrodynamics.common.packet.types.server.PacketSendUpdatePropertiesServer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -41,6 +35,8 @@ public class Property<T> {
     };
     private BiConsumer<Property<T>, T> onLoad = (prop, val) -> {
     };
+
+    private boolean alreadySynced = false;
 
     public Property(IPropertyType type, String name, T defaultValue) {
         this.type = type;
@@ -86,6 +82,9 @@ public class Property<T> {
     }
 
     public Property<T> set(Object updated) {
+        if(alreadySynced){
+            return this;
+        }
         if(!updated.getClass().equals(value.getClass())) {
             throw new RuntimeException("Value " + updated + " being set for " + getName() + " on tile " + getPropertyManager().getOwner() + " is an invalid data type!");
         }
@@ -95,8 +94,10 @@ public class Property<T> {
         if (isDirty() && manager.getOwner().getLevel() != null) {
             if (!manager.getOwner().getLevel().isClientSide()) {
                 if(shouldUpdateOnChange) {
+                    alreadySynced = true;
                     manager.getOwner().getLevel().sendBlockUpdated(manager.getOwner().getBlockPos(), manager.getOwner().getBlockState(), manager.getOwner().getBlockState(), Block.UPDATE_CLIENTS);
                     manager.getOwner().setChanged();
+                    alreadySynced = false;
                 }
                 manager.setDirty(this);
             }
@@ -192,25 +193,6 @@ public class Property<T> {
     public void saveToTag(CompoundTag tag, HolderLookup.Provider registries) {
         getType().writeToTag(new IPropertyType.TagWriter<>(this, tag, registries));
     }
-
-    /*
-    private void updateClient() {
-
-
-        ServerLevel level = (ServerLevel) manager.getOwner().getLevel();
-        List<ServerPlayer> players = level.getChunkSource().chunkMap.getPlayers(new ChunkPos(manager.getOwner().getBlockPos()), false);
-
-        if (players.isEmpty()) {
-            return;
-        }
-
-        PacketUpdateSpecificPropertyClient packet = new PacketUpdateSpecificPropertyClient(new PropertyManager.PropertyWrapper(getIndex(), getType(), get(), this), manager.getOwner().getBlockPos());
-
-        players.forEach(p -> PacketDistributor.sendToPlayer(p, packet));
-
-
-    }
-    */
     public void updateServer() {
 
         if (manager.getOwner() != null) {

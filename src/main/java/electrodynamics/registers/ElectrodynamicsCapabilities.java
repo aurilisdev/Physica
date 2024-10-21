@@ -5,6 +5,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.References;
@@ -32,6 +34,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.ItemCapability;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 public class ElectrodynamicsCapabilities {
 
     public static final double DEFAULT_VOLTAGE = 120.0;
@@ -44,6 +47,7 @@ public class ElectrodynamicsCapabilities {
     public static final ItemCapability<IGasHandlerItem, Void> CAPABILITY_GASHANDLER_ITEM = ItemCapability.createVoid(id("gashandleritem"), IGasHandlerItem.class);
     public static final BlockCapability<IGasHandler, @Nullable Direction> CAPABILITY_GASHANDLER_BLOCK = BlockCapability.createSided(id("gashandlerblock"), IGasHandler.class);
 
+    @SubscribeEvent
     public static void register(RegisterCapabilitiesEvent event) {
 
         /* ITEMS */
