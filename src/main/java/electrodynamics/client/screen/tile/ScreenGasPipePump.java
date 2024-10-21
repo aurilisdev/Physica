@@ -53,8 +53,6 @@ public class ScreenGasPipePump extends GenericScreen<ContainerGasPipePump> {
 
 		pump.priority.set(priority);
 
-		pump.priority.updateServer();
-
 	}
 
 	@Override

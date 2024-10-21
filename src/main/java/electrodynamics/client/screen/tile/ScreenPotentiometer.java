@@ -45,7 +45,6 @@ public class ScreenPotentiometer extends GenericScreen<ContainerPotentiometer> {
 		}
 
 		potentiometer.powerConsumption.set(consumption);
-		potentiometer.powerConsumption.updateServer();
 
 	}
 

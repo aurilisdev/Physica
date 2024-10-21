@@ -39,9 +39,6 @@ public class TileLogisticalManager extends GenericTile implements IConnectTile {
     public static final int EAST_MASK = 0b00000000111100000000000000000000;
 
     public final Property<Integer> connections = property(new Property<>(PropertyTypes.INTEGER, "connections", 0).onChange((property, old) -> {
-        if (!level.isClientSide) {
-            return;
-        }
         requestModelDataUpdate();
     }));
 

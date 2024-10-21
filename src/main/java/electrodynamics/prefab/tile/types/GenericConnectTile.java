@@ -26,16 +26,23 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
     public static final int EAST_MASK = 0b00000000111100000000000000000000;
 
     public final Property<Integer> connections = property(new Property<>(PropertyTypes.INTEGER, "connections", 0).setShouldUpdateOnChange().onChange((property, old) -> {
-        if(!level.isClientSide()){
-            return;
-        }
         requestModelDataUpdate();
     }));
     public final Property<BlockState> camoflaugedBlock = property(new Property<>(PropertyTypes.BLOCK_STATE, "camoflaugedblock", Blocks.AIR.defaultBlockState())).onChange((property, block) -> {
+        if(level == null) {
+            return;
+        }
+        level.getChunkSource().getLightEngine().checkBlock(worldPosition);
+    }).onTileLoaded(property -> {
         level.getChunkSource().getLightEngine().checkBlock(worldPosition);
     });
 
     public final Property<BlockState> scaffoldBlock = property(new Property<>(PropertyTypes.BLOCK_STATE, "scaffoldblock", Blocks.AIR.defaultBlockState())).onChange((property, block) -> {
+        if(level == null) {
+            return;
+        }
+        level.getChunkSource().getLightEngine().checkBlock(worldPosition);
+    }).onTileLoaded(property -> {
         level.getChunkSource().getLightEngine().checkBlock(worldPosition);
     });
 

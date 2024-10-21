@@ -81,8 +81,6 @@ public class ScreenComponentGasGaugeInput extends ScreenComponentGasGauge {
 
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
 
-        tank.updateServer();
-
         stack = handler.getContainer();
 
         PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray().getBlockPos(), Minecraft.getInstance().player.getUUID()));

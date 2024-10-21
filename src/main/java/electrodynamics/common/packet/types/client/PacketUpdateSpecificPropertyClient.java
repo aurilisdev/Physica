@@ -18,31 +18,38 @@ public class PacketUpdateSpecificPropertyClient implements CustomPacketPayload {
 
         @Override
         public void encode(RegistryFriendlyByteBuf buf, PacketUpdateSpecificPropertyClient packet) {
+            /*
             buf.writeBlockPos(packet.pos);
             buf.writeInt(packet.value.index());
             buf.writeResourceLocation(packet.value.type().getId());
             packet.value.type().getPacketCodec().encode(buf, packet.value.property().get());
+
+             */
         }
 
         @Override
         public PacketUpdateSpecificPropertyClient decode(RegistryFriendlyByteBuf buf) {
+            /*
             BlockPos pos = buf.readBlockPos();
             int index = buf.readInt();
             IPropertyType type = PropertyManager.REGISTERED_PROPERTIES.get(buf.readResourceLocation());
             return new PacketUpdateSpecificPropertyClient(new PropertyManager.PropertyWrapper(index, type, type.getPacketCodec().decode(buf), null), pos);
+
+             */
+            return null;
         }
     };
 
     private final BlockPos pos;
-    private final PropertyManager.PropertyWrapper value;
+    //private final PropertyManager.PropertyWrapper value;
 
-    public PacketUpdateSpecificPropertyClient(PropertyManager.PropertyWrapper wrapper, BlockPos pos) {
-        value = wrapper;
+    public PacketUpdateSpecificPropertyClient(/*PropertyManager.PropertyWrapper wrapper, */BlockPos pos) {
+        //value = wrapper;
         this.pos = pos;
     }
 
     public static void handle(PacketUpdateSpecificPropertyClient packet, IPayloadContext context){
-        ClientBarrierMethods.handleUpdateSpecificPropertyClient(packet.value, packet.pos);
+        //ClientBarrierMethods.handleUpdateSpecificPropertyClient(packet.value, packet.pos);
     }
 
     @Override

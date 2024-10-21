@@ -175,7 +175,7 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
         CompoundTag tag = super.getUpdateTag(registries);
         if(propertyManager != null) {
             CompoundTag propertyData = new CompoundTag();
-            propertyManager.saveToTag(propertyData, registries);
+            propertyManager.saveAllPropsForClientSync(propertyData, registries);
             tag.put(PropertyManager.NBT_KEY, propertyData);
             propertyManager.clean();
         }
@@ -196,6 +196,7 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
         });
     }
 
+    //Only fires on server side
     @Override
     public void onLoad() {
         super.onLoad();
@@ -205,6 +206,10 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 component.holder(this);
                 component.onLoad();
             }
+        }
+
+        if(propertyManager != null) {
+            propertyManager.onTileLoaded();
         }
     }
 
@@ -254,17 +259,6 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 pr.holder(this);
                 pr.remove();
             }
-        }
-    }
-
-    @Override
-    public void setChanged() {
-        super.setChanged();
-        if (!level.isClientSide) {
-            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
-            //if (hasComponent(IComponentType.PacketHandler)) {
-            //    this.<ComponentPacketHandler>getComponent(IComponentType.PacketHandler).sendProperties();
-            //}
         }
     }
 

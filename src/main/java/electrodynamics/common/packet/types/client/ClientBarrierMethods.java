@@ -11,7 +11,7 @@ import electrodynamics.common.item.gear.armor.types.ItemJetpack;
 import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
 import electrodynamics.common.reloadlistener.ThermoelectricGeneratorHeatRegister;
-import electrodynamics.prefab.properties.PropertyManager.PropertyWrapper;
+//import electrodynamics.prefab.properties.PropertyManager.PropertyWrapper;
 import electrodynamics.prefab.sound.tickable.TickableSoundJetpack;
 import electrodynamics.prefab.tile.IPropertyHolderTile;
 import electrodynamics.prefab.utilities.object.CombustionFuelSource;
@@ -45,12 +45,14 @@ public class ClientBarrierMethods {
         HandlerSeismicScanner.addBlock(pos);
     }
 
+    /*
     public static void handlePropertiesUpdateClient(BlockPos pos, HashSet<PropertyWrapper> values) {
         ClientLevel world = Minecraft.getInstance().level;
         if (world == null) {
             return;
         }
         BlockEntity tile = world.getBlockEntity(pos);
+
         if (tile instanceof IPropertyHolderTile holder) {
             for (PropertyWrapper wrapper : values) {
 
@@ -59,6 +61,7 @@ public class ClientBarrierMethods {
             }
         }
     }
+    */
 
     public static void handlePacketJetpackEquipedSound(UUID messageId) {
         Minecraft minecraft = Minecraft.getInstance();
@@ -127,6 +130,7 @@ public class ClientBarrierMethods {
         world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0);
     }
 
+    /*
     public static void handleUpdateSpecificPropertyClient(PropertyWrapper wrapper, BlockPos pos){
         ClientLevel world = Minecraft.getInstance().level;
         if (world == null) {
@@ -137,5 +141,7 @@ public class ClientBarrierMethods {
             holder.getPropertyManager().update(wrapper.index(), wrapper.value());
         }
     }
+
+     */
 
 }

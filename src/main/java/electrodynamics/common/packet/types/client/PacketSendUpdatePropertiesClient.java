@@ -5,7 +5,7 @@ import java.util.HashSet;
 import electrodynamics.common.packet.NetworkHandler;
 import electrodynamics.prefab.properties.IPropertyType;
 import electrodynamics.prefab.properties.PropertyManager;
-import electrodynamics.prefab.properties.PropertyManager.PropertyWrapper;
+//import electrodynamics.prefab.properties.PropertyManager.PropertyWrapper;
 import electrodynamics.prefab.tile.IPropertyHolderTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -22,6 +22,7 @@ public class PacketSendUpdatePropertiesClient implements CustomPacketPayload {
 
         @Override
         public void encode(RegistryFriendlyByteBuf buf, PacketSendUpdatePropertiesClient packet) {
+            /*
             buf.writeBlockPos(packet.pos);
             buf.writeInt(packet.values.size());
             packet.values.forEach(wrapper -> {
@@ -29,10 +30,13 @@ public class PacketSendUpdatePropertiesClient implements CustomPacketPayload {
                 buf.writeResourceLocation(wrapper.type().getId());
                 wrapper.type().getPacketCodec().encode(buf, wrapper.property().get());
             });
+
+             */
         }
 
         @Override
         public PacketSendUpdatePropertiesClient decode(RegistryFriendlyByteBuf buf) {
+            /*
             BlockPos pos = buf.readBlockPos();
 
             int size = buf.readInt();
@@ -49,23 +53,29 @@ public class PacketSendUpdatePropertiesClient implements CustomPacketPayload {
 
             }
             return new PacketSendUpdatePropertiesClient(pos, properties);
+
+             */
+            return null;
         }
     };
 
     private final BlockPos pos;
-    private final HashSet<PropertyWrapper> values;
+    //private final HashSet<PropertyWrapper> values;
 
+    /*
     public PacketSendUpdatePropertiesClient(IPropertyHolderTile tile) {
         this(tile.getTile().getBlockPos(), tile.getPropertyManager().getClientUpdateProperties());
     }
 
-    public PacketSendUpdatePropertiesClient(BlockPos pos, HashSet<PropertyWrapper> dirtyProperties) {
+     */
+
+    public PacketSendUpdatePropertiesClient(BlockPos pos/*, HashSet<PropertyWrapper> dirtyProperties*/) {
         this.pos = pos;
-        values = dirtyProperties;
+        //values = dirtyProperties;
     }
 
     public static void handle(PacketSendUpdatePropertiesClient message, IPayloadContext context) {
-        ClientBarrierMethods.handlePropertiesUpdateClient(message.pos, message.values);
+        //ClientBarrierMethods.handlePropertiesUpdateClient(message.pos/*, message.values */) ;
     }
 
     @Override

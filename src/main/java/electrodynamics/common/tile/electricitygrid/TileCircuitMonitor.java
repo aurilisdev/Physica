@@ -23,7 +23,7 @@ public class TileCircuitMonitor extends GenericTile {
 	public final Property<Integer> booleanOperator = property(new Property<>(PropertyTypes.INTEGER, "booleanoperator", 0));
 	public final Property<Double> value = property(new Property<>(PropertyTypes.DOUBLE, "value", 0.0));
 	public final Property<Boolean> redstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false)).setNoUpdateClient().onChange((prop, old) -> {
-		if (level.isClientSide) {
+		if (level == null || level.isClientSide) {
 			return;
 		}
 

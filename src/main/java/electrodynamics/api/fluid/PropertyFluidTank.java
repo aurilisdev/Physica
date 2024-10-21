@@ -178,16 +178,4 @@ public class PropertyFluidTank extends FluidTank {
 		}
 	}
 
-	// this must be called to update the server if interacted with on the client
-	public void updateServer() {
-
-		if (fluidStackProperty.isDirty()) {
-			fluidStackProperty.updateServer();
-		}
-		if (capacityProperty.isDirty()) {
-			capacityProperty.updateServer();
-		}
-
-	}
-
 }

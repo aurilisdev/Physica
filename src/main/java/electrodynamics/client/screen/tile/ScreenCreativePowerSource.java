@@ -55,8 +55,6 @@ public class ScreenCreativePowerSource extends GenericScreen<ContainerCreativePo
 		}
 
 		tile.voltage.set(voltage);
-
-		tile.voltage.updateServer();
 	}
 
 	private void setPower(String val) {
@@ -86,8 +84,6 @@ public class ScreenCreativePowerSource extends GenericScreen<ContainerCreativePo
 		}
 
 		tile.power.set(power);
-
-		tile.power.updateServer();
 
 	}
 

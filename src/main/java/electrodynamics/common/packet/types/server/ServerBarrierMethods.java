@@ -94,14 +94,14 @@ public class ServerBarrierMethods {
         tile.power.set(power);
     }
 
-    public static void handleSendUpdatePropertiesServer(Level level, BlockPos tilePos, PropertyManager.PropertyWrapper wrapper) {
+    public static void handleSendUpdatePropertiesServer(Level level, BlockPos tilePos, CompoundTag data, int index) {
         ServerLevel world = (ServerLevel) level;
         if (world == null) {
             return;
         }
         BlockEntity tile = world.getBlockEntity(tilePos);
         if (tile instanceof IPropertyHolderTile holder) {
-            holder.getPropertyManager().update(wrapper.index(), wrapper.value());
+            holder.getPropertyManager().loadDataFromClient(index, data);
         }
     }
 

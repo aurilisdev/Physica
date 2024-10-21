@@ -58,7 +58,6 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 2.0);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(75, 40, 40, 20).setLabel(Component.literal("4 : 1")).setOnPress(button -> {
 			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
@@ -66,7 +65,6 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 4.0);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(75, 60, 40, 20).setLabel(Component.literal("8 : 1")).setOnPress(button -> {
 			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
@@ -74,7 +72,6 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 8.0);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(75, 80, 40, 20).setLabel(Component.literal("16 : 1")).setOnPress(button -> {
 			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
@@ -82,7 +79,6 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 16.0);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(120, 20, 40, 20).setLabel(Component.literal("32 : 1")).setOnPress(button -> {
 			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
@@ -90,7 +86,6 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 32.0);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(120, 40, 40, 20).setLabel(Component.literal("64 : 1")).setOnPress(button -> {
 			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
@@ -98,7 +93,6 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 64.0);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(120, 60, 40, 20).setLabel(Component.literal("128 : 1")).setOnPress(button -> {
 			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
@@ -106,7 +100,6 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 128.0);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(120, 80, 40, 20).setLabel(Component.literal("256 : 1")).setOnPress(button -> {
 			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
@@ -114,7 +107,6 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 256.0);
-			xfmr.coilRatio.updateServer();
 		}));
 	}
 

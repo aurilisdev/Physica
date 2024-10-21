@@ -157,22 +157,4 @@ public class PropertyGasTank extends GasTank {
 		return new PropertyGasTank[] { this };
 	}
 
-	// this must be called to update the server if interacted with on the client
-	public void updateServer() {
-
-		if (gasProperty.isDirty()) {
-			gasProperty.updateServer();
-		}
-		if (capacityProperty.isDirty()) {
-			capacityProperty.updateServer();
-		}
-		if (maxTemperatureProperty.isDirty()) {
-			maxTemperatureProperty.updateServer();
-		}
-		if (maxPressureProperty.isDirty()) {
-			maxPressureProperty.updateServer();
-		}
-
-	}
-
 }

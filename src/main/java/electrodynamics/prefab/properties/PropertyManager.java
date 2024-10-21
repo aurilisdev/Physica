@@ -5,15 +5,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.annotation.Nullable;
-
+import electrodynamics.Electrodynamics;
 import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 
 /**
- * A wrapper class designed to react when properties change and take according action
+ * A wrapper class designed to manage data properties on a tile
  * 
  * @author AurilisDev
  * @author skip999
@@ -34,7 +33,7 @@ public class PropertyManager {
 
 	private ArrayList<Property<?>> properties = new ArrayList<>();
 
-	private HashSet<PropertyWrapper> dirtyProperties = new HashSet<>();
+	//private HashSet<PropertyWrapper> dirtyProperties = new HashSet<>();
 	private HashSet<Property<?>> dirtyPropertiesDirect = new HashSet<>();
 
 	private boolean isDirty = false;
@@ -54,29 +53,41 @@ public class PropertyManager {
 		return properties;
 	}
 
+	/*
 	public HashSet<PropertyWrapper> getClientUpdateProperties() {
 
 		return dirtyProperties;
 
 	}
 
+
+	 */
 	public void saveDirtyPropsToTag(CompoundTag tag, HolderLookup.Provider registries) {
 		for(Property<?> prop : dirtyPropertiesDirect){
 			prop.saveToTag(tag, owner.getLevel().registryAccess());
 		}
 	}
 
+	public void saveAllPropsForClientSync(CompoundTag tag, HolderLookup.Provider registries) {
+		for(Property<?> prop : properties){
+			if(prop.shouldUpdateClient()) {
+				prop.saveToTag(tag, registries);
+			}
+		}
+	}
+
 	public void clean() {
 		isDirty = false;
+		/*
 		dirtyProperties.forEach(wrapper -> {
 			wrapper.property.clean();
 		});
-		dirtyProperties.clear();
+		 */
+		for (Property<?> property : dirtyPropertiesDirect) {
+			property.clean();
+		}
+		//dirtyProperties.clear();
 		dirtyPropertiesDirect.clear();
-	}
-
-	public void update(int indexOf, Object value) {
-		properties.get(indexOf).set(value);
 	}
 
 	public boolean isDirty() {
@@ -87,7 +98,6 @@ public class PropertyManager {
 		isDirty = true;
 		if (dirtyProp.shouldUpdateClient()) {
 			dirtyPropertiesDirect.add(dirtyProp);
-			//dirtyProperties.add(new PropertyWrapper(dirtyProp.getIndex(), dirtyProp.getType(), dirtyProp.get(), dirtyProp));
 		}
 	}
 
@@ -121,7 +131,33 @@ public class PropertyManager {
 		}
 	}
 
+	public void loadDataFromClient(int index, CompoundTag data) {
+		if(index >= properties.size()) {
+			Electrodynamics.LOGGER.error("The tile at " + owner.getBlockPos() + " has a differently sized property list than what was declared by the packet");
+			return;
+		}
+		Property<?> prop = properties.get(index);
+		if(owner == null) {
+			Electrodynamics.LOGGER.info("The property " + prop.getName() + " is sending data to a null tile");
+			return;
+		}
+		if(owner.getLevel() == null){
+			Electrodynamics.LOGGER.info("The property " + prop.getName() + " that sent data to the tile at " + owner.getBlockPos() + " encountered a null level. The data was not loaded");
+			return;
+		}
+		prop.set(prop.getType().readFromTag(new IPropertyType.TagReader(prop, data, owner.getLevel().registryAccess())));
+	}
+
+	public void onTileLoaded() {
+		for (Property<?> property : properties) {
+			property.onTileLoaded();
+		}
+	}
+
+	/*
 	public static record PropertyWrapper(int index, IPropertyType type, Object value, @Nullable Property<?> property) {
 
 	}
+
+	 */
 }

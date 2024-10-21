@@ -32,7 +32,7 @@ public class TileGasPipePump extends GenericTile {
 
 	public final Property<Integer> priority = property(new Property<>(PropertyTypes.INTEGER, "pumppriority", 0).onChange((prop, oldval) -> {
 
-		if (level.isClientSide) {
+		if (level == null || level.isClientSide) {
 			return;
 		}
 

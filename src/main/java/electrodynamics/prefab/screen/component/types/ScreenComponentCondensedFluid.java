@@ -101,8 +101,6 @@ public class ScreenComponentCondensedFluid extends ScreenComponentGeneric {
 
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BUCKET_FILL, 1.0F));
 
-        fluidProperty.updateServer();
-
         stack = handler.getContainer();
 
         PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), owner.getBlockPos(), Minecraft.getInstance().player.getUUID()));

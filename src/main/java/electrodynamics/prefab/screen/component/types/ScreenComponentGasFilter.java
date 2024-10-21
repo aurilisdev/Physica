@@ -116,7 +116,6 @@ public class ScreenComponentGasFilter extends ScreenComponentGeneric {
                 return;
             }
             property.set(GasStack.EMPTY);
-            property.updateServer();
 
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
 
@@ -139,7 +138,6 @@ public class ScreenComponentGasFilter extends ScreenComponentGeneric {
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
 
         property.set(taken);
-        property.updateServer();
 
     }
 

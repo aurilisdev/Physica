@@ -54,8 +54,6 @@ public class ScreenFluidPipePump extends GenericScreen<ContainerFluidPipePump> {
 
 		pump.priority.set(priority);
 
-		pump.priority.updateServer();
-
 	}
 
 	@Override

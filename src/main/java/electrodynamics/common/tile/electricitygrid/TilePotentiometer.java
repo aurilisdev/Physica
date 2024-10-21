@@ -16,12 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TilePotentiometer extends GenericTile {
 
-	public final Property<Double> powerConsumption = property(new Property<>(PropertyTypes.DOUBLE, "consumption", -1.0)).onChange((prop, oldval) -> {
-		if (level.isClientSide) {
-			return;
-		}
-		setChanged();
-	});
+	public final Property<Double> powerConsumption = property(new Property<>(PropertyTypes.DOUBLE, "consumption", -1.0));
 
 	public TilePotentiometer(BlockPos pos, BlockState state) {
 		super(ElectrodynamicsBlockTypes.TILE_POTENTIOMETER.get(), pos, state);

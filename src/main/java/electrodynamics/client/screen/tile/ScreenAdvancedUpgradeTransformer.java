@@ -58,7 +58,6 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 				return;
 			}
 			xfmr.coilRatio.set(2);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(75, 40, 40, 20).setLabel(Component.literal("1 : 4")).setOnPress(button -> {
 			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
@@ -66,7 +65,6 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 				return;
 			}
 			xfmr.coilRatio.set(4);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(75, 60, 40, 20).setLabel(Component.literal("1 : 8")).setOnPress(button -> {
 			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
@@ -74,7 +72,6 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 				return;
 			}
 			xfmr.coilRatio.set(8);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(75, 80, 40, 20).setLabel(Component.literal("1 : 16")).setOnPress(button -> {
 			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
@@ -82,7 +79,6 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 				return;
 			}
 			xfmr.coilRatio.set(16);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(120, 20, 40, 20).setLabel(Component.literal("1 : 32")).setOnPress(button -> {
 			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
@@ -90,7 +86,6 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 				return;
 			}
 			xfmr.coilRatio.set(32);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(120, 40, 40, 20).setLabel(Component.literal("1 : 64")).setOnPress(button -> {
 			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
@@ -98,7 +93,6 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 				return;
 			}
 			xfmr.coilRatio.set(64);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(120, 60, 40, 20).setLabel(Component.literal("1 : 128")).setOnPress(button -> {
 			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
@@ -106,7 +100,6 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 				return;
 			}
 			xfmr.coilRatio.set(128);
-			xfmr.coilRatio.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(120, 80, 40, 20).setLabel(Component.literal("1 : 256")).setOnPress(button -> {
 			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
@@ -114,7 +107,6 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 				return;
 			}
 			xfmr.coilRatio.set(256);
-			xfmr.coilRatio.updateServer();
 		}));
 	}
 

@@ -105,8 +105,6 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 
 		manipulator.targetTemperature.set(temperature);
 
-		manipulator.targetTemperature.updateServer();
-
 	}
 
 	@Override

@@ -61,7 +61,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.networkProperty.set(0);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(13, 70, 70, 20).setLabel(getPropertyLabel(1)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -69,7 +68,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.networkProperty.set(1);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(13, 90, 70, 20).setLabel(getPropertyLabel(2)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -77,7 +75,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.networkProperty.set(2);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(93, 50, 70, 20).setLabel(getPropertyLabel(3)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -85,7 +82,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.networkProperty.set(3);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(93, 70, 70, 20).setLabel(getPropertyLabel(4)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -93,7 +89,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.networkProperty.set(4);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(93, 90, 70, 20).setLabel(getPropertyLabel(5)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -101,7 +96,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.networkProperty.set(5);
-			monitor.networkProperty.updateServer();
 		}));
 
 		// boolean operator
@@ -112,7 +106,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.booleanOperator.set(0);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(39, 130, 20, 20).setLabel(getOperatorLabel(1)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -120,7 +113,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.booleanOperator.set(1);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(65, 130, 20, 20).setLabel(getOperatorLabel(2)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -128,7 +120,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.booleanOperator.set(2);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(91, 130, 20, 20).setLabel(getOperatorLabel(3)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -136,7 +127,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.booleanOperator.set(3);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(117, 130, 20, 20).setLabel(getOperatorLabel(4)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -144,7 +134,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.booleanOperator.set(4);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(143, 130, 20, 20).setLabel(getOperatorLabel(5)).setOnPress(button -> {
 			TileCircuitMonitor monitor = menu.getHostFromIntArray();
@@ -152,7 +141,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 				return;
 			}
 			monitor.booleanOperator.set(5);
-			monitor.booleanOperator.updateServer();
 		}));
 
 		// entered value
@@ -194,7 +182,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 		}
 
 		monitor.value.set(value);
-		monitor.value.updateServer();
 
 	}
 

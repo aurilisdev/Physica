@@ -149,7 +149,6 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
                 return;
             }
             property.set(FluidStack.EMPTY);
-            property.updateServer();
 
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BUCKET_EMPTY, 1.0F));
 
@@ -170,7 +169,6 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
         }
 
         property.set(taken);
-        property.updateServer();
 
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BUCKET_FILL, 1.0F));
 
