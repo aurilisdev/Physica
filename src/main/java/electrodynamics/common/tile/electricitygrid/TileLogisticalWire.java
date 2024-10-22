@@ -19,11 +19,9 @@ public class TileLogisticalWire extends TileWire {
 	}
 
 	private void tickClient(ComponentTickable componentTickable) {
-		Electrodynamics.LOGGER.info(getBlockPos() + ", Client: " + Arrays.toString(readConnections()));
 	}
 
 	protected void tickServer(ComponentTickable component) {
-		Electrodynamics.LOGGER.info(getBlockPos() + ", Server: " + Arrays.toString(readConnections()));
 		if (component.getTicks() % 10 == 0) {
 			boolean shouldPower = getNetwork().getActiveTransmitted() > 0;
 			if (shouldPower != isPowered) {

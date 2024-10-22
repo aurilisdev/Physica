@@ -1,3 +1,7 @@
 /time set day
 /time set night
 /time set noon
+/gamemode creative
+/time set day
+/gamerule doDaylightCycle false
+/time set noon

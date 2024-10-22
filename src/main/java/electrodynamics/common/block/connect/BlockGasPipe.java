@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class BlockGasPipe extends AbstractRefreshingConnectBlock {
 
@@ -94,11 +93,6 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
 
         }
 
-    }
-
-    @Override
-    public EnumConnectType getConnectionForFace(BlockState otherState, BlockEntity otherTile, BlockState thisState, GenericConnectTile thisTile, Direction dir) {
-        return null;
     }
 
     @Override

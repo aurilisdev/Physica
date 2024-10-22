@@ -16,7 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -38,9 +38,12 @@ public class TileLogisticalManager extends GenericTile implements IConnectTile {
     public static final int WEST_MASK = 0b00000000000011110000000000000000;
     public static final int EAST_MASK = 0b00000000111100000000000000000000;
 
-    public final Property<Integer> connections = property(new Property<>(PropertyTypes.INTEGER, "connections", 0).onChange((property, old) -> {
+    public final Property<Integer> connections = property(new Property<>(PropertyTypes.INTEGER, "connections", 0).setShouldUpdateOnChange().onChange((property, old) -> {
         requestModelDataUpdate();
-    }));
+        if(level != null && level.isClientSide()){
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 8); //
+        }
+    }).onTileLoaded(property -> requestModelDataUpdate()));
 
     public TileLogisticalManager(BlockPos pos, BlockState state) {
         super(ElectrodynamicsBlockTypes.TILE_LOGISTICALMANAGER.get(), pos, state);
@@ -159,12 +162,12 @@ public class TileLogisticalManager extends GenericTile implements IConnectTile {
 
     }
 
-    public static boolean isQuarry(BlockPos pos, LevelAccessor world) {
+    public static boolean isQuarry(BlockPos pos, LevelReader world) {
         BlockEntity entity = world.getBlockEntity(pos);
         return entity instanceof TileQuarry;
     }
 
-    public static boolean isValidInventory(BlockPos pos, LevelAccessor world, Direction dir) {
+    public static boolean isValidInventory(BlockPos pos, LevelReader world, Direction dir) {
         BlockEntity entity = world.getBlockEntity(pos);
         if (entity == null) {
             return false;

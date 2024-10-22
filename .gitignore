@@ -1,6 +1,6 @@
 /bin
 /out
-/run
+/runs
 /classes
 *.classpath
 *.project

@@ -1,7 +1,6 @@
 package electrodynamics.common.block.connect.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
@@ -113,7 +112,7 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 		return Shapes.join(wireShape, camoShape, BooleanOp.OR);
 	}
 
-	private static int hashPresentSides(EnumConnectType[] connections) {
+	public static int hashPresentSides(EnumConnectType[] connections) {
 		int flag = 0;
 		for (short i = 0; i < 6; i++) {
 			if (connections[i] != EnumConnectType.NONE) {

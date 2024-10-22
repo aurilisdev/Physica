@@ -3,7 +3,6 @@ package electrodynamics.common.event;
 import java.util.ArrayList;
 import java.util.List;
 
-import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import electrodynamics.common.event.types.living.equipmentchange.AbstractEquipmentChangeHandler;
 import electrodynamics.common.event.types.living.equipmentchange.HandlerJetpackEquiped;
@@ -17,7 +16,6 @@ import electrodynamics.common.event.types.player.rightclick.AbstractRightClickBl
 import electrodynamics.common.event.types.player.rightclick.HandlerWrench;
 import electrodynamics.common.event.types.player.starttracking.AbstractPlayerStartTrackingHandler;
 import electrodynamics.common.event.types.player.starttracking.HandlerJetpackSound;
-import electrodynamics.common.packet.types.server.PacketPlayerInformation;
 import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
 import electrodynamics.common.reloadlistener.ThermoelectricGeneratorHeatRegister;
@@ -30,8 +28,6 @@ import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.GAME)
 public class ServerEventHandler {
@@ -56,6 +52,7 @@ public class ServerEventHandler {
 		START_TRACKING_PLAYER_HANDLERS.add(new HandlerJetpackSound());
 	}
 
+
 	@SubscribeEvent
 	public static void handleRightClickBlock(RightClickBlock event) {
 		RIGHT_CLICK_HANDLERS.forEach(handler -> handler.handle(event));
@@ -79,13 +76,6 @@ public class ServerEventHandler {
 	@SubscribeEvent
 	public static void handlerStartTrackingPlayer(PlayerEvent.StartTracking event) {
 		START_TRACKING_PLAYER_HANDLERS.forEach(handler -> handler.handle(event));
-	}
-
-	@SubscribeEvent
-	public static void tick(PlayerTickEvent.Pre event) {
-		if (event.getEntity().level().isClientSide() && event.getEntity().level().getLevelData().getDayTime() % 50 == 10) {
-			PacketDistributor.sendToServer(new PacketPlayerInformation());
-		}
 	}
 
 	@SubscribeEvent

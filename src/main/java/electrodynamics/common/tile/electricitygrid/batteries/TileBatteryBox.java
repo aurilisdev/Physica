@@ -88,7 +88,15 @@ public class TileBatteryBox extends GenericTile implements IEnergyStorage {
             return null;
         }
 
-        return side == getFacing() ? inputDispatcher : outputDispatcher;
+        Direction facing = getFacing();
+
+        if(side == facing){
+            return inputDispatcher;
+        } else if (side == facing.getOpposite()){
+            return outputDispatcher;
+        } else {
+            return null;
+        }
 
     }
 

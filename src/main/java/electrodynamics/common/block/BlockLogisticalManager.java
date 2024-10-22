@@ -1,23 +1,15 @@
 package electrodynamics.common.block;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
-import com.google.common.collect.Maps;
 import com.mojang.serialization.MapCodec;
 
+import electrodynamics.common.block.connect.util.AbstractConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.common.tile.machines.quarry.TileLogisticalManager;
 import electrodynamics.prefab.block.GenericEntityBlockWaterloggable;
 import electrodynamics.prefab.tile.types.IConnectTile;
-import net.minecraft.Util;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -28,10 +20,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -47,7 +35,8 @@ public class BlockLogisticalManager extends GenericEntityBlockWaterloggable {
 
     protected final VoxelShape[] boundingBoxes = new VoxelShape[7];
 
-    protected HashMap<EnumConnectType[], VoxelShape> shapestates = new HashMap<>();
+    int maxValue = 0b1000000;
+    protected VoxelShape[] shapestates = new VoxelShape[maxValue];
 
 
     public BlockLogisticalManager() {
@@ -78,7 +67,7 @@ public class BlockLogisticalManager extends GenericEntityBlockWaterloggable {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        VoxelShape shape = boundingBoxes[6];
+
         EnumConnectType[] checked = new EnumConnectType[6];
 
         BlockEntity entity = level.getBlockEntity(pos);
@@ -88,33 +77,27 @@ public class BlockLogisticalManager extends GenericEntityBlockWaterloggable {
         }
 
         EnumConnectType[] connections = ((IConnectTile) entity).readConnections();
+        int hash = AbstractConnectBlock.hashPresentSides(connections);
+
+        if (shapestates[hash] != null) {
+            return shapestates[hash];
+        }
+
+        VoxelShape shape = boundingBoxes[6];
 
         for (int i = 0; i < 6; i++) {
-            EnumConnectType connection = connections[i];
-
-            if (connection != EnumConnectType.NONE) {
-                checked[i] = connection;
-            }
-
-        }
-        if (shapestates.containsKey(checked)) {
-            return shapestates.get(checked);
-        }
-        for (int i = 0; i < 6; i++) {
-
-            EnumConnectType connection = checked[i];
-
-            if(connection == null) {
+            if (connections[i] == EnumConnectType.NONE) {
                 continue;
             }
 
             shape = Shapes.join(shape, boundingBoxes[i], BooleanOp.OR);
         }
-        shapestates.put(checked, shape);
+        shapestates[hash] = shape;
         if (shape == null) {
             return Shapes.empty();
+        } else {
+            return shape;
         }
-        return shape;
     }
 
     @Override
@@ -129,23 +112,22 @@ public class BlockLogisticalManager extends GenericEntityBlockWaterloggable {
 
 
     @Override
-    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState stateIn, @Nullable LivingEntity placer, ItemStack stack) {
-        if (worldIn.isClientSide) {
+    public void onPlace(BlockState newState, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(newState, level, pos, oldState, isMoving);
+        if (level.isClientSide) {
             return;
         }
-        BlockState currentState = stateIn;
-        TileLogisticalManager tile = (TileLogisticalManager) worldIn.getBlockEntity(pos);
+        TileLogisticalManager tile = (TileLogisticalManager) level.getBlockEntity(pos);
         if (tile == null) {
             return;
         }
         for (Direction dir : Direction.values()) {
-            if (TileLogisticalManager.isQuarry(pos.relative(dir), worldIn)) {
+            if (TileLogisticalManager.isQuarry(pos.relative(dir), level)) {
                 tile.writeConnection(dir, EnumConnectType.WIRE);
-            } else if (TileLogisticalManager.isValidInventory(pos.relative(dir), worldIn, dir.getOpposite())) {
+            } else if (TileLogisticalManager.isValidInventory(pos.relative(dir), level, dir.getOpposite())) {
                 tile.writeConnection(dir, EnumConnectType.INVENTORY);
             }
         }
-        worldIn.setBlockAndUpdate(pos, currentState);
     }
 
     @Override
@@ -163,6 +145,26 @@ public class BlockLogisticalManager extends GenericEntityBlockWaterloggable {
         }
         tile.writeConnection(facing, connection);
         return stateIn;
+    }
+
+    @Override
+    public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
+        super.onNeighborChange(state, world, pos, neighbor);
+        if (world.isClientSide()) {
+            return;
+        }
+        TileLogisticalManager tile = (TileLogisticalManager) world.getBlockEntity(pos);
+        EnumConnectType connection = EnumConnectType.NONE;
+        if (tile == null) {
+            return;
+        }
+        Direction facing = BlockEntityUtils.directionFromPos(pos, neighbor);
+        if (TileLogisticalManager.isQuarry(neighbor, world)) {
+            connection = EnumConnectType.WIRE;
+        } else if (TileLogisticalManager.isValidInventory(neighbor, world, facing.getOpposite())) {
+            connection = EnumConnectType.INVENTORY;
+        }
+        tile.writeConnection(facing, connection);
     }
 
     @Override

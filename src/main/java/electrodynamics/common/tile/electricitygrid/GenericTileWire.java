@@ -7,8 +7,6 @@ import com.google.common.collect.Sets;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.network.cable.type.IConductor;
-import electrodynamics.common.block.connect.util.EnumConnectType;
-import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.network.type.ElectricNetwork;
 import electrodynamics.prefab.network.AbstractNetwork;
 import electrodynamics.prefab.tile.types.GenericConnectTile;
