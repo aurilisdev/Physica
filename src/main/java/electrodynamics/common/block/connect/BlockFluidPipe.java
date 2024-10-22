@@ -40,6 +40,11 @@ public class BlockFluidPipe extends AbstractRefreshingConnectBlock {
     }
 
     @Override
+    public EnumConnectType getConnectionForFace(BlockState otherState, BlockEntity otherTile, BlockState thisState, GenericConnectTile thisTile, Direction dir) {
+        return null;
+    }
+
+    @Override
     public BlockState refreshConnections(BlockState otherState, BlockEntity otherTile, BlockState state, BlockEntity thisTile, Direction dir) {
         if(!(thisTile instanceof GenericConnectTile)) {
             return state;

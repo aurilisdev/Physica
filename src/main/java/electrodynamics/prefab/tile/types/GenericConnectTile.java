@@ -1,5 +1,7 @@
 package electrodynamics.prefab.tile.types;
 
+import com.mojang.datafixers.util.Pair;
+import electrodynamics.Electrodynamics;
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertyConnections;
 import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.prefab.properties.Property;
@@ -14,6 +16,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class GenericConnectTile extends GenericTile implements IConnectTile {
 
     // DUNSWE
@@ -25,11 +30,15 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
     public static final int WEST_MASK = 0b00000000000011110000000000000000;
     public static final int EAST_MASK = 0b00000000111100000000000000000000;
 
+
     public final Property<Integer> connections = property(new Property<>(PropertyTypes.INTEGER, "connections", 0).setShouldUpdateOnChange().onChange((property, old) -> {
+        Electrodynamics.LOGGER.info(getBlockPos() + " requesting update " + Arrays.toString(readConnections()));
+
         requestModelDataUpdate();
-    }));
-    public final Property<BlockState> camoflaugedBlock = property(new Property<>(PropertyTypes.BLOCK_STATE, "camoflaugedblock", Blocks.AIR.defaultBlockState())).onChange((property, block) -> {
-        if(level == null) {
+    }).onTileLoaded(property -> requestModelDataUpdate()));
+
+    public final Property<BlockState> camoflaugedBlock = property(new Property<>(PropertyTypes.BLOCK_STATE, "camoflaugedblock", Blocks.AIR.defaultBlockState())).setShouldUpdateOnChange().onChange((property, block) -> {
+        if (level == null) {
             return;
         }
         level.getChunkSource().getLightEngine().checkBlock(worldPosition);
@@ -37,8 +46,8 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
         level.getChunkSource().getLightEngine().checkBlock(worldPosition);
     });
 
-    public final Property<BlockState> scaffoldBlock = property(new Property<>(PropertyTypes.BLOCK_STATE, "scaffoldblock", Blocks.AIR.defaultBlockState())).onChange((property, block) -> {
-        if(level == null) {
+    public final Property<BlockState> scaffoldBlock = property(new Property<>(PropertyTypes.BLOCK_STATE, "scaffoldblock", Blocks.AIR.defaultBlockState())).setShouldUpdateOnChange().onChange((property, block) -> {
+        if (level == null) {
             return;
         }
         level.getChunkSource().getLightEngine().checkBlock(worldPosition);
@@ -79,6 +88,7 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
 
     public EnumConnectType readConnection(Direction dir) {
 
+
         int connectionData = connections.get();
 
         if (connectionData == 0) {
@@ -108,10 +118,10 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
             default:
                 break;
         }
-
         //return EnumConnectType.NONE;
 
         return EnumConnectType.values()[(extracted >> (dir.ordinal() * 4))];
+
 
     }
 
@@ -145,6 +155,43 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
         }
 
         connections.set(masked | (connection.ordinal() << (dir.ordinal() * 4)));
+
+    }
+
+    public void writeConnections(Pair<Direction, EnumConnectType>... dirs) {
+        int connectionData = this.connections.get();
+
+        for (Pair<Direction, EnumConnectType> pair : dirs) {
+
+            switch (pair.getFirst()) {
+                case DOWN:
+                    connectionData = connectionData & ~DOWN_MASK;
+                    break;
+                case UP:
+                    connectionData = connectionData & ~UP_MASK;
+                    break;
+                case NORTH:
+                    connectionData = connectionData & ~NORTH_MASK;
+                    break;
+                case SOUTH:
+                    connectionData = connectionData & ~SOUTH_MASK;
+                    break;
+                case WEST:
+                    connectionData = connectionData & ~WEST_MASK;
+                    break;
+                case EAST:
+                    connectionData = connectionData & ~EAST_MASK;
+                    break;
+                default:
+                    connectionData = 0;
+                    break;
+            }
+
+            connectionData = connectionData | (pair.getSecond().ordinal() << (pair.getFirst().ordinal() * 4));
+        }
+
+        connections.set(connectionData);
+
     }
 
     public EnumConnectType[] readConnections() {
@@ -157,7 +204,8 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
 
     @Override
     public @NotNull ModelData getModelData() {
-        return ModelData.builder().with(ModelPropertyConnections.INSTANCE, readConnections()).build();
+        Electrodynamics.LOGGER.info(getBlockPos() + " " + Arrays.toString(readConnections()) + " " + getLevel().getGameTime());
+        return ModelData.builder().with(ModelPropertyConnections.INSTANCE, () -> readConnections()).build();
     }
 
 }

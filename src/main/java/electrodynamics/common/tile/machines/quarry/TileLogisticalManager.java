@@ -257,7 +257,7 @@ public class TileLogisticalManager extends GenericTile implements IConnectTile {
 
     @Override
     public @NotNull ModelData getModelData() {
-        return ModelData.builder().with(ModelPropertyConnections.INSTANCE, readConnections()).build();
+        return ModelData.builder().with(ModelPropertyConnections.INSTANCE, () -> readConnections()).build();
     }
 
 }

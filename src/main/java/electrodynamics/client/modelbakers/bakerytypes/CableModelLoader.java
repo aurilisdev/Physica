@@ -167,7 +167,7 @@ public class CableModelLoader implements IGeometryLoader<CableModelLoader.WirePa
 
         @Override
         public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData extraData, @Nullable RenderType renderType) {
-            EnumConnectType[] data = extraData.get(ModelPropertyConnections.INSTANCE);
+            EnumConnectType[] data = extraData.get(ModelPropertyConnections.INSTANCE).get();
             if (data == null) {
                 return NO_QUADS;
             }
@@ -204,7 +204,7 @@ public class CableModelLoader implements IGeometryLoader<CableModelLoader.WirePa
         @Override
         public @NotNull ModelData getModelData(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ModelData modelData) {
             if (level.getBlockEntity(pos) instanceof IConnectTile tile) {
-                return ModelData.builder().with(ModelPropertyConnections.INSTANCE, tile.readConnections()).build();
+                return ModelData.builder().with(ModelPropertyConnections.INSTANCE, () -> tile.readConnections()).build();
             }
             return modelData;
         }

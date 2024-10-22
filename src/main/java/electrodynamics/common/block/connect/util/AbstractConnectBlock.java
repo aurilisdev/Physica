@@ -154,6 +154,7 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 		return superState;
 	}
 
+	/*
 	@Override
 	public void onPlace(BlockState newState, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
 		super.onPlace(newState, level, pos, oldState, isMoving);
@@ -161,6 +162,8 @@ public abstract class AbstractConnectBlock extends GenericEntityBlockWaterloggab
 			newState = newState.setValue(ElectrodynamicsBlockStates.HAS_SCAFFOLDING, oldState.getValue(ElectrodynamicsBlockStates.HAS_SCAFFOLDING));
 		}
 	}
+
+	 */
 
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
