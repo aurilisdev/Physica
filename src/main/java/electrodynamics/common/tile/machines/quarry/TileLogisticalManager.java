@@ -11,7 +11,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.IConnectTile;
 import electrodynamics.prefab.utilities.Scheduler;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
@@ -46,7 +46,7 @@ public class TileLogisticalManager extends GenericTile implements IConnectTile {
     }).onTileLoaded(property -> requestModelDataUpdate()));
 
     public TileLogisticalManager(BlockPos pos, BlockState state) {
-        super(ElectrodynamicsBlockTypes.TILE_LOGISTICALMANAGER.get(), pos, state);
+        super(ElectrodynamicsTileTypes.TILE_LOGISTICALMANAGER.get(), pos, state);
         addComponent(new ComponentTickable(this).tickServer(this::tickServer));
     }
 

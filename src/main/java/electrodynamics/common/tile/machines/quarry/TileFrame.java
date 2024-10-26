@@ -1,6 +1,6 @@
 package electrodynamics.common.tile.machines.quarry;
 
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -15,7 +15,7 @@ public class TileFrame extends BlockEntity {
 	private static final String KEY = "quarrypos";
 
 	public TileFrame(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_QUARRY_FRAME.get(), pos, state);
+		super(ElectrodynamicsTileTypes.TILE_QUARRY_FRAME.get(), pos, state);
 	}
 
 	public void purposefullyDestroyed() {

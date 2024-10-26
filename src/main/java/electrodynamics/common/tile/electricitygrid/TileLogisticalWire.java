@@ -1,20 +1,17 @@
 package electrodynamics.common.tile.electricitygrid;
 
-import electrodynamics.Electrodynamics;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Arrays;
 
 public class TileLogisticalWire extends TileWire {
 
 	public boolean isPowered = false;
 
 	public TileLogisticalWire(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_LOGISTICALWIRE.get(), pos, state);
+		super(ElectrodynamicsTileTypes.TILE_LOGISTICALWIRE.get(), pos, state);
 		forceComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 	}
 

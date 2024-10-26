@@ -2,6 +2,7 @@ package electrodynamics.common.tile.machines.arcfurnace;
 
 import java.util.List;
 
+import electrodynamics.client.particle.lavawithphysics.ParticleOptionLavaWithPhysics;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerElectricArcFurnace;
 import electrodynamics.common.inventory.container.tile.ContainerElectricArcFurnaceDouble;
@@ -21,14 +22,13 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.BlastingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -49,7 +49,7 @@ public class TileElectricArcFurnace extends GenericTile implements ITickableSoun
 	}
 
 	public TileElectricArcFurnace(SubtypeMachine machine, int extra, BlockPos worldPosition, BlockState blockState) {
-		super(extra == 1 ? ElectrodynamicsBlockTypes.TILE_ELECTRICARCFURNACEDOUBLE.get() : extra == 2 ? ElectrodynamicsBlockTypes.TILE_ELECTRICARCFURNACETRIPLE.get() : ElectrodynamicsBlockTypes.TILE_ELECTRICARCFURNACE.get(), worldPosition, blockState);
+		super(extra == 1 ? ElectrodynamicsTileTypes.TILE_ELECTRICARCFURNACEDOUBLE.get() : extra == 2 ? ElectrodynamicsTileTypes.TILE_ELECTRICARCFURNACETRIPLE.get() : ElectrodynamicsTileTypes.TILE_ELECTRICARCFURNACE.get(), worldPosition, blockState);
 
 		int processorCount = extra + 1;
 		int inputsPerProc = 1;
@@ -148,12 +148,23 @@ public class TileElectricArcFurnace extends GenericTile implements ITickableSoun
 			return;
 		}
 		if (level.random.nextDouble() < 0.15) {
+
 			Direction direction = getFacing();
-			double d4 = level.random.nextDouble();
-			double d5 = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -1 ? 0 : 1) : d4;
-			double d6 = level.random.nextDouble();
-			double d7 = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -1 ? 0 : 1) : d4;
-			level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + d5, worldPosition.getY() + d6, worldPosition.getZ() + d7, 0.0D, 0.0D, 0.0D);
+
+			double axisShift = 0.5;
+			double yShift = 0.7;
+
+			double xShift = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -0.5 ? 0 : 0.5) : axisShift;
+			double zShift = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -0.5 ? 0 : 0.5) : axisShift;
+
+			level.addParticle(new ParticleOptionLavaWithPhysics().setParameters(1, 1), worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+
+
+
+
+
+
+
 		}
 		if (!isSoundPlaying) {
 			isSoundPlaying = true;

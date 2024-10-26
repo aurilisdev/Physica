@@ -1,5 +1,6 @@
 package electrodynamics.common.tile.machines;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerDO2OProcessor;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
@@ -15,7 +16,7 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
@@ -28,7 +29,7 @@ public class TileOxidationFurnace extends GenericTile implements ITickableSound 
 	private boolean isSoundPlaying = false;
 
 	public TileOxidationFurnace(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_OXIDATIONFURNACE.get(), worldPosition, blockState);
+		super(ElectrodynamicsTileTypes.TILE_OXIDATIONFURNACE.get(), worldPosition, blockState);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient));
 		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.NORTH).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2));
@@ -50,13 +51,32 @@ public class TileOxidationFurnace extends GenericTile implements ITickableSound 
 		if (!shouldPlaySound()) {
 			return;
 		}
-		if (level.random.nextDouble() < 0.15) {
+		if (level.random.nextDouble() < 0.5) {
+
 			Direction direction = getFacing();
-			double d4 = level.random.nextDouble();
-			double d5 = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -1 ? 0 : 1) : d4;
-			double d6 = level.random.nextDouble();
-			double d7 = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -1 ? 0 : 1) : d4;
-			level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + d5, worldPosition.getY() + d6, worldPosition.getZ() + d7, 0.0D, 0.0D, 0.0D);
+
+			int next = level.random.nextIntBetweenInclusive(0, 2);
+
+			double yShift = Electrodynamics.RANDOM.nextDouble(0.2) + 0.5;
+			double axisShift = Electrodynamics.RANDOM.nextDouble(0.7) + 0.18;
+
+			if(next == 1) {
+				direction = direction.getClockWise();
+				yShift = 0.6;
+			} else if (next == 2) {
+				direction = direction.getCounterClockWise();
+				yShift = 0.6;
+			}
+
+			//double d4 = level.random.nextDouble();
+			double xShift = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -1 ? 0 : 1) : axisShift;
+			//double d6 = level.random.nextDouble();
+			double zShift = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -1 ? 0 : 1) : axisShift;
+
+
+
+
+			level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
 		}
 		if (!isSoundPlaying) {
 			isSoundPlaying = true;

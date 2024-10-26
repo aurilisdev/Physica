@@ -2,6 +2,7 @@ package electrodynamics.api.fluid;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import electrodynamics.prefab.utilities.CodecUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -12,12 +13,12 @@ public class FluidStackComponent {
 
     public static final Codec<FluidStackComponent> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 
-            FluidStack.CODEC.fieldOf("fluid").forGetter(instance0 -> instance0.fluid)
+            FluidStack.OPTIONAL_CODEC.fieldOf("fluid").forGetter(instance0 -> instance0.fluid)
 
     ).apply(instance, FluidStackComponent::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FluidStackComponent> STREAM_CODEC = StreamCodec.composite(
-            FluidStack.STREAM_CODEC, instance -> instance.fluid,
+            FluidStack.OPTIONAL_STREAM_CODEC, instance -> instance.fluid,
             FluidStackComponent::new
 
     );

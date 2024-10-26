@@ -75,11 +75,7 @@ import electrodynamics.common.tile.pipelines.fluids.TileFluidPipeFilter;
 import electrodynamics.common.tile.pipelines.fluids.TileFluidPipePump;
 import electrodynamics.common.tile.pipelines.fluids.TileFluidValve;
 import electrodynamics.common.tile.pipelines.fluids.TileFluidVoid;
-import electrodynamics.common.tile.pipelines.gas.TileGasPipe;
-import electrodynamics.common.tile.pipelines.gas.TileGasPipeFilter;
-import electrodynamics.common.tile.pipelines.gas.TileGasPipePump;
-import electrodynamics.common.tile.pipelines.gas.TileGasValve;
-import electrodynamics.common.tile.pipelines.gas.TileGasVent;
+import electrodynamics.common.tile.pipelines.gas.*;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerAddonTank;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerSideBlock;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.compressor.TileCompressor;
@@ -96,7 +92,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class ElectrodynamicsBlockTypes {
+public class ElectrodynamicsTileTypes {
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, References.ID);
 
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileCoalGenerator>> TILE_COALGENERATOR = BLOCK_ENTITY_TYPES.register(SubtypeMachine.coalgenerator.tag(), () -> new BlockEntityType<>(TileCoalGenerator::new, Sets.newHashSet(getBlock(SubtypeMachine.coalgenerator)), null));
@@ -195,4 +191,6 @@ public class ElectrodynamicsBlockTypes {
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TilePotentiometer>> TILE_POTENTIOMETER = BLOCK_ENTITY_TYPES.register("potentiometer", () -> new BlockEntityType<>(TilePotentiometer::new, Sets.newHashSet(ElectrodynamicsBlocks.getBlock(SubtypeMachine.potentiometer)), null));
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileCircuitMonitor>> TILE_CIRCUITMONITOR = BLOCK_ENTITY_TYPES.register("circuitmonitor", () -> new BlockEntityType<>(TileCircuitMonitor::new, Sets.newHashSet(ElectrodynamicsBlocks.getBlock(SubtypeMachine.circuitmonitor)), null));
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileCurrentRegulator>> TILE_CURRENTREGULATOR = BLOCK_ENTITY_TYPES.register("currentregulator", () -> new BlockEntityType<>(TileCurrentRegulator::new, Sets.newHashSet(ElectrodynamicsBlocks.getBlock(SubtypeMachine.currentregulator)), null));
+
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileGasCollector>> TILE_GASCOLLECTOR = BLOCK_ENTITY_TYPES.register("gascollector", () -> new BlockEntityType<>(TileGasCollector::new, Sets.newHashSet(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gascollector)), null));
 }

@@ -312,6 +312,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.energizedalloyer), "Energized Alloyer");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.fermentationplant), "Fermentation Plant");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.fluidvoid), "Fluid Void");
+			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gascollector), "Gas Collector");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.hydroelectricgenerator), "Hydroelectric Generator");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.lathe), "Lathe");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.lithiumbatterybox), "Lithium Battery Box");
@@ -663,6 +664,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addContainer(SubtypeMachine.energizedalloyer, "Energized Alloyer");
 			addContainer(SubtypeMachine.fermentationplant, "Fermentation Plant");
 			addContainer(SubtypeMachine.fluidvoid, "Fluid Void");
+			addContainer(SubtypeMachine.gascollector, "Gas Collector");
 			addContainer(SubtypeMachine.hydroelectricgenerator, "Hydroelectric Generator");
 			addContainer(SubtypeMachine.lathe, "Lathe");
 			addContainer(SubtypeMachine.lithiumbatterybox, "Lithium Battery Box");

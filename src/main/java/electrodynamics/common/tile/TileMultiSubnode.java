@@ -5,7 +5,7 @@ import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -26,7 +26,7 @@ public class TileMultiSubnode extends GenericTile {
 	public VoxelShape shapeCache;
 
 	public TileMultiSubnode(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_MULTI.get(), worldPosition, blockState);
+		super(ElectrodynamicsTileTypes.TILE_MULTI.get(), worldPosition, blockState);
 		addComponent(new ComponentPacketHandler(this));
 	}
 

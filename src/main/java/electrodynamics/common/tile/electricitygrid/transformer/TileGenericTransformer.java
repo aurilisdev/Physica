@@ -14,7 +14,7 @@ import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
@@ -212,7 +212,7 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
     public static final class TileDowngradeTransformer extends TileGenericTransformer {
 
         public TileDowngradeTransformer(BlockPos worldPosition, BlockState blockState) {
-            super(ElectrodynamicsBlockTypes.TILE_DOWNGRADETRANSFORMER.get(), worldPosition, blockState);
+            super(ElectrodynamicsTileTypes.TILE_DOWNGRADETRANSFORMER.get(), worldPosition, blockState);
         }
 
         @Override
@@ -235,7 +235,7 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
     public static final class TileUpgradeTransformer extends TileGenericTransformer {
 
         public TileUpgradeTransformer(BlockPos worldPosition, BlockState blockState) {
-            super(ElectrodynamicsBlockTypes.TILE_UPGRADETRANSFORMER.get(), worldPosition, blockState);
+            super(ElectrodynamicsTileTypes.TILE_UPGRADETRANSFORMER.get(), worldPosition, blockState);
         }
 
         @Override

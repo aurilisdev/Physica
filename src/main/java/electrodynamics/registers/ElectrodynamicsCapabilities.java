@@ -158,14 +158,14 @@ public class ElectrodynamicsCapabilities {
 
         /* TILES */
 
-        ElectrodynamicsBlockTypes.BLOCK_ENTITY_TYPES.getEntries().forEach(entry -> {
+        ElectrodynamicsTileTypes.BLOCK_ENTITY_TYPES.getEntries().forEach(entry -> {
             event.registerBlockEntity(CAPABILITY_ELECTRODYNAMIC_BLOCK, (BlockEntityType<? extends GenericTile>) entry.get(), (tile, context) -> tile.getElectrodynamicCapability(context));
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, (BlockEntityType<? extends GenericTile>) entry.get(), (tile, context) -> tile.getFluidHandlerCapability(context));
             event.registerBlockEntity(CAPABILITY_GASHANDLER_BLOCK, (BlockEntityType<? extends GenericTile>) entry.get(), (tile, context) -> tile.getGasHandlerCapability(context));
             event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, (BlockEntityType<? extends GenericTile>) entry.get(), (tile, context) -> tile.getItemHandlerCapability(context));
         });
 
-        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, ElectrodynamicsBlockTypes.TILE_BATTERYBOX.get(), (tile, context) -> tile.getFECapability(context));
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, ElectrodynamicsTileTypes.TILE_BATTERYBOX.get(), (tile, context) -> tile.getFECapability(context));
 
     }
 

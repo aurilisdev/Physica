@@ -37,7 +37,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.InventoryUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
@@ -163,7 +163,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 	private QuarryRenderManger renderHandler = null;
 
 	public TileQuarry(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_QUARRY.get(), pos, state);
+		super(ElectrodynamicsTileTypes.TILE_QUARRY.get(), pos, state);
 
 		hasMotorComplex = property(new Property<>(PropertyTypes.BOOLEAN, "hasmotorcomplex", false));
 		hasCoolantResavoir = property(new Property<>(PropertyTypes.BOOLEAN, "hascoolantresavoir", false));

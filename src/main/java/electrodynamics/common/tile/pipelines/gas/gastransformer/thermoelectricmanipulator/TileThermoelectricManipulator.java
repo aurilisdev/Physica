@@ -27,7 +27,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.core.BlockPos;
@@ -58,7 +58,7 @@ public class TileThermoelectricManipulator extends GenericTileGasTransformer {
     private Gas evaporatedGas;
 
     public TileThermoelectricManipulator(BlockPos worldPos, BlockState blockState) {
-        super(ElectrodynamicsBlockTypes.TILE_THERMOELECTRIC_MANIPULATOR.get(), worldPos, blockState);
+        super(ElectrodynamicsTileTypes.TILE_THERMOELECTRIC_MANIPULATOR.get(), worldPos, blockState);
         addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(BASE_INPUT_CAPACITY * 10));
         addComponent(new ComponentFluidHandlerMultiBiDirec(this).setInputDirections(Direction.DOWN).setInputTanks(1, arr((int) BASE_INPUT_CAPACITY)).setOutputDirections(Direction.DOWN).setOutputTanks(1, arr((int) BASE_OUTPUT_CAPACITY)));
     }

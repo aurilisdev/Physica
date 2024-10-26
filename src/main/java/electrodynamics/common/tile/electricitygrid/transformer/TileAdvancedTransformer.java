@@ -6,7 +6,7 @@ import electrodynamics.common.inventory.container.tile.ContainerAdvancedUpgradeT
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -39,7 +39,7 @@ public abstract class TileAdvancedTransformer extends TileGenericTransformer {
 	public static final class TileAdvancedDowngradeTransformer extends TileAdvancedTransformer {
 
 		public TileAdvancedDowngradeTransformer(BlockPos worldPosition, BlockState blockState) {
-			super(ElectrodynamicsBlockTypes.TILE_ADVANCEDDOWNGRADETRANSFORMER.get(), worldPosition, blockState, 0.5);
+			super(ElectrodynamicsTileTypes.TILE_ADVANCEDDOWNGRADETRANSFORMER.get(), worldPosition, blockState, 0.5);
 			addComponent(new ComponentContainerProvider(SubtypeMachine.advanceddowngradetransformer, this).createMenu((id, playerinv) -> new ContainerAdvancedDowngradeTransformer(id, playerinv, getCoordsArray())));
 		}
 
@@ -48,7 +48,7 @@ public abstract class TileAdvancedTransformer extends TileGenericTransformer {
 	public static final class TileAdvancedUpgradeTransformer extends TileAdvancedTransformer {
 
 		public TileAdvancedUpgradeTransformer(BlockPos worldPosition, BlockState blockState) {
-			super(ElectrodynamicsBlockTypes.TILE_ADVANCEDUPGRADETRANSFORMER.get(), worldPosition, blockState, 2.0);
+			super(ElectrodynamicsTileTypes.TILE_ADVANCEDUPGRADETRANSFORMER.get(), worldPosition, blockState, 2.0);
 			addComponent(new ComponentContainerProvider(SubtypeMachine.advancedupgradetransformer, this).createMenu((id, playerinv) -> new ContainerAdvancedUpgradeTransformer(id, playerinv, getCoordsArray())));
 		}
 

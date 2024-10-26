@@ -10,6 +10,7 @@ import electrodynamics.common.item.gear.armor.types.ItemCombatArmor;
 import electrodynamics.common.item.gear.armor.types.ItemJetpack;
 import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
+import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
 import electrodynamics.common.reloadlistener.ThermoelectricGeneratorHeatRegister;
 //import electrodynamics.prefab.properties.PropertyManager.PropertyWrapper;
 import electrodynamics.prefab.sound.tickable.TickableSoundJetpack;
@@ -128,6 +129,10 @@ public class ClientBarrierMethods {
             return;
         }
         world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0, 0, 0);
+    }
+
+    public static void handlerClientGasCollectorCards(HashMap<Item, GasCollectorChromoCardsRegister.AtmosphericResult> results) {
+        GasCollectorChromoCardsRegister.INSTANCE.setClientValues(results);
     }
 
     /*

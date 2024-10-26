@@ -18,6 +18,7 @@ import electrodynamics.common.event.types.player.starttracking.AbstractPlayerSta
 import electrodynamics.common.event.types.player.starttracking.HandlerJetpackSound;
 import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
+import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
 import electrodynamics.common.reloadlistener.ThermoelectricGeneratorHeatRegister;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -83,12 +84,14 @@ public class ServerEventHandler {
 		event.addListener(CombustionFuelRegister.INSTANCE);
 		event.addListener(CoalGeneratorFuelRegister.INSTANCE);
 		event.addListener(ThermoelectricGeneratorHeatRegister.INSTANCE);
+		event.addListener(GasCollectorChromoCardsRegister.INSTANCE);
 	}
 
 	@SubscribeEvent
 	public static void serverStartedHandler(ServerStartedEvent event) {
 		CoalGeneratorFuelRegister.INSTANCE.generateTagValues();
 		ThermoelectricGeneratorHeatRegister.INSTANCE.generateTagValues();
+		GasCollectorChromoCardsRegister.INSTANCE.generateTagValues();
 	}
 
 	// TODO: Why was this commented?

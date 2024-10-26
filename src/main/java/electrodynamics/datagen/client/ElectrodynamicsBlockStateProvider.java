@@ -167,6 +167,11 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
 
         horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.currentregulator), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.currentregulator)), 180, 0, true);
 
+        redstoneToggleBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gascollector),
+                models().cube(SubtypeMachine.gascollector.tag(), blockLoc("gascollector_bottom"), blockLoc("gascollector_fanoff"), blockLoc("gascollector_fanoff"), blockLoc("gascollector_back"), blockLoc("gascollector_fanoff"), blockLoc("gascollector_fanoff")).texture("particle", blockLoc("multisubnode")),
+                models().cube(SubtypeMachine.gascollector.tag() + "on", blockLoc("gascollector_bottom"), blockLoc("gascollector_fanon"), blockLoc("gascollector_fanon"), blockLoc("gascollector_back"), blockLoc("gascollector_fanon"), blockLoc("gascollector_fanon")).texture("particle", blockLoc("multisubnode")),
+                true);
+
         genWires();
         genPipes();
         genGasPipes();

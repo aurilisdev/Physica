@@ -58,6 +58,7 @@ import electrodynamics.common.tile.machines.wiremill.TileWireMillTriple;
 import electrodynamics.common.tile.pipelines.TileCreativeFluidSource;
 import electrodynamics.common.tile.pipelines.TileElectricPump;
 import electrodynamics.common.tile.pipelines.fluids.TileFluidVoid;
+import electrodynamics.common.tile.pipelines.gas.TileGasCollector;
 import electrodynamics.common.tile.pipelines.gas.TileGasVent;
 import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankHSLA;
 import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankReinforced;
@@ -133,7 +134,10 @@ public enum SubtypeMachine implements ISubtype {
     advancedupgradetransformer(true, TileAdvancedUpgradeTransformer.class),
     advanceddowngradetransformer(true, TileAdvancedDowngradeTransformer.class),
     circuitmonitor(true, TileCircuitMonitor.class),
-    currentregulator(true, TileCurrentRegulator.class);
+    currentregulator(true, TileCurrentRegulator.class),
+
+    gascollector(true, TileGasCollector.class),
+    ;
 
     public final Class<? extends BlockEntity> tileclass;
     public final boolean showInItemGroup;

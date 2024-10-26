@@ -86,9 +86,9 @@ public class PropertyTypes {
         return thisStack.getFluid().isSame(otherStack.getFluid());
     }, FluidStack.STREAM_CODEC, writer -> {
         CompoundTag fluidTag = new CompoundTag();
-        FluidStack.CODEC.encode(writer.prop().get(), NbtOps.INSTANCE, fluidTag);
+        FluidStack.OPTIONAL_CODEC.encode(writer.prop().get(), NbtOps.INSTANCE, fluidTag);
         writer.tag().put(writer.prop().getName(), fluidTag);
-    }, reader -> FluidStack.CODEC.decode(NbtOps.INSTANCE, reader.tag().getCompound(reader.prop().getName())).getOrThrow().getFirst());
+    }, reader -> FluidStack.OPTIONAL_CODEC.decode(NbtOps.INSTANCE, reader.tag().getCompound(reader.prop().getName())).getOrThrow().getFirst());
     public static final PropertyType<List<BlockPos>, ByteBuf> BLOCK_POS_LIST = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "blockposlist"), (thisList, otherList) -> {
         if (thisList.size() != otherList.size()) {
             return false;

@@ -103,6 +103,7 @@
     "electrodynamics:advanceddowngradetransformer",
     "electrodynamics:circuitmonitor",
     "electrodynamics:currentregulator",
+    "electrodynamics:gascollector",
     "electrodynamics:wiretin",
     "electrodynamics:wireiron",
     "electrodynamics:wirecopper",

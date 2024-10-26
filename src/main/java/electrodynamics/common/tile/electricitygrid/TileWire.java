@@ -7,7 +7,7 @@ import electrodynamics.common.block.connect.BlockWire;
 import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.block.subtype.SubtypeWire.WireColor;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -21,7 +21,7 @@ public class TileWire extends GenericTileWire {
 	public WireColor color = null;
 
 	public TileWire(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_WIRE.get(), pos, state);
+		super(ElectrodynamicsTileTypes.TILE_WIRE.get(), pos, state);
 	}
 
 	public TileWire(BlockEntityType<TileLogisticalWire> tileEntityType, BlockPos pos, BlockState state) {

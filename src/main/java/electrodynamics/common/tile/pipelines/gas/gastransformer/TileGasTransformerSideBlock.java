@@ -3,7 +3,6 @@ package electrodynamics.common.tile.pipelines.gas.gastransformer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.common.tile.machines.quarry.TileQuarry;
@@ -11,7 +10,7 @@ import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,7 +30,7 @@ public class TileGasTransformerSideBlock extends GenericTile {
     private boolean isLeft = false;
 
     public TileGasTransformerSideBlock(BlockPos worldPos, BlockState blockState) {
-        super(ElectrodynamicsBlockTypes.TILE_COMPRESSOR_SIDE.get(), worldPos, blockState);
+        super(ElectrodynamicsTileTypes.TILE_COMPRESSOR_SIDE.get(), worldPos, blockState);
     }
 
     public void setOwnerPos(BlockPos ownerPos) {

@@ -2,13 +2,13 @@
   "type": "electrodynamics:electrolytic_separator_recipe",
   "fluidinputs": [
     {
-      "amount": 1000,
+      "amount": 1,
       "tag": "minecraft:water"
     }
   ],
   "gasbi": [
     {
-      "amount": 2000.0,
+      "amount": 2.0,
       "chance": 1.0,
       "gas": "electrodynamics:hydrogen",
       "pressure": 1,
@@ -17,11 +17,11 @@
   ],
   "group": "electrodynamics",
   "output": {
-    "amount": 1000.0,
+    "amount": 1.0,
     "gas": "electrodynamics:oxygen",
     "pressure": 1,
     "temp": 293.0
   },
-  "ticks": 200,
+  "ticks": 1,
   "usagepertick": 250.0
 }

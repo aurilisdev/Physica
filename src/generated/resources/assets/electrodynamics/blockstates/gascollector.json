@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "electrodynamics:block/gascollector"
+    },
+    "lit=true": {
+      "model": "electrodynamics:block/gascollectoron"
+    }
+  }
+}

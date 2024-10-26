@@ -13,7 +13,7 @@ public class UnifiedElectrodynamicsRegister {
 
 	public static void register(IEventBus bus) {
 		ElectrodynamicsBlocks.BLOCKS.register(bus);
-		ElectrodynamicsBlockTypes.BLOCK_ENTITY_TYPES.register(bus);
+		ElectrodynamicsTileTypes.BLOCK_ENTITY_TYPES.register(bus);
 		ElectrodynamicsItems.ITEMS.register(bus);
 		ElectrodynamicsFluids.FLUIDS.register(bus);
 		ElectrodynamicsFluidTypes.FLUID_TYPES.register(bus);

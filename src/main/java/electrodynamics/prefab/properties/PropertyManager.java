@@ -126,6 +126,7 @@ public class PropertyManager {
 		for (Property<?> prop : getProperties()) {
 			if (prop.shouldSave() && tag.contains(prop.getName())) {
 				prop.loadFromTag(tag, registries);
+
 				tag.remove(prop.getName());
 			}
 		}

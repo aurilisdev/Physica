@@ -12,10 +12,7 @@ import electrodynamics.datagen.client.ElectrodynamicsItemModelsProvider;
 import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider;
 import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider.Locale;
 import electrodynamics.datagen.client.ElectrodynamicsSoundProvider;
-import electrodynamics.datagen.server.CoalGeneratorFuelSourceProvider;
-import electrodynamics.datagen.server.CombustionChamberFuelSourceProvider;
-import electrodynamics.datagen.server.ElectrodynamicsLootTablesProvider;
-import electrodynamics.datagen.server.ThermoelectricGenHeatSourceProvider;
+import electrodynamics.datagen.server.*;
 import electrodynamics.datagen.server.advancement.ElectrodynamicsAdvancementProvider;
 import electrodynamics.datagen.server.recipe.ElectrodynamicsRecipeProvider;
 import electrodynamics.datagen.server.tags.ElectrodynamicsTagsProvider;
@@ -56,6 +53,7 @@ public class DataGenerators {
 			generator.addProvider(true, new CombustionChamberFuelSourceProvider(output));
 			generator.addProvider(true, new CoalGeneratorFuelSourceProvider(output));
 			generator.addProvider(true, new ThermoelectricGenHeatSourceProvider(output));
+			generator.addProvider(true, new GasCollectorChromoCardsProvider(output));
 			generator.addProvider(true, new ElectrodynamicsAdvancementProvider(output, lookupProvider));
 
 			DatapackBuiltinEntriesProvider datapacks = new DatapackBuiltinEntriesProvider(output, lookupProvider, new RegistrySetBuilder()

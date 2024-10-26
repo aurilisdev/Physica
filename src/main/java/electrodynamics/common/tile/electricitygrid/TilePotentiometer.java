@@ -9,7 +9,7 @@ import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,7 +19,7 @@ public class TilePotentiometer extends GenericTile {
 	public final Property<Double> powerConsumption = property(new Property<>(PropertyTypes.DOUBLE, "consumption", -1.0));
 
 	public TilePotentiometer(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_POTENTIOMETER.get(), pos, state);
+		super(ElectrodynamicsTileTypes.TILE_POTENTIOMETER.get(), pos, state);
 		addComponent(new ComponentContainerProvider(SubtypeMachine.potentiometer, this).createMenu((id, player) -> new ContainerPotentiometer(id, player, getCoordsArray())));
 		addComponent(new ComponentElectrodynamic(this, false, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setInputDirections(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.DOWN).voltage(-1.0D));
 	}

@@ -4,7 +4,7 @@ import net.minecraft.core.HolderLookup;
 
 import electrodynamics.common.block.connect.BlockGasPipe;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level.ExplosionInteraction;
@@ -15,7 +15,7 @@ public class TileGasPipe extends GenericTileGasPipe {
 	public SubtypeGasPipe pipe = null;
 
 	public TileGasPipe(BlockPos worldPos, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_GAS_PIPE.get(), worldPos, blockState);
+		super(ElectrodynamicsTileTypes.TILE_GAS_PIPE.get(), worldPos, blockState);
 	}
 
 	@Override

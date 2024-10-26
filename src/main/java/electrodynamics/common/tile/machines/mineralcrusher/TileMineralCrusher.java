@@ -17,7 +17,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
@@ -38,7 +38,7 @@ public class TileMineralCrusher extends GenericTile implements ITickableSound {
 	}
 
 	public TileMineralCrusher(SubtypeMachine machine, int extra, BlockPos pos, BlockState state) {
-		super(extra == 1 ? ElectrodynamicsBlockTypes.TILE_MINERALCRUSHERDOUBLE.get() : extra == 2 ? ElectrodynamicsBlockTypes.TILE_MINERALCRUSHERTRIPLE.get() : ElectrodynamicsBlockTypes.TILE_MINERALCRUSHER.get(), pos, state);
+		super(extra == 1 ? ElectrodynamicsTileTypes.TILE_MINERALCRUSHERDOUBLE.get() : extra == 2 ? ElectrodynamicsTileTypes.TILE_MINERALCRUSHERTRIPLE.get() : ElectrodynamicsTileTypes.TILE_MINERALCRUSHER.get(), pos, state);
 
 		int processorCount = extra + 1;
 		int inputsPerProc = 1;
@@ -76,7 +76,7 @@ public class TileMineralCrusher extends GenericTile implements ITickableSound {
 				double d6 = level.random.nextDouble() * 4.0 / 16.0 + 0.5 - 2.0 / 16.0;
 				level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + d4 + direction.getStepX() * 0.2, worldPosition.getY() + 0.4, worldPosition.getZ() + d6 + direction.getStepZ() * 0.2, 0.0D, 0.0D, 0.0D);
 			}
-			int amount = getType() == ElectrodynamicsBlockTypes.TILE_MINERALCRUSHERDOUBLE.get() ? 2 : getType() == ElectrodynamicsBlockTypes.TILE_MINERALCRUSHERTRIPLE.get() ? 3 : 0;
+			int amount = getType() == ElectrodynamicsTileTypes.TILE_MINERALCRUSHERDOUBLE.get() ? 2 : getType() == ElectrodynamicsTileTypes.TILE_MINERALCRUSHERTRIPLE.get() ? 3 : 0;
 			for (int in = 0; in < amount; in++) {
 				ComponentInventory inv = getComponent(IComponentType.Inventory);
 				ItemStack stack = inv.getInputsForProcessor(getProcessor(in).getProcessorNumber()).get(0);

@@ -22,7 +22,7 @@ import electrodynamics.prefab.utilities.CapabilityUtils.FEOutputDispatcher;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -46,7 +46,7 @@ public class TileBatteryBox extends GenericTile implements IEnergyStorage {
     public final int baseVoltage;
 
     public TileBatteryBox(BlockPos worldPosition, BlockState blockState) {
-        this(ElectrodynamicsBlockTypes.TILE_BATTERYBOX.get(), SubtypeMachine.batterybox, 120, 359.0 * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE / 20.0, 10000000, worldPosition, blockState);
+        this(ElectrodynamicsTileTypes.TILE_BATTERYBOX.get(), SubtypeMachine.batterybox, 120, 359.0 * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE / 20.0, 10000000, worldPosition, blockState);
     }
 
     public TileBatteryBox(BlockEntityType<?> type, SubtypeMachine machine, int baseVoltage, double output, double max, BlockPos worldPosition, BlockState blockState) {

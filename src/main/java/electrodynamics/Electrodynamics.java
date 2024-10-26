@@ -3,6 +3,7 @@ package electrodynamics;
 import java.util.Random;
 import java.util.function.Consumer;
 
+import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
 import electrodynamics.prefab.properties.PropertyTypes;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.apache.logging.log4j.LogManager;
@@ -62,6 +63,7 @@ public class Electrodynamics {
         ServerEventHandler.init();
         CombustionFuelRegister.INSTANCE = new CombustionFuelRegister().subscribeAsSyncable();
         CoalGeneratorFuelRegister.INSTANCE = new CoalGeneratorFuelRegister().subscribeAsSyncable();
+        GasCollectorChromoCardsRegister.INSTANCE = new GasCollectorChromoCardsRegister().subscribeAsSyncable();
         ThermoelectricGeneratorHeatRegister.INSTANCE = new ThermoelectricGeneratorHeatRegister().subscribeAsSyncable();
         NeoForge.EVENT_BUS.addListener(getGuidebookListener());
         ElectrodynamicsTags.init();

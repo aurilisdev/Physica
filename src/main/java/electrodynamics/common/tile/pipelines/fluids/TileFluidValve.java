@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 import electrodynamics.common.tile.pipelines.GenericTileValve;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.CapabilityUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -20,7 +20,7 @@ public class TileFluidValve extends GenericTileValve {
     private boolean isLocked = false;
 
     public TileFluidValve(BlockPos pos, BlockState state) {
-        super(ElectrodynamicsBlockTypes.TILE_FLUIDVALVE.get(), pos, state);
+        super(ElectrodynamicsTileTypes.TILE_FLUIDVALVE.get(), pos, state);
     }
 
     @Override

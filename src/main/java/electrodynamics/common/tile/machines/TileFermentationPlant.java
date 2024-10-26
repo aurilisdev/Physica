@@ -13,20 +13,19 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 
 public class TileFermentationPlant extends GenericMaterialTile {
 
     public static final int MAX_TANK_CAPACITY = 5000;
 
     public TileFermentationPlant(BlockPos worldPosition, BlockState blockState) {
-        super(ElectrodynamicsBlockTypes.TILE_FERMENTATIONPLANT.get(), worldPosition, blockState);
+        super(ElectrodynamicsTileTypes.TILE_FERMENTATIONPLANT.get(), worldPosition, blockState);
         addComponent(new ComponentTickable(this).tickClient(this::tickClient));
         addComponent(new ComponentPacketHandler(this));
         addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));

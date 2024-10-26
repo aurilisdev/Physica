@@ -12,7 +12,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,7 +22,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 public class TileCoolantResavoir extends GenericMaterialTile {
 
 	public TileCoolantResavoir(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_COOLANTRESAVOIR.get(), pos, state);
+		super(ElectrodynamicsTileTypes.TILE_COOLANTRESAVOIR.get(), pos, state);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentFluidHandlerSimple(Constants.QUARRY_WATERUSAGE_PER_BLOCK * 1000, this, "").setInputDirections(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST).setValidFluids(Fluids.WATER));

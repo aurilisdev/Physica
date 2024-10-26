@@ -12,7 +12,7 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,7 +36,7 @@ public class TileCircuitMonitor extends GenericTile {
 	protected CachedTileOutput output;
 
 	public TileCircuitMonitor(BlockPos worldPos, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_CIRCUITMONITOR.get(), worldPos, blockState);
+		super(ElectrodynamicsTileTypes.TILE_CIRCUITMONITOR.get(), worldPos, blockState);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentElectrodynamic(this, false, false).voltage(-1).receivePower((transfer, debug) -> TransferPack.EMPTY).getConnectedLoad((profile, dir) -> TransferPack.EMPTY).setInputDirections(Direction.SOUTH));
@@ -89,6 +89,7 @@ public class TileCircuitMonitor extends GenericTile {
 			case 3 -> network.getMinimumVoltage(); // The lowest voltage a connected machine has in volts
 			case 4 -> network.getResistance(); // The current resistance of the network in ohms
 			case 5 -> network.getMaxJoulesStored() / 20.0; // The connected load on the network in watts
+			//case 6 -> TransferPack.joulesVoltage(network.getActiveTransmitted(), network.getActiveVoltage()).getAmps();
 			default -> -1;
 			};
 		}

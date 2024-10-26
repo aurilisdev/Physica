@@ -16,7 +16,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTileTypes;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
@@ -38,7 +38,7 @@ public class TileMotorComplex extends GenericTile implements ITickableSound {
 	public final Property<Boolean> isPowered = property(new Property<>(PropertyTypes.BOOLEAN, "isPowered", false));
 
 	public TileMotorComplex(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_MOTORCOMPLEX.get(), pos, state);
+		super(ElectrodynamicsTileTypes.TILE_MOTORCOMPLEX.get(), pos, state);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.SOUTH).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2).maxJoules(Constants.MOTORCOMPLEX_USAGE_PER_TICK * 10000));

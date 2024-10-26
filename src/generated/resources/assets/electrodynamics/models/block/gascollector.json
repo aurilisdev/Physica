@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "electrodynamics:block/gascollector_bottom",
+    "east": "electrodynamics:block/gascollector_fanoff",
+    "north": "electrodynamics:block/gascollector_fanoff",
+    "particle": "electrodynamics:block/multisubnode",
+    "south": "electrodynamics:block/gascollector_back",
+    "up": "electrodynamics:block/gascollector_fanoff",
+    "west": "electrodynamics:block/gascollector_fanoff"
+  }
+}

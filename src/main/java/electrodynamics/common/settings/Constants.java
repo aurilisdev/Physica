@@ -50,10 +50,8 @@ public class Constants {
 	public static int CHARGER_REQUIRED_TICKS = 100;
 	@DoubleValue(def = 1000.0)
 	public static double CHARGER_USAGER_PER_TICK = 1000.0;
-	@IntValue(def = 100)
-	public static int COBBLE_GEN_REQUIRED_TICKS = 100;
 	@DoubleValue(def = 100)
-	public static double COBBLE_GEN_USAGE_PER_TICK = 100;
+	public static double GAS_COLLECTOR_USAGE_PER_TICK = 100;
 	@DoubleValue(def = 100)
 	public static double MOTORCOMPLEX_USAGE_PER_TICK = 100.0;
 	@DoubleValue(def = 10)
