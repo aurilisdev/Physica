@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:ores",
+  "criteria": {
+    "HasRawOre": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:raworetin"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.rawtin.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:raworetin"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.rawtin.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasRawOre"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  }
+}

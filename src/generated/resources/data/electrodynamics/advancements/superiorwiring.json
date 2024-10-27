@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:betterwiring",
+  "criteria": {
+    "HasGoldWire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:wiregold"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.superiorwiring.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:wiregold"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.superiorwiring.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasGoldWire"
+    ]
+  ],
+  "rewards": {
+    "experience": 20
+  }
+}

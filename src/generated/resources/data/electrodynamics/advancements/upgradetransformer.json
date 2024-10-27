@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:basicwiring",
+  "criteria": {
+    "HasTransformer": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:upgradetransformer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.upgradetransformer.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:upgradetransformer"
+    },
+    "title": {
+      "color": "light_purple",
+      "translate": "advancement.electrodynamics.upgradetransformer.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasTransformer"
+    ]
+  ],
+  "rewards": {
+    "experience": 25
+  }
+}

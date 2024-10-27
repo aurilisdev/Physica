@@ -88,13 +88,14 @@ public class ShapedCraftingRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
-    public ShapedCraftingRecipeBuilder complete(String parent, String name) {
+    public ShapedCraftingRecipeBuilder complete(String parent, String name, RecipeOutput output) {
         for (Character character : keys.keySet()) {
             if (isKeyNotUsed(character)) {
                 throw new UnsupportedOperationException("The key " + character + " is defined by never used!");
             }
         }
         id = ResourceLocation.fromNamespaceAndPath(parent, name);
+        save(output);
         return this;
     }
 

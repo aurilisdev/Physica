@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:coalgenerator",
+  "criteria": {
+    "HasThermoGenerator": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:thermoelectricgenerator"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.thermoelectricgenerator.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:thermoelectricgenerator"
+    },
+    "title": {
+      "color": "red",
+      "translate": "advancement.electrodynamics.thermoelectricgenerator.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasThermoGenerator"
+    ]
+  ],
+  "rewards": {
+    "experience": 20
+  }
+}

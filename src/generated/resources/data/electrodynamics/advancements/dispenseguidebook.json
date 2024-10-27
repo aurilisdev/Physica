@@ -1,0 +1,17 @@
+{
+  "criteria": {
+    "SpawnIn": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "requirements": [
+    [
+      "SpawnIn"
+    ]
+  ],
+  "rewards": {
+    "loot": [
+      "minecraft:advancement_reward/electroguidebook"
+    ]
+  }
+}

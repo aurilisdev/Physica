@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 
 import electrodynamics.api.References;
 import electrodynamics.common.block.subtype.SubtypeMachine;
@@ -34,7 +33,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ElectrodynamicsAdvancementProvider implements DataProvider {
 
@@ -58,7 +56,7 @@ public class ElectrodynamicsAdvancementProvider implements DataProvider {
     @Override
     public CompletableFuture<?> run(CachedOutput output) {
         return this.registries.thenCompose(provider -> {
-
+            generate(provider);
             //
 
             List<CompletableFuture<?>> list = new ArrayList<>();
@@ -75,11 +73,11 @@ public class ElectrodynamicsAdvancementProvider implements DataProvider {
 
                 Path path = this.pathProvider.json(holder.id());
 
-                list.add(DataProvider.saveStable(output, builder.serializeToJson(), path));
+                list.add(DataProvider.saveStable(output, builder.serializeToJson(provider), path));
 
             }
 
-            return CompletableFuture.allOf(list.toArray(new CompletableFuture[0]));
+            return CompletableFuture.allOf(list.toArray(CompletableFuture[]::new));
 
         });
     }
@@ -95,7 +93,7 @@ public class ElectrodynamicsAdvancementProvider implements DataProvider {
         return builder;
     }
 
-    public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper) {
+    public void generate(HolderLookup.Provider registries) {
 
         advancement("dispenseguidebook")
                 //

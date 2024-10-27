@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:ores",
+  "criteria": {
+    "HasRawOre": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:raworethorium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.rawthorium.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:raworethorium"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.rawthorium.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasRawOre"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  }
+}

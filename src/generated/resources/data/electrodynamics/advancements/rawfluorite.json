@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:ores",
+  "criteria": {
+    "HasRawOre": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:raworefluorite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.rawfluorite.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:raworefluorite"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.rawfluorite.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasRawOre"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  }
+}

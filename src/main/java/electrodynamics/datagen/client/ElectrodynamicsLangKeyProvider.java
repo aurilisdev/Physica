@@ -12,20 +12,7 @@ import electrodynamics.common.block.subtype.SubtypeRawOreBlock;
 import electrodynamics.common.block.subtype.SubtypeResourceBlock;
 import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.fluid.types.liquid.subtype.SubtypeSulfateFluid;
-import electrodynamics.common.item.subtype.SubtypeCeramic;
-import electrodynamics.common.item.subtype.SubtypeCircuit;
-import electrodynamics.common.item.subtype.SubtypeCrystal;
-import electrodynamics.common.item.subtype.SubtypeDrillHead;
-import electrodynamics.common.item.subtype.SubtypeDust;
-import electrodynamics.common.item.subtype.SubtypeGear;
-import electrodynamics.common.item.subtype.SubtypeImpureDust;
-import electrodynamics.common.item.subtype.SubtypeIngot;
-import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
-import electrodynamics.common.item.subtype.SubtypeNugget;
-import electrodynamics.common.item.subtype.SubtypeOxide;
-import electrodynamics.common.item.subtype.SubtypePlate;
-import electrodynamics.common.item.subtype.SubtypeRawOre;
-import electrodynamics.common.item.subtype.SubtypeRod;
+import electrodynamics.common.item.subtype.*;
 import electrodynamics.common.recipe.categories.fluid2gas.specificmachines.ElectrolyticSeparatorRecipe;
 import electrodynamics.common.recipe.categories.fluid2item.specificmachines.ChemicalCrystalizerRecipe;
 import electrodynamics.common.recipe.categories.fluiditem2fluid.specificmachines.ChemicalMixerRecipe;
@@ -276,6 +263,11 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addItem(ElectrodynamicsItems.getItem(SubtypeRod.stainlesssteel), "Stainless Steel Rod");
 			addItem(ElectrodynamicsItems.getItem(SubtypeRod.steel), "Steel Rod");
 			addItem(ElectrodynamicsItems.getItem(SubtypeRod.titaniumcarbide), "Titanium Carbide Rod");
+
+			addItem(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.argon), "Argon Chromotography Card");
+			addItem(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.carbondioxide), "Carbon Chromotography Card");
+			addItem(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.nitrogen), "Nitrogen Chromotography Card");
+			addItem(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.oxygen), "Oxygen Chromotography Card");
 
 			addBlock(ElectrodynamicsBlocks.BLOCK_FRAME, "Quarry Frame");
 			addBlock(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER, "Quarry Frame Corner");

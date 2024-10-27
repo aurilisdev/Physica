@@ -54,7 +54,6 @@ public class DataGenerators {
 			generator.addProvider(true, new CoalGeneratorFuelSourceProvider(output));
 			generator.addProvider(true, new ThermoelectricGenHeatSourceProvider(output));
 			generator.addProvider(true, new GasCollectorChromoCardsProvider(output));
-			generator.addProvider(true, new ElectrodynamicsAdvancementProvider(output, lookupProvider));
 
 			DatapackBuiltinEntriesProvider datapacks = new DatapackBuiltinEntriesProvider(output, lookupProvider, new RegistrySetBuilder()
 					//
@@ -71,6 +70,7 @@ public class DataGenerators {
 			generator.addProvider(true, datapacks);
 			ElectrodynamicsTagsProvider.addTagProviders(generator, output, datapacks.getRegistryProvider(), helper);
 			generator.addProvider(true, new ElectrodynamicsRecipeProvider(output, lookupProvider));
+			generator.addProvider(true, new ElectrodynamicsAdvancementProvider(output, datapacks.getRegistryProvider()));
 		}
 		if (event.includeClient()) {
 			generator.addProvider(true, new ElectrodynamicsBlockStateProvider(output, helper));

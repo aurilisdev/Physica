@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:wiremill",
+  "criteria": {
+    "HasMill": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:wiremilldouble"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.doublewiremill.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:wiremilldouble"
+    },
+    "title": {
+      "color": "blue",
+      "translate": "advancement.electrodynamics.doublewiremill.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasMill"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

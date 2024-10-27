@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:root",
+  "criteria": {
+    "HasCopperWire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:wirecopper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.basicwiring.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:wirecopper"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.basicwiring.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasCopperWire"
+    ]
+  ],
+  "rewards": {
+    "experience": 20
+  }
+}

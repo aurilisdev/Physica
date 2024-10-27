@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:ores",
+  "criteria": {
+    "HasRawOre": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:raworeuranium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.rawuranium.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:raworeuranium"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.rawuranium.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasRawOre"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:insulation",
+  "criteria": {
+    "HasCeramicInsulation": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:insulationceramic"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.ceramicinsulation.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:insulationceramic"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.ceramicinsulation.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasCeramicInsulation"
+    ]
+  ],
+  "rewards": {
+    "experience": 30
+  }
+}

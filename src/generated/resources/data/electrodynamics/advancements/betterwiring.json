@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:basicwiring",
+  "criteria": {
+    "HasSilverWire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:wiresilver"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.betterwiring.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:wiresilver"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.betterwiring.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasSilverWire"
+    ]
+  ],
+  "rewards": {
+    "experience": 20
+  }
+}

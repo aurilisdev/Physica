@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:ores",
+  "criteria": {
+    "HasRawOre": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:raworetitanium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.rawtitanium.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:raworetitanium"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.rawtitanium.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasRawOre"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  }
+}

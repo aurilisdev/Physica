@@ -71,8 +71,9 @@ public class ShapelessCraftingRecipeBuilder implements RecipeBuilder {
         return this;
     }
 
-    public ShapelessCraftingRecipeBuilder complete(String parent, String name) {
+    public ShapelessCraftingRecipeBuilder complete(String parent, String name, RecipeOutput output) {
         id = ResourceLocation.fromNamespaceAndPath(parent, name);
+        save(output);
         return this;
     }
 

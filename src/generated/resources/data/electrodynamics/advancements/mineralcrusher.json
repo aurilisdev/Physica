@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:coalgenerator",
+  "criteria": {
+    "HasCrusher": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:mineralcrusher"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.mineralcrusher.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:mineralcrusher"
+    },
+    "title": {
+      "color": "gold",
+      "translate": "advancement.electrodynamics.mineralcrusher.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasCrusher"
+    ]
+  ],
+  "rewards": {
+    "experience": 30
+  }
+}

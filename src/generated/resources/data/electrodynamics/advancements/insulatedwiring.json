@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:insulation",
+  "criteria": {
+    "HasInsulatedCopperWire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:wireinsulatedcopperblack"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.insulatedwiring.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:insulation"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.insulatedwiring.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasInsulatedCopperWire"
+    ]
+  ],
+  "rewards": {
+    "experience": 20
+  }
+}

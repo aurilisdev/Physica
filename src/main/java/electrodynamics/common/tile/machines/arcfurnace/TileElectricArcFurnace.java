@@ -2,6 +2,7 @@ package electrodynamics.common.tile.machines.arcfurnace;
 
 import java.util.List;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.client.particle.lavawithphysics.ParticleOptionLavaWithPhysics;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerElectricArcFurnace;
@@ -44,12 +45,16 @@ public class TileElectricArcFurnace extends GenericTile implements ITickableSoun
 
 	private boolean isSoundPlaying = false;
 
+	private final int extra;
+
 	public TileElectricArcFurnace(BlockPos worldPosition, BlockState blockState) {
 		this(SubtypeMachine.electricarcfurnace, 0, worldPosition, blockState);
 	}
 
 	public TileElectricArcFurnace(SubtypeMachine machine, int extra, BlockPos worldPosition, BlockState blockState) {
 		super(extra == 1 ? ElectrodynamicsTileTypes.TILE_ELECTRICARCFURNACEDOUBLE.get() : extra == 2 ? ElectrodynamicsTileTypes.TILE_ELECTRICARCFURNACETRIPLE.get() : ElectrodynamicsTileTypes.TILE_ELECTRICARCFURNACE.get(), worldPosition, blockState);
+
+		this.extra = extra;
 
 		int processorCount = extra + 1;
 		int inputsPerProc = 1;
@@ -147,18 +152,43 @@ public class TileElectricArcFurnace extends GenericTile implements ITickableSoun
 		if (!isProcessorActive()) {
 			return;
 		}
-		if (level.random.nextDouble() < 0.15) {
+
+		double threshhold = 0.5;
+
+		if(extra == 1) {
+			threshhold = 0.75;
+		} else if (extra == 2){
+			threshhold = 0.9;
+		}
+
+		if (level.random.nextDouble() < threshhold) {
 
 			Direction direction = getFacing();
 
 			double axisShift = 0.5;
-			double yShift = 0.7;
+
+			if (extra == 1) {
+				axisShift = Electrodynamics.RANDOM.nextDouble(0.5) + 0.25;
+			} else if (extra == 2) {
+				axisShift = Electrodynamics.RANDOM.nextDouble(0.6) + 0.22;
+			}
+
+			double yShift = 0.6;
 
 			double xShift = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -0.5 ? 0 : 0.5) : axisShift;
 			double zShift = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -0.5 ? 0 : 0.5) : axisShift;
 
-			level.addParticle(new ParticleOptionLavaWithPhysics().setParameters(1, 1), worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+			double xVel = (Math.random() * 2.0 - 1.0) * 0.4F;
+			double yVel = Math.random() * 0.4F;
+			double zVel = (Math.random() * 2.0 - 1.0) * 0.4F;
+			double rand = (Math.random() + Math.random() + 1.0) * 0.15F;
+			double vectorMag = Math.sqrt(xVel * xVel + yVel * yVel + zVel * zVel);
+			xVel = xVel / vectorMag * rand * 0.4F;
+			yVel = Math.max(0.05, yVel / vectorMag * rand * 0.4F + 0.1F);
+			zVel = zVel / vectorMag * rand * 0.4F;
 
+			level.addParticle(new ParticleOptionLavaWithPhysics().setParameters(0.05F, 1, 1), worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, xVel, yVel, zVel);
+			level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ(), 0, 0, 0);
 
 
 

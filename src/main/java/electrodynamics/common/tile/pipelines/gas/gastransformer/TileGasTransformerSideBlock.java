@@ -1,5 +1,6 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer;
 
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.item.ItemStack;
@@ -24,9 +25,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
+import java.util.Optional;
+
 public class TileGasTransformerSideBlock extends GenericTile {
 
-    private BlockPos ownerPos = TileQuarry.OUT_OF_REACH;
+    private BlockPos ownerPos = BlockEntityUtils.OUT_OF_REACH;
     private boolean isLeft = false;
 
     public TileGasTransformerSideBlock(BlockPos worldPos, BlockState blockState) {
@@ -98,13 +101,14 @@ public class TileGasTransformerSideBlock extends GenericTile {
     @Override
     protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
         super.loadAdditional(compound, registries);
-        ownerPos = NbtUtils.readBlockPos(compound, "owner").get();
+        Optional<BlockPos> optional = NbtUtils.readBlockPos(compound, "owner");
+        ownerPos = optional.isPresent() ? optional.get() : BlockEntityUtils.OUT_OF_REACH;
         isLeft = compound.getBoolean("isleft");
     }
 
     @Override
     public @org.jetbrains.annotations.Nullable IFluidHandler getFluidHandlerCapability(@org.jetbrains.annotations.Nullable Direction side) {
-        if (ownerPos == null || ownerPos.equals(TileQuarry.OUT_OF_REACH)) {
+        if (ownerPos == null || ownerPos.equals(BlockEntityUtils.OUT_OF_REACH)) {
             return null;
         }
 
@@ -123,7 +127,7 @@ public class TileGasTransformerSideBlock extends GenericTile {
 
     @Override
     public @org.jetbrains.annotations.Nullable IGasHandler getGasHandlerCapability(@org.jetbrains.annotations.Nullable Direction side) {
-        if (ownerPos == null || ownerPos.equals(TileQuarry.OUT_OF_REACH)) {
+        if (ownerPos == null || ownerPos.equals(BlockEntityUtils.OUT_OF_REACH)) {
             return null;
         }
 

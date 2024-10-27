@@ -14,20 +14,7 @@ import electrodynamics.common.block.subtype.SubtypeWire.Conductor;
 import electrodynamics.common.block.subtype.SubtypeWire.InsulationMaterial;
 import electrodynamics.common.block.subtype.SubtypeWire.WireClass;
 import electrodynamics.common.block.subtype.SubtypeWire.WireColor;
-import electrodynamics.common.item.subtype.SubtypeCeramic;
-import electrodynamics.common.item.subtype.SubtypeCircuit;
-import electrodynamics.common.item.subtype.SubtypeCrystal;
-import electrodynamics.common.item.subtype.SubtypeDrillHead;
-import electrodynamics.common.item.subtype.SubtypeDust;
-import electrodynamics.common.item.subtype.SubtypeGear;
-import electrodynamics.common.item.subtype.SubtypeImpureDust;
-import electrodynamics.common.item.subtype.SubtypeIngot;
-import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
-import electrodynamics.common.item.subtype.SubtypeNugget;
-import electrodynamics.common.item.subtype.SubtypeOxide;
-import electrodynamics.common.item.subtype.SubtypePlate;
-import electrodynamics.common.item.subtype.SubtypeRawOre;
-import electrodynamics.common.item.subtype.SubtypeRod;
+import electrodynamics.common.item.subtype.*;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -197,6 +184,10 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 
 		for (SubtypeGasPipe pipe : SubtypeGasPipe.values()) {
 			layeredItem(ElectrodynamicsItems.getItem(pipe), Parent.GENERATED, itemLoc("gaspipe/" + pipe.tag()));
+		}
+
+		for (SubtypeChromotographyCard card : SubtypeChromotographyCard.values()) {
+			layeredItem(ElectrodynamicsItems.getItem(card), Parent.GENERATED, itemLoc("chromotographycard/" + card.tag()));
 		}
 
 		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.advancedsolarpanel), existingBlock(blockLoc("advancedsolarpanelitem"))).transforms().transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(35, 45, 0).translation(0, 2.5F, 0).scale(0.375F).end().transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(35, 45, 0).translation(0, 2.5F, 0).scale(0.375F).end().transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0, 45, 0).scale(0.4F).end().transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0, 225, 0).scale(0.4F).end().transform(ItemDisplayContext.GUI).rotation(30, 225, 0).translation(0, -3F, 0).scale(0.265F).end();

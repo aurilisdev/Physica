@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:coalgenerator",
+  "criteria": {
+    "HasFurnace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:electricfurnace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.electricfurnace.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:electricfurnace"
+    },
+    "title": {
+      "color": "gold",
+      "translate": "advancement.electrodynamics.electricfurnace.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasFurnace"
+    ]
+  ],
+  "rewards": {
+    "experience": 30
+  }
+}

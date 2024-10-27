@@ -16,12 +16,12 @@ public class ParticleLavaWithPhysics extends TextureSheetParticle {
         this.friction = 0.999F;
         this.hasPhysics = true;
         this.bounceFactor = options.bounceFactor;
-        this.xd *= 0.8F;
-        this.yd *= 0.8F;
-        this.zd *= 0.8F;
-        this.yd = (double) (this.random.nextFloat() * 0.4F + 0.05F);
-        this.quadSize = this.quadSize * (this.random.nextFloat() * 2.0F + 0.2F) * options.scale;
-        this.lifetime = (int) (16.0 / (Math.random() * 0.8 + 0.2));
+        this.xd = xSpeed;
+        this.yd = ySpeed;
+        this.zd = zSpeed;
+        this.quadSize = options.scale;
+        this.lifetime = options.lifetime;
+        this.setSpriteFromAge(this.sprites);
     }
 
     @Override

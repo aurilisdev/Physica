@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nullable;
 
 import electrodynamics.prefab.properties.PropertyTypes;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 
@@ -74,8 +75,6 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 	private static final int CAPACITY = 10000;
 	private static final BlockState AIR = Blocks.AIR.defaultBlockState();
 	private static final int CLEAR_SKIP = Math.max(Math.min(Constants.CLEARING_AIR_SKIP, 128), 0);
-
-	public static final BlockPos OUT_OF_REACH = new BlockPos(0, -1000, 0);
 
 	public static final int DRILL_HEAD_INDEX = 0;
 
@@ -172,9 +171,9 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 		cornerOnRight = property(new Property<>(PropertyTypes.BOOLEAN, "corneronright", false));
 		isAreaCleared = property(new Property<>(PropertyTypes.BOOLEAN, "areaClear", false));
 
-		corners = property(new Property<>(PropertyTypes.BLOCK_POS_LIST, "corners", List.of(OUT_OF_REACH, OUT_OF_REACH, OUT_OF_REACH, OUT_OF_REACH)));
-		miningPos = property(new Property<>(PropertyTypes.BLOCK_POS, "miningpos", OUT_OF_REACH));
-		prevMiningPos = property(new Property<>(PropertyTypes.BLOCK_POS, "prevminingpos", OUT_OF_REACH));
+		corners = property(new Property<>(PropertyTypes.BLOCK_POS_LIST, "corners", List.of(BlockEntityUtils.OUT_OF_REACH, BlockEntityUtils.OUT_OF_REACH, BlockEntityUtils.OUT_OF_REACH, BlockEntityUtils.OUT_OF_REACH)));
+		miningPos = property(new Property<>(PropertyTypes.BLOCK_POS, "miningpos", BlockEntityUtils.OUT_OF_REACH));
+		prevMiningPos = property(new Property<>(PropertyTypes.BLOCK_POS, "prevminingpos", BlockEntityUtils.OUT_OF_REACH));
 
 		quarryPowerUsage = property(new Property<>(PropertyTypes.DOUBLE, "quarrypowerusage", 0.0));
 		setupPowerUsage = property(new Property<>(PropertyTypes.DOUBLE, "setuppowerusage", 0.0));
@@ -342,7 +341,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 		// deals with the issue of the client pos always being one tick behind
 		// the server's
 		cont = true;
-		if (!miningPos.get().equals(OUT_OF_REACH)) {
+		if (!miningPos.get().equals(BlockEntityUtils.OUT_OF_REACH)) {
 			BlockState miningState = world.getBlockState(miningPos.get());
 			float strength = miningState.getDestroySpeed(world, miningPos.get());
 			if (!skipBlock(miningState) && strength >= 0) {
@@ -1024,8 +1023,8 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 	}
 
 	public void handleFramesDecay() {
-		miningPos.set(OUT_OF_REACH);
-		prevMiningPos.set(OUT_OF_REACH);
+		miningPos.set(BlockEntityUtils.OUT_OF_REACH);
+		prevMiningPos.set(BlockEntityUtils.OUT_OF_REACH);
 		hasHandledDecay = true;
 		isAreaCleared.set(false);
 		hasRing.set(false);

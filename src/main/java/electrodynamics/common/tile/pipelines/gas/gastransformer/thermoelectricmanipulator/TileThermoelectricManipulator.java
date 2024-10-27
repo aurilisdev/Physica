@@ -2,6 +2,7 @@ package electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricm
 
 import java.util.function.BiConsumer;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasAction;
@@ -32,6 +33,8 @@ import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -386,8 +389,38 @@ public class TileThermoelectricManipulator extends GenericTileGasTransformer {
 
     @Override
     public void tickClient(ComponentTickable tickable) {
-        // TODO Auto-generated method stub
+        ManipulatorHeatingStatus status = getBlockState().getValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS);
+        if(status == ManipulatorHeatingStatus.OFF) {
+            return;
+        }
+        if(level.random.nextDouble() < 0.5) {
 
+            Direction direction = getFacing();
+
+            double axisShift = Electrodynamics.RANDOM.nextDouble(0.25) + 0.1;
+            double otherShift = Electrodynamics.RANDOM.nextDouble(0.63) + 0.1;
+            double yShift = Electrodynamics.RANDOM.nextDouble();
+
+            double xShift = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() < 0 ? -1 + otherShift : otherShift) : direction.getStepZ() < 0 ? 1 - axisShift : axisShift;
+            double zShift = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() < 0 ? -1 + otherShift : otherShift) : direction.getStepX() < 0 ? axisShift : 1 - axisShift;
+
+            ParticleOptions particle;
+
+            if(status == ManipulatorHeatingStatus.HEAT){
+                particle = ParticleTypes.SMOKE;
+            } else {
+                particle = ParticleTypes.SNOWFLAKE;
+            }
+
+            level.addParticle(particle, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+            //level.addParticle(ParticleTypes.FLAME, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+
+
+
+
+
+
+        }
     }
 
     @Override

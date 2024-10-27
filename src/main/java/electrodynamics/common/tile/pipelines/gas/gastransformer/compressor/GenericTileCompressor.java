@@ -37,6 +37,25 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
 
 	@Override
 	public void tickClient(ComponentTickable tickable) {
+
+		if(isProcessorActive()){
+			return;
+		}
+
+		if(level.getRandom().nextDouble() < 0.15){
+
+
+			//TODO add particles?
+
+
+
+
+
+		}
+
+
+
+
 		if (!isSoundPlaying && shouldPlaySound()) {
 			isSoundPlaying = true;
 			if (isDecompressor) {
@@ -44,8 +63,8 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
 			} else {
 				SoundBarrierMethods.playTileSound(ElectrodynamicsSounds.SOUND_COMPRESSORRUNNING.get(), this, true);
 			}
-
 		}
+
 	}
 
 	@Override

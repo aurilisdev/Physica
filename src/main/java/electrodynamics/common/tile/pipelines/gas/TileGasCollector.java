@@ -5,14 +5,17 @@ import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerDO2OProcessor;
 import electrodynamics.common.inventory.container.tile.ContainerGasCollector;
+import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
 import electrodynamics.common.settings.Constants;
+import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.*;
 import electrodynamics.prefab.tile.types.GenericGasTile;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsSounds;
 import electrodynamics.registers.ElectrodynamicsTileTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -31,15 +34,27 @@ public class TileGasCollector extends GenericGasTile implements ITickableSound {
     public TileGasCollector(BlockPos worldPos, BlockState blockState) {
         super(ElectrodynamicsTileTypes.TILE_GASCOLLECTOR.get(), worldPos, blockState);
         addComponent(new ComponentPacketHandler(this));
-        addComponent(new ComponentTickable(this).tickClient(this::tickClient));
+        addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
         addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2.0).maxJoules(Constants.GAS_COLLECTOR_USAGE_PER_TICK * 20));
         addComponent(new ComponentInventory(this, ComponentInventory.InventoryBuilder.newInv().inputs(1).gasOutputs(1).upgrades(3)).validUpgrades(ContainerDO2OProcessor.VALID_UPGRADES).valid(machineValidator()));
         addComponent(new ComponentProcessor(this).canProcess(this::canProcess).process(this::process));
         addComponent(new ComponentContainerProvider(SubtypeMachine.gascollector, this).createMenu((id, player) -> new ContainerGasCollector(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
-        addComponent(new ComponentGasHandlerSimple(this, "", 5000, 1000, 10).setOutputDirections(Direction.SOUTH).setOnGasCondensed(getCondensedHandler()));
+        addComponent(new ComponentGasHandlerSimple(this, "", 5000, 1000, 10).setOutputDirections(Direction.NORTH).setOnGasCondensed(getCondensedHandler()));
     }
 
     private void tickClient(ComponentTickable componentTickable) {
+        if (!isSoundPlaying) {
+            isSoundPlaying = true;
+            SoundBarrierMethods.playTileSound(ElectrodynamicsSounds.SOUND_WINDMILL.get(), this, true);
+        }
+    }
+
+    private void tickServer(ComponentTickable componentTickable) {
+
+        ComponentGasHandlerSimple handler = getComponent(IComponentType.GasHandler);
+        GasUtilities.fillItem(this, handler.asArray());
+        GasUtilities.outputToPipe(this, handler.asArray(), handler.outputDirections);
+
     }
 
     private void process(ComponentProcessor componentProcessor) {

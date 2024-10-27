@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:lithiumbatterybox",
+  "criteria": {
+    "HasBatteryBox": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:carbynebatterybox"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.carbynebatterybox.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:carbynebatterybox"
+    },
+    "title": {
+      "color": "red",
+      "translate": "advancement.electrodynamics.carbynebatterybox.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasBatteryBox"
+    ]
+  ],
+  "rewards": {
+    "experience": 150
+  }
+}

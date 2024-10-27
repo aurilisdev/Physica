@@ -21,6 +21,7 @@ import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -144,7 +145,7 @@ public class ScreenQuarry extends GenericScreen<ContainerQuarry> {
 		}
 
 		Component location;
-		if (quarry.miningPos.get().equals(TileQuarry.OUT_OF_REACH)) {
+		if (quarry.miningPos.get().equals(BlockEntityUtils.OUT_OF_REACH)) {
 			location = ElectroTextUtils.gui("quarry.notavailable").withStyle(ChatFormatting.RED);
 		} else {
 			location = Component.literal(quarry.miningPos.get().toShortString()).withStyle(ChatFormatting.GRAY);

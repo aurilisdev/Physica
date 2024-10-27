@@ -46,20 +46,7 @@ import electrodynamics.common.item.gear.tools.electric.ItemMechanizedCrossbow;
 import electrodynamics.common.item.gear.tools.electric.ItemRailgunKinetic;
 import electrodynamics.common.item.gear.tools.electric.ItemRailgunPlasma;
 import electrodynamics.common.item.gear.tools.electric.ItemSeismicScanner;
-import electrodynamics.common.item.subtype.SubtypeCeramic;
-import electrodynamics.common.item.subtype.SubtypeCircuit;
-import electrodynamics.common.item.subtype.SubtypeCrystal;
-import electrodynamics.common.item.subtype.SubtypeDrillHead;
-import electrodynamics.common.item.subtype.SubtypeDust;
-import electrodynamics.common.item.subtype.SubtypeGear;
-import electrodynamics.common.item.subtype.SubtypeImpureDust;
-import electrodynamics.common.item.subtype.SubtypeIngot;
-import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
-import electrodynamics.common.item.subtype.SubtypeNugget;
-import electrodynamics.common.item.subtype.SubtypeOxide;
-import electrodynamics.common.item.subtype.SubtypePlate;
-import electrodynamics.common.item.subtype.SubtypeRawOre;
-import electrodynamics.common.item.subtype.SubtypeRod;
+import electrodynamics.common.item.subtype.*;
 import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.prefab.item.ItemElectric;
 import electrodynamics.prefab.utilities.object.TransferPack;
@@ -158,6 +145,7 @@ public class ElectrodynamicsItems {
 		registerSubtypeItem(SubtypePlate.values(), () -> ElectrodynamicsCreativeTabs.MAIN.get());
 		registerSubtypeItem(SubtypeCircuit.values(), () -> ElectrodynamicsCreativeTabs.MAIN.get());
 		registerSubtypeItem(SubtypeRod.values(), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+		registerSubtypeItem(SubtypeChromotographyCard.values(), () -> ElectrodynamicsCreativeTabs.MAIN.get());
 		for (SubtypeItemUpgrade subtype : SubtypeItemUpgrade.values()) {
 			SUBTYPEITEMREGISTER_MAPPINGS.put(subtype, ITEMS.register(subtype.tag(), () -> new ItemUpgrade(new Item.Properties(), subtype)));
 		}

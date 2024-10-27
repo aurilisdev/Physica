@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:superiorwiring",
+  "criteria": {
+    "HasSuperconductiveWire": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:wiresuperconductive"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.superconductivewiring.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:wiresuperconductive"
+    },
+    "title": {
+      "color": "gray",
+      "translate": "advancement.electrodynamics.superconductivewiring.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasSuperconductiveWire"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

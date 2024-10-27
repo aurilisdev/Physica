@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:electricfurnace",
+  "criteria": {
+    "HasFurnace": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:electricfurnacedouble"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.doubleelectricfurnace.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:electricfurnacedouble"
+    },
+    "title": {
+      "color": "blue",
+      "translate": "advancement.electrodynamics.doubleelectricfurnace.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasFurnace"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  }
+}

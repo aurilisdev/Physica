@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/tin"
+    }
+  },
+  "pattern": [
+    " I ",
+    "I I",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:geartin"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "electrodynamics:wiretin"
+    },
+    {
+      "item": "electrodynamics:insulation"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:wireinsulatedtinblack"
+  }
+}

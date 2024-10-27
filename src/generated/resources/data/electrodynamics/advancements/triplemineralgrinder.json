@@ -1,0 +1,36 @@
+{
+  "parent": "electrodynamics:doublemineralgrinder",
+  "criteria": {
+    "HasGrinder": {
+      "conditions": {
+        "items": [
+          {
+            "items": "electrodynamics:mineralgrindertriple"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.electrodynamics.triplemineralgrinder.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "electrodynamics:mineralgrindertriple"
+    },
+    "title": {
+      "color": "red",
+      "translate": "advancement.electrodynamics.triplemineralgrinder.title"
+    }
+  },
+  "requirements": [
+    [
+      "HasGrinder"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  }
+}

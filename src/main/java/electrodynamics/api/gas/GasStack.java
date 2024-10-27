@@ -173,7 +173,7 @@ public class GasStack {
     }
 
     public boolean isEmpty() {
-        return this == EMPTY || isEmpty;
+        return this.equals(EMPTY) || isEmpty;
     }
 
     public boolean isSameGas(GasStack other) {
@@ -207,7 +207,7 @@ public class GasStack {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof GasStack other) {
-            return other.gas.equals(gas) && other.amount == amount && other.temperature == temperature && other.pressure == pressure;
+            return other.getGas().equals(getGas()) && other.amount == amount && other.temperature == temperature && other.pressure == pressure;
         }
         return false;
     }

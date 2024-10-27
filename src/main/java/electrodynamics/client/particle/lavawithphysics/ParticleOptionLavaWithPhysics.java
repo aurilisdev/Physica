@@ -15,25 +15,30 @@ public class ParticleOptionLavaWithPhysics extends ParticleType<ParticleOptionLa
 
     public float scale;
     public double bounceFactor;
+    public int lifetime;
 
     public static final MapCodec<ParticleOptionLavaWithPhysics> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Codec.FLOAT.fieldOf("scale").forGetter(instance0 -> instance0.scale),
+                    Codec.INT.fieldOf("lifetime").forGetter(instance0 -> instance0.lifetime),
                     Codec.DOUBLE.fieldOf("bouncefactor").forGetter(instance0 -> instance0.bounceFactor)
-            ).apply(instance, (scale, bounceFactor) -> new ParticleOptionLavaWithPhysics().setParameters(scale, bounceFactor)));
+            ).apply(instance, (scale, lifetime, bounceFactor) -> new ParticleOptionLavaWithPhysics().setParameters(scale, lifetime, bounceFactor)));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ParticleOptionLavaWithPhysics> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, instance0 -> instance0.scale,
+            ByteBufCodecs.INT, instance0 -> instance0.lifetime,
             ByteBufCodecs.DOUBLE, instance0 -> instance0.bounceFactor,
-            (scale, bounceFactor) -> new ParticleOptionLavaWithPhysics().setParameters(scale, bounceFactor)
+            (scale, lifetime, bounceFactor) -> new ParticleOptionLavaWithPhysics().setParameters(scale, lifetime, bounceFactor)
     );
 
     public ParticleOptionLavaWithPhysics() {
         super(false);
     }
 
-    public ParticleOptionLavaWithPhysics setParameters(float scale, double bounceFactor) {
+    public ParticleOptionLavaWithPhysics setParameters(float scale, int lifetime, double bounceFactor) {
         this.scale = scale;
+        this.lifetime = lifetime;
+        this.bounceFactor = bounceFactor;
         return this;
     }
 

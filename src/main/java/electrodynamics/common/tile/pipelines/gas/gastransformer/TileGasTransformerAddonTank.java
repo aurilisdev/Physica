@@ -1,5 +1,6 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer;
 
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.item.ItemStack;
@@ -18,12 +19,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
+import java.util.Optional;
+
 public class TileGasTransformerAddonTank extends GenericTile {
 
 	public static final int MAX_ADDON_TANKS = 5;
 	public static final double ADDITIONAL_CAPACITY = 5000;
 
-	private BlockPos ownerPos = TileQuarry.OUT_OF_REACH;
+	private BlockPos ownerPos = BlockEntityUtils.OUT_OF_REACH;
 	// public boolean isDestroyed = false;
 
 	public TileGasTransformerAddonTank(BlockPos worldPos, BlockState blockState) {
@@ -43,7 +46,7 @@ public class TileGasTransformerAddonTank extends GenericTile {
 		BlockEntity aboveTile = getLevel().getBlockEntity(above);
 		for (int i = 0; i < MAX_ADDON_TANKS; i++) {
 			if (aboveTile instanceof TileGasTransformerAddonTank tank) {
-				tank.setOwnerPos(TileQuarry.OUT_OF_REACH);
+				tank.setOwnerPos(BlockEntityUtils.OUT_OF_REACH);
 			}
 			above = above.above();
 			aboveTile = getLevel().getBlockEntity(above);
@@ -102,7 +105,8 @@ public class TileGasTransformerAddonTank extends GenericTile {
 	@Override
 	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
 		super.loadAdditional(compound, registries);
-		ownerPos = NbtUtils.readBlockPos(compound, "owner").get();
+		Optional<BlockPos> optional = NbtUtils.readBlockPos(compound, "owner");
+		ownerPos = optional.isPresent() ? optional.get() : BlockEntityUtils.OUT_OF_REACH;
 	}
 
 }

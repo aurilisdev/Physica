@@ -18,6 +18,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
 public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerator {
@@ -242,6 +243,16 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
                 //
                 .save(output);
 
+        newRecipe(new ItemStack(Items.GLOWSTONE, 4), 0, 200, 450.0, "glowstone_dust_from_glowstone_block", modID)
+                //
+                .addItemStackInput(new ItemStack(Blocks.GLOWSTONE))
+                //
+                .save(output);
+        newRecipe(new ItemStack(Items.AMETHYST_SHARD), 0, 200, 300, "amethyst_shard_from_amethyst_block", modID)
+                //
+                .addItemStackInput(new ItemStack(Items.AMETHYST_BLOCK, 4))
+                //
+                .save(output);
     }
 
     public Item2ItemBuilder<MineralCrusherRecipe> newRecipe(ItemStack stack, float xp, int ticks, double usagePerTick, String name, String group) {
