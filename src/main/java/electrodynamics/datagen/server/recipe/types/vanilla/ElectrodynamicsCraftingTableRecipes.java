@@ -462,6 +462,24 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "chromotographycard_" + SubtypeChromotographyCard.argon.name(), output);
 
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.sulfurdioxide), 1)
+                //
+                .addPattern(" G ")
+                //
+                .addPattern("WPW")
+                //
+                .addPattern(" C ")
+                //
+                .addKey('G', ElectrodynamicsTags.Items.DUST_SULFUR)
+                //
+                .addKey('W', ElectrodynamicsItems.getItem(SubtypeWire.iron))
+                //
+                .addKey('P', ElectrodynamicsTags.Items.PLATE_STAINLESSSTEEL)
+                //
+                .addKey('C', ElectrodynamicsTags.Items.CIRCUITS_BASIC)
+                //
+                .complete(References.ID, "chromotographycard_" + SubtypeChromotographyCard.sulfurdioxide.name(), output);
+
         ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_MOTOR.get(), 1)
                 //
                 .addPattern(" S ")

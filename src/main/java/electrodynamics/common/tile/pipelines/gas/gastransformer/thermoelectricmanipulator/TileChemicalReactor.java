@@ -28,7 +28,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.core.BlockPos;
@@ -45,7 +45,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
-public class TileThermoelectricManipulator extends GenericTileGasTransformer {
+public class TileChemicalReactor extends GenericTileGasTransformer {
 
     /**
      * NOTE this value can NEVER be more than 90. This is because above 90, it becomes possible to create an infinite energy
@@ -60,8 +60,8 @@ public class TileThermoelectricManipulator extends GenericTileGasTransformer {
 
     private Gas evaporatedGas;
 
-    public TileThermoelectricManipulator(BlockPos worldPos, BlockState blockState) {
-        super(ElectrodynamicsTileTypes.TILE_THERMOELECTRIC_MANIPULATOR.get(), worldPos, blockState);
+    public TileChemicalReactor(BlockPos worldPos, BlockState blockState) {
+        super(ElectrodynamicsTiles.TILE_THERMOELECTRIC_MANIPULATOR.get(), worldPos, blockState);
         addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(BASE_INPUT_CAPACITY * 10));
         addComponent(new ComponentFluidHandlerMultiBiDirec(this).setInputDirections(Direction.DOWN).setInputTanks(1, arr((int) BASE_INPUT_CAPACITY)).setOutputDirections(Direction.DOWN).setOutputTanks(1, arr((int) BASE_OUTPUT_CAPACITY)));
     }

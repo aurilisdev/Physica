@@ -11,7 +11,7 @@ import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -33,7 +33,7 @@ public class TileCircuitBreaker extends GenericTile {
     private boolean isLocked = false;
 
     public TileCircuitBreaker(BlockPos worldPosition, BlockState blockState) {
-        super(ElectrodynamicsTileTypes.TILE_CIRCUITBREAKER.get(), worldPosition, blockState);
+        super(ElectrodynamicsTiles.TILE_CIRCUITBREAKER.get(), worldPosition, blockState);
         addComponent(new ComponentElectrodynamic(this, true, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setOutputDirections(Direction.SOUTH).setInputDirections(Direction.NORTH).voltage(-1).getAmpacity(this::getAmpacity).getMinimumVoltage(this::getMinimumVoltage));
         addComponent(new ComponentTickable(this).tickServer(this::tickServer));
     }

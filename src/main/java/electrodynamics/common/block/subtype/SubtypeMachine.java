@@ -24,15 +24,7 @@ import electrodynamics.common.tile.electricitygrid.transformer.TileAdvancedTrans
 import electrodynamics.common.tile.electricitygrid.transformer.TileAdvancedTransformer.TileAdvancedUpgradeTransformer;
 import electrodynamics.common.tile.electricitygrid.transformer.TileGenericTransformer.TileDowngradeTransformer;
 import electrodynamics.common.tile.electricitygrid.transformer.TileGenericTransformer.TileUpgradeTransformer;
-import electrodynamics.common.tile.machines.TileChemicalCrystallizer;
-import electrodynamics.common.tile.machines.TileChemicalMixer;
-import electrodynamics.common.tile.machines.TileElectrolyticSeparator;
-import electrodynamics.common.tile.machines.TileEnergizedAlloyer;
-import electrodynamics.common.tile.machines.TileFermentationPlant;
-import electrodynamics.common.tile.machines.TileLathe;
-import electrodynamics.common.tile.machines.TileMineralWasher;
-import electrodynamics.common.tile.machines.TileOxidationFurnace;
-import electrodynamics.common.tile.machines.TileReinforcedAlloyer;
+import electrodynamics.common.tile.machines.*;
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnace;
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnaceDouble;
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnaceTriple;
@@ -137,6 +129,7 @@ public enum SubtypeMachine implements ISubtype {
     currentregulator(true, TileCurrentRegulator.class),
 
     gascollector(true, TileGasCollector.class),
+    chemicalreactor(true, TileChemicalReactor.class),
     ;
 
     public final Class<? extends BlockEntity> tileclass;

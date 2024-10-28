@@ -3,14 +3,14 @@ package electrodynamics.common.tile.pipelines.gas.gastransformer.compressor;
 import electrodynamics.common.inventory.container.tile.ContainerCompressor;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TileCompressor extends GenericTileCompressor {
 
 	public TileCompressor(BlockPos worldPos, BlockState blockState) {
-		super(ElectrodynamicsTileTypes.TILE_COMPRESSOR.get(), worldPos, blockState, false);
+		super(ElectrodynamicsTiles.TILE_COMPRESSOR.get(), worldPos, blockState, false);
 	}
 
 	@Override

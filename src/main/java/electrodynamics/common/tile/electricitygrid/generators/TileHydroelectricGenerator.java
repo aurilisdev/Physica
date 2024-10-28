@@ -18,7 +18,7 @@ import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,7 +40,7 @@ public class TileHydroelectricGenerator extends GenericGeneratorTile implements 
 	private boolean isSoundPlaying = false;
 
 	public TileHydroelectricGenerator(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsTileTypes.TILE_HYDROELECTRICGENERATOR.get(), worldPosition, blockState, 2.25, SubtypeItemUpgrade.stator);
+		super(ElectrodynamicsTiles.TILE_HYDROELECTRICGENERATOR.get(), worldPosition, blockState, 2.25, SubtypeItemUpgrade.stator);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickCommon(this::tickCommon).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.NORTH));

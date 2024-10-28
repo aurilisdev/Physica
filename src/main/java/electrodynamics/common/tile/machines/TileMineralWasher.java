@@ -15,7 +15,7 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,7 +30,7 @@ public class TileMineralWasher extends GenericMaterialTile {
 	public static final int MAX_TANK_CAPACITY = 5000;
 
 	public TileMineralWasher(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsTileTypes.TILE_MINERALWASHER.get(), worldPosition, blockState);
+		super(ElectrodynamicsTiles.TILE_MINERALWASHER.get(), worldPosition, blockState);
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.NORTH).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 4));

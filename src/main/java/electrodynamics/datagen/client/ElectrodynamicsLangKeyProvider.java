@@ -268,6 +268,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addItem(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.carbondioxide), "Carbon Chromotography Card");
 			addItem(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.nitrogen), "Nitrogen Chromotography Card");
 			addItem(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.oxygen), "Oxygen Chromotography Card");
+			addItem(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.sulfurdioxide), "Sulfur Chromotography Card");
 
 			addBlock(ElectrodynamicsBlocks.BLOCK_FRAME, "Quarry Frame");
 			addBlock(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER, "Quarry Frame Corner");
@@ -286,6 +287,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chargerhv), "480V Charger");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalcrystallizer), "Chemical Crystallizer");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalmixer), "Chemical Mixer");
+			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalreactor), "Chemical Reactor");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.circuitbreaker), "Circuit Breaker");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.coalgenerator), "Coal Generator");
 			addBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.combustionchamber), "Combustion Chamber");
@@ -632,6 +634,10 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGas(ElectrodynamicsGases.HYDROGEN, "Hydrogen");
 			addGas(ElectrodynamicsGases.OXYGEN, "Oxygen");
 			addGas(ElectrodynamicsGases.STEAM, "Steam");
+			addGas(ElectrodynamicsGases.NITROGEN, "Nitrogen");
+			addGas(ElectrodynamicsGases.CARBON_DIOXIDE, "Carbon Dioxide");
+			addGas(ElectrodynamicsGases.ARGON, "Argon");
+			addGas(ElectrodynamicsGases.SULFUR_DIOXIDE, "Sulfur Dioxide");
 
 			addContainer(SubtypeMachine.advancedsolarpanel, "Advanced Solar Panel");
 			addContainer(SubtypeMachine.batterybox, "Battery Box");
@@ -641,6 +647,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addContainer(SubtypeMachine.chargerhv, "480V Charger");
 			addContainer(SubtypeMachine.chemicalcrystallizer, "Chemical Crystallizer");
 			addContainer(SubtypeMachine.chemicalmixer, "Chemical Mixer");
+			addContainer(SubtypeMachine.chemicalreactor, "Chemical Reactor");
 			addContainer(SubtypeMachine.coalgenerator, "Coal Generator");
 			addContainer(SubtypeMachine.coolantresavoir, "Coolant Resavoir");
 			addContainer(SubtypeMachine.combustionchamber, "Combustion Chamber");

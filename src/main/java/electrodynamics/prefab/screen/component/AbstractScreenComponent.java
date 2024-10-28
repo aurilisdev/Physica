@@ -3,6 +3,7 @@ package electrodynamics.prefab.screen.component;
 import javax.annotation.Nullable;
 
 import electrodynamics.api.screen.IScreenWrapper;
+import electrodynamics.prefab.screen.component.button.ScreenComponentButton;
 import net.minecraft.client.gui.ComponentPath;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -230,6 +231,12 @@ public abstract class AbstractScreenComponent implements GuiEventListener, Rende
 
 	@Override
 	public void updateNarration(NarrationElementOutput pNarrationElementOutput) {
+
+	}
+
+	public static interface OnTooltip {
+
+		public void onTooltip(GuiGraphics graphics, AbstractScreenComponent component, int xAxis, int yAxis);
 
 	}
 

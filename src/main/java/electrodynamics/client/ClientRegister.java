@@ -19,34 +19,7 @@ import electrodynamics.client.render.model.armor.types.ModelHydraulicBoots;
 import electrodynamics.client.render.model.armor.types.ModelJetpack;
 import electrodynamics.client.render.model.armor.types.ModelNightVisionGoggles;
 import electrodynamics.client.render.model.armor.types.ModelServoLeggings;
-import electrodynamics.client.render.tile.RenderAdvancedSolarPanel;
-import electrodynamics.client.render.tile.RenderBatteryBox;
-import electrodynamics.client.render.tile.RenderCarbyneBatteryBox;
-import electrodynamics.client.render.tile.RenderChargerGeneric;
-import electrodynamics.client.render.tile.RenderChemicalMixer;
-import electrodynamics.client.render.tile.RenderCombustionChamber;
-import electrodynamics.client.render.tile.RenderConnectBlock;
-import electrodynamics.client.render.tile.RenderCoolantResavoir;
-import electrodynamics.client.render.tile.RenderElectrolyticSeparator;
-import electrodynamics.client.render.tile.RenderFermentationPlant;
-import electrodynamics.client.render.tile.RenderFluidPipePump;
-import electrodynamics.client.render.tile.RenderGasPipePump;
-import electrodynamics.client.render.tile.RenderHydroelectricGenerator;
-import electrodynamics.client.render.tile.RenderLathe;
-import electrodynamics.client.render.tile.RenderLithiumBatteryBox;
-import electrodynamics.client.render.tile.RenderLogisticalWire;
-import electrodynamics.client.render.tile.RenderMineralCrusher;
-import electrodynamics.client.render.tile.RenderMineralCrusherDouble;
-import electrodynamics.client.render.tile.RenderMineralCrusherTriple;
-import electrodynamics.client.render.tile.RenderMineralGrinder;
-import electrodynamics.client.render.tile.RenderMineralGrinderDouble;
-import electrodynamics.client.render.tile.RenderMineralGrinderTriple;
-import electrodynamics.client.render.tile.RenderMineralWasher;
-import electrodynamics.client.render.tile.RenderMotorComplex;
-import electrodynamics.client.render.tile.RenderMultimeterBlock;
-import electrodynamics.client.render.tile.RenderSeismicRelay;
-import electrodynamics.client.render.tile.RenderTankGeneric;
-import electrodynamics.client.render.tile.RenderWindmill;
+import electrodynamics.client.render.tile.*;
 import electrodynamics.client.screen.item.ScreenElectricDrill;
 import electrodynamics.client.screen.item.ScreenSeismicScanner;
 import electrodynamics.client.screen.tile.*;
@@ -54,7 +27,7 @@ import electrodynamics.client.texture.atlas.AtlasHolderElectrodynamicsCustom;
 import electrodynamics.common.item.gear.tools.electric.ItemElectricBaton;
 import electrodynamics.common.item.gear.tools.electric.ItemElectricChainsaw;
 import electrodynamics.common.item.gear.tools.electric.ItemElectricDrill;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsEntities;
 import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsMenuTypes;
@@ -146,6 +119,7 @@ public class ClientRegister {
         event.register(MODEL_MOTORCOMPLEXROTOR);
         event.register(MODEL_QUARRYWHEEL_STILL);
         event.register(MODEL_QUARRYWHEEL_ROT);
+        event.register(MODEL_CHEMICALREACTOR);
     }
 
     public static final ModelResourceLocation MODEL_ADVSOLARTOP = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "advancedsolarpaneltop"));
@@ -180,6 +154,7 @@ public class ClientRegister {
     public static final ModelResourceLocation MODEL_CHEMICALMIXERBLADES = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "chemicalmixerblades"));
     public static final ModelResourceLocation MODEL_LATHESHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "latheshaft"));
     public static final ModelResourceLocation MODEL_MOTORCOMPLEXROTOR = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motorcomplexrotor"));
+    public static final ModelResourceLocation MODEL_CHEMICALREACTOR = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "chemicalreactormodel"));
 
     public static final ModelResourceLocation MODEL_RODSTEEL = ModelResourceLocation.standalone(ResourceLocation.parse(References.ID + ":entity/rodsteel"));
     public static final ModelResourceLocation MODEL_RODSTAINLESSSTEEL = ModelResourceLocation.standalone(ResourceLocation.parse(References.ID + ":entity/rodstainlesssteel"));
@@ -258,6 +233,7 @@ public class ClientRegister {
         event.register(ElectrodynamicsMenuTypes.CONTAINER_ADVANCEDUPGRADETRANSFORMER.get(), ScreenAdvancedUpgradeTransformer::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_CIRCUITMONITOR.get(), ScreenCircuitMonitor::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_GASCOLLECTOR.get(), ScreenGasCollector::new);
+        event.register(ElectrodynamicsMenuTypes.CONTAINER_CHEMICALREACTOR.get(), ScreenChemicalReactor::new);
     }
 
     @SubscribeEvent
@@ -265,42 +241,44 @@ public class ClientRegister {
         event.registerEntityRenderer(ElectrodynamicsEntities.ENTITY_ENERGYBLAST.get(), RenderEnergyBlast::new);
         event.registerEntityRenderer(ElectrodynamicsEntities.ENTITY_METALROD.get(), RenderMetalRod::new);
 
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_ADVANCEDSOLARPANEL.get(), RenderAdvancedSolarPanel::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_BATTERYBOX.get(), RenderBatteryBox::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_LITHIUMBATTERYBOX.get(), RenderLithiumBatteryBox::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_CARBYNEBATTERYBOX.get(), RenderCarbyneBatteryBox::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_HYDROELECTRICGENERATOR.get(), RenderHydroelectricGenerator::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_WINDMILL.get(), RenderWindmill::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_MINERALCRUSHER.get(), RenderMineralCrusher::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_MINERALCRUSHERDOUBLE.get(), RenderMineralCrusherDouble::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_MINERALCRUSHERTRIPLE.get(), RenderMineralCrusherTriple::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_MINERALGRINDER.get(), RenderMineralGrinder::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_MINERALGRINDERDOUBLE.get(), RenderMineralGrinderDouble::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_MINERALGRINDERTRIPLE.get(), RenderMineralGrinderTriple::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_FERMENTATIONPLANT.get(), RenderFermentationPlant::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_COMBUSTIONCHAMBER.get(), RenderCombustionChamber::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_MINERALWASHER.get(), RenderMineralWasher::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_CHEMICALMIXER.get(), RenderChemicalMixer::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_MULTIMETERBLOCK.get(), RenderMultimeterBlock::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_LATHE.get(), RenderLathe::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_CHARGERLV.get(), RenderChargerGeneric::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_CHARGERMV.get(), RenderChargerGeneric::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_CHARGERHV.get(), RenderChargerGeneric::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_SEISMICRELAY.get(), RenderSeismicRelay::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_COOLANTRESAVOIR.get(), RenderCoolantResavoir::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_TANKHSLA.get(), RenderTankGeneric::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_TANKREINFORCED.get(), RenderTankGeneric::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_TANKSTEEL.get(), RenderTankGeneric::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_MOTORCOMPLEX.get(), RenderMotorComplex::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_ELECTROLYTICSEPARATOR.get(), RenderElectrolyticSeparator::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_GASPIPEPUMP.get(), RenderGasPipePump::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_FLUIDPIPEPUMP.get(), RenderFluidPipePump::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_LOGISTICALWIRE.get(), RenderLogisticalWire::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_ADVANCEDSOLARPANEL.get(), RenderAdvancedSolarPanel::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_BATTERYBOX.get(), RenderBatteryBox::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_LITHIUMBATTERYBOX.get(), RenderLithiumBatteryBox::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_CARBYNEBATTERYBOX.get(), RenderCarbyneBatteryBox::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_HYDROELECTRICGENERATOR.get(), RenderHydroelectricGenerator::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_WINDMILL.get(), RenderWindmill::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_MINERALCRUSHER.get(), RenderMineralCrusher::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_MINERALCRUSHERDOUBLE.get(), RenderMineralCrusherDouble::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_MINERALCRUSHERTRIPLE.get(), RenderMineralCrusherTriple::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_MINERALGRINDER.get(), RenderMineralGrinder::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_MINERALGRINDERDOUBLE.get(), RenderMineralGrinderDouble::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_MINERALGRINDERTRIPLE.get(), RenderMineralGrinderTriple::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_FERMENTATIONPLANT.get(), RenderFermentationPlant::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_COMBUSTIONCHAMBER.get(), RenderCombustionChamber::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_MINERALWASHER.get(), RenderMineralWasher::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_CHEMICALMIXER.get(), RenderChemicalMixer::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_MULTIMETERBLOCK.get(), RenderMultimeterBlock::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_LATHE.get(), RenderLathe::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_CHARGERLV.get(), RenderChargerGeneric::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_CHARGERMV.get(), RenderChargerGeneric::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_CHARGERHV.get(), RenderChargerGeneric::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_SEISMICRELAY.get(), RenderSeismicRelay::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_COOLANTRESAVOIR.get(), RenderCoolantResavoir::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_TANKHSLA.get(), RenderTankGeneric::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_TANKREINFORCED.get(), RenderTankGeneric::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_TANKSTEEL.get(), RenderTankGeneric::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_MOTORCOMPLEX.get(), RenderMotorComplex::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_ELECTROLYTICSEPARATOR.get(), RenderElectrolyticSeparator::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_GASPIPEPUMP.get(), RenderGasPipePump::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_FLUIDPIPEPUMP.get(), RenderFluidPipePump::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_LOGISTICALWIRE.get(), RenderLogisticalWire::new);
 
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_WIRE.get(), RenderConnectBlock::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_LOGISTICALWIRE.get(), RenderConnectBlock::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_PIPE.get(), RenderConnectBlock::new);
-        event.registerBlockEntityRenderer(ElectrodynamicsTileTypes.TILE_GAS_PIPE.get(), RenderConnectBlock::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_WIRE.get(), RenderConnectBlock::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_LOGISTICALWIRE.get(), RenderConnectBlock::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_PIPE.get(), RenderConnectBlock::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_GAS_PIPE.get(), RenderConnectBlock::new);
+
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_CHEMICALREACTOR.get(), RenderChemicalReactor::new);
     }
 
     public static boolean shouldMultilayerRender(RenderType type) {

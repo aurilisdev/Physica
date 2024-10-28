@@ -23,7 +23,7 @@ import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.CombustionFuelSource;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -49,7 +49,7 @@ public class TileCombustionChamber extends GenericMaterialTile implements IElect
 	private boolean isSoundPlaying = false;
 
 	public TileCombustionChamber(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsTileTypes.TILE_COMBUSTIONCHAMBER.get(), worldPosition, blockState);
+		super(ElectrodynamicsTiles.TILE_COMBUSTIONCHAMBER.get(), worldPosition, blockState);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.EAST));

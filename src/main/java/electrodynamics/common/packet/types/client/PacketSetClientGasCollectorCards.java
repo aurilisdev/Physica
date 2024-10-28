@@ -33,16 +33,15 @@ public class PacketSetClientGasCollectorCards implements CustomPacketPayload {
                 GasStack.STREAM_CODEC.encode(buf, entry.getValue().stack());
                 if(entry.getValue().biome() != null || entry.getValue().biomeTag() != null){
                     buf.writeBoolean(true);
+                    if(entry.getValue().biome() != null) {
+                        buf.writeBoolean(true);
+                        buf.writeResourceLocation(entry.getValue().biome().location());
+                    } else {
+                        buf.writeBoolean(false);
+                        buf.writeResourceLocation(entry.getValue().biomeTag().location());
+                    }
                 } else {
                     buf.writeBoolean(false);
-                    return;
-                }
-                if(entry.getValue().biome() != null) {
-                    buf.writeBoolean(true);
-                    buf.writeResourceLocation(entry.getValue().biome().location());
-                } else {
-                    buf.writeBoolean(false);
-                    buf.writeResourceLocation(entry.getValue().biomeTag().location());
                 }
             }
         }

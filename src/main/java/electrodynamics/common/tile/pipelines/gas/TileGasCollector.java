@@ -16,7 +16,7 @@ import electrodynamics.prefab.tile.types.GenericGasTile;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -32,7 +32,7 @@ public class TileGasCollector extends GenericGasTile implements ITickableSound {
     private boolean isSoundPlaying = false;
 
     public TileGasCollector(BlockPos worldPos, BlockState blockState) {
-        super(ElectrodynamicsTileTypes.TILE_GASCOLLECTOR.get(), worldPos, blockState);
+        super(ElectrodynamicsTiles.TILE_GASCOLLECTOR.get(), worldPos, blockState);
         addComponent(new ComponentPacketHandler(this));
         addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
         addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2.0).maxJoules(Constants.GAS_COLLECTOR_USAGE_PER_TICK * 20));

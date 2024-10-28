@@ -33,13 +33,6 @@ public class ScreenComponentCountdown extends AbstractScreenComponentInfo {
 	}
 
 	@Override
-	public void renderForeground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
-		if (isPointInRegion(xLocation, yLocation, xAxis, yAxis, texture.textureWidth(), texture.textureHeight())) {
-			graphics.renderTooltip(gui.getFontRenderer(), getInfo(infoHandler.getInfo()), xAxis, yAxis);
-		}
-	}
-
-	@Override
 	public void renderBackground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
 		super.renderBackground(graphics, xAxis, yAxis, guiWidth, guiHeight);
 		int lengthBar = (int) (progressInfoHandler.getAsDouble() * CountdownTextures.COUNTDOWN_BAR_DEFAULT.textureWidth());

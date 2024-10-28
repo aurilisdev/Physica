@@ -17,7 +17,7 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
@@ -30,7 +30,7 @@ public class TileEnergizedAlloyer extends GenericTile implements ITickableSound 
 	private boolean isSoundPlaying = false;
 
 	public TileEnergizedAlloyer(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsTileTypes.TILE_ENERGIZEDALLOYER.get(), worldPosition, blockState);
+		super(ElectrodynamicsTiles.TILE_ENERGIZEDALLOYER.get(), worldPosition, blockState);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient));
 		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.NORTH).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 4));

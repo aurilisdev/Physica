@@ -5,9 +5,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.item.ItemStack;
 
-import electrodynamics.common.tile.machines.quarry.TileQuarry;
 import electrodynamics.prefab.tile.GenericTile;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +29,7 @@ public class TileGasTransformerAddonTank extends GenericTile {
 	// public boolean isDestroyed = false;
 
 	public TileGasTransformerAddonTank(BlockPos worldPos, BlockState blockState) {
-		super(ElectrodynamicsTileTypes.TILE_COMPRESSOR_ADDONTANK.get(), worldPos, blockState);
+		super(ElectrodynamicsTiles.TILE_COMPRESSOR_ADDONTANK.get(), worldPos, blockState);
 	}
 
 	public void setOwnerPos(BlockPos ownerPos) {

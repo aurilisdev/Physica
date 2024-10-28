@@ -34,11 +34,14 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
     public static final BooleanProperty ON = BlockStateProperties.LIT;
     public static final IntegerProperty BATTERY_CHARGE = BlockStateProperties.AGE_7;
 
-    public static final VoxelShape[] STANDARD_CUBE = new VoxelShape[] { Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block() };
+    public static final VoxelShape[] STANDARD_CUBE = new VoxelShape[]{Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block()};
 
-    public static final Subnode[] advancedsolarpanelsubnodes = new Subnode[9];
-    public static final Subnode[] windmillsubnodes = { new Subnode(new BlockPos(0, 1, 0),
-            new VoxelShape[] { Shapes.block(), Shapes.block(), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11)) }) };
+    public static final Subnode[] SUBNODES_ADVANCEDSOLARPANEL = new Subnode[9];
+    public static final Subnode[] SUBNODES_WINDMILL = {new Subnode(new BlockPos(0, 1, 0),
+            new VoxelShape[]{Shapes.block(), Shapes.block(), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11))})};
+
+    public static final Subnode[] SUBNODES_CHEMICALREACTOR = new Subnode[] { new Subnode(new BlockPos(0, 1, 0), Shapes.block()), new Subnode(new BlockPos(0, 2, 0), Shapes.block())};
+
     static {
 
         int counter = 0;
@@ -49,9 +52,9 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
 
             for (int j = -radius; j <= radius; j++) {
                 if (i == 0 && j == 0) {
-                    advancedsolarpanelsubnodes[counter] = new Subnode(new BlockPos(i, 1, j), Shapes.or(Block.box(6, 0, 6, 10, 16, 10), Block.box(5, 13, 5, 11, 16, 11), Block.box(0, 14, 0, 16, 16, 16)));
+                    SUBNODES_ADVANCEDSOLARPANEL[counter] = new Subnode(new BlockPos(i, 1, j), Shapes.or(Block.box(6, 0, 6, 10, 16, 10), Block.box(5, 13, 5, 11, 16, 11), Block.box(0, 14, 0, 16, 16, 16)));
                 } else {
-                    advancedsolarpanelsubnodes[counter] = new Subnode(new BlockPos(i, 1, j), Block.box(0, 14, 0, 16, 16, 16));
+                    SUBNODES_ADVANCEDSOLARPANEL[counter] = new Subnode(new BlockPos(i, 1, j), Block.box(0, 14, 0, 16, 16, 16));
                 }
 
                 counter++;
@@ -83,10 +86,11 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 
         if (machine == SubtypeMachine.advancedsolarpanel) {
-            return isValidMultiblockPlacement(state, worldIn, pos, advancedsolarpanelsubnodes);
-        }
-        if (machine == SubtypeMachine.windmill) {
-            return isValidMultiblockPlacement(state, worldIn, pos, windmillsubnodes);
+            return isValidMultiblockPlacement(state, worldIn, pos, SUBNODES_ADVANCEDSOLARPANEL);
+        } else if (machine == SubtypeMachine.windmill) {
+            return isValidMultiblockPlacement(state, worldIn, pos, SUBNODES_WINDMILL);
+        } else if (machine == SubtypeMachine.chemicalreactor) {
+            return isValidMultiblockPlacement(state, worldIn, pos, SUBNODES_CHEMICALREACTOR);
         }
         return super.canSurvive(state, worldIn, pos);
 
@@ -140,7 +144,7 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
 
     @Override
     public boolean hasMultiBlock() {
-        return machine == SubtypeMachine.advancedsolarpanel || machine == SubtypeMachine.windmill;
+        return machine == SubtypeMachine.advancedsolarpanel || machine == SubtypeMachine.windmill || machine == SubtypeMachine.chemicalreactor;
     }
 
     @Override

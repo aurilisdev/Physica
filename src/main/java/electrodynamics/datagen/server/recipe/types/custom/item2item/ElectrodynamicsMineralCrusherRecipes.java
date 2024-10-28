@@ -248,9 +248,16 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
                 .addItemStackInput(new ItemStack(Blocks.GLOWSTONE))
                 //
                 .save(output);
-        newRecipe(new ItemStack(Items.AMETHYST_SHARD), 0, 200, 300, "amethyst_shard_from_amethyst_block", modID)
+
+        newRecipe(new ItemStack(Items.AMETHYST_SHARD, 4), 0, 200, 300, "amethyst_shard_from_amethyst_block", modID)
                 //
-                .addItemStackInput(new ItemStack(Items.AMETHYST_BLOCK, 4))
+                .addItemStackInput(new ItemStack(Items.AMETHYST_BLOCK))
+                //
+                .save(output);
+
+        newRecipe(new ItemStack(Items.QUARTZ, 4), 0, 200, 450, "nether_quartz_from_quartz_block", modID)
+                //
+                .addItemStackInput(new ItemStack(Blocks.QUARTZ_BLOCK))
                 //
                 .save(output);
     }

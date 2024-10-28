@@ -1,0 +1,18 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:quartz_block"
+      }
+    }
+  ],
+  "output": {
+    "count": 4,
+    "id": "minecraft:quartz"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

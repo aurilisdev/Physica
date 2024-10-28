@@ -6,7 +6,7 @@ import net.minecraft.core.HolderLookup;
 import electrodynamics.common.block.connect.BlockFluidPipe;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,7 +15,7 @@ public class TileFluidPipe extends GenericTileFluidPipe {
 	public Property<Double> transmit = property(new Property<>(PropertyTypes.DOUBLE, "transmit", 0.0));
 
 	public TileFluidPipe(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsTileTypes.TILE_PIPE.get(), pos, state);
+		super(ElectrodynamicsTiles.TILE_PIPE.get(), pos, state);
 	}
 
 	public SubtypeFluidPipe pipe = null;

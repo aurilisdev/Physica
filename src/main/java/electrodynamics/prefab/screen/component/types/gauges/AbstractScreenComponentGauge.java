@@ -24,6 +24,12 @@ public abstract class AbstractScreenComponentGauge extends ScreenComponentGeneri
 
 	public AbstractScreenComponentGauge(int x, int y) {
 		super(GaugeTextures.BACKGROUND_DEFAULT, x, y);
+		onTooltip((graphics, component, xAxis, yAxis) -> {
+			List<? extends FormattedCharSequence> tooltips = getTooltips();
+			if (!tooltips.isEmpty()) {
+				graphics.renderTooltip(gui.getFontRenderer(), tooltips, xAxis, yAxis);
+			}
+		});
 	}
 
 	@Override
@@ -56,17 +62,6 @@ public abstract class AbstractScreenComponentGauge extends ScreenComponentGeneri
 	}
 
 	protected abstract void applyColor();
-
-	@Override
-	public void renderForeground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
-		if (isPointInRegion(xLocation, yLocation, xAxis, yAxis, super.texture.textureWidth(), super.texture.textureHeight())) {
-			List<? extends FormattedCharSequence> tooltips = getTooltips();
-
-			if (!tooltips.isEmpty()) {
-				graphics.renderTooltip(gui.getFontRenderer(), tooltips, xAxis, yAxis);
-			}
-		}
-	}
 
 	protected abstract int getScaledLevel();
 

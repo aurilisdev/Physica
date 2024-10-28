@@ -104,6 +104,7 @@
     "electrodynamics:circuitmonitor",
     "electrodynamics:currentregulator",
     "electrodynamics:gascollector",
+    "electrodynamics:chemicalreactor",
     "electrodynamics:wiretin",
     "electrodynamics:wireiron",
     "electrodynamics:wirecopper",

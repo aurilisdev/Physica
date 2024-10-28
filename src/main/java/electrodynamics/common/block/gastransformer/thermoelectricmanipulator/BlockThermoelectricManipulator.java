@@ -6,7 +6,7 @@ import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.block.gastransformer.BlockGenericGasTransformer;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates.ManipulatorHeatingStatus;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileThermoelectricManipulator;
+import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileChemicalReactor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 public class BlockThermoelectricManipulator extends BlockGenericGasTransformer {
 
     public BlockThermoelectricManipulator() {
-        super(TileThermoelectricManipulator::new);
+        super(TileChemicalReactor::new);
         registerDefaultState(stateDefinition.any().setValue(BlockMachine.ON, false).setValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF));
     }
 

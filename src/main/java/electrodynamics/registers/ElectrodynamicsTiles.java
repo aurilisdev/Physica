@@ -34,15 +34,7 @@ import electrodynamics.common.tile.electricitygrid.transformer.TileAdvancedTrans
 import electrodynamics.common.tile.electricitygrid.transformer.TileAdvancedTransformer.TileAdvancedUpgradeTransformer;
 import electrodynamics.common.tile.electricitygrid.transformer.TileGenericTransformer.TileDowngradeTransformer;
 import electrodynamics.common.tile.electricitygrid.transformer.TileGenericTransformer.TileUpgradeTransformer;
-import electrodynamics.common.tile.machines.TileChemicalCrystallizer;
-import electrodynamics.common.tile.machines.TileChemicalMixer;
-import electrodynamics.common.tile.machines.TileElectrolyticSeparator;
-import electrodynamics.common.tile.machines.TileEnergizedAlloyer;
-import electrodynamics.common.tile.machines.TileFermentationPlant;
-import electrodynamics.common.tile.machines.TileLathe;
-import electrodynamics.common.tile.machines.TileMineralWasher;
-import electrodynamics.common.tile.machines.TileOxidationFurnace;
-import electrodynamics.common.tile.machines.TileReinforcedAlloyer;
+import electrodynamics.common.tile.machines.*;
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnace;
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnaceDouble;
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnaceTriple;
@@ -80,7 +72,7 @@ import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransform
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerSideBlock;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.compressor.TileCompressor;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.compressor.TileDecompressor;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileThermoelectricManipulator;
+import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileChemicalReactor;
 import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankHSLA;
 import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankReinforced;
 import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankSteel;
@@ -92,7 +84,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class ElectrodynamicsTileTypes {
+public class ElectrodynamicsTiles {
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, References.ID);
 
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileCoalGenerator>> TILE_COALGENERATOR = BLOCK_ENTITY_TYPES.register(SubtypeMachine.coalgenerator.tag(), () -> new BlockEntityType<>(TileCoalGenerator::new, Sets.newHashSet(getBlock(SubtypeMachine.coalgenerator)), null));
@@ -178,7 +170,7 @@ public class ElectrodynamicsTileTypes {
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileGasTransformerSideBlock>> TILE_COMPRESSOR_SIDE = BLOCK_ENTITY_TYPES.register("compressorside", () -> new BlockEntityType<>(TileGasTransformerSideBlock::new, Sets.newHashSet(ElectrodynamicsBlocks.blockGasTransformerSide), null));
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileGasTransformerAddonTank>> TILE_COMPRESSOR_ADDONTANK = BLOCK_ENTITY_TYPES.register("compressoraddontank", () -> new BlockEntityType<>(TileGasTransformerAddonTank::new, Sets.newHashSet(ElectrodynamicsBlocks.blockGasTransformerAddonTank), null));
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileGasVent>> TILE_GASVENT = BLOCK_ENTITY_TYPES.register("gasvent", () -> new BlockEntityType<>(TileGasVent::new, Sets.newHashSet(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gasvent)), null));
-	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileThermoelectricManipulator>> TILE_THERMOELECTRIC_MANIPULATOR = BLOCK_ENTITY_TYPES.register("thermoelectricmanipulator", () -> new BlockEntityType<>(TileThermoelectricManipulator::new, Sets.newHashSet(ElectrodynamicsBlocks.blockThermoelectricManipulator), null));
+	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileChemicalReactor>> TILE_THERMOELECTRIC_MANIPULATOR = BLOCK_ENTITY_TYPES.register("thermoelectricmanipulator", () -> new BlockEntityType<>(TileChemicalReactor::new, Sets.newHashSet(ElectrodynamicsBlocks.blockThermoelectricManipulator), null));
 
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileGasValve>> TILE_GASVALVE = BLOCK_ENTITY_TYPES.register("gasvalve", () -> new BlockEntityType<>(TileGasValve::new, Sets.newHashSet(ElectrodynamicsBlocks.blockGasValve), null));
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileFluidValve>> TILE_FLUIDVALVE = BLOCK_ENTITY_TYPES.register("fluidvalve", () -> new BlockEntityType<>(TileFluidValve::new, Sets.newHashSet(ElectrodynamicsBlocks.blockFluidValve), null));
@@ -193,4 +185,5 @@ public class ElectrodynamicsTileTypes {
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileCurrentRegulator>> TILE_CURRENTREGULATOR = BLOCK_ENTITY_TYPES.register("currentregulator", () -> new BlockEntityType<>(TileCurrentRegulator::new, Sets.newHashSet(ElectrodynamicsBlocks.getBlock(SubtypeMachine.currentregulator)), null));
 
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileGasCollector>> TILE_GASCOLLECTOR = BLOCK_ENTITY_TYPES.register("gascollector", () -> new BlockEntityType<>(TileGasCollector::new, Sets.newHashSet(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gascollector)), null));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<electrodynamics.common.tile.machines.TileChemicalReactor>> TILE_CHEMICALREACTOR = BLOCK_ENTITY_TYPES.register("chemicalreactor", () -> new BlockEntityType<>(electrodynamics.common.tile.machines.TileChemicalReactor::new, Sets.newHashSet(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalreactor)), null));
 }

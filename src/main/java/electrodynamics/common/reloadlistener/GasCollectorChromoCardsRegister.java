@@ -109,7 +109,7 @@ public class GasCollectorChromoCardsRegister extends SimplePreparableReloadListe
 
                     biomeString = biomeString.substring(1);
 
-                    biomeTag = TagKey.create(Registries.BIOME, ResourceLocation.withDefaultNamespace(biomeString));
+                    biomeTag = TagKey.create(Registries.BIOME, ResourceLocation.parse(biomeString));
 
                 } else {
 

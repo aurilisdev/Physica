@@ -32,6 +32,9 @@ public class ScreenComponentInventoryIO extends ScreenComponentGeneric {
 
 	public ScreenComponentInventoryIO(int x, int y, Direction side) {
 		super(InventoryIOTextures.DEFAULT, x, y);
+		onTooltip((graphics, component, xAxis, yAxis) -> {
+			graphics.renderTooltip(gui.getFontRenderer(), getLabelFromDir(), xAxis, yAxis);
+		});
 		this.side = side;
 	}
 
@@ -87,13 +90,6 @@ public class ScreenComponentInventoryIO extends ScreenComponentGeneric {
 		// TODO more than 16 unique colors mapped to a single face
 		// I will deal with this when it becomes a problem 10/15/23
 
-	}
-
-	@Override
-	public void renderForeground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
-		if (isVisible() && isHovered()) {
-			graphics.renderTooltip(gui.getFontRenderer(), getLabelFromDir(), xAxis, yAxis);
-		}
 	}
 
 	private void fillSquare(GuiGraphics graphics, List<Color> colors, int x, int y) {

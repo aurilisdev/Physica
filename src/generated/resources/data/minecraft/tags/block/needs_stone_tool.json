@@ -63,6 +63,7 @@
     "electrodynamics:circuitmonitor",
     "electrodynamics:currentregulator",
     "electrodynamics:gascollector",
+    "electrodynamics:chemicalreactor",
     "electrodynamics:pipecopper",
     "electrodynamics:pipesteel",
     "electrodynamics:orefluorite",

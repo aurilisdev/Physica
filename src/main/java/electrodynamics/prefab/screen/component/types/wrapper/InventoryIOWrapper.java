@@ -95,7 +95,7 @@ public class InventoryIOWrapper {
 
 			}
 
-		}).setOnTooltip((graphics, but, xAxis, yAxis) -> {
+		}).onTooltip((graphics, but, xAxis, yAxis) -> {
 			//
 			ButtonInventoryIOView button = (ButtonInventoryIOView) but;
 			List<Component> tooltips = new ArrayList<>();

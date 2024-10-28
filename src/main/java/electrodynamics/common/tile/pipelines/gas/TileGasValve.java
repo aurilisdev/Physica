@@ -8,7 +8,7 @@ import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.tile.pipelines.GenericTileValve;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.CapabilityUtils;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +20,7 @@ public class TileGasValve extends GenericTileValve {
     private boolean isLocked = false;
 
     public TileGasValve(BlockPos pos, BlockState state) {
-        super(ElectrodynamicsTileTypes.TILE_GASVALVE.get(), pos, state);
+        super(ElectrodynamicsTiles.TILE_GASVALVE.get(), pos, state);
     }
 
     @Override

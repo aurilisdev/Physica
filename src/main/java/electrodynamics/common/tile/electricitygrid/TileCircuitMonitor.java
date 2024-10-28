@@ -12,7 +12,7 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,7 +36,7 @@ public class TileCircuitMonitor extends GenericTile {
 	protected CachedTileOutput output;
 
 	public TileCircuitMonitor(BlockPos worldPos, BlockState blockState) {
-		super(ElectrodynamicsTileTypes.TILE_CIRCUITMONITOR.get(), worldPos, blockState);
+		super(ElectrodynamicsTiles.TILE_CIRCUITMONITOR.get(), worldPos, blockState);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentElectrodynamic(this, false, false).voltage(-1).receivePower((transfer, debug) -> TransferPack.EMPTY).getConnectedLoad((profile, dir) -> TransferPack.EMPTY).setInputDirections(Direction.SOUTH));

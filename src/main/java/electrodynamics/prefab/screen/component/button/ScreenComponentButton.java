@@ -30,9 +30,6 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
     public static final WidgetSprites VANILLA_BUTTON_SPRITES = new WidgetSprites(ResourceLocation.withDefaultNamespace("widget/button"), ResourceLocation.withDefaultNamespace("widget/button_disabled"), ResourceLocation.withDefaultNamespace("widget/button_highlighted"));
 
     public final boolean isVanillaRender;
-
-    @Nullable
-    public OnTooltip onTooltip = null;
     @Nullable
     public OnPress onPress = null;
 
@@ -63,7 +60,8 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
         return (T) this;
     }
 
-    public T setOnTooltip(OnTooltip onTooltip) {
+    @Override
+    public T onTooltip(OnTooltip onTooltip) {
         this.onTooltip = onTooltip;
         return (T) this;
     }
@@ -103,14 +101,6 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
         }
 
         return 1;
-    }
-
-    @Override
-    public void renderForeground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
-        super.renderForeground(graphics, xAxis, yAxis, guiWidth, guiHeight);
-        if (isVisible() && isHovered() && onTooltip != null) {
-            onTooltip.onTooltip(graphics, this, xAxis, yAxis);
-        }
     }
 
     @Override
@@ -173,12 +163,6 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
     public static interface OnPress {
 
         public void onPress(ScreenComponentButton<?> button);
-
-    }
-
-    public static interface OnTooltip {
-
-        public void onTooltip(GuiGraphics graphics, ScreenComponentButton<?> button, int xAxis, int yAxis);
 
     }
 

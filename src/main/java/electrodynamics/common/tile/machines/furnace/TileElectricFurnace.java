@@ -22,14 +22,13 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -52,7 +51,7 @@ public class TileElectricFurnace extends GenericTile implements ITickableSound {
 	}
 
 	public TileElectricFurnace(SubtypeMachine machine, int extra, BlockPos worldPosition, BlockState blockState) {
-		super(extra == 1 ? ElectrodynamicsTileTypes.TILE_ELECTRICFURNACEDOUBLE.get() : extra == 2 ? ElectrodynamicsTileTypes.TILE_ELECTRICFURNACETRIPLE.get() : ElectrodynamicsTileTypes.TILE_ELECTRICFURNACE.get(), worldPosition, blockState);
+		super(extra == 1 ? ElectrodynamicsTiles.TILE_ELECTRICFURNACEDOUBLE.get() : extra == 2 ? ElectrodynamicsTiles.TILE_ELECTRICFURNACETRIPLE.get() : ElectrodynamicsTiles.TILE_ELECTRICFURNACE.get(), worldPosition, blockState);
 
 		this.extra = extra;
 

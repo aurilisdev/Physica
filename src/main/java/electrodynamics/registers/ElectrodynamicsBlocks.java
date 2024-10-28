@@ -84,6 +84,7 @@ public class ElectrodynamicsBlocks {
         for (SubtypeMachine subtype : SubtypeMachine.values()) {
             SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new BlockMachine(subtype)));
         }
+
         for (SubtypeWire subtype : SubtypeWire.values()) {
             if (subtype.wireClass == WireClass.LOGISTICAL) {
                 SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new BlockLogisticalWire(subtype)));

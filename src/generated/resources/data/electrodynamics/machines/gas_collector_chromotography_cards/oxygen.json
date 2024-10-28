@@ -1,7 +1,7 @@
 {
-  "amount": 100.0,
+  "amount": 20.9,
   "gas": "electrodynamics:oxygen",
-  "item": "minecraft:cobblestone",
+  "item": "electrodynamics:chromotographycardoxygen",
   "pressure": 1,
   "temperature": 293.0
 }

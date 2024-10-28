@@ -23,7 +23,7 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsSounds;
@@ -52,7 +52,7 @@ public class TileElectricArcFurnace extends GenericTile implements ITickableSoun
 	}
 
 	public TileElectricArcFurnace(SubtypeMachine machine, int extra, BlockPos worldPosition, BlockState blockState) {
-		super(extra == 1 ? ElectrodynamicsTileTypes.TILE_ELECTRICARCFURNACEDOUBLE.get() : extra == 2 ? ElectrodynamicsTileTypes.TILE_ELECTRICARCFURNACETRIPLE.get() : ElectrodynamicsTileTypes.TILE_ELECTRICARCFURNACE.get(), worldPosition, blockState);
+		super(extra == 1 ? ElectrodynamicsTiles.TILE_ELECTRICARCFURNACEDOUBLE.get() : extra == 2 ? ElectrodynamicsTiles.TILE_ELECTRICARCFURNACETRIPLE.get() : ElectrodynamicsTiles.TILE_ELECTRICARCFURNACE.get(), worldPosition, blockState);
 
 		this.extra = extra;
 

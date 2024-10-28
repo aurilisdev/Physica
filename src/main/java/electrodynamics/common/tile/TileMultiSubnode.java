@@ -1,11 +1,14 @@
 package electrodynamics.common.tile;
 
+import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
+import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.multiblock.parent.IMultiblockParentTile;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -17,17 +20,52 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 
 public class TileMultiSubnode extends GenericTile {
 
-	public final Property<BlockPos> parentPos = property(new Property<>(PropertyTypes.BLOCK_POS, "nodePos", BlockPos.ZERO));
+	public final Property<BlockPos> parentPos = property(new Property<>(PropertyTypes.BLOCK_POS, "nodePos", BlockEntityUtils.OUT_OF_REACH));
 	public final Property<Integer> nodeIndex = property(new Property<>(PropertyTypes.INTEGER, "nodeIndex", 0));
 
 	public VoxelShape shapeCache;
 
 	public TileMultiSubnode(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsTileTypes.TILE_MULTI.get(), worldPosition, blockState);
+		super(ElectrodynamicsTiles.TILE_MULTI.get(), worldPosition, blockState);
 		addComponent(new ComponentPacketHandler(this));
+	}
+
+	@Nullable
+	public ICapabilityElectrodynamic getElectrodynamicCapability(@Nullable Direction side) {
+		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile node) {
+			return node.getSubnodeElectrodynamicCapability(this, side);
+		}
+		return null;
+	}
+
+	@Nullable
+	public IFluidHandler getFluidHandlerCapability(@Nullable Direction side) {
+		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile node) {
+			return node.getSubnodeFluidHandlerCapability(this, side);
+		}
+		return null;
+	}
+
+	@Nullable
+	public IGasHandler getGasHandlerCapability(@Nullable Direction side) {
+		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile node) {
+			return node.getSubnodeGasHandlerCapability(this, side);
+		}
+		return null;
+	}
+
+	@Nullable
+	public IItemHandler getItemHandlerCapability(@Nullable Direction side) {
+		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile node) {
+			return node.getSubnodeItemHandlerCapability(this, side);
+		}
+		return null;
 	}
 
 	public void setData(BlockPos parentPos, int subnodeIndex) {

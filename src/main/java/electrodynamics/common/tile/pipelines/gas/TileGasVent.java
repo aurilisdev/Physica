@@ -12,7 +12,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class TileGasVent extends GenericMaterialTile {
 
     public TileGasVent(BlockPos worldPos, BlockState blockState) {
-        super(ElectrodynamicsTileTypes.TILE_GASVENT.get(), worldPos, blockState);
+        super(ElectrodynamicsTiles.TILE_GASVENT.get(), worldPos, blockState);
         addComponent(new ComponentTickable(this).tickServer(this::tickServer));
         addComponent(new ComponentPacketHandler(this));
         addComponent(new ComponentGasHandlerSimple(this, "", 128000, 1000000, 1000000).universalInput());

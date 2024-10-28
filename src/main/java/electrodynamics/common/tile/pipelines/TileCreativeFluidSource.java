@@ -11,7 +11,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +27,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 public class TileCreativeFluidSource extends GenericTile {
 
     public TileCreativeFluidSource(BlockPos worldPos, BlockState blockState) {
-        super(ElectrodynamicsTileTypes.TILE_CREATIVEFLUIDSOURCE.get(), worldPos, blockState);
+        super(ElectrodynamicsTiles.TILE_CREATIVEFLUIDSOURCE.get(), worldPos, blockState);
         addComponent(new ComponentTickable(this).tickServer(this::tickServer));
         addComponent(new ComponentPacketHandler(this));
         addComponent(new ComponentFluidHandlerSimple(128000, this, "").setOutputDirections(Direction.values()));

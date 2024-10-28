@@ -28,6 +28,9 @@ public class ElectrodynamicsGases {
     public static final Holder<Gas> HYDROGEN = GASES.register("hydrogen", () -> new Gas(() -> ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get(), ElectrodynamicsTags.Gases.HYDROGEN, ElectroTextUtils.gas("hydrogen"), 33, ElectrodynamicsFluids.fluidHydrogen));
     public static final Holder<Gas> OXYGEN = GASES.register("oxygen", () -> new Gas(() -> ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get(), ElectrodynamicsTags.Gases.OXYGEN, ElectroTextUtils.gas("oxygen"), 90, ElectrodynamicsFluids.fluidOxygen));
     public static final Holder<Gas> STEAM = GASES.register("steam", () -> new Gas(() -> ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get(), ElectrodynamicsTags.Gases.STEAM, ElectroTextUtils.gas("steam"), 373, Fluids.WATER));
-
+    public static final Holder<Gas> NITROGEN = GASES.register("nitrogen", () -> new Gas(() -> ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get(), ElectrodynamicsTags.Gases.NITROGEN, ElectroTextUtils.gas("nitrogen")));
+    public static final Holder<Gas> CARBON_DIOXIDE = GASES.register("carbondioxide", () -> new Gas(() -> ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get(), ElectrodynamicsTags.Gases.CARBON_DIOXIDE, ElectroTextUtils.gas("carbondioxide")));
+    public static final Holder<Gas> ARGON = GASES.register("argon", () -> new Gas(() -> ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get(), ElectrodynamicsTags.Gases.ARGON, ElectroTextUtils.gas("argon")));
+    public static final Holder<Gas> SULFUR_DIOXIDE = GASES.register("sulfurdioxide", () -> new Gas(() -> ElectrodynamicsItems.ITEM_PORTABLECYLINDER.get(), ElectrodynamicsTags.Gases.SULFUR_DIOXIDE, ElectroTextUtils.gas("sulfurdioxide")));
 
 }

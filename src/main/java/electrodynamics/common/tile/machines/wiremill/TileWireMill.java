@@ -17,7 +17,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
-import electrodynamics.registers.ElectrodynamicsTileTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
@@ -34,7 +34,7 @@ public class TileWireMill extends GenericTile implements ITickableSound {
 	}
 
 	public TileWireMill(SubtypeMachine machine, int extra, BlockPos worldPosition, BlockState blockState) {
-		super(extra == 1 ? ElectrodynamicsTileTypes.TILE_WIREMILLDOUBLE.get() : extra == 2 ? ElectrodynamicsTileTypes.TILE_WIREMILLTRIPLE.get() : ElectrodynamicsTileTypes.TILE_WIREMILL.get(), worldPosition, blockState);
+		super(extra == 1 ? ElectrodynamicsTiles.TILE_WIREMILLDOUBLE.get() : extra == 2 ? ElectrodynamicsTiles.TILE_WIREMILLTRIPLE.get() : ElectrodynamicsTiles.TILE_WIREMILL.get(), worldPosition, blockState);
 
 		int processorCount = extra + 1;
 		int inputsPerProc = 1;

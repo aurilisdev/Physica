@@ -11,7 +11,7 @@ import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.screen.ITexture.Textures;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileThermoelectricManipulator;
+import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileChemicalReactor;
 import electrodynamics.compatibility.jei.recipecategories.utils.AbstractRecipeCategory;
 import electrodynamics.compatibility.jei.recipecategories.utils.psuedorecipes.types.PsuedoFluid2GasRecipe;
 import electrodynamics.compatibility.jei.utils.gui.JeiTextures;
@@ -41,7 +41,7 @@ public class EvaporatingFluidRecipeCategory extends AbstractRecipeCategory<Psued
 	private static final ScreenObject IN_GAS_GAUGE = new ScreenObject(JeiTextures.FAKE_GAS_GAUGE, 30, 5);
 	private static final GasGaugeObject OUT_GAS_GAUGE = new GasGaugeObject(108, 5, 5000);
 
-	private static final PowerLabelWrapperConstant POWER_LABEL = new PowerLabelWrapperConstant(2, 60, TileThermoelectricManipulator.USAGE_PER_TICK, 120);
+	private static final PowerLabelWrapperConstant POWER_LABEL = new PowerLabelWrapperConstant(2, 60, TileChemicalReactor.USAGE_PER_TICK, 120);
 	private static final AbstractLabelWrapper TEMPERATURE_LABEL = new AbstractLabelWrapper(0xFF808080, 60, 130, true) {
 
 		@Override

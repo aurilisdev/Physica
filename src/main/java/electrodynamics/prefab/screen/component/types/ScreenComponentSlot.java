@@ -34,6 +34,12 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 		this.slotType = slotType;
 		this.iconType = iconType;
 		this.slot = slot;
+		onTooltip((graphics, component, xAxis, yAxis) -> {
+			if(tooltip == null){
+				return;
+			}
+			graphics.renderTooltip(gui.getFontRenderer(), tooltip.getText(), xAxis, yAxis);
+		});
 	}
 
 	public ScreenComponentSlot(Slot slot, int x, int y) {
@@ -70,11 +76,8 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 		if (!slot.isActive()) {
 			return;
 		}
+		super.renderForeground(graphics, xAxis, yAxis, guiWidth, guiHeight);
 		if (isHoveredOrFocused()) {
-
-			if (tooltip != null && !tooltip.getText().getString().isEmpty()) {
-				graphics.renderTooltip(gui.getFontRenderer(), tooltip.getText(), xAxis, yAxis);
-			}
 
 			if (Screen.hasControlDown() && slot instanceof IUpgradeSlot upgrade) {
 

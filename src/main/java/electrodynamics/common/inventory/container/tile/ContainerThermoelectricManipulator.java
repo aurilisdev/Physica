@@ -1,7 +1,7 @@
 package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileThermoelectricManipulator;
+import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileChemicalReactor;
 import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotFluid;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotGas;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 
-public class ContainerThermoelectricManipulator extends GenericContainerBlockEntity<TileThermoelectricManipulator> {
+public class ContainerThermoelectricManipulator extends GenericContainerBlockEntity<TileChemicalReactor> {
 
 	public static final SubtypeItemUpgrade[] VALID_UPGRADES = new SubtypeItemUpgrade[] { SubtypeItemUpgrade.advancedspeed, SubtypeItemUpgrade.basicspeed };
 

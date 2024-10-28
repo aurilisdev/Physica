@@ -3,15 +3,17 @@ package electrodynamics.datagen.server;
 import com.google.gson.JsonObject;
 import electrodynamics.api.References;
 import electrodynamics.api.gas.Gas;
+import electrodynamics.common.item.subtype.SubtypeChromotographyCard;
 import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
 import electrodynamics.registers.ElectrodynamicsGases;
+import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 
 import javax.annotation.Nullable;
@@ -36,7 +38,7 @@ public class GasCollectorChromoCardsProvider implements DataProvider {
 
     @Override
     public CompletableFuture<?> run(CachedOutput cache) {
-        addFuels();
+        addGases();
 
         Path parent = output.getOutputFolder().resolve(LOC);
 
@@ -49,8 +51,12 @@ public class GasCollectorChromoCardsProvider implements DataProvider {
         return CompletableFuture.allOf(completed.toArray(size -> new CompletableFuture[size]));
     }
 
-    private void addFuels() {
-        jsons.put("testing", toJson(Items.COBBLESTONE, ElectrodynamicsGases.OXYGEN.value(), 100, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
+    public void addGases() {
+        jsons.put("nitrogen", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.nitrogen), ElectrodynamicsGases.NITROGEN.value(), 78.1, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
+        jsons.put("oxygen", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.oxygen), ElectrodynamicsGases.OXYGEN.value(), 20.9, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
+        jsons.put("argon", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.argon), ElectrodynamicsGases.ARGON.value(), 0.93, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
+        jsons.put("carbondioxide", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.carbondioxide), ElectrodynamicsGases.CARBON_DIOXIDE.value(), 0.04, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
+        jsons.put("sulfurdioxide", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.sulfurdioxide), ElectrodynamicsGases.SULFUR_DIOXIDE.value(), 0.01, 373, Gas.PRESSURE_AT_SEA_LEVEL, BiomeTags.IS_NETHER));
     }
 
     private JsonObject toJson(TagKey<Item> tag, Gas gas, double amount, double temperature, int pressure, @Nullable TagKey<Biome> biomeTag) {

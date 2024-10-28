@@ -31,6 +31,9 @@ public class ElectrodynamicsGasTagsProvider extends IntrinsicHolderTagsProvider<
 		tag(ElectrodynamicsTags.Gases.HYDROGEN).add(ElectrodynamicsGases.HYDROGEN.value());
 		tag(ElectrodynamicsTags.Gases.OXYGEN).add(ElectrodynamicsGases.OXYGEN.value());
 		tag(ElectrodynamicsTags.Gases.STEAM).add(ElectrodynamicsGases.STEAM.value());
+		tag(ElectrodynamicsTags.Gases.NITROGEN).add(ElectrodynamicsGases.NITROGEN.value());
+		tag(ElectrodynamicsTags.Gases.ARGON).add(ElectrodynamicsGases.ARGON.value());
+		tag(ElectrodynamicsTags.Gases.CARBON_DIOXIDE).add(ElectrodynamicsGases.CARBON_DIOXIDE.value());
 
 		tag(ElectrodynamicsTags.Gases.IS_CORROSIVE);
 	}
