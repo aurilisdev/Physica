@@ -61,11 +61,11 @@ public class ElectrodynamicsPsuedoRecipes {
 
 		ElectrodynamicsGases.MAPPED_GASSES.forEach((fluid, gas) -> {
 
-			if (fluid.isSame(Fluids.EMPTY)) {
+			if (fluid.value().isSame(Fluids.EMPTY)) {
 				return;
 			}
 
-			ItemStack inputBucket = new ItemStack(fluid.getBucket());
+			ItemStack inputBucket = new ItemStack(fluid.value().getBucket());
 			
 			IFluidHandlerItem inputHandler = inputBucket.getCapability(Capabilities.FluidHandler.ITEM);
 			

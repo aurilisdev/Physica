@@ -1,4 +1,4 @@
-package electrodynamics.common.fluid.types.liquid.subtype;
+package electrodynamics.common.fluid.subtype;
 
 import java.util.function.Supplier;
 

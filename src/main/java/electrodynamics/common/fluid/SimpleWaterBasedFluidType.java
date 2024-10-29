@@ -1,8 +1,9 @@
-package electrodynamics.common.fluid.types;
+package electrodynamics.common.fluid;
 
 import java.util.function.Consumer;
 
 import net.minecraft.world.level.pathfinder.PathType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
@@ -17,19 +18,21 @@ import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.FluidType;
 
 public class SimpleWaterBasedFluidType extends FluidType {
-	private String modId;
-	private String fluidName;
-	private int color;
+	private final String modId;
+	private final String id;
+	private final ResourceLocation texture;
+	private final int color;
 
-	public SimpleWaterBasedFluidType(String modId, String fluidName, int color) {
-		super(FluidType.Properties.create().descriptionId("fluid." + modId + "." + fluidName).fallDistanceModifier(0F).canExtinguish(true).canConvertToSource(true).supportsBoating(true).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH).canHydrate(true));
+	public SimpleWaterBasedFluidType(String modId, String id, String texture, int color) {
+		super(FluidType.Properties.create().descriptionId("fluid." + modId + "." + id).fallDistanceModifier(0F).canExtinguish(true).canConvertToSource(true).supportsBoating(true).sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL).sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY).sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH).canHydrate(true));
 		this.modId = modId;
-		this.fluidName = fluidName;
+		this.id = id;
+		this.texture = ResourceLocation.fromNamespaceAndPath(this.modId, "block/fluid/" + texture);
 		this.color = color;
 	}
 
-	public SimpleWaterBasedFluidType(String modId, String fluidName) {
-		this(modId, fluidName, 0xFF3F76E4);
+	public SimpleWaterBasedFluidType(String modId, String fluidName, String texture) {
+		this(modId, fluidName, texture, 0xFF3F76E4);
 	}
 
 	@Override
@@ -38,17 +41,17 @@ public class SimpleWaterBasedFluidType extends FluidType {
 	}
 
 	@Override
-	public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
+	public void initializeClient(@NotNull Consumer<IClientFluidTypeExtensions> consumer) {
 		consumer.accept(new IClientFluidTypeExtensions() {
 
 			@Override
 			public ResourceLocation getStillTexture() {
-				return ResourceLocation.parse(modId + ":block/fluid/" + fluidName.replaceFirst("fluid", ""));
+				return texture;
 			}
 
 			@Override
 			public ResourceLocation getFlowingTexture() {
-				return ResourceLocation.parse(modId + ":block/fluid/" + fluidName.replaceFirst("fluid", ""));
+				return texture;
 			}
 
 			@Override

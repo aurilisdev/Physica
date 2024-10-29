@@ -1,20 +1,17 @@
 package electrodynamics.registers;
 
-import static electrodynamics.registers.ElectrodynamicsFluids.SUBTYPEFLUID_REGISTRY_MAP;
-import static electrodynamics.registers.ElectrodynamicsFluids.fluidClay;
-import static electrodynamics.registers.ElectrodynamicsFluids.fluidEthanol;
-import static electrodynamics.registers.ElectrodynamicsFluids.fluidHydraulic;
-import static electrodynamics.registers.ElectrodynamicsFluids.fluidHydrogen;
-import static electrodynamics.registers.ElectrodynamicsFluids.fluidHydrogenFluoride;
-import static electrodynamics.registers.ElectrodynamicsFluids.fluidOxygen;
-import static electrodynamics.registers.ElectrodynamicsFluids.fluidPolyethylene;
-import static electrodynamics.registers.ElectrodynamicsFluids.fluidSulfuricAcid;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_CLAY;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_ETHANOL;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_HYDRAULIC;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_HYDROGEN;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_HYDROFLUORICACID;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_OXYGEN;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_POLYETHYLENE;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_SULFURICACID;
 
-import java.util.Map.Entry;
-
-import electrodynamics.api.ISubtype;
 import electrodynamics.api.References;
-import net.minecraft.world.level.material.Fluid;
+import electrodynamics.api.registration.BulkDeferredHolder;
+import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -24,29 +21,15 @@ public class ElectrodynamicsFluidTypes {
 	public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, References.ID);
 
 	// liquids
-	public static FluidType fluidTypeEthanol;
-	public static FluidType fluidTypeSulfuricAcid;
-	public static FluidType fluidTypeHydrogenFluoride;
-	public static FluidType fluidTypePolyethylene;
-	public static FluidType fluidTypeClay;
-	public static FluidType fluidTypeHydraulic;
-	// condensed gases
-	public static FluidType fluiTypedOxygen;
-	public static FluidType fluidTypeHydrogen;
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_CLAY = FLUID_TYPES.register("fluidclay", () -> FLUID_CLAY.get().getFluidType());
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_ETHANOL = FLUID_TYPES.register("fluidethanol", () -> FLUID_ETHANOL.get().getFluidType());
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_HYDRAULIC = FLUID_TYPES.register("fluidhydraulic", () -> FLUID_HYDRAULIC.get().getFluidType());
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_HYDROFLUORICACID = FLUID_TYPES.register("fluidhydrofluoricacid", () -> FLUID_HYDROFLUORICACID.get().getFluidType());
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_HYDROGEN = FLUID_TYPES.register("fluidhydrogen", () -> FLUID_HYDROGEN.get().getFluidType());
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_OXYGEN = FLUID_TYPES.register("fluidoxygen", () -> FLUID_OXYGEN.get().getFluidType());
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_POLYETHYLENE = FLUID_TYPES.register("fluidpolyethylene", () -> FLUID_POLYETHYLENE.get().getFluidType());
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_SULFURICACID = FLUID_TYPES.register("fluidsulfuricacid", () -> FLUID_SULFURICACID.get().getFluidType());
 
-	static {
-		// Liquids
-		FLUID_TYPES.register("fluidethanol", () -> fluidEthanol.getFluidType());
-		FLUID_TYPES.register("fluidsulfuricacid", () -> fluidSulfuricAcid.getFluidType());
-		FLUID_TYPES.register("fluidhydrogenfluoride", () -> fluidHydrogenFluoride.getFluidType());
-		FLUID_TYPES.register("fluidpolyethylene", () -> fluidPolyethylene.getFluidType());
-		FLUID_TYPES.register("fluidclay", () -> fluidClay.getFluidType());
-		FLUID_TYPES.register("fluidhydraulic", () -> fluidHydraulic.getFluidType());
-		for (Entry<ISubtype, DeferredHolder<Fluid, Fluid>> entry : SUBTYPEFLUID_REGISTRY_MAP.entrySet()) {
-			FLUID_TYPES.register("fluidsulfate" + entry.getKey().tag(), () -> entry.getValue().get().getFluidType());
-		}
-		// condensed gases
-		FLUID_TYPES.register("fluidoxygen", () -> fluidOxygen.getFluidType());
-		FLUID_TYPES.register("fluidhydrogen", () -> fluidHydrogen.getFluidType());
-	}
+	public static final BulkDeferredHolder<FluidType, FluidType, SubtypeSulfateFluid> SULFATE_FLUID_TYPES = new BulkDeferredHolder<>(SubtypeSulfateFluid.values(), subtype -> FLUID_TYPES.register("fluidsulfate" + subtype.tag(), () -> ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(subtype).get().getFluidType()));
+
 }

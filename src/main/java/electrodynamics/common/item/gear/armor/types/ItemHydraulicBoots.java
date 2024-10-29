@@ -84,7 +84,7 @@ public class ItemHydraulicBoots extends ItemElectrodynamicsArmor {
 
         RestrictedFluidHandlerItemStack restricted = (RestrictedFluidHandlerItemStack) handler;
 
-        restricted.setFluid(new FluidStack(ElectrodynamicsFluids.fluidHydraulic, MAX_CAPACITY));
+        restricted.setFluid(new FluidStack(ElectrodynamicsFluids.FLUID_HYDRAULIC, MAX_CAPACITY));
 
         items.add(full);
 

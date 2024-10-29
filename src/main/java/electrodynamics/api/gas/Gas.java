@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import electrodynamics.registers.ElectrodynamicsGases;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -27,27 +28,28 @@ public class Gas {
 	public static final double MINIMUM_HEAT_BURN_TEMP = 327;
 	public static final double MINIMUM_FREEZE_TEMP = 260;
 
-	private final Supplier<Item> container;
+	private final Holder<Item> container;
 	private final TagKey<Gas> tag;
 	private final Component description;
 	private final double condensationTemp; // Degrees Kelvin; set to -1 if this gas does not condense
 	@Nullable
-	private final Fluid condensedFluid; // set to empty if gas does not condense
+	private final Holder<Fluid> condensedFluid; // set to empty if gas does not condense
 
-	public Gas(Supplier<Item> container, @Nullable TagKey<Gas> tag, Component description) {
-		this(container, tag, description, -1, Fluids.EMPTY);
+	public Gas(Holder<Item> container, @Nullable TagKey<Gas> tag, Component description) {
+		this.container = container;
+		this.tag = tag;
+		this.description = description;
+		this.condensationTemp = -1;
+		this.condensedFluid = new Holder.Direct(Fluids.EMPTY);
 	}
 
-	public Gas(Supplier<Item> container, @Nullable TagKey<Gas> tag, Component description, double condensationTemp, Fluid condensedFluid) {
+	public Gas(Holder<Item> container, @Nullable TagKey<Gas> tag, Component description, double condensationTemp, Holder<Fluid> condensedFluid) {
 		this.container = container;
 		this.tag = tag;
 		this.description = description;
 		this.condensationTemp = condensationTemp;
 		this.condensedFluid = condensedFluid;
-
-		if (!condensedFluid.isSame(Fluids.EMPTY)) {
-			ElectrodynamicsGases.MAPPED_GASSES.put(condensedFluid, this);
-		}
+		ElectrodynamicsGases.MAPPED_GASSES.put(condensedFluid, this);
 	}
 
 	public Component getDescription() {
@@ -55,7 +57,7 @@ public class Gas {
 	}
 
 	public Item getContainer() {
-		return container.get();
+		return container.value();
 	}
 
 	public boolean is(@Nonnull TagKey<Gas> tag) {
@@ -72,7 +74,7 @@ public class Gas {
 
 	@Nullable
 	public Fluid getCondensedFluid() {
-		return condensedFluid;
+		return condensedFluid.value();
 	}
 
 	@Override
@@ -85,7 +87,7 @@ public class Gas {
 
 	@Override
 	public String toString() {
-		return description.getString() + ",\tcondensation temp : " + condensationTemp + " K,\tcondensed fluid: " + condensedFluid.getFluidType().getDescription().getString();
+		return description.getString() + ",\tcondensation temp : " + condensationTemp + " K,\tcondensed fluid: " + getCondensedFluid().getFluidType().getDescription().getString();
 	}
 	
 	public boolean doesCondense() {

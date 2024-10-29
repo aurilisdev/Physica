@@ -1,7 +1,7 @@
 package electrodynamics.datagen.server.recipe.types.custom.fluiditem2fluid;
 
 import electrodynamics.api.References;
-import electrodynamics.common.fluid.types.liquid.subtype.SubtypeSulfateFluid;
+import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import electrodynamics.common.recipe.categories.fluiditem2fluid.specificmachines.MineralWasherRecipe;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
@@ -43,7 +43,7 @@ public class ElectrodynamicsMineralWasherRecipes extends AbstractRecipeGenerator
 
 		for (SubtypeSulfateFluid fluid : SubtypeSulfateFluid.values()) {
 			if (fluid.source != null) {
-				newRecipe(new FluidStack(ElectrodynamicsFluids.SUBTYPEFLUID_REGISTRY_MAP.get(fluid).get(), 1000), 0, 200, 400.0, "sulfate_" + fluid.name(), modID)
+				newRecipe(new FluidStack(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(fluid).get(), 1000), 0, 200, 400.0, "sulfate_" + fluid.name(), modID)
 						//
 						.addItemTagInput(fluid.source, 1)
 						//

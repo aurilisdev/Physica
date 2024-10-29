@@ -11,7 +11,7 @@ import electrodynamics.common.block.subtype.SubtypeOreDeepslate;
 import electrodynamics.common.block.subtype.SubtypeRawOreBlock;
 import electrodynamics.common.block.subtype.SubtypeResourceBlock;
 import electrodynamics.common.block.subtype.SubtypeWire;
-import electrodynamics.common.fluid.types.liquid.subtype.SubtypeSulfateFluid;
+import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import electrodynamics.common.item.subtype.*;
 import electrodynamics.common.recipe.categories.fluid2gas.specificmachines.ElectrolyticSeparatorRecipe;
 import electrodynamics.common.recipe.categories.fluid2item.specificmachines.ChemicalCrystalizerRecipe;
@@ -611,24 +611,24 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 
 			addBlock(ElectrodynamicsBlocks.blockSteelScaffold, "Steel Scaffold");
 
-			addFluid(ElectrodynamicsFluids.fluidClay, "Clay Slurry");
-			addFluid(ElectrodynamicsFluids.fluidEthanol, "Ethanol");
-			addFluid(ElectrodynamicsFluids.fluidHydraulic, "Hydraulic Fluid");
-			addFluid(ElectrodynamicsFluids.fluidHydrogen, "Liquid Hydrogen");
-			addFluid(ElectrodynamicsFluids.fluidHydrogenFluoride, "Hydrofluoric Acid");
-			addFluid(ElectrodynamicsFluids.fluidOxygen, "Liquid Oxygen");
-			addFluid(ElectrodynamicsFluids.fluidPolyethylene, "Molten Polyethylene");
-			addFluid(ElectrodynamicsFluids.fluidSulfuricAcid, "Sulfuric Acid");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.copper), "Copper Sulfate");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.gold), "Gold Sulfate");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.iron), "Iron Sulfate");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.lead), "Lead Sulfate");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.lithium), "Lithium Sulfate");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.molybdenum), "Molybdenum Sulfate");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.netherite), "Carbyne Sulfate");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.silver), "Silver Sulfate");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.tin), "Tin Sulfate");
-			addFluid(ElectrodynamicsFluids.getFluid(SubtypeSulfateFluid.vanadium), "Vanadium Sulfate");
+			addFluid(ElectrodynamicsFluids.FLUID_CLAY, "Clay Slurry");
+			addFluid(ElectrodynamicsFluids.FLUID_ETHANOL, "Ethanol");
+			addFluid(ElectrodynamicsFluids.FLUID_HYDRAULIC, "Hydraulic Fluid");
+			addFluid(ElectrodynamicsFluids.FLUID_HYDROGEN, "Liquid Hydrogen");
+			addFluid(ElectrodynamicsFluids.FLUID_HYDROFLUORICACID, "Hydrofluoric Acid");
+			addFluid(ElectrodynamicsFluids.FLUID_OXYGEN, "Liquid Oxygen");
+			addFluid(ElectrodynamicsFluids.FLUID_POLYETHYLENE, "Molten Polyethylene");
+			addFluid(ElectrodynamicsFluids.FLUID_SULFURICACID, "Sulfuric Acid");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.copper), "Copper Sulfate");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.gold), "Gold Sulfate");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.iron), "Iron Sulfate");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.lead), "Lead Sulfate");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.lithium), "Lithium Sulfate");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.molybdenum), "Molybdenum Sulfate");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.netherite), "Carbyne Sulfate");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.silver), "Silver Sulfate");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.tin), "Tin Sulfate");
+			addFluid(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.vanadium), "Vanadium Sulfate");
 
 			addGas(ElectrodynamicsGases.EMPTY, "Empty");
 			addGas(ElectrodynamicsGases.HYDROGEN, "Hydrogen");
@@ -1825,6 +1825,9 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 		add("tooltip." + modID + "." + key, translation);
 	}
 
+	public void addFluid(DeferredHolder<Fluid, Fluid> fluid, String translation){
+		addFluid(fluid.get(), translation);
+	}
 	public void addFluid(Fluid fluid, String translation) {
 		add("fluid." + modID + "." + BuiltInRegistries.FLUID.getKey(fluid).getPath(), translation);
 	}

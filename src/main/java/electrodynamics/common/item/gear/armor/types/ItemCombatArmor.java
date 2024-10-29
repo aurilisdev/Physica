@@ -162,7 +162,7 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
                 return;
             }
 
-            ((RestrictedFluidHandlerItemStack) handlerFluid).setFluid(new FluidStack(ElectrodynamicsFluids.fluidHydraulic, ItemHydraulicBoots.MAX_CAPACITY));
+            ((RestrictedFluidHandlerItemStack) handlerFluid).setFluid(new FluidStack(ElectrodynamicsFluids.FLUID_HYDRAULIC, ItemHydraulicBoots.MAX_CAPACITY));
 
             items.add(full);
 
