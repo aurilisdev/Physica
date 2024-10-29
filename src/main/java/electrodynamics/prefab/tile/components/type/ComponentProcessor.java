@@ -1123,7 +1123,7 @@ public class ComponentProcessor implements IComponent {
         setChanged();
     }
 
-    private void dispenseExperience(ComponentInventory inv, double experience) {
+    public void dispenseExperience(ComponentInventory inv, double experience) {
         storedXp += experience;
         for (ItemStack stack : inv.getUpgradeContents()) {
 
@@ -1139,7 +1139,7 @@ public class ComponentProcessor implements IComponent {
         }
     }
 
-    private static boolean roomInItemBiSlots(List<ItemStack> slots, ItemStack[] biproducts) {
+    public static boolean roomInItemBiSlots(List<ItemStack> slots, ItemStack[] biproducts) {
         for (int i = 0; i < slots.size(); i++) {
             ItemStack slotStack = slots.get(i);
             ItemStack biStack = biproducts[Math.min(i, biproducts.length - 1)];
@@ -1155,7 +1155,7 @@ public class ComponentProcessor implements IComponent {
         return true;
     }
 
-    private static boolean roomInBiproductFluidTanks(FluidTank[] tanks, FluidStack[] stacks) {
+    public static boolean roomInBiproductFluidTanks(FluidTank[] tanks, FluidStack[] stacks) {
         for (int i = 1; i < tanks.length; i++) {
             FluidTank tank = tanks[i];
             FluidStack stack = stacks[Math.min(i, stacks.length - 1)];
@@ -1167,7 +1167,7 @@ public class ComponentProcessor implements IComponent {
         return true;
     }
 
-    private static boolean roomInBiproductGasTanks(GasTank[] tanks, GasStack[] stacks) {
+    public static boolean roomInBiproductGasTanks(GasTank[] tanks, GasStack[] stacks) {
         for (int i = 1; i < tanks.length; i++) {
             GasTank tank = tanks[i];
             GasStack stack = stacks[Math.min(i, stacks.length - 1)];
@@ -1179,7 +1179,7 @@ public class ComponentProcessor implements IComponent {
         return true;
     }
 
-    private boolean checkExistingRecipe(ComponentProcessor pr) {
+    public boolean checkExistingRecipe(ComponentProcessor pr) {
         if (recipe != null) {
             return recipe.matchesRecipe(pr);
         }
@@ -1187,14 +1187,14 @@ public class ComponentProcessor implements IComponent {
     }
 
     @Nullable
-    private ElectrodynamicsRecipe getRecipe(ComponentProcessor pr, RecipeType<?> typeIn) {
+    public ElectrodynamicsRecipe getRecipe(ComponentProcessor pr, RecipeType<?> typeIn) {
         if (cachedRecipes.isEmpty()) {
             cachedRecipes = ElectrodynamicsRecipe.findRecipesbyType((RecipeType<ElectrodynamicsRecipe>) typeIn, pr.getHolder().getLevel());
         }
         return ElectrodynamicsRecipe.getRecipe(pr, cachedRecipes);
     }
 
-    private void setChanged() {
+    public void setChanged() {
         // hook method; empty for now
     }
 

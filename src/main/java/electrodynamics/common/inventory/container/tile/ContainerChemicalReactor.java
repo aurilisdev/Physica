@@ -3,6 +3,12 @@ package electrodynamics.common.inventory.container.tile;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.tile.machines.TileChemicalReactor;
 import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
+import electrodynamics.prefab.inventory.container.slot.item.type.SlotFluid;
+import electrodynamics.prefab.inventory.container.slot.item.type.SlotGas;
+import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
+import electrodynamics.prefab.inventory.container.slot.item.type.SlotUpgrade;
+import electrodynamics.prefab.utilities.math.Color;
 import electrodynamics.registers.ElectrodynamicsMenuTypes;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -15,7 +21,7 @@ public class ContainerChemicalReactor extends GenericContainerBlockEntity<TileCh
     public static final SubtypeItemUpgrade[] VALID_UPGRADES = new SubtypeItemUpgrade[] { SubtypeItemUpgrade.advancedspeed, SubtypeItemUpgrade.basicspeed, SubtypeItemUpgrade.iteminput, SubtypeItemUpgrade.itemoutput, SubtypeItemUpgrade.experience };
 
     public ContainerChemicalReactor(int id, Inventory playerinv) {
-        this(id, playerinv, new SimpleContainer(14), new SimpleContainerData(3));
+        this(id, playerinv, new SimpleContainer(17), new SimpleContainerData(3));
     }
 
     public ContainerChemicalReactor(int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {
@@ -24,6 +30,23 @@ public class ContainerChemicalReactor extends GenericContainerBlockEntity<TileCh
 
     @Override
     public void addInventorySlots(Container inv, Inventory playerinv) {
-        playerInvOffset += 90;
+        playerInvOffset += 100;
+        addSlot(new SlotGeneric(inv, nextIndex(), 16, 137).setIOColor(new Color(0, 255, 30, 255)));
+        addSlot(new SlotGeneric(inv, nextIndex(), 36 , 137).setIOColor(new Color(144, 0, 255, 255)));
+        addSlot(new SlotRestricted(inv, nextIndex(), 104, 128).setIOColor(new Color(255, 0, 0, 255)));
+        addSlot(new SlotRestricted(inv, nextIndex(), 124, 128).setIOColor(new Color(255, 255, 0, 255)));
+        addSlot(new SlotRestricted(inv, nextIndex(), 104, 148).setIOColor(new Color(255, 255, 0, 255)));
+        addSlot(new SlotRestricted(inv, nextIndex(), 124, 148).setIOColor(new Color(255, 255, 0, 255)));
+        addSlot(new SlotFluid(inv, nextIndex(), 27, 19));
+        addSlot(new SlotFluid(inv, nextIndex(), 27, 50));
+        addSlot(new SlotFluid(inv, nextIndex(), 113, 19));
+        addSlot(new SlotFluid(inv, nextIndex(), 113, 50));
+        addSlot(new SlotGas(inv, nextIndex(), 27, 73));
+        addSlot(new SlotGas(inv, nextIndex(), 27, 104));
+        addSlot(new SlotGas(inv, nextIndex(), 113, 73));
+        addSlot(new SlotGas(inv, nextIndex(), 113, 104));
+        addSlot(new SlotUpgrade(inv, nextIndex(), 153, 14, VALID_UPGRADES));
+        addSlot(new SlotUpgrade(inv, nextIndex(), 153, 34, VALID_UPGRADES));
+        addSlot(new SlotUpgrade(inv, nextIndex(), 153, 54, VALID_UPGRADES));
     }
 }

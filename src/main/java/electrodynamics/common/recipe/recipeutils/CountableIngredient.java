@@ -72,6 +72,10 @@ public class CountableIngredient implements ICustomIngredient {
     @Nullable
     private ItemStack[] countedItems;
 
+    public CountableIngredient(ItemStack stack) {
+        this(Ingredient.of(stack), stack.getCount());
+    }
+
     public CountableIngredient(Ingredient ingredient, int stackSize) {
         this.ingredient = ingredient;
         this.stackSize = stackSize;

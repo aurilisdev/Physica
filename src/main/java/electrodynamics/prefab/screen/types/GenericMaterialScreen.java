@@ -31,7 +31,7 @@ public class GenericMaterialScreen<T extends GenericContainer> extends GenericSc
 	}
 
 	@Override
-	public void addComponent(AbstractScreenComponent component) {
+	public AbstractScreenComponent addComponent(AbstractScreenComponent component) {
 		super.addComponent(component);
 
 		if (component instanceof ScreenComponentFluidGauge gauge) {
@@ -39,7 +39,7 @@ public class GenericMaterialScreen<T extends GenericContainer> extends GenericSc
 		} else if (component instanceof ScreenComponentGasGauge gauge) {
 			gasGauges.add(gauge);
 		}
-
+		return component;
 	}
 
 	public Set<ScreenComponentFluidGauge> getFluidGauges() {

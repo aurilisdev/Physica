@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import electrodynamics.datagen.server.recipe.types.custom.ElectrodynamicsChemicalReactorRecipes;
 import electrodynamics.datagen.server.recipe.types.custom.fluid2gas.ElectrodynamicsElectrolyticSeparatorRecipes;
 import electrodynamics.datagen.server.recipe.types.custom.fluid2item.ElectrodynamicsChemicalCrystallizerRecipes;
 import electrodynamics.datagen.server.recipe.types.custom.fluiditem2fluid.ElectrodynamicsChemicalMixerRecipes;
@@ -51,6 +52,7 @@ public class ElectrodynamicsRecipeProvider extends RecipeProvider {
 		GENERATORS.add(new ElectrodynamicsOxidationFurnaceRecipes());
 		GENERATORS.add(new ElectrodynamicsReinforcedAlloyerRecipes());
 		GENERATORS.add(new ElectrodynamicsWireMillRecipes());
+		GENERATORS.add(new ElectrodynamicsChemicalReactorRecipes());
 	}
 
     @Override

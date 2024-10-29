@@ -72,7 +72,7 @@ import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransform
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerSideBlock;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.compressor.TileCompressor;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.compressor.TileDecompressor;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileChemicalReactor;
+import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileThermoelectricManipulator;
 import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankHSLA;
 import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankReinforced;
 import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankSteel;
@@ -170,7 +170,7 @@ public class ElectrodynamicsTiles {
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileGasTransformerSideBlock>> TILE_COMPRESSOR_SIDE = BLOCK_ENTITY_TYPES.register("compressorside", () -> new BlockEntityType<>(TileGasTransformerSideBlock::new, Sets.newHashSet(ElectrodynamicsBlocks.blockGasTransformerSide), null));
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileGasTransformerAddonTank>> TILE_COMPRESSOR_ADDONTANK = BLOCK_ENTITY_TYPES.register("compressoraddontank", () -> new BlockEntityType<>(TileGasTransformerAddonTank::new, Sets.newHashSet(ElectrodynamicsBlocks.blockGasTransformerAddonTank), null));
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileGasVent>> TILE_GASVENT = BLOCK_ENTITY_TYPES.register("gasvent", () -> new BlockEntityType<>(TileGasVent::new, Sets.newHashSet(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gasvent)), null));
-	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileChemicalReactor>> TILE_THERMOELECTRIC_MANIPULATOR = BLOCK_ENTITY_TYPES.register("thermoelectricmanipulator", () -> new BlockEntityType<>(TileChemicalReactor::new, Sets.newHashSet(ElectrodynamicsBlocks.blockThermoelectricManipulator), null));
+	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileThermoelectricManipulator>> TILE_THERMOELECTRIC_MANIPULATOR = BLOCK_ENTITY_TYPES.register("thermoelectricmanipulator", () -> new BlockEntityType<>(TileThermoelectricManipulator::new, Sets.newHashSet(ElectrodynamicsBlocks.blockThermoelectricManipulator), null));
 
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileGasValve>> TILE_GASVALVE = BLOCK_ENTITY_TYPES.register("gasvalve", () -> new BlockEntityType<>(TileGasValve::new, Sets.newHashSet(ElectrodynamicsBlocks.blockGasValve), null));
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileFluidValve>> TILE_FLUIDVALVE = BLOCK_ENTITY_TYPES.register("fluidvalve", () -> new BlockEntityType<>(TileFluidValve::new, Sets.newHashSet(ElectrodynamicsBlocks.blockFluidValve), null));

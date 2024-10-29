@@ -101,14 +101,15 @@ public abstract class ElectrodynamicsRecipeBuilder<T extends ElectrodynamicsReci
         FLUID_2_ITEM,
         FLUID_2_FLUID,
         FLUID_2_GAS,
-        FLUID_ITEM_2_GAS;
+        FLUID_ITEM_2_GAS,
+        CHEMICAL_REACTOR;
 
         public String category() {
             return toString().toLowerCase(Locale.ROOT).replaceAll("_", "");
         }
     }
 
-    public static record GasIngWrapper(double amt, double temp, double pressure) {
+    public static record GasIngWrapper(double amt, double temp, int pressure) {
 
     }
 

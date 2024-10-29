@@ -1,6 +1,8 @@
 package electrodynamics.common.recipe;
 
 import electrodynamics.api.References;
+import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
+import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipeSerializer;
 import electrodynamics.common.recipe.categories.fluid2gas.Fluid2GasRecipeSerializer;
 import electrodynamics.common.recipe.categories.fluid2gas.specificmachines.ElectrolyticSeparatorRecipe;
 import electrodynamics.common.recipe.categories.fluid2item.Fluid2ItemRecipeSerializer;
@@ -69,6 +71,8 @@ public class ElectrodynamicsRecipeInit {
     // Fluid2Gas
     public static final DeferredHolder<RecipeType<?>, RecipeType<ElectrolyticSeparatorRecipe>> ELECTROLYTIC_SEPERATOR_TYPE = RECIPE_TYPES.register(ElectrolyticSeparatorRecipe.RECIPE_GROUP, CustomRecipeType::new);
 
+    public static final DeferredHolder<RecipeType<?>, RecipeType<ChemicalReactorRecipe>> CHEMICAL_REACTOR_TYPE = RECIPE_TYPES.register(ElectrolyticSeparatorRecipe.RECIPE_GROUP, CustomRecipeType::new);
+
     /* SERIALIZERS */
 
     // Item2Item
@@ -90,6 +94,8 @@ public class ElectrodynamicsRecipeInit {
 
     // Fluid2Gas
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> ELECTROLYTIC_SEPARATOR_SERIALIZER = RECIPE_SERIALIZER.register(ElectrolyticSeparatorRecipe.RECIPE_GROUP, () -> new Fluid2GasRecipeSerializer<>(ElectrolyticSeparatorRecipe::new));
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> CHEMICAL_REACTOR_SERIALIZER = RECIPE_SERIALIZER.register(ChemicalReactorRecipe.RECIPE_GROUP, () -> new ChemicalReactorRecipeSerializer());
 
     /* Functional Methods */
 

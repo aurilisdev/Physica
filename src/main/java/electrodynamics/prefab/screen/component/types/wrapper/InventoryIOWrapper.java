@@ -1,11 +1,13 @@
 package electrodynamics.prefab.screen.component.types.wrapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
 
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
 import electrodynamics.prefab.screen.GenericScreen;
+import electrodynamics.prefab.screen.component.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.button.type.ButtonInventoryIOView;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.screen.component.types.io.ScreenComponentInventoryIO;
@@ -24,6 +26,8 @@ public class InventoryIOWrapper {
 	private final GenericScreen<?> screen;
 
 	private final BiFunction<SlotGeneric, Integer, Color> defaultColorSupplier;
+
+	private final List<AbstractScreenComponent> additionalToHide = new ArrayList<>();
 
 	public InventoryIOWrapper(GenericScreen<?> screen, int tabX, int tabY, int slotStartX, int slotStartY, int labelX, int labelY) {
 		this(screen, tabX, tabY, slotStartX, slotStartY, labelX, labelY, (slot, index) -> Color.WHITE);
@@ -65,6 +69,11 @@ public class InventoryIOWrapper {
 
 				label.setVisible(true);
 
+				additionalToHide.forEach(component -> {
+					component.setActive(false);
+					component.setVisible(false);
+				});
+
 			} else {
 
 				this.screen.playerInvLabel.setVisible(true);
@@ -92,6 +101,11 @@ public class InventoryIOWrapper {
 				}
 
 				label.setVisible(false);
+
+				additionalToHide.forEach(component -> {
+					component.setActive(true);
+					component.setVisible(true);
+				});
 
 			}
 
@@ -124,6 +138,14 @@ public class InventoryIOWrapper {
 		for (ScreenComponentInventoryIO io : ioArr) {
 			io.setVisible(false);
 		}
+	}
+
+	public InventoryIOWrapper hideAdditional(AbstractScreenComponent... components){
+		if(components == null){
+			throw new RuntimeException("Quit being silly");
+		}
+		additionalToHide.addAll(Arrays.asList(components));
+		return this;
 	}
 
 }

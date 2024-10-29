@@ -107,9 +107,25 @@ public class GenericScreen<T extends GenericContainer> extends AbstractContainer
 		// RenderingUtils.bindTexture(defaultResource);
 		int guiWidth = (int) getGuiWidth();
 		int guiHeight = (int) getGuiHeight();
-		graphics.blit(defaultResource, guiWidth, guiHeight, 0, 248, imageWidth, 4);
-		graphics.blit(defaultResource, guiWidth, guiHeight + 4, 0, 0, imageWidth, imageHeight - 8);
-		graphics.blit(defaultResource, guiWidth, guiHeight + imageHeight - 4, 0, 252, imageWidth, 4);
+
+		int y = guiHeight;
+
+		graphics.blit(defaultResource, guiWidth, y, 0, 0, 176, 4, 176, 18);
+
+		y += 4;
+
+		int wholeHeight = (imageHeight - 8) / 10;
+		int remainder = (imageHeight - 8) % 10;
+
+		for(int i = 0; i < wholeHeight; i++){
+			graphics.blit(defaultResource, guiWidth, y, 0, 4, 176, 10, 176, 18);
+			y += 10;
+		}
+
+		graphics.blit(defaultResource, guiWidth, y, 0, 4, 176, remainder, 176, 18);
+		y += remainder;
+
+		graphics.blit(defaultResource, guiWidth, y, 0, 14, 176, 4, 176, 18);
 	}
 
 	@Override
@@ -158,9 +174,10 @@ public class GenericScreen<T extends GenericContainer> extends AbstractContainer
 		return mouseY - getGuiHeight();
 	}
 
-	public void addComponent(AbstractScreenComponent component) {
+	public AbstractScreenComponent addComponent(AbstractScreenComponent component) {
 		components.add(component);
 		component.setScreen(this);
+		return component;
 	}
 
 	public Set<AbstractScreenComponent> getComponents() {
