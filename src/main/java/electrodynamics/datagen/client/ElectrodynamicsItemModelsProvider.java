@@ -98,119 +98,119 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 		layeredBuilder(name(ElectrodynamicsItems.ITEM_MECHANIZEDCROSSBOW), Parent.GENERATED, itemLoc("tools/mechanizedcrossbow")).transforms().transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(-90, 0, -60).translation(2F, 0.1F, -3F).scale(0.9F).end().transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(-90, 0, 30).translation(2, 0.1F, -3).scale(0.9F).end().transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(-90, 0, -55).translation(1.13F, 3.2F, 1.13F).scale(0.68F).end().transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(-90, 0, 35).translation(1.13F, 3.2F, 1.13F).scale(0.68F).end();
 
 		for (SubtypeCeramic ceramic : SubtypeCeramic.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(ceramic), Parent.GENERATED, itemLoc("ceramic/" + ceramic.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_CERAMIC.getValue(ceramic), Parent.GENERATED, itemLoc("ceramic/" + ceramic.tag()));
 		}
 
 		for (SubtypeCircuit circuit : SubtypeCircuit.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(circuit), Parent.GENERATED, itemLoc("circuit/" + circuit.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_CIRCUIT.getValue(circuit), Parent.GENERATED, itemLoc("circuit/" + circuit.tag()));
 		}
 
 		for (SubtypeCrystal crystal : SubtypeCrystal.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(crystal), Parent.GENERATED, itemLoc("crystal/" + crystal.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(crystal), Parent.GENERATED, itemLoc("crystal/" + crystal.tag()));
 		}
 
 		for (SubtypeDrillHead drill : SubtypeDrillHead.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(drill), Parent.GENERATED, itemLoc("drillhead/drillhead"));
+			layeredItem(ElectrodynamicsItems.ITEMS_DRILLHEAD.getValue(drill), Parent.GENERATED, itemLoc("drillhead/drillhead"));
 		}
 
 		for (SubtypeDust dust : SubtypeDust.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(dust), Parent.GENERATED, itemLoc("dust/" + dust.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_DUST.getValue(dust), Parent.GENERATED, itemLoc("dust/" + dust.tag()));
 		}
 
 		for (SubtypeGear gear : SubtypeGear.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(gear), Parent.GENERATED, itemLoc("gear/" + gear.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_GEAR.getValue(gear), Parent.GENERATED, itemLoc("gear/" + gear.tag()));
 		}
 
 		for (SubtypeImpureDust impure : SubtypeImpureDust.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(impure), Parent.GENERATED, itemLoc("impuredust/" + impure.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(impure), Parent.GENERATED, itemLoc("impuredust/" + impure.tag()));
 		}
 
 		for (SubtypeIngot ingot : SubtypeIngot.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(ingot), Parent.GENERATED, itemLoc("ingot/" + ingot.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_INGOT.getValue(ingot), Parent.GENERATED, itemLoc("ingot/" + ingot.tag()));
 		}
 
 		for (SubtypeItemUpgrade upgrade : SubtypeItemUpgrade.values()) {
-			layeredBuilder(name(ElectrodynamicsItems.getItem(upgrade)), Parent.GENERATED, itemLoc("upgrade/" + upgrade.tag())).transforms().transform(ItemDisplayContext.GUI).scale(0.8F).end();
+			layeredBuilder(name(ElectrodynamicsItems.ITEMS_UPGRADE.getValue(upgrade)), Parent.GENERATED, itemLoc("upgrade/" + upgrade.tag())).transforms().transform(ItemDisplayContext.GUI).scale(0.8F).end();
 		}
 
 		for (SubtypeNugget nugget : SubtypeNugget.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(nugget), Parent.GENERATED, itemLoc("nugget/" + nugget.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_NUGGET.getValue(nugget), Parent.GENERATED, itemLoc("nugget/" + nugget.tag()));
 		}
 
 		for (SubtypeOxide oxide : SubtypeOxide.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(oxide), Parent.GENERATED, itemLoc("oxide/" + oxide.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_OXIDE.getValue(oxide), Parent.GENERATED, itemLoc("oxide/" + oxide.tag()));
 		}
 
 		for (SubtypePlate plate : SubtypePlate.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(plate), Parent.GENERATED, itemLoc("plate/" + plate.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_PLATE.getValue(plate), Parent.GENERATED, itemLoc("plate/" + plate.tag()));
 		}
 
 		for (SubtypeRawOre raw : SubtypeRawOre.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(raw), Parent.GENERATED, itemLoc("rawore/" + raw.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_RAWORE.getValue(raw), Parent.GENERATED, itemLoc("rawore/" + raw.tag()));
 		}
 
 		for (SubtypeRod rod : SubtypeRod.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(rod), Parent.GENERATED, itemLoc("rod/" + rod.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_ROD.getValue(rod), Parent.GENERATED, itemLoc("rod/" + rod.tag()));
 		}
 
 		// bare
 		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE)) {
-			layeredBuilder(name(ElectrodynamicsItems.getItem(wire)), Parent.GENERATED, itemLoc("wire/" + wire.tag())).transforms().transform(ItemDisplayContext.GUI).scale(0.7F).end();
+			layeredBuilder(name(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire)), Parent.GENERATED, itemLoc("wire/" + wire.tag())).transforms().transform(ItemDisplayContext.GUI).scale(0.7F).end();
 		}
 
 		// insulated
 		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())) {
-			layeredItem(ElectrodynamicsItems.getItem(wire), Parent.GENERATED, itemLoc("wire/wireinsulated" + wire.conductor.toString()), itemLoc("wire/wireinsulatedcoil"));
+			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wireinsulated" + wire.conductor.toString()), itemLoc("wire/wireinsulatedcoil"));
 		}
 
 		// logistical
 		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())) {
-			layeredItem(ElectrodynamicsItems.getItem(wire), Parent.GENERATED, itemLoc("wire/wirelogistics" + wire.conductor.toString()), itemLoc("wire/wirelogisticscoil"), itemLoc("wire/wirelogisticsredstone"));
+			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wirelogistics" + wire.conductor.toString()), itemLoc("wire/wirelogisticscoil"), itemLoc("wire/wirelogisticsredstone"));
 		}
 
 		// ceramic
 		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())) {
-			layeredItem(ElectrodynamicsItems.getItem(wire), Parent.GENERATED, itemLoc("wire/wireceramicinsulated" + wire.conductor.toString()), itemLoc("wire/wireceramicinsulatedcolortips"), itemLoc("wire/wireceramicinsulatedcoil"));
+			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wireceramicinsulated" + wire.conductor.toString()), itemLoc("wire/wireceramicinsulatedcolortips"), itemLoc("wire/wireceramicinsulatedcoil"));
 		}
 
 		// highly insulated
 		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())) {
-			layeredItem(ElectrodynamicsItems.getItem(wire), Parent.GENERATED, itemLoc("wire/wirehighlyinsulated" + wire.conductor.toString()), itemLoc("wire/wirehighlyinsulatedcoil"));
+			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wirehighlyinsulated" + wire.conductor.toString()), itemLoc("wire/wirehighlyinsulatedcoil"));
 		}
 
 		for (SubtypeFluidPipe pipe : SubtypeFluidPipe.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(pipe), Parent.GENERATED, itemLoc("pipe/" + pipe.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_PIPE.getValue(pipe), Parent.GENERATED, itemLoc("pipe/" + pipe.tag()));
 		}
 
 		for (SubtypeGasPipe pipe : SubtypeGasPipe.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(pipe), Parent.GENERATED, itemLoc("gaspipe/" + pipe.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_GASPIPE.getValue(pipe), Parent.GENERATED, itemLoc("gaspipe/" + pipe.tag()));
 		}
 
 		for (SubtypeChromotographyCard card : SubtypeChromotographyCard.values()) {
-			layeredItem(ElectrodynamicsItems.getItem(card), Parent.GENERATED, itemLoc("chromotographycard/" + card.tag()));
+			layeredItem(ElectrodynamicsItems.ITEMS_CHROMOTOGRAPHYCARD.getValue(card), Parent.GENERATED, itemLoc("chromotographycard/" + card.tag()));
 		}
 
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.advancedsolarpanel), existingBlock(blockLoc("advancedsolarpanelitem"))).transforms().transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(35, 45, 0).translation(0, 2.5F, 0).scale(0.375F).end().transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(35, 45, 0).translation(0, 2.5F, 0).scale(0.375F).end().transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0, 45, 0).scale(0.4F).end().transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0, 225, 0).scale(0.4F).end().transform(ItemDisplayContext.GUI).rotation(30, 225, 0).translation(0, -3F, 0).scale(0.265F).end();
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.hydroelectricgenerator), existingBlock(blockLoc("hydroelectricgeneratoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30, 225, 0).translation(1.85F, 1.0F, 0).scale(0.55F).end();
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralcrusher), existingBlock(blockLoc("mineralcrusheritem")));
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralcrusherdouble), existingBlock(blockLoc("mineralcrusherdoubleitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralcrushertriple), existingBlock(blockLoc("mineralcrushertripleitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrinder), existingBlock(blockLoc("mineralgrinderitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrinderdouble), existingBlock(blockLoc("mineralgrinderdoubleitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrindertriple), existingBlock(blockLoc("mineralgrindertripleitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.motorcomplex), existingBlock(blockLoc("motorcomplexitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.windmill), existingBlock(blockLoc("windmillitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.blockCompressor, existingBlock(blockLoc("compressoritem"))).transforms().transform(ItemDisplayContext.GUI).scale(0.3333F).rotation(30.0F, 225.0F, 0.0F).end();
-		simpleBlockItem(ElectrodynamicsBlocks.blockDecompressor, existingBlock(blockLoc("decompressoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30.0F, 225.0F, 0.0F).scale(0.3333F).end();
-		simpleBlockItem(ElectrodynamicsBlocks.blockThermoelectricManipulator, existingBlock(blockLoc("thermoelectricmanipulatoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30.0F, 225.0F, 0.0F).scale(0.3333F).end();
-		simpleBlockItem(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalreactor), existingBlock(blockLoc("chemicalreactormodel"))).transforms().transform(ItemDisplayContext.GUI).scale(0.3F).rotation(30.0F, 225.0F, 0.0F).end();
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.advancedsolarpanel), existingBlock(blockLoc("advancedsolarpanelitem"))).transforms().transform(ItemDisplayContext.THIRD_PERSON_RIGHT_HAND).rotation(35, 45, 0).translation(0, 2.5F, 0).scale(0.375F).end().transform(ItemDisplayContext.THIRD_PERSON_LEFT_HAND).rotation(35, 45, 0).translation(0, 2.5F, 0).scale(0.375F).end().transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND).rotation(0, 45, 0).scale(0.4F).end().transform(ItemDisplayContext.FIRST_PERSON_LEFT_HAND).rotation(0, 225, 0).scale(0.4F).end().transform(ItemDisplayContext.GUI).rotation(30, 225, 0).translation(0, -3F, 0).scale(0.265F).end();
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.hydroelectricgenerator), existingBlock(blockLoc("hydroelectricgeneratoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30, 225, 0).translation(1.85F, 1.0F, 0).scale(0.55F).end();
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralcrusher), existingBlock(blockLoc("mineralcrusheritem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralcrusherdouble), existingBlock(blockLoc("mineralcrusherdoubleitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralcrushertriple), existingBlock(blockLoc("mineralcrushertripleitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrinder), existingBlock(blockLoc("mineralgrinderitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrinderdouble), existingBlock(blockLoc("mineralgrinderdoubleitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrindertriple), existingBlock(blockLoc("mineralgrindertripleitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.motorcomplex), existingBlock(blockLoc("motorcomplexitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.windmill), existingBlock(blockLoc("windmillitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_COMPRESSOR.get(), existingBlock(blockLoc("compressoritem"))).transforms().transform(ItemDisplayContext.GUI).scale(0.3333F).rotation(30.0F, 225.0F, 0.0F).end();
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR.get(), existingBlock(blockLoc("decompressoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30.0F, 225.0F, 0.0F).scale(0.3333F).end();
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get(), existingBlock(blockLoc("thermoelectricmanipulatoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30.0F, 225.0F, 0.0F).scale(0.3333F).end();
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalreactor), existingBlock(blockLoc("chemicalreactormodel"))).transforms().transform(ItemDisplayContext.GUI).scale(0.3F).rotation(30.0F, 225.0F, 0.0F).end();
 
-		simpleBlockItem(ElectrodynamicsBlocks.blockGasPipePump, existingBlock(blockLoc("gaspipepumpitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.blockFluidPipePump, existingBlock(blockLoc("fluidpipepumpitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP.get(), existingBlock(blockLoc("gaspipepumpitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP.get(), existingBlock(blockLoc("fluidpipepumpitem")));
 
 	}
 
-	public void layeredItem(DeferredHolder<Item, Item> item, Parent parent, ResourceLocation... textures) {
+	public void layeredItem(DeferredHolder<Item, ? extends Item> item, Parent parent, ResourceLocation... textures) {
 		layeredItem(name(item), parent, textures);
 	}
 
@@ -222,7 +222,7 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 		layeredBuilder(name, parent, textures);
 	}
 
-	public void toggleableItem(DeferredHolder<Item, Item> item, String toggle, Parent parentOff, Parent parentOn, ResourceLocation[] offText, ResourceLocation[] onText) {
+	public void toggleableItem(DeferredHolder<Item, ? extends Item> item, String toggle, Parent parentOff, Parent parentOn, ResourceLocation[] offText, ResourceLocation[] onText) {
 		toggleableItem(name(item), toggle, parentOff, parentOn, offText, onText);
 	}
 
@@ -245,7 +245,7 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 		return builder;
 	}
 
-	public DynamicFluidContainerModelBuilder<ItemModelBuilder> getBucketModel(DeferredHolder<Item, Item> item, Parent parent) {
+	public DynamicFluidContainerModelBuilder<ItemModelBuilder> getBucketModel(DeferredHolder<Item, ? extends Item> item, Parent parent) {
 		return getBucketModel(name(item), parent);
 	}
 
@@ -269,7 +269,7 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 		return modLoc("block/" + texture);
 	}
 
-	public String name(DeferredHolder<Item, Item> item) {
+	public String name(DeferredHolder<Item, ? extends Item> item) {
 		return name(item.get());
 	}
 
@@ -277,7 +277,7 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 		return BuiltInRegistries.ITEM.getKey(item).getPath();
 	}
 
-	public ExistingModelFile existingBlock(DeferredHolder<Block, Block> block) {
+	public ExistingModelFile existingBlock(DeferredHolder<Block, ? extends Block> block) {
 		return existingBlock(block.getId());
 	}
 

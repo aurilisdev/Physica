@@ -93,20 +93,20 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 
 		registration.addRecipeCatalyst(ElectricFurnaceRecipeCategory.INPUT_MACHINE, ElectricFurnaceRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricfurnacedouble)), ElectricFurnaceRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricfurnacetriple)), ElectricFurnaceRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnacedouble)), ElectricFurnaceRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnacetriple)), ElectricFurnaceRecipeCategory.RECIPE_TYPE);
 		registration.addRecipeCatalyst(WireMillRecipeCategory.INPUT_MACHINE, WireMillRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.wiremilldouble)), WireMillRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.wiremilltriple)), WireMillRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremilldouble)), WireMillRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremilltriple)), WireMillRecipeCategory.RECIPE_TYPE);
 		registration.addRecipeCatalyst(MineralCrusherRecipeCategory.INPUT_MACHINE, MineralCrusherRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralcrusherdouble)), MineralCrusherRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralcrushertriple)), MineralCrusherRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralcrusherdouble)), MineralCrusherRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralcrushertriple)), MineralCrusherRecipeCategory.RECIPE_TYPE);
 		registration.addRecipeCatalyst(MineralGrinderRecipeCategory.INPUT_MACHINE, MineralGrinderRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrinderdouble)), MineralGrinderRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrindertriple)), MineralGrinderRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrinderdouble)), MineralGrinderRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrindertriple)), MineralGrinderRecipeCategory.RECIPE_TYPE);
 		registration.addRecipeCatalyst(ElectricArcFurnaceRecipeCategory.INPUT_MACHINE, ElectricArcFurnaceRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnacedouble)), ElectricArcFurnaceRecipeCategory.RECIPE_TYPE);
-		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnacetriple)), ElectricArcFurnaceRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnacedouble)), ElectricArcFurnaceRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnacetriple)), ElectricArcFurnaceRecipeCategory.RECIPE_TYPE);
 		registration.addRecipeCatalyst(OxidationFurnaceRecipeCategory.INPUT_MACHINE, OxidationFurnaceRecipeCategory.RECIPE_TYPE);
 		registration.addRecipeCatalyst(EnergizedAlloyerRecipeCategory.INPUT_MACHINE, EnergizedAlloyerRecipeCategory.RECIPE_TYPE);
 		registration.addRecipeCatalyst(LatheRecipeCategory.INPUT_MACHINE, LatheRecipeCategory.RECIPE_TYPE);

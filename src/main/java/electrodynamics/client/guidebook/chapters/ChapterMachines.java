@@ -15,7 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChapterMachines extends Chapter {
 
-	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.electricfurnace));
+	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.electricfurnace));
 
 	public ChapterMachines(Module module) {
 		super(module);

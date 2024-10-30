@@ -6,7 +6,6 @@ import electrodynamics.registers.ElectrodynamicsDamageTypes;
 import electrodynamics.registers.ElectrodynamicsEntities;
 import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsSounds;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -83,11 +82,11 @@ public class EntityMetalRod extends EntityCustomProjectile {
 	protected Item getDefaultItem() {
 		switch (number) {
 		case 0:
-			return ElectrodynamicsItems.SUBTYPEITEMREGISTER_MAPPINGS.get(SubtypeRod.steel).get();
+			return ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.steel);
 		case 1:
-			return ElectrodynamicsItems.SUBTYPEITEMREGISTER_MAPPINGS.get(SubtypeRod.stainlesssteel).get();
+			return ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.stainlesssteel);
 		case 2:
-			return ElectrodynamicsItems.SUBTYPEITEMREGISTER_MAPPINGS.get(SubtypeRod.hslasteel).get();
+			return ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.hslasteel);
 		default:
 			return super.getDefaultItem();
 		}

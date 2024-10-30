@@ -3,6 +3,7 @@ package electrodynamics.common.item;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +13,7 @@ public class ItemDescriptable extends ItemElectrodynamics {
 
 	private Component[] tooltips;
 
-	public ItemDescriptable(Properties properties, Supplier<CreativeModeTab> creativeTab, Component... tooltips) {
+	public ItemDescriptable(Properties properties, Holder<CreativeModeTab> creativeTab, Component... tooltips) {
 		super(properties, creativeTab);
 		this.tooltips = tooltips;
 	}

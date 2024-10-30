@@ -10,24 +10,24 @@ import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.common.blockitem.BlockItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
 public class BlockItemDescriptable extends BlockItemElectrodynamics {
 
-    private static HashMap<Supplier<Block>, HashSet<MutableComponent>> descriptionMappings = new HashMap<>();
-    private static HashMap<Block, HashSet<MutableComponent>> processedDescriptionMappings = new HashMap<>();
+    private static final HashMap<Holder<Block>, HashSet<MutableComponent>> DESCRIPTION_MAPPINGS = new HashMap<>();
+    private final static HashMap<Block, HashSet<MutableComponent>> PROCESSED_DESCRIPTION_MAPPINGS = new HashMap<>();
 
     private static boolean initialized = false;
 
-    public BlockItemDescriptable(Supplier<Block> block, Properties properties, Supplier<CreativeModeTab> creativeTab) {
-        super(block.get(), properties, creativeTab);
+    public BlockItemDescriptable(Block block, Properties properties, Holder<CreativeModeTab> creativeTab) {
+        super(block, properties, creativeTab);
     }
 
     @Override
@@ -36,14 +36,14 @@ public class BlockItemDescriptable extends BlockItemElectrodynamics {
         if (!initialized) {
             BlockItemDescriptable.initialized = true;
 
-            descriptionMappings.forEach((supplier, set) -> {
+            DESCRIPTION_MAPPINGS.forEach((supplier, set) -> {
 
-                processedDescriptionMappings.put(supplier.get(), set);
+                PROCESSED_DESCRIPTION_MAPPINGS.put(supplier.value(), set);
 
             });
 
         }
-        HashSet<MutableComponent> gotten = processedDescriptionMappings.get(getBlock());
+        HashSet<MutableComponent> gotten = PROCESSED_DESCRIPTION_MAPPINGS.get(getBlock());
         if (gotten != null) {
             for (MutableComponent s : gotten) {
                 tooltip.add(s.withStyle(ChatFormatting.GRAY));
@@ -66,13 +66,13 @@ public class BlockItemDescriptable extends BlockItemElectrodynamics {
         return super.getMaxStackSize(stack);
     }
 
-    public static void addDescription(Supplier<Block> block, MutableComponent description) {
+    public static void addDescription(Holder<Block> block, MutableComponent description) {
 
-        HashSet<MutableComponent> set = descriptionMappings.getOrDefault(block, new HashSet<>());
+        HashSet<MutableComponent> set = DESCRIPTION_MAPPINGS.getOrDefault(block, new HashSet<>());
 
         set.add(description);
 
-        descriptionMappings.put(block, set);
+        DESCRIPTION_MAPPINGS.put(block, set);
 
     }
 

@@ -33,10 +33,10 @@ public class RuleTestOre extends RuleTest {
 
 	public static final MapCodec<RuleTestOre> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("block").forGetter(instance0 -> {
 		if (instance0.thisOre != null) {
-			return ElectrodynamicsBlocks.SUBTYPEBLOCKREGISTER_MAPPINGS.get(instance0.thisOre).get();
+			return ElectrodynamicsBlocks.BLOCKS_ORE.getValue(instance0.thisOre);
 		}
 		if (instance0.thisDeepOre != null) {
-			return ElectrodynamicsBlocks.SUBTYPEBLOCKREGISTER_MAPPINGS.get(instance0.thisDeepOre).get();
+			return ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getValue(instance0.thisDeepOre);
 		}
 		return Blocks.AIR;
 	}), TagKey.codec(Registries.BLOCK).fieldOf("canspawnintag").forGetter(instance0 -> instance0.canSpawnIn)).apply(instance, (block, tag) -> {

@@ -15,16 +15,16 @@ import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.Tags;
 
 public enum SubtypeSulfateFluid implements ISubtype {
-    copper(ElectrodynamicsTags.Fluids.COPPER_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.copper), ItemTags.COPPER_ORES),
-    tin(ElectrodynamicsTags.Fluids.TIN_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.tin), ElectrodynamicsTags.Items.ORE_TIN),
-    silver(ElectrodynamicsTags.Fluids.SILVER_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.silver), ElectrodynamicsTags.Items.ORE_SILVER),
-    lead(ElectrodynamicsTags.Fluids.LEAD_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.lead), ElectrodynamicsTags.Items.ORE_LEAD),
-    vanadium(ElectrodynamicsTags.Fluids.VANADIUM_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.vanadium), ElectrodynamicsTags.Items.ORE_VANADIUM),
-    iron(ElectrodynamicsTags.Fluids.IRON_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.iron), ItemTags.IRON_ORES),
-    gold(ElectrodynamicsTags.Fluids.GOLD_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.gold), ItemTags.GOLD_ORES),
-    lithium(ElectrodynamicsTags.Fluids.LITHIUM_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.lithium), ElectrodynamicsTags.Items.ORE_LITHIUM),
-    molybdenum(ElectrodynamicsTags.Fluids.MOLYBDENUM_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.molybdenum), ElectrodynamicsTags.Items.ORE_MOLYBDENUM),
-    netherite(ElectrodynamicsTags.Fluids.NETHERITE_SULF, () -> ElectrodynamicsItems.getItem(SubtypeCrystal.netherite), Tags.Items.ORES_NETHERITE_SCRAP);
+    copper(ElectrodynamicsTags.Fluids.COPPER_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.copper), ItemTags.COPPER_ORES),
+    tin(ElectrodynamicsTags.Fluids.TIN_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.tin), ElectrodynamicsTags.Items.ORE_TIN),
+    silver(ElectrodynamicsTags.Fluids.SILVER_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.silver), ElectrodynamicsTags.Items.ORE_SILVER),
+    lead(ElectrodynamicsTags.Fluids.LEAD_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.lead), ElectrodynamicsTags.Items.ORE_LEAD),
+    vanadium(ElectrodynamicsTags.Fluids.VANADIUM_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.vanadium), ElectrodynamicsTags.Items.ORE_VANADIUM),
+    iron(ElectrodynamicsTags.Fluids.IRON_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.iron), ItemTags.IRON_ORES),
+    gold(ElectrodynamicsTags.Fluids.GOLD_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.gold), ItemTags.GOLD_ORES),
+    lithium(ElectrodynamicsTags.Fluids.LITHIUM_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.lithium), ElectrodynamicsTags.Items.ORE_LITHIUM),
+    molybdenum(ElectrodynamicsTags.Fluids.MOLYBDENUM_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.molybdenum), ElectrodynamicsTags.Items.ORE_MOLYBDENUM),
+    netherite(ElectrodynamicsTags.Fluids.NETHERITE_SULF, () -> ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.netherite), Tags.Items.ORES_NETHERITE_SCRAP);
 
     public final TagKey<Fluid> tag;
     @Nullable

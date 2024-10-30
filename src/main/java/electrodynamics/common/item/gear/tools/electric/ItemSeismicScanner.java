@@ -15,6 +15,7 @@ import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -45,7 +46,7 @@ public class ItemSeismicScanner extends ItemElectric {
     public static final String PLAY_LOC = "player";
     public static final String BLOCK_LOC = "block";
 
-    public ItemSeismicScanner(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
+    public ItemSeismicScanner(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
         super(properties, creativeTab, item -> ElectrodynamicsItems.ITEM_BATTERY.get());
     }
 

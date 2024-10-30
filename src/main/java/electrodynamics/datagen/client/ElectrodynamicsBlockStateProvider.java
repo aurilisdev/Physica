@@ -58,121 +58,121 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
 
         for (SubtypeGlass glass : SubtypeGlass.values()) {
-            glassBlock(ElectrodynamicsBlocks.getBlock(glass), blockLoc("glass/" + glass.tag()), true);
+            glassBlock(ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(glass), blockLoc("glass/" + glass.tag()), true);
         }
 
         for (SubtypeOre ore : SubtypeOre.values()) {
-            simpleBlock(ElectrodynamicsBlocks.getBlock(ore), blockLoc("ore/" + ore.tag()), true);
+            simpleBlock(ElectrodynamicsBlocks.BLOCKS_ORE.getValue(ore), blockLoc("ore/" + ore.tag()), true);
         }
 
         for (SubtypeOreDeepslate ore : SubtypeOreDeepslate.values()) {
-            simpleBlock(ElectrodynamicsBlocks.getBlock(ore), blockLoc("deepslateore/" + ore.tag()), true);
+            simpleBlock(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getValue(ore), blockLoc("deepslateore/" + ore.tag()), true);
         }
 
         for (SubtypeRawOreBlock raw : SubtypeRawOreBlock.values()) {
-            simpleBlock(ElectrodynamicsBlocks.getBlock(raw), blockLoc("raworeblock/" + raw.tag()), true);
+            simpleBlock(ElectrodynamicsBlocks.BLOCKS_RAWORE.getValue(raw), blockLoc("raworeblock/" + raw.tag()), true);
         }
 
         for (SubtypeResourceBlock resource : SubtypeResourceBlock.values()) {
-            simpleBlock(ElectrodynamicsBlocks.getBlock(resource), blockLoc("resource/" + resource.tag()), true);
+            simpleBlock(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getValue(resource), blockLoc("resource/" + resource.tag()), true);
         }
 
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.advancedsolarpanel), existingBlock(blockLoc("advancedsolarpanelbase")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.batterybox), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.batterybox)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.lithiumbatterybox), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.lithiumbatterybox)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.carbynebatterybox), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.carbynebatterybox)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chargerlv), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chargerlv)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chargermv), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chargermv)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chargerhv), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chargerhv)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalcrystallizer), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalcrystallizer)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalmixer), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalmixer)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.circuitbreaker), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.circuitbreaker)), true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.coalgenerator), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.coalgenerator)), existingBlock(blockLoc("coalgeneratorrunning")), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.combustionchamber), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.combustionchamber)), true).transforms().transform(ItemDisplayContext.GUI).rotation(35, 40, 0).scale(0.665F).end();
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.coolantresavoir), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.coolantresavoir)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.creativefluidsource), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.creativefluidsource)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.creativepowersource), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.creativepowersource)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.downgradetransformer), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.downgradetransformer)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.upgradetransformer), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.upgradetransformer)), true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricfurnace), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricfurnace)), existingBlock(blockLoc("electricfurnacerunning")), true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricfurnacedouble), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricfurnacedouble)), existingBlock(blockLoc("electricfurnacedoublerunning")), true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricfurnacetriple), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricfurnacetriple)), existingBlock(blockLoc("electricfurnacetriplerunning")), true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnace), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnace)), existingBlock(blockLoc("electricarcfurnacerunning")), true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnacedouble), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnacedouble)), existingBlock(blockLoc("electricarcfurnacedoublerunning")), true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnacetriple), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnacetriple)), existingBlock(blockLoc("electricarcfurnacetriplerunning")), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricpump), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricpump)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electrolyticseparator), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electrolyticseparator)), true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.energizedalloyer), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.energizedalloyer)), existingBlock(blockLoc("energizedalloyerrunning")), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.fermentationplant), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.fermentationplant)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.fluidvoid), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.fluidvoid)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.blockFrame, existingBlock(ElectrodynamicsBlocks.blockFrame), true);
-        simpleBlock(ElectrodynamicsBlocks.blockFrameCorner, existingBlock(ElectrodynamicsBlocks.blockFrameCorner), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.hydroelectricgenerator), existingBlock(blockLoc("hydroelectricgeneratorengine")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.lathe), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.lathe)), true);
-        wire(ElectrodynamicsBlocks.blockLogisticalManager, existingBlock(blockLoc("logisticalmanager_none")), existingBlock(blockLoc("logisticalmanager_inventory")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralcrusher), existingBlock(blockLoc("mineralcrusherbase")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralcrusherdouble), existingBlock(blockLoc("mineralcrusherdoublebase")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralcrushertriple), existingBlock(blockLoc("mineralcrushertriplebase")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrinder), existingBlock(blockLoc("mineralgrinderbase")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrinderdouble), existingBlock(blockLoc("mineralgrinderdoublebase")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrindertriple), existingBlock(blockLoc("mineralgrindertriplebase")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralwasher), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralwasher)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.motorcomplex), existingBlock(blockLoc("motorcomplexbase")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.multimeterblock), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.multimeterblock)), true);
-        airBlock(ElectrodynamicsBlocks.multi, "block/multisubnode", false);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.oxidationfurnace), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.oxidationfurnace)), existingBlock(blockLoc("oxidationfurnacerunning")), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.quarry), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.quarry)), true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.reinforcedalloyer), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.reinforcedalloyer)), existingBlock(blockLoc("reinforcedalloyerrunning")), true);
-        simpleBlock(ElectrodynamicsBlocks.blockSeismicMarker, existingBlock(ElectrodynamicsBlocks.blockSeismicMarker), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.seismicrelay), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.seismicrelay)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.solarpanel), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.solarpanel)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.tanksteel), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.tanksteel)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.tankreinforced), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.tankreinforced)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.tankhsla), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.tankhsla)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.thermoelectricgenerator), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.thermoelectricgenerator)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.windmill), existingBlock(blockLoc("windmillbase")), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.wiremill), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.wiremill)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.wiremilldouble), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.wiremilldouble)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.wiremilltriple), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.wiremilltriple)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.advancedsolarpanel), existingBlock(blockLoc("advancedsolarpanelbase")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.batterybox), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.batterybox)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.lithiumbatterybox), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.lithiumbatterybox)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.carbynebatterybox), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.carbynebatterybox)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chargerlv), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chargerlv)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chargermv), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chargermv)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chargerhv), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chargerhv)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalcrystallizer), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalcrystallizer)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalmixer), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalmixer)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.circuitbreaker), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.circuitbreaker)), true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.coalgenerator), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.coalgenerator)), existingBlock(blockLoc("coalgeneratorrunning")), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.combustionchamber), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.combustionchamber)), true).transforms().transform(ItemDisplayContext.GUI).rotation(35, 40, 0).scale(0.665F).end();
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.coolantresavoir), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.coolantresavoir)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativefluidsource), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativefluidsource)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativepowersource), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativepowersource)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.downgradetransformer), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.downgradetransformer)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.upgradetransformer), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.upgradetransformer)), true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnace), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnace)), existingBlock(blockLoc("electricfurnacerunning")), true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnacedouble), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnacedouble)), existingBlock(blockLoc("electricfurnacedoublerunning")), true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnacetriple), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnacetriple)), existingBlock(blockLoc("electricfurnacetriplerunning")), true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnace), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnace)), existingBlock(blockLoc("electricarcfurnacerunning")), true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnacedouble), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnacedouble)), existingBlock(blockLoc("electricarcfurnacedoublerunning")), true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnacetriple), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnacetriple)), existingBlock(blockLoc("electricarcfurnacetriplerunning")), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricpump), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricpump)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolyticseparator), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolyticseparator)), true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.energizedalloyer), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.energizedalloyer)), existingBlock(blockLoc("energizedalloyerrunning")), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fermentationplant), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fermentationplant)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidvoid), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidvoid)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_FRAME, existingBlock(ElectrodynamicsBlocks.BLOCK_FRAME.get()), true);
+        simpleBlock(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER, existingBlock(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER.get()), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.hydroelectricgenerator), existingBlock(blockLoc("hydroelectricgeneratorengine")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.lathe), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.lathe)), true);
+        wire(ElectrodynamicsBlocks.BLOCK_LOGISTICALMANAGER.get(), existingBlock(blockLoc("logisticalmanager_none")), existingBlock(blockLoc("logisticalmanager_inventory")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralcrusher), existingBlock(blockLoc("mineralcrusherbase")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralcrusherdouble), existingBlock(blockLoc("mineralcrusherdoublebase")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralcrushertriple), existingBlock(blockLoc("mineralcrushertriplebase")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrinder), existingBlock(blockLoc("mineralgrinderbase")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrinderdouble), existingBlock(blockLoc("mineralgrinderdoublebase")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrindertriple), existingBlock(blockLoc("mineralgrindertriplebase")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralwasher), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralwasher)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.motorcomplex), existingBlock(blockLoc("motorcomplexbase")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.multimeterblock), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.multimeterblock)), true);
+        airBlock(ElectrodynamicsBlocks.BLOCK_MULTISUBNODE, "block/multisubnode", false);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.oxidationfurnace), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.oxidationfurnace)), existingBlock(blockLoc("oxidationfurnacerunning")), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.quarry), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.quarry)), true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.reinforcedalloyer), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.reinforcedalloyer)), existingBlock(blockLoc("reinforcedalloyerrunning")), true);
+        simpleBlock(ElectrodynamicsBlocks.BLOCK_SEISMICMARKER, existingBlock(ElectrodynamicsBlocks.BLOCK_SEISMICMARKER.get()), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.seismicrelay), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.seismicrelay)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.solarpanel), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.solarpanel)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tankreinforced), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tankreinforced)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tankhsla), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tankhsla)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.thermoelectricgenerator), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.thermoelectricgenerator)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.windmill), existingBlock(blockLoc("windmillbase")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremill), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremill)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremilldouble), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremilldouble)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremilltriple), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremilltriple)), true);
 
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gastanksteel), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gastanksteel)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gastankreinforced), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gastankreinforced)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gastankhsla), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gastankhsla)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastanksteel), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastanksteel)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankreinforced), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankreinforced)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankhsla), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankhsla)), true);
 
-        horrRotatedBlock(ElectrodynamicsBlocks.blockCompressor, existingBlock(ElectrodynamicsBlocks.blockCompressor), 180, 0, false);
-        horrRotatedBlock(ElectrodynamicsBlocks.blockDecompressor, existingBlock(ElectrodynamicsBlocks.blockDecompressor), 180, 0, false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR, existingBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR.get()), 180, 0, false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR, existingBlock(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR.get()), 180, 0, false);
         genCompressorAddonTank();
         genCompressorSide();
-        simpleBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gasvent), blockLoc("gasvent"), true);
+        simpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvent), blockLoc("gasvent"), true);
         genThermoelectricManipulator();
 
-        horrRotatedLitBlock(ElectrodynamicsBlocks.blockGasValve, existingBlock(ElectrodynamicsBlocks.blockGasValve), existingBlock(blockLoc("gasvalveon")), 90, 0, true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.blockFluidValve, existingBlock(ElectrodynamicsBlocks.blockFluidValve), existingBlock(blockLoc("fluidvalveon")), 90, 0, true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCK_GASVALVE, existingBlock(ElectrodynamicsBlocks.BLOCK_GASVALVE.get()), existingBlock(blockLoc("gasvalveon")), 90, 0, true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE, existingBlock(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE.get()), existingBlock(blockLoc("fluidvalveon")), 90, 0, true);
 
-        horrRotatedBlock(ElectrodynamicsBlocks.blockGasPipePump, existingBlock(ElectrodynamicsBlocks.blockGasPipePump), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.blockFluidPipePump, existingBlock(ElectrodynamicsBlocks.blockFluidPipePump), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP, existingBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP.get()), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP, existingBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP.get()), false);
 
-        horrRotatedBlock(ElectrodynamicsBlocks.blockGasPipeFilter, existingBlock(ElectrodynamicsBlocks.blockGasPipeFilter), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.blockFluidPipeFilter, existingBlock(ElectrodynamicsBlocks.blockFluidPipeFilter), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEFILTER, existingBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEFILTER.get()), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEFILTER, existingBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEFILTER.get()), true);
 
-        horrRotatedLitBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.relay), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.relay)), existingBlock(blockLoc("relayon")), 180, 0, true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.relay), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.relay)), existingBlock(blockLoc("relayon")), 180, 0, true);
 
-        glassBlock(ElectrodynamicsBlocks.blockSteelScaffold, blockLoc("steelscaffold"), true);
+        glassBlock(ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING, blockLoc("steelscaffold"), true);
 
-        simpleBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.potentiometer), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.potentiometer)), true);
+        simpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.potentiometer), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.potentiometer)), true);
 
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.advanceddowngradetransformer), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.advanceddowngradetransformer)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.advancedupgradetransformer), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.advancedupgradetransformer)), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.circuitmonitor), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.circuitmonitor)), 90, 0, true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.advanceddowngradetransformer), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.advanceddowngradetransformer)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.advancedupgradetransformer), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.advancedupgradetransformer)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.circuitmonitor), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.circuitmonitor)), 90, 0, true);
 
-        horrRotatedBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.currentregulator), existingBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.currentregulator)), 180, 0, true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.currentregulator), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.currentregulator)), 180, 0, true);
 
-        redstoneToggleBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.gascollector),
+        redstoneToggleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gascollector),
                 models().cube(SubtypeMachine.gascollector.tag(), blockLoc("gascollector_bottom"), blockLoc("gascollector_fanoff"), blockLoc("gascollector_fanoff"), blockLoc("gascollector_back"), blockLoc("gascollector_fanoff"), blockLoc("gascollector_fanoff")).texture("particle", blockLoc("multisubnode")),
                 models().cube(SubtypeMachine.gascollector.tag() + "on", blockLoc("gascollector_bottom"), blockLoc("gascollector_fanon"), blockLoc("gascollector_fanon"), blockLoc("gascollector_back"), blockLoc("gascollector_fanon"), blockLoc("gascollector_fanon")).texture("particle", blockLoc("multisubnode")),
                 true);
 
-        airBlock(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalreactor), "block/steelcasing", false);
+        airBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalreactor), "block/steelcasing", false);
 
         genWires();
         genPipes();
@@ -188,27 +188,27 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
 
         // bare
         for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE)) {
-            wire(ElectrodynamicsBlocks.getBlock(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "wire_none")).texture("conductor", blockLoc(texture + wire.conductor.toString())).texture("particle", "#conductor").renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "wire_side")).texture("conductor", blockLoc(texture + wire.conductor.toString())).texture("particle", "#conductor").renderType("cutout"), false);
+            wire(ElectrodynamicsBlocks.BLOCKS_WIRE.getValue(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "wire_none")).texture("conductor", blockLoc(texture + wire.conductor.toString())).texture("particle", "#conductor").renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "wire_side")).texture("conductor", blockLoc(texture + wire.conductor.toString())).texture("particle", "#conductor").renderType("cutout"), false);
         }
 
         // insulated
         for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())) {
-            wire(ElectrodynamicsBlocks.getBlock(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "insulatedwire_none")).texture("conductor", blockLoc(texture + wire.conductor.toString() + "_center")).texture("insulation", blockLoc(texture + "insulationwool_center")).texture("particle", "#insulation").renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "insulatedwire_side")).texture("insulation", blockLoc(texture + "insulationwool")).texture("particle", "#insulation").renderType("cutout"), false);
+            wire(ElectrodynamicsBlocks.BLOCKS_WIRE.getValue(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "insulatedwire_none")).texture("conductor", blockLoc(texture + wire.conductor.toString() + "_center")).texture("insulation", blockLoc(texture + "insulationwool_center")).texture("particle", "#insulation").renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "insulatedwire_side")).texture("insulation", blockLoc(texture + "insulationwool")).texture("particle", "#insulation").renderType("cutout"), false);
         }
 
         // logistical
         for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())) {
-            wire(ElectrodynamicsBlocks.getBlock(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "logisticswire_none")).texture("conductor", blockLoc(texture + "logisticswire" + wire.conductor.toString())).texture("insulation", blockLoc(texture + "logisticswireinsulation_center")).texture("particle", "#insulation").texture("redstone", blockLoc(texture + "logisticswireredstone_center")).renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "logisticswire_side")).texture("insulation", blockLoc(texture + "logisticswireinsulation_side")).texture("particle", "#insulation").texture("redstone", blockLoc(texture + "logisticswireredstone_side")).renderType("cutout"), false);
+            wire(ElectrodynamicsBlocks.BLOCKS_WIRE.getValue(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "logisticswire_none")).texture("conductor", blockLoc(texture + "logisticswire" + wire.conductor.toString())).texture("insulation", blockLoc(texture + "logisticswireinsulation_center")).texture("particle", "#insulation").texture("redstone", blockLoc(texture + "logisticswireredstone_center")).renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "logisticswire_side")).texture("insulation", blockLoc(texture + "logisticswireinsulation_side")).texture("particle", "#insulation").texture("redstone", blockLoc(texture + "logisticswireredstone_side")).renderType("cutout"), false);
         }
 
         // ceramic
         for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())) {
-            wire(ElectrodynamicsBlocks.getBlock(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "ceramicinsulatedwire_none")).texture("conductor", blockLoc(texture + wire.conductor.toString() + "_center")).texture("insulation", blockLoc(texture + "insulationceramic_center_base")).texture("particle", "#insulation").renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "ceramicinsulatedwire_side")).texture("insulationbase", blockLoc(texture + "insulationceramic_base")).texture("insulationcolor", blockLoc(texture + "insulationceramic")).texture("particle", "#insulationcolor").renderType("cutout"), false);
+            wire(ElectrodynamicsBlocks.BLOCKS_WIRE.getValue(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "ceramicinsulatedwire_none")).texture("conductor", blockLoc(texture + wire.conductor.toString() + "_center")).texture("insulation", blockLoc(texture + "insulationceramic_center_base")).texture("particle", "#insulation").renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "ceramicinsulatedwire_side")).texture("insulationbase", blockLoc(texture + "insulationceramic_base")).texture("insulationcolor", blockLoc(texture + "insulationceramic")).texture("particle", "#insulationcolor").renderType("cutout"), false);
         }
 
         // highly insulated
         for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())) {
-            wire(ElectrodynamicsBlocks.getBlock(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "highlyinsulatedwire_none")).texture("conductor", blockLoc(texture + wire.conductor.toString() + "_center")).texture("insulation", blockLoc(texture + "insulationwool_center")).texture("particle", "#insulation").renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "highlyinsulatedwire_side")).texture("insulation", blockLoc(texture + "insulationwool")).texture("particle", "#insulation").renderType("cutout"), false);
+            wire(ElectrodynamicsBlocks.BLOCKS_WIRE.getValue(wire), models().withExistingParent(name + wire.tag() + "_none", modLoc(parent + "highlyinsulatedwire_none")).texture("conductor", blockLoc(texture + wire.conductor.toString() + "_center")).texture("insulation", blockLoc(texture + "insulationwool_center")).texture("particle", "#insulation").renderType("cutout"), models().withExistingParent(name + wire.tag() + "_side", modLoc(parent + "highlyinsulatedwire_side")).texture("insulation", blockLoc(texture + "insulationwool")).texture("particle", "#insulation").renderType("cutout"), false);
         }
 
     }
@@ -220,7 +220,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         String texture = "pipe/";
 
         for (SubtypeFluidPipe pipe : SubtypeFluidPipe.values()) {
-            wire(ElectrodynamicsBlocks.getBlock(pipe), models().withExistingParent(name + pipe.tag() + "_none", modLoc(parent + "pipe_none")).texture("texture", blockLoc(texture + pipe.tag())).texture("particle", "#texture"), models().withExistingParent(name + pipe.tag() + "_side", modLoc(parent + "pipe_side")).texture("texture", blockLoc(texture + pipe.tag())).texture("particle", "#texture"), false);
+            wire(ElectrodynamicsBlocks.BLOCKS_FLUIDPIPE.getValue(pipe), models().withExistingParent(name + pipe.tag() + "_none", modLoc(parent + "pipe_none")).texture("texture", blockLoc(texture + pipe.tag())).texture("particle", "#texture"), models().withExistingParent(name + pipe.tag() + "_side", modLoc(parent + "pipe_side")).texture("texture", blockLoc(texture + pipe.tag())).texture("particle", "#texture"), false);
         }
 
     }
@@ -243,14 +243,14 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         String parent = "parent/gaspipe";
         String name = "block/gaspipe/";
         String texture = "gaspipe/";
-        wire(ElectrodynamicsBlocks.getBlock(pipe), models().withExistingParent(name + pipe.tag() + "center", modLoc(parent + "uninsulatedcenter")).texture("texture", blockLoc(texture + pipe.tag() + "center")).texture("particle", "#texture"), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "uninsulatedside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
+        wire(ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(pipe), models().withExistingParent(name + pipe.tag() + "center", modLoc(parent + "uninsulatedcenter")).texture("texture", blockLoc(texture + pipe.tag() + "center")).texture("particle", "#texture"), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "uninsulatedside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
     }
 
     private void gasPipeUninsulatedPlastic(SubtypeGasPipe pipe) {
         String parent = "parent/gaspipe";
         String name = "block/gaspipe/";
         String texture = "gaspipe/";
-        wire(ElectrodynamicsBlocks.getBlock(pipe), models().withExistingParent(name + pipe.tag() + "center", modLoc(parent + "uninsulatedcenter")).texture("texture", blockLoc(texture + pipe.tag() + "center")).texture("particle", "#texture"), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "uninsulatedplasticside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
+        wire(ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(pipe), models().withExistingParent(name + pipe.tag() + "center", modLoc(parent + "uninsulatedcenter")).texture("texture", blockLoc(texture + pipe.tag() + "center")).texture("particle", "#texture"), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "uninsulatedplasticside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
     }
 
     @SuppressWarnings("unused")
@@ -258,7 +258,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         String parent = "parent/gaspipe";
         String name = "block/gaspipe/";
         String texture = "gaspipe/";
-        wire(ElectrodynamicsBlocks.getBlock(pipe), models().getExistingFile(modLoc(parent + "woolinsulatedcenter")), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "insulatedside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
+        wire(ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(pipe), models().getExistingFile(modLoc(parent + "woolinsulatedcenter")), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "insulatedside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
     }
 
     @SuppressWarnings("unused")
@@ -266,7 +266,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         String parent = "parent/gaspipe";
         String name = "block/gaspipe/";
         String texture = "gaspipe/";
-        wire(ElectrodynamicsBlocks.getBlock(pipe), models().getExistingFile(modLoc(parent + "woolinsulatedcenter")), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "insulatedplasticside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
+        wire(ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(pipe), models().getExistingFile(modLoc(parent + "woolinsulatedcenter")), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "insulatedplasticside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
     }
 
     @SuppressWarnings("unused")
@@ -274,7 +274,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         String parent = "parent/gaspipe";
         String name = "block/gaspipe/";
         String texture = "gaspipe/";
-        wire(ElectrodynamicsBlocks.getBlock(pipe), models().getExistingFile(modLoc(parent + "ceramicinsulatedcenter")), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "insulatedside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
+        wire(ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(pipe), models().getExistingFile(modLoc(parent + "ceramicinsulatedcenter")), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "insulatedside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
     }
 
     @SuppressWarnings("unused")
@@ -282,17 +282,17 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         String parent = "parent/gaspipe";
         String name = "block/gaspipe/";
         String texture = "gaspipe/";
-        wire(ElectrodynamicsBlocks.getBlock(pipe), models().getExistingFile(modLoc(parent + "ceramicinsulatedcenter")), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "insulatedplasticside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
+        wire(ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(pipe), models().getExistingFile(modLoc(parent + "ceramicinsulatedcenter")), models().withExistingParent(name + pipe.tag() + "side", modLoc(parent + "insulatedplasticside")).texture("texture", blockLoc(texture + pipe.tag() + "side")).texture("particle", "#texture"), false);
     }
 
     private void genCompressorAddonTank() {
-        getVariantBuilder(ElectrodynamicsBlocks.blockGasTransformerAddonTank).partialState().with(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS, AddonTankNeighborType.BOTTOMANDTOPTANK).modelForState().modelFile(existingBlock(blockLoc("compressoraddontanktab"))).addModel().partialState().with(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS, AddonTankNeighborType.TOPTANK).modelForState().modelFile(existingBlock(blockLoc("compressoraddontankt"))).addModel().partialState().with(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS, AddonTankNeighborType.BOTTOMTANK).modelForState().modelFile(existingBlock(blockLoc("compressoraddontankb"))).addModel().partialState().with(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS, AddonTankNeighborType.NONE).modelForState().modelFile(existingBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK)).addModel();
+        getVariantBuilder(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK.get()).partialState().with(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS, AddonTankNeighborType.BOTTOMANDTOPTANK).modelForState().modelFile(existingBlock(blockLoc("compressoraddontanktab"))).addModel().partialState().with(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS, AddonTankNeighborType.TOPTANK).modelForState().modelFile(existingBlock(blockLoc("compressoraddontankt"))).addModel().partialState().with(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS, AddonTankNeighborType.BOTTOMTANK).modelForState().modelFile(existingBlock(blockLoc("compressoraddontankb"))).addModel().partialState().with(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS, AddonTankNeighborType.NONE).modelForState().modelFile(existingBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK)).addModel();
 
-        blockItem(ElectrodynamicsBlocks.blockGasTransformerAddonTank, existingBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK));
+        blockItem(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK.get(), existingBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK));
     }
 
     private void genCompressorSide() {
-        Block block = ElectrodynamicsBlocks.blockGasTransformerSide;
+        Block block = ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE.get();
 
         ModelFile none = existingBlock(block);
         ModelFile top = existingBlock(blockLoc("compressorsidet"));
@@ -301,7 +301,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
     }
 
     private void genThermoelectricManipulator() {
-        Block block = ElectrodynamicsBlocks.blockThermoelectricManipulator;
+        Block block = ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get();
 
         ModelFile off = existingBlock(block);
         ModelFile cool = existingBlock(blockLoc("thermoelectricmanipulatorcool"));
@@ -317,7 +317,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
     }
 
 
-	public ItemModelBuilder simpleBlock(DeferredHolder<Block, Block> block, ModelFile file, boolean registerItem) {
+	public ItemModelBuilder simpleBlock(DeferredHolder<Block, ? extends Block> block, ModelFile file, boolean registerItem) {
 		return simpleBlock(block.get(), file, registerItem);
 	}
     public ItemModelBuilder simpleBlock(Block block, ModelFile file, boolean registerItem) {
@@ -328,7 +328,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         return null;
     }
 
-    public ItemModelBuilder simpleBlock(DeferredHolder<Block, Block> block, ResourceLocation texture, boolean registerItem) {
+    public ItemModelBuilder simpleBlock(DeferredHolder<Block, ? extends Block> block, ResourceLocation texture, boolean registerItem) {
         return simpleBlock(block.get(), texture, registerItem);
     }
 
@@ -336,7 +336,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         return simpleBlock(block, models().cubeAll(name(block), texture), registerItem);
     }
 
-    public ItemModelBuilder glassBlock(DeferredHolder<Block, Block> block, ResourceLocation texture, boolean registerItem) {
+    public ItemModelBuilder glassBlock(DeferredHolder<Block, ? extends Block> block, ResourceLocation texture, boolean registerItem) {
         return glassBlock(block.get(), texture, registerItem);
     }
 
@@ -353,11 +353,11 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         return null;
     }
 
-    public ItemModelBuilder simpleBlockCustomRenderType(DeferredHolder<Block, Block> block, ResourceLocation texture, ResourceLocation renderType, boolean registerItem) {
+    public ItemModelBuilder simpleBlockCustomRenderType(DeferredHolder<Block, ? extends Block> block, ResourceLocation texture, ResourceLocation renderType, boolean registerItem) {
         return simpleBlockCustomRenderType(block.get(), texture, renderType, registerItem);
     }
 
-    public ItemModelBuilder airBlock(DeferredHolder<Block, Block> block, String particleTexture, boolean registerItem) {
+    public ItemModelBuilder airBlock(DeferredHolder<Block, ? extends Block> block, String particleTexture, boolean registerItem) {
         return airBlock(block.get(), particleTexture, registerItem);
     }
 
@@ -370,7 +370,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         return null;
     }
 
-    public ItemModelBuilder bottomSlabBlock(DeferredHolder<Block, Block> block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, boolean registerItem) {
+    public ItemModelBuilder bottomSlabBlock(DeferredHolder<Block, ? extends Block> block, ResourceLocation side, ResourceLocation bottom, ResourceLocation top, boolean registerItem) {
         return bottomSlabBlock(block.get(), side, bottom, top, registerItem);
     }
 
@@ -383,11 +383,11 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         return null;
     }
 
-    public ItemModelBuilder horrRotatedBlock(DeferredHolder<Block, Block> block, ModelFile modelFile, boolean registerItem) {
+    public ItemModelBuilder horrRotatedBlock(DeferredHolder<Block, ? extends Block> block, ModelFile modelFile, boolean registerItem) {
         return horrRotatedBlock(block, modelFile, 0, 0, registerItem);
     }
 
-    public ItemModelBuilder horrRotatedBlock(DeferredHolder<Block, Block> block, ModelFile modelFile, int yRotationOffset, int xRotation, boolean registerItem) {
+    public ItemModelBuilder horrRotatedBlock(DeferredHolder<Block, ? extends Block> block, ModelFile modelFile, int yRotationOffset, int xRotation, boolean registerItem) {
         return horrRotatedBlock(block.get(), modelFile, yRotationOffset, xRotation, registerItem);
     }
 
@@ -403,11 +403,11 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         return null;
     }
 
-    public ItemModelBuilder horrRotatedLitBlock(DeferredHolder<Block, Block> block, ModelFile off, ModelFile on, boolean registerItem) {
+    public ItemModelBuilder horrRotatedLitBlock(DeferredHolder<Block, ? extends Block> block, ModelFile off, ModelFile on, boolean registerItem) {
         return horrRotatedBlock(block, on, 0, 0, registerItem);
     }
 
-    public ItemModelBuilder horrRotatedLitBlock(DeferredHolder<Block, Block> block, ModelFile off, ModelFile on, int yRotationOffset, int xRotation, boolean registerItem) {
+    public ItemModelBuilder horrRotatedLitBlock(DeferredHolder<Block, ? extends Block> block, ModelFile off, ModelFile on, int yRotationOffset, int xRotation, boolean registerItem) {
         return horrRotatedLitBlock(block.get(), off, on, yRotationOffset, xRotation, registerItem);
     }
 
@@ -424,7 +424,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
 
     }
 
-    public ItemModelBuilder redstoneToggleBlock(DeferredHolder<Block, Block> block, ModelFile off, ModelFile on, boolean registerItem) {
+    public ItemModelBuilder redstoneToggleBlock(DeferredHolder<Block, ? extends Block> block, ModelFile off, ModelFile on, boolean registerItem) {
         return redstoneToggleBlock(block.get(), off, on, registerItem);
     }
 
@@ -491,7 +491,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         return null;
     }
 
-    public ItemModelBuilder crossBlock(DeferredHolder<Block, Block> block, ResourceLocation texture, @Nullable ResourceLocation renderType, boolean registerItem) {
+    public ItemModelBuilder crossBlock(DeferredHolder<Block, ? extends Block> block, ResourceLocation texture, @Nullable ResourceLocation renderType, boolean registerItem) {
         return crossBlock(block.get(), texture, renderType, registerItem);
     }
 
@@ -513,7 +513,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         return models().withExistingParent("block/" + name, "cube").customLoader(ObjModelBuilder::begin).flipV(true).modelLocation(modLoc("models/" + modelLoc + ".obj")).end();
     }
 
-    public BlockModelBuilder blockTopBottom(DeferredHolder<Block, Block> block, String top, String bottom, String side) {
+    public BlockModelBuilder blockTopBottom(DeferredHolder<Block, ? extends Block> block, String top, String bottom, String side) {
         return models().cubeBottomTop(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), ResourceLocation.fromNamespaceAndPath(modID, side), ResourceLocation.fromNamespaceAndPath(modID, bottom), ResourceLocation.fromNamespaceAndPath(modID, top));
     }
 
@@ -529,7 +529,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         return key(block).getPath();
     }
 
-    public ExistingModelFile existingBlock(DeferredHolder<Block, Block> block) {
+    public ExistingModelFile existingBlock(DeferredHolder<Block, ? extends Block> block) {
         return existingBlock(block.getId());
     }
 

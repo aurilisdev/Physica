@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.core.Holder;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -33,7 +34,7 @@ public class ItemRailgunKinetic extends ItemRailgun {
 	private static final double TEMPERATURE_REDUCED_PER_TICK = 2.0;
 	private static final double OVERHEAT_WARNING_THRESHOLD = 0.75;
 
-	public ItemRailgunKinetic(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemRailgunKinetic(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
 		super(properties, creativeTab, OVERHEAT_TEMPERATURE, OVERHEAT_WARNING_THRESHOLD, TEMPERATURE_REDUCED_PER_TICK, item -> ElectrodynamicsItems.ITEM_LITHIUMBATTERY.get());
 	}
 

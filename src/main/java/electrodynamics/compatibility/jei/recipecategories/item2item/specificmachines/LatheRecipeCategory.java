@@ -37,7 +37,7 @@ public class LatheRecipeCategory extends Item2ItemRecipeCategory<LatheRecipe> {
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.lathe));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.lathe));
 
     public static final RecipeType<LatheRecipe> RECIPE_TYPE = RecipeType.create(References.ID, LatheRecipe.RECIPE_GROUP, LatheRecipe.class);
 

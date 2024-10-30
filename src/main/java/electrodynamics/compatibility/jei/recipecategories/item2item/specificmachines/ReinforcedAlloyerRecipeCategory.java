@@ -38,7 +38,7 @@ public class ReinforcedAlloyerRecipeCategory extends Item2ItemRecipeCategory<Rei
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.reinforcedalloyer));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.reinforcedalloyer));
 
     public static final RecipeType<ReinforcedAlloyerRecipe> RECIPE_TYPE = RecipeType.create(References.ID, ReinforcedAlloyerRecipe.RECIPE_GROUP, ReinforcedAlloyerRecipe.class);
 

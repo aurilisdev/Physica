@@ -30,7 +30,7 @@ public class ItemUpgrade extends ItemElectrodynamics {
 	private static final DecimalFormat FORMATTER = new DecimalFormat("0.00");
 
 	public ItemUpgrade(Properties properties, SubtypeItemUpgrade subtype) {
-		super(properties.stacksTo(subtype.maxSize), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+		super(properties.stacksTo(subtype.maxSize), ElectrodynamicsCreativeTabs.MAIN);
 		this.subtype = subtype;
 	}
 

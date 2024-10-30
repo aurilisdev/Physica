@@ -1,7 +1,6 @@
 package electrodynamics.common.item.gear.armor;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.api.creativetab.CreativeTabSupplier;
 import net.minecraft.core.Holder;
@@ -15,9 +14,9 @@ import net.minecraft.world.level.Level;
 
 public class ItemElectrodynamicsArmor extends ArmorItem implements CreativeTabSupplier {
 
-	private final Supplier<CreativeModeTab> creativeTab;
+	private final Holder<CreativeModeTab> creativeTab;
 
-	public ItemElectrodynamicsArmor(Holder<ArmorMaterial> material, Type type, Properties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemElectrodynamicsArmor(Holder<ArmorMaterial> material, Type type, Properties properties, Holder<CreativeModeTab> creativeTab) {
 		super(material, type, properties);
 		this.creativeTab = creativeTab;
 	}
@@ -42,7 +41,7 @@ public class ItemElectrodynamicsArmor extends ArmorItem implements CreativeTabSu
 
 	@Override
 	public boolean isAllowedInCreativeTab(CreativeModeTab tab) {
-		return creativeTab.get() == tab;
+		return creativeTab.value() == tab;
 	}
 
 	@Override

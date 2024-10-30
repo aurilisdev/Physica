@@ -23,6 +23,7 @@ import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -45,7 +46,7 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 public class ItemElectricDrill extends DiggerItem implements IItemElectric, CreativeTabSupplier {
 
-    private final Supplier<CreativeModeTab> creativeTab;
+    private final Holder<CreativeModeTab> creativeTab;
 
     private static final List<ItemElectricDrill> DRILLS = new ArrayList<>();
 
@@ -58,7 +59,7 @@ public class ItemElectricDrill extends DiggerItem implements IItemElectric, Crea
     private static final String SUBTYPE = "subtype";
     private final ElectricItemProperties properties;
 
-    public ItemElectricDrill(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
+    public ItemElectricDrill(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
         super(ElectricItemTier.ELECTRIC_DRILL, ElectrodynamicsTags.Blocks.ELECTRIC_DRILL_BLOCKS, properties.durability(0).attributes(createAttributes(ElectricItemTier.ELECTRIC_DRILL, 4, -2.4F)));
         this.properties = properties;
         this.creativeTab = creativeTab;
@@ -161,7 +162,7 @@ public class ItemElectricDrill extends DiggerItem implements IItemElectric, Crea
 
         if (!other.isEmpty() && other.getItem() instanceof ItemDrillHead head) {
 
-            ItemStack oldHead = new ItemStack(ElectrodynamicsItems.getItem(getHead(stack)));
+            ItemStack oldHead = new ItemStack(ElectrodynamicsItems.ITEMS_DRILLHEAD.getValue(getHead(stack)));
 
             saveHead(stack, head.head);
 
@@ -210,7 +211,7 @@ public class ItemElectricDrill extends DiggerItem implements IItemElectric, Crea
 
     @Override
     public boolean isAllowedInCreativeTab(CreativeModeTab tab) {
-        return creativeTab.get() == tab;
+        return creativeTab.value() == tab;
     }
 
     @Override

@@ -151,7 +151,7 @@ public class BlockFrame extends BaseEntityBlock {
     }
 
     public static BlockState readFromNbt(CompoundTag tag) {
-        BlockState state = ElectrodynamicsBlocks.blockFrame.defaultBlockState();
+        BlockState state = ElectrodynamicsBlocks.BLOCK_FRAME.get().defaultBlockState();
         int dir = 0;
         if (tag.contains("facing", 8)) {
             String name = tag.getString("facing");

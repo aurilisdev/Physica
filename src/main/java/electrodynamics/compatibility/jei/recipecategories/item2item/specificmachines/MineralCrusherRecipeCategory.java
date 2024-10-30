@@ -37,7 +37,7 @@ public class MineralCrusherRecipeCategory extends Item2ItemRecipeCategory<Minera
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralcrusher));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralcrusher));
 
     public static final RecipeType<MineralCrusherRecipe> RECIPE_TYPE = RecipeType.create(References.ID, MineralCrusherRecipe.RECIPE_GROUP, MineralCrusherRecipe.class);
 

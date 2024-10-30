@@ -37,7 +37,7 @@ public class MineralGrinderRecipeCategory extends Item2ItemRecipeCategory<Minera
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrinder));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrinder));
 
     public static final RecipeType<MineralGrinderRecipe> RECIPE_TYPE = RecipeType.create(References.ID, MineralGrinderRecipe.RECIPE_GROUP, MineralGrinderRecipe.class);
 

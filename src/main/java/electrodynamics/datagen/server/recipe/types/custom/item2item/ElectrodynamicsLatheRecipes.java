@@ -31,35 +31,35 @@ public class ElectrodynamicsLatheRecipes extends AbstractRecipeGenerator {
 	@Override
 	public void addRecipes(RecipeOutput output) {
 
-		newRecipe(new ItemStack(RODS[SubtypeRod.hslasteel.ordinal()], 1), 0.1F, 200, 350.0, "hsla_steel_rod", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.hslasteel), 1), 0.1F, 200, 350.0, "hsla_steel_rod", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_HSLASTEEL, 2)
 				//
-				.addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeNugget.hslasteel), 2), 1))
+				.addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_NUGGET.getValue(SubtypeNugget.hslasteel), 2), 1))
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(RODS[SubtypeRod.stainlesssteel.ordinal()], 1), 0.1F, 200, 350.0, "stainless_steel_rod", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.stainlesssteel), 1), 0.1F, 200, 350.0, "stainless_steel_rod", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_STAINLESSSTEEL, 2)
 				//
-				.addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeNugget.stainlesssteel), 2), 1))
+				.addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_NUGGET.getValue(SubtypeNugget.stainlesssteel), 2), 1))
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(RODS[SubtypeRod.steel.ordinal()], 1), 0.1F, 200, 350.0, "steel_rod", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.steel), 1), 0.1F, 200, 350.0, "steel_rod", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_STEEL, 2)
 				//
-				.addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeNugget.steel), 2), 1))
+				.addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_NUGGET.getValue(SubtypeNugget.steel), 2), 1))
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(RODS[SubtypeRod.titaniumcarbide.ordinal()], 1), 0.1F, 200, 350.0, "titanium_carbide_rod", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.titaniumcarbide), 1), 0.1F, 200, 350.0, "titanium_carbide_rod", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_TITANIUMCARBIDE, 2)
 				//
-				.addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeNugget.titaniumcarbide), 2), 1))
+				.addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_NUGGET.getValue(SubtypeNugget.titaniumcarbide), 2), 1))
 				//
 				.save(output);
 

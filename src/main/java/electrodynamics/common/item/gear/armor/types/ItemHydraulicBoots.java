@@ -44,7 +44,7 @@ public class ItemHydraulicBoots extends ItemElectrodynamicsArmor {
     private static final String TEXTURE_LOCATION = References.ID + ":textures/model/armor/hydraulicboots.png";
 
     public ItemHydraulicBoots() {
-        super(ElectrodynamicsArmorMaterials.HYDRAULIC_BOOTS, Type.BOOTS, new Item.Properties().stacksTo(1), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+        super(ElectrodynamicsArmorMaterials.HYDRAULIC_BOOTS, Type.BOOTS, new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN);
     }
 
     @Override

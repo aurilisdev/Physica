@@ -39,7 +39,7 @@ public class ChemicalCrystallizerRecipeCategory extends Fluid2ItemRecipeCategory
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalcrystallizer));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalcrystallizer));
 
     public static final RecipeType<ChemicalCrystalizerRecipe> RECIPE_TYPE = RecipeType.create(References.ID, ChemicalCrystalizerRecipe.RECIPE_GROUP, ChemicalCrystalizerRecipe.class);
 

@@ -33,7 +33,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 	@Override
 	public void addRecipes(RecipeOutput output) {
 
-		newRecipe(new ItemStack(CUSTOM_GLASS[SubtypeGlass.aluminum.ordinal()], 5), 0.5F, 50, 50.0, "aluminum_glass", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum), 5), 0.5F, 50, 50.0, "aluminum_glass", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_ALUMINUM, 1)
 				//
@@ -43,7 +43,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.bronze.ordinal()], 7), 0.1F, 50, 50.0, "ingot_bronze", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.bronze), 7), 0.1F, 50, 50.0, "ingot_bronze", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_TIN, 1)
 				//
@@ -53,7 +53,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(CUSTOM_GLASS[SubtypeGlass.clear.ordinal()], 16), 0.1F, 50, 50.0, "clear_glass", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_CUSTOMGLASS.getValue(SubtypeGlass.clear), 16), 0.1F, 50, 50.0, "clear_glass", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.COAL_COKE, 1)
 				//
@@ -61,7 +61,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.hslasteel.ordinal()], 2), 0.3F, 50, 50.0, "ingot_hsla_steel", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.hslasteel), 2), 0.3F, 50, 50.0, "ingot_hsla_steel", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_STAINLESSSTEEL, 1)
 				//
@@ -89,7 +89,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.stainlesssteel.ordinal()], 34), 0.4F, 50, 50.0, "ingot_stainless_steel", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.stainlesssteel), 34), 0.4F, 50, 50.0, "ingot_stainless_steel", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_CHROMIUM, 1)
 				//
@@ -99,7 +99,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.steel.ordinal()], 4), 0.3F, 50, 50.0, "ingot_steel", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.steel), 4), 0.3F, 50, 50.0, "ingot_steel", modID)
 				//
 				.addItemTagInput(Tags.Items.INGOTS_IRON, 2)
 				//
@@ -109,7 +109,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.superconductive.ordinal()], 4), 0.3F, 50, 50.0, "ingot_superconductive_endereye", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.superconductive), 4), 0.3F, 50, 50.0, "ingot_superconductive_endereye", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_SILVER, 5)
 				//
@@ -119,7 +119,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.superconductive.ordinal()], 4), 0.3F, 50, 50.0, "ingot_superconductive_netherite", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.superconductive), 4), 0.3F, 50, 50.0, "ingot_superconductive_netherite", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_SILVER, 5)
 				//
@@ -129,7 +129,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.titaniumcarbide.ordinal()], 4), 0.3F, 50, 50.0, "ingot_titanium_carbide", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.titaniumcarbide), 4), 0.3F, 50, 50.0, "ingot_titanium_carbide", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_TITANIUM, 1)
 				//
@@ -139,7 +139,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.vanadiumsteel.ordinal()], 8), 0.3F, 50, 50.0, "vanadium_steel_ingot", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.vanadiumsteel), 8), 0.3F, 50, 50.0, "vanadium_steel_ingot", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_STEEL, 8)
 				//

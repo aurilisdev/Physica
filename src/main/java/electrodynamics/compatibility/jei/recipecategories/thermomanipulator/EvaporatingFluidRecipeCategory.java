@@ -55,7 +55,7 @@ public class EvaporatingFluidRecipeCategory extends AbstractRecipeCategory<Psued
 
 	public static final String RECIPE_GROUP = "gas_evaporating";
 
-	public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.blockThermoelectricManipulator);
+	public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get());
 
 	public static final RecipeType<PsuedoFluid2GasRecipe> RECIPE_TYPE = RecipeType.create(References.ID, RECIPE_GROUP, PsuedoFluid2GasRecipe.class);
 

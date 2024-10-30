@@ -24,6 +24,6 @@ public class ElectrodynamicsFluids {
 	public static final DeferredHolder<Fluid, Fluid> FLUID_POLYETHYLENE = FLUIDS.register("fluidpolyethylene", () -> new FluidNonPlaceable(ElectrodynamicsItems.ITEM_CANISTERREINFORCED, new SimpleWaterBasedFluidType(References.ID, "fluidpolyethylene", "polyethylene", -376664948)));
 	public static final DeferredHolder<Fluid, Fluid> FLUID_SULFURICACID = FLUIDS.register("fluidsulfuricacid", () -> new FluidNonPlaceable(ElectrodynamicsItems.ITEM_CANISTERREINFORCED, new SimpleWaterBasedFluidType(References.ID, "fluidsulfuricacid", "sulfuricacid", -375879936)));
 
-	public static final BulkDeferredHolder<Fluid, Fluid, SubtypeSulfateFluid> SULFATE_FLUIDS = new BulkDeferredHolder<>(SubtypeSulfateFluid.values(), subtype -> FLUIDS.register("fluidsulfate" + subtype.name(), () -> new FluidSulfate(subtype)));
+	public static final BulkDeferredHolder<Fluid, Fluid, SubtypeSulfateFluid> FLUIDS_SULFATE = new BulkDeferredHolder<>(SubtypeSulfateFluid.values(), subtype -> FLUIDS.register("fluidsulfate" + subtype.name(), () -> new FluidSulfate(subtype)));
 
 }

@@ -52,8 +52,8 @@ public class BlockGasTransformerAddonTank extends GenericMachineBlock {
         }
         BlockState above = world.getBlockState(pos.above());
         BlockState below = world.getBlockState(pos.below());
-        boolean isTankBelow = below.is(ElectrodynamicsBlocks.blockGasTransformerSide) || below.is(ElectrodynamicsBlocks.blockGasTransformerAddonTank);
-        boolean isTankAbove = above.is(ElectrodynamicsBlocks.blockGasTransformerAddonTank);
+        boolean isTankBelow = below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE) || below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK);
+        boolean isTankAbove = above.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK);
         AddonTankNeighborType type;
         if (isTankAbove && isTankBelow) {
             type = AddonTankNeighborType.BOTTOMANDTOPTANK;

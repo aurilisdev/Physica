@@ -88,9 +88,9 @@ public class ChapterElectricity extends Chapter {
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
 				List<FormattedCharSequence> tooltips = new ArrayList<>();
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.getItem(SubtypeMachine.mineralgrinder).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.getItem(SubtypeMachine.batterybox).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.getItem(SubtypeMachine.electricfurnace).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.mineralgrinder).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.batterybox).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.electricfurnace).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
 
 				graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
 			}
@@ -105,9 +105,9 @@ public class ChapterElectricity extends Chapter {
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
 
 				List<FormattedCharSequence> tooltips = new ArrayList<>();
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.getItem(SubtypeMachine.chemicalmixer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.getItem(SubtypeMachine.lathe).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.getItem(SubtypeMachine.oxidationfurnace).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.chemicalmixer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.lathe).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.oxidationfurnace).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
 
 				graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
 			}
@@ -120,9 +120,9 @@ public class ChapterElectricity extends Chapter {
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
 				List<FormattedCharSequence> tooltips = new ArrayList<>();
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.getItem(SubtypeMachine.mineralwasher).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.getItem(SubtypeMachine.energizedalloyer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.getItem(SubtypeMachine.carbynebatterybox).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.mineralwasher).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.energizedalloyer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.carbynebatterybox).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
 
 				graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
 			}
@@ -135,8 +135,8 @@ public class ChapterElectricity extends Chapter {
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
 				List<FormattedCharSequence> tooltips = new ArrayList<>();
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.getItem(SubtypeMachine.reinforcedalloyer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.getItem(SubtypeMachine.mineralcrushertriple).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.reinforcedalloyer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.mineralcrushertriple).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
 
 				graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
 			}
@@ -160,9 +160,9 @@ public class ChapterElectricity extends Chapter {
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
 				List<FormattedCharSequence> tooltips = new ArrayList<>();
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.getItem(SubtypeMachine.batterybox).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.getItem(SubtypeMachine.relay).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.getItem(SubtypeMachine.downgradetransformer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.batterybox).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.relay).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.downgradetransformer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
 
 				graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
 			}
@@ -287,8 +287,8 @@ public class ChapterElectricity extends Chapter {
 
 		// block multimeter
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeMachine.multimeterblock).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.multimeterblock)).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.multimeterblock).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.multimeterblock)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -308,7 +308,7 @@ public class ChapterElectricity extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.multimeterblock));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.multimeterblock));
 			}
 
 		}));
@@ -317,8 +317,8 @@ public class ChapterElectricity extends Chapter {
 
 		// relay
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeMachine.relay).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.relay)).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.relay).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.relay)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -338,7 +338,7 @@ public class ChapterElectricity extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.relay));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.relay));
 			}
 
 		}));
@@ -350,8 +350,8 @@ public class ChapterElectricity extends Chapter {
 
 		// circuit breaker
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeMachine.circuitbreaker).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.circuitbreaker)).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.circuitbreaker).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.circuitbreaker)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -371,7 +371,7 @@ public class ChapterElectricity extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.circuitbreaker));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.circuitbreaker));
 			}
 
 		}));
@@ -383,8 +383,8 @@ public class ChapterElectricity extends Chapter {
 
 		// current regulator
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeMachine.currentregulator).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.currentregulator)).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.currentregulator).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.currentregulator)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -404,7 +404,7 @@ public class ChapterElectricity extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.currentregulator));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.currentregulator));
 			}
 
 		}));
@@ -413,8 +413,8 @@ public class ChapterElectricity extends Chapter {
 
 		// circuit monitor
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeMachine.circuitmonitor).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.circuitmonitor)).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.circuitmonitor).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.circuitmonitor)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -434,7 +434,7 @@ public class ChapterElectricity extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.circuitmonitor));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.circuitmonitor));
 			}
 
 		}));
@@ -447,8 +447,8 @@ public class ChapterElectricity extends Chapter {
 
 		// Potentiometer
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeMachine.potentiometer).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.potentiometer)).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.potentiometer).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.potentiometer)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -468,7 +468,7 @@ public class ChapterElectricity extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.potentiometer));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.potentiometer));
 			}
 
 		}));

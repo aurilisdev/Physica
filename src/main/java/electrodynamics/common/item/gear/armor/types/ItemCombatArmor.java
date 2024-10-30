@@ -24,6 +24,7 @@ import electrodynamics.registers.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -61,7 +62,7 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
 
     public static final float OFFSET = 0.2F;
 
-    public ItemCombatArmor(Properties properties, Type type, Supplier<CreativeModeTab> creativeTab) {
+    public ItemCombatArmor(Properties properties, Type type, Holder<CreativeModeTab> creativeTab) {
         super(ElectrodynamicsArmorMaterials.COMPOSITE_ARMOR, type, properties, creativeTab);
         switch (type) {
         case HELMET, LEGGINGS:

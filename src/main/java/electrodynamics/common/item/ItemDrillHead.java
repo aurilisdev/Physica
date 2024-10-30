@@ -20,7 +20,7 @@ public class ItemDrillHead extends ItemElectrodynamics {
 	public SubtypeDrillHead head;
 
 	public ItemDrillHead(SubtypeDrillHead head) {
-		super(new Item.Properties().durability(head.durability).durability(head.durability).rarity(head.isUnbreakable ? Rarity.UNCOMMON : Rarity.COMMON), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+		super(new Item.Properties().durability(head.durability).durability(head.durability).rarity(head.isUnbreakable ? Rarity.UNCOMMON : Rarity.COMMON), ElectrodynamicsCreativeTabs.MAIN);
 		this.head = head;
 		HEADS.add(this);
 	}

@@ -12,21 +12,21 @@ import net.minecraft.world.item.Item;
 
 public enum SubtypeIngot implements ISubtype {
 
-	tin(ElectrodynamicsTags.Items.INGOT_TIN, () -> ElectrodynamicsItems.getItem(SubtypeDust.tin)),
-	silver(ElectrodynamicsTags.Items.INGOT_SILVER, () -> ElectrodynamicsItems.getItem(SubtypeDust.silver)),
-	steel(ElectrodynamicsTags.Items.INGOT_STEEL, () -> ElectrodynamicsItems.getItem(SubtypeDust.steel)),
-	lead(ElectrodynamicsTags.Items.INGOT_LEAD, () -> ElectrodynamicsItems.getItem(SubtypeDust.lead)),
-	superconductive(ElectrodynamicsTags.Items.INGOT_SUPERCONDUCTIVE, () -> ElectrodynamicsItems.getItem(SubtypeDust.superconductive)),
-	bronze(ElectrodynamicsTags.Items.INGOT_BRONZE, () -> ElectrodynamicsItems.getItem(SubtypeDust.bronze)),
-	vanadium(ElectrodynamicsTags.Items.INGOT_VANADIUM, () -> ElectrodynamicsItems.getItem(SubtypeDust.vanadium)),
-	lithium(ElectrodynamicsTags.Items.INGOT_LITHIUM, () -> ElectrodynamicsItems.getItem(SubtypeDust.lithium)),
+	tin(ElectrodynamicsTags.Items.INGOT_TIN, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.tin)),
+	silver(ElectrodynamicsTags.Items.INGOT_SILVER, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.silver)),
+	steel(ElectrodynamicsTags.Items.INGOT_STEEL, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.steel)),
+	lead(ElectrodynamicsTags.Items.INGOT_LEAD, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.lead)),
+	superconductive(ElectrodynamicsTags.Items.INGOT_SUPERCONDUCTIVE, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.superconductive)),
+	bronze(ElectrodynamicsTags.Items.INGOT_BRONZE, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.bronze)),
+	vanadium(ElectrodynamicsTags.Items.INGOT_VANADIUM, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.vanadium)),
+	lithium(ElectrodynamicsTags.Items.INGOT_LITHIUM, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.lithium)),
 	aluminum(ElectrodynamicsTags.Items.INGOT_ALUMINUM),
-	chromium(ElectrodynamicsTags.Items.INGOT_CHROMIUM, () -> ElectrodynamicsItems.getItem(SubtypeOxide.chromite)),
+	chromium(ElectrodynamicsTags.Items.INGOT_CHROMIUM, () -> ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.chromite)),
 	stainlesssteel(ElectrodynamicsTags.Items.INGOT_STAINLESSSTEEL),
 	vanadiumsteel(ElectrodynamicsTags.Items.INGOT_VANADIUMSTEEL),
 	hslasteel(ElectrodynamicsTags.Items.INGOT_HSLASTEEL),
 	titanium(ElectrodynamicsTags.Items.INGOT_TITANIUM),
-	molybdenum(ElectrodynamicsTags.Items.INGOT_MOLYBDENUM, () -> ElectrodynamicsItems.getItem(SubtypeDust.molybdenum)),
+	molybdenum(ElectrodynamicsTags.Items.INGOT_MOLYBDENUM, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.molybdenum)),
 	titaniumcarbide(ElectrodynamicsTags.Items.INGOT_TITANIUMCARBIDE);
 
 	public final TagKey<Item> tag;

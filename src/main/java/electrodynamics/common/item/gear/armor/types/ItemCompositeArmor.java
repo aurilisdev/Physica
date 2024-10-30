@@ -43,7 +43,7 @@ public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
 	public static final String ARMOR_TEXTURE_LOCATION = References.ID + ":textures/model/armor/compositearmor.png";
 
 	public ItemCompositeArmor(Type slot) {
-		super(ElectrodynamicsArmorMaterials.COMPOSITE_ARMOR, slot, new Item.Properties().stacksTo(1).fireResistant().setNoRepair().durability(2000), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+		super(ElectrodynamicsArmorMaterials.COMPOSITE_ARMOR, slot, new Item.Properties().stacksTo(1).fireResistant().setNoRepair().durability(2000), ElectrodynamicsCreativeTabs.MAIN);
 	}
 
 	@Override

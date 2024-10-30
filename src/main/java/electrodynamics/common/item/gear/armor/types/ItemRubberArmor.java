@@ -1,11 +1,11 @@
 package electrodynamics.common.item.gear.armor.types;
 
 import java.util.EnumMap;
-import java.util.function.Supplier;
 
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.registers.ElectrodynamicsArmorMaterials;
 import net.minecraft.Util;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
 
@@ -18,7 +18,7 @@ public class ItemRubberArmor extends ItemElectrodynamicsArmor {
 		map.put(Type.BOOTS, 2);
 	});
 
-	public ItemRubberArmor(ArmorItem.Type type, Properties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemRubberArmor(ArmorItem.Type type, Properties properties, Holder<CreativeModeTab> creativeTab) {
 		super(ElectrodynamicsArmorMaterials.RUBBER_BOOTS, type, properties, creativeTab);
 	}
 

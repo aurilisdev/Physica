@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import net.minecraft.core.Holder;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -44,7 +45,7 @@ public class ItemMechanizedCrossbow extends ProjectileWeaponItem implements IIte
 
 	private final ElectricItemProperties properties;
 
-	private final Supplier<CreativeModeTab> creativeTab;
+	private final Holder<CreativeModeTab> creativeTab;
 
 	public static final int JOULES_PER_SHOT = 5000;
 	public static final int NUMBER_OF_SHOTS = 200;
@@ -52,7 +53,7 @@ public class ItemMechanizedCrossbow extends ProjectileWeaponItem implements IIte
 	public static final int PROJECTILE_RANGE = 20;
 	public static final int PROJECTILE_SPEED = 3;
 
-	public ItemMechanizedCrossbow(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemMechanizedCrossbow(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
 		super(properties);
 		this.properties = properties;
 		this.creativeTab = creativeTab;
@@ -207,7 +208,7 @@ public class ItemMechanizedCrossbow extends ProjectileWeaponItem implements IIte
 
 	@Override
 	public boolean isAllowedInCreativeTab(CreativeModeTab tab) {
-		return creativeTab.get() == tab;
+		return creativeTab.value() == tab;
 	}
 
 	@Override

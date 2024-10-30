@@ -38,7 +38,7 @@ public class OxidationFurnaceRecipeCategory extends Item2ItemRecipeCategory<Oxid
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.oxidationfurnace));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.oxidationfurnace));
 
     public static final RecipeType<OxidationFurnaceRecipe> RECIPE_TYPE = RecipeType.create(References.ID, OxidationFurnaceRecipe.RECIPE_GROUP, OxidationFurnaceRecipe.class);
 

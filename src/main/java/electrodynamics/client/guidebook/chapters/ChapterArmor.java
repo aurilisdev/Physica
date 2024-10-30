@@ -155,7 +155,7 @@ public class ChapterArmor extends Chapter {
 
 		// Ceramic Plate Protection
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.armor.ceramicheader").withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.getItem(SubtypeCeramic.plate)).onTooltip(new OnTooltip() {
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.ITEMS_CERAMIC.getValue(SubtypeCeramic.plate)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -175,7 +175,7 @@ public class ChapterArmor extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeCeramic.plate));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_CERAMIC.getValue(SubtypeCeramic.plate));
 			}
 
 		}));

@@ -11,13 +11,13 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public enum SubtypeRawOre implements ISubtype {
-	silver(ElectrodynamicsTags.Items.RAW_ORE_SILVER, () -> ElectrodynamicsItems.getItem(SubtypeImpureDust.silver), () -> ElectrodynamicsItems.getItem(SubtypeDust.silver)),
-	lead(ElectrodynamicsTags.Items.RAW_ORE_LEAD, () -> ElectrodynamicsItems.getItem(SubtypeImpureDust.lead), () -> ElectrodynamicsItems.getItem(SubtypeDust.lead)),
-	tin(ElectrodynamicsTags.Items.RAW_ORE_TIN, () -> ElectrodynamicsItems.getItem(SubtypeImpureDust.tin), () -> ElectrodynamicsItems.getItem(SubtypeDust.tin)),
-	chromium(ElectrodynamicsTags.Items.RAW_ORE_CHROMIUM, () -> ElectrodynamicsItems.getItem(SubtypeOxide.chromite), null),
-	titanium(ElectrodynamicsTags.Items.RAW_ORE_TITANIUM, () -> ElectrodynamicsItems.getItem(SubtypeOxide.dititanium), null),
-	vanadinite(ElectrodynamicsTags.Items.RAW_ORE_VANADIUM, () -> ElectrodynamicsItems.getItem(SubtypeImpureDust.vanadium), () -> ElectrodynamicsItems.getItem(SubtypeDust.vanadium)),
-	lepidolite(ElectrodynamicsTags.Items.RAW_ORE_LEPIDOLITE, () -> ElectrodynamicsItems.getItem(SubtypeImpureDust.lithium), null),
+	silver(ElectrodynamicsTags.Items.RAW_ORE_SILVER, () -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.silver), () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.silver)),
+	lead(ElectrodynamicsTags.Items.RAW_ORE_LEAD, () -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.lead), () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.lead)),
+	tin(ElectrodynamicsTags.Items.RAW_ORE_TIN, () -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.tin), () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.tin)),
+	chromium(ElectrodynamicsTags.Items.RAW_ORE_CHROMIUM, () -> ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.chromite), null),
+	titanium(ElectrodynamicsTags.Items.RAW_ORE_TITANIUM, () -> ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.dititanium), null),
+	vanadinite(ElectrodynamicsTags.Items.RAW_ORE_VANADIUM, () -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.vanadium), () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.vanadium)),
+	lepidolite(ElectrodynamicsTags.Items.RAW_ORE_LEPIDOLITE, () -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.lithium), null),
 	fluorite(ElectrodynamicsTags.Items.RAW_ORE_FLUORITE, null, null),
 	uranium(ElectrodynamicsTags.Items.RAW_ORE_URANIUM, null, null),
 	thorium(ElectrodynamicsTags.Items.RAW_ORE_THORIUM, null, null);

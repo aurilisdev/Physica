@@ -3,7 +3,6 @@ package electrodynamics.common.block.voxelshapes;
 import java.util.stream.Stream;
 
 import electrodynamics.common.block.subtype.SubtypeMachine;
-import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -271,7 +270,7 @@ public class ElectrodynamicsVoxelShapeRegistry {
         fermentationplant = Shapes.or(fermentationplant, Block.box(7.5, 9, 9, 8.5, 10, 10));
         fermentationplant = Shapes.or(fermentationplant, Block.box(7.5, 7, 8, 8.5, 9, 9));
 
-        VoxelShapes.registerShape(ElectrodynamicsBlocks.getBlock(SubtypeMachine.fermentationplant), fermentationplant, Direction.WEST);
+        VoxelShapes.registerShape(SubtypeMachine.fermentationplant, fermentationplant, Direction.WEST);
 
         /* HSLA GAS TANK */
 

@@ -3,7 +3,6 @@ package electrodynamics.common.item.gear.armor.types;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 import electrodynamics.api.References;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
@@ -21,6 +20,7 @@ import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -53,7 +53,7 @@ public class ItemServoLeggings extends ItemElectrodynamicsArmor implements IItem
 
     final ElectricItemProperties properties;
 
-    public ItemServoLeggings(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
+    public ItemServoLeggings(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
         super(ElectrodynamicsArmorMaterials.SERVO_LEGGINGS, Type.LEGGINGS, properties, creativeTab);
         this.properties = properties;
     }

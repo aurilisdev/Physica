@@ -40,7 +40,7 @@ public class EnergizedAlloyerRecipeCategory extends Item2ItemRecipeCategory<Ener
 
     // public static final String RECIPE_GROUP = SubtypeMachine.energizedalloyer.tag();
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.energizedalloyer));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.energizedalloyer));
 
     public static final RecipeType<EnergizedAlloyerRecipe> RECIPE_TYPE = RecipeType.create(References.ID, EnergizedAlloyerRecipe.RECIPE_GROUP, EnergizedAlloyerRecipe.class);
 

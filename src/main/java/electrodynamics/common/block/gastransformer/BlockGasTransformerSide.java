@@ -41,7 +41,7 @@ public class BlockGasTransformerSide extends GenericMachineBlock {
         if (!baseState.hasProperty(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK)) {
             return baseState;
         }
-        if (world.getBlockState(pos.above()).is(ElectrodynamicsBlocks.blockGasTransformerAddonTank)) {
+        if (world.getBlockState(pos.above()).is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK)) {
             return baseState.setValue(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true);
         }
         return baseState.setValue(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false);

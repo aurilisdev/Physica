@@ -43,7 +43,7 @@ public class ElectrodynamicsMineralWasherRecipes extends AbstractRecipeGenerator
 
 		for (SubtypeSulfateFluid fluid : SubtypeSulfateFluid.values()) {
 			if (fluid.source != null) {
-				newRecipe(new FluidStack(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(fluid).get(), 1000), 0, 200, 400.0, "sulfate_" + fluid.name(), modID)
+				newRecipe(new FluidStack(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(fluid), 1000), 0, 200, 400.0, "sulfate_" + fluid.name(), modID)
 						//
 						.addItemTagInput(fluid.source, 1)
 						//

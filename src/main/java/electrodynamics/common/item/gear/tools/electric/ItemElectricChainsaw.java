@@ -13,6 +13,7 @@ import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,9 +34,9 @@ import net.neoforged.neoforge.common.ItemAbility;
 public class ItemElectricChainsaw extends DiggerItem implements IItemElectric, CreativeTabSupplier {
 
     private final ElectricItemProperties properties;
-    private final Supplier<CreativeModeTab> creativeTab;
+    private final Holder<CreativeModeTab> creativeTab;
 
-    public ItemElectricChainsaw(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
+    public ItemElectricChainsaw(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
         super(ElectricItemTier.ELECTRIC_CHAINSAW, BlockTags.MINEABLE_WITH_AXE, properties.durability(0).attributes(createAttributes(ElectricItemTier.ELECTRIC_CHAINSAW, 4, -2.4F)));
         this.properties = properties;
         this.creativeTab = creativeTab;
@@ -116,7 +117,7 @@ public class ItemElectricChainsaw extends DiggerItem implements IItemElectric, C
 
     @Override
     public boolean isAllowedInCreativeTab(CreativeModeTab tab) {
-        return creativeTab.get() == tab;
+        return creativeTab.value() == tab;
     }
 
     @Override

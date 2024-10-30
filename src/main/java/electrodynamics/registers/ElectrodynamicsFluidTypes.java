@@ -30,6 +30,6 @@ public class ElectrodynamicsFluidTypes {
 	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_POLYETHYLENE = FLUID_TYPES.register("fluidpolyethylene", () -> FLUID_POLYETHYLENE.get().getFluidType());
 	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_SULFURICACID = FLUID_TYPES.register("fluidsulfuricacid", () -> FLUID_SULFURICACID.get().getFluidType());
 
-	public static final BulkDeferredHolder<FluidType, FluidType, SubtypeSulfateFluid> SULFATE_FLUID_TYPES = new BulkDeferredHolder<>(SubtypeSulfateFluid.values(), subtype -> FLUID_TYPES.register("fluidsulfate" + subtype.tag(), () -> ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(subtype).get().getFluidType()));
+	public static final BulkDeferredHolder<FluidType, FluidType, SubtypeSulfateFluid> FLUID_TYPES_SULFATE = new BulkDeferredHolder<>(SubtypeSulfateFluid.values(), subtype -> FLUID_TYPES.register("fluidsulfate" + subtype.tag(), () -> ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(subtype).getFluidType()));
 
 }

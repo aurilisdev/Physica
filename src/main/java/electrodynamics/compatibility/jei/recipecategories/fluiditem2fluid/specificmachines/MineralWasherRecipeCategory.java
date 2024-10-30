@@ -41,7 +41,7 @@ public class MineralWasherRecipeCategory extends FluidItem2FluidRecipeCategory<M
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralwasher));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralwasher));
 
     public static RecipeType<MineralWasherRecipe> RECIPE_TYPE = RecipeType.create(References.ID, MineralWasherRecipe.RECIPE_GROUP, MineralWasherRecipe.class);
 

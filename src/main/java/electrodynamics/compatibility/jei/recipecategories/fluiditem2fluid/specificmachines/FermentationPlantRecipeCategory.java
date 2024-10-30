@@ -41,7 +41,7 @@ public class FermentationPlantRecipeCategory extends FluidItem2FluidRecipeCatego
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.fermentationplant));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fermentationplant));
 
     public static final RecipeType<FermentationPlantRecipe> RECIPE_TYPE = RecipeType.create(References.ID, FermentationPlantRecipe.RECIPE_GROUP, FermentationPlantRecipe.class);
 

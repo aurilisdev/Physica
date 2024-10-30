@@ -83,7 +83,7 @@ public class ElectrodynamicsFeatures {
 	}
 
 	private static OreConfiguration dualOre(SubtypeOre ore, SubtypeOreDeepslate deepOre) {
-		return new OreConfiguration(List.of(OreConfiguration.target(new RuleTestOre(ore, null, BlockTags.STONE_ORE_REPLACEABLES), ElectrodynamicsBlocks.getBlock(ore).defaultBlockState()), OreConfiguration.target(new RuleTestOre(null, deepOre, BlockTags.DEEPSLATE_ORE_REPLACEABLES), ElectrodynamicsBlocks.getBlock(deepOre).defaultBlockState())), ore.veinSize);
+		return new OreConfiguration(List.of(OreConfiguration.target(new RuleTestOre(ore, null, BlockTags.STONE_ORE_REPLACEABLES), ElectrodynamicsBlocks.BLOCKS_ORE.getValue(ore).defaultBlockState()), OreConfiguration.target(new RuleTestOre(null, deepOre, BlockTags.DEEPSLATE_ORE_REPLACEABLES), ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getValue(deepOre).defaultBlockState())), ore.veinSize);
 	}
 
 	/* PLACED FEATURES */

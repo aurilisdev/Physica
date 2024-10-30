@@ -42,7 +42,7 @@ public class ElectricArcFurnaceRecipeCategory extends AbstractRecipeCategory<Bla
 
 	public static final int ANIM_TIME = 50;
 
-	public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnace));
+	public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnace));
 
 	public static final String RECIPE_GROUP = "blasting";
 

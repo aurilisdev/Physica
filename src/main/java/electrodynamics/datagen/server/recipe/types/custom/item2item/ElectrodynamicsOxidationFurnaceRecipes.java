@@ -35,7 +35,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
     @Override
     public void addRecipes(RecipeOutput output) {
 
-        newRecipe(new ItemStack(INGOTS[SubtypeIngot.aluminum.ordinal()], 3), 0.4F, 200, 350.0, "ingot_aluminum", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.aluminum), 3), 0.4F, 200, 350.0, "ingot_aluminum", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_ALUMINUM, 1)
                 //
@@ -45,7 +45,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.calciumcarbonate.ordinal()], 2), 0.1F, 200, 350.0, "calcium_carbonate", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.calciumcarbonate), 2), 0.1F, 200, 350.0, "calcium_carbonate", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.OXIDE_SODIUMCARBONATE, 1)
                 //
@@ -53,7 +53,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.chromiumdisilicide.ordinal()]), 0.3F, 200, 350.0, "chromium_disilicide", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.chromiumdisilicide)), 0.3F, 200, 350.0, "chromium_disilicide", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.OXIDE_CHROMIUM, 1)
                 //
@@ -61,7 +61,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(INGOTS[SubtypeIngot.chromium.ordinal()]), 0.3F, 200, 350.0, "ingot_chromium", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.chromium)), 0.3F, 200, 350.0, "ingot_chromium", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.OXIDE_CHROMIUM, 1)
                 //
@@ -71,7 +71,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.disulfur.ordinal()], 1), 0.1F, 200, 350.0, "sulfur_dioxide", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.disulfur), 1), 0.1F, 200, 350.0, "sulfur_dioxide", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.DUST_SULFUR, 1)
                 //
@@ -79,7 +79,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(DUSTS[SubtypeDust.silica.ordinal()], 3), 0.1F, 200, 350.0, "dust_silica", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.silica), 3), 0.1F, 200, 350.0, "dust_silica", modID)
                 //
                 .addItemTagInput(Tags.Items.SANDS, 1)
                 //
@@ -87,7 +87,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.sodiumcarbonate.ordinal()], 1), 0.1F, 200, 350.0, "sodium_carbonate", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.sodiumcarbonate), 1), 0.1F, 200, 350.0, "sodium_carbonate", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.DUST_SALT, 1)
                 //
@@ -95,7 +95,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.sulfurdichloride.ordinal()], 1), 0.1F, 200, 350.0, "sulfur_dichloride", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.sulfurdichloride), 1), 0.1F, 200, 350.0, "sulfur_dichloride", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.DUST_SALT, 1)
                 //
@@ -103,7 +103,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.thionylchloride.ordinal()], 1), 0.1F, 200, 350.0, "thionyl_chloride", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.thionylchloride), 1), 0.1F, 200, 350.0, "thionyl_chloride", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.OXIDE_SULFURDICHLORIDE, 1)
                 //
@@ -111,7 +111,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(INGOTS[SubtypeIngot.titanium.ordinal()], 1), 0.2F, 200, 350.0, "ingot_titanium", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.titanium), 1), 0.2F, 200, 350.0, "ingot_titanium", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.OXIDE_DITITANIUM, 1)
                 //
@@ -121,7 +121,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.trisulfur.ordinal()], 1), 0.1F, 200, 350.0, "sulfur_trioxide", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.trisulfur), 1), 0.1F, 200, 350.0, "sulfur_trioxide", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.OXIDE_DISULFUR, 1)
                 //
@@ -129,7 +129,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.vanadium.ordinal()], 1), 0.1F, 200, 350.0, "vanadium_oxide", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.vanadium), 1), 0.1F, 200, 350.0, "vanadium_oxide", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.DUST_VANADIUM, 1)
                 //

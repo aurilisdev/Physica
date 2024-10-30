@@ -111,9 +111,9 @@ public class ChapterFluids extends Chapter {
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
                 List<FormattedCharSequence> tooltips = new ArrayList<>();
-                tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.getItem(SubtypeMachine.mineralwasher).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-                tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.getItem(SubtypeMachine.chemicalcrystallizer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-                tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.getItem(SubtypeMachine.electricpump).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+                tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.mineralwasher).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+                tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.chemicalcrystallizer).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+                tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.electricpump).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
 
                 graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
             }
@@ -272,8 +272,8 @@ public class ChapterFluids extends Chapter {
 
         // Fluid Void
 
-        pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeMachine.fluidvoid).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.fluidvoid)).onTooltip(new OnTooltip() {
+        pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidvoid).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidvoid)).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -293,7 +293,7 @@ public class ChapterFluids extends Chapter {
 
             @Override
             public Object getJeiLookup() {
-                return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.fluidvoid));
+                return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidvoid));
             }
 
         }));
@@ -303,7 +303,7 @@ public class ChapterFluids extends Chapter {
         // Fluid Tanks
 
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.fluidtanks").withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.tankhsla)).onTooltip(new OnTooltip() {
+        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.tankhsla)).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -323,7 +323,7 @@ public class ChapterFluids extends Chapter {
 
             @Override
             public Object getJeiLookup() {
-                return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.tankhsla));
+                return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.tankhsla));
             }
 
         }));

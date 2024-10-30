@@ -10,6 +10,7 @@ import electrodynamics.api.item.IItemElectric;
 import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +28,7 @@ public class ItemElectric extends ItemElectrodynamics implements IItemElectric {
 	private final ElectricItemProperties properties;
 	private final Function<Item, Item> getBatteryItem;
 
-	public ItemElectric(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab, Function<Item, Item> getBatteryItem) {
+	public ItemElectric(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab, Function<Item, Item> getBatteryItem) {
 		super(properties, creativeTab);
 		this.properties = properties;
 		this.getBatteryItem = getBatteryItem;

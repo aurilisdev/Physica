@@ -21,7 +21,7 @@ public class ItemCeramic extends ItemElectrodynamics {
 	public SubtypeCeramic subtype;
 
 	public ItemCeramic(SubtypeCeramic subtype) {
-		super(new Item.Properties().stacksTo(64), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+		super(new Item.Properties().stacksTo(64), ElectrodynamicsCreativeTabs.MAIN);
 		this.subtype = subtype;
 	}
 
@@ -30,7 +30,7 @@ public class ItemCeramic extends ItemElectrodynamics {
 
 		ItemStack handStack = player.getItemInHand(hand);
 
-		if (world.isClientSide || !ItemUtils.testItems(handStack.getItem(), ElectrodynamicsItems.SUBTYPEITEMREGISTER_MAPPINGS.get(SubtypeCeramic.plate).get())) {
+		if (world.isClientSide || !ItemUtils.testItems(handStack.getItem(), ElectrodynamicsItems.ITEMS_CERAMIC.getValue(SubtypeCeramic.plate))) {
 			return InteractionResultHolder.pass(player.getItemInHand(hand));
 		}
 

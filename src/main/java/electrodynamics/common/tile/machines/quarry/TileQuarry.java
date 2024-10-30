@@ -643,7 +643,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 			return;
 		}
 		electro.joules(electro.getJoulesStored() - Constants.QUARRY_USAGE_PER_TICK);
-		BlockState cornerState = ElectrodynamicsBlocks.blockFrameCorner.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE);
+		BlockState cornerState = ElectrodynamicsBlocks.BLOCK_FRAME_CORNER.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE);
 		Level world = getLevel();
 		BlockPos frontOfQuarry = corners.get().get(0);
 		BlockPos foqFar = corners.get().get(1);
@@ -770,7 +770,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 			currPos = null;
 			return;
 		} else {
-			world.setBlockAndUpdate(currPos, ElectrodynamicsBlocks.blockFrame.defaultBlockState().setValue(GenericEntityBlock.FACING, frameFace).setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
+			world.setBlockAndUpdate(currPos, ElectrodynamicsBlocks.BLOCK_FRAME.get().defaultBlockState().setValue(GenericEntityBlock.FACING, frameFace).setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
 			repairedFrames.add(currPos);
 			prevIsCorner = false;
 		}
@@ -788,7 +788,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 			return;
 		}
 		isTryingToMineFrame.set(false);
-		world.setBlockAndUpdate(currPos, ElectrodynamicsBlocks.blockFrame.defaultBlockState().setValue(GenericEntityBlock.FACING, cornerOnRight.get() ? frameFace.getOpposite() : frameFace).setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
+		world.setBlockAndUpdate(currPos, ElectrodynamicsBlocks.BLOCK_FRAME.get().defaultBlockState().setValue(GenericEntityBlock.FACING, cornerOnRight.get() ? frameFace.getOpposite() : frameFace).setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
 		repairedFrames.add(currPos);
 		world.playSound(null, currPos, SoundEvents.ANVIL_PLACE, SoundSource.BLOCKS, 0.5F, 1.0F);
 		prevPos = new BlockPos(currPos.getX(), currPos.getY(), currPos.getZ());
@@ -1065,7 +1065,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 
 	private static void updateState(Level world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
-		if (state.is(ElectrodynamicsBlocks.blockFrame) || state.is(ElectrodynamicsBlocks.blockFrameCorner)) {
+		if (state.is(ElectrodynamicsBlocks.BLOCK_FRAME) || state.is(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER)) {
 			world.setBlockAndUpdate(pos, state.setValue(ElectrodynamicsBlockStates.QUARRY_FRAME_DECAY, Boolean.TRUE));
 		}
 	}
@@ -1216,7 +1216,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 	}
 
 	public boolean canMineIfFrame(BlockState state, BlockPos pos) {
-		if (state.is(ElectrodynamicsBlocks.blockFrame) || state.is(ElectrodynamicsBlocks.blockFrameCorner)) {
+		if (state.is(ElectrodynamicsBlocks.BLOCK_FRAME) || state.is(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER)) {
 			BlockEntity entity = level.getBlockEntity(pos);
 			if (entity != null && entity instanceof TileFrame frame) {
 				return frame.ownerQuarryPos != null;

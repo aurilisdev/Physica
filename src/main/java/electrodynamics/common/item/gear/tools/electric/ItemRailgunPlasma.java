@@ -9,6 +9,7 @@ import electrodynamics.common.item.gear.tools.electric.utils.ItemRailgun;
 import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsSounds;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -29,7 +30,7 @@ public class ItemRailgunPlasma extends ItemRailgun {
 	private static final double TEMPERATURE_REDUCED_PER_TICK = 2.5;
 	private static final double OVERHEAT_WARNING_THRESHOLD = 0.5;
 
-	public ItemRailgunPlasma(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemRailgunPlasma(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
 		super(properties, creativeTab, OVERHEAT_TEMPERATURE, OVERHEAT_WARNING_THRESHOLD, TEMPERATURE_REDUCED_PER_TICK, item -> ElectrodynamicsItems.ITEM_CARBYNEBATTERY.get());
 	}
 

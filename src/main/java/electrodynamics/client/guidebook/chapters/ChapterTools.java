@@ -72,9 +72,9 @@ public class ChapterTools extends Chapter {
 
 		}));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.tools.ammo")).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeRod.steel).getDescription()).setIndentions(1).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeRod.stainlesssteel).getDescription()).setIndentions(1).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeRod.hslasteel).getDescription()).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.steel).getDescription()).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.stainlesssteel).getDescription()).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_ROD.getValue(SubtypeRod.hslasteel).getDescription()).setIndentions(1).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.tools.damage")).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.tools.roddamage", ElectroTextUtils.guidebook("chapter.tools.steel"), 16)).setIndentions(1).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.tools.roddamage", ElectroTextUtils.guidebook("chapter.tools.stainless"), 20)).setIndentions(1).setSeparateStart());

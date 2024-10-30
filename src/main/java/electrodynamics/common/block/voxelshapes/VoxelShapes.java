@@ -13,7 +13,7 @@ public class VoxelShapes {
     public static HashMap<Block, VoxelShape[]> shapesHashMap = new HashMap<>();
 
     public static VoxelShape getShape(SubtypeMachine machine, Direction currentDirection) {
-        return getShape(ElectrodynamicsBlocks.getBlock(machine), currentDirection);
+        return getShape(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(machine), currentDirection);
     }
 
     public static VoxelShape getShape(Block block, Direction currentDirection) {
@@ -38,7 +38,7 @@ public class VoxelShapes {
     }
 
     public static void registerShape(SubtypeMachine machine, VoxelShape shape, Direction baseDirection) {
-        registerShape(ElectrodynamicsBlocks.getBlock(machine), shape, baseDirection);
+        registerShape(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(machine), shape, baseDirection);
     }
 
     public static void registerShape(Block block, VoxelShape shape, Direction baseDirection) {

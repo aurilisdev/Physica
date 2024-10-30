@@ -56,7 +56,7 @@ public class ElectrodynamicsChemicalMixerRecipes extends AbstractRecipeGenerator
 				//
 				.save(output);
 
-		newRecipe(new FluidStack(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.molybdenum).get(), 250), 0, 200, 400.0, "molybdenum_from_carrots", modID)
+		newRecipe(new FluidStack(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(SubtypeSulfateFluid.molybdenum), 250), 0, 200, 400.0, "molybdenum_from_carrots", modID)
 				//
 				.addFluidTagInput(ElectrodynamicsTags.Fluids.SULFURIC_ACID, 100)
 				//
@@ -64,7 +64,7 @@ public class ElectrodynamicsChemicalMixerRecipes extends AbstractRecipeGenerator
 				//
 				.save(output);
 
-		newRecipe(new FluidStack(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.molybdenum).get(), 250), 0, 200, 400.0, "molybdenum_from_potatos", modID)
+		newRecipe(new FluidStack(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(SubtypeSulfateFluid.molybdenum), 250), 0, 200, 400.0, "molybdenum_from_potatos", modID)
 				//
 				.addFluidTagInput(ElectrodynamicsTags.Fluids.SULFURIC_ACID, 100)
 				//
@@ -72,7 +72,7 @@ public class ElectrodynamicsChemicalMixerRecipes extends AbstractRecipeGenerator
 				//
 				.save(output);
 
-		newRecipe(new FluidStack(ElectrodynamicsFluids.SULFATE_FLUIDS.getValue(SubtypeSulfateFluid.molybdenum).get(), 250), 0, 200, 400.0, "molybdenum_from_wheat", modID)
+		newRecipe(new FluidStack(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(SubtypeSulfateFluid.molybdenum), 250), 0, 200, 400.0, "molybdenum_from_wheat", modID)
 				//
 				.addFluidTagInput(ElectrodynamicsTags.Fluids.SULFURIC_ACID, 100)
 				//

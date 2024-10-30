@@ -1,11 +1,7 @@
 package electrodynamics.registers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import electrodynamics.api.ISubtype;
 import electrodynamics.api.References;
+import electrodynamics.api.registration.BulkDeferredHolder;
 import electrodynamics.common.block.BlockCustomGlass;
 import electrodynamics.common.block.BlockFrame;
 import electrodynamics.common.block.BlockLogisticalManager;
@@ -43,98 +39,41 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ElectrodynamicsBlocks {
+
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Registries.BLOCK, References.ID);
-    public static final HashMap<ISubtype, DeferredHolder<Block, ? extends Block>> SUBTYPEBLOCKREGISTER_MAPPINGS = new HashMap<>();
 
-    public static BlockMultiSubnode multi;
-    public static BlockSeismicMarker blockSeismicMarker;
-    public static BlockFrame blockFrame;
-    public static BlockFrame blockFrameCorner;
-    public static BlockLogisticalManager blockLogisticalManager;
-
-    public static BlockCompressor blockCompressor;
-    public static BlockCompressor blockDecompressor;
-
-    public static BlockThermoelectricManipulator blockThermoelectricManipulator;
-
-    public static BlockGasTransformerSide blockGasTransformerSide;
-    public static BlockGasTransformerAddonTank blockGasTransformerAddonTank;
-
-    public static BlockValve blockGasValve;
-    public static BlockValve blockFluidValve;
-
-    public static BlockPipePump blockGasPipePump;
-    public static BlockPipePump blockFluidPipePump;
-
-    public static BlockPipeFilter blockGasPipeFilter;
-    public static BlockPipeFilter blockFluidPipeFilter;
-
-    public static BlockScaffold blockSteelScaffold;
-
-    static {
-        for (SubtypeOre subtype : SubtypeOre.values()) {
-            SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new BlockOre(subtype)));
+    public static final BulkDeferredHolder<Block, BlockOre, SubtypeOre> BLOCKS_ORE = new BulkDeferredHolder<>(SubtypeOre.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockOre(subtype)));
+    public static final BulkDeferredHolder<Block, BlockOre, SubtypeOreDeepslate> BLOCKS_DEEPSLATEORE = new BulkDeferredHolder<>(SubtypeOreDeepslate.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockOre(subtype)));
+    public static final BulkDeferredHolder<Block, Block, SubtypeRawOreBlock> BLOCKS_RAWORE = new BulkDeferredHolder<>(SubtypeRawOreBlock.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new Block(Blocks.STONE.properties().requiresCorrectToolForDrops().strength(5.0F, 6.0F))));
+    public static final BulkDeferredHolder<Block, BlockMachine, SubtypeMachine> BLOCKS_MACHINE = new BulkDeferredHolder<>(SubtypeMachine.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockMachine(subtype)));
+    public static final BulkDeferredHolder<Block, ? extends BlockWire, SubtypeWire> BLOCKS_WIRE = new BulkDeferredHolder<>(SubtypeWire.values(), subtype -> {
+        if(subtype.wireClass == WireClass.LOGISTICAL) {
+            return BLOCKS.register(subtype.tag(), () -> new BlockLogisticalWire(subtype));
+        } else {
+            return BLOCKS.register(subtype.tag(), () -> new BlockWire(subtype));
         }
-        for (SubtypeOreDeepslate subtype : SubtypeOreDeepslate.values()) {
-            SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new BlockOre(subtype)));
-        }
-        for (SubtypeRawOreBlock subtype : SubtypeRawOreBlock.values()) {
-            SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new Block(Blocks.STONE.properties().requiresCorrectToolForDrops().strength(5.0F, 6.0F))));
-        }
-        for (SubtypeMachine subtype : SubtypeMachine.values()) {
-            SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new BlockMachine(subtype)));
-        }
+    });
+    public static final BulkDeferredHolder<Block, BlockFluidPipe, SubtypeFluidPipe> BLOCKS_FLUIDPIPE = new BulkDeferredHolder<>(SubtypeFluidPipe.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockFluidPipe(subtype)));
+    public static final BulkDeferredHolder<Block, BlockCustomGlass, SubtypeGlass> BLOCKS_CUSTOMGLASS = new BulkDeferredHolder<>(SubtypeGlass.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockCustomGlass(subtype)));
+    public static final BulkDeferredHolder<Block, Block, SubtypeResourceBlock> BLOCKS_RESOURCE = new BulkDeferredHolder<>(SubtypeResourceBlock.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new Block(subtype.getProperties().strength(subtype.getHardness(), subtype.getResistance()).sound(subtype.getSoundType()))));
+    public static final BulkDeferredHolder<Block, BlockGasPipe, SubtypeGasPipe> BLOCKS_GASPIPE = new BulkDeferredHolder<>(SubtypeGasPipe.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockGasPipe(subtype)));
 
-        for (SubtypeWire subtype : SubtypeWire.values()) {
-            if (subtype.wireClass == WireClass.LOGISTICAL) {
-                SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new BlockLogisticalWire(subtype)));
-            } else {
-                SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new BlockWire(subtype)));
-            }
-        }
-        for (SubtypeFluidPipe subtype : SubtypeFluidPipe.values()) {
-            SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new BlockFluidPipe(subtype)));
-        }
-        for (SubtypeGlass subtype : SubtypeGlass.values()) {
-            SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new BlockCustomGlass(subtype)));
-        }
-        for (SubtypeResourceBlock subtype : SubtypeResourceBlock.values()) {
-            SUBTYPEBLOCKREGISTER_MAPPINGS.put(subtype, BLOCKS.register(subtype.tag(), () -> new Block(subtype.getProperties().strength(subtype.getHardness(), subtype.getResistance()).sound(subtype.getSoundType()))));
-        }
-        for (SubtypeGasPipe pipe : SubtypeGasPipe.values()) {
-            SUBTYPEBLOCKREGISTER_MAPPINGS.put(pipe, BLOCKS.register(pipe.tag(), () -> new BlockGasPipe(pipe)));
-        }
-    }
-
-    public static final DeferredHolder<Block, Block> BLOCK_MULTISUBNODE = BLOCKS.register("multisubnode", () -> multi = new BlockMultiSubnode());
-    public static final DeferredHolder<Block, Block> BLOCK_SEISMICMARKER = BLOCKS.register("seismicmarker", () -> blockSeismicMarker = new BlockSeismicMarker());
-    public static final DeferredHolder<Block, Block> BLOCK_FRAME = BLOCKS.register("frame", () -> blockFrame = new BlockFrame(0));
-    public static final DeferredHolder<Block, Block> BLOCK_FRAME_CORNER = BLOCKS.register("framecorner", () -> blockFrameCorner = new BlockFrame(1));
-    public static final DeferredHolder<Block, Block> BLOCK_LOGISTICALMANAGER = BLOCKS.register("logisticalmanager", () -> blockLogisticalManager = new BlockLogisticalManager());
-    public static final DeferredHolder<Block, Block> BLOCK_COMPRESSOR = BLOCKS.register("compressor", () -> blockCompressor = new BlockCompressor(false));
-    public static final DeferredHolder<Block, Block> BLOCK_DECOMPRESSOR = BLOCKS.register("decompressor", () -> blockDecompressor = new BlockCompressor(true));
-    public static final DeferredHolder<Block, Block> BLOCK_COMPRESSOR_SIDE = BLOCKS.register("compressorside", () -> blockGasTransformerSide = new BlockGasTransformerSide());
-    public static final DeferredHolder<Block, Block> BLOCK_COMPRESSOR_ADDONTANK = BLOCKS.register("compressoraddontank", () -> blockGasTransformerAddonTank = new BlockGasTransformerAddonTank());
-    public static final DeferredHolder<Block, Block> BLOCK_THERMOELECTRICMANIPULATOR = BLOCKS.register("thermoelectricmanipulator", () -> blockThermoelectricManipulator = new BlockThermoelectricManipulator());
-    public static final DeferredHolder<Block, Block> BLOCK_GASVALVE = BLOCKS.register("gasvalve", () -> blockGasValve = new BlockValve(true));
-    public static final DeferredHolder<Block, Block> BLOCK_FLUIDVALVE = BLOCKS.register("fluidvalve", () -> blockFluidValve = new BlockValve(false));
-    public static final DeferredHolder<Block, Block> BLOCK_GASPIPEPUMP = BLOCKS.register("gaspipepump", () -> blockGasPipePump = new BlockPipePump(true));
-    public static final DeferredHolder<Block, Block> BLOCK_FLUIDPIPEPUMP = BLOCKS.register("fluidpipepump", () -> blockFluidPipePump = new BlockPipePump(false));
-    public static final DeferredHolder<Block, Block> BLOCK_GASPIPEFILTER = BLOCKS.register("gaspipefilter", () -> blockGasPipeFilter = new BlockPipeFilter(false));
-    public static final DeferredHolder<Block, Block> BLOCK_FLUIDPIPEFILTER = BLOCKS.register("fluidpipefilter", () -> blockFluidPipeFilter = new BlockPipeFilter(true));
-
-    public static final DeferredHolder<Block, Block> BLOCK_STEELSCAFFOLDING = BLOCKS.register("steelscaffold", () -> blockSteelScaffold = new BlockScaffold(Blocks.IRON_BLOCK.properties().requiresCorrectToolForDrops().strength(2.0F, 3.0F).sound(SoundType.METAL).noOcclusion()));
-
-    public static Block[] getAllBlockForSubtype(ISubtype[] values) {
-        List<Block> list = new ArrayList<>();
-        for (ISubtype value : values) {
-            list.add(SUBTYPEBLOCKREGISTER_MAPPINGS.get(value).get());
-        }
-        return list.toArray(new Block[] {});
-    }
-
-    public static Block getBlock(ISubtype value) {
-        return SUBTYPEBLOCKREGISTER_MAPPINGS.get(value).get();
-    }
+    public static final DeferredHolder<Block, BlockMultiSubnode> BLOCK_MULTISUBNODE = BLOCKS.register("multisubnode", () -> new BlockMultiSubnode());
+    public static final DeferredHolder<Block, BlockSeismicMarker> BLOCK_SEISMICMARKER = BLOCKS.register("seismicmarker", () -> new BlockSeismicMarker());
+    public static final DeferredHolder<Block, BlockFrame> BLOCK_FRAME = BLOCKS.register("frame", () -> new BlockFrame(0));
+    public static final DeferredHolder<Block, BlockFrame> BLOCK_FRAME_CORNER = BLOCKS.register("framecorner", () -> new BlockFrame(1));
+    public static final DeferredHolder<Block, BlockLogisticalManager> BLOCK_LOGISTICALMANAGER = BLOCKS.register("logisticalmanager", () -> new BlockLogisticalManager());
+    public static final DeferredHolder<Block, BlockCompressor> BLOCK_COMPRESSOR = BLOCKS.register("compressor", () -> new BlockCompressor(false));
+    public static final DeferredHolder<Block, BlockCompressor> BLOCK_DECOMPRESSOR = BLOCKS.register("decompressor", () -> new BlockCompressor(true));
+    public static final DeferredHolder<Block, BlockGasTransformerSide> BLOCK_COMPRESSOR_SIDE = BLOCKS.register("compressorside", () -> new BlockGasTransformerSide());
+    public static final DeferredHolder<Block, BlockGasTransformerAddonTank> BLOCK_COMPRESSOR_ADDONTANK = BLOCKS.register("compressoraddontank", () -> new BlockGasTransformerAddonTank());
+    public static final DeferredHolder<Block, BlockThermoelectricManipulator> BLOCK_THERMOELECTRICMANIPULATOR = BLOCKS.register("thermoelectricmanipulator", () -> new BlockThermoelectricManipulator());
+    public static final DeferredHolder<Block, BlockValve> BLOCK_GASVALVE = BLOCKS.register("gasvalve", () -> new BlockValve(true));
+    public static final DeferredHolder<Block, BlockValve> BLOCK_FLUIDVALVE = BLOCKS.register("fluidvalve", () -> new BlockValve(false));
+    public static final DeferredHolder<Block, BlockPipePump> BLOCK_GASPIPEPUMP = BLOCKS.register("gaspipepump", () -> new BlockPipePump(true));
+    public static final DeferredHolder<Block, BlockPipePump> BLOCK_FLUIDPIPEPUMP = BLOCKS.register("fluidpipepump", () -> new BlockPipePump(false));
+    public static final DeferredHolder<Block, BlockPipeFilter> BLOCK_GASPIPEFILTER = BLOCKS.register("gaspipefilter", () -> new BlockPipeFilter(false));
+    public static final DeferredHolder<Block, BlockPipeFilter> BLOCK_FLUIDPIPEFILTER = BLOCKS.register("fluidpipefilter", () -> new BlockPipeFilter(true));
+    public static final DeferredHolder<Block, BlockScaffold> BLOCK_STEELSCAFFOLDING = BLOCKS.register("steelscaffold", () -> new BlockScaffold(Blocks.IRON_BLOCK.properties().requiresCorrectToolForDrops().strength(2.0F, 3.0F).sound(SoundType.METAL).noOcclusion()));
 
 }

@@ -11,6 +11,7 @@ import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -41,7 +42,7 @@ public class ItemCanister extends ItemElectrodynamics {
 
     public static final List<InventoryTickConsumer> INVENTORY_TICK_CONSUMERS = new ArrayList<>();
 
-    public ItemCanister(Item.Properties properties, Supplier<CreativeModeTab> creativeTab) {
+    public ItemCanister(Item.Properties properties, Holder<CreativeModeTab> creativeTab) {
         super(properties, creativeTab);
     }
 

@@ -55,7 +55,7 @@ public class CondensingGasRecipeCategory extends AbstractRecipeCategory<PsuedoGa
 
 	public static final String RECIPE_GROUP = "gas_condensing";
 
-	public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.blockThermoelectricManipulator);
+	public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get());
 
 	public static final RecipeType<PsuedoGas2FluidRecipe> RECIPE_TYPE = RecipeType.create(References.ID, RECIPE_GROUP, PsuedoGas2FluidRecipe.class);
 

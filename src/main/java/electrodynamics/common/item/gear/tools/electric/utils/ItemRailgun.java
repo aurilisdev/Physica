@@ -13,6 +13,7 @@ import electrodynamics.prefab.item.ItemElectric;
 import electrodynamics.prefab.item.TemperateItemProperties;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
@@ -28,7 +29,7 @@ public class ItemRailgun extends ItemElectric implements IItemTemperate {
 	private double tempThreshold = 0;
 	private double tempPerTick = 0;
 
-	public ItemRailgun(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab, double overheatTemperature, double tempThreshold, double tempPerTick, Function<Item, Item> getBatteryItem) {
+	public ItemRailgun(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab, double overheatTemperature, double tempThreshold, double tempPerTick, Function<Item, Item> getBatteryItem) {
 		super(properties, creativeTab, getBatteryItem);
 		this.overheatTemperature = overheatTemperature;
 		this.tempThreshold = tempThreshold;

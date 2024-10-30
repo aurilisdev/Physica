@@ -70,7 +70,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
     @Override
     public void onCaughtFire(BlockState state, Level world, BlockPos pos, Direction face, LivingEntity igniter) {
         super.onCaughtFire(state, world, pos, face, igniter);
-        Scheduler.schedule(5, () -> world.setBlockAndUpdate(pos, ElectrodynamicsBlocks.getBlock(SubtypeGasPipe.getPipeForType(pipe.pipeMaterial, InsulationMaterial.NONE)).defaultBlockState()));
+        Scheduler.schedule(5, () -> world.setBlockAndUpdate(pos, ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(SubtypeGasPipe.getPipeForType(pipe.pipeMaterial, InsulationMaterial.NONE)).defaultBlockState()));
     }
 
     @Override

@@ -33,7 +33,7 @@ public class ElectrodynamicsEnergizedAlloyerRecipes extends AbstractRecipeGenera
 	@Override
 	public void addRecipes(RecipeOutput output) {
 
-		newRecipe(new ItemStack(CUSTOM_GLASS[SubtypeGlass.aluminum.ordinal()], 4), 0.5F, 50, 50.0, "aluminum_glass", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum), 4), 0.5F, 50, 50.0, "aluminum_glass", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_ALUMINUM, 1)
 				//
@@ -43,7 +43,7 @@ public class ElectrodynamicsEnergizedAlloyerRecipes extends AbstractRecipeGenera
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.bronze.ordinal()], 5), 0.35F, 50, 50.0, "ingot_bronze", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.bronze), 5), 0.35F, 50, 50.0, "ingot_bronze", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_TIN, 1)
 				//
@@ -71,7 +71,7 @@ public class ElectrodynamicsEnergizedAlloyerRecipes extends AbstractRecipeGenera
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.stainlesssteel.ordinal()], 32), 0.4F, 50, 50.0, "ingot_stainless_steel", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.stainlesssteel), 32), 0.4F, 50, 50.0, "ingot_stainless_steel", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_CHROMIUM, 1)
 				//
@@ -81,7 +81,7 @@ public class ElectrodynamicsEnergizedAlloyerRecipes extends AbstractRecipeGenera
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.steel.ordinal()], 3), 0.3F, 50, 50.0, "ingot_steel", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.steel), 3), 0.3F, 50, 50.0, "ingot_steel", modID)
 				//
 				.addItemTagInput(Tags.Items.INGOTS_IRON, 2)
 				//
@@ -91,7 +91,7 @@ public class ElectrodynamicsEnergizedAlloyerRecipes extends AbstractRecipeGenera
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(INGOTS[SubtypeIngot.vanadiumsteel.ordinal()], 8), 0.3F, 50, 50.0, "ingot_vanadium_steel", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.vanadiumsteel), 8), 0.3F, 50, 50.0, "ingot_vanadium_steel", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.INGOT_STEEL, 8)
 				//

@@ -17,6 +17,7 @@ import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
@@ -33,7 +34,7 @@ public class ItemPortableCylinder extends ItemElectrodynamics {
 
     public static final List<InventoryTickConsumer> INVENTORY_TICK_CONSUMERS = new ArrayList<>();
 
-    public ItemPortableCylinder(Properties properties, Supplier<CreativeModeTab> creativeTab) {
+    public ItemPortableCylinder(Properties properties, Holder<CreativeModeTab> creativeTab) {
         super(properties, creativeTab);
     }
 

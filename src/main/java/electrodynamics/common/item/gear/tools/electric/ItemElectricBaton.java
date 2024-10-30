@@ -12,6 +12,7 @@ import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -29,9 +30,9 @@ import net.minecraft.world.item.TooltipFlag;
 public class ItemElectricBaton extends SwordItem implements IItemElectric, CreativeTabSupplier {
 
 	private final ElectricItemProperties properties;
-	private final Supplier<CreativeModeTab> creativeTab;
+	private final Holder<CreativeModeTab> creativeTab;
 
-	public ItemElectricBaton(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemElectricBaton(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
 		super(ElectricItemTier.ELECTRIC_BATON, properties.durability(0).attributes(createAttributes(ElectricItemTier.ELECTRIC_BATON, 12, -2.4F)));
 		this.properties = properties;
 		this.creativeTab = creativeTab;
@@ -107,7 +108,7 @@ public class ItemElectricBaton extends SwordItem implements IItemElectric, Creat
 
 	@Override
 	public boolean isAllowedInCreativeTab(CreativeModeTab tab) {
-		return creativeTab.get() == tab;
+		return creativeTab.value() == tab;
 	}
 
 	@Override

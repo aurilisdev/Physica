@@ -52,11 +52,11 @@ public class GasCollectorChromoCardsProvider implements DataProvider {
     }
 
     public void addGases() {
-        jsons.put("nitrogen", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.nitrogen), ElectrodynamicsGases.NITROGEN.value(), 78.1, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
-        jsons.put("oxygen", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.oxygen), ElectrodynamicsGases.OXYGEN.value(), 20.9, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
-        jsons.put("argon", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.argon), ElectrodynamicsGases.ARGON.value(), 0.93, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
-        jsons.put("carbondioxide", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.carbondioxide), ElectrodynamicsGases.CARBON_DIOXIDE.value(), 0.04, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
-        jsons.put("sulfurdioxide", toJson(ElectrodynamicsItems.getItem(SubtypeChromotographyCard.sulfurdioxide), ElectrodynamicsGases.SULFUR_DIOXIDE.value(), 0.01, 373, Gas.PRESSURE_AT_SEA_LEVEL, BiomeTags.IS_NETHER));
+        jsons.put("nitrogen", toJson(ElectrodynamicsItems.ITEMS_CHROMOTOGRAPHYCARD.getValue(SubtypeChromotographyCard.nitrogen), ElectrodynamicsGases.NITROGEN.value(), 78.1, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
+        jsons.put("oxygen", toJson(ElectrodynamicsItems.ITEMS_CHROMOTOGRAPHYCARD.getValue(SubtypeChromotographyCard.oxygen), ElectrodynamicsGases.OXYGEN.value(), 20.9, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
+        jsons.put("argon", toJson(ElectrodynamicsItems.ITEMS_CHROMOTOGRAPHYCARD.getValue(SubtypeChromotographyCard.argon), ElectrodynamicsGases.ARGON.value(), 0.93, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
+        jsons.put("carbondioxide", toJson(ElectrodynamicsItems.ITEMS_CHROMOTOGRAPHYCARD.getValue(SubtypeChromotographyCard.carbondioxide), ElectrodynamicsGases.CARBON_DIOXIDE.value(), 0.04, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL, null));
+        jsons.put("sulfurdioxide", toJson(ElectrodynamicsItems.ITEMS_CHROMOTOGRAPHYCARD.getValue(SubtypeChromotographyCard.sulfurdioxide), ElectrodynamicsGases.SULFUR_DIOXIDE.value(), 0.01, 373, Gas.PRESSURE_AT_SEA_LEVEL, BiomeTags.IS_NETHER));
     }
 
     private JsonObject toJson(TagKey<Item> tag, Gas gas, double amount, double temperature, int pressure, @Nullable TagKey<Biome> biomeTag) {

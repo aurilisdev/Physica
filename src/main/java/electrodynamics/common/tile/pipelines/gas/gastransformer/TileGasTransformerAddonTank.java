@@ -65,13 +65,13 @@ public class TileGasTransformerAddonTank extends GenericTile {
 		BlockPos belowPos = getBlockPos().below();
 		BlockState below = getLevel().getBlockState(belowPos);
 		for (int i = 0; i < MAX_ADDON_TANKS; i++) {
-			if (below.is(ElectrodynamicsBlocks.blockGasTransformerSide)) {
+			if (below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE)) {
 				if (getLevel().getBlockEntity(belowPos) instanceof TileGasTransformerSideBlock side) {
 					side.updateTankCount();
 				}
 				break;
 			}
-			if (!below.is(ElectrodynamicsBlocks.blockGasTransformerAddonTank)) {
+			if (!below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK)) {
 				break;
 			}
 			belowPos = belowPos.below();

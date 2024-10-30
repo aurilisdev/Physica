@@ -6,6 +6,7 @@ import electrodynamics.api.IWrenchItem;
 import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.prefab.tile.IWrenchable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -19,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class ItemWrench extends ItemElectrodynamics implements IWrenchItem {
 
-	public ItemWrench(Properties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemWrench(Properties properties, Holder<CreativeModeTab> creativeTab) {
 		super(properties, creativeTab);
 	}
 

@@ -37,7 +37,7 @@ public class WireMillRecipeCategory extends Item2ItemRecipeCategory<WireMillReci
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.wiremill));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremill));
 
     public static final RecipeType<WireMillRecipe> RECIPE_TYPE = RecipeType.create(References.ID, WireMillRecipe.RECIPE_GROUP, WireMillRecipe.class);
 

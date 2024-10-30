@@ -41,7 +41,7 @@ public class ChemicalMixerRecipeCategory extends FluidItem2FluidRecipeCategory<C
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalmixer));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalmixer));
 
     public static final RecipeType<ChemicalMixerRecipe> RECIPE_TYPE = RecipeType.create(References.ID, ChemicalMixerRecipe.RECIPE_GROUP, ChemicalMixerRecipe.class);
 
