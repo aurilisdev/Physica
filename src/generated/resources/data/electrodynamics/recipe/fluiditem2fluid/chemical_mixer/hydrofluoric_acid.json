@@ -17,7 +17,7 @@
   ],
   "output": {
     "amount": 1000,
-    "id": "electrodynamics:fluidhydrogenfluoride"
+    "id": "electrodynamics:fluidhydrofluoricacid"
   },
   "ticks": 200,
   "usagepertick": 400.0
