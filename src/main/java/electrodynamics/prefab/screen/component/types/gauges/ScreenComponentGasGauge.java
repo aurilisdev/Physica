@@ -4,6 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import electrodynamics.api.capability.types.gas.IGasHandlerItem;
+import electrodynamics.api.gas.GasAction;
+import electrodynamics.api.gas.PropertyGasTank;
+import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
+import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.screen.GenericScreen;
+import electrodynamics.prefab.tile.GenericTile;
+import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsSounds;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -125,7 +138,90 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 
 	}
 
-	public enum GasGaugeTextures implements ITexture {
+	@Override
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
+		if (isActiveAndVisible() && isValidClick(button) && isInClickRegion(mouseX, mouseY)) {
+
+			onMouseClick(mouseX, mouseY);
+
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean mouseReleased(double mouseX, double mouseY, int button) {
+		if (isValidClick(button)) {
+			onMouseRelease(mouseX, mouseY);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void onMouseClick(double mouseX, double mouseY) {
+
+		PropertyGasTank tank = (PropertyGasTank) gasTank.get();
+
+		if (tank == null) {
+			return;
+		}
+
+		GenericScreen<?> screen = (GenericScreen<?>) gui;
+
+		GenericTile owner = (GenericTile) ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray();
+
+		if (owner == null) {
+			return;
+		}
+
+		ItemStack stack = screen.getMenu().getCarried();
+
+		GasStack drainedGasSource = tank.getGas().copy();
+
+		IGasHandlerItem handler = stack.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
+
+		if (handler == null) {
+			return;
+		}
+
+		double taken = handler.fillTank(0, drainedGasSource, GasAction.EXECUTE);
+
+		//drain this gas gauge if the amount taken was greater than zero
+		if (taken > 0) {
+
+			tank.drain(taken, GasAction.EXECUTE);
+
+			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
+
+			stack = handler.getContainer();
+
+			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray().getBlockPos(), Minecraft.getInstance().player.getUUID()));
+
+			return;
+		}
+		//we didn't drain the gauge, now we try to fill it
+		for(int i = 0; i < handler.getTanks(); i++){
+			drainedGasSource = handler.getGasInTank(i);
+			taken = tank.fill(drainedGasSource, GasAction.EXECUTE);
+			if(taken <= 0) {
+				continue;
+			}
+			handler.drainTank(i, taken, GasAction.EXECUTE);
+
+			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
+
+			stack = handler.getContainer();
+
+			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray().getBlockPos(), Minecraft.getInstance().player.getUUID()));
+
+			return;
+		}
+
+
+	}
+
+		public enum GasGaugeTextures implements ITexture {
 		BACKGROUND_DEFAULT(14, 49, 0, 0, 256, 256, TEXTURE),
 		LEVEL_DEFAULT(14, 49, 14, 0, 256, 256, TEXTURE);
 

@@ -7,7 +7,6 @@ import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressTextures;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGaugeInput;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
@@ -46,7 +45,7 @@ public class ScreenChemicalMixer extends GenericMaterialScreen<ContainerChemical
 			return 0;
 		}, 98, 30));
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_LEFT_OFF, 42, 50));
-		addComponent(new ScreenComponentFluidGaugeInput(() -> {
+		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileChemicalMixer boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];

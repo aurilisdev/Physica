@@ -6,7 +6,6 @@ import electrodynamics.prefab.screen.component.types.ScreenComponentCondensedFlu
 import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressTextures;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGaugeInput;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasTemperature;
@@ -22,7 +21,7 @@ public class ScreenCompressor extends GenericMaterialScreen<ContainerCompressor>
 	public ScreenCompressor(ContainerCompressor container, Inventory inv, Component titleIn) {
 		super(container, inv, titleIn);
 		addComponent(new ScreenComponentGeneric(ProgressTextures.COMPRESS_ARROW_OFF, 65, 40));
-		addComponent(new ScreenComponentGasGaugeInput(() -> {
+		addComponent(new ScreenComponentGasGauge(() -> {
 			GenericTileCompressor boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getInputTanks()[0];

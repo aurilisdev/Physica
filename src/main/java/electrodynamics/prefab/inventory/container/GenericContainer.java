@@ -25,6 +25,11 @@ public abstract class GenericContainer extends AbstractContainerMenu {
 		return nextIndex++;
 	}
 
+	public int nextIndex(int offset){
+		nextIndex += offset;
+		return nextIndex ++;
+	}
+
 	// Specialized constructor for screen with no player inv
 	protected GenericContainer(MenuType<?> type, int id, Inventory playerInv) {
 		super(type, id);

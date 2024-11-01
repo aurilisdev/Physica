@@ -5,7 +5,7 @@ import electrodynamics.common.tile.machines.TileElectrolyticSeparator;
 import electrodynamics.prefab.screen.component.types.ScreenComponentCondensedFluid;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGaugeInput;
+import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;
@@ -44,7 +44,7 @@ public class ScreenElectrolyticSeparator extends GenericMaterialScreen<Container
 			}
 			return 0;
 		}, 78, 30));
-		addComponent(new ScreenComponentFluidGaugeInput(() -> {
+		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileElectrolyticSeparator boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];

@@ -30,23 +30,23 @@ public class ContainerChemicalReactor extends GenericContainerBlockEntity<TileCh
 
     @Override
     public void addInventorySlots(Container inv, Inventory playerinv) {
-        playerInvOffset += 100;
-        addSlot(new SlotGeneric(inv, nextIndex(), 16, 137).setIOColor(new Color(0, 255, 30, 255)));
-        addSlot(new SlotGeneric(inv, nextIndex(), 36 , 137).setIOColor(new Color(144, 0, 255, 255)));
-        addSlot(new SlotRestricted(inv, nextIndex(), 104, 128).setIOColor(new Color(255, 0, 0, 255)));
-        addSlot(new SlotRestricted(inv, nextIndex(), 124, 128).setIOColor(new Color(255, 255, 0, 255)));
-        addSlot(new SlotRestricted(inv, nextIndex(), 104, 148).setIOColor(new Color(255, 255, 0, 255)));
-        addSlot(new SlotRestricted(inv, nextIndex(), 124, 148).setIOColor(new Color(255, 255, 0, 255)));
-        addSlot(new SlotFluid(inv, nextIndex(), 27, 19));
-        addSlot(new SlotFluid(inv, nextIndex(), 27, 50));
-        addSlot(new SlotFluid(inv, nextIndex(), 113, 19));
-        addSlot(new SlotFluid(inv, nextIndex(), 113, 50));
-        addSlot(new SlotGas(inv, nextIndex(), 27, 73));
-        addSlot(new SlotGas(inv, nextIndex(), 27, 104));
-        addSlot(new SlotGas(inv, nextIndex(), 113, 73));
-        addSlot(new SlotGas(inv, nextIndex(), 113, 104));
-        addSlot(new SlotUpgrade(inv, nextIndex(), 153, 14, VALID_UPGRADES));
-        addSlot(new SlotUpgrade(inv, nextIndex(), 153, 34, VALID_UPGRADES));
-        addSlot(new SlotUpgrade(inv, nextIndex(), 153, 54, VALID_UPGRADES));
+        playerInvOffset += 35;
+        addSlot(new SlotGeneric(inv, nextIndex(), 46, 42).setIOColor(new Color(0, 255, 30, 255)));
+        addSlot(new SlotGeneric(inv, nextIndex(), 46 , 62).setIOColor(new Color(144, 0, 255, 255)));
+        addSlot(new SlotRestricted(inv, nextIndex(), 92, 22).setIOColor(new Color(255, 0, 0, 255)));
+        addSlot(new SlotRestricted(inv, nextIndex(), 92, 42).setIOColor(new Color(255, 255, 0, 255)));
+        addSlot(new SlotRestricted(inv, nextIndex(), 92, 62).setIOColor(new Color(255, 255, 0, 255)));
+        addSlot(new SlotRestricted(inv, nextIndex(), 92, 82).setIOColor(new Color(255, 255, 0, 255)));
+        //addSlot(new SlotFluid(inv, nextIndex(), 27, 19));
+        //addSlot(new SlotFluid(inv, nextIndex(), 27, 50));
+        //addSlot(new SlotFluid(inv, nextIndex(), 113, 19));
+        //addSlot(new SlotFluid(inv, nextIndex(), 113, 50));
+        //addSlot(new SlotGas(inv, nextIndex(), 27, 73));
+        //addSlot(new SlotGas(inv, nextIndex(), 27, 104));
+        //addSlot(new SlotGas(inv, nextIndex(), 113, 73));
+        //addSlot(new SlotGas(inv, nextIndex(), 113, 104));
+        addSlot(new SlotUpgrade(inv, nextIndex(8), 153, 22, VALID_UPGRADES));
+        addSlot(new SlotUpgrade(inv, nextIndex(), 153, 42, VALID_UPGRADES));
+        addSlot(new SlotUpgrade(inv, nextIndex(), 153, 62, VALID_UPGRADES));
     }
 }

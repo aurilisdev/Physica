@@ -5,3 +5,4 @@
 /time set day
 /gamerule doDaylightCycle false
 /time set noon
+/gamerule doTraderSpawning false

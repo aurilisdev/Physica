@@ -6,7 +6,7 @@ import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressTextures;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGaugeInput;
+import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.screen.types.GenericMaterialScreen;
@@ -22,7 +22,7 @@ public class ScreenCombustionChamber extends GenericMaterialScreen<ContainerComb
 
 	public ScreenCombustionChamber(ContainerCombustionChamber container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
-		addComponent(new ScreenComponentFluidGaugeInput(() -> {
+		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileCombustionChamber boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];

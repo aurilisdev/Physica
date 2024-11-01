@@ -2,16 +2,17 @@ package electrodynamics.client.screen.tile;
 
 import electrodynamics.common.inventory.container.tile.ContainerChemicalReactor;
 import electrodynamics.common.tile.machines.TileChemicalReactor;
+import electrodynamics.prefab.screen.component.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.types.ScreenComponentCondensedFluid;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGaugeInput;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGaugeInput;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasTemperature;
 import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
+import electrodynamics.prefab.screen.component.types.wrapper.WrapperCyclableFluidGauge;
+import electrodynamics.prefab.screen.component.types.wrapper.WrapperCyclableGasGauge;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.screen.types.GenericMaterialScreen;
 import electrodynamics.prefab.tile.GenericTile;
@@ -26,8 +27,8 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
     public ScreenChemicalReactor(ContainerChemicalReactor container, Inventory inv, Component titleIn) {
         super(container, inv, titleIn);
 
-        imageHeight += 100;
-        inventoryLabelY += 100;
+        imageHeight += 35;
+        inventoryLabelY += 35;
 
         addComponent(new ScreenComponentProgress(ScreenComponentProgress.ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
             GenericTile furnace = container.getHostFromIntArray();
@@ -38,8 +39,8 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
                 }
             }
             return 0;
-        }, 48, 34));
-
+        }, 66, 52));
+        /*
         addComponent(new ScreenComponentProgress(ScreenComponentProgress.ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
             GenericTile furnace = container.getHostFromIntArray();
             if (furnace != null) {
@@ -62,6 +63,12 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
             return 0;
         }, 48, 142));
 
+         */
+
+        WrapperCyclableFluidGauge fluidInput = new WrapperCyclableFluidGauge(6, 26, container, this, true);
+        WrapperCyclableGasGauge gasInput = new WrapperCyclableGasGauge(26, 26, container, this, true);
+
+        /*
         addComponent(new ScreenComponentFluidGaugeInput(() -> {
             TileChemicalReactor boiler = container.getHostFromIntArray();
             if (boiler != null) {
@@ -76,6 +83,9 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
             }
             return null;
         }, 46, 18));
+
+         */
+        /*
         addComponent(new ScreenComponentFluidGauge(() -> {
             TileChemicalReactor boiler = container.getHostFromIntArray();
             if (boiler != null) {
@@ -90,6 +100,13 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
             }
             return null;
         }, 132, 18));
+
+         */
+
+        WrapperCyclableFluidGauge fluidOutput = new WrapperCyclableFluidGauge(112, 26, container, this, false);
+        WrapperCyclableGasGauge gasOutput = new WrapperCyclableGasGauge(132, 26, container, this, false);
+
+        /*
         addComponent(new ScreenComponentGasGaugeInput(() -> {
             TileChemicalReactor boiler = container.getHostFromIntArray();
             if (boiler != null) {
@@ -104,6 +121,9 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
             }
             return null;
         }, 46, 72));
+
+         */
+        /*
         addComponent(new ScreenComponentGasGauge(() -> {
             TileChemicalReactor boiler = container.getHostFromIntArray();
             if (boiler != null) {
@@ -119,7 +139,17 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
             return null;
         }, 132, 72));
 
-        new InventoryIOWrapper(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE * 3 + 2, 75, 182, 8, 72);
+         */
+
+        new InventoryIOWrapper(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE * 3 + 2, 75, 117, 8, 107)
+                //
+                .hideAdditional(fluidInput.getComponents().toArray(new AbstractScreenComponent[0]))
+                //
+                .hideAdditional(gasInput.getComponents().toArray(new AbstractScreenComponent[0]))
+                //
+                .hideAdditional(fluidOutput.getComponents().toArray(new AbstractScreenComponent[0]))
+                //
+                .hideAdditional(gasOutput.getComponents().toArray(new AbstractScreenComponent[0]));
 
         addComponent(new ScreenComponentGasTemperature(-AbstractScreenComponentInfo.SIZE + 1, 2 + AbstractScreenComponentInfo.SIZE * 2));
         addComponent(new ScreenComponentGasPressure(-AbstractScreenComponentInfo.SIZE + 1, 2 + AbstractScreenComponentInfo.SIZE));
@@ -132,6 +162,6 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
 
             return electric.condensedFluidFromGas;
 
-        }, 153, 80));
+        }, 153, 84));
     }
 }

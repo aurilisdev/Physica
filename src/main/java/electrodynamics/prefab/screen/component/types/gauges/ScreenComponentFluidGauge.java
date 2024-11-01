@@ -4,19 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import electrodynamics.api.electricity.formatting.ChatFormatter;
+import electrodynamics.api.fluid.PropertyFluidTank;
 import electrodynamics.api.screen.component.FluidTankSupplier;
+import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
+import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.screen.GenericScreen;
+import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.RenderingUtils;
 import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 @OnlyIn(Dist.CLIENT)
 public class ScreenComponentFluidGauge extends AbstractScreenComponentGauge {
@@ -76,5 +89,93 @@ public class ScreenComponentFluidGauge extends AbstractScreenComponentGauge {
 			}
 		}
 		return tooltips;
+	}
+
+	@Override
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
+		if (isActiveAndVisible() && isValidClick(button) && isInClickRegion(mouseX, mouseY)) {
+
+			onMouseClick(mouseX, mouseY);
+
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean mouseReleased(double mouseX, double mouseY, int button) {
+		if (isValidClick(button)) {
+			onMouseRelease(mouseX, mouseY);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void onMouseClick(double mouseX, double mouseY) {
+
+		PropertyFluidTank tank = (PropertyFluidTank) fluidInfoHandler.getTank();
+
+		if (tank == null) {
+			return;
+		}
+
+		GenericScreen<?> screen = (GenericScreen<?>) gui;
+
+		GenericTile owner = (GenericTile) ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray();
+
+		if (owner == null) {
+			return;
+		}
+
+		ItemStack stack = screen.getMenu().getCarried();
+
+		IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
+
+		if(handler == null) {
+			return;
+		}
+
+		FluidStack drainedSourceFluid = tank.getFluid().copy();
+
+		int taken = handler.fill(drainedSourceFluid, IFluidHandler.FluidAction.EXECUTE);
+
+		//drain this fluid gauge if the amount taken was greater than zero
+		if (taken > 0) {
+
+			tank.drain(taken, IFluidHandler.FluidAction.EXECUTE);
+
+			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BUCKET_FILL, 1.0F));
+
+			stack = handler.getContainer();
+
+			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray().getBlockPos(), Minecraft.getInstance().player.getUUID()));
+
+			return;
+
+		}
+		//we didn't drain the gauge, now we try to fill it
+
+		for(int i = 0; i < handler.getTanks(); i++){
+			drainedSourceFluid = handler.getFluidInTank(i);
+			taken = tank.fill(drainedSourceFluid, IFluidHandler.FluidAction.EXECUTE);
+			if(taken <= 0) {
+				continue;
+			}
+			handler.drain(taken, IFluidHandler.FluidAction.EXECUTE);
+
+			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BUCKET_EMPTY, 1.0F));
+
+			stack = handler.getContainer();
+
+			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray().getBlockPos(), Minecraft.getInstance().player.getUUID()));
+
+			return;
+		}
+
+
+
+
+
 	}
 }

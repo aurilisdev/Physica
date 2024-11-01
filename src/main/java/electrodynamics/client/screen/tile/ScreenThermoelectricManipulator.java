@@ -12,9 +12,7 @@ import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
 import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGaugeInput;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGaugeInput;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasTemperature;
@@ -37,7 +35,7 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 		super(container, inv, titleIn);
 		imageHeight += 30;
 		inventoryLabelY += 30;
-		addComponent(new ScreenComponentFluidGaugeInput(() -> {
+		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
@@ -51,7 +49,7 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 			}
 			return null;
 		}, 96, 18));
-		addComponent(new ScreenComponentGasGaugeInput(() -> {
+		addComponent(new ScreenComponentGasGauge(() -> {
 			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getInputTanks()[0];

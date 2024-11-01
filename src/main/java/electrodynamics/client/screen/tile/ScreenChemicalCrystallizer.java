@@ -6,7 +6,7 @@ import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressTextures;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGaugeInput;
+import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
@@ -36,7 +36,7 @@ public class ScreenChemicalCrystallizer extends GenericMaterialScreen<ContainerC
 			return 0;
 		}, 41, 31));
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_LEFT_OFF, 41, 51));
-		addComponent(new ScreenComponentFluidGaugeInput(() -> {
+		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileChemicalCrystallizer boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
