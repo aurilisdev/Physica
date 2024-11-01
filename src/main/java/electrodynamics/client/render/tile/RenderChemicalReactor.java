@@ -20,6 +20,8 @@ public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReac
     @Override
     public void render(@NotNull TileChemicalReactor tile, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
 
+        poseStack.pushPose();
+
         switch (tile.getBlockState().getValue(GenericEntityBlock.FACING)) {
             case NORTH -> {
                 poseStack.mulPose(MathUtils.rotQuaternionDeg(0, 90, 0));
@@ -41,7 +43,10 @@ public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReac
         }
         poseStack.translate(0.5, 0.5, 0.5);
         poseStack.translate(0, 1.0, 0);
-        RenderingUtils.renderModel(getModel(ClientRegister.MODEL_CHEMICALREACTOR), tile, RenderType.solid(), poseStack, bufferSource, packedLight, packedOverlay);
+        RenderingUtils.renderModel(getModel(ClientRegister.MODEL_CHEMICALREACTOR_BASE), tile, RenderType.solid(), poseStack, bufferSource, packedLight, packedOverlay);
+        RenderingUtils.renderModel(getModel(ClientRegister.MODEL_CHEMICALREACTOR_ROTOR), tile, RenderType.solid(), poseStack, bufferSource, packedLight, packedOverlay);
+
+        poseStack.popPose();
 
     }
 
