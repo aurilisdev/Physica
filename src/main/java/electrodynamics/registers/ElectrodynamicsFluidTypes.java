@@ -11,6 +11,7 @@ import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_SULFURICACID
 
 import electrodynamics.api.References;
 import electrodynamics.api.registration.BulkDeferredHolder;
+import electrodynamics.common.fluid.subtype.SubtypePureMineralFluid;
 import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -31,5 +32,6 @@ public class ElectrodynamicsFluidTypes {
 	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_SULFURICACID = FLUID_TYPES.register("fluidsulfuricacid", () -> FLUID_SULFURICACID.get().getFluidType());
 
 	public static final BulkDeferredHolder<FluidType, FluidType, SubtypeSulfateFluid> FLUID_TYPES_SULFATE = new BulkDeferredHolder<>(SubtypeSulfateFluid.values(), subtype -> FLUID_TYPES.register("fluidsulfate" + subtype.tag(), () -> ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(subtype).getFluidType()));
+	public static final BulkDeferredHolder<FluidType, FluidType, SubtypePureMineralFluid> FLUID_TYPES_PUREMINERAL = new BulkDeferredHolder<>(SubtypePureMineralFluid.values(), subtype -> FLUID_TYPES.register("fluidpuremineral" + subtype.tag(), () -> ElectrodynamicsFluids.FLUIDS_PUREMINERAL.getValue(subtype).getFluidType()));
 
 }

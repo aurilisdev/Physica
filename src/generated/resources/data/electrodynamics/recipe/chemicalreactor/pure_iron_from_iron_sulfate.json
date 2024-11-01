@@ -1,0 +1,27 @@
+{
+  "type": "electrodynamics:chemical_reactor_recipe",
+  "fluidbi": [
+    {
+      "amount": 150,
+      "chance": 1.0,
+      "fluid": "electrodynamics:fluidsulfuricacid"
+    }
+  ],
+  "fluidinputs": [
+    {
+      "amount": 200,
+      "tag": "c:sulfates/iron"
+    },
+    {
+      "amount": 1000,
+      "tag": "minecraft:water"
+    }
+  ],
+  "fluidoutput": {
+    "amount": 200,
+    "id": "electrodynamics:fluidpuremineraliron"
+  },
+  "group": "electrodynamics",
+  "ticks": 200,
+  "usagepertick": 800.0
+}

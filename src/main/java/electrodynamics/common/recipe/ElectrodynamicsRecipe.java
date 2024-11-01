@@ -219,7 +219,7 @@ public abstract class ElectrodynamicsRecipe implements Recipe<ElectrodynamicsRec
             FluidIngredient ing = ingredients.get(i);
             int tankNum = -1;
             for (int j = 0; j < fluidTanks.length; j++) {
-                if (ing.test(fluidTanks[i].getFluid())) {
+                if (ing.test(fluidTanks[j].getFluid())) {
                     tankNum = j;
                     break;
                 }
@@ -241,7 +241,7 @@ public abstract class ElectrodynamicsRecipe implements Recipe<ElectrodynamicsRec
             GasIngredient ing = ingredients.get(i);
             int tankNum = -1;
             for (int j = 0; j < gasTanks.length; j++) {
-                if (ing.testGas(gasTanks[i].getGas(), true, true)) {
+                if (ing.testGas(gasTanks[j].getGas(), true, true)) {
                     tankNum = j;
                     break;
                 }

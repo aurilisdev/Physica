@@ -53,8 +53,6 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
                         //
                         .addItemStackInput(new ItemStack(ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(crystal)))
                         //
-                        .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.trisulfur)), 0.05))
-                        //
                         .save(output);
             }
 

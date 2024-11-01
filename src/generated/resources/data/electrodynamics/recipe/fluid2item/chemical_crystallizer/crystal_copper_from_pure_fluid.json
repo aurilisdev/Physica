@@ -1,0 +1,16 @@
+{
+  "type": "electrodynamics:chemical_crystallizer_recipe",
+  "fluidinputs": [
+    {
+      "amount": 200,
+      "tag": "c:puremineral/copper"
+    }
+  ],
+  "group": "electrodynamics",
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:crystalcopper"
+  },
+  "ticks": 200,
+  "usagepertick": 800.0
+}

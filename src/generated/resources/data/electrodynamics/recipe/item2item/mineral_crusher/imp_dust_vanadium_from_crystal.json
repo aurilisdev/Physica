@@ -1,15 +1,6 @@
 {
   "type": "electrodynamics:mineral_crusher_recipe",
   "group": "electrodynamics",
-  "itembi": [
-    {
-      "chance": 0.05,
-      "item": {
-        "count": 1,
-        "id": "electrodynamics:oxidetrisulfur"
-      }
-    }
-  ],
   "iteminputs": [
     {
       "count": 1,

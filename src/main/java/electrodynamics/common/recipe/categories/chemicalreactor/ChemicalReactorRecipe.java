@@ -106,15 +106,15 @@ public class ChemicalReactorRecipe extends AbstractMaterialRecipe {
     }
 
     public boolean hasItemOutput() {
-        return getItemRecipeOutput().isEmpty();
+        return !getItemRecipeOutput().isEmpty();
     }
 
     public boolean hasFluidOutput() {
-        return getFluidRecipeOutput().isEmpty();
+        return !getFluidRecipeOutput().isEmpty();
     }
 
     public boolean hasGasOutput() {
-        return getGasRecipeOutput().isEmpty();
+        return !getGasRecipeOutput().isEmpty();
     }
 
     @Override

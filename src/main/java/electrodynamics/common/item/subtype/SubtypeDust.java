@@ -31,7 +31,10 @@ public enum SubtypeDust implements ISubtype {
 	salt(ElectrodynamicsTags.Items.DUST_SALT),
 	silica(ElectrodynamicsTags.Items.DUST_SILICA, () -> ElectrodynamicsItems.ITEMS_CUSTOMGLASS.getValue(SubtypeGlass.clear), 200),
 	molybdenum(ElectrodynamicsTags.Items.DUST_MOLYBDENUM, () -> ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.molybdenum), 200),
-	netherite(ElectrodynamicsTags.Items.DUST_NETHERITE, () -> Items.NETHERITE_SCRAP, 200);
+	netherite(ElectrodynamicsTags.Items.DUST_NETHERITE, () -> Items.NETHERITE_SCRAP, 200),
+	aluminum(ElectrodynamicsTags.Items.DUST_ALUMINUM, () -> ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.aluminum), 200),
+	chromium(ElectrodynamicsTags.Items.DUST_CHROMIUM, () -> ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.chromium), 200),
+	titanium(ElectrodynamicsTags.Items.DUST_TITANIUM, () -> ElectrodynamicsItems.ITEMS_INGOT.getValue(SubtypeIngot.titanium), 200);
 
 	public final TagKey<Item> tag;
 	@Nullable

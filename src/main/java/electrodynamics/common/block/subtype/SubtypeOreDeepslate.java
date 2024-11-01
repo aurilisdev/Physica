@@ -348,7 +348,7 @@ public enum SubtypeOreDeepslate implements ISubtype {
                 values.add(value);
             }
         }
-        return values.toArray(new SubtypeOreDeepslate[] {});
+        return values.toArray(new SubtypeOreDeepslate[]{});
     }
 
 }

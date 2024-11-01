@@ -17,6 +17,7 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.*;
 import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
 import electrodynamics.prefab.tile.types.GenericGasTile;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ItemUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsTiles;
@@ -27,8 +28,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -47,14 +51,15 @@ public class TileChemicalReactor extends GenericGasTile implements IMultiblockPa
         addComponent(new ComponentPacketHandler(this));
         addComponent(new ComponentContainerProvider(SubtypeMachine.chemicalreactor, this).createMenu((id, player) -> new ContainerChemicalReactor(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
         addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.UP, Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 4));
-        addComponent(new ComponentFluidHandlerMulti(this).setTanks(2, 2, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}).setInputDirections(Direction.WEST, Direction.NORTH).setOutputDirections(Direction.EAST, Direction.SOUTH).setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()));
+        addComponent(new ComponentFluidHandlerMulti(this).setTanks(2, 2, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}).setInputDirections(Direction.EAST, Direction.SOUTH).setOutputDirections(Direction.WEST, Direction.NORTH).setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()));
         addComponent(new ComponentInventory(this, ComponentInventory.InventoryBuilder.newInv().processors(1, 2, 1, 3).bucketInputs(2).bucketOutputs(2).gasInputs(2).gasOutputs(2).upgrades(3)).setDirectionsBySlot(0, Direction.SOUTH).setDirectionsBySlot(1, Direction.EAST).setSlotsByDirection(Direction.WEST, 2).setSlotsByDirection(Direction.NORTH, 3, 4, 5).validUpgrades(ContainerChemicalReactor.VALID_UPGRADES).valid(machineValidator()));
         addComponent(new ComponentGasHandlerMulti(this).setInputDirections(Direction.WEST, Direction.NORTH).setOutputDirections(Direction.EAST, Direction.SOUTH).setInputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000.0, 1000.0), arr(1024, 1024)).setOutputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000.0, 1000.0), arr(1024, 1024)).setCondensedHandler(getCondensedHandler()).setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()));
         addComponent(new ComponentProcessor(this).canProcess(this::canProcess).process(this::process));
     }
 
     private boolean canProcess(ComponentProcessor pr) {
-        pr.consumeBucket().consumeGasCylinder().dispenseGasCylinder().dispenseBucket().outputToGasPipe().outputToFluidPipe();
+        pr.consumeBucket().consumeGasCylinder().dispenseGasCylinder().dispenseBucket().outputToGasPipe();
+        outputToPipe();
         ChemicalReactorRecipe locRecipe;
         if (!pr.checkExistingRecipe(pr)) {
             pr.setShouldKeepProgress(false);
@@ -228,6 +233,44 @@ public class TileChemicalReactor extends GenericGasTile implements IMultiblockPa
 
         pr.dispenseExperience(inv, locRecipe.getXp());
         pr.setChanged();
+    }
+
+    private void outputToPipe() {
+
+        ComponentFluidHandlerMulti component = getComponent(IComponentType.FluidHandler);
+        Direction[] outputDirections = component.outputDirections;
+
+        Direction facing = getFacing();
+
+        for (Direction relative : outputDirections) {
+
+            Direction direction = BlockEntityUtils.getRelativeSide(facing, relative.getOpposite());
+
+            BlockPos face = getBlockPos().relative(direction.getOpposite()).offset(0, 2, 0);
+
+            BlockEntity faceTile = getLevel().getBlockEntity(face);
+
+            if (faceTile == null) {
+                continue;
+            }
+
+            IFluidHandler handler = getLevel().getCapability(Capabilities.FluidHandler.BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction.getOpposite());
+
+            if(handler == null) {
+                continue;
+            }
+
+            for (FluidTank fluidTank : component.getOutputTanks()) {
+
+                FluidStack tankFluid = fluidTank.getFluid();
+
+                int amtAccepted = handler.fill(tankFluid, IFluidHandler.FluidAction.EXECUTE);
+
+                FluidStack taken = new FluidStack(tankFluid.getFluid(), amtAccepted);
+
+                fluidTank.drain(taken, IFluidHandler.FluidAction.EXECUTE);
+            }
+        }
     }
 
     @Override

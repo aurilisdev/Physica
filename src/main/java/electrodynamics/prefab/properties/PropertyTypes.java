@@ -12,6 +12,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -84,10 +85,11 @@ public class PropertyTypes {
             return false;
         }
         return thisStack.getFluid().isSame(otherStack.getFluid());
-    }, FluidStack.STREAM_CODEC, writer -> {
-        CompoundTag fluidTag = new CompoundTag();
-        FluidStack.OPTIONAL_CODEC.encode(writer.prop().get(), NbtOps.INSTANCE, fluidTag);
+    }, FluidStack.OPTIONAL_STREAM_CODEC, writer -> {
+        Tag fluidTag = new CompoundTag();
+        fluidTag = FluidStack.OPTIONAL_CODEC.encode(writer.prop().get(), NbtOps.INSTANCE, fluidTag).getOrThrow();
         writer.tag().put(writer.prop().getName(), fluidTag);
+        int i = 0;
     }, reader -> FluidStack.OPTIONAL_CODEC.decode(NbtOps.INSTANCE, reader.tag().getCompound(reader.prop().getName())).getOrThrow().getFirst());
     public static final PropertyType<List<BlockPos>, ByteBuf> BLOCK_POS_LIST = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "blockposlist"), (thisList, otherList) -> {
         if (thisList.size() != otherList.size()) {

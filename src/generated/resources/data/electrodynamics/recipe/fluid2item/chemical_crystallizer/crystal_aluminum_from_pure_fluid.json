@@ -1,0 +1,16 @@
+{
+  "type": "electrodynamics:chemical_crystallizer_recipe",
+  "fluidinputs": [
+    {
+      "amount": 200,
+      "tag": "c:puremineral/aluminum"
+    }
+  ],
+  "group": "electrodynamics",
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:crystalaluminum"
+  },
+  "ticks": 200,
+  "usagepertick": 800.0
+}

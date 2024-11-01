@@ -18,7 +18,11 @@ public enum SubtypeImpureDust implements ISubtype {
 	vanadium(ElectrodynamicsTags.Items.IMPURE_DUST_VANADIUM, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.vanadium)),
 	lithium(ElectrodynamicsTags.Items.IMPURE_DUST_LITHIUM, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.lithium)),
 	molybdenum(ElectrodynamicsTags.Items.IMPURE_DUST_MOLYBDENUM, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.molybdenum)),
-	netherite(ElectrodynamicsTags.Items.IMPURE_DUST_NETHERITE, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.netherite));
+	netherite(ElectrodynamicsTags.Items.IMPURE_DUST_NETHERITE, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.netherite)),
+	aluminum(ElectrodynamicsTags.Items.IMPURE_DUST_ALUMINUM, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.aluminum)),
+	chromium(ElectrodynamicsTags.Items.IMPURE_DUST_CHROMIUM, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.chromium)),
+	titanium(ElectrodynamicsTags.Items.IMPURE_DUST_TITANIUM, () -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.titanium));
+
 
 	public final TagKey<Item> tag;
 	public final Supplier<Item> grindedDust;

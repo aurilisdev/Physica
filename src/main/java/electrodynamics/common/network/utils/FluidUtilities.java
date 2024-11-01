@@ -81,7 +81,7 @@ public class FluidUtilities {
 				continue;
 			}
 
-			IFluidHandler handler = tile.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, tile.getBlockPos(), tile.getBlockState(), tile, direction);
+			IFluidHandler handler = tile.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction.getOpposite());
 
 			if(handler == null) {
 			    continue;

@@ -20,7 +20,10 @@ public enum SubtypeCrystal implements ISubtype {
 	halite(() -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.salt)),
 	molybdenum(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.molybdenum)),
 	potassiumchloride(null),
-	netherite(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.netherite));
+	netherite(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.netherite)),
+	aluminum(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.aluminum)),
+	titanium(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.titanium)),
+	chromium(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.chromium));
 
 	@Nullable
 	public final Supplier<Item> crushedItem;
