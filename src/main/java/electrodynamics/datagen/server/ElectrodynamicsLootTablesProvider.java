@@ -162,7 +162,7 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
 		addMachineTable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolyticseparator), ElectrodynamicsTiles.TILE_ELECTROLYTICSEPARATOR, true, true, true, true, false);
 
 		addMachineTable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gascollector), ElectrodynamicsTiles.TILE_GASCOLLECTOR, true, false, true, true, false);
-		addMachineTable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalreactor), ElectrodynamicsTiles.TILE_CHEMICALREACTOR, true, true, true, true, true);
+		addMachineTable(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get(), ElectrodynamicsTiles.TILE_CHEMICALREACTOR, true, true, true, true, true);
 
 		addSimpleBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK.get());
 
@@ -221,7 +221,7 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
 
 	@Override
 	public List<Block> getExcludedBlocks() {
-		return List.of(ElectrodynamicsBlocks.BLOCK_MULTISUBNODE.get(), ElectrodynamicsBlocks.BLOCK_FRAME.get(), ElectrodynamicsBlocks.BLOCK_FRAME_CORNER.get(), ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE.get());
+		return List.of(ElectrodynamicsBlocks.BLOCK_MULTISUBNODE.get(), ElectrodynamicsBlocks.BLOCK_FRAME.get(), ElectrodynamicsBlocks.BLOCK_FRAME_CORNER.get(), ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE.get(), ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_MIDDLE.get(), ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_TOP.get());
 	}
 
 }

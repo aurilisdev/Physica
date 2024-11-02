@@ -1,11 +1,9 @@
 package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
-import electrodynamics.common.tile.machines.TileChemicalReactor;
+import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactor;
 import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
-import electrodynamics.prefab.inventory.container.slot.item.type.SlotFluid;
-import electrodynamics.prefab.inventory.container.slot.item.type.SlotGas;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotUpgrade;
 import electrodynamics.prefab.utilities.math.Color;

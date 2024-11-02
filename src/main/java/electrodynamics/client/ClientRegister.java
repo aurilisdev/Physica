@@ -112,7 +112,6 @@ public class ClientRegister {
     public static final ModelResourceLocation MODEL_CHEMICALMIXERBLADES = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "chemicalmixerblades"));
     public static final ModelResourceLocation MODEL_LATHESHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "latheshaft"));
     public static final ModelResourceLocation MODEL_MOTORCOMPLEXROTOR = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motorcomplexrotor"));
-    public static final ModelResourceLocation MODEL_CHEMICALREACTOR_BASE = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "chemicalreactormodelbase"));
     public static final ModelResourceLocation MODEL_CHEMICALREACTOR_ROTOR = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "chemicalreactormodelrotor"));
 
     public static final ModelResourceLocation MODEL_RODSTEEL = ModelResourceLocation.standalone(ResourceLocation.parse(References.ID + ":entity/rodsteel"));
@@ -182,7 +181,6 @@ public class ClientRegister {
         event.register(MODEL_MOTORCOMPLEXROTOR);
         event.register(MODEL_QUARRYWHEEL_STILL);
         event.register(MODEL_QUARRYWHEEL_ROT);
-        event.register(MODEL_CHEMICALREACTOR_BASE);
         event.register(MODEL_CHEMICALREACTOR_ROTOR);
     }
 

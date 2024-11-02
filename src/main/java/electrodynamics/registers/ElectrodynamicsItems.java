@@ -75,6 +75,8 @@ public class ElectrodynamicsItems {
 		}
 
 	});
+
+	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_CHEMICALREACTOR = ITEMS.register("chemicalreactor", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get(), new Item.Properties().stacksTo(64), ElectrodynamicsCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_STEELSCAFFOLD = ITEMS.register("steelscaffold", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING.get(), new Item.Properties().stacksTo(64), ElectrodynamicsCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_FRAME = ITEMS.register("frame", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_FRAME.get(), new Item.Properties().stacksTo(64), null));
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_FRAMECORNER = ITEMS.register("framecorner", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER.get(), new Item.Properties().stacksTo(64), null));

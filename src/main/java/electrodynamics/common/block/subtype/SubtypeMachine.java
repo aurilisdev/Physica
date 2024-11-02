@@ -129,7 +129,6 @@ public enum SubtypeMachine implements ISubtype {
     currentregulator(true, TileCurrentRegulator.class),
 
     gascollector(true, TileGasCollector.class),
-    chemicalreactor(true, TileChemicalReactor.class),
     ;
 
     public final Class<? extends BlockEntity> tileclass;

@@ -12,6 +12,8 @@ import electrodynamics.common.block.BlockPipeFilter;
 import electrodynamics.common.block.BlockPipePump;
 import electrodynamics.common.block.BlockSeismicMarker;
 import electrodynamics.common.block.BlockValve;
+import electrodynamics.common.block.chemicalreactor.BlockChemicalReactor;
+import electrodynamics.common.block.chemicalreactor.BlockChemicalReactorExtra;
 import electrodynamics.common.block.connect.BlockFluidPipe;
 import electrodynamics.common.block.connect.BlockGasPipe;
 import electrodynamics.common.block.connect.BlockLogisticalWire;
@@ -46,6 +48,7 @@ public class ElectrodynamicsBlocks {
     public static final BulkDeferredHolder<Block, BlockOre, SubtypeOreDeepslate> BLOCKS_DEEPSLATEORE = new BulkDeferredHolder<>(SubtypeOreDeepslate.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockOre(subtype)));
     public static final BulkDeferredHolder<Block, Block, SubtypeRawOreBlock> BLOCKS_RAWORE = new BulkDeferredHolder<>(SubtypeRawOreBlock.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new Block(Blocks.STONE.properties().requiresCorrectToolForDrops().strength(5.0F, 6.0F))));
     public static final BulkDeferredHolder<Block, BlockMachine, SubtypeMachine> BLOCKS_MACHINE = new BulkDeferredHolder<>(SubtypeMachine.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockMachine(subtype)));
+    public static final DeferredHolder<Block, BlockChemicalReactor> BLOCK_CHEMICALREACTOR = BLOCKS.register("chemicalreactor", BlockChemicalReactor::new);
     public static final BulkDeferredHolder<Block, ? extends BlockWire, SubtypeWire> BLOCKS_WIRE = new BulkDeferredHolder<>(SubtypeWire.values(), subtype -> {
         if(subtype.wireClass == WireClass.LOGISTICAL) {
             return BLOCKS.register(subtype.tag(), () -> new BlockLogisticalWire(subtype));
@@ -75,5 +78,7 @@ public class ElectrodynamicsBlocks {
     public static final DeferredHolder<Block, BlockPipeFilter> BLOCK_GASPIPEFILTER = BLOCKS.register("gaspipefilter", () -> new BlockPipeFilter(false));
     public static final DeferredHolder<Block, BlockPipeFilter> BLOCK_FLUIDPIPEFILTER = BLOCKS.register("fluidpipefilter", () -> new BlockPipeFilter(true));
     public static final DeferredHolder<Block, BlockScaffold> BLOCK_STEELSCAFFOLDING = BLOCKS.register("steelscaffold", () -> new BlockScaffold(Blocks.IRON_BLOCK.properties().requiresCorrectToolForDrops().strength(2.0F, 3.0F).sound(SoundType.METAL).noOcclusion()));
+    public static final DeferredHolder<Block, BlockChemicalReactorExtra> BLOCK_CHEMICALREACTOREXTRA_MIDDLE = BLOCKS.register("chemicalreactorextramiddle", () -> new BlockChemicalReactorExtra(BlockChemicalReactorExtra.Location.MIDDLE));
+    public static final DeferredHolder<Block, BlockChemicalReactorExtra> BLOCK_CHEMICALREACTOREXTRA_TOP = BLOCKS.register("chemicalreactorextratop", () -> new BlockChemicalReactorExtra(BlockChemicalReactorExtra.Location.TOP));
 
 }

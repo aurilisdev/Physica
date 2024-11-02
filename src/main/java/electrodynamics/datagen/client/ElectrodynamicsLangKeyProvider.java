@@ -297,7 +297,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chargerhv), "480V Charger");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalcrystallizer), "Chemical Crystallizer");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalmixer), "Chemical Mixer");
-			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalreactor), "Chemical Reactor");
+			addBlock(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR, "Chemical Reactor");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.circuitbreaker), "Circuit Breaker");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.coalgenerator), "Coal Generator");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.combustionchamber), "Combustion Chamber");
@@ -671,7 +671,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addContainer(SubtypeMachine.chargerhv, "480V Charger");
 			addContainer(SubtypeMachine.chemicalcrystallizer, "Chemical Crystallizer");
 			addContainer(SubtypeMachine.chemicalmixer, "Chemical Mixer");
-			addContainer(SubtypeMachine.chemicalreactor, "Chemical Reactor");
+			addContainer("chemicalreactor", "Chemical Reactor");
 			addContainer(SubtypeMachine.coalgenerator, "Coal Generator");
 			addContainer(SubtypeMachine.coolantresavoir, "Coolant Resavoir");
 			addContainer(SubtypeMachine.combustionchamber, "Combustion Chamber");

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "electrodynamics:block/chemicalreactormiddle"
+    },
+    "facing=north": {
+      "model": "electrodynamics:block/chemicalreactormiddle",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "electrodynamics:block/chemicalreactormiddle",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "electrodynamics:block/chemicalreactormiddle",
+      "y": 180
+    }
+  }
+}

@@ -1,4 +1,4 @@
-package electrodynamics.common.tile.machines;
+package electrodynamics.common.tile.machines.chemicalreactor;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.gas.GasAction;
@@ -6,12 +6,14 @@ import electrodynamics.api.gas.GasTank;
 import electrodynamics.api.multiblock.Subnode;
 import electrodynamics.api.multiblock.parent.IMultiblockParentTile;
 import electrodynamics.common.block.BlockMachine;
+import electrodynamics.common.block.chemicalreactor.BlockChemicalReactorExtra;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerChemicalReactor;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
 import electrodynamics.common.recipe.recipeutils.*;
 import electrodynamics.common.tile.TileMultiSubnode;
+import electrodynamics.prefab.block.GenericEntityBlockWaterloggable;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.*;
@@ -19,6 +21,7 @@ import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
 import electrodynamics.prefab.tile.types.GenericGasTile;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ItemUtils;
+import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
@@ -30,6 +33,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -40,7 +44,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TileChemicalReactor extends GenericGasTile implements IMultiblockParentTile {
+public class TileChemicalReactor extends GenericGasTile {
 
     public static final int MAX_FLUID_TANK_CAPACITY = 5000;
     public static final double MAX_GAS_TANK_CAPACITY = 5000.0;
@@ -49,7 +53,7 @@ public class TileChemicalReactor extends GenericGasTile implements IMultiblockPa
         super(ElectrodynamicsTiles.TILE_CHEMICALREACTOR.get(), worldPos, blockState);
         addComponent(new ComponentTickable(this));
         addComponent(new ComponentPacketHandler(this));
-        addComponent(new ComponentContainerProvider(SubtypeMachine.chemicalreactor, this).createMenu((id, player) -> new ContainerChemicalReactor(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
+        addComponent(new ComponentContainerProvider("container.chemicalreactor", this).createMenu((id, player) -> new ContainerChemicalReactor(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
         addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.UP, Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 4));
         addComponent(new ComponentFluidHandlerMulti(this).setTanks(2, 2, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}).setInputDirections(Direction.EAST, Direction.SOUTH).setOutputDirections(Direction.WEST, Direction.NORTH).setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()));
         addComponent(new ComponentInventory(this, ComponentInventory.InventoryBuilder.newInv().processors(1, 2, 1, 3).bucketInputs(2).bucketOutputs(2).gasInputs(2).gasOutputs(2).upgrades(3)).setDirectionsBySlot(0, Direction.SOUTH).setDirectionsBySlot(1, Direction.EAST).setSlotsByDirection(Direction.WEST, 2).setSlotsByDirection(Direction.NORTH, 3, 4, 5).validUpgrades(ContainerChemicalReactor.VALID_UPGRADES).valid(machineValidator()));
@@ -256,7 +260,7 @@ public class TileChemicalReactor extends GenericGasTile implements IMultiblockPa
 
             IFluidHandler handler = getLevel().getCapability(Capabilities.FluidHandler.BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction.getOpposite());
 
-            if(handler == null) {
+            if (handler == null) {
                 continue;
             }
 
@@ -274,53 +278,8 @@ public class TileChemicalReactor extends GenericGasTile implements IMultiblockPa
     }
 
     @Override
-    public Subnode[] getSubNodes() {
-        return BlockMachine.SUBNODES_CHEMICALREACTOR;
-    }
-
-    @Override
-    public void onSubnodeDestroyed(TileMultiSubnode subnode) {
-        level.destroyBlock(worldPosition, true);
-    }
-
-    @Override
-    public InteractionResult onSubnodeUseWithoutItem(Player player, BlockHitResult hit, TileMultiSubnode subnode) {
-        return useWithoutItem(player, hit);
-    }
-
-    @Override
-    public ItemInteractionResult onSubnodeUseWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit, TileMultiSubnode subnode) {
-        return useWithItem(used, player, hand, hit);
-    }
-
-    @Override
-    public int getSubdnodeComparatorSignal(TileMultiSubnode subnode) {
-        return getComparatorSignal();
-    }
-
-    @Override
-    public Direction getFacingDirection() {
-        return getFacing();
-    }
-
-    @Override
-    public @Nullable ICapabilityElectrodynamic getSubnodeElectrodynamicCapability(TileMultiSubnode subnode, @Nullable Direction side) {
-        return this.<ComponentElectrodynamic>getComponent(IComponentType.Electrodynamic).getCapability(side, CapabilityInputType.NONE);
-    }
-
-    @Override
-    public @Nullable IFluidHandler getSubnodeFluidHandlerCapability(TileMultiSubnode subnode, @Nullable Direction side) {
-        return this.<IComponentFluidHandler>getComponent(IComponentType.FluidHandler).getCapability(side, CapabilityInputType.NONE);
-    }
-
-    @Override
     public @Nullable IFluidHandler getFluidHandlerCapability(@Nullable Direction side) {
         return null;
-    }
-
-    @Override
-    public @Nullable IItemHandler getSubnodeItemHandlerCapability(TileMultiSubnode subnode, @Nullable Direction side) {
-        return this.<ComponentInventory>getComponent(IComponentType.Inventory).getCapability(side, CapabilityInputType.NONE);
     }
 
     @Override
@@ -328,5 +287,10 @@ public class TileChemicalReactor extends GenericGasTile implements IMultiblockPa
         return null;
     }
 
-
+    @Override
+    public void onBlockDestroyed() {
+        getLevel().destroyBlock(getBlockPos().offset(BlockChemicalReactorExtra.Location.MIDDLE.offsetUpFromParent), false);
+        getLevel().destroyBlock(getBlockPos().offset(BlockChemicalReactorExtra.Location.TOP.offsetUpFromParent), false);
+        super.onBlockDestroyed();
+    }
 }

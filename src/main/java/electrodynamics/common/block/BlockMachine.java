@@ -40,8 +40,6 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
     public static final Subnode[] SUBNODES_WINDMILL = {new Subnode(new BlockPos(0, 1, 0),
             new VoxelShape[]{Shapes.block(), Shapes.block(), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11))})};
 
-    public static final Subnode[] SUBNODES_CHEMICALREACTOR = new Subnode[] { new Subnode(new BlockPos(0, 1, 0), Shapes.block()), new Subnode(new BlockPos(0, 2, 0), Shapes.block())};
-
     static {
 
         int counter = 0;
@@ -89,8 +87,6 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
             return isValidMultiblockPlacement(state, worldIn, pos, SUBNODES_ADVANCEDSOLARPANEL);
         } else if (machine == SubtypeMachine.windmill) {
             return isValidMultiblockPlacement(state, worldIn, pos, SUBNODES_WINDMILL);
-        } else if (machine == SubtypeMachine.chemicalreactor) {
-            return isValidMultiblockPlacement(state, worldIn, pos, SUBNODES_CHEMICALREACTOR);
         }
         return super.canSurvive(state, worldIn, pos);
 
@@ -144,7 +140,7 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
 
     @Override
     public boolean hasMultiBlock() {
-        return machine == SubtypeMachine.advancedsolarpanel || machine == SubtypeMachine.windmill || machine == SubtypeMachine.chemicalreactor;
+        return machine == SubtypeMachine.advancedsolarpanel || machine == SubtypeMachine.windmill;
     }
 
     @Override

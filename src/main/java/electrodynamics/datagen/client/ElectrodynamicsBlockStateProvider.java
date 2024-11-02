@@ -172,7 +172,9 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
                 models().cube(SubtypeMachine.gascollector.tag() + "on", blockLoc("gascollector_bottom"), blockLoc("gascollector_fanon"), blockLoc("gascollector_fanon"), blockLoc("gascollector_back"), blockLoc("gascollector_fanon"), blockLoc("gascollector_fanon")).texture("particle", blockLoc("multisubnode")),
                 true);
 
-        airBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalreactor), "block/steelcasing", false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR, existingBlock(blockLoc("chemicalreactorbottom")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_MIDDLE, existingBlock(blockLoc("chemicalreactormiddle")), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_TOP, existingBlock(blockLoc("chemicalreactortop")), false);
 
         genWires();
         genPipes();

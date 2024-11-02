@@ -1,12 +1,10 @@
 package electrodynamics.client.screen.tile;
 
 import electrodynamics.common.inventory.container.tile.ContainerChemicalReactor;
-import electrodynamics.common.tile.machines.TileChemicalReactor;
+import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactor;
 import electrodynamics.prefab.screen.component.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.types.ScreenComponentCondensedFluid;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasTemperature;
@@ -17,8 +15,6 @@ import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo
 import electrodynamics.prefab.screen.types.GenericMaterialScreen;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
-import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
-import electrodynamics.prefab.tile.components.type.ComponentGasHandlerMulti;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;

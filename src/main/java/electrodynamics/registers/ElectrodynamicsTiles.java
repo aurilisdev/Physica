@@ -39,6 +39,8 @@ import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnaceTri
 import electrodynamics.common.tile.machines.charger.TileChargerHV;
 import electrodynamics.common.tile.machines.charger.TileChargerLV;
 import electrodynamics.common.tile.machines.charger.TileChargerMV;
+import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactor;
+import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactorDummy;
 import electrodynamics.common.tile.machines.furnace.TileElectricFurnace;
 import electrodynamics.common.tile.machines.furnace.TileElectricFurnaceDouble;
 import electrodynamics.common.tile.machines.furnace.TileElectricFurnaceTriple;
@@ -183,5 +185,6 @@ public class ElectrodynamicsTiles {
 	public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<TileCurrentRegulator>> TILE_CURRENTREGULATOR = BLOCK_ENTITY_TYPES.register("currentregulator", () -> new BlockEntityType<>(TileCurrentRegulator::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.currentregulator)), null));
 
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileGasCollector>> TILE_GASCOLLECTOR = BLOCK_ENTITY_TYPES.register("gascollector", () -> new BlockEntityType<>(TileGasCollector::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gascollector)), null));
-	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileChemicalReactor>> TILE_CHEMICALREACTOR = BLOCK_ENTITY_TYPES.register("chemicalreactor", () -> new BlockEntityType<>(TileChemicalReactor::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalreactor)), null));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileChemicalReactor>> TILE_CHEMICALREACTOR = BLOCK_ENTITY_TYPES.register("chemicalreactor", () -> new BlockEntityType<>(TileChemicalReactor::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get()), null));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileChemicalReactorDummy>> TILE_CHEMICALREACTOR_DUMMY = BLOCK_ENTITY_TYPES.register("chemicalreactordummy", () -> new BlockEntityType<>(TileChemicalReactorDummy::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_MIDDLE.get(), ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_TOP.get()), null));
 }

@@ -1,5 +1,5 @@
 {
-  "parent": "electrodynamics:block/chemicalreactormodel",
+  "parent": "electrodynamics:block/chemicalreactoritem",
   "display": {
     "gui": {
       "rotation": [
