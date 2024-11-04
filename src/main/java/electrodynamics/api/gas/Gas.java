@@ -31,7 +31,7 @@ public class Gas {
 	private final Holder<Item> container;
 	private final TagKey<Gas> tag;
 	private final Component description;
-	private final double condensationTemp; // Degrees Kelvin; set to -1 if this gas does not condense
+	private final double condensationTemp; // Degrees Kelvin; set to 0 if this gas does not condense
 	@Nullable
 	private final Holder<Fluid> condensedFluid; // set to empty if gas does not condense
 
@@ -65,7 +65,7 @@ public class Gas {
 	}
 
 	public boolean isEmpty() {
-		return this == ElectrodynamicsGases.EMPTY;
+		return this == ElectrodynamicsGases.EMPTY.value();
 	}
 
 	public double getCondensationTemp() {

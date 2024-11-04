@@ -34,6 +34,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ChapterGases extends Chapter {
@@ -137,7 +138,7 @@ public class ChapterGases extends Chapter {
 		// condensed gases
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l9")).setIndentions(1).setSeparateStart());
 		for (DeferredHolder<Gas, ? extends Gas> gas : ElectrodynamicsGases.GASES.getEntries()) {
-			if (gas.get().isEmpty() || gas.get().getCondensedFluid() == null) {
+			if (gas.get().isEmpty() || gas.get().getCondensedFluid().isSame(Fluids.EMPTY)) {
 				continue;
 			}
 			blankLine();
