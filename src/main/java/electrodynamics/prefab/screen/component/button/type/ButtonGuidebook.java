@@ -4,7 +4,6 @@ import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.button.ScreenComponentButton;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.BookViewScreen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 
@@ -48,10 +47,10 @@ public class ButtonGuidebook extends ScreenComponentButton<ButtonGuidebook> {
 	}
 
 	public static enum GuidebookButtonTextures implements ITexture {
-		PAGE_LEFT_OFF(19, 10, 2, 207, 256, 256, BookViewScreen.BOOK_LOCATION),
-		PAGE_LEFT_ON(19, 10, 25, 207, 256, 256, BookViewScreen.BOOK_LOCATION),
-		PAGE_RIGHT_OFF(19, 10, 2, 194, 256, 256, BookViewScreen.BOOK_LOCATION),
-		PAGE_RIGHT_ON(19, 10, 25, 194, 256, 256, BookViewScreen.BOOK_LOCATION),
+		PAGE_LEFT_OFF(18, 10, 0, 0, 18, 10, "page_backward"),
+		PAGE_LEFT_ON(18, 10, 0, 0, 18, 10, "page_backward_on"),
+		PAGE_RIGHT_OFF(18, 10, 0, 0, 18, 10, "page_forward"),
+		PAGE_RIGHT_ON(18, 10, 0, 0, 18, 10, "page_forward_on"),
 		HOME_OFF(11, 10, 0, 0, 11, 10, "homeoff"),
 		HOME_ON(11, 10, 0, 0, 11, 10, "homeon"),
 		CHAPTERS_OFF(11, 10, 0, 0, 11, 10, "chaptersoff"),

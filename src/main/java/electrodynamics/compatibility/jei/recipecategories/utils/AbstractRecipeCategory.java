@@ -14,7 +14,6 @@ import electrodynamics.compatibility.jei.utils.gui.types.gasgauge.AbstractGasGau
 import electrodynamics.compatibility.jei.utils.ingredients.ElectrodynamicsJeiTypes;
 import electrodynamics.compatibility.jei.utils.ingredients.IngredientRendererGasStack;
 import electrodynamics.compatibility.jei.utils.label.AbstractLabelWrapper;
-import electrodynamics.compatibility.jei.utils.label.types.BiproductPercentWrapperElectroRecipe;
 import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
 import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
 import mezz.jei.api.constants.VanillaTypes;
@@ -38,28 +37,26 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 
-	private int animationTime;
+	protected int animationTime;
 
-	private Component title;
+	protected Component title;
 
-	private IDrawable background;
-	private IDrawable icon;
+	protected IDrawable background;
+	protected IDrawable icon;
 
-	private RecipeType<T> recipeType;
+	protected RecipeType<T> recipeType;
 
 	public AbstractLabelWrapper[] labels = new AbstractLabelWrapper[0];
 
-	public int itemBiLabelFirstIndex;
+	protected ArrayList<AnimatedWrapper> animatedDrawables = new ArrayList<>();
+	protected ArrayList<StaticWrapper> staticDrawables = new ArrayList<>();
 
-	private ArrayList<AnimatedWrapper> animatedDrawables = new ArrayList<>();
-	private ArrayList<StaticWrapper> staticDrawables = new ArrayList<>();
-
-	private SlotDataWrapper[] inputSlotWrappers = new SlotDataWrapper[0];
-	private SlotDataWrapper[] outputSlotWrappers = new SlotDataWrapper[0];
-	private AbstractFluidGaugeObject[] fluidInputWrappers = new AbstractFluidGaugeObject[0];
-	private AbstractFluidGaugeObject[] fluidOutputWrappers = new AbstractFluidGaugeObject[0];
-	private AbstractGasGaugeObject[] gasInputWrappers = new AbstractGasGaugeObject[0];
-	private AbstractGasGaugeObject[] gasOutputWrappers = new AbstractGasGaugeObject[0];
+	protected SlotDataWrapper[] inputSlotWrappers = new SlotDataWrapper[0];
+	protected SlotDataWrapper[] outputSlotWrappers = new SlotDataWrapper[0];
+	protected AbstractFluidGaugeObject[] fluidInputWrappers = new AbstractFluidGaugeObject[0];
+	protected AbstractFluidGaugeObject[] fluidOutputWrappers = new AbstractFluidGaugeObject[0];
+	protected AbstractGasGaugeObject[] gasInputWrappers = new AbstractGasGaugeObject[0];
+	protected AbstractGasGaugeObject[] gasOutputWrappers = new AbstractGasGaugeObject[0];
 
 	public AbstractRecipeCategory(IGuiHelper guiHelper, Component title, ItemStack inputMachine, BackgroundObject wrapper, RecipeType<T> recipeType, int animationTime) {
 
@@ -85,10 +82,6 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 		return title;
 	}
 
-	@Override
-	public IDrawable getBackground() {
-		return background;
-	}
 
 	@Override
 	public IDrawable getIcon() {
@@ -97,6 +90,8 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 
 	@Override
 	public void draw(T recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+
+		drawnBackground(recipe, recipeSlotsView, graphics);
 
 		drawPre(graphics, recipe);
 
@@ -110,6 +105,10 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 		addLabels(graphics, recipe);
 
 		postLabels(graphics, recipe);
+	}
+
+	public void drawnBackground(T recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics){
+		background.draw(graphics);
 	}
 
 	@Override
@@ -128,16 +127,6 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 
 	public void setLabels(AbstractLabelWrapper... labels) {
 		this.labels = labels;
-		AbstractLabelWrapper wrap;
-		boolean firstItemBi = false;
-		for (int i = 0; i < labels.length; i++) {
-			wrap = labels[i];
-			if (!firstItemBi && wrap instanceof BiproductPercentWrapperElectroRecipe) {
-				this.itemBiLabelFirstIndex = i;
-				firstItemBi = true;
-			}
-		}
-
 	}
 
 	public void setInputSlots(IGuiHelper guiHelper, ItemSlotObject... inputSlots) {
@@ -419,16 +408,25 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 		return new ArrayList<>();
 	}
 
-	private static record SlotDataWrapper(int x, int y, RecipeIngredientRole role) {
+	public static record SlotDataWrapper(int x, int y, RecipeIngredientRole role) {
 
 	}
 
-	private static record StaticWrapper(int x, int y, IDrawableStatic stat) {
+	public static record StaticWrapper(int x, int y, IDrawableStatic stat) {
 
 	}
 
-	private static record AnimatedWrapper(int x, int y, IDrawableAnimated anim) {
+	public static record AnimatedWrapper(int x, int y, IDrawableAnimated anim) {
 
 	}
 
+	@Override
+	public int getWidth() {
+		return background.getWidth();
+	}
+
+	@Override
+	public int getHeight() {
+		return background.getHeight();
+	}
 }

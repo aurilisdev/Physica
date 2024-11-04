@@ -195,7 +195,7 @@ public class ChapterGases extends Chapter {
 		blankLine();
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l13.2")).setSeparateStart());
 		blankLine();
-		for (Holder<Gas> gas : ElectrodynamicsGases.GAS_REGISTRY.getTag(ElectrodynamicsTags.Gases.IS_CORROSIVE).get().unwrap().right().get()) {
+		for (Holder<Gas> gas : ElectrodynamicsGases.GAS_REGISTRY.getTag(ElectrodynamicsTags.Gases.IS_CORROSIVE).get()) {
 			pageData.add(new TextWrapperObject(gas.value().getDescription()).setSeparateStart());
 		}
 		blankLine();

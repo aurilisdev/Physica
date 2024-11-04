@@ -39,7 +39,7 @@ public class Gas {
 		this.container = container;
 		this.tag = tag;
 		this.description = description;
-		this.condensationTemp = -1;
+		this.condensationTemp = 0;
 		this.condensedFluid = new Holder.Direct(Fluids.EMPTY);
 	}
 

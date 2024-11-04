@@ -360,10 +360,10 @@ public class ElectrodynamicsTags {
 
 	public static class Enchantments {
 
-		public static TagKey<Enchantment> EFFICIENCY = forgeTag("efficiency");
-		public static TagKey<Enchantment> UNBREAKING = forgeTag("unbreaking");
+		public static final TagKey<Enchantment> EFFICIENCY = forgeTag("efficiency");
+		public static final TagKey<Enchantment> UNBREAKING = forgeTag("unbreaking");
 
-		public static TagKey<Enchantment> SILK_TOUCH = forgeTag("silk_touch");
+		public static final TagKey<Enchantment> SILK_TOUCH = forgeTag("silk_touch");
 
 		private static void init()  { }
 
