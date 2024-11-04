@@ -8,6 +8,7 @@ import electrodynamics.api.References;
 import electrodynamics.client.guidebook.ModuleElectrodynamics;
 import electrodynamics.client.guidebook.ScreenGuidebook;
 import electrodynamics.client.modelbakers.bakerytypes.CableModelLoader;
+import electrodynamics.client.particle.fluiddrop.ParticleFluidDrop;
 import electrodynamics.client.particle.lavawithphysics.ParticleLavaWithPhysics;
 import electrodynamics.client.particle.plasmaball.ParticlePlasmaBall;
 import electrodynamics.client.reloadlistener.ReloadListenerResetGuidebook;
@@ -306,6 +307,7 @@ public class ClientRegister {
     public static void registerParticles(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(ElectrodynamicsParticles.PARTICLE_PLASMA_BALL.get(), ParticlePlasmaBall.Factory::new);
         event.registerSpriteSet(ElectrodynamicsParticles.PARTICLE_LAVAWITHPHYSICS.get(), ParticleLavaWithPhysics.Factory::new);
+        event.registerSpriteSet(ElectrodynamicsParticles.PARTICLE_FLUIDDROP.get(), ParticleFluidDrop.Factory::new);
     }
 
     @SubscribeEvent

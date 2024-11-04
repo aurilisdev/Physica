@@ -14,6 +14,8 @@ import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorR
 import electrodynamics.common.recipe.recipeutils.*;
 import electrodynamics.common.tile.TileMultiSubnode;
 import electrodynamics.prefab.block.GenericEntityBlockWaterloggable;
+import electrodynamics.prefab.properties.Property;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.*;
@@ -49,6 +51,10 @@ public class TileChemicalReactor extends GenericGasTile {
     public static final int MAX_FLUID_TANK_CAPACITY = 5000;
     public static final double MAX_GAS_TANK_CAPACITY = 5000.0;
 
+    public final Property<Boolean> hasItemInputs = property(new Property<>(PropertyTypes.BOOLEAN, "hasiteminputs", false));
+    public final Property<Boolean> hasFluidInputs = property(new Property<>(PropertyTypes.BOOLEAN, "hasfluidinputs", false));
+    public final Property<Boolean> hasGasInputs = property(new Property<>(PropertyTypes.BOOLEAN, "hasgasinputs", false));
+
     public TileChemicalReactor(BlockPos worldPos, BlockState blockState) {
         super(ElectrodynamicsTiles.TILE_CHEMICALREACTOR.get(), worldPos, blockState);
         addComponent(new ComponentTickable(this));
@@ -70,6 +76,9 @@ public class TileChemicalReactor extends GenericGasTile {
             pr.operatingTicks.set(0.0);
             locRecipe = (ChemicalReactorRecipe) pr.getRecipe(pr, ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get());
             if (locRecipe == null) {
+                hasItemInputs.set(false);
+                hasFluidInputs.set(false);
+                hasGasInputs.set(false);
                 return false;
             }
         } else {
@@ -77,6 +86,9 @@ public class TileChemicalReactor extends GenericGasTile {
             locRecipe = (ChemicalReactorRecipe) pr.getRecipe();
         }
         pr.setRecipe(locRecipe);
+        hasItemInputs.set(locRecipe.hasItemInputs());
+        hasFluidInputs.set(locRecipe.hasFluidInputs());
+        hasGasInputs.set(locRecipe.hasGasInputs());
 
         pr.requiredTicks.set((double) locRecipe.getTicks());
         pr.usage.set(locRecipe.getUsagePerTick());
