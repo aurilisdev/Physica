@@ -232,6 +232,10 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         FluidStack stack;
         for (int i = 0; i < fluidInputWrappers.length; i++) {
             wrapper = fluidInputWrappers[i];
+
+            if(inputs.get(i).isEmpty()){
+                continue;
+            }
             stack = inputs.get(i).get(0);
 
             if(stack.isEmpty()){

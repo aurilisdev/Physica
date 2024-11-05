@@ -36,6 +36,7 @@ public class ElectrodynamicsGasTagsProvider extends IntrinsicHolderTagsProvider<
 		tag(ElectrodynamicsTags.Gases.ARGON).add(ElectrodynamicsGases.ARGON.value());
 		tag(ElectrodynamicsTags.Gases.CARBON_DIOXIDE).add(ElectrodynamicsGases.CARBON_DIOXIDE.value());
 		tag(ElectrodynamicsTags.Gases.SULFUR_DIOXIDE).add(ElectrodynamicsGases.SULFUR_DIOXIDE.value());
+		tag(ElectrodynamicsTags.Gases.AMMONIA).add(ElectrodynamicsGases.AMMONIA.value());
 
 		tag(ElectrodynamicsTags.Gases.IS_CORROSIVE).add(ElectrodynamicsGases.SULFUR_DIOXIDE.value());
 	}

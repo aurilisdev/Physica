@@ -14,6 +14,7 @@ import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.fluid.subtype.SubtypePureMineralFluid;
 import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import electrodynamics.common.item.subtype.*;
+import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
 import electrodynamics.common.recipe.categories.fluid2gas.specificmachines.ElectrolyticSeparatorRecipe;
 import electrodynamics.common.recipe.categories.fluid2item.specificmachines.ChemicalCrystalizerRecipe;
 import electrodynamics.common.recipe.categories.fluiditem2fluid.specificmachines.ChemicalMixerRecipe;
@@ -629,6 +630,8 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addFluid(ElectrodynamicsFluids.FLUID_OXYGEN, "Liquid Oxygen");
 			addFluid(ElectrodynamicsFluids.FLUID_POLYETHYLENE, "Molten Polyethylene");
 			addFluid(ElectrodynamicsFluids.FLUID_SULFURICACID, "Sulfuric Acid");
+			addFluid(ElectrodynamicsFluids.FLUID_HYDROCHLORICACID, "Hydrochloric Acid");
+			addFluid(ElectrodynamicsFluids.FLUID_NITRICACID, "Nitric Acid");
 			addFluid(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(SubtypeSulfateFluid.copper), "Copper Sulfate");
 			addFluid(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(SubtypeSulfateFluid.gold), "Gold Sulfate");
 			addFluid(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(SubtypeSulfateFluid.iron), "Iron Sulfate");
@@ -662,6 +665,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGas(ElectrodynamicsGases.CARBON_DIOXIDE, "Carbon Dioxide");
 			addGas(ElectrodynamicsGases.ARGON, "Argon");
 			addGas(ElectrodynamicsGases.SULFUR_DIOXIDE, "Sulfur Dioxide");
+			addGas(ElectrodynamicsGases.AMMONIA, "Ammonia");
 
 			addContainer(SubtypeMachine.advancedsolarpanel, "Advanced Solar Panel");
 			addContainer(SubtypeMachine.batterybox, "Battery Box");
@@ -1060,6 +1064,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addJei(MineralCrusherRecipe.RECIPE_GROUP, "Mineral Crusher");
 			addJei(LatheRecipe.RECIPE_GROUP, "Lathe");
 			addJei(EnergizedAlloyerRecipe.RECIPE_GROUP, "Energized Alloyer");
+			addJei(ChemicalReactorRecipe.RECIPE_GROUP, "Chemical Reactor");
 			addJei("blasting", "Electric Arc Furnace");
 			addJei("smelting", "Electric Furnace");
 			addJei("gas_condensing", "Gas Condensation");

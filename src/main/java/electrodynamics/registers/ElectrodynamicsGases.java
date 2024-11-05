@@ -32,5 +32,6 @@ public class ElectrodynamicsGases {
     public static final Holder<Gas> CARBON_DIOXIDE = GASES.register("carbondioxide", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectrodynamicsTags.Gases.CARBON_DIOXIDE, ElectroTextUtils.gas("carbondioxide")));
     public static final Holder<Gas> ARGON = GASES.register("argon", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectrodynamicsTags.Gases.ARGON, ElectroTextUtils.gas("argon")));
     public static final Holder<Gas> SULFUR_DIOXIDE = GASES.register("sulfurdioxide", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectrodynamicsTags.Gases.SULFUR_DIOXIDE, ElectroTextUtils.gas("sulfurdioxide")));
+    public static final Holder<Gas> AMMONIA = GASES.register("ammonia", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectrodynamicsTags.Gases.AMMONIA, ElectroTextUtils.gas("ammonia")));
 
 }

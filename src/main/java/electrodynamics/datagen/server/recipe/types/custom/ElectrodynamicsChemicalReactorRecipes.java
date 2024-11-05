@@ -1,12 +1,16 @@
 package electrodynamics.datagen.server.recipe.types.custom;
 
 import electrodynamics.api.References;
+import electrodynamics.api.gas.Gas;
+import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import electrodynamics.common.recipe.recipeutils.ProbableFluid;
+import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
 import electrodynamics.datagen.utils.recipe.builders.ChemicalReactorBuilder;
 import electrodynamics.datagen.utils.recipe.builders.ElectrodynamicsRecipeBuilder;
 import electrodynamics.registers.ElectrodynamicsFluids;
+import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.FluidTags;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -39,6 +43,40 @@ public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerat
                     //
                     .save(output);
         }
+
+        newRecipe(0, 200, 700, "hydrochloric_acid", modID)
+                //
+                .setFluidOutput(new FluidStack(ElectrodynamicsFluids.FLUID_HYDROCHLORICACID.get(), 500))
+                //
+                .addFluidTagInput(FluidTags.WATER, 1000)
+                //
+                .addItemTagInput(ElectrodynamicsTags.Items.DUST_SALT, 5)
+                //
+                .addGasTagInput(ElectrodynamicsTags.Gases.HYDROGEN, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 500, 5))
+                //
+                .save(output);
+
+        newRecipe(0, 200, 1000, "ammonia", modID)
+                //
+                .setGasOutput(new GasStack(ElectrodynamicsGases.AMMONIA.value(), 1000, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL))
+                //
+                .addFluidTagInput(FluidTags.WATER, 2000)
+                //
+                .addGasTagInput(ElectrodynamicsTags.Gases.NITROGEN, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 500, 5))
+                //
+                .addGasTagInput(ElectrodynamicsTags.Gases.HYDROGEN, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 500, 5))
+                //
+                .save(output);
+
+        newRecipe(0, 200, 1000, "nitric_acid", modID)
+                //
+                .setFluidOutput(new FluidStack(ElectrodynamicsFluids.FLUID_NITRICACID.get(), 500))
+                //
+                .addFluidTagInput(FluidTags.WATER, 3000)
+                //
+                .addGasTagInput(ElectrodynamicsTags.Gases.AMMONIA, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 700, 3))
+                //
+                .save(output);
 
     }
 
