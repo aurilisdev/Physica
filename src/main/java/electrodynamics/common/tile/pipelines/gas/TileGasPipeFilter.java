@@ -26,8 +26,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TileGasPipeFilter extends GenericTile {
 
-    public static final Direction INPUT_DIR = Direction.SOUTH;
-    public static final Direction OUTPUT_DIR = Direction.NORTH;
+    public static final BlockEntityUtils.MachineDirection INPUT_DIR = BlockEntityUtils.MachineDirection.FRONT;
+    public static final BlockEntityUtils.MachineDirection OUTPUT_DIR = BlockEntityUtils.MachineDirection.BACK;
 
     private boolean isLocked = false;
 
@@ -58,11 +58,11 @@ public class TileGasPipeFilter extends GenericTile {
 
         Direction facing = getFacing();
 
-        if (side == BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR)) {
+        if (side == BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR.mappedDir)) {
             return CapabilityUtils.EMPTY_GAS;
         }
 
-        if (side == BlockEntityUtils.getRelativeSide(facing, INPUT_DIR)) {
+        if (side == BlockEntityUtils.getRelativeSide(facing, INPUT_DIR.mappedDir)) {
 
             BlockEntity output = level.getBlockEntity(getBlockPos().relative(side.getOpposite()));
 

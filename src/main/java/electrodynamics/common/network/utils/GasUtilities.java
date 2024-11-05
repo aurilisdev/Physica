@@ -10,10 +10,7 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
@@ -56,17 +53,15 @@ public class GasUtilities {
 
         for (Direction relative : outputDirections) {
 
-            Direction direction = BlockEntityUtils.getRelativeSide(facing, relative.getOpposite());
+            Direction direction = BlockEntityUtils.getRelativeSide(facing, relative);
 
-            BlockPos face = tile.getBlockPos().relative(direction.getOpposite());
-
-            BlockEntity faceTile = tile.getLevel().getBlockEntity(face);
+            BlockEntity faceTile = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(direction));
 
             if (faceTile == null) {
                 continue;
             }
 
-            IGasHandler handler = faceTile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction);
+            IGasHandler handler = faceTile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction.getOpposite());
 
             if (handler == null) {
                 continue;

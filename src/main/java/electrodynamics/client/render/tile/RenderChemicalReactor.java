@@ -63,23 +63,22 @@ public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReac
 
         boolean active = processor.isActive();
 
-        if (active) {
-            poseStack.pushPose();
+        poseStack.pushPose();
 
-            poseStack.translate(0.5, 0.5, 0.5);
+        poseStack.translate(0.5, 0.5, 0.5);
 
-            poseStack.translate(0, 1.0, 0);
+        poseStack.translate(0, 1.0, 0);
 
-            float progress = (float) (processor.operatingTicks.get() / processor.requiredTicks.get());
+        float progress = (float) (processor.operatingTicks.get() / processor.requiredTicks.get());
 
-            float rotation = progress * 90.0F;
+        float rotation = progress * 90.0F;
 
-            poseStack.mulPose(MathUtils.rotVectorQuaternionDeg(rotation, MathUtils.YP));
+        poseStack.mulPose(MathUtils.rotVectorQuaternionDeg(rotation, MathUtils.YP));
 
-            RenderingUtils.renderModel(getModel(ClientRegister.MODEL_CHEMICALREACTOR_ROTOR), tile, RenderType.solid(), poseStack, bufferSource, packedLight, packedOverlay);
+        RenderingUtils.renderModel(getModel(ClientRegister.MODEL_CHEMICALREACTOR_ROTOR), tile, RenderType.solid(), poseStack, bufferSource, packedLight, packedOverlay);
 
-            poseStack.popPose();
-        }
+        poseStack.popPose();
+
 
         //TODO
 
@@ -234,13 +233,11 @@ public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReac
         }
 
 
-
-
         //render gases
 
         poseStack.pushPose();
 
-        if(tile.hasGasInputs.get() && active && tile.getLevel().getRandom().nextDouble() < 0.8){
+        if (tile.hasGasInputs.get() && active && tile.getLevel().getRandom().nextDouble() < 0.8) {
 
             double x = tile.getBlockPos().getX();
             double y = tile.getBlockPos().getY();
@@ -248,22 +245,21 @@ public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReac
 
             y += 1.25;
 
-            if(Electrodynamics.RANDOM.nextBoolean()){
+            if (Electrodynamics.RANDOM.nextBoolean()) {
 
                 x += Electrodynamics.RANDOM.nextDouble(0.875) + 0.0625;
 
-                if(Electrodynamics.RANDOM.nextBoolean()) {
+                if (Electrodynamics.RANDOM.nextBoolean()) {
                     z += Electrodynamics.RANDOM.nextDouble(0.125) + 0.0625;
                 } else {
                     z += Electrodynamics.RANDOM.nextDouble(0.125) + 0.8125;
                 }
 
 
-
             } else {
                 z += Electrodynamics.RANDOM.nextDouble(0.875) + 0.0625;
 
-                if(Electrodynamics.RANDOM.nextBoolean()) {
+                if (Electrodynamics.RANDOM.nextBoolean()) {
                     x += Electrodynamics.RANDOM.nextDouble(0.125) + 0.0625;
                 } else {
                     x += Electrodynamics.RANDOM.nextDouble(0.125) + 0.8125;
@@ -275,7 +271,7 @@ public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReac
             //y += 1.6875;//Electrodynamics.RANDOM.nextDouble(0.375) + 1.3125;
             //z += Electrodynamics.RANDOM.nextDouble(0.5) + 0.25;
 
-            minecraft().particleEngine.createParticle(ParticleTypes.SMOKE, x, y, z, 0,0,0);
+            minecraft().particleEngine.createParticle(ParticleTypes.SMOKE, x, y, z, 0, 0, 0);
 
         }
 

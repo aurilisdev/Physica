@@ -67,15 +67,15 @@ public class ComponentGasHandlerSimple extends PropertyGasTank implements ICompo
         super(other);
     }
 
-    public ComponentGasHandlerSimple setInputDirections(Direction... directions) {
+    public ComponentGasHandlerSimple setInputDirections(BlockEntityUtils.MachineDirection... directions) {
         isSided = true;
-        inputDirections = directions;
+        inputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         return this;
     }
 
-    public ComponentGasHandlerSimple setOutputDirections(Direction... directions) {
+    public ComponentGasHandlerSimple setOutputDirections(BlockEntityUtils.MachineDirection... directions) {
         isSided = true;
-        outputDirections = directions;
+        outputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         return this;
     }
 

@@ -1,6 +1,7 @@
 package electrodynamics.common.tile.electricitygrid.batteries;
 
 import electrodynamics.prefab.properties.PropertyTypes;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.common.block.subtype.SubtypeMachine;
@@ -45,6 +46,9 @@ public class TileBatteryBox extends GenericTile implements IEnergyStorage {
 
     public final int baseVoltage;
 
+    public static final BlockEntityUtils.MachineDirection OUTPUT = BlockEntityUtils.MachineDirection.BACK;
+    public static final BlockEntityUtils.MachineDirection INPUT = BlockEntityUtils.MachineDirection.FRONT;
+
     public TileBatteryBox(BlockPos worldPosition, BlockState blockState) {
         this(ElectrodynamicsTiles.TILE_BATTERYBOX.get(), SubtypeMachine.batterybox, 120, 359.0 * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE / 20.0, 10000000, worldPosition, blockState);
     }
@@ -59,7 +63,7 @@ public class TileBatteryBox extends GenericTile implements IEnergyStorage {
         addComponent(new ComponentPacketHandler(this));
         addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1).upgrades(3)).validUpgrades(ContainerBatteryBox.VALID_UPGRADES).valid((i, s, c) -> i == 0 ? s.getItem() instanceof ItemElectric : machineValidator().test(i, s, c)));
         addComponent(new ComponentContainerProvider(machine, this).createMenu((id, player) -> new ContainerBatteryBox(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
-        addComponent(new ComponentElectrodynamic(this, true, true).voltage(baseVoltage).maxJoules(max).setInputDirections(Direction.SOUTH).setOutputDirections(Direction.NORTH));
+        addComponent(new ComponentElectrodynamic(this, true, true).voltage(baseVoltage).maxJoules(max).setInputDirections(INPUT).setOutputDirections(OUTPUT));
 
     }
 

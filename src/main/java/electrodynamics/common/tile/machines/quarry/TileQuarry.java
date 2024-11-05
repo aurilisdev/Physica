@@ -194,8 +194,8 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
-		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2).maxJoules(Constants.QUARRY_USAGE_PER_TICK * CAPACITY));
-		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(7).outputs(9).upgrades(3)).validUpgrades(ContainerQuarry.VALID_UPGRADES).valid(machineValidator()).setSlotsByDirection(Direction.NORTH, 0, 7, 8, 9, 10, 11, 12, 13, 14, 15));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2).maxJoules(Constants.QUARRY_USAGE_PER_TICK * CAPACITY));
+		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(7).outputs(9).upgrades(3)).validUpgrades(ContainerQuarry.VALID_UPGRADES).valid(machineValidator()).setSlotsByDirection(BlockEntityUtils.MachineDirection.FRONT, 0, 7, 8, 9, 10, 11, 12, 13, 14, 15));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.quarry, this).createMenu((id, player) -> new ContainerQuarry(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}
 

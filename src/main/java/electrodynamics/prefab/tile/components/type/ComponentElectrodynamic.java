@@ -217,18 +217,18 @@ public class ComponentElectrodynamic implements IComponent, ICapabilityElectrody
         return this;
     }
 
-    public ComponentElectrodynamic setInputDirections(Direction... dirs) {
+    public ComponentElectrodynamic setInputDirections(BlockEntityUtils.MachineDirection... dirs) {
         isSided = true;
-        for (Direction dir : dirs) {
-            relativeInputDirections.add(dir);
+        for (BlockEntityUtils.MachineDirection dir : dirs) {
+            relativeInputDirections.add(dir.mappedDir);
         }
         return this;
     }
 
-    public ComponentElectrodynamic setOutputDirections(Direction... dirs) {
+    public ComponentElectrodynamic setOutputDirections(BlockEntityUtils.MachineDirection... dirs) {
         isSided = true;
-        for (Direction dir : dirs) {
-            relativeOutputDirections.add(dir);
+        for (BlockEntityUtils.MachineDirection dir : dirs) {
+            relativeOutputDirections.add(dir.mappedDir);
         }
         return this;
     }

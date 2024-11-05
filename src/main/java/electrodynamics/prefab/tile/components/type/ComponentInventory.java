@@ -149,25 +149,26 @@ public class ComponentInventory implements IComponent, WorldlyContainer {
         return this;
     }
 
-    public ComponentInventory setSlotsByDirection(Direction face, Integer... slot) {
-        if (relativeDirectionToSlotsMap[face.ordinal()] == null) {
-            relativeDirectionToSlotsMap[face.ordinal()] = new HashSet<>();
+    public ComponentInventory setSlotsByDirection(BlockEntityUtils.MachineDirection face, Integer... slot) {
+        Direction faceDir = face.mappedDir;
+        if (relativeDirectionToSlotsMap[faceDir.ordinal()] == null) {
+            relativeDirectionToSlotsMap[faceDir.ordinal()] = new HashSet<>();
         }
         for (Integer sl : slot) {
-            relativeDirectionToSlotsMap[face.ordinal()].add(sl);
+            relativeDirectionToSlotsMap[faceDir.ordinal()].add(sl);
         }
         return this;
     }
 
-    public ComponentInventory setDirectionsBySlot(Integer slot, Direction... faces) {
-        for (Direction face : faces) {
+    public ComponentInventory setDirectionsBySlot(Integer slot, BlockEntityUtils.MachineDirection... faces) {
+        for (BlockEntityUtils.MachineDirection face : faces) {
             setSlotsByDirection(face, slot);
         }
         return this;
     }
 
     public ComponentInventory setSlotsForAllDirections(Integer... slots) {
-        for (Direction faceDirection : Direction.values()) {
+        for (BlockEntityUtils.MachineDirection faceDirection : BlockEntityUtils.MachineDirection.values()) {
             setSlotsByDirection(faceDirection, slots);
         }
         return this;
@@ -177,15 +178,15 @@ public class ComponentInventory implements IComponent, WorldlyContainer {
         ComponentInventory inv = this;
 
         for (int i : getInputSlots()) {
-            inv = inv.setSlotsByDirection(Direction.EAST, i).setSlotsByDirection(Direction.UP, i);
+            inv = inv.setSlotsByDirection(BlockEntityUtils.MachineDirection.RIGHT, i).setSlotsByDirection(BlockEntityUtils.MachineDirection.TOP, i);
         }
 
         for (int i : getOutputSlots()) {
-            inv = inv.setSlotsByDirection(Direction.WEST, i).setSlotsByDirection(Direction.DOWN, i);
+            inv = inv.setSlotsByDirection(BlockEntityUtils.MachineDirection.LEFT, i).setSlotsByDirection(BlockEntityUtils.MachineDirection.BOTTOM, i);
         }
 
         for (int i : getBiproductSlots()) {
-            inv = inv.setSlotsByDirection(Direction.WEST, i).setSlotsByDirection(Direction.DOWN, i);
+            inv = inv.setSlotsByDirection(BlockEntityUtils.MachineDirection.LEFT, i).setSlotsByDirection(BlockEntityUtils.MachineDirection.BOTTOM, i);
         }
 
         return inv;

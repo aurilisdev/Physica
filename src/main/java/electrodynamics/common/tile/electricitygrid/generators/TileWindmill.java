@@ -19,6 +19,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
@@ -52,7 +53,7 @@ public class TileWindmill extends GenericGeneratorTile implements IMultiblockPar
 		super(ElectrodynamicsTiles.TILE_WINDMILL.get(), worldPosition, blockState, 2.25, SubtypeItemUpgrade.stator);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickCommon(this::tickCommon).tickClient(this::tickClient));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.DOWN));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.BOTTOM));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().upgrades(1)).validUpgrades(ContainerWindmill.VALID_UPGRADES).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.windmill, this).createMenu((id, player) -> new ContainerWindmill(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 

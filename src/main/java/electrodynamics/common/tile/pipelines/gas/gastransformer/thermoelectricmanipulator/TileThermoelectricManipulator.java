@@ -62,8 +62,8 @@ public class TileThermoelectricManipulator extends GenericTileGasTransformer {
 
     public TileThermoelectricManipulator(BlockPos worldPos, BlockState blockState) {
         super(ElectrodynamicsTiles.TILE_THERMOELECTRIC_MANIPULATOR.get(), worldPos, blockState);
-        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(BASE_INPUT_CAPACITY * 10));
-        addComponent(new ComponentFluidHandlerMultiBiDirec(this).setInputDirections(Direction.DOWN).setInputTanks(1, arr((int) BASE_INPUT_CAPACITY)).setOutputDirections(Direction.DOWN).setOutputTanks(1, arr((int) BASE_OUTPUT_CAPACITY)));
+        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(BASE_INPUT_CAPACITY * 10));
+        addComponent(new ComponentFluidHandlerMultiBiDirec(this).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).setInputTanks(1, arr((int) BASE_INPUT_CAPACITY)).setOutputDirections(BlockEntityUtils.MachineDirection.BOTTOM).setOutputTanks(1, arr((int) BASE_OUTPUT_CAPACITY)));
     }
 
     @Override
@@ -79,12 +79,12 @@ public class TileThermoelectricManipulator extends GenericTileGasTransformer {
 
         Direction facing = getFacing();
 
-        Direction direction = BlockEntityUtils.getRelativeSide(facing, Direction.EAST);// opposite of west is east
-        BlockPos face = getBlockPos().relative(direction.getOpposite(), 2);
+        Direction direction = BlockEntityUtils.getRelativeSide(facing, BlockEntityUtils.MachineDirection.LEFT.mappedDir);// opposite of west is east
+        BlockPos face = getBlockPos().relative(direction, 2);
         BlockEntity faceTile = getLevel().getBlockEntity(face);
         if (faceTile != null) {
 
-            IGasHandler handler = faceTile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction);
+            IGasHandler handler = faceTile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction.getOpposite());
 
             if (handler != null) {
 
@@ -102,11 +102,11 @@ public class TileThermoelectricManipulator extends GenericTileGasTransformer {
 
         ComponentFluidHandlerMulti fluidHandler = getComponent(IComponentType.FluidHandler);
 
-        face = getBlockPos().relative(direction.getOpposite()).relative(Direction.DOWN);
+        face = getBlockPos().relative(direction).relative(Direction.DOWN);
         faceTile = getLevel().getBlockEntity(face);
         if (faceTile != null) {
 
-            IFluidHandler handler = faceTile.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction);
+            IFluidHandler handler = faceTile.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, Direction.UP);
 
             if (handler != null) {
 

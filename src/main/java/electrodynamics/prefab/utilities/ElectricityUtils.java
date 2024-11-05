@@ -40,16 +40,6 @@ public class ElectricityUtils {
         entity.hurt(entity.damageSources().source(ElectrodynamicsDamageTypes.ELECTRICITY, entity), (float) Math.min(9999, Math.max(0, transfer.getAmps())));
     }
 
-    public static boolean isElectricReceiver(BlockEntity tile) {
-        for (Direction dir : Direction.values()) {
-            boolean is = isElectricReceiver(tile, dir);
-            if (is) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static boolean isElectricReceiver(BlockEntity tile, Direction dir) {
         return tile != null && (tile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, tile.getBlockPos(), tile.getBlockState(), tile, dir) != null || tile.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, tile.getBlockPos(), tile.getBlockState(), tile, dir) != null);
     }
@@ -90,10 +80,6 @@ public class ElectricityUtils {
 
         return TransferPack.EMPTY;
 
-    }
-
-    public static boolean canInputPower(BlockEntity tile, Direction direction) {
-        return isElectricReceiver(tile, direction);
     }
 
 }

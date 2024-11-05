@@ -1,42 +1,26 @@
 package electrodynamics.common.tile.machines.chemicalreactor;
 
-import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasTank;
-import electrodynamics.api.multiblock.Subnode;
-import electrodynamics.api.multiblock.parent.IMultiblockParentTile;
-import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.block.chemicalreactor.BlockChemicalReactorExtra;
-import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerChemicalReactor;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
 import electrodynamics.common.recipe.recipeutils.*;
-import electrodynamics.common.tile.TileMultiSubnode;
-import electrodynamics.prefab.block.GenericEntityBlockWaterloggable;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
-import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.*;
-import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
 import electrodynamics.prefab.tile.types.GenericGasTile;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ItemUtils;
-import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -60,10 +44,18 @@ public class TileChemicalReactor extends GenericGasTile {
         addComponent(new ComponentTickable(this));
         addComponent(new ComponentPacketHandler(this));
         addComponent(new ComponentContainerProvider("container.chemicalreactor", this).createMenu((id, player) -> new ContainerChemicalReactor(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
-        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.UP, Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 4));
-        addComponent(new ComponentFluidHandlerMulti(this).setTanks(2, 2, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}).setInputDirections(Direction.EAST, Direction.SOUTH).setOutputDirections(Direction.WEST, Direction.NORTH).setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()));
-        addComponent(new ComponentInventory(this, ComponentInventory.InventoryBuilder.newInv().processors(1, 2, 1, 3).bucketInputs(2).bucketOutputs(2).gasInputs(2).gasOutputs(2).upgrades(3)).setDirectionsBySlot(0, Direction.SOUTH).setDirectionsBySlot(1, Direction.EAST).setSlotsByDirection(Direction.WEST, 2).setSlotsByDirection(Direction.NORTH, 3, 4, 5).validUpgrades(ContainerChemicalReactor.VALID_UPGRADES).valid(machineValidator()));
-        addComponent(new ComponentGasHandlerMulti(this).setInputDirections(Direction.WEST, Direction.NORTH).setOutputDirections(Direction.EAST, Direction.SOUTH).setInputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000.0, 1000.0), arr(1024, 1024)).setOutputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000.0, 1000.0), arr(1024, 1024)).setCondensedHandler(getCondensedHandler()).setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()));
+        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.TOP, BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 4));
+        addComponent(new ComponentFluidHandlerMulti(this).setTanks(2, 2, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}, new int[]{MAX_FLUID_TANK_CAPACITY, MAX_FLUID_TANK_CAPACITY}).setInputDirections(BlockEntityUtils.MachineDirection.FRONT, BlockEntityUtils.MachineDirection.RIGHT)
+                //
+                .setOutputDirections(BlockEntityUtils.MachineDirection.BACK, BlockEntityUtils.MachineDirection.LEFT).setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()));
+        addComponent(new ComponentInventory(this, ComponentInventory.InventoryBuilder.newInv().processors(1, 2, 1, 3).bucketInputs(2).bucketOutputs(2).gasInputs(2).gasOutputs(2).upgrades(3)).setDirectionsBySlot(0, BlockEntityUtils.MachineDirection.BACK)
+                //
+                .setDirectionsBySlot(1, BlockEntityUtils.MachineDirection.RIGHT).setSlotsByDirection(BlockEntityUtils.MachineDirection.LEFT, 2).setSlotsByDirection(BlockEntityUtils.MachineDirection.FRONT, 3, 4, 5).validUpgrades(ContainerChemicalReactor.VALID_UPGRADES).valid(machineValidator()));
+        addComponent(new ComponentGasHandlerMulti(this).setInputDirections(BlockEntityUtils.MachineDirection.FRONT, BlockEntityUtils.MachineDirection.RIGHT).setOutputDirections(BlockEntityUtils.MachineDirection.BACK, BlockEntityUtils.MachineDirection.LEFT)
+                //
+                .setInputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000.0, 1000.0), arr(1024, 1024)).setOutputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000.0, 1000.0), arr(1024, 1024)).setCondensedHandler(getCondensedHandler())
+                //
+                .setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()));
         addComponent(new ComponentProcessor(this).canProcess(this::canProcess).process(this::process));
     }
 
@@ -260,11 +252,9 @@ public class TileChemicalReactor extends GenericGasTile {
 
         for (Direction relative : outputDirections) {
 
-            Direction direction = BlockEntityUtils.getRelativeSide(facing, relative.getOpposite());
+            Direction direction = BlockEntityUtils.getRelativeSide(facing, relative);
 
-            BlockPos face = getBlockPos().relative(direction.getOpposite()).offset(0, 2, 0);
-
-            BlockEntity faceTile = getLevel().getBlockEntity(face);
+            BlockEntity faceTile = getLevel().getBlockEntity(getBlockPos().relative(direction).offset(0, 2, 0));
 
             if (faceTile == null) {
                 continue;

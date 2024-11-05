@@ -31,7 +31,7 @@ public class TileFluidValve extends GenericTileValve {
 
         Direction facing = getFacing();
 
-        if (BlockEntityUtils.getRelativeSide(facing, INPUT_DIR) == side || BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR) == side) {
+        if (BlockEntityUtils.getRelativeSide(facing, INPUT_DIR.mappedDir) == side || BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR.mappedDir) == side) {
 
             BlockEntity relative = level.getBlockEntity(worldPosition.relative(side.getOpposite()));
 

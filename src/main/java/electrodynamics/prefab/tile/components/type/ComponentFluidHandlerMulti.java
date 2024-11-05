@@ -131,14 +131,14 @@ public class ComponentFluidHandlerMulti implements IComponentFluidHandler {
         return this;
     }
 
-    public ComponentFluidHandlerMulti setInputDirections(Direction... directions) {
-        inputDirections = directions;
+    public ComponentFluidHandlerMulti setInputDirections(BlockEntityUtils.MachineDirection... directions) {
+        inputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         isSided = true;
         return this;
     }
 
-    public ComponentFluidHandlerMulti setOutputDirections(Direction... directions) {
-        outputDirections = directions;
+    public ComponentFluidHandlerMulti setOutputDirections(BlockEntityUtils.MachineDirection... directions) {
+        outputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         isSided = true;
         return this;
     }

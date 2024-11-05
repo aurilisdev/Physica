@@ -62,7 +62,7 @@ public class TileElectricArcFurnace extends GenericTile implements ITickableSoun
 
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient));
-		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.NORTH).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * Math.pow(2, extra)).maxJoules(Constants.ELECTRICARCFURNACE_USAGE_PER_TICK * 20 * (extra + 1)));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BACK).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * Math.pow(2, extra)).maxJoules(Constants.ELECTRICARCFURNACE_USAGE_PER_TICK * 20 * (extra + 1)));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().processors(processorCount, inputsPerProc, outputPerProc, 0).upgrades(3)).validUpgrades(ContainerElectricArcFurnace.VALID_UPGRADES).valid(machineValidator()).implementMachineInputsAndOutputs());
 		addComponent(new ComponentContainerProvider(machine, this).createMenu((id, player) -> (extra == 0 ? new ContainerElectricArcFurnace(id, player, getComponent(IComponentType.Inventory), getCoordsArray()) : extra == 1 ? new ContainerElectricArcFurnaceDouble(id, player, getComponent(IComponentType.Inventory), getCoordsArray()) : extra == 2 ? new ContainerElectricArcFurnaceTriple(id, player, getComponent(IComponentType.Inventory), getCoordsArray()) : null)));
 

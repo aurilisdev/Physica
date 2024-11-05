@@ -18,9 +18,14 @@ public class TileCurrentRegulator extends GenericTile {
 
     private boolean isLocked = false;
 
+    public static final BlockEntityUtils.MachineDirection OUTPUT = BlockEntityUtils.MachineDirection.FRONT;
+    public static final BlockEntityUtils.MachineDirection INPUT = BlockEntityUtils.MachineDirection.BACK;
+
     public TileCurrentRegulator(BlockPos worldPos, BlockState blockState) {
         super(ElectrodynamicsTiles.TILE_CURRENTREGULATOR.get(), worldPos, blockState);
-        addComponent(new ComponentElectrodynamic(this, true, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setOutputDirections(Direction.SOUTH).setInputDirections(Direction.NORTH).voltage(-1).getAmpacity(this::getAmpacity).getMinimumVoltage(this::getMinimumVoltage));
+        addComponent(new ComponentElectrodynamic(this, true, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setOutputDirections(OUTPUT).setInputDirections(INPUT).voltage(-1)
+                //
+                .getAmpacity(this::getAmpacity).getMinimumVoltage(this::getMinimumVoltage));
     }
 
     public TransferPack receivePower(TransferPack transfer, boolean debug) {
@@ -29,7 +34,7 @@ public class TileCurrentRegulator extends GenericTile {
             return TransferPack.EMPTY;
         }
 
-        Direction output = BlockEntityUtils.getRelativeSide(getFacing(), Direction.SOUTH);
+        Direction output = BlockEntityUtils.getRelativeSide(getFacing(), OUTPUT.mappedDir);
 
         BlockEntity tile = level.getBlockEntity(worldPosition.relative(output));
 
@@ -75,9 +80,9 @@ public class TileCurrentRegulator extends GenericTile {
             return TransferPack.EMPTY;
         }
 
-        Direction output = BlockEntityUtils.getRelativeSide(getFacing(), Direction.SOUTH);
+        Direction output = BlockEntityUtils.getRelativeSide(getFacing(), OUTPUT.mappedDir);
 
-        if (dir.getOpposite() != output) {
+        if (dir != output.getOpposite()) {
             return TransferPack.EMPTY;
         }
 
@@ -132,7 +137,7 @@ public class TileCurrentRegulator extends GenericTile {
         }
         isLocked = true;
 
-        ICapabilityElectrodynamic electro = output.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, output.getBlockPos(), output.getBlockState(), output, facing);
+        ICapabilityElectrodynamic electro = output.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, output.getBlockPos(), output.getBlockState(), output, facing.getOpposite());
 
         if (electro == null) {
             isLocked = false;
@@ -155,7 +160,7 @@ public class TileCurrentRegulator extends GenericTile {
         }
         isLocked = true;
 
-        ICapabilityElectrodynamic electro = output.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, output.getBlockPos(), output.getBlockState(), output, facing);
+        ICapabilityElectrodynamic electro = output.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, output.getBlockPos(), output.getBlockState(), output, facing.getOpposite());
 
         if (electro == null) {
             isLocked = false;

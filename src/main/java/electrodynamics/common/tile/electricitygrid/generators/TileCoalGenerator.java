@@ -46,8 +46,10 @@ public class TileCoalGenerator extends GenericGeneratorTile {
 		super(ElectrodynamicsTiles.TILE_COALGENERATOR.get(), worldPosition, blockState, 1.0);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient).tickServer(this::tickServer));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.NORTH));
-		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1)).setDirectionsBySlot(0, Direction.UP, Direction.EAST, Direction.WEST, Direction.SOUTH, Direction.NORTH).valid((index, stack, i) -> getValidItems().contains(stack.getItem())));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.BACK));
+		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1)).setDirectionsBySlot(0, BlockEntityUtils.MachineDirection.TOP, BlockEntityUtils.MachineDirection.BOTTOM, BlockEntityUtils.MachineDirection.FRONT, BlockEntityUtils.MachineDirection.LEFT, BlockEntityUtils.MachineDirection.RIGHT)
+				//
+				.valid((index, stack, i) -> getValidItems().contains(stack.getItem())));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.coalgenerator, this).createMenu((id, player) -> new ContainerCoalGenerator(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}
 

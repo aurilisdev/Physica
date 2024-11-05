@@ -12,6 +12,7 @@ import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
@@ -34,7 +35,7 @@ public class TileCreativePowerSource extends GenericTile {
 		super(ElectrodynamicsTiles.TILE_CREATIVEPOWERSOURCE.get(), worldPos, blockState);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.values()).voltage(-1));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.values()).voltage(-1));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.creativepowersource, this).createMenu((id, player) -> new ContainerCreativePowerSource(id, player, getCoordsArray())));
 	}
 

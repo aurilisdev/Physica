@@ -18,7 +18,6 @@ import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStack;
@@ -35,11 +34,11 @@ public class TileGasCollector extends GenericGasTile implements ITickableSound {
         super(ElectrodynamicsTiles.TILE_GASCOLLECTOR.get(), worldPos, blockState);
         addComponent(new ComponentPacketHandler(this));
         addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
-        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2.0).maxJoules(Constants.GAS_COLLECTOR_USAGE_PER_TICK * 20));
+        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2.0).maxJoules(Constants.GAS_COLLECTOR_USAGE_PER_TICK * 20));
         addComponent(new ComponentInventory(this, ComponentInventory.InventoryBuilder.newInv().inputs(1).gasOutputs(1).upgrades(3)).validUpgrades(ContainerDO2OProcessor.VALID_UPGRADES).valid(machineValidator()));
         addComponent(new ComponentProcessor(this).canProcess(this::canProcess).process(this::process));
         addComponent(new ComponentContainerProvider(SubtypeMachine.gascollector, this).createMenu((id, player) -> new ContainerGasCollector(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
-        addComponent(new ComponentGasHandlerSimple(this, "", 5000, 1000, 10).setOutputDirections(Direction.NORTH).setOnGasCondensed(getCondensedHandler()));
+        addComponent(new ComponentGasHandlerSimple(this, "", 5000, 1000, 10).setOutputDirections(BlockEntityUtils.MachineDirection.BACK).setOnGasCondensed(getCondensedHandler()));
     }
 
     private void tickClient(ComponentTickable componentTickable) {

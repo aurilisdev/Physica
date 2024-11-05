@@ -32,7 +32,7 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
 	public GenericTileCompressor(BlockEntityType<?> type, BlockPos worldPos, BlockState blockState, boolean isDecompressor) {
 		super(type, worldPos, blockState);
 		this.isDecompressor = isDecompressor;
-		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.DOWN).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(BASE_INPUT_CAPACITY * 10));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(BASE_INPUT_CAPACITY * 10));
 	}
 
 	@Override
@@ -77,12 +77,12 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
 
 		Direction facing = getFacing();
 
-		Direction direction = BlockEntityUtils.getRelativeSide(facing, Direction.EAST);// opposite of west is east
-		BlockPos face = getBlockPos().relative(direction.getOpposite(), 2);
+		Direction direction = BlockEntityUtils.getRelativeSide(facing, BlockEntityUtils.MachineDirection.LEFT.mappedDir);// opposite of west is east
+		BlockPos face = getBlockPos().relative(direction, 2);
 		BlockEntity faceTile = getLevel().getBlockEntity(face);
 		if (faceTile != null) {
 		    
-		    IGasHandler handler = faceTile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction);
+		    IGasHandler handler = faceTile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction.getOpposite());
 		    
 		    if(handler != null) {
 		        GasTank gasTank = gasHandler.getOutputTanks()[0];

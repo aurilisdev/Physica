@@ -273,7 +273,7 @@ public class FluidNetwork extends AbstractNetwork<IFluidPipe, SubtypeFluidPipe, 
 
 	@Override
 	public boolean isAcceptor(BlockEntity acceptor, Direction orientation) {
-		return FluidUtilities.isFluidReceiver(acceptor);
+		return FluidUtilities.isFluidReceiver(acceptor, orientation);
 	}
 
 	@Override

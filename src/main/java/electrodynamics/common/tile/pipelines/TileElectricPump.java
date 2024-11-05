@@ -12,6 +12,7 @@ import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsSounds;
@@ -32,10 +33,10 @@ public class TileElectricPump extends GenericTile implements ITickableSound {
 
 	public TileElectricPump(BlockPos worldPosition, BlockState blockState) {
 		super(ElectrodynamicsTiles.TILE_ELECTRICPUMP.get(), worldPosition, blockState);
-		addComponent(new ComponentElectrodynamic(this, false, true).maxJoules(Constants.ELECTRICPUMP_USAGE_PER_TICK * 20).setInputDirections(Direction.UP));
+		addComponent(new ComponentElectrodynamic(this, false, true).maxJoules(Constants.ELECTRICPUMP_USAGE_PER_TICK * 20).setInputDirections(BlockEntityUtils.MachineDirection.TOP));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentFluidHandlerMulti(this).setOutputTanks(1, 0).setOutputDirections(Direction.EAST).setOutputFluidTags(FluidTags.WATER));
+		addComponent(new ComponentFluidHandlerMulti(this).setOutputTanks(1, 0).setOutputDirections(BlockEntityUtils.MachineDirection.RIGHT).setOutputFluidTags(FluidTags.WATER));
 	}
 
 	protected CachedTileOutput output;

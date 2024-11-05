@@ -8,6 +8,7 @@ import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
@@ -28,7 +29,7 @@ public class TileThermoelectricGenerator extends GenericTile {
 	public TileThermoelectricGenerator(BlockPos worldPosition, BlockState blockState) {
 		super(ElectrodynamicsTiles.TILE_THERMOELECTRICGENERATOR.get(), worldPosition, blockState);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.UP));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.TOP));
 	}
 
 	protected void tickServer(ComponentTickable tickable) {

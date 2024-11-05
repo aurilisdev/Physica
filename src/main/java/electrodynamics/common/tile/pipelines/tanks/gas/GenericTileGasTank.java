@@ -16,11 +16,10 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericGasTile;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -36,7 +35,7 @@ public class GenericTileGasTank extends GenericGasTile {
 		super(type, pos, state);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentGasHandlerSimple(this, "", capacity, maxTemperature, maxPressure).setInputDirections(Direction.UP).setOutputDirections(Direction.DOWN).setOnGasCondensed(getCondensedHandler()));
+		addComponent(new ComponentGasHandlerSimple(this, "", capacity, maxTemperature, maxPressure).setInputDirections(BlockEntityUtils.MachineDirection.TOP).setOutputDirections(BlockEntityUtils.MachineDirection.BOTTOM).setOnGasCondensed(getCondensedHandler()));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(6).gasInputs(1).gasOutputs(1)).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider(machine, this).createMenu((id, player) -> new ContainerGasTankGeneric(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}
@@ -59,17 +58,10 @@ public class GenericTileGasTank extends GenericGasTile {
 
 		}
 
-		// Output to tank below
-		BlockPos pos = getBlockPos();
-		BlockPos below = pos.below();
+		if (level.getBlockEntity(getBlockPos().below()) instanceof GenericTileGasTank tankBelow) {
+			ComponentGasHandlerSimple belowHandler = tankBelow.getComponent(IComponentType.GasHandler);
 
-		if (level.getBlockState(below).hasBlockEntity()) {
-			BlockEntity tile = level.getBlockEntity(below);
-			if (tile instanceof GenericTileGasTank tankBelow) {
-				ComponentGasHandlerSimple belowHandler = tankBelow.getComponent(IComponentType.GasHandler);
-
-				handler.drain(belowHandler.fill(handler.getGas(), GasAction.SIMULATE), GasAction.EXECUTE);
-			}
+			handler.drain(belowHandler.fill(handler.getGas(), GasAction.EXECUTE), GasAction.EXECUTE);
 		}
 	}
 

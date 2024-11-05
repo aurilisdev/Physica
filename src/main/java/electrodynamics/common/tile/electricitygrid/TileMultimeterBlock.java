@@ -9,6 +9,7 @@ import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
 import electrodynamics.registers.ElectrodynamicsTiles;
@@ -17,6 +18,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TileMultimeterBlock extends GenericTile {
+
+	//TODO Flip it so it places facing towards the player
 
 	public Property<Double> voltage = property(new Property<>(PropertyTypes.DOUBLE, "voltageNew", 0.0).setNoSave());
 	public Property<Double> minVoltage = property(new Property<>(PropertyTypes.DOUBLE, "minvoltage", 0.0).setNoSave());
@@ -30,7 +33,7 @@ public class TileMultimeterBlock extends GenericTile {
 		super(ElectrodynamicsTiles.TILE_MULTIMETERBLOCK.get(), worldPosition, blockState);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, false, false).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setInputDirections(Direction.SOUTH).voltage(-1));
+		addComponent(new ComponentElectrodynamic(this, false, false).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setInputDirections(BlockEntityUtils.MachineDirection.FRONT).voltage(-1));
 	}
 
 	public void tickServer(ComponentTickable tickable) {

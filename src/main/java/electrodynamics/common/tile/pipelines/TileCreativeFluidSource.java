@@ -30,7 +30,7 @@ public class TileCreativeFluidSource extends GenericTile {
         super(ElectrodynamicsTiles.TILE_CREATIVEFLUIDSOURCE.get(), worldPos, blockState);
         addComponent(new ComponentTickable(this).tickServer(this::tickServer));
         addComponent(new ComponentPacketHandler(this));
-        addComponent(new ComponentFluidHandlerSimple(128000, this, "").setOutputDirections(Direction.values()));
+        addComponent(new ComponentFluidHandlerSimple(128000, this, "").setOutputDirections(BlockEntityUtils.MachineDirection.values()));
         addComponent(new ComponentInventory(this, InventoryBuilder.newInv().bucketInputs(1).bucketOutputs(1)).valid((slot, stack, i) -> stack.getCapability(Capabilities.FluidHandler.ITEM) != null));
         addComponent(new ComponentContainerProvider(SubtypeMachine.creativefluidsource, this).createMenu((id, player) -> new ContainerCreativeFluidSource(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
     }

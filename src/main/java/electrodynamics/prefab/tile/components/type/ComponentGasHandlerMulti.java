@@ -134,15 +134,15 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         return this;
     }
 
-    public ComponentGasHandlerMulti setInputDirections(Direction... directions) {
+    public ComponentGasHandlerMulti setInputDirections(BlockEntityUtils.MachineDirection... directions) {
         isSided = true;
-        inputDirections = directions;
+        inputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         return this;
     }
 
-    public ComponentGasHandlerMulti setOutputDirections(Direction... directions) {
+    public ComponentGasHandlerMulti setOutputDirections(BlockEntityUtils.MachineDirection... directions) {
         isSided = true;
-        outputDirections = directions;
+        outputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         return this;
     }
 

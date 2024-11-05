@@ -26,8 +26,8 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class TileFluidPipePump extends GenericTile {
 
-    public static final Direction INPUT_DIR = Direction.SOUTH;
-    public static final Direction OUTPUT_DIR = Direction.NORTH;
+    public static final BlockEntityUtils.MachineDirection INPUT_DIR = BlockEntityUtils.MachineDirection.FRONT;
+    public static final BlockEntityUtils.MachineDirection OUTPUT_DIR = BlockEntityUtils.MachineDirection.BACK;
 
     private boolean isLocked = false;
 
@@ -37,7 +37,7 @@ public class TileFluidPipePump extends GenericTile {
             return;
         }
 
-        BlockEntity entity = level.getBlockEntity(worldPosition.relative(BlockEntityUtils.getRelativeSide(getFacing(), INPUT_DIR)));
+        BlockEntity entity = level.getBlockEntity(worldPosition.relative(getFacing()));
 
         if (entity != null && entity instanceof TileFluidPipe pipe) {
             FluidNetwork network = pipe.getNetwork();
@@ -53,7 +53,7 @@ public class TileFluidPipePump extends GenericTile {
         super(ElectrodynamicsTiles.TILE_FLUIDPIPEPUMP.get(), pos, state);
         addComponent(new ComponentTickable(this).tickServer(this::tickServer));
         addComponent(new ComponentPacketHandler(this));
-        addComponent(new ComponentElectrodynamic(this, false, true).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(Constants.PIPE_PUMP_USAGE_PER_TICK * 10).setInputDirections(Direction.WEST));
+        addComponent(new ComponentElectrodynamic(this, false, true).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(Constants.PIPE_PUMP_USAGE_PER_TICK * 10).setInputDirections(BlockEntityUtils.MachineDirection.LEFT));
         addComponent(new ComponentContainerProvider("container.fluidpipepump", this).createMenu((id, inv) -> new ContainerFluidPipePump(id, inv, getCoordsArray())));
     }
 
@@ -73,11 +73,11 @@ public class TileFluidPipePump extends GenericTile {
 
         Direction facing = getFacing();
 
-        if (side == BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR)) {
+        if (side == BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR.mappedDir)) {
             return CapabilityUtils.EMPTY_FLUID;
         }
 
-        if (side == BlockEntityUtils.getRelativeSide(facing, INPUT_DIR)) {
+        if (side == BlockEntityUtils.getRelativeSide(facing, INPUT_DIR.mappedDir)) {
 
             BlockEntity output = level.getBlockEntity(worldPosition.relative(side.getOpposite()));
             if (output == null) {

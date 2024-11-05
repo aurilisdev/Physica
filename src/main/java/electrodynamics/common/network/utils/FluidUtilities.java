@@ -5,7 +5,6 @@ import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
@@ -19,15 +18,6 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 public class FluidUtilities {
-
-	public static boolean isFluidReceiver(BlockEntity acceptor) {
-		for (Direction dir : Direction.values()) {
-			if (isFluidReceiver(acceptor, dir)) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	public static boolean isFluidReceiver(BlockEntity acceptor, Direction dir) {
 		return acceptor != null && acceptor.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, acceptor.getBlockPos(), acceptor.getBlockState(), acceptor, dir) != null;
@@ -71,11 +61,9 @@ public class FluidUtilities {
 
 		for (Direction relative : outputDirections) {
 
-			Direction direction = BlockEntityUtils.getRelativeSide(facing, relative.getOpposite());
+			Direction direction = BlockEntityUtils.getRelativeSide(facing, relative);
 
-			BlockPos face = tile.getBlockPos().relative(direction.getOpposite());
-
-			BlockEntity faceTile = tile.getLevel().getBlockEntity(face);
+			BlockEntity faceTile = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(direction));
 
 			if (faceTile == null) {
 				continue;

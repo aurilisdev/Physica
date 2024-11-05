@@ -32,7 +32,7 @@ public class TileChemicalReactorDummy extends GenericTile {
     @Override
     public @Nullable ICapabilityElectrodynamic getElectrodynamicCapability(@Nullable Direction side) {
 
-        if(getLevel().getBlockEntity(getBlockPos().offset(getLocation().offsetDownToParent)) instanceof TileChemicalReactor reactor){
+        if(getLevel().getBlockEntity(getBlockPos().offset(getLocation().offsetDownToParent)) instanceof TileChemicalReactor reactor && getLocation() == BlockChemicalReactorExtra.Location.TOP){
             return reactor.<ComponentElectrodynamic>getComponent(IComponentType.Electrodynamic).getCapability(side, CapabilityInputType.NONE);
         }
 
@@ -42,7 +42,7 @@ public class TileChemicalReactorDummy extends GenericTile {
     @Override
     public @Nullable IFluidHandler getFluidHandlerCapability(@Nullable Direction side) {
 
-        if(getLevel().getBlockEntity(getBlockPos().offset(getLocation().offsetDownToParent)) instanceof TileChemicalReactor reactor){
+        if(getLevel().getBlockEntity(getBlockPos().offset(getLocation().offsetDownToParent)) instanceof TileChemicalReactor reactor && getLocation() == BlockChemicalReactorExtra.Location.TOP){
             return reactor.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getCapability(side, CapabilityInputType.NONE);
         }
 
@@ -51,7 +51,7 @@ public class TileChemicalReactorDummy extends GenericTile {
 
     @Override
     public @Nullable IItemHandler getItemHandlerCapability(@Nullable Direction side) {
-        if(getLevel().getBlockEntity(getBlockPos().offset(getLocation().offsetDownToParent)) instanceof TileChemicalReactor reactor) {
+        if(getLevel().getBlockEntity(getBlockPos().offset(getLocation().offsetDownToParent)) instanceof TileChemicalReactor reactor && getLocation() == BlockChemicalReactorExtra.Location.MIDDLE) {
             return reactor.<ComponentInventory>getComponent(IComponentType.Inventory).getCapability(side, CapabilityInputType.NONE);
         }
 

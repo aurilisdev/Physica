@@ -11,12 +11,10 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 
 public class GenericTileFluidTank extends GenericMaterialTile {
@@ -25,37 +23,21 @@ public class GenericTileFluidTank extends GenericMaterialTile {
 		super(tile, pos, state);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentFluidHandlerSimple(capacity, this, "").setInputDirections(Direction.UP).setOutputDirections(Direction.DOWN));
+		addComponent(new ComponentFluidHandlerSimple(capacity, this, "").setInputDirections(BlockEntityUtils.MachineDirection.TOP).setOutputDirections(BlockEntityUtils.MachineDirection.BOTTOM));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().bucketInputs(1).bucketOutputs(1)).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider(machine, this).createMenu((id, player) -> new ContainerFluidTankGeneric(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}
 
 	public void tickServer(ComponentTickable tick) {
-		ComponentFluidHandlerSimple handler = (ComponentFluidHandlerSimple) getComponent(IComponentType.FluidHandler);
+		ComponentFluidHandlerSimple handler = getComponent(IComponentType.FluidHandler);
 		FluidUtilities.drainItem(this, handler.toArray());
 		FluidUtilities.fillItem(this, handler.toArray());
 		FluidUtilities.outputToPipe(this, handler.toArray(), handler.outputDirections);
 
-		// Output to tank below
-		BlockPos pos = getBlockPos();
-		BlockPos below = pos.below();
+		if (level.getBlockEntity(getBlockPos().below()) instanceof GenericTileFluidTank tankBelow) {
+			ComponentFluidHandlerSimple belowHandler = tankBelow.getComponent(IComponentType.FluidHandler);
 
-		if (level.getBlockState(below).hasBlockEntity()) {
-			BlockEntity tile = level.getBlockEntity(below);
-			if (tile instanceof GenericTileFluidTank tankBelow) {
-				ComponentFluidHandlerSimple belowHandler = tankBelow.getComponent(IComponentType.FluidHandler);
-				ComponentFluidHandlerSimple thisHandler = getComponent(IComponentType.FluidHandler);
-
-				if (belowHandler.isFluidValid(0, thisHandler.getFluid())) {
-					int room = belowHandler.getSpace();
-					if (room > 0) {
-						int amtTaken = room >= thisHandler.getFluidAmount() ? thisHandler.getFluidAmount() : room;
-						FluidStack stack = new FluidStack(thisHandler.getFluid().getFluid(), amtTaken);
-						belowHandler.fill(stack, FluidAction.EXECUTE);
-						thisHandler.drain(stack, FluidAction.EXECUTE);
-					}
-				}
-			}
+			handler.drain(belowHandler.fill(handler.getFluid(), FluidAction.EXECUTE), FluidAction.EXECUTE);
 		}
 	}
 

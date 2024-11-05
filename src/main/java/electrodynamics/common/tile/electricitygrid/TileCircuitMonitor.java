@@ -10,6 +10,7 @@ import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
 import electrodynamics.registers.ElectrodynamicsTiles;
@@ -39,7 +40,7 @@ public class TileCircuitMonitor extends GenericTile {
 		super(ElectrodynamicsTiles.TILE_CIRCUITMONITOR.get(), worldPos, blockState);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
-		addComponent(new ComponentElectrodynamic(this, false, false).voltage(-1).receivePower((transfer, debug) -> TransferPack.EMPTY).getConnectedLoad((profile, dir) -> TransferPack.EMPTY).setInputDirections(Direction.SOUTH));
+		addComponent(new ComponentElectrodynamic(this, false, false).voltage(-1).receivePower((transfer, debug) -> TransferPack.EMPTY).getConnectedLoad((profile, dir) -> TransferPack.EMPTY).setInputDirections(BlockEntityUtils.MachineDirection.BACK));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.circuitmonitor, this).createMenu((id, inv) -> new ContainerCircuitMonitor(id, inv, getCoordsArray())));
 	}
 

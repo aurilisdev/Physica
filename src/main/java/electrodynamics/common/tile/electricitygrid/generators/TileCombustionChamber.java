@@ -19,6 +19,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.CombustionFuelSource;
@@ -33,6 +34,8 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+
+import javax.crypto.Mac;
 
 public class TileCombustionChamber extends GenericMaterialTile implements IElectricGenerator, ITickableSound {
 
@@ -52,9 +55,9 @@ public class TileCombustionChamber extends GenericMaterialTile implements IElect
 		super(ElectrodynamicsTiles.TILE_COMBUSTIONCHAMBER.get(), worldPosition, blockState);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.EAST));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.RIGHT));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().bucketInputs(1)).valid((slot, stack, i) -> stack.getCapability(Capabilities.FluidHandler.ITEM) != null));
-		addComponent(new ComponentFluidHandlerMulti(this).setInputTanks(1, TANK_CAPACITY).setInputDirections(Direction.WEST).setInputFluidTags(CombustionFuelRegister.INSTANCE.getFluidTags()));
+		addComponent(new ComponentFluidHandlerMulti(this).setInputTanks(1, TANK_CAPACITY).setInputDirections(BlockEntityUtils.MachineDirection.LEFT).setInputFluidTags(CombustionFuelRegister.INSTANCE.getFluidTags()));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.combustionchamber, this).createMenu((id, player) -> new ContainerCombustionChamber(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}
 

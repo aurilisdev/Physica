@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class GenericTileValve extends GenericTile {
 
-	public static final Direction INPUT_DIR = Direction.SOUTH;
-	public static final Direction OUTPUT_DIR = Direction.NORTH;
+	public static final BlockEntityUtils.MachineDirection INPUT_DIR = BlockEntityUtils.MachineDirection.FRONT;
+	public static final BlockEntityUtils.MachineDirection OUTPUT_DIR = BlockEntityUtils.MachineDirection.BACK;
 
 	public boolean isClosed = false;
 

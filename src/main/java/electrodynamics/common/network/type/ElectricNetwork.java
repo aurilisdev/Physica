@@ -334,7 +334,7 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
 
     @Override
     public boolean isAcceptor(BlockEntity acceptor, Direction orientation) {
-        return ElectricityUtils.isElectricReceiver(acceptor);
+        return ElectricityUtils.isElectricReceiver(acceptor, orientation.getOpposite());
     }
 
     @Override
@@ -360,13 +360,14 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
 
     @Override
     public boolean canConnect(BlockEntity acceptor, Direction orientation) {
-        return ElectricityUtils.canInputPower(acceptor, orientation.getOpposite());
+        return ElectricityUtils.isElectricReceiver(acceptor, orientation.getOpposite());
     }
 
     @Override
     public double getJoulesStored() {
         return transferBuffer;
     }
+
 
     @Override
     public void setJoulesStored(double joules) {

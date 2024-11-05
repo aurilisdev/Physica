@@ -11,6 +11,7 @@ import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
@@ -47,13 +48,16 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
 
     private boolean isPlayingSound = false;
 
+    public static final BlockEntityUtils.MachineDirection OUTPUT = BlockEntityUtils.MachineDirection.FRONT;
+    public static final BlockEntityUtils.MachineDirection INPUT = BlockEntityUtils.MachineDirection.BACK;
+
     public TileGenericTransformer(BlockEntityType<?> type, BlockPos worldPosition, BlockState blockState) {
         super(type, worldPosition, blockState);
         addComponent(new ComponentPacketHandler(this));
         if (Constants.SHOULD_TRANSFORMER_HUM) {
             addComponent(new ComponentTickable(this).tickClient(this::tickClient));
         }
-        addComponent(new ComponentElectrodynamic(this, true, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setOutputDirections(Direction.SOUTH).setInputDirections(Direction.NORTH).voltage(-1.0).getAmpacity(this::getAmpacity).getMinimumVoltage(this::getMinimumVoltage));
+        addComponent(new ComponentElectrodynamic(this, true, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setOutputDirections(OUTPUT).setInputDirections(INPUT).voltage(-1.0).getAmpacity(this::getAmpacity).getMinimumVoltage(this::getMinimumVoltage));
     }
 
     public void tickClient(ComponentTickable tickable) {
@@ -143,7 +147,7 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
 
         BlockEntity outputTile = output.getSafe();
 
-        ICapabilityElectrodynamic electro = level.getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, outputTile.getBlockPos(), outputTile.getBlockState(), outputTile, facing);
+        ICapabilityElectrodynamic electro = level.getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, outputTile.getBlockPos(), outputTile.getBlockState(), outputTile, facing.getOpposite());
 
         double minimumVoltage = -1;
 
@@ -172,7 +176,7 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
 
         BlockEntity outputTile = output.getSafe();
 
-        ICapabilityElectrodynamic electro = level.getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, outputTile.getBlockPos(), outputTile.getBlockState(), outputTile, facing);
+        ICapabilityElectrodynamic electro = level.getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, outputTile.getBlockPos(), outputTile.getBlockState(), outputTile, facing.getOpposite());
 
         double ampacity = -1;
 

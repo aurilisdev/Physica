@@ -8,6 +8,7 @@ import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.object.TransferPack;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
@@ -21,7 +22,9 @@ public class TilePotentiometer extends GenericTile {
 	public TilePotentiometer(BlockPos pos, BlockState state) {
 		super(ElectrodynamicsTiles.TILE_POTENTIOMETER.get(), pos, state);
 		addComponent(new ComponentContainerProvider(SubtypeMachine.potentiometer, this).createMenu((id, player) -> new ContainerPotentiometer(id, player, getCoordsArray())));
-		addComponent(new ComponentElectrodynamic(this, false, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setInputDirections(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.DOWN).voltage(-1.0D));
+		addComponent(new ComponentElectrodynamic(this, false, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad)
+				//
+				.setInputDirections(BlockEntityUtils.MachineDirection.FRONT, BlockEntityUtils.MachineDirection.BACK, BlockEntityUtils.MachineDirection.LEFT, BlockEntityUtils.MachineDirection.RIGHT, BlockEntityUtils.MachineDirection.BOTTOM).voltage(-1.0D));
 	}
 
 	private TransferPack receivePower(TransferPack pack, boolean debug) {
@@ -33,7 +36,7 @@ public class TilePotentiometer extends GenericTile {
 	}
 
 	private TransferPack getConnectedLoad(LoadProfile loadProfile, Direction dir) {
-		if (dir == Direction.UP || dir == Direction.DOWN) {
+		if (dir == Direction.DOWN) {
 			return TransferPack.EMPTY;
 		}
 		return TransferPack.joulesVoltage(powerConsumption.get() < 0 ? Double.MAX_VALUE : powerConsumption.get(), -1);

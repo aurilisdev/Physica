@@ -10,9 +10,9 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -29,7 +29,7 @@ public class TileFluidVoid extends GenericMaterialTile {
 		super(ElectrodynamicsTiles.TILE_FLUIDVOID.get(), worldPos, blockState);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentFluidHandlerSimple(CAPACITY, this, "").setInputDirections(Direction.values()));
+		addComponent(new ComponentFluidHandlerSimple(CAPACITY, this, "").setInputDirections(BlockEntityUtils.MachineDirection.values()));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().bucketInputs(1)).valid((slot, stack, i) -> stack.getCapability(Capabilities.FluidHandler.ITEM) != null));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.fluidvoid, this).createMenu((id, player) -> new ContainerFluidVoid(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}

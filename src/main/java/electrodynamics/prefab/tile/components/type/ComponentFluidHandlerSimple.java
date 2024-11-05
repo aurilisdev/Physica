@@ -67,14 +67,14 @@ public class ComponentFluidHandlerSimple extends PropertyFluidTank implements IC
         super(other);
     }
 
-    public ComponentFluidHandlerSimple setInputDirections(Direction... directions) {
-        inputDirections = directions;
+    public ComponentFluidHandlerSimple setInputDirections(BlockEntityUtils.MachineDirection... directions) {
+        inputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         isSided = true;
         return this;
     }
 
-    public ComponentFluidHandlerSimple setOutputDirections(Direction... directions) {
-        outputDirections = directions;
+    public ComponentFluidHandlerSimple setOutputDirections(BlockEntityUtils.MachineDirection... directions) {
+        outputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         isSided = true;
         return this;
     }
