@@ -52,8 +52,12 @@ public class ElectrodynamicsMenuTypes {
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerGasTankGeneric>> CONTAINER_GASTANK = register("gastank", ContainerGasTankGeneric::new);
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerCompressor>> CONTAINER_COMPRESSOR = register("compressor", ContainerCompressor::new);
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerDecompressor>> CONTAINER_DECOMPRESSOR = register("decompressor", ContainerDecompressor::new);
+
+	public static final DeferredHolder<MenuType<?>,MenuType<ContainerAdvancedCompressor>> CONTAINER_ADVANCEDCOMPRESSOR = register("advancedcompressor", ContainerAdvancedCompressor::new);
+	public static final DeferredHolder<MenuType<?>,MenuType<ContainerAdvancedDecompressor>> CONTAINER_ADVANCEDDECOMPRESSOR = register("advanceddecompressor", ContainerAdvancedDecompressor::new);
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerGasVent>> CONTAINER_GASVENT = register("gasvent", ContainerGasVent::new);
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerThermoelectricManipulator>> CONTAINER_THERMOELECTRICMANIPULATOR = register("thermoelectricmanipulator", ContainerThermoelectricManipulator::new);
+	public static final DeferredHolder<MenuType<?>,MenuType<ContainerAdvancedThermoelectricManipulator>> CONTAINER_ADVANCED_THERMOELECTRICMANIPULATOR = register("advancedthermoelectricmanipulator", ContainerAdvancedThermoelectricManipulator::new);
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerGasPipePump>> CONTAINER_GASPIPEPUMP = register("gaspipepump", ContainerGasPipePump::new);
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerFluidPipePump>> CONTAINER_FLUIDPIPEPUMP = register("fluidpipepump", ContainerFluidPipePump::new);
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerGasPipeFilter>> CONTAINER_GASPIPEFILTER = register("gaspipefilter", ContainerGasPipeFilter::new);

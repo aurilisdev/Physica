@@ -2,7 +2,7 @@ package electrodynamics.common.block;
 
 import com.mojang.serialization.MapCodec;
 
-import electrodynamics.common.tile.pipelines.fluids.TileFluidPipeFilter;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidPipeFilter;
 import electrodynamics.common.tile.pipelines.gas.TileGasPipeFilter;
 import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.block.GenericMachineBlock;

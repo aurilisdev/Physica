@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=east,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulatorcool",
+      "y": 180
+    },
+    "facing=east,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulatorheat",
+      "y": 180
+    },
+    "facing=east,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulator",
+      "y": 180
+    },
+    "facing=north,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulatorcool",
+      "y": 90
+    },
+    "facing=north,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulatorheat",
+      "y": 90
+    },
+    "facing=north,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulator",
+      "y": 90
+    },
+    "facing=south,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulatorcool",
+      "y": 270
+    },
+    "facing=south,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulatorheat",
+      "y": 270
+    },
+    "facing=south,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulator",
+      "y": 270
+    },
+    "facing=west,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulatorcool"
+    },
+    "facing=west,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulatorheat"
+    },
+    "facing=west,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/advancedthermoelectricmanipulator"
+    }
+  }
+}

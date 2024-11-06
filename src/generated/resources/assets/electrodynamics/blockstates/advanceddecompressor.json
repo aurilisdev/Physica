@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "electrodynamics:block/advanceddecompressor",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "electrodynamics:block/advanceddecompressor",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "electrodynamics:block/advanceddecompressor",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "electrodynamics:block/advanceddecompressor"
+    }
+  }
+}

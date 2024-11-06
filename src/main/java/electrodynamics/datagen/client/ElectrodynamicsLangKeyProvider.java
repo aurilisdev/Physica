@@ -347,10 +347,13 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 
 			addBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR, "Compressor");
 			addBlock(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR, "Decompressor");
+			addBlock(ElectrodynamicsBlocks.BLOCK_ADVANCEDCOMPRESSOR, "Compressor MK2");
+			addBlock(ElectrodynamicsBlocks.BLOCK_ADVANCEDDECOMPRESSOR, "Decompressor MK2");
 			addBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK, "Pressurized Tank");
 			addBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE, "Compressor Side");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvent), "Gas Vent");
-			addBlock(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR, "Thermoelectric Manipulator");
+			addBlock(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR, "GTL Chamber");
+			addBlock(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR, "GTL Chamber MK2");
 
 			addBlock(ElectrodynamicsBlocks.BLOCK_GASVALVE, "Gas Valve");
 			addBlock(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE, "Fluid Valve");
@@ -725,8 +728,11 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addContainer(SubtypeMachine.gastankhsla, "HSLA Gas Cylinder");
 			addContainer("compressor", "Compressor");
 			addContainer("decompressor", "Decompressor");
+			addContainer("advancedcompressor", "Compressor MK2");
+			addContainer("advanceddecompressor", "Decompressor MK2");
 			addContainer(SubtypeMachine.gasvent, "Gas Vent");
-			addContainer("thermoelectricmanipulator", "Thermoelectric Manipulator");
+			addContainer("thermoelectricmanipulator", "GTL Chamber");
+			addContainer("advancedthermoelectricmanipulator", "GTL Chamber MK2");
 
 			addContainer("gaspipepump", "Gas Pipe Pump");
 			addContainer("fluidpipepump", "Fluid Pipe Pump");

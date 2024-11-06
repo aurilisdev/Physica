@@ -200,9 +200,9 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrindertriple), existingBlock(blockLoc("mineralgrindertripleitem")));
 		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.motorcomplex), existingBlock(blockLoc("motorcomplexitem")));
 		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.windmill), existingBlock(blockLoc("windmillitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_COMPRESSOR.get(), existingBlock(blockLoc("compressoritem"))).transforms().transform(ItemDisplayContext.GUI).scale(0.3333F).rotation(30.0F, 225.0F, 0.0F).end();
-		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR.get(), existingBlock(blockLoc("decompressoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30.0F, 225.0F, 0.0F).scale(0.3333F).end();
-		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get(), existingBlock(blockLoc("thermoelectricmanipulatoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30.0F, 225.0F, 0.0F).scale(0.3333F).end();
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_ADVANCEDCOMPRESSOR.get(), existingBlock(blockLoc("advancedcompressoritem"))).transforms().transform(ItemDisplayContext.GUI).scale(0.3333F).rotation(30.0F, 225.0F, 0.0F).end();
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_ADVANCEDDECOMPRESSOR.get(), existingBlock(blockLoc("advanceddecompressoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30.0F, 225.0F, 0.0F).scale(0.3333F).end();
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get(), existingBlock(blockLoc("advancedthermoelectricmanipulatoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30.0F, 225.0F, 0.0F).scale(0.3333F).end();
 		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get(), existingBlock(blockLoc("chemicalreactoritem"))).transforms().transform(ItemDisplayContext.GUI).scale(0.3F).rotation(30.0F, 225.0F, 0.0F).end();
 
 		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP.get(), existingBlock(blockLoc("gaspipepumpitem")));

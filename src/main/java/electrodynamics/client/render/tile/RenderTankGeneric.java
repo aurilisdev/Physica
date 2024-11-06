@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
-import electrodynamics.common.tile.pipelines.tanks.fluid.GenericTileFluidTank;
+import electrodynamics.common.tile.pipelines.fluid.tank.GenericTileFluidTank;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerSimple;
 import electrodynamics.prefab.utilities.RenderingUtils;

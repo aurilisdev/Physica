@@ -1,6 +1,6 @@
 package electrodynamics.common.inventory.container.tile;
 
-import electrodynamics.common.tile.pipelines.tanks.gas.GenericTileGasTank;
+import electrodynamics.common.tile.pipelines.gas.tank.GenericTileGasTank;
 import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotGas;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;

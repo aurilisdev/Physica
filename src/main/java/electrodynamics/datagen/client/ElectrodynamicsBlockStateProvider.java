@@ -139,8 +139,8 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankreinforced), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankreinforced)), true);
         horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankhsla), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankhsla)), true);
 
-        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR, existingBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR.get()), 180, 0, false);
-        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR, existingBlock(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR.get()), 180, 0, false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_ADVANCEDCOMPRESSOR, existingBlock(ElectrodynamicsBlocks.BLOCK_ADVANCEDCOMPRESSOR.get()), 180, 0, false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_ADVANCEDDECOMPRESSOR, existingBlock(ElectrodynamicsBlocks.BLOCK_ADVANCEDDECOMPRESSOR.get()), 180, 0, false);
         genCompressorAddonTank();
         genCompressorSide();
         simpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvent), blockLoc("gasvent"), true);
@@ -303,11 +303,11 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
     }
 
     private void genThermoelectricManipulator() {
-        Block block = ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get();
+        Block block = ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get();
 
         ModelFile off = existingBlock(block);
-        ModelFile cool = existingBlock(blockLoc("thermoelectricmanipulatorcool"));
-        ModelFile heat = existingBlock(blockLoc("thermoelectricmanipulatorheat"));
+        ModelFile cool = existingBlock(blockLoc("advancedthermoelectricmanipulatorcool"));
+        ModelFile heat = existingBlock(blockLoc("advancedthermoelectricmanipulatorheat"));
 
         getVariantBuilder(block)
 

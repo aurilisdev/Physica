@@ -50,9 +50,9 @@ public class TileGasTransformerAddonTank extends GenericTile {
 			above = above.above();
 			aboveTile = getLevel().getBlockEntity(above);
 		}
-		if (getLevel().getBlockEntity(ownerPos) instanceof TileGasTransformerSideBlock side) {
+		if (getLevel().getBlockEntity(ownerPos) instanceof IAddonTankManager manager) {
 			// isDestroyed = true;
-			side.updateTankCount();
+			manager.updateTankCount();
 		}
 	}
 
@@ -65,10 +65,8 @@ public class TileGasTransformerAddonTank extends GenericTile {
 		BlockPos belowPos = getBlockPos().below();
 		BlockState below = getLevel().getBlockState(belowPos);
 		for (int i = 0; i < MAX_ADDON_TANKS; i++) {
-			if (below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE)) {
-				if (getLevel().getBlockEntity(belowPos) instanceof TileGasTransformerSideBlock side) {
-					side.updateTankCount();
-				}
+			if (getLevel().getBlockEntity(belowPos) instanceof IAddonTankManager manager) {
+				manager.updateTankCount();
 				break;
 			}
 			if (!below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK)) {
@@ -81,7 +79,7 @@ public class TileGasTransformerAddonTank extends GenericTile {
 
 	@Override
 	public ItemInteractionResult useWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (getLevel().getBlockEntity(ownerPos) instanceof TileGasTransformerSideBlock compressor) {
+		if (getLevel().getBlockEntity(ownerPos) instanceof GenericTile compressor) {
 			return compressor.useWithItem(used, player, hand, hit);
 		}
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -89,7 +87,7 @@ public class TileGasTransformerAddonTank extends GenericTile {
 
 	@Override
 	public InteractionResult useWithoutItem(Player player, BlockHitResult hit) {
-		if (getLevel().getBlockEntity(ownerPos) instanceof TileGasTransformerSideBlock compressor) {
+		if (getLevel().getBlockEntity(ownerPos) instanceof GenericTile compressor) {
 			return compressor.useWithoutItem(player, hit);
 		}
 		return InteractionResult.FAIL;

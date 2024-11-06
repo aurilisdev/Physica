@@ -10,7 +10,7 @@ import electrodynamics.common.block.connect.util.AbstractRefreshingConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.common.network.utils.FluidUtilities;
-import electrodynamics.common.tile.pipelines.fluids.TileFluidPipe;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidPipe;
 import electrodynamics.prefab.tile.types.GenericConnectTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class BlockFluidPipe extends AbstractRefreshingConnectBlock {
 

@@ -6,7 +6,7 @@ import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.screen.ITexture.Textures;
 import electrodynamics.common.inventory.container.tile.ContainerThermoelectricManipulator;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.GenericTileGasTransformer;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileThermoelectricManipulator;
+import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.GenericTileThermoelectricManipulator;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
 import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
@@ -36,28 +36,28 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 		imageHeight += 30;
 		inventoryLabelY += 30;
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
 			}
 			return null;
 		}, 10, 18));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getOutputTanks()[0];
 			}
 			return null;
 		}, 96, 18));
 		addComponent(new ScreenComponentGasGauge(() -> {
-			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getInputTanks()[0];
 			}
 			return null;
 		}, 46, 18));
 		addComponent(new ScreenComponentGasGauge(() -> {
-			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getHostFromIntArray();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getOutputTanks()[0];
 			}
@@ -76,7 +76,7 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 
 	private void setTemperature(String temp) {
 
-		TileThermoelectricManipulator manipulator = menu.getHostFromIntArray();
+		GenericTileThermoelectricManipulator manipulator = menu.getHostFromIntArray();
 
 		if (manipulator == null) {
 			return;
@@ -110,7 +110,7 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			TileThermoelectricManipulator manipulator = menu.getHostFromIntArray();
+			GenericTileThermoelectricManipulator manipulator = menu.getHostFromIntArray();
 			if (manipulator != null) {
 				temperature.setValue("" + manipulator.targetTemperature.get());
 			}

@@ -155,6 +155,10 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
 		addMachineTable(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR.get(), ElectrodynamicsTiles.TILE_DECOMPRESSOR, true, false, true, true, false);
 		addMachineTable(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get(), ElectrodynamicsTiles.TILE_THERMOELECTRIC_MANIPULATOR, true, true, true, true, false);
 
+		addMachineTable(ElectrodynamicsBlocks.BLOCK_ADVANCEDCOMPRESSOR.get(), ElectrodynamicsTiles.TILE_ADVANCEDCOMPRESSOR, true, false, true, true, false);
+		addMachineTable(ElectrodynamicsBlocks.BLOCK_ADVANCEDDECOMPRESSOR.get(), ElectrodynamicsTiles.TILE_ADVANCEDDECOMPRESSOR, true, false, true, true, false);
+		addMachineTable(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get(), ElectrodynamicsTiles.TILE_ADVANCED_THERMOELECTRIC_MANIPULATOR, true, true, true, true, false);
+
 		addMachineTable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastanksteel), ElectrodynamicsTiles.TILE_GASTANK_STEEL, true, false, true, false, false);
 		addMachineTable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankreinforced), ElectrodynamicsTiles.TILE_GASTANK_REINFORCED, true, false, true, false, false);
 		addMachineTable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gastankhsla), ElectrodynamicsTiles.TILE_GASTANK_HSLA, true, false, true, false, false);

@@ -1,6 +1,6 @@
 package electrodynamics.common.inventory.container.tile;
 
-import electrodynamics.common.tile.pipelines.fluids.TileFluidPipeFilter;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidPipeFilter;
 import electrodynamics.prefab.inventory.container.ContainerBlockEntityEmpty;
 import electrodynamics.registers.ElectrodynamicsMenuTypes;
 import net.minecraft.world.entity.player.Inventory;

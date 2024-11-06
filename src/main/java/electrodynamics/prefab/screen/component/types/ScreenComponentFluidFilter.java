@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import electrodynamics.common.tile.pipelines.fluids.TileFluidPipeFilter;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidPipeFilter;
 import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.screen.GenericScreen;

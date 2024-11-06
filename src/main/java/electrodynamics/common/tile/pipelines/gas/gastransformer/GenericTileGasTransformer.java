@@ -11,14 +11,10 @@ import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericGasTile;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 public abstract class GenericTileGasTransformer extends GenericGasTile implements ITickableSound {
-
-	public boolean hasBeenDestroyed = false;
 
 	protected boolean isSoundPlaying = false;
 
@@ -60,39 +56,6 @@ public abstract class GenericTileGasTransformer extends GenericGasTile implement
 	@Override
 	public boolean shouldPlaySound() {
 		return this.<ComponentProcessor>getComponent(IComponentType.Processor).isActive();
-	}
-
-	@Override
-	public void onPlace(BlockState oldState, boolean isMoving) {
-		super.onPlace(oldState, isMoving);
-		if (level.isClientSide) {
-			return;
-		}
-		Direction facing = getFacing();
-
-		BlockEntity left = getLevel().getBlockEntity(getBlockPos().relative(BlockEntityUtils.getRelativeSide(facing, Direction.EAST)));
-		BlockEntity right = getLevel().getBlockEntity(getBlockPos().relative(BlockEntityUtils.getRelativeSide(facing, Direction.WEST)));
-
-		if (left != null && right != null && left instanceof TileGasTransformerSideBlock leftTile && right instanceof TileGasTransformerSideBlock rightTile) {
-			leftTile.setOwnerPos(getBlockPos());
-			leftTile.setIsLeft();
-			leftTile.setChanged();
-			rightTile.setOwnerPos(getBlockPos());
-			rightTile.setChanged();
-		}
-	}
-
-	public abstract void updateAddonTanks(int count, boolean isLeft);
-
-	@Override
-	public void onBlockDestroyed() {
-		if (level.isClientSide || hasBeenDestroyed) {
-			return;
-		}
-		hasBeenDestroyed = true;
-		Direction facing = getFacing();
-		getLevel().destroyBlock(getBlockPos().relative(BlockEntityUtils.getRelativeSide(facing, Direction.WEST)), false);
-		getLevel().destroyBlock(getBlockPos().relative(BlockEntityUtils.getRelativeSide(facing, Direction.EAST)), false);
 	}
 
 	public abstract ComponentContainerProvider getContainerProvider();

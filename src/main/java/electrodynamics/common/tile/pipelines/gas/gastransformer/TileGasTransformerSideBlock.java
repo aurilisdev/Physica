@@ -26,7 +26,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import java.util.Optional;
 
-public class TileGasTransformerSideBlock extends GenericTile {
+public class TileGasTransformerSideBlock extends GenericTile implements IAddonTankManager {
 
     private BlockPos ownerPos = BlockEntityUtils.OUT_OF_REACH;
     private boolean isLeft = false;
@@ -56,6 +56,7 @@ public class TileGasTransformerSideBlock extends GenericTile {
         updateTankCount();
     }
 
+    @Override
     public void updateTankCount() {
         BlockPos abovePos = getBlockPos().above();
         BlockState aboveState = getLevel().getBlockState(abovePos);
@@ -75,7 +76,7 @@ public class TileGasTransformerSideBlock extends GenericTile {
             tankCount++;
         }
         BlockEntity owner = getLevel().getBlockEntity(ownerPos);
-        if (owner != null && owner instanceof GenericTileGasTransformer compressor) {
+        if (owner != null && owner instanceof IMultiblockGasTransformer compressor) {
             compressor.updateAddonTanks(tankCount, isLeft);
         }
     }
@@ -85,8 +86,8 @@ public class TileGasTransformerSideBlock extends GenericTile {
         if (level.isClientSide) {
             return;
         }
-        if (getLevel().getBlockEntity(ownerPos) instanceof GenericTileGasTransformer compressor) {
-            getLevel().destroyBlock(ownerPos, !compressor.hasBeenDestroyed);
+        if (getLevel().getBlockEntity(ownerPos) instanceof IMultiblockGasTransformer compressor) {
+            getLevel().destroyBlock(ownerPos, !compressor.hasBeenDestroyed());
         }
     }
 
@@ -111,9 +112,7 @@ public class TileGasTransformerSideBlock extends GenericTile {
             return null;
         }
 
-        BlockEntity owner = getLevel().getBlockEntity(ownerPos);
-
-        if (owner instanceof GenericTileGasTransformer compressor && compressor.hasComponent(IComponentType.FluidHandler)) {
+        if (getLevel().getBlockEntity(ownerPos) instanceof GenericTileGasTransformer compressor && compressor.hasComponent(IComponentType.FluidHandler)) {
 
             if (isLeft) {
                 return compressor.<IComponentFluidHandler>getComponent(IComponentType.FluidHandler).getCapability(side, CapabilityInputType.INPUT);
@@ -130,9 +129,7 @@ public class TileGasTransformerSideBlock extends GenericTile {
             return null;
         }
 
-        BlockEntity owner = getLevel().getBlockEntity(ownerPos);
-
-        if (owner instanceof GenericTileGasTransformer compressor) {
+        if (getLevel().getBlockEntity(ownerPos) instanceof GenericTileGasTransformer compressor) {
             return compressor.getGasHandlerCapability(side);
         }
 

@@ -49,15 +49,15 @@ import electrodynamics.common.tile.machines.wiremill.TileWireMillDouble;
 import electrodynamics.common.tile.machines.wiremill.TileWireMillTriple;
 import electrodynamics.common.tile.pipelines.TileCreativeFluidSource;
 import electrodynamics.common.tile.pipelines.TileElectricPump;
-import electrodynamics.common.tile.pipelines.fluids.TileFluidVoid;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidVoid;
 import electrodynamics.common.tile.pipelines.gas.TileGasCollector;
 import electrodynamics.common.tile.pipelines.gas.TileGasVent;
-import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankHSLA;
-import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankReinforced;
-import electrodynamics.common.tile.pipelines.tanks.fluid.TileFluidTankSteel;
-import electrodynamics.common.tile.pipelines.tanks.gas.TileGasTankHSLA;
-import electrodynamics.common.tile.pipelines.tanks.gas.TileGasTankReinforced;
-import electrodynamics.common.tile.pipelines.tanks.gas.TileGasTankSteel;
+import electrodynamics.common.tile.pipelines.fluid.tank.TileFluidTankHSLA;
+import electrodynamics.common.tile.pipelines.fluid.tank.TileFluidTankReinforced;
+import electrodynamics.common.tile.pipelines.fluid.tank.TileFluidTankSteel;
+import electrodynamics.common.tile.pipelines.gas.tank.TileGasTankHSLA;
+import electrodynamics.common.tile.pipelines.gas.tank.TileGasTankReinforced;
+import electrodynamics.common.tile.pipelines.gas.tank.TileGasTankSteel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -127,8 +127,7 @@ public enum SubtypeMachine implements ISubtype {
     advanceddowngradetransformer(true, TileAdvancedDowngradeTransformer.class),
     circuitmonitor(true, TileCircuitMonitor.class),
     currentregulator(true, TileCurrentRegulator.class),
-
-    gascollector(true, TileGasCollector.class),
+    gascollector(true, TileGasCollector.class)
     ;
 
     public final Class<? extends BlockEntity> tileclass;

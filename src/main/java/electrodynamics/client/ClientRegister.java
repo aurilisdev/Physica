@@ -222,8 +222,11 @@ public class ClientRegister {
         event.register(ElectrodynamicsMenuTypes.CONTAINER_GASTANK.get(), ScreenGasTankGeneric::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_COMPRESSOR.get(), ScreenCompressor::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_DECOMPRESSOR.get(), ScreenDecompressor::new);
+        event.register(ElectrodynamicsMenuTypes.CONTAINER_ADVANCEDCOMPRESSOR.get(), ScreenAdvancedCompressor::new);
+        event.register(ElectrodynamicsMenuTypes.CONTAINER_ADVANCEDDECOMPRESSOR.get(), ScreenAdvancedDecompressor::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_GASVENT.get(), ScreenGasVent::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_THERMOELECTRICMANIPULATOR.get(), ScreenThermoelectricManipulator::new);
+        event.register(ElectrodynamicsMenuTypes.CONTAINER_ADVANCED_THERMOELECTRICMANIPULATOR.get(), ScreenAdvancedThermoelectricManipulator::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_GASPIPEPUMP.get(), ScreenGasPipePump::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_FLUIDPIPEPUMP.get(), ScreenFluidPipePump::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_GASPIPEFILTER.get(), ScreenGasPipeFilter::new);

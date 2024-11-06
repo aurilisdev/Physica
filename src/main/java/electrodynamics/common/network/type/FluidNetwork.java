@@ -13,7 +13,7 @@ import electrodynamics.api.network.cable.type.IFluidPipe;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.common.network.NetworkRegistry;
 import electrodynamics.common.network.utils.FluidUtilities;
-import electrodynamics.common.tile.pipelines.fluids.TileFluidPipePump;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidPipePump;
 import electrodynamics.prefab.network.AbstractNetwork;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
