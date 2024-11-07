@@ -1,5 +1,6 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer;
 
+import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.ItemInteractionResult;
@@ -22,9 +23,6 @@ import java.util.Optional;
 
 public class TileGasTransformerAddonTank extends GenericTile {
 
-	public static final int MAX_ADDON_TANKS = 5;
-	public static final double ADDITIONAL_CAPACITY = 5000;
-
 	private BlockPos ownerPos = BlockEntityUtils.OUT_OF_REACH;
 	// public boolean isDestroyed = false;
 
@@ -43,7 +41,7 @@ public class TileGasTransformerAddonTank extends GenericTile {
 		}
 		BlockPos above = getBlockPos().above();
 		BlockEntity aboveTile = getLevel().getBlockEntity(above);
-		for (int i = 0; i < MAX_ADDON_TANKS; i++) {
+		for (int i = 0; i < Constants.GAS_TRANSFORMER_ADDON_TANK_LIMIT; i++) {
 			if (aboveTile instanceof TileGasTransformerAddonTank tank) {
 				tank.setOwnerPos(BlockEntityUtils.OUT_OF_REACH);
 			}
@@ -64,7 +62,7 @@ public class TileGasTransformerAddonTank extends GenericTile {
 		}
 		BlockPos belowPos = getBlockPos().below();
 		BlockState below = getLevel().getBlockState(belowPos);
-		for (int i = 0; i < MAX_ADDON_TANKS; i++) {
+		for (int i = 0; i < Constants.GAS_TRANSFORMER_ADDON_TANK_LIMIT; i++) {
 			if (getLevel().getBlockEntity(belowPos) instanceof IAddonTankManager manager) {
 				manager.updateTankCount();
 				break;

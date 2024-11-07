@@ -1,4 +1,4 @@
-package electrodynamics.common.tile.pipelines;
+package electrodynamics.common.tile.pipelines.fluid;
 
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerCreativeFluidSource;

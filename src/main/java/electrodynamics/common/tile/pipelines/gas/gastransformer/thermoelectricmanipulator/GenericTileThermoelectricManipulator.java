@@ -31,10 +31,9 @@ import java.util.function.BiConsumer;
 public abstract class GenericTileThermoelectricManipulator extends GenericTileGasTransformer {
 
     /**
-     * NOTE this value can NEVER be more than 90. This is because above 90, it becomes possible to create an infinite energy
+     * NOTE heat transfer can NEVER be more than 90. This is because above 90, it becomes possible to create an infinite energy
      * loop with the steam turbine from Nuclear Science.
      */
-    private static final double HEAT_TRANSFER = 10.0; // degrees kelvin
 
     public final Property<Double> targetTemperature = property(new Property<>(PropertyTypes.DOUBLE, "targettemperature", Gas.ROOM_TEMPERATURE));
 
@@ -45,7 +44,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
 
     public GenericTileThermoelectricManipulator(BlockEntityType<?> type, BlockPos worldPos, BlockState blockState) {
         super(type, worldPos, blockState);
-        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(BASE_INPUT_CAPACITY * 10));
+        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(getUsagePerTick() * 10));
         addComponent(getFluidHandler());
     }
 
@@ -107,14 +106,14 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
 
         ComponentElectrodynamic electro = getComponent(IComponentType.Electrodynamic);
 
-        if (electro.getJoulesStored() < USAGE_PER_TICK * processor.operatingSpeed.get()) {
+        if (electro.getJoulesStored() < getUsagePerTick() * processor.operatingSpeed.get()) {
             return new ManipulatorStatusCheckWrapper(false, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF, false);
         }
 
         if (inputTank.getGas().getGas().getCondensationTemp() >= targetTemperature.get()) {
 
             // gas is condensed
-            ComponentFluidHandlerMulti.ComponentFluidHandlerMultiBiDirec fluidHandler = getComponent(IComponentType.FluidHandler);
+            ComponentFluidHandlerMulti fluidHandler = getComponent(IComponentType.FluidHandler);
 
             FluidTank outputTank = fluidHandler.getOutputTanks()[0];
 
@@ -174,7 +173,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
 
     private ManipulatorStatusCheckWrapper checkFluidConditions(ComponentProcessor processor) {
 
-        ComponentFluidHandlerMulti.ComponentFluidHandlerMultiBiDirec fluidHandler = getComponent(IComponentType.FluidHandler);
+        ComponentFluidHandlerMulti fluidHandler = getComponent(IComponentType.FluidHandler);
 
         FluidTank inputTank = fluidHandler.getInputTanks()[0];
 
@@ -184,7 +183,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
 
         ComponentElectrodynamic electro = getComponent(IComponentType.Electrodynamic);
 
-        if (electro.getJoulesStored() < USAGE_PER_TICK * processor.operatingSpeed.get()) {
+        if (electro.getJoulesStored() < getUsagePerTick() * processor.operatingSpeed.get()) {
             return new ManipulatorStatusCheckWrapper(false, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF, false);
         }
 
@@ -215,10 +214,10 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
 
     @Override
     public void process(ComponentProcessor processor) {
-        ComponentFluidHandlerMulti.ComponentFluidHandlerMultiBiDirec fluidHandler = getComponent(IComponentType.FluidHandler);
+        ComponentFluidHandlerMulti fluidHandler = getComponent(IComponentType.FluidHandler);
         ComponentGasHandlerMulti gasHandler = getComponent(IComponentType.GasHandler);
 
-        double conversionRate = BASE_CONVERSION_RATE * processor.operatingSpeed.get();
+        double conversionRate = getConversionRate() * processor.operatingSpeed.get();
 
         // fluid to gas
         if (isFluid && changeState) {
@@ -364,15 +363,17 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
         };
     }
 
-    private static double getAdjustedHeatingFactor(double deltaT) {
+    private double getAdjustedHeatingFactor(double deltaT) {
 
         if (deltaT == 0) {
             return 1;
         }
 
-        return Math.abs(HEAT_TRANSFER / deltaT);
+        return Math.abs(getHeatTransfer() / deltaT);
 
     }
+
+    public abstract double getHeatTransfer();
 
     private static record ManipulatorStatusCheckWrapper(boolean canProcess, ElectrodynamicsBlockStates.ManipulatorHeatingStatus status, boolean changeState) {
 

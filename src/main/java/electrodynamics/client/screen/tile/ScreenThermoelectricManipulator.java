@@ -5,7 +5,7 @@ import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.screen.ITexture.Textures;
 import electrodynamics.common.inventory.container.tile.ContainerThermoelectricManipulator;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.GenericTileGasTransformer;
+import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.GenericTileThermoelectricManipulator;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
@@ -96,8 +96,8 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 
 		if (temperature < GasStack.ABSOLUTE_ZERO) {
 			temperature = Gas.ROOM_TEMPERATURE;
-		} else if (temperature > GenericTileGasTransformer.OUTPUT_TEMPERATURE) {
-			temperature = GenericTileGasTransformer.OUTPUT_TEMPERATURE;
+		} else if (temperature > Constants.GAS_TRANSFORMER_OUTPUT_TEMP_CAP) {
+			temperature = Constants.GAS_TRANSFORMER_OUTPUT_TEMP_CAP;
 			this.temperature.setValue("" + temperature);
 		}
 

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "compressorsidehastoptank=false,facing=east": {
+      "model": "electrodynamics:block/decompressor",
+      "y": 90
+    },
+    "compressorsidehastoptank=false,facing=north": {
+      "model": "electrodynamics:block/decompressor"
+    },
+    "compressorsidehastoptank=false,facing=south": {
+      "model": "electrodynamics:block/decompressor",
+      "y": 180
+    },
+    "compressorsidehastoptank=false,facing=west": {
+      "model": "electrodynamics:block/decompressor",
+      "y": 270
+    },
+    "compressorsidehastoptank=true,facing=east": {
+      "model": "electrodynamics:block/decompressortoptank",
+      "y": 90
+    },
+    "compressorsidehastoptank=true,facing=north": {
+      "model": "electrodynamics:block/decompressortoptank"
+    },
+    "compressorsidehastoptank=true,facing=south": {
+      "model": "electrodynamics:block/decompressortoptank",
+      "y": 180
+    },
+    "compressorsidehastoptank=true,facing=west": {
+      "model": "electrodynamics:block/decompressortoptank",
+      "y": 270
+    }
+  }
+}

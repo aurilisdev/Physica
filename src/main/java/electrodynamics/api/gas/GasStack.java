@@ -81,15 +81,15 @@ public class GasStack {
     }
 
     public double getAmount() {
-        return amount;
+        return isEmpty() ? 0 : amount;
     }
 
     public double getTemperature() {
-        return temperature;
+        return isEmpty() ? Gas.ROOM_TEMPERATURE : temperature;
     }
 
     public int getPressure() {
-        return pressure;
+        return isEmpty() ? Gas.PRESSURE_AT_SEA_LEVEL : pressure;
     }
 
     public GasStack copy() {
@@ -173,7 +173,7 @@ public class GasStack {
     }
 
     public boolean isEmpty() {
-        return this.equals(EMPTY) || isEmpty;
+        return this.getGas().isEmpty() || isEmpty;
     }
 
     public boolean isSameGas(GasStack other) {

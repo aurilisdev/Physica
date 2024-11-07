@@ -6,8 +6,8 @@ import net.minecraft.network.chat.Component;
 
 public class TemperatureLabelWrapper extends AbstractLabelWrapper {
 
-	public TemperatureLabelWrapper(int color, int yPos, int endXPos, boolean xIsEnd) {
-		super(color, yPos, endXPos, xIsEnd);
+	public TemperatureLabelWrapper(int color, int yPos, int xPos, boolean xIsEnd) {
+		super(color, yPos, xPos, xIsEnd);
 	}
 
 	@Override

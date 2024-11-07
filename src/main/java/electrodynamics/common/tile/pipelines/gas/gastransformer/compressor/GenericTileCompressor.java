@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class GenericTileCompressor extends GenericTileGasTransformer {
     public GenericTileCompressor(BlockEntityType<?> type, BlockPos worldPos, BlockState blockState) {
         super(type, worldPos, blockState);
-        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(BASE_INPUT_CAPACITY * 10));
+        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(getUsagePerTick() * 10));
     }
 
     @Override
@@ -87,7 +87,7 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
 
         ComponentElectrodynamic electro = getComponent(IComponentType.Electrodynamic);
 
-        if (electro.getJoulesStored() < USAGE_PER_TICK * processor.operatingSpeed.get()) {
+        if (electro.getJoulesStored() < getUsagePerTick() * processor.operatingSpeed.get()) {
             return false;
         }
 
@@ -109,7 +109,7 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
     @Override
     public void process(ComponentProcessor processor) {
 
-        double conversionRate = BASE_CONVERSION_RATE * processor.operatingSpeed.get();
+        double conversionRate = getConversionRate() * processor.operatingSpeed.get();
 
         ComponentGasHandlerMulti gasHandler = getComponent(IComponentType.GasHandler);
         GasTank inputTank = gasHandler.getInputTanks()[0];

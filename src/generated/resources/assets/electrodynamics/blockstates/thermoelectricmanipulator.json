@@ -1,0 +1,94 @@
+{
+  "variants": {
+    "compressorsidehastoptank=false,facing=east,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/thermoelectricmanipulator",
+      "y": 90
+    },
+    "compressorsidehastoptank=false,facing=east,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/thermoelectricmanipulator",
+      "y": 90
+    },
+    "compressorsidehastoptank=false,facing=east,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/thermoelectricmanipulator",
+      "y": 90
+    },
+    "compressorsidehastoptank=false,facing=north,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/thermoelectricmanipulator"
+    },
+    "compressorsidehastoptank=false,facing=north,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/thermoelectricmanipulator"
+    },
+    "compressorsidehastoptank=false,facing=north,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/thermoelectricmanipulator"
+    },
+    "compressorsidehastoptank=false,facing=south,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/thermoelectricmanipulator",
+      "y": 180
+    },
+    "compressorsidehastoptank=false,facing=south,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/thermoelectricmanipulator",
+      "y": 180
+    },
+    "compressorsidehastoptank=false,facing=south,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/thermoelectricmanipulator",
+      "y": 180
+    },
+    "compressorsidehastoptank=false,facing=west,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/thermoelectricmanipulator",
+      "y": 270
+    },
+    "compressorsidehastoptank=false,facing=west,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/thermoelectricmanipulator",
+      "y": 270
+    },
+    "compressorsidehastoptank=false,facing=west,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/thermoelectricmanipulator",
+      "y": 270
+    },
+    "compressorsidehastoptank=true,facing=east,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank",
+      "y": 90
+    },
+    "compressorsidehastoptank=true,facing=east,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank",
+      "y": 90
+    },
+    "compressorsidehastoptank=true,facing=east,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank",
+      "y": 90
+    },
+    "compressorsidehastoptank=true,facing=north,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank"
+    },
+    "compressorsidehastoptank=true,facing=north,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank"
+    },
+    "compressorsidehastoptank=true,facing=north,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank"
+    },
+    "compressorsidehastoptank=true,facing=south,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank",
+      "y": 180
+    },
+    "compressorsidehastoptank=true,facing=south,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank",
+      "y": 180
+    },
+    "compressorsidehastoptank=true,facing=south,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank",
+      "y": 180
+    },
+    "compressorsidehastoptank=true,facing=west,manipulatorheatingstatus=cool": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank",
+      "y": 270
+    },
+    "compressorsidehastoptank=true,facing=west,manipulatorheatingstatus=heat": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank",
+      "y": 270
+    },
+    "compressorsidehastoptank=true,facing=west,manipulatorheatingstatus=off": {
+      "model": "electrodynamics:block/thermoelectricmanipulatortoptank",
+      "y": 270
+    }
+  }
+}

@@ -2,6 +2,7 @@ package electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricm
 
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.inventory.container.tile.ContainerThermoelectricManipulator;
+import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.IAddonTankManager;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerAddonTank;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -35,12 +36,27 @@ public class TileBasicThermoelectricManipulator extends GenericTileThermoelectri
 
     @Override
     public IComponentFluidHandler getFluidHandler() {
-        return new ComponentFluidHandlerMulti(this).setInputTanks(1, (int) BASE_INPUT_CAPACITY).setInputDirections(BlockEntityUtils.MachineDirection.BACK).setOutputTanks(1, (int) BASE_OUTPUT_CAPACITY).setOutputDirections(BlockEntityUtils.MachineDirection.FRONT);
+        return new ComponentFluidHandlerMulti(this).setInputTanks(1, (int) Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY).setInputDirections(BlockEntityUtils.MachineDirection.BACK).setOutputTanks(1, (int) Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY).setOutputDirections(BlockEntityUtils.MachineDirection.FRONT);
+    }
+
+    @Override
+    public double getHeatTransfer() {
+        return Constants.THERMOELECTRIC_MANIPULATOR_HEAT_TRANSFER;
     }
 
     @Override
     public ComponentContainerProvider getContainerProvider() {
         return new ComponentContainerProvider("container.thermoelectricmanipulator", this).createMenu((id, inv) -> new ContainerThermoelectricManipulator(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
+    }
+
+    @Override
+    public double getUsagePerTick() {
+        return Constants.THERMOELECTRIC_MANIPULATOR_USAGE_PER_TICK;
+    }
+
+    @Override
+    public double getConversionRate() {
+        return Constants.THERMOELECTRIC_MANIPULATOR_CONVERSION_RATE;
     }
 
     @Override
@@ -62,7 +78,7 @@ public class TileBasicThermoelectricManipulator extends GenericTileThermoelectri
         BlockState aboveState = getLevel().getBlockState(abovePos);
         BlockEntity aboveTile;
         int tankCount = 0;
-        for (int i = 0; i < TileGasTransformerAddonTank.MAX_ADDON_TANKS; i++) {
+        for (int i = 0; i < Constants.GAS_TRANSFORMER_ADDON_TANK_LIMIT; i++) {
             if (!aboveState.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK)) {
                 break;
             }
@@ -77,10 +93,10 @@ public class TileBasicThermoelectricManipulator extends GenericTileThermoelectri
         }
         ComponentGasHandlerMulti handler = getComponent(IComponentType.GasHandler);
         ComponentFluidHandlerMulti multi = getComponent(IComponentType.FluidHandler);
-        multi.getInputTanks()[0].setCapacity((int) (BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * tankCount));
-        handler.getInputTanks()[0].setCapacity(BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * tankCount);
-        multi.getOutputTanks()[0].setCapacity((int) (BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * tankCount));
-        handler.getOutputTanks()[0].setCapacity(BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * tankCount);
+        multi.getInputTanks()[0].setCapacity((int) (Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount));
+        handler.getInputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount);
+        multi.getOutputTanks()[0].setCapacity((int) (Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount));
+        handler.getOutputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount);
 
     }
 }

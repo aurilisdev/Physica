@@ -2,6 +2,7 @@ package electrodynamics.common.tile.pipelines.gas.gastransformer.compressor;
 
 import electrodynamics.common.inventory.container.tile.ContainerCompressor;
 import electrodynamics.common.inventory.container.tile.ContainerDecompressor;
+import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.IAddonTankManager;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerAddonTank;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -44,7 +45,7 @@ public abstract class GenericTileBasicCompressor extends GenericTileCompressor i
         BlockState aboveState = getLevel().getBlockState(abovePos);
         BlockEntity aboveTile;
         int tankCount = 0;
-        for (int i = 0; i < TileGasTransformerAddonTank.MAX_ADDON_TANKS; i++) {
+        for (int i = 0; i < Constants.GAS_TRANSFORMER_ADDON_TANK_LIMIT; i++) {
             if (!aboveState.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK)) {
                 break;
             }
@@ -58,11 +59,8 @@ public abstract class GenericTileBasicCompressor extends GenericTileCompressor i
             tankCount++;
         }
         ComponentGasHandlerMulti handler = getComponent(IComponentType.GasHandler);
-        ComponentFluidHandlerMulti multi = getComponent(IComponentType.FluidHandler);
-        multi.getInputTanks()[0].setCapacity((int) (BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * tankCount));
-        handler.getInputTanks()[0].setCapacity(BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * tankCount);
-        multi.getOutputTanks()[0].setCapacity((int) (BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * tankCount));
-        handler.getOutputTanks()[0].setCapacity(BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * tankCount);
+        handler.getInputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount);
+        handler.getOutputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount);
     }
 
     @Override
@@ -96,6 +94,16 @@ public abstract class GenericTileBasicCompressor extends GenericTileCompressor i
         public ComponentContainerProvider getContainerProvider() {
             return new ComponentContainerProvider("container.compressor", this).createMenu((id, inv) -> new ContainerCompressor(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
         }
+
+        @Override
+        public double getUsagePerTick() {
+            return Constants.COMPRESSOR_USAGE_PER_TICK;
+        }
+
+        @Override
+        public double getConversionRate() {
+            return Constants.COMPRESSOR_CONVERSION_RATE;
+        }
     }
 
     public static class TileDecompressor extends GenericTileBasicCompressor {
@@ -116,6 +124,16 @@ public abstract class GenericTileBasicCompressor extends GenericTileCompressor i
         @Override
         public ComponentContainerProvider getContainerProvider() {
             return new ComponentContainerProvider("container.decompressor", this).createMenu((id, inv) -> new ContainerDecompressor(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
+        }
+
+        @Override
+        public double getUsagePerTick() {
+            return Constants.DECOMPRESSOR_USAGE_PER_TICK;
+        }
+
+        @Override
+        public double getConversionRate() {
+            return Constants.DECOMPRESSOR_CONVERSION_RATE;
         }
     }
 

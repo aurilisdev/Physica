@@ -1,4 +1,4 @@
-package electrodynamics.common.tile.pipelines;
+package electrodynamics.common.tile.pipelines.fluid;
 
 import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.common.settings.Constants;

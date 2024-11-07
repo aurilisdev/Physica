@@ -10,8 +10,8 @@ public class BiproductPercentWrapperConstant extends AbstractLabelWrapper {
 
 	private final double percentage;
 
-	public BiproductPercentWrapperConstant(int xEndPos, int yPos, double percentage) {
-		super(0xFF808080, yPos, xEndPos, false);
+	public BiproductPercentWrapperConstant(int xPos, int yPos, double percentage) {
+		super(0xFF808080, yPos, xPos, false);
 		this.percentage = percentage;
 	}
 

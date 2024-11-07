@@ -7,12 +7,13 @@ import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
+import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
 import electrodynamics.compatibility.jei.recipecategories.utils.psuedorecipes.types.PsuedoFluid2GasRecipe;
 import electrodynamics.compatibility.jei.recipecategories.utils.psuedorecipes.types.PsuedoGas2FluidRecipe;
+import electrodynamics.compatibility.jei.recipecategories.utils.psuedorecipes.types.PsuedoGasCollectorRecipe;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsGases;
 import electrodynamics.registers.ElectrodynamicsItems;
-import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -24,6 +25,8 @@ public class ElectrodynamicsPsuedoRecipes {
 
 	public static final HashSet<PsuedoFluid2GasRecipe> EVAPORATION_RECIPES = new HashSet<>();
 	public static final HashSet<PsuedoGas2FluidRecipe> CONDENSATION_RECIPES = new HashSet<>();
+
+	public static final HashSet<PsuedoGasCollectorRecipe> GAS_COLLECTOR_RECIPES = new HashSet<>();
 
 	public static void initRecipes() {
 
@@ -87,6 +90,10 @@ public class ElectrodynamicsPsuedoRecipes {
 
 			EVAPORATION_RECIPES.add(new PsuedoFluid2GasRecipe(Arrays.asList(new FluidStack(fluid, 1000)), new GasStack(gas, 1000, gas.getCondensationTemp(), 1), inputBucket, outputCylinder));
 
+		});
+
+		GasCollectorChromoCardsRegister.INSTANCE.getEntries().forEach((item, result) -> {
+			GAS_COLLECTOR_RECIPES.add(new PsuedoGasCollectorRecipe(new ItemStack(item), result));
 		});
 
 	}

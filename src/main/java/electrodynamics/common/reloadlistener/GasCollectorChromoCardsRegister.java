@@ -157,7 +157,7 @@ public class GasCollectorChromoCardsRegister extends SimplePreparableReloadListe
         return this;
     }
 
-    public HashMap<Item, AtmosphericResult> getFuels() {
+    public HashMap<Item, AtmosphericResult> getEntries() {
         return results;
     }
 

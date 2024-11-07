@@ -8,36 +8,30 @@ import net.minecraft.client.renderer.Rect2i;
 
 public class ClickableGasIngredient extends AbstractClickableIngredient<GasStack> {
 
-	private final GasIngredientType typeIngredient;
+    private final GasIngredientType typeIngredient;
 
-	public ClickableGasIngredient(Rect2i rect, GasStack gasStack) {
-		super(rect);
-		typeIngredient = new GasIngredientType(gasStack);
-	}
+    public ClickableGasIngredient(Rect2i rect, GasStack gasStack) {
+        super(rect);
+        typeIngredient = new GasIngredientType(gasStack);
+    }
 
-	@Override
-	public ITypedIngredient<GasStack> getTypedIngredient() {
-		return typeIngredient;
-	}
+    @Override
+    public ITypedIngredient<GasStack> getTypedIngredient() {
+        return typeIngredient;
+    }
 
-	private static class GasIngredientType implements ITypedIngredient<GasStack> {
+    private record GasIngredientType(GasStack gasStack) implements ITypedIngredient<GasStack> {
 
-		private final GasStack gasStack;
+        @Override
+        public IIngredientType<GasStack> getType() {
+            return ElectrodynamicsJeiTypes.GAS_STACK;
+        }
 
-		public GasIngredientType(GasStack gasStack) {
-			this.gasStack = gasStack;
-		}
+        @Override
+        public GasStack getIngredient() {
+            return gasStack;
+        }
 
-		@Override
-		public IIngredientType<GasStack> getType() {
-			return ElectrodynamicsJeiTypes.GAS_STACK;
-		}
-
-		@Override
-		public GasStack getIngredient() {
-			return gasStack;
-		}
-
-	}
+    }
 
 }

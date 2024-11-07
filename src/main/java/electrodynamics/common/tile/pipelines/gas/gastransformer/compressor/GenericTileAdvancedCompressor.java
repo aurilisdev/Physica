@@ -5,8 +5,8 @@ import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.common.inventory.container.tile.ContainerCompressor;
+import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.IMultiblockGasTransformer;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerAddonTank;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerSideBlock;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
@@ -31,7 +31,7 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
 
     public GenericTileAdvancedCompressor(BlockEntityType<?> type, BlockPos worldPos, BlockState blockState) {
         super(type, worldPos, blockState);
-        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(BASE_INPUT_CAPACITY * 10));
+        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(getUsagePerTick() * 10));
     }
 
 
@@ -53,13 +53,10 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
     @Override
     public void updateAddonTanks(int count, boolean isLeft) {
         ComponentGasHandlerMulti handler = getComponent(IComponentType.GasHandler);
-        ComponentFluidHandlerMulti multi = getComponent(IComponentType.FluidHandler);
         if (isLeft) {
-            multi.getInputTanks()[0].setCapacity((int) (BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * count));
-            handler.getInputTanks()[0].setCapacity(BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * count);
+            handler.getInputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * count);
         } else {
-            multi.getOutputTanks()[0].setCapacity((int) (BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * count));
-            handler.getOutputTanks()[0].setCapacity(BASE_INPUT_CAPACITY + TileGasTransformerAddonTank.ADDITIONAL_CAPACITY * count);
+            handler.getOutputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * count);
         }
     }
 
@@ -152,6 +149,16 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
         public ComponentContainerProvider getContainerProvider() {
             return new ComponentContainerProvider("container.advancedcompressor", this).createMenu((id, inv) -> new ContainerCompressor(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
         }
+
+        @Override
+        public double getUsagePerTick() {
+            return Constants.ADVACNED_COMPRESSOR_USAGE_PER_TICK;
+        }
+
+        @Override
+        public double getConversionRate() {
+            return Constants.ADVACNED_COMPRESSOR_CONVERSION_RATE;
+        }
     }
 
     public static class TileAdvancedDecompressor extends GenericTileAdvancedCompressor {
@@ -167,6 +174,16 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
         @Override
         public ComponentContainerProvider getContainerProvider() {
             return new ComponentContainerProvider("container.advanceddecompressor", this).createMenu((id, inv) -> new ContainerCompressor(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
+        }
+
+        @Override
+        public double getUsagePerTick() {
+            return Constants.ADVANCED_DECOMPRESSOR_USAGE_PER_TICK;
+        }
+
+        @Override
+        public double getConversionRate() {
+            return Constants.ADVANCED_DECOMPRESSOR_CONVERSION_RATE;
         }
     }
 

@@ -5,7 +5,7 @@ import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.blockitem.types.BlockItemDescriptable;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerAddonTank;
+import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.neoforged.bus.api.IEventBus;
 
@@ -65,8 +65,11 @@ public class UnifiedElectrodynamicsRegister {
 
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_COMPRESSOR, ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR, ElectroTextUtils.voltageTooltip(120));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK, ElectroTextUtils.tooltip("addontankcap", ChatFormatter.formatFluidMilibuckets(TileGasTransformerAddonTank.ADDITIONAL_CAPACITY)));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ADVANCEDCOMPRESSOR, ElectroTextUtils.voltageTooltip(120));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ADVANCEDDECOMPRESSOR, ElectroTextUtils.voltageTooltip(120));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK, ElectroTextUtils.tooltip("addontankcap", ChatFormatter.formatFluidMilibuckets(Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY)));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR, ElectroTextUtils.voltageTooltip(120));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR, ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP, ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP, ElectroTextUtils.voltageTooltip(120));
 
@@ -105,9 +108,11 @@ public class UnifiedElectrodynamicsRegister {
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_LOGISTICALMANAGER, ElectroTextUtils.tooltip("logisticalmanager.use"));
 
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gasvent), ElectroTextUtils.tooltip("gasvent"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gascollector), ElectroTextUtils.voltageTooltip(240));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_GASVALVE, ElectroTextUtils.tooltip("gasvalve"));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE, ElectroTextUtils.tooltip("fluidvalve"));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.potentiometer), ElectroTextUtils.tooltip("potentiometer.use"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR, ElectroTextUtils.voltageTooltip(480));
 	}
 
 }

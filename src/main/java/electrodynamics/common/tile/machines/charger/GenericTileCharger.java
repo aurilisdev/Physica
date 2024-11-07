@@ -3,6 +3,7 @@ package electrodynamics.common.tile.machines.charger;
 import electrodynamics.api.item.IItemElectric;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerChargerGeneric;
+import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -27,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 public abstract class GenericTileCharger extends GenericTile {
 
 	private static final int BATTERY_COUNT = 3;
-	private static final double MAX_BATTERY_TRANSFER_JOULES = 1000.0;
 
 	protected GenericTileCharger(BlockEntityType<?> typeIn, int voltageMultiplier, SubtypeMachine machine, BlockPos worldPosition, BlockState blockState) {
 		super(typeIn, worldPosition, blockState);
@@ -105,7 +105,7 @@ public abstract class GenericTileCharger extends GenericTile {
 					electro.overVoltage(TransferPack.joulesVoltage(electro.getJoulesStored(), battVoltage));
 					return true;
 				} else if (electro.getMaxJoulesStored() - electro.getJoulesStored() > 0) {
-					electro.joules(electro.getJoulesStored() + electricItem.extractPower(battery, MAX_BATTERY_TRANSFER_JOULES, false).getJoules());
+					electro.joules(electro.getJoulesStored() + electricItem.extractPower(battery, Constants.CHARGER_USAGE_PER_TICK, false).getJoules());
 				}
 			}
 		}

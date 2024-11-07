@@ -69,6 +69,7 @@ public class ElectrodynamicsMenuTypes {
 	public static final DeferredHolder<MenuType<?>,MenuType<ContainerCircuitMonitor>> CONTAINER_CIRCUITMONITOR = register("circuitmonitor", ContainerCircuitMonitor::new);
 	public static final DeferredHolder<MenuType<?>, MenuType<ContainerGasCollector>> CONTAINER_GASCOLLECTOR = register("gascollector", ContainerGasCollector::new);
 	public static final DeferredHolder<MenuType<?>, MenuType<ContainerChemicalReactor>> CONTAINER_CHEMICALREACTOR = register("chemicalreactor", ContainerChemicalReactor::new);
+	public static final DeferredHolder<MenuType<?>, MenuType<ContainerCreativeGasSource>> CONTAINER_CREATIVEGASSOURCE = register("creativegassource", ContainerCreativeGasSource::new);
 
 	private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>,MenuType<T>> register(String id, MenuSupplier<T> supplier) {
 		return MENU_TYPES.register(id, () -> new MenuType<>(supplier, FeatureFlags.DEFAULT_FLAGS));

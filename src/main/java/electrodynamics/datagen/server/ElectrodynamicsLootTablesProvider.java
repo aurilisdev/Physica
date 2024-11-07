@@ -143,6 +143,7 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
 
 		addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativepowersource));
 		addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativefluidsource));
+		addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativegassource));
 		addMachineTable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidvoid), ElectrodynamicsTiles.TILE_FLUIDVOID, true, false, false, false, false);
 		addMachineTable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolyticseparator), ElectrodynamicsTiles.TILE_ELECTROLYTICSEPARATOR, true, true, false, true, false);
 

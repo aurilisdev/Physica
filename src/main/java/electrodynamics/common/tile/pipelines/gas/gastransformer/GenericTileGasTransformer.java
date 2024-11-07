@@ -1,5 +1,6 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer;
 
+import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -18,26 +19,13 @@ public abstract class GenericTileGasTransformer extends GenericGasTile implement
 
 	protected boolean isSoundPlaying = false;
 
-	public static final double BASE_INPUT_CAPACITY = 5000;
-	public static final int INPUT_PRESSURE = 1048576;// 2^20
-	public static final double INPUT_TEMPERATURE = 1000000;
-
-	public static final double BASE_OUTPUT_CAPACITY = 5000;
-	public static final int OUTPUT_PRESSURE = 1048576;// 2^20
-	public static final double OUTPUT_TEMPERATURE = 1000000;
-
-	public static final double MAX_JOULES = 50000;
-	public static final double USAGE_PER_TICK = 100;
-
-	public static final double BASE_CONVERSION_RATE = 20;
-
 	public GenericTileGasTransformer(BlockEntityType<?> tileEntityTypeIn, BlockPos worldPos, BlockState blockState) {
 		super(tileEntityTypeIn, worldPos, blockState);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient));
 		addComponent(getInventory());
-		addComponent(new ComponentProcessor(this).canProcess(this::canProcess).process(this::process).usage(USAGE_PER_TICK));
-		addComponent(new ComponentGasHandlerMulti(this).setTanks(1, arr(BASE_INPUT_CAPACITY), arr(INPUT_TEMPERATURE), arr(INPUT_PRESSURE), 1, arr(BASE_OUTPUT_CAPACITY), arr(OUTPUT_TEMPERATURE), arr(OUTPUT_PRESSURE)).setInputDirections(BlockEntityUtils.MachineDirection.RIGHT)
+		addComponent(new ComponentProcessor(this).canProcess(this::canProcess).process(this::process).usage(getUsagePerTick()));
+		addComponent(new ComponentGasHandlerMulti(this).setTanks(1, arr(Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY), arr(Constants.GAS_TRANSFORMER_INPUT_TEMP_CAP), arr(Constants.GAS_TRANSFORMER_INPUT_PRESSURE_CAP), 1, arr(Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY), arr(Constants.GAS_TRANSFORMER_OUTPUT_TEMP_CAP), arr(Constants.GAS_TRANSFORMER_OUTPUT_PRESSURE_CAP)).setInputDirections(BlockEntityUtils.MachineDirection.RIGHT)
 				.setOutputDirections(BlockEntityUtils.MachineDirection.LEFT).setCondensedHandler(getCondensedHandler()));
 		addComponent(getContainerProvider());
 	}
@@ -61,5 +49,9 @@ public abstract class GenericTileGasTransformer extends GenericGasTile implement
 	public abstract ComponentContainerProvider getContainerProvider();
 
 	public abstract ComponentInventory getInventory();
+
+	public abstract double getUsagePerTick();
+
+	public abstract double getConversionRate();
 
 }

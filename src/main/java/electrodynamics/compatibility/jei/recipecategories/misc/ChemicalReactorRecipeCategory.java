@@ -1,9 +1,8 @@
-package electrodynamics.compatibility.jei.recipecategories;
+package electrodynamics.compatibility.jei.recipecategories.misc;
 
 import electrodynamics.api.References;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
-import electrodynamics.common.recipe.categories.item2item.specificmachines.EnergizedAlloyerRecipe;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
 import electrodynamics.common.recipe.recipeutils.GasIngredient;
 import electrodynamics.compatibility.jei.recipecategories.utils.AbstractRecipeCategory;
@@ -303,6 +302,19 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
 
             double gaugeCap = wrapper.getAmount();
 
+            if (amt < gaugeCap / 50) {
+                double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));
+                if (amtPowTen == 0) {
+                    amtPowTen = 1;
+                }
+                double gaugePowTen = Math.log10(Math.pow(10, Math.round(Math.log10(gaugeCap) - Math.log10(5.5) + 0.5)));
+                double logAmtPowTen = Math.log10(amtPowTen);
+
+                double delta = gaugePowTen - logAmtPowTen;
+
+                amt *= Math.pow(10, delta);
+            }
+
             if (amt > gaugeCap) {
                 gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;
             }
@@ -333,6 +345,19 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
             double amt = stack.getAmount();
 
             double gaugeCap = wrapper.getAmount();
+
+            if (amt < gaugeCap / 50) {
+                double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));
+                if (amtPowTen == 0) {
+                    amtPowTen = 1;
+                }
+                double gaugePowTen = Math.log10(Math.pow(10, Math.round(Math.log10(gaugeCap) - Math.log10(5.5) + 0.5)));
+                double logAmtPowTen = Math.log10(amtPowTen);
+
+                double delta = gaugePowTen - logAmtPowTen;
+
+                amt *= Math.pow(10, delta);
+            }
 
             if (amt > gaugeCap) {
                 gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;

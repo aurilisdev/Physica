@@ -1,6 +1,6 @@
 package electrodynamics.common.inventory.container.tile;
 
-import electrodynamics.common.tile.pipelines.TileCreativeFluidSource;
+import electrodynamics.common.tile.pipelines.fluid.TileCreativeFluidSource;
 import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotFluid;
 import electrodynamics.registers.ElectrodynamicsMenuTypes;
@@ -19,10 +19,6 @@ public class ContainerCreativeFluidSource extends GenericContainerBlockEntity<Ti
 
 	public ContainerCreativeFluidSource(int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {
 		super(ElectrodynamicsMenuTypes.CONTAINER_CREATIVEFLUIDSOURCE.get(), id, playerinv, inventory, inventorydata);
-	}
-
-	public ContainerCreativeFluidSource(MenuType<?> type, int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {
-		super(type, id, playerinv, inventory, inventorydata);
 	}
 
 	@Override

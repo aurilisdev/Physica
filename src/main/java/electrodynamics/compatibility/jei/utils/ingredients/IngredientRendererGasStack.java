@@ -52,7 +52,22 @@ public class IngredientRendererGasStack implements IIngredientRenderer<GasStack>
 
 		stack.pushPose();
 
-		float ratio = (float) ingredient.getAmount() / tankAmount;
+		float amt = (float) ingredient.getAmount();
+
+		if (amt < tankAmount / 50) {
+			double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));
+			if (amtPowTen == 0) {
+				amtPowTen = 1;
+			}
+			double gaugePowTen = Math.log10(Math.pow(10, Math.round(Math.log10(tankAmount) - Math.log10(5.5) + 0.5)));
+			double logAmtPowTen = Math.log10(amtPowTen);
+
+			double delta = gaugePowTen - logAmtPowTen;
+
+			amt *= Math.pow(10, delta);
+		}
+
+		float ratio = amt / tankAmount;
 
 		ScreenComponentGasGauge.renderMercuryTexture(graphics, 0, mercuryOffset, ratio);
 
@@ -81,7 +96,7 @@ public class IngredientRendererGasStack implements IIngredientRenderer<GasStack>
 
 	@Override
 	public int getHeight() {
-		return tooltipHeight - 1;
+		return Math.max(1, tooltipHeight - 1);
 	}
 
 }

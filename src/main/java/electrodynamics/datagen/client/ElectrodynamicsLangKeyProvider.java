@@ -304,6 +304,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.combustionchamber), "Combustion Chamber");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.coolantresavoir), "Coolant Resavoir");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativefluidsource), "Creative Fluid Source");
+			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativegassource), "Creative Gas Source");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativepowersource), "Creative Power Source");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.downgradetransformer), "Downgrade Transformer");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricarcfurnace), "Electric Arc Furnace");
@@ -683,6 +684,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addContainer(SubtypeMachine.coolantresavoir, "Coolant Resavoir");
 			addContainer(SubtypeMachine.combustionchamber, "Combustion Chamber");
 			addContainer(SubtypeMachine.creativefluidsource, "Creative Fluid Source");
+			addContainer(SubtypeMachine.creativegassource, "Creative Gas Source");
 			addContainer(SubtypeMachine.creativepowersource, "Creative Power Source");
 			addContainer(SubtypeMachine.electricarcfurnace, "Arc Furnace");
 			addContainer(SubtypeMachine.electricarcfurnacedouble, "Double Arc Furnace");
@@ -866,6 +868,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGuiLabel("creativepowersource.voltage", "Voltage: ");
 			addGuiLabel("creativepowersource.power", "Power: ");
 			addGuiLabel("creativefluidsource.setfluid", "Set Fluid");
+			addGuiLabel("creativegassource.setgas", "Set Gas");
 			addGuiLabel("machine.usage", "Usage: %s");
 			addGuiLabel("machine.voltage", "Voltage: %s");
 			addGuiLabel("machine.current", "Current: %s");
@@ -1075,6 +1078,9 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addJei("smelting", "Electric Furnace");
 			addJei("gas_condensing", "Gas Condensation");
 			addJei("gas_evaporating", "Fluid Evaporation");
+			addJei("gascollector", "Gas Collection");
+			addJei("validbiome", "Biome: %s");
+			addJei("anybiome", "Any");
 
 			addDamageSource("electricity", "%s was electrocuted");
 			addDamageSource("acceleratedbolt", "%1$s was perforated by %2$s");

@@ -18,8 +18,8 @@ public class BiproductPercentWrapperElectroRecipe extends AbstractLabelWrapper {
 	private final BiproductType type;
 	private final int index;
 
-	public BiproductPercentWrapperElectroRecipe(int xEndPos, int yPos, BiproductType type, int index) {
-		super(0xFF808080, yPos, xEndPos, false);
+	public BiproductPercentWrapperElectroRecipe(int xPos, int yPos, BiproductType type, int index) {
+		super(0xFF808080, yPos, xPos, false);
 		this.type = type;
 		this.index = index;
 	}

@@ -14,7 +14,7 @@ import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tile.electricitygrid.generators.TileCoalGenerator;
-import electrodynamics.compatibility.jei.recipecategories.ChemicalReactorRecipeCategory;
+import electrodynamics.compatibility.jei.recipecategories.misc.ChemicalReactorRecipeCategory;
 import electrodynamics.compatibility.jei.recipecategories.fluid2gas.specificmachines.ElectrolyticSeparatorRecipeCategory;
 import electrodynamics.compatibility.jei.recipecategories.fluid2item.specificmachines.ChemicalCrystallizerRecipeCategory;
 import electrodynamics.compatibility.jei.recipecategories.fluiditem2fluid.specificmachines.ChemicalMixerRecipeCategory;
@@ -27,6 +27,7 @@ import electrodynamics.compatibility.jei.recipecategories.item2item.specificmach
 import electrodynamics.compatibility.jei.recipecategories.item2item.specificmachines.OxidationFurnaceRecipeCategory;
 import electrodynamics.compatibility.jei.recipecategories.item2item.specificmachines.ReinforcedAlloyerRecipeCategory;
 import electrodynamics.compatibility.jei.recipecategories.item2item.specificmachines.WireMillRecipeCategory;
+import electrodynamics.compatibility.jei.recipecategories.misc.GasCollectorRecipeCategory;
 import electrodynamics.compatibility.jei.recipecategories.modfurnace.ElectricArcFurnaceRecipeCategory;
 import electrodynamics.compatibility.jei.recipecategories.modfurnace.ElectricFurnaceRecipeCategory;
 import electrodynamics.compatibility.jei.recipecategories.thermomanipulator.CondensingGasRecipeCategory;
@@ -60,6 +61,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
 
 @JeiPlugin
 public class ElectrodynamicsJEIPlugin implements IModPlugin {
@@ -70,7 +72,7 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 	private static final int FULL_FLUID_SQUARE = 1600;
 
 	@Override
-	public ResourceLocation getPluginUid() {
+	public @NotNull ResourceLocation getPluginUid() {
 		return ResourceLocation.fromNamespaceAndPath(electrodynamics.api.References.ID, "jei");
 	}
 
@@ -109,6 +111,7 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 		registration.addRecipeCatalyst(CondensingGasRecipeCategory.INPUT_MACHINE, CondensingGasRecipeCategory.RECIPE_TYPE);
 		registration.addRecipeCatalyst(EvaporatingFluidRecipeCategory.INPUT_MACHINE, EvaporatingFluidRecipeCategory.RECIPE_TYPE);
 		registration.addRecipeCatalyst(ChemicalReactorRecipeCategory.INPUT_MACHINE, ChemicalReactorRecipeCategory.RECIPE_TYPE);
+		registration.addRecipeCatalyst(GasCollectorRecipeCategory.INPUT_MACHINE, GasCollectorRecipeCategory.RECIPE_TYPE);
 
 	}
 
@@ -168,7 +171,11 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 		// Thermoelectric Manipulator Evaporating
 		registration.addRecipes(EvaporatingFluidRecipeCategory.RECIPE_TYPE, new ArrayList<>(ElectrodynamicsPsuedoRecipes.EVAPORATION_RECIPES));
 
+		// Chemical Reactor
 		registration.addRecipes(ChemicalReactorRecipeCategory.RECIPE_TYPE, recipeManager.getAllRecipesFor(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()).stream().map(val -> val.value()).toList());
+
+		// Gas Collector
+		registration.addRecipes(GasCollectorRecipeCategory.RECIPE_TYPE, new ArrayList<>(ElectrodynamicsPsuedoRecipes.GAS_COLLECTOR_RECIPES));
 
 		electrodynamicsInfoTabs(registration);
 
@@ -195,6 +202,7 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 		registration.addRecipeCategories(new CondensingGasRecipeCategory(guiHelper));
 		registration.addRecipeCategories(new EvaporatingFluidRecipeCategory(guiHelper));
 		registration.addRecipeCategories(new ChemicalReactorRecipeCategory(guiHelper));
+		registration.addRecipeCategories(new GasCollectorRecipeCategory(guiHelper));
 
 	}
 
@@ -216,6 +224,8 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 		registry.addRecipeClickArea(ScreenChemicalCrystallizer.class, 41, 35, 22, 15, ChemicalCrystallizerRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenElectrolyticSeparator.class, 38, 30, 22, 15, ElectrolyticSeparatorRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenThermoelectricManipulator.class, 62, 19, 32, 47, CondensingGasRecipeCategory.RECIPE_TYPE, EvaporatingFluidRecipeCategory.RECIPE_TYPE);
+		registry.addRecipeClickArea(ScreenChemicalReactor.class, 66, 52, 22, 15, ChemicalReactorRecipeCategory.RECIPE_TYPE);
+		registry.addRecipeClickArea(ScreenGasCollector.class, 57, 34, 17, 17, GasCollectorRecipeCategory.RECIPE_TYPE);
 
 		registry.addGenericGuiContainerHandler(ScreenGuidebook.class, new ScreenHandlerGuidebook());
 		registry.addGenericGuiContainerHandler(GenericMaterialScreen.class, new ScreenHandlerMaterialScreen());

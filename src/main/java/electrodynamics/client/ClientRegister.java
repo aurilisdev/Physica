@@ -238,6 +238,7 @@ public class ClientRegister {
         event.register(ElectrodynamicsMenuTypes.CONTAINER_CIRCUITMONITOR.get(), ScreenCircuitMonitor::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_GASCOLLECTOR.get(), ScreenGasCollector::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_CHEMICALREACTOR.get(), ScreenChemicalReactor::new);
+        event.register(ElectrodynamicsMenuTypes.CONTAINER_CREATIVEGASSOURCE.get(), ScreenCreativeGasSource::new);
     }
 
     @SubscribeEvent

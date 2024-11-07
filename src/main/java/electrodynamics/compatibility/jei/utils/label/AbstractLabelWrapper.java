@@ -5,28 +5,28 @@ import net.minecraft.network.chat.Component;
 
 public abstract class AbstractLabelWrapper {
 
-	private int COLOR;
-	private int Y_POS;
-	private int X_POS;
+	private int color;
+	private int yPos;
+	private int xPos;
 	private boolean xIsEnd;
 
-	public AbstractLabelWrapper(int color, int yPos, int endXPos, boolean xIsEnd) {
-		COLOR = color;
-		Y_POS = yPos;
-		X_POS = endXPos;
+	public AbstractLabelWrapper(int color, int yPos, int xPos, boolean xIsEnd) {
+		this.color = color;
+		this.yPos = yPos;
+		this.xPos = xPos;
 		this.xIsEnd = xIsEnd;
 	}
 
 	public int getColor() {
-		return COLOR;
+		return color;
 	}
 
 	public int getYPos() {
-		return Y_POS;
+		return yPos;
 	}
 
 	public int getXPos() {
-		return X_POS;
+		return xPos;
 	}
 
 	public boolean xIsEnd() {

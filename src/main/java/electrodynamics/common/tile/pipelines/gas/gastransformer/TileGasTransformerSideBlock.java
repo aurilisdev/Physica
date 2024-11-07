@@ -1,5 +1,6 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer;
 
+import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.ItemInteractionResult;
@@ -62,7 +63,7 @@ public class TileGasTransformerSideBlock extends GenericTile implements IAddonTa
         BlockState aboveState = getLevel().getBlockState(abovePos);
         BlockEntity aboveTile;
         int tankCount = 0;
-        for (int i = 0; i < TileGasTransformerAddonTank.MAX_ADDON_TANKS; i++) {
+        for (int i = 0; i < Constants.GAS_TRANSFORMER_ADDON_TANK_LIMIT; i++) {
             if (!aboveState.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK)) {
                 break;
             }
