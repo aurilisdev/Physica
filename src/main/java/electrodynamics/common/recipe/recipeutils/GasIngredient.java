@@ -192,7 +192,7 @@ public class GasIngredient implements Predicate<GasStack>, ICustomIngredient {
             return false;
         }
         for (GasStack g : getMatchingGases()) {
-            if (g.getAmount() >= gas.getAmount()) {
+            if (gas.getAmount() >= g.getAmount()) {
                 if (g.isSameGas(gas)) {
                     if (!checkTemperature && !checkPressure) {
                         return true;

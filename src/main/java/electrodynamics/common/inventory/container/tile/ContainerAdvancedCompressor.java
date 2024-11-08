@@ -26,6 +26,7 @@ public class ContainerAdvancedCompressor extends GenericContainerBlockEntity<Gen
 
     @Override
     public void addInventorySlots(Container inv, Inventory playerinv) {
+        playerInvOffset += 47;
         addSlot(new SlotGas(inv, nextIndex(), 20, 50));
         addSlot(new SlotGas(inv, nextIndex(), 109, 50));
         addSlot(new SlotUpgrade(inv, nextIndex(), 153, 14, VALID_UPGRADES));

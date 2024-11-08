@@ -4,7 +4,8 @@ import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.gas.GasTank;
-import electrodynamics.common.inventory.container.tile.ContainerCompressor;
+import electrodynamics.common.inventory.container.tile.ContainerAdvancedCompressor;
+import electrodynamics.common.inventory.container.tile.ContainerAdvancedDecompressor;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.IMultiblockGasTransformer;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerSideBlock;
@@ -27,11 +28,11 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
 
     public boolean hasBeenDestroyed = false;
 
-    public final Property<Double> pressureMultiplier = property(new Property<>(PropertyTypes.DOUBLE, "pressuremultiplier", 1.0));
+    public final Property<Double> pressureMultiplier;
 
-    public GenericTileAdvancedCompressor(BlockEntityType<?> type, BlockPos worldPos, BlockState blockState) {
+    public GenericTileAdvancedCompressor(BlockEntityType<?> type, BlockPos worldPos, BlockState blockState, double defaultMultiplier) {
         super(type, worldPos, blockState);
-        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(getUsagePerTick() * 10));
+        pressureMultiplier = property(new Property<>(PropertyTypes.DOUBLE, "pressuremultiplier", defaultMultiplier));
     }
 
 
@@ -137,7 +138,7 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
 
     public static class TileAdvancedCompressor extends GenericTileAdvancedCompressor {
         public TileAdvancedCompressor(BlockPos worldPos, BlockState blockState) {
-            super(ElectrodynamicsTiles.TILE_ADVANCEDCOMPRESSOR.get(), worldPos, blockState);
+            super(ElectrodynamicsTiles.TILE_ADVANCEDCOMPRESSOR.get(), worldPos, blockState, 2);
         }
 
         @Override
@@ -147,7 +148,7 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
 
         @Override
         public ComponentContainerProvider getContainerProvider() {
-            return new ComponentContainerProvider("container.advancedcompressor", this).createMenu((id, inv) -> new ContainerCompressor(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
+            return new ComponentContainerProvider("container.advancedcompressor", this).createMenu((id, inv) -> new ContainerAdvancedCompressor(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
         }
 
         @Override
@@ -163,7 +164,7 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
 
     public static class TileAdvancedDecompressor extends GenericTileAdvancedCompressor {
         public TileAdvancedDecompressor(BlockPos worldPos, BlockState blockState) {
-            super(ElectrodynamicsTiles.TILE_ADVANCEDDECOMPRESSOR.get(), worldPos, blockState);
+            super(ElectrodynamicsTiles.TILE_ADVANCEDDECOMPRESSOR.get(), worldPos, blockState, 0.5);
         }
 
         @Override
@@ -173,7 +174,7 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
 
         @Override
         public ComponentContainerProvider getContainerProvider() {
-            return new ComponentContainerProvider("container.advanceddecompressor", this).createMenu((id, inv) -> new ContainerCompressor(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
+            return new ComponentContainerProvider("container.advanceddecompressor", this).createMenu((id, inv) -> new ContainerAdvancedDecompressor(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
         }
 
         @Override

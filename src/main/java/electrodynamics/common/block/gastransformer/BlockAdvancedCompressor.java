@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.StateDefinition.Builder;
 public class BlockAdvancedCompressor extends BlockGenericAdvancedGasTransformer {
 
     public BlockAdvancedCompressor(boolean isDecompressor) {
-        super(isDecompressor ? GenericTileAdvancedCompressor.TileAdvancedCompressor::new : GenericTileAdvancedCompressor.TileAdvancedCompressor::new);
+        super(isDecompressor ? GenericTileAdvancedCompressor.TileAdvancedDecompressor::new : GenericTileAdvancedCompressor.TileAdvancedCompressor::new);
         registerDefaultState(stateDefinition.any().setValue(BlockMachine.ON, false));
     }
 

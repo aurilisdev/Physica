@@ -52,7 +52,7 @@ public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerat
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.DUST_SALT, 5)
                 //
-                .addGasTagInput(ElectrodynamicsTags.Gases.HYDROGEN, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 500, 5))
+                .addGasTagInput(ElectrodynamicsTags.Gases.HYDROGEN, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 500, 8))
                 //
                 .save(output);
 
@@ -62,9 +62,9 @@ public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerat
                 //
                 .addFluidTagInput(FluidTags.WATER, 2000)
                 //
-                .addGasTagInput(ElectrodynamicsTags.Gases.NITROGEN, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 500, 5))
+                .addGasTagInput(ElectrodynamicsTags.Gases.NITROGEN, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 500, 4))
                 //
-                .addGasTagInput(ElectrodynamicsTags.Gases.HYDROGEN, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 500, 5))
+                .addGasTagInput(ElectrodynamicsTags.Gases.HYDROGEN, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 500, 4))
                 //
                 .save(output);
 
@@ -74,7 +74,7 @@ public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerat
                 //
                 .addFluidTagInput(FluidTags.WATER, 3000)
                 //
-                .addGasTagInput(ElectrodynamicsTags.Gases.AMMONIA, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 700, 3))
+                .addGasTagInput(ElectrodynamicsTags.Gases.AMMONIA, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 700, 4))
                 //
                 .save(output);
 

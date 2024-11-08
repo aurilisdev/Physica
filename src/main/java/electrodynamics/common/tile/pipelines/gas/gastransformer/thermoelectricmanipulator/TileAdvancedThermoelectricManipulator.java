@@ -6,7 +6,7 @@ import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
-import electrodynamics.common.inventory.container.tile.ContainerAdvancedThermoelectricManipulator;
+import electrodynamics.common.inventory.container.tile.ContainerThermoelectricManipulator;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.IMultiblockGasTransformer;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerSideBlock;
@@ -67,7 +67,7 @@ public class TileAdvancedThermoelectricManipulator extends GenericTileThermoelec
 
     @Override
     public ComponentContainerProvider getContainerProvider() {
-        return new ComponentContainerProvider("container.advancedthermoelectricmanipulator", this).createMenu((id, inv) -> new ContainerAdvancedThermoelectricManipulator(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
+        return new ComponentContainerProvider("container.advancedthermoelectricmanipulator", this).createMenu((id, inv) -> new ContainerThermoelectricManipulator(id, inv, getComponent(IComponentType.Inventory), getCoordsArray()));
     }
 
     @Override

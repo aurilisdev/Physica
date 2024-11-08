@@ -212,7 +212,7 @@ public class TileChemicalReactor extends GenericGasTile {
         if (locRecipe.hasItemInputs()) {
             List<Integer> slotOrientation = locRecipe.getItemArrangment(pr.getProcessorNumber());
             List<Integer> inputs = inv.getInputSlotsForProcessor(procNumber);
-            for (int i = 0; i < inputs.size(); i++) {
+            for (int i = 0; i < slotOrientation.size(); i++) {
                 int index = inputs.get(slotOrientation.get(i));
                 ItemStack stack = inv.getItem(index);
                 stack.shrink(locRecipe.getCountedIngredients().get(i).getStackSize());
@@ -224,7 +224,7 @@ public class TileChemicalReactor extends GenericGasTile {
             FluidTank[] tanks = fluidHandler.getInputTanks();
             List<FluidIngredient> fluidIngs = locRecipe.getFluidIngredients();
             List<Integer> tankOrientation = locRecipe.getFluidArrangement();
-            for (int i = 0; i < fluidHandler.tankCount(true); i++) {
+            for (int i = 0; i < tankOrientation.size(); i++) {
                 tanks[tankOrientation.get(i)].drain(fluidIngs.get(i).getFluidStack().getAmount(), IFluidHandler.FluidAction.EXECUTE);
             }
         }
@@ -232,8 +232,8 @@ public class TileChemicalReactor extends GenericGasTile {
         if (locRecipe.hasGasInputs()) {
             GasTank[] tanks = gasHandler.getInputTanks();
             List<GasIngredient> gasIngs = locRecipe.getGasIngredients();
-            List<Integer> tankOrientation = locRecipe.getFluidArrangement();
-            for (int i = 0; i < gasHandler.tankCount(true); i++) {
+            List<Integer> tankOrientation = locRecipe.getGasArrangement();
+            for (int i = 0; i < tankOrientation.size(); i++) {
                 tanks[tankOrientation.get(i)].drain(gasIngs.get(i).getGasStack().getAmount(), GasAction.EXECUTE);
             }
         }

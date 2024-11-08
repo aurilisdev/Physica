@@ -50,13 +50,15 @@ public class ChemicalReactorRecipe extends AbstractMaterialRecipe {
     @Override
     public boolean matchesRecipe(ComponentProcessor pr) {
 
-        boolean flag = false;
+        int valid = 0b000;
 
         if (hasItemInputs()) {
             Pair<List<Integer>, Boolean> itemPair = areItemsValid(getCountedIngredients(), ((ComponentInventory) pr.getHolder().getComponent(IComponentType.Inventory)).getInputsForProcessor(pr.getProcessorNumber()));
             if (itemPair.getSecond()) {
                 setItemArrangement(pr.getProcessorNumber(), itemPair.getFirst());
-                flag = true;
+                valid = valid | 1 << 2;
+            } else {
+                return false;
             }
         }
 
@@ -64,7 +66,9 @@ public class ChemicalReactorRecipe extends AbstractMaterialRecipe {
             Pair<List<Integer>, Boolean> fluidPair = areFluidsValid(getFluidIngredients(), pr.getHolder().<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks());
             if (fluidPair.getSecond()) {
                 setFluidArrangement(fluidPair.getFirst());
-                flag = true;
+                valid = valid | 1 << 1;
+            } else {
+                return false;
             }
         }
 
@@ -72,11 +76,13 @@ public class ChemicalReactorRecipe extends AbstractMaterialRecipe {
             Pair<List<Integer>, Boolean> gasPair = areGasesValid(getGasIngredients(), pr.getHolder().<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getInputTanks());
             if (gasPair.getSecond()) {
                 setGasArrangement(gasPair.getFirst());
-                flag = true;
+                valid = valid | 1 << 0;
+            } else {
+                return false;
             }
         }
 
-        return flag;
+        return valid > 0;
     }
 
     public boolean hasItemInputs() {

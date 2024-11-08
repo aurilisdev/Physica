@@ -38,7 +38,7 @@ public class BlockChemicalReactor extends GenericMachineBlock {
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
         super.setPlacedBy(level, pos, pState, pPlacer, pStack);
-        level.setBlockAndUpdate(pos.offset(BlockChemicalReactorExtra.Location.MIDDLE.offsetUpFromParent), ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_MIDDLE.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
-        level.setBlockAndUpdate(pos.offset(BlockChemicalReactorExtra.Location.TOP.offsetUpFromParent), ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_TOP.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
+        level.setBlockAndUpdate(pos.offset(BlockChemicalReactorExtra.Location.MIDDLE.offsetUpFromParent), ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_MIDDLE.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(FACING, pState.getValue(FACING)));
+        level.setBlockAndUpdate(pos.offset(BlockChemicalReactorExtra.Location.TOP.offsetUpFromParent), ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_TOP.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(FACING, pState.getValue(FACING)));
     }
 }

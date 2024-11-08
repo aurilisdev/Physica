@@ -7,3 +7,4 @@
 /time set noon
 /gamerule doTraderSpawning false
 /gamerule doDaylightCycle false
+/time set night

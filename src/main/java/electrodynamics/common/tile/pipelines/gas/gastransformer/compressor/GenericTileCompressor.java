@@ -1,12 +1,10 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer.compressor;
 
-import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.common.inventory.container.tile.ContainerCompressor;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.GenericTileGasTransformer;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerSideBlock;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.*;
@@ -15,7 +13,6 @@ import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -45,34 +42,10 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
 
         Direction facing = getFacing();
 
-        Direction direction = BlockEntityUtils.getRelativeSide(facing, BlockEntityUtils.MachineDirection.LEFT.mappedDir);// opposite of west is east
-        BlockPos face = getBlockPos().relative(direction, 2);
-        BlockEntity faceTile = getLevel().getBlockEntity(face);
-        if (faceTile != null) {
-
-            IGasHandler handler = faceTile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction.getOpposite());
-
-            if(handler != null) {
-                GasTank gasTank = gasHandler.getOutputTanks()[0];
-                for (int i = 0; i < handler.getTanks(); i++) {
-                    GasStack tankGas = gasTank.getGas();
-                    double amtAccepted = handler.fillTank(i, tankGas, GasAction.EXECUTE);
-                    GasStack taken = new GasStack(tankGas.getGas(), amtAccepted, tankGas.getTemperature(), tankGas.getPressure());
-                    gasTank.drain(taken, GasAction.EXECUTE);
-                }
-            }
-        }
+        outputToPipe(processor, gasHandler, facing);
 
         boolean canProcess = checkConditions(processor);
-        if (BlockEntityUtils.isLit(this) ^ canProcess) {
-            BlockEntityUtils.updateLit(this, canProcess);
-            BlockEntity left = getLevel().getBlockEntity(getBlockPos().relative(BlockEntityUtils.getRelativeSide(facing, Direction.EAST)));
-            BlockEntity right = getLevel().getBlockEntity(getBlockPos().relative(BlockEntityUtils.getRelativeSide(facing, Direction.WEST)));
-            if (left != null && left instanceof TileGasTransformerSideBlock leftTile && right != null && right instanceof TileGasTransformerSideBlock rightTile) {
-                BlockEntityUtils.updateLit(leftTile, canProcess);
-                BlockEntityUtils.updateLit(rightTile, canProcess);
-            }
-        }
+        updateLit(canProcess, facing);
         return canProcess;
     }
 
@@ -146,7 +119,7 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
 
     public abstract void outputToPipe(ComponentProcessor processor, ComponentGasHandlerMulti multi, Direction facing);
 
-    public abstract void updateLit(boolean isHeating, Direction facing);
+    public abstract void updateLit(boolean isRunning, Direction facing);
 
     public abstract SoundEvent getSound();
 
