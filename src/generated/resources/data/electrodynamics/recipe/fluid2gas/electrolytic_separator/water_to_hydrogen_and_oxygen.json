@@ -8,19 +8,19 @@
   ],
   "gasbi": [
     {
-      "amount": 2.0,
+      "amount": 2,
       "chance": 1.0,
       "gas": "electrodynamics:hydrogen",
       "pressure": 1,
-      "temp": 293.0
+      "temp": 293
     }
   ],
   "group": "electrodynamics",
   "output": {
-    "amount": 1.0,
+    "amount": 1,
     "gas": "electrodynamics:oxygen",
     "pressure": 1,
-    "temp": 293.0
+    "temp": 293
   },
   "ticks": 1,
   "usagepertick": 250.0

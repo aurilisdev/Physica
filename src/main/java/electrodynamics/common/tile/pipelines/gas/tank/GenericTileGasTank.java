@@ -31,7 +31,7 @@ public class GenericTileGasTank extends GenericGasTile {
 
 	public final Property<Double> insulationBonus = property(new Property<>(PropertyTypes.DOUBLE, "insulationbonus", 1.0));
 
-	public GenericTileGasTank(BlockEntityType<?> type, BlockPos pos, BlockState state, SubtypeMachine machine, double capacity, int maxPressure, double maxTemperature) {
+	public GenericTileGasTank(BlockEntityType<?> type, BlockPos pos, BlockState state, SubtypeMachine machine, int capacity, int maxPressure, int maxTemperature) {
 		super(type, pos, state);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentPacketHandler(this));
@@ -50,11 +50,11 @@ public class GenericTileGasTank extends GenericGasTile {
 
 		if (!gasIn.isEmpty() && gasIn.getTemperature() != Gas.ROOM_TEMPERATURE) {
 
-			double deltaT = Math.signum(Gas.ROOM_TEMPERATURE - gasIn.getTemperature());
+			int deltaT = (int) Math.signum(Gas.ROOM_TEMPERATURE - gasIn.getTemperature());
 
-			double temperatureDecrease = HEAT_LOSS / Math.max(1.0, insulationBonus.get()) * deltaT;
+			int temperatureDecrease = (int) (Math.max(1, HEAT_LOSS / Math.max(1.0, insulationBonus.get())) * deltaT);
 
-			handler.heat(temperatureDecrease, GasAction.EXECUTE);
+			handler.heat(0, temperatureDecrease, GasAction.EXECUTE);
 
 		}
 

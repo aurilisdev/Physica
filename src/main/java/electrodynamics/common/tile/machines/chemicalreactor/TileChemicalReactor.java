@@ -33,7 +33,7 @@ import java.util.List;
 public class TileChemicalReactor extends GenericGasTile {
 
     public static final int MAX_FLUID_TANK_CAPACITY = 5000;
-    public static final double MAX_GAS_TANK_CAPACITY = 5000.0;
+    public static final int MAX_GAS_TANK_CAPACITY = 5000;
 
     public final Property<Boolean> hasItemInputs = property(new Property<>(PropertyTypes.BOOLEAN, "hasiteminputs", false));
     public final Property<Boolean> hasFluidInputs = property(new Property<>(PropertyTypes.BOOLEAN, "hasfluidinputs", false));
@@ -53,7 +53,7 @@ public class TileChemicalReactor extends GenericGasTile {
                 .setDirectionsBySlot(1, BlockEntityUtils.MachineDirection.RIGHT).setSlotsByDirection(BlockEntityUtils.MachineDirection.LEFT, 2).setSlotsByDirection(BlockEntityUtils.MachineDirection.FRONT, 3, 4, 5).validUpgrades(ContainerChemicalReactor.VALID_UPGRADES).valid(machineValidator()));
         addComponent(new ComponentGasHandlerMulti(this).setInputDirections(BlockEntityUtils.MachineDirection.FRONT, BlockEntityUtils.MachineDirection.RIGHT).setOutputDirections(BlockEntityUtils.MachineDirection.BACK, BlockEntityUtils.MachineDirection.LEFT)
                 //
-                .setInputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000.0, 1000.0), arr(1024, 1024)).setOutputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000.0, 1000.0), arr(1024, 1024)).setCondensedHandler(getCondensedHandler())
+                .setInputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000, 1000), arr(1024, 1024)).setOutputTanks(2, arr(MAX_GAS_TANK_CAPACITY, MAX_GAS_TANK_CAPACITY), arr(1000, 1000), arr(1024, 1024)).setCondensedHandler(getCondensedHandler())
                 //
                 .setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_REACTOR_TYPE.get()));
         addComponent(new ComponentProcessor(this).canProcess(this::canProcess).process(this::process));

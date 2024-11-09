@@ -12,10 +12,10 @@
   },
   "gasinputs": [
     {
-      "amount": 1000.0,
+      "amount": 1000,
       "pressure": 8,
       "tag": "c:hydrogen",
-      "temp": 500.0
+      "temp": 500
     }
   ],
   "group": "electrodynamics",

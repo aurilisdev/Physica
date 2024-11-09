@@ -185,7 +185,7 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 			return;
 		}
 
-		double taken = handler.fillTank(0, drainedGasSource, GasAction.EXECUTE);
+		int taken = handler.fill(drainedGasSource, GasAction.EXECUTE);
 
 		//drain this gas gauge if the amount taken was greater than zero
 		if (taken > 0) {
@@ -207,7 +207,7 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 			if(taken <= 0) {
 				continue;
 			}
-			handler.drainTank(i, taken, GasAction.EXECUTE);
+			handler.drain(taken, GasAction.EXECUTE);
 
 			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
 

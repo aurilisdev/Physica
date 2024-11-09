@@ -1,7 +1,7 @@
 {
-  "amount": 78.1,
+  "amount": 78,
   "gas": "electrodynamics:nitrogen",
   "item": "electrodynamics:chromotographycardnitrogen",
   "pressure": 1,
-  "temperature": 293.0
+  "temperature": 293
 }

@@ -55,11 +55,11 @@ public class ComponentGasHandlerSimple extends PropertyGasTank implements ICompo
     @Nullable
     private IGasHandler outputOptional = null;
 
-    public ComponentGasHandlerSimple(GenericTile holder, String key, double capacity, double maxTemperature, int maxPressure) {
+    public ComponentGasHandlerSimple(GenericTile holder, String key, int capacity, int maxTemperature, int maxPressure) {
         super(holder, key, capacity, maxTemperature, maxPressure);
     }
 
-    public ComponentGasHandlerSimple(GenericTile holder, String key, double capacity, double maxTemperature, int maxPressure, Predicate<GasStack> isGasValid) {
+    public ComponentGasHandlerSimple(GenericTile holder, String key, int capacity, int maxTemperature, int maxPressure, Predicate<GasStack> isGasValid) {
         super(holder, key, capacity, maxTemperature, maxPressure, isGasValid);
     }
 
@@ -220,7 +220,7 @@ public class ComponentGasHandlerSimple extends PropertyGasTank implements ICompo
         }
 
         @Override
-        public GasStack drain(double amount, GasAction action) {
+        public GasStack drain(int amount, GasAction action) {
             return GasStack.EMPTY;
         }
 
@@ -238,7 +238,7 @@ public class ComponentGasHandlerSimple extends PropertyGasTank implements ICompo
         }
 
         @Override
-        public double fill(GasStack resource, GasAction action) {
+        public int fill(GasStack resource, GasAction action) {
             return 0;
         }
 

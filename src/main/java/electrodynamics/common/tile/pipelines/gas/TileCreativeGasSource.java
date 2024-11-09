@@ -45,7 +45,7 @@ public class TileCreativeGasSource extends GenericTile {
 
             if (handler != null) {
 
-                GasStack contained = handler.drainTank(0, Double.MAX_VALUE, GasAction.SIMULATE);
+                GasStack contained = handler.drain(Integer.MAX_VALUE, GasAction.SIMULATE);
 
                 simple.setGas(new GasStack(contained.getGas(), simple.getCapacity(), contained.getTemperature(), contained.getPressure()));
 
@@ -60,7 +60,7 @@ public class TileCreativeGasSource extends GenericTile {
 
             if (handler != null) {
 
-                handler.fillTank(0, simple.getGas().copy(), GasAction.EXECUTE);
+                handler.fill(simple.getGas().copy(), GasAction.EXECUTE);
 
                 inv.setItem(1, handler.getContainer());
 
@@ -92,7 +92,7 @@ public class TileCreativeGasSource extends GenericTile {
 
                 GasStack tankGas = gasTank.getGas();
 
-                handler.fillTank(0, tankGas, GasAction.EXECUTE);
+                handler.fill(tankGas, GasAction.EXECUTE);
 
             }
         }

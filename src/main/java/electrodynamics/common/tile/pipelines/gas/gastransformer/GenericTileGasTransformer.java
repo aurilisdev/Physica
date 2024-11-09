@@ -52,6 +52,6 @@ public abstract class GenericTileGasTransformer extends GenericGasTile implement
 
 	public abstract double getUsagePerTick();
 
-	public abstract double getConversionRate();
+	public abstract int getConversionRate();
 
 }

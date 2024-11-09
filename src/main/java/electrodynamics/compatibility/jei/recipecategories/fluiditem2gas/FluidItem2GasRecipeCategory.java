@@ -74,7 +74,7 @@ public class FluidItem2GasRecipeCategory<T extends FluidItem2GasRecipe> extends 
 
         if (outputHandler != null) {
 
-            outputHandler.fillTank(0, recipe.getGasRecipeOutput(), GasAction.EXECUTE);
+            outputHandler.fill(recipe.getGasRecipeOutput(), GasAction.EXECUTE);
 
             bucket = outputHandler.getContainer();
 

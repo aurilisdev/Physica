@@ -2,7 +2,6 @@ package electrodynamics.common.item.gear.tools;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
@@ -27,9 +26,9 @@ import net.minecraft.world.level.Level;
 
 public class ItemPortableCylinder extends ItemElectrodynamics {
 
-    public static final double MAX_GAS_CAPCITY = 5000;
+    public static final int MAX_GAS_CAPCITY = 5000;
 
-    public static final double MAX_TEMPERATURE = 1000;
+    public static final int MAX_TEMPERATURE = 1000;
     public static final int MAX_PRESSURE = 1000;
 
     public static final List<InventoryTickConsumer> INVENTORY_TICK_CONSUMERS = new ArrayList<>();

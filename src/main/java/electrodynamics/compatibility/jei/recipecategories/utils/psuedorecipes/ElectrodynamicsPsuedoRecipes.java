@@ -44,7 +44,7 @@ public class ElectrodynamicsPsuedoRecipes {
 			
 			IGasHandlerItem inputHandler = inputCylinder.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
 			
-			inputHandler.fillTank(0, new GasStack(gas, 1000, gas.getCondensationTemp() + 0.00001, Gas.PRESSURE_AT_SEA_LEVEL), GasAction.EXECUTE);
+			inputHandler.fill(new GasStack(gas, 1000, gas.getCondensationTemp() + 1, Gas.PRESSURE_AT_SEA_LEVEL), GasAction.EXECUTE);
 
 			ItemStack outputBucket = new ItemStack(gas.getCondensedFluid().getBucket());
 			
@@ -84,7 +84,7 @@ public class ElectrodynamicsPsuedoRecipes {
 			
 			IGasHandlerItem outputHandler = outputCylinder.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
 			
-			outputHandler.fillTank(0, new GasStack(gas, 1000, gas.getCondensationTemp() + 0.00001, Gas.PRESSURE_AT_SEA_LEVEL), GasAction.EXECUTE);
+			outputHandler.fill(new GasStack(gas, 1000, gas.getCondensationTemp() + 1, Gas.PRESSURE_AT_SEA_LEVEL), GasAction.EXECUTE);
 
 			outputCylinder = outputHandler.getContainer();
 

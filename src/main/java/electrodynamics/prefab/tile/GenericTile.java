@@ -7,7 +7,6 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -437,10 +436,6 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
     protected static TriPredicate<Integer, ItemStack, ComponentInventory> machineValidator() {
         return (x, y, i) -> x < i.getOutputStartIndex() || x >= i.getInputBucketStartIndex() && x < i.getInputGasStartIndex() && y.getCapability(Capabilities.FluidHandler.ITEM) != null || x >= i.getInputGasStartIndex() && x < i.getUpgradeSlotStartIndex() && y.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM) != null
                 || x >= i.getUpgradeSlotStartIndex() && y.getItem() instanceof ItemUpgrade upgrade && i.isUpgradeValid(upgrade.subtype);
-    }
-
-    public static double[] arr(double... values) {
-        return values;
     }
 
     public static int[] arr(int... values) {

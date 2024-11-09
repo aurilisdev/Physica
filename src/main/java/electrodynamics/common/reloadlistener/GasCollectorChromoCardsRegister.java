@@ -95,8 +95,8 @@ public class GasCollectorChromoCardsRegister extends SimplePreparableReloadListe
 
             String item = set.get(ITEM_KEY).getAsString();
             Gas gas = ElectrodynamicsGases.GAS_REGISTRY.get(ResourceKey.create(ElectrodynamicsGases.GAS_REGISTRY_KEY, ResourceLocation.parse(set.get(GAS_KEY).getAsString())));
-            double amount = set.get(AMOUNT_KEY).getAsDouble();
-            double temperature = set.get(TEMPERATURE_KEY).getAsDouble();
+            int amount = set.get(AMOUNT_KEY).getAsInt();
+            int temperature = set.get(TEMPERATURE_KEY).getAsInt();
             int pressure = set.get(PRESSURE_KEY).getAsInt();
 
             ResourceKey<Biome> biome = null;

@@ -76,7 +76,7 @@ public class TileAdvancedThermoelectricManipulator extends GenericTileThermoelec
     }
 
     @Override
-    public double getConversionRate() {
+    public int getConversionRate() {
         return Constants.ADVANCED_THERMOELECTRIC_MANIPULATOR_CONVERSION_RATE;
     }
 
@@ -144,7 +144,7 @@ public class TileAdvancedThermoelectricManipulator extends GenericTileThermoelec
                 GasTank gasTank = gasHandler.getOutputTanks()[0];
                 for (int i = 0; i < handler.getTanks(); i++) {
                     GasStack tankGas = gasTank.getGas();
-                    double amtAccepted = handler.fillTank(i, tankGas, GasAction.EXECUTE);
+                    int amtAccepted = handler.fill(tankGas, GasAction.EXECUTE);
                     GasStack taken = new GasStack(tankGas.getGas(), amtAccepted, tankGas.getTemperature(), tankGas.getPressure());
                     gasTank.drain(taken, GasAction.EXECUTE);
                 }
@@ -193,7 +193,7 @@ public class TileAdvancedThermoelectricManipulator extends GenericTileThermoelec
     }
 
     @Override
-    public double getHeatTransfer() {
+    public int getHeatTransfer() {
         return Constants.ADVANCED_THERMOELECTRIC_MANIPULATOR_HEAT_TRANSFER;
     }
 }

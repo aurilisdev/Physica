@@ -101,7 +101,7 @@ public abstract class GenericTileBasicCompressor extends GenericTileCompressor i
         }
 
         @Override
-        public double getConversionRate() {
+        public int getConversionRate() {
             return Constants.COMPRESSOR_CONVERSION_RATE;
         }
     }
@@ -132,7 +132,7 @@ public abstract class GenericTileBasicCompressor extends GenericTileCompressor i
         }
 
         @Override
-        public double getConversionRate() {
+        public int getConversionRate() {
             return Constants.DECOMPRESSOR_CONVERSION_RATE;
         }
     }

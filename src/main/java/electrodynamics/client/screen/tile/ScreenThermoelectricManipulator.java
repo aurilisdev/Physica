@@ -86,10 +86,10 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 			return;
 		}
 
-		double temperature = Gas.ROOM_TEMPERATURE;
+		int temperature = Gas.ROOM_TEMPERATURE;
 
 		try {
-			temperature = Double.parseDouble(temp);
+			temperature = Integer.parseInt(temp);
 		} catch (Exception e) {
 
 		}

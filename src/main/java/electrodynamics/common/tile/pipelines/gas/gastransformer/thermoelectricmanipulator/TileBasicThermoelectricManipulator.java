@@ -40,7 +40,7 @@ public class TileBasicThermoelectricManipulator extends GenericTileThermoelectri
     }
 
     @Override
-    public double getHeatTransfer() {
+    public int getHeatTransfer() {
         return Constants.THERMOELECTRIC_MANIPULATOR_HEAT_TRANSFER;
     }
 
@@ -55,7 +55,7 @@ public class TileBasicThermoelectricManipulator extends GenericTileThermoelectri
     }
 
     @Override
-    public double getConversionRate() {
+    public int getConversionRate() {
         return Constants.THERMOELECTRIC_MANIPULATOR_CONVERSION_RATE;
     }
 

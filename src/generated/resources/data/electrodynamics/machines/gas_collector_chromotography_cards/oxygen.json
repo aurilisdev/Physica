@@ -1,7 +1,7 @@
 {
-  "amount": 20.9,
+  "amount": 21,
   "gas": "electrodynamics:oxygen",
   "item": "electrodynamics:chromotographycardoxygen",
   "pressure": 1,
-  "temperature": 293.0
+  "temperature": 293
 }

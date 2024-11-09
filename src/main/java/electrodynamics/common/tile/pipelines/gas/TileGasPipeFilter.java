@@ -130,23 +130,23 @@ public class TileGasPipeFilter extends GenericTile {
         }
 
         @Override
-        public double getTankCapacity(int tank) {
+        public int getTankCapacity(int tank) {
             if (isLocked) {
                 return 0;
             }
             isLocked = true;
-            double cap = outputCap.getTankCapacity(tank);
+            int cap = outputCap.getTankCapacity(tank);
             isLocked = false;
             return cap;
         }
 
         @Override
-        public double getTankMaxTemperature(int tank) {
+        public int getTankMaxTemperature(int tank) {
             if (isLocked) {
                 return 0;
             }
             isLocked = true;
-            double temp = outputCap.getTankMaxTemperature(tank);
+            int temp = outputCap.getTankMaxTemperature(tank);
 
             isLocked = false;
             return temp;
@@ -202,62 +202,65 @@ public class TileGasPipeFilter extends GenericTile {
         }
 
         @Override
-        public double fillTank(int tank, GasStack gas, GasAction action) {
+        public int fill(GasStack gas, GasAction action) {
             if (isLocked) {
                 return 0;
             }
-            if (isGasValid(tank, gas)) {
-                isLocked = true;
-                double fill = outputCap.fillTank(tank, gas, action);
+            for(int i = 0; i < outputCap.getTanks(); i++){
+                if (isGasValid(i, gas)) {
+                    isLocked = true;
+                    int fill = outputCap.fill(gas, action);
 
-                isLocked = false;
-                return fill;
+                    isLocked = false;
+                    return fill;
+                }
             }
+
             return 0;
         }
 
         @Override
-        public GasStack drainTank(int tank, GasStack gas, GasAction action) {
+        public GasStack drain(GasStack gas, GasAction action) {
             if (isLocked) {
                 return GasStack.EMPTY;
             }
             isLocked = true;
-            GasStack drain = outputCap.drainTank(tank, tank, action);
+            GasStack drain = outputCap.drain(gas, action);
 
             isLocked = false;
             return drain;
         }
 
         @Override
-        public GasStack drainTank(int tank, double maxFill, GasAction action) {
+        public GasStack drain(int maxFill, GasAction action) {
             if (isLocked) {
                 return GasStack.EMPTY;
             }
             isLocked = true;
-            GasStack drain = outputCap.drainTank(tank, maxFill, action);
+            GasStack drain = outputCap.drain(maxFill, action);
             isLocked = false;
             return drain;
         }
 
         @Override
-        public double heat(int tank, double deltaTemperature, GasAction action) {
+        public int heat(int tank, int deltaTemperature, GasAction action) {
             if (isLocked) {
                 return -1;
             }
             isLocked = true;
-            double heat = outputCap.heat(tank, deltaTemperature, action);
+            int heat = outputCap.heat(tank, deltaTemperature, action);
 
             isLocked = false;
             return heat;
         }
 
         @Override
-        public double bringPressureTo(int tank, int atm, GasAction action) {
+        public int bringPressureTo(int tank, int atm, GasAction action) {
             if (isLocked) {
                 return -1;
             }
             isLocked = true;
-            double pres = outputCap.bringPressureTo(tank, atm, action);
+            int pres = outputCap.bringPressureTo(tank, atm, action);
 
             isLocked = false;
             return pres;

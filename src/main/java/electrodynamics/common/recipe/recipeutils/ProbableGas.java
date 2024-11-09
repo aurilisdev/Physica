@@ -18,10 +18,10 @@ public class ProbableGas {
             //
             ElectrodynamicsGases.GAS_REGISTRY.byNameCodec().fieldOf("gas").forGetter(instance0 -> instance0.gas.getGas()),
             //
-            Codec.DOUBLE.fieldOf("amount").forGetter(instance0 -> instance0.gas.getAmount()),
+            Codec.INT.fieldOf("amount").forGetter(instance0 -> instance0.gas.getAmount()),
             //
 
-            Codec.DOUBLE.fieldOf("temp").forGetter(instance0 -> instance0.gas.getTemperature()),
+            Codec.INT.fieldOf("temp").forGetter(instance0 -> instance0.gas.getTemperature()),
             //
             Codec.INT.fieldOf("pressure").forGetter(instance0 -> instance0.gas.getPressure()),
             //
@@ -94,7 +94,7 @@ public class ProbableGas {
     public GasStack roll() {
         double random = Electrodynamics.RANDOM.nextDouble();
         if (random > 1 - chance) {
-            double amount = chance >= 1 ? gas.getAmount() : gas.getAmount() * random;
+            int amount = chance >= 1 ? gas.getAmount() : (int) (gas.getAmount() * random);
             return new GasStack(gas.getGas(), amount, gas.getTemperature(), gas.getPressure());
         }
         return GasStack.EMPTY;

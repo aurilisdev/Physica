@@ -20,11 +20,11 @@ public class GasHandlerItemStack implements IGasHandlerItem {
     private Predicate<GasStack> isGasValid = gas -> true;
     protected ItemStack container;
     private ItemStack slag = new ItemStack(ElectrodynamicsItems.ITEM_SLAG.get(), 1);
-    protected double capacity;
-    protected double maxTemperature;
+    protected int capacity;
+    protected int maxTemperature;
     protected int maxPressure;
 
-    public GasHandlerItemStack(ItemStack container, double capacity, double maxTemperature, int maxPressure) {
+    public GasHandlerItemStack(ItemStack container, int capacity, int maxTemperature, int maxPressure) {
         this.container = container;
         this.capacity = capacity;
         this.maxTemperature = maxTemperature;
@@ -53,12 +53,12 @@ public class GasHandlerItemStack implements IGasHandlerItem {
     }
 
     @Override
-    public double getTankCapacity(int tank) {
+    public int getTankCapacity(int tank) {
         return capacity;
     }
 
     @Override
-    public double getTankMaxTemperature(int tank) {
+    public int getTankMaxTemperature(int tank) {
         return maxTemperature;
     }
 
@@ -73,18 +73,18 @@ public class GasHandlerItemStack implements IGasHandlerItem {
     }
 
     @Override
-    public double fillTank(int tank, GasStack resource, GasAction action) {
+    public int fill(GasStack resource, GasAction action) {
         if (resource.isEmpty()) {
             return 0;
         }
 
-        if (!isGasValid(tank, resource)) {
+        if (!isGasValid(0, resource)) {
             return 0;
         }
 
         if (isEmpty()) {
 
-            double accepted = resource.getAmount() > capacity ? capacity : resource.getAmount();
+            int accepted = Math.min(resource.getAmount(), capacity);
 
             if (action == GasAction.EXECUTE) {
 
@@ -113,7 +113,7 @@ public class GasHandlerItemStack implements IGasHandlerItem {
             return 0;
         }
 
-        double canTake = GasStack.getMaximumAcceptance(gas, resource, capacity);
+        int canTake = GasStack.getMaximumAcceptance(gas, resource, capacity);
 
         if (canTake == 0) {
             return 0;
@@ -147,7 +147,7 @@ public class GasHandlerItemStack implements IGasHandlerItem {
     }
 
     @Override
-    public GasStack drainTank(int tank, GasStack resource, GasAction action) {
+    public GasStack drain(GasStack resource, GasAction action) {
 
         GasStack gas = getGasInTank(0);
 
@@ -155,12 +155,12 @@ public class GasHandlerItemStack implements IGasHandlerItem {
             return GasStack.EMPTY;
         }
 
-        return drainTank(tank, resource.getAmount(), action);
+        return drain(resource.getAmount(), action);
 
     }
 
     @Override
-    public GasStack drainTank(int tank, double amount, GasAction action) {
+    public GasStack drain(int amount, GasAction action) {
 
         if (isEmpty() || amount == 0) {
             return GasStack.EMPTY;
@@ -168,7 +168,7 @@ public class GasHandlerItemStack implements IGasHandlerItem {
 
         GasStack gas = getGasInTank(0);
 
-        double taken = gas.getAmount() > amount ? amount : gas.getAmount();
+        int taken = Math.min(gas.getAmount(), amount);
 
         GasStack takenStack = new GasStack(gas.getGas(), taken, gas.getTemperature(), gas.getPressure());
 
@@ -191,7 +191,7 @@ public class GasHandlerItemStack implements IGasHandlerItem {
     }
 
     @Override
-    public double heat(int tank, double deltaTemperature, GasAction action) {
+    public int heat(int tank, int deltaTemperature, GasAction action) {
 
         GasStack gas = getGasInTank(0);
 
@@ -223,7 +223,7 @@ public class GasHandlerItemStack implements IGasHandlerItem {
     }
 
     @Override
-    public double bringPressureTo(int tank, int atm, GasAction action) {
+    public int bringPressureTo(int tank, int atm, GasAction action) {
 
         GasStack gas = getGasInTank(0);
 
@@ -282,7 +282,7 @@ public class GasHandlerItemStack implements IGasHandlerItem {
      */
     public static class Consumable extends GasHandlerItemStack {
 
-        public Consumable(ItemStack container, double capacity, double maxTemperature, int maxPressure) {
+        public Consumable(ItemStack container, int capacity, int maxTemperature, int maxPressure) {
             super(container, capacity, maxTemperature, maxPressure);
         }
 
@@ -300,7 +300,7 @@ public class GasHandlerItemStack implements IGasHandlerItem {
 
         protected final ItemStack emptyContainer;
 
-        public SwapEmpty(ItemStack container, ItemStack emptyContainer, double capacity, double maxTemperature, int maxPressure) {
+        public SwapEmpty(ItemStack container, ItemStack emptyContainer, int capacity, int maxTemperature, int maxPressure) {
             super(container, capacity, maxTemperature, maxPressure);
             this.emptyContainer = emptyContainer;
         }

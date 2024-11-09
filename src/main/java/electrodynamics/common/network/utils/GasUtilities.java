@@ -22,7 +22,7 @@ public class GasUtilities {
         return acceptor != null && acceptor.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, acceptor.getBlockPos(), acceptor.getBlockState(), acceptor, dir) != null;
     }
 
-    public static double recieveGas(BlockEntity reciever, Direction dir, GasStack gas, GasAction action) {
+    public static int recieveGas(BlockEntity reciever, Direction dir, GasStack gas, GasAction action) {
         if (gas.isEmpty() || gas.getAmount() <= 0) {
             return 0;
         }
@@ -31,15 +31,15 @@ public class GasUtilities {
         IGasHandler handler = reciever.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, reciever.getBlockPos(), reciever.getBlockState(), reciever, dir);
 
         if (handler == null) {
-            return 0.0;
+            return 0;
         }
 
-        double taken = 0;
-        double recieved = 0;
+        int taken = 0;
+        int recieved = 0;
 
         for (int i = 0; i < handler.getTanks(); i++) {
             if (handler.isGasValid(i, copy)) {
-                recieved = handler.fillTank(i, copy, action);
+                recieved = handler.fill(copy, action);
                 copy.shrink(recieved);
                 taken += recieved;
             }
@@ -73,7 +73,7 @@ public class GasUtilities {
 
                     GasStack tankGas = gasTank.getGas().copy();
 
-                    double amtAccepted = handler.fillTank(i, tankGas, GasAction.EXECUTE);
+                    int amtAccepted = handler.fill(tankGas, GasAction.EXECUTE);
 
                     GasStack taken = new GasStack(tankGas.getGas(), amtAccepted, tankGas.getTemperature(), tankGas.getPressure());
 
@@ -108,7 +108,7 @@ public class GasUtilities {
 
             ItemStack stack = inv.getItem(index);
 
-            double room = tank.getRoom();
+            int room = tank.getRoom();
 
             if (stack.isEmpty() || room <= 0) {
                 continue;
@@ -126,15 +126,15 @@ public class GasUtilities {
                     break;
                 }
 
-                GasStack taken = handler.drainTank(0, room, GasAction.SIMULATE);
+                GasStack taken = handler.drain(room, GasAction.SIMULATE);
 
                 if (taken.isEmpty() || !tank.isGasValid(taken)) {
                     continue;
                 }
 
-                double takenAmt = tank.fill(taken, GasAction.EXECUTE);
+                int takenAmt = tank.fill(taken, GasAction.EXECUTE);
 
-                handler.drainTank(j, takenAmt, GasAction.EXECUTE);
+                handler.drain(takenAmt, GasAction.EXECUTE);
 
                 room = tank.getRoom();
 
@@ -194,7 +194,7 @@ public class GasUtilities {
 
                 }
 
-                double taken = handler.fillTank(j, gas, GasAction.EXECUTE);
+                int taken = handler.fill(gas, GasAction.EXECUTE);
 
                 tank.drain(taken, GasAction.EXECUTE);
 

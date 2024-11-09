@@ -110,9 +110,9 @@ public class GenericMaterialTile extends GenericTile {
             // first try to drain the item
             for (GasTank tank : gasHandler.getInputTanks()) {
 
-                double space = tank.getSpace();
+                int space = tank.getSpace();
 
-                GasStack containedGas = handlerGasItem.drainTank(0, space, GasAction.SIMULATE);
+                GasStack containedGas = handlerGasItem.drain(space, GasAction.SIMULATE);
 
                 if (containedGas.isEmpty()) {
                     continue;
@@ -124,7 +124,7 @@ public class GenericMaterialTile extends GenericTile {
 
                     if (!player.isCreative()) {
 
-                        handlerGasItem.drainTank(0, space, GasAction.EXECUTE);
+                        handlerGasItem.drain(space, GasAction.EXECUTE);
 
                     }
 
@@ -142,7 +142,7 @@ public class GenericMaterialTile extends GenericTile {
 
                 GasStack tankGas = tank.getGas();
 
-                double taken = handlerGasItem.fillTank(0, tankGas, GasAction.EXECUTE);
+                int taken = handlerGasItem.fill(tankGas, GasAction.EXECUTE);
 
                 if (taken <= 0) {
                     continue;

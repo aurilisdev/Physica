@@ -26,10 +26,10 @@ public class GasStack {
                             //
                             ElectrodynamicsGases.GAS_REGISTRY.byNameCodec().fieldOf("gas").forGetter(instance0 -> instance0.gas.value()),
                             //
-                            Codec.DOUBLE.fieldOf("amount").forGetter(instance0 -> instance0.amount),
+                            Codec.INT.fieldOf("amount").forGetter(instance0 -> instance0.amount),
                             //
 
-                            Codec.DOUBLE.fieldOf("temp").forGetter(instance0 -> instance0.temperature),
+                            Codec.INT.fieldOf("temp").forGetter(instance0 -> instance0.temperature),
                             //
                             Codec.INT.fieldOf("pressure").forGetter(instance0 -> instance0.pressure)
                             //
@@ -40,20 +40,20 @@ public class GasStack {
     public static final StreamCodec<FriendlyByteBuf, GasStack> STREAM_CODEC = StreamCodec.composite(
 
             ByteBufCodecs.fromCodec(ElectrodynamicsGases.GAS_REGISTRY.byNameCodec()), GasStack::getGas,
-            ByteBufCodecs.DOUBLE, GasStack::getAmount,
-            ByteBufCodecs.DOUBLE, GasStack::getTemperature,
+            ByteBufCodecs.INT, GasStack::getAmount,
+            ByteBufCodecs.INT, GasStack::getTemperature,
             ByteBufCodecs.INT, GasStack::getPressure,
             GasStack::new
     );
 
     public static final GasStack EMPTY = new GasStack();
 
-    public static final double ABSOLUTE_ZERO = 1; // zero technically, but that makes volumes a pain in the ass
+    public static final int ABSOLUTE_ZERO = 1; // zero technically, but that makes volumes a pain in the ass
     public static final int VACUUM = 1; // zero technically, but that makes volumes a pain in the ass
 
     private Holder<Gas> gas = ElectrodynamicsGases.EMPTY;
-    private double amount = 0; // mB
-    private double temperature = Gas.ROOM_TEMPERATURE;
+    private int amount = 0; // mB
+    private int temperature = Gas.ROOM_TEMPERATURE;
     private int pressure = Gas.PRESSURE_AT_SEA_LEVEL; // ATM
 
     private boolean isEmpty = false;
@@ -69,7 +69,7 @@ public class GasStack {
         }
     }
 
-    public GasStack(Gas gas, double amount, double temperature, int pressure) {
+    public GasStack(Gas gas, int amount, int temperature, int pressure) {
         this(gas);
         this.amount = amount;
         this.temperature = temperature;
@@ -80,11 +80,11 @@ public class GasStack {
         return gas.value();
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return isEmpty() ? 0 : amount;
     }
 
-    public double getTemperature() {
+    public int getTemperature() {
         return isEmpty() ? Gas.ROOM_TEMPERATURE : temperature;
     }
 
@@ -96,14 +96,14 @@ public class GasStack {
         return new GasStack(gas.value(), amount, temperature, pressure);
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         if (isEmpty()) {
             throw new UnsupportedOperationException("An empty Gas Stack cannot be modified");
         }
         this.amount = amount;
     }
 
-    public void shrink(double amount) {
+    public void shrink(int amount) {
         if (isEmpty()) {
             throw new UnsupportedOperationException("An empty Gas Stack cannot be modified");
         }
@@ -115,7 +115,7 @@ public class GasStack {
         }
     }
 
-    public void grow(double amount) {
+    public void grow(int amount) {
         if (isEmpty()) {
             throw new UnsupportedOperationException("An empty Gas Stack cannot be modified");
         }
@@ -129,7 +129,7 @@ public class GasStack {
      *
      * @param deltaTemp The change in temperature
      */
-    public void heat(double deltaTemp) {
+    public void heat(int deltaTemp) {
         amount = getVolumeChangeFromHeating(deltaTemp);
         temperature += deltaTemp;
     }
@@ -144,7 +144,7 @@ public class GasStack {
         pressure = atm;
     }
 
-    public double getVolumeChangeFromHeating(double deltaTemp) {
+    public int getVolumeChangeFromHeating(int deltaTemp) {
         if (isEmpty()) {
             throw new UnsupportedOperationException("An empty Gas Stack cannot be modified");
         }
@@ -152,13 +152,13 @@ public class GasStack {
             throw new UnsupportedOperationException("The temperature cannot drop below absolute zero");
         }
 
-        double change = (deltaTemp + temperature) / temperature;
+        int change = (int) ((deltaTemp + (double) temperature) / (double) temperature);
 
         return amount * change;
 
     }
 
-    public double getVolumeChangeFromPressurizing(int atm) {
+    public int getVolumeChangeFromPressurizing(int atm) {
         if (isEmpty()) {
             throw new UnsupportedOperationException("An empty Gas Stack cannot be modified");
         }
@@ -169,7 +169,7 @@ public class GasStack {
 
         double change = (double) atm / (double) pressure;
 
-        return amount / change;
+        return (int) (amount / change);
     }
 
     public boolean isEmpty() {
@@ -233,8 +233,8 @@ public class GasStack {
 
     public static GasStack readFromNbt(CompoundTag tag) {
         Gas gas = ElectrodynamicsGases.GAS_REGISTRY.get(ResourceLocation.parse(tag.getString("name")));
-        double amount = tag.getDouble("amount");
-        double temperature = tag.getDouble("temperature");
+        int amount = tag.getInt("amount");
+        int temperature = tag.getInt("temperature");
         int pressure = tag.getInt("pressure");
         return new GasStack(gas, amount, temperature, pressure);
     }
@@ -255,10 +255,10 @@ public class GasStack {
 
         int newPressure = stack1.getAmount() > stack2.getAmount() ? stack1.getPressure() : stack2.getPressure();
 
-        double medianTemperature = (stack1.temperature + stack2.temperature) / 2.0;
+        int medianTemperature = (int) ((stack1.temperature + stack2.temperature) / 2.0);
 
-        double deltaT1 = medianTemperature - stack1.temperature;
-        double deltaT2 = medianTemperature - stack2.temperature;
+        int deltaT1 = medianTemperature - stack1.temperature;
+        int deltaT2 = medianTemperature - stack2.temperature;
 
         stack1.bringPressureTo(newPressure);
         stack2.bringPressureTo(newPressure);
@@ -289,7 +289,7 @@ public class GasStack {
      * @param maximumAccept : The capacity of the container
      * @return How much of stack2 could be accepted before the temperatures and pressures equalize
      */
-    public static double getMaximumAcceptance(GasStack stack1, GasStack stack2, double maximumAccept) {
+    public static int getMaximumAcceptance(GasStack stack1, GasStack stack2, int maximumAccept) {
 
         int rulingPressure = stack1.getAmount() > stack2.getAmount() ? stack1.getPressure() : stack2.getPressure();
         double medianTemperature = (stack1.temperature + stack2.temperature) / 2.0;
@@ -317,7 +317,7 @@ public class GasStack {
             return stack2.getAmount();
         }
 
-        return remaining / deltaT2Factor * deltaP2Factor;
+        return (int) (remaining / deltaT2Factor * deltaP2Factor);
 
     }
 

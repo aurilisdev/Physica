@@ -76,7 +76,7 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         }
     }
 
-    public ComponentGasHandlerMulti setInputTanks(int count, double[] capacity, double[] maxTemperature, int[] maxPressure) {
+    public ComponentGasHandlerMulti setInputTanks(int count, int[] capacity, int[] maxTemperature, int[] maxPressure) {
         inputTanks = new PropertyGasTank[count];
         if (capacity.length < count) {
             throw new UnsupportedOperationException("The number of capacities does not match the number of input tanks");
@@ -93,7 +93,7 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         return this;
     }
 
-    public ComponentGasHandlerMulti setOutputTanks(int count, double[] capacity, double[] maxTemperature, int[] maxPressure) {
+    public ComponentGasHandlerMulti setOutputTanks(int count, int[] capacity, int[] maxTemperature, int[] maxPressure) {
         outputTanks = new PropertyGasTank[count];
         if (capacity.length < count) {
             throw new UnsupportedOperationException("The number of capacities does not match the number of output tanks");
@@ -110,7 +110,7 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         return this;
     }
 
-    public ComponentGasHandlerMulti setTanks(int inputCount, double[] inputCapacity, double[] inputMaxTemperature, int[] inputMaxPressure, int outputCount, double[] outputCapacity, double[] outputMaxTemperature, int[] outputMaxPressure) {
+    public ComponentGasHandlerMulti setTanks(int inputCount, int[] inputCapacity, int[] inputMaxTemperature, int[] inputMaxPressure, int outputCount, int[] outputCapacity, int[] outputMaxTemperature, int[] outputMaxPressure) {
         return setInputTanks(inputCount, inputCapacity, inputMaxTemperature, inputMaxPressure).setOutputTanks(outputCount, outputCapacity, outputMaxTemperature, outputMaxPressure);
     }
 
@@ -204,7 +204,7 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         return null;
     }
 
-    public double getTankCapacity(int tank, boolean input) {
+    public int getTankCapacity(int tank, boolean input) {
         if (input) {
             return inputTanks[tank].getCapacity();
         }
@@ -218,7 +218,7 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         return outputTanks[tank].isGasValid(stack);
     }
 
-    public double fill(int tank, GasStack resource, GasAction action, boolean input) {
+    public int fill(int tank, GasStack resource, GasAction action, boolean input) {
         if (input) {
             return inputTanks[tank].fill(resource, action);
         }
@@ -232,7 +232,7 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         return outputTanks[tank].drain(resource, action);
     }
 
-    public @NotNull GasStack drain(int tank, double maxDrain, GasAction action, boolean input) {
+    public @NotNull GasStack drain(int tank, int maxDrain, GasAction action, boolean input) {
         if (input) {
             return inputTanks[tank].drain(maxDrain, action);
         }
@@ -390,12 +390,12 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
                 for (PropertyGasTank tank : inputTanks) {
 
                     if (tank.getCapacity() < maxGasInputAmount) {
-                        tank.setCapacity(maxGasInputAmount);
+                        tank.setCapacity((int) maxGasInputAmount);
                     }
 
                     if (tank.getMaxTemperature() < maxGasInputTemperature) {
 
-                        tank.setMaxTemperature(maxGasInputTemperature + 10.0);
+                        tank.setMaxTemperature((int) (maxGasInputTemperature + 10.0));
 
                     }
 
@@ -422,12 +422,12 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
                 maxGasOutputPressure = (int) Math.pow(2, logged);
 
                 if (tank.getCapacity() < maxGasOutputAmount) {
-                    tank.setCapacity(maxGasOutputAmount);
+                    tank.setCapacity((int) maxGasOutputAmount);
                 }
 
                 if (tank.getMaxTemperature() < maxGasOutputTemperature) {
 
-                    tank.setMaxTemperature(maxGasOutputTemperature + 10.0);
+                    tank.setMaxTemperature((int) (maxGasOutputTemperature + 10.0));
 
                 }
 
@@ -454,11 +454,11 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
                     PropertyGasTank tank = outputTanks[i + offset];
 
                     if (tank.getCapacity() < maxGasBiproductAmount) {
-                        tank.setCapacity(maxGasBiproductAmount);
+                        tank.setCapacity((int) maxGasBiproductAmount);
                     }
 
                     if (tank.getMaxTemperature() < maxGasBiproductTemperature) {
-                        tank.setMaxTemperature(maxGasBiproductTemperature + 10.0);
+                        tank.setMaxTemperature((int) (maxGasBiproductTemperature + 10.0));
                     }
 
                     if (tank.getMaxPressure() < maxGasBiproudctPressure) {
@@ -540,12 +540,12 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         }
 
         @Override
-        public double getTankCapacity(int tank) {
+        public int getTankCapacity(int tank) {
             return tanks[tank].getCapacity();
         }
 
         @Override
-        public double getTankMaxTemperature(int tank) {
+        public int getTankMaxTemperature(int tank) {
             return tanks[tank].getMaxTemperature();
         }
 
@@ -560,28 +560,38 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         }
 
         @Override
-        public double fillTank(int tank, GasStack gas, GasAction action) {
-            return tanks[tank].fill(gas, action);
+        public int fill(GasStack gas, GasAction action) {
+            for(PropertyGasTank tank : tanks){
+                if(tank.getGas().getGas().equals(gas.getGas())){
+                    return tank.fill(gas, action);
+                }
+            }
+            for(PropertyGasTank tank : tanks){
+                if(tank.isEmpty()){
+                    return tank.fill(gas, action);
+                }
+            }
+            return 0;
         }
 
         @Override
-        public GasStack drainTank(int tank, GasStack gas, GasAction action) {
+        public GasStack drain(GasStack gas, GasAction action) {
             return GasStack.EMPTY;
         }
 
         @Override
-        public GasStack drainTank(int tank, double maxFill, GasAction action) {
+        public GasStack drain(int maxFill, GasAction action) {
             return GasStack.EMPTY;
         }
 
         @Override
-        public double heat(int tank, double deltaTemperature, GasAction action) {
-            return tanks[tank].heat(deltaTemperature, action);
+        public int heat(int tank, int deltaTemperature, GasAction action) {
+            return tanks[tank].heat(tank, deltaTemperature, action);
         }
 
         @Override
-        public double bringPressureTo(int tank, int atm, GasAction action) {
-            return tanks[tank].bringPressureTo(atm, action);
+        public int bringPressureTo(int tank, int atm, GasAction action) {
+            return tanks[tank].bringPressureTo(tank, atm, action);
         }
 
     }
@@ -605,12 +615,12 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         }
 
         @Override
-        public double getTankCapacity(int tank) {
+        public int getTankCapacity(int tank) {
             return tanks[tank].getCapacity();
         }
 
         @Override
-        public double getTankMaxTemperature(int tank) {
+        public int getTankMaxTemperature(int tank) {
             return tanks[tank].getMaxTemperature();
         }
 
@@ -625,28 +635,33 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         }
 
         @Override
-        public double fillTank(int tank, GasStack gas, GasAction action) {
+        public int fill(GasStack gas, GasAction action) {
             return 0;
         }
 
         @Override
-        public GasStack drainTank(int tank, GasStack gas, GasAction action) {
-            return tanks[tank].drain(tank, action);
+        public GasStack drain(GasStack gas, GasAction action) {
+            for(PropertyGasTank tank : tanks) {
+                if(tank.getGas().getGas().equals(gas.getGas())){
+                    return tank.drain(gas, action);
+                }
+            }
+            return GasStack.EMPTY;
         }
 
         @Override
-        public GasStack drainTank(int tank, double maxFill, GasAction action) {
-            return tanks[tank].drain(maxFill, action);
+        public GasStack drain(int maxFill, GasAction action) {
+            return GasStack.EMPTY;
         }
 
         @Override
-        public double heat(int tank, double deltaTemperature, GasAction action) {
-            return tanks[tank].heat(deltaTemperature, action);
+        public int heat(int tank, int deltaTemperature, GasAction action) {
+            return tanks[tank].heat(tank, deltaTemperature, action);
         }
 
         @Override
-        public double bringPressureTo(int tank, int atm, GasAction action) {
-            return tanks[tank].bringPressureTo(atm, action);
+        public int bringPressureTo(int tank, int atm, GasAction action) {
+            return tanks[tank].bringPressureTo(tank, atm, action);
         }
 
     }

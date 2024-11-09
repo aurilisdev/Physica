@@ -61,7 +61,7 @@ public class TileGasCollector extends GenericGasTile implements ITickableSound {
         ItemStack card = inv.getItem(CARD_SLOT);
         GasCollectorChromoCardsRegister.AtmosphericResult result = GasCollectorChromoCardsRegister.INSTANCE.getResult(card.getItem());
         ComponentGasHandlerSimple tank = getComponent(IComponentType.GasHandler);
-        tank.fill(new GasStack(result.stack().getGas(), result.stack().getAmount() * componentProcessor.operatingSpeed.get(), result.stack().getTemperature(), result.stack().getPressure()), GasAction.EXECUTE);
+        tank.fill(new GasStack(result.stack().getGas(), (int) (result.stack().getAmount() * componentProcessor.operatingSpeed.get()), result.stack().getTemperature(), result.stack().getPressure()), GasAction.EXECUTE);
     }
 
     private boolean canProcess(ComponentProcessor componentProcessor) {

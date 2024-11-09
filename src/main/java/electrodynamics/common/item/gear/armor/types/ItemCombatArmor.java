@@ -142,7 +142,7 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
                 return;
             }
 
-            handler.fillTank(0, gas, GasAction.EXECUTE);
+            handler.fill(gas, GasAction.EXECUTE);
 
             full.set(ElectrodynamicsDataComponentTypes.PLATES, 2);
 

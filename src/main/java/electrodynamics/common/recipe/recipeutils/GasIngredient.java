@@ -40,9 +40,9 @@ public class GasIngredient implements Predicate<GasStack>, ICustomIngredient {
             //
             ElectrodynamicsGases.GAS_REGISTRY.byNameCodec().fieldOf("gas").forGetter(instance0 -> instance0.gas),
             //
-            Codec.DOUBLE.fieldOf("amount").forGetter(instance0 -> instance0.amount),
+            Codec.INT.fieldOf("amount").forGetter(instance0 -> instance0.amount),
             //
-            Codec.DOUBLE.fieldOf("temp").forGetter(instance0 -> instance0.temperature),
+            Codec.INT.fieldOf("temp").forGetter(instance0 -> instance0.temperature),
             //
             Codec.INT.fieldOf("pressure").forGetter(instance0 -> instance0.pressure)
 
@@ -59,9 +59,9 @@ public class GasIngredient implements Predicate<GasStack>, ICustomIngredient {
             //
             TagKey.codec(ElectrodynamicsGases.GAS_REGISTRY_KEY).fieldOf("tag").forGetter(instance0 -> instance0.tag),
             //
-            Codec.DOUBLE.fieldOf("amount").forGetter(instance0 -> instance0.amount),
+            Codec.INT.fieldOf("amount").forGetter(instance0 -> instance0.amount),
             //
-            Codec.DOUBLE.fieldOf("temp").forGetter(instance0 -> instance0.temperature),
+            Codec.INT.fieldOf("temp").forGetter(instance0 -> instance0.temperature),
             //
             Codec.INT.fieldOf("pressure").forGetter(instance0 -> instance0.pressure)
 
@@ -136,11 +136,11 @@ public class GasIngredient implements Predicate<GasStack>, ICustomIngredient {
     private TagKey<Gas> tag;
     @Nullable
     private Gas gas;
-    private double amount;
-    private double temperature;
+    private int amount;
+    private int temperature;
     private int pressure;
 
-    public GasIngredient(Gas gas, double amount, double temperature, int pressure) {
+    public GasIngredient(Gas gas, int amount, int temperature, int pressure) {
         this(new GasStack(gas, amount, temperature, pressure));
     }
 
@@ -160,7 +160,7 @@ public class GasIngredient implements Predicate<GasStack>, ICustomIngredient {
         this.pressure = gas.getPressure();
     }
 
-    public GasIngredient(TagKey<Gas> tag, double amount, double temperature, int pressure) {
+    public GasIngredient(TagKey<Gas> tag, int amount, int temperature, int pressure) {
         this.tag = tag;
         this.amount = amount;
         this.temperature = temperature;

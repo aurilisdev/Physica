@@ -1,7 +1,5 @@
 package electrodynamics.api.gas;
 
-import java.util.function.Supplier;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -23,15 +21,15 @@ import net.minecraft.world.level.material.Fluids;
  */
 public class Gas {
 
-	public static final double ROOM_TEMPERATURE = 293;
+	public static final int ROOM_TEMPERATURE = 293;
 	public static final int PRESSURE_AT_SEA_LEVEL = 1;
-	public static final double MINIMUM_HEAT_BURN_TEMP = 327;
-	public static final double MINIMUM_FREEZE_TEMP = 260;
+	public static final int MINIMUM_HEAT_BURN_TEMP = 327;
+	public static final int MINIMUM_FREEZE_TEMP = 260;
 
 	private final Holder<Item> container;
 	private final TagKey<Gas> tag;
 	private final Component description;
-	private final double condensationTemp; // Degrees Kelvin; set to 0 if this gas does not condense
+	private final int condensationTemp; // Degrees Kelvin; set to 0 if this gas does not condense
 	@Nullable
 	private final Holder<Fluid> condensedFluid; // set to empty if gas does not condense
 
@@ -43,7 +41,7 @@ public class Gas {
 		this.condensedFluid = new Holder.Direct(Fluids.EMPTY);
 	}
 
-	public Gas(Holder<Item> container, @Nullable TagKey<Gas> tag, Component description, double condensationTemp, Holder<Fluid> condensedFluid) {
+	public Gas(Holder<Item> container, @Nullable TagKey<Gas> tag, Component description, int condensationTemp, Holder<Fluid> condensedFluid) {
 		this.container = container;
 		this.tag = tag;
 		this.description = description;
@@ -68,7 +66,7 @@ public class Gas {
 		return this == ElectrodynamicsGases.EMPTY.value();
 	}
 
-	public double getCondensationTemp() {
+	public int getCondensationTemp() {
 		return condensationTemp;
 	}
 

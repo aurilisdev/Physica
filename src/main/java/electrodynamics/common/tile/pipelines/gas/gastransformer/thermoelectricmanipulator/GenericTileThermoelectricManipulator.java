@@ -35,7 +35,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
      * loop with the steam turbine from Nuclear Science.
      */
 
-    public final Property<Double> targetTemperature = property(new Property<>(PropertyTypes.DOUBLE, "targettemperature", Gas.ROOM_TEMPERATURE));
+    public final Property<Integer> targetTemperature = property(new Property<>(PropertyTypes.INTEGER, "targettemperature", Gas.ROOM_TEMPERATURE));
 
     private boolean isFluid = false;
     private boolean changeState = false;
@@ -217,7 +217,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
         ComponentFluidHandlerMulti fluidHandler = getComponent(IComponentType.FluidHandler);
         ComponentGasHandlerMulti gasHandler = getComponent(IComponentType.GasHandler);
 
-        double conversionRate = getConversionRate() * processor.operatingSpeed.get();
+        int conversionRate = (int) (getConversionRate() * processor.operatingSpeed.get());
 
         // fluid to gas
         if (isFluid && changeState) {
@@ -225,7 +225,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
             FluidTank inputTank = fluidHandler.getInputTanks()[0];
             GasTank outputTank = gasHandler.getOutputTanks()[0];
 
-            double deltaT = targetTemperature.get() - evaporatedGas.getCondensationTemp();
+            int deltaT = targetTemperature.get() - evaporatedGas.getCondensationTemp();
 
             conversionRate = conversionRate * getAdjustedHeatingFactor(deltaT);
 
@@ -233,13 +233,13 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
                 conversionRate = 1;
             }
 
-            double maxTake = inputTank.getFluidAmount() > conversionRate ? conversionRate : inputTank.getFluidAmount();
+            int maxTake = Math.min(inputTank.getFluidAmount(), conversionRate);
 
             GasStack evaporatedPotential = new GasStack(evaporatedGas, maxTake, evaporatedGas.getCondensationTemp(), Gas.PRESSURE_AT_SEA_LEVEL);
 
             evaporatedPotential.heat(deltaT);
 
-            double taken = outputTank.fill(evaporatedPotential, GasAction.EXECUTE);
+            int taken = outputTank.fill(evaporatedPotential, GasAction.EXECUTE);
 
             if (taken == 0) {
                 return;
@@ -257,9 +257,9 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
             GasTank inputTank = gasHandler.getInputTanks()[0];
             FluidTank outputTank = fluidHandler.getOutputTanks()[0];
 
-            double targetTemp = targetTemperature.get() < inputTank.getGas().getGas().getCondensationTemp() ? inputTank.getGas().getGas().getCondensationTemp() : targetTemperature.get();
+            int targetTemp = targetTemperature.get() < inputTank.getGas().getGas().getCondensationTemp() ? inputTank.getGas().getGas().getCondensationTemp() : targetTemperature.get();
 
-            double deltaT = targetTemp - inputTank.getGas().getTemperature();
+            int deltaT = targetTemp - inputTank.getGas().getTemperature();
 
             conversionRate = conversionRate * getAdjustedHeatingFactor(deltaT);
 
@@ -301,17 +301,17 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
             GasTank inputTank = gasHandler.getInputTanks()[0];
             GasTank outputTank = gasHandler.getOutputTanks()[0];
 
-            double deltaT = targetTemperature.get() - inputTank.getGas().getTemperature();
+            int deltaT = targetTemperature.get() - inputTank.getGas().getTemperature();
 
             conversionRate = conversionRate * getAdjustedHeatingFactor(deltaT);
 
-            double maxTake = inputTank.getGasAmount() > conversionRate ? conversionRate : inputTank.getGasAmount();
+            int maxTake = inputTank.getGasAmount() > conversionRate ? conversionRate : inputTank.getGasAmount();
 
             GasStack condensedPotential = new GasStack(inputTank.getGas().getGas(), maxTake, inputTank.getGas().getTemperature(), inputTank.getGas().getPressure());
 
             condensedPotential.heat(deltaT);
 
-            double taken = outputTank.fill(condensedPotential, GasAction.EXECUTE);
+            int taken = outputTank.fill(condensedPotential, GasAction.EXECUTE);
 
             if (taken == 0) {
                 return;
@@ -363,17 +363,17 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
         };
     }
 
-    private double getAdjustedHeatingFactor(double deltaT) {
+    private int getAdjustedHeatingFactor(int deltaT) {
 
         if (deltaT == 0) {
             return 1;
         }
 
-        return Math.abs(getHeatTransfer() / deltaT);
+        return (int) Math.max(1, Math.abs((double) getHeatTransfer() / (double) deltaT));
 
     }
 
-    public abstract double getHeatTransfer();
+    public abstract int getHeatTransfer();
 
     private static record ManipulatorStatusCheckWrapper(boolean canProcess, ElectrodynamicsBlockStates.ManipulatorHeatingStatus status, boolean changeState) {
 

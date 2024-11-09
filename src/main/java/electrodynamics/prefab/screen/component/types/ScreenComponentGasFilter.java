@@ -129,7 +129,7 @@ public class ScreenComponentGasFilter extends ScreenComponentGeneric {
             return;
         }
 
-        GasStack taken = handler.drainTank(0, Double.MAX_VALUE, GasAction.SIMULATE);
+        GasStack taken = handler.drain(Integer.MAX_VALUE, GasAction.SIMULATE);
 
         if (taken.isEmpty()) {
             return;

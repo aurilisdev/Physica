@@ -109,7 +109,7 @@ public abstract class ElectrodynamicsRecipeBuilder<T extends ElectrodynamicsReci
         }
     }
 
-    public static record GasIngWrapper(double amt, double temp, int pressure) {
+    public static record GasIngWrapper(int amt, int temp, int pressure) {
 
     }
 

@@ -110,7 +110,7 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
                 GasTank gasTank = gasHandler.getOutputTanks()[0];
                 for (int i = 0; i < handler.getTanks(); i++) {
                     GasStack tankGas = gasTank.getGas();
-                    double amtAccepted = handler.fillTank(i, tankGas, GasAction.EXECUTE);
+                    int amtAccepted = handler.fill(tankGas, GasAction.EXECUTE);
                     GasStack taken = new GasStack(tankGas.getGas(), amtAccepted, tankGas.getTemperature(), tankGas.getPressure());
                     gasTank.drain(taken, GasAction.EXECUTE);
                 }
@@ -157,7 +157,7 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
         }
 
         @Override
-        public double getConversionRate() {
+        public int getConversionRate() {
             return Constants.ADVACNED_COMPRESSOR_CONVERSION_RATE;
         }
     }
@@ -183,7 +183,7 @@ public abstract class GenericTileAdvancedCompressor extends GenericTileCompresso
         }
 
         @Override
-        public double getConversionRate() {
+        public int getConversionRate() {
             return Constants.ADVANCED_DECOMPRESSOR_CONVERSION_RATE;
         }
     }

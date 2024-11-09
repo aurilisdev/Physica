@@ -1,7 +1,7 @@
 {
-  "amount": 0.93,
+  "amount": 1,
   "gas": "electrodynamics:argon",
   "item": "electrodynamics:chromotographycardargon",
   "pressure": 1,
-  "temperature": 293.0
+  "temperature": 293
 }

@@ -81,7 +81,7 @@ public abstract class Fluid2GasRecipeCategory<T extends Fluid2GasRecipe> extends
 
         IGasHandlerItem outputHandler = output.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
 
-        outputHandler.fillTank(0, recipe.getGasRecipeOutput(), GasAction.EXECUTE);
+        outputHandler.fill(recipe.getGasRecipeOutput(), GasAction.EXECUTE);
 
         output = outputHandler.getContainer();
 
@@ -99,7 +99,7 @@ public abstract class Fluid2GasRecipeCategory<T extends Fluid2GasRecipe> extends
 
                 if (handler != null) {
 
-                    handler.fillTank(0, gas.getFullStack(), GasAction.EXECUTE);
+                    handler.fill(gas.getFullStack(), GasAction.EXECUTE);
 
                     temp = handler.getContainer();
 

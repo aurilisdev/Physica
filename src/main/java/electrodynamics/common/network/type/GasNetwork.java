@@ -123,7 +123,7 @@ public class GasNetwork extends AbstractNetwork<IGasPipe, SubtypeGasPipe, BlockE
 		int size = recievingTiles.size();
 
 		HashSet<Direction> connections;
-		double /* deltaDegreesKelvin, newTemperature, */ takenAmt, amtTaken;
+		int /* deltaDegreesKelvin, newTemperature, */ takenAmt, amtTaken;
 		int connectionCount;
 
 		// pre-defining all vars to eek out a little more performance since this method is already beefy
@@ -187,7 +187,7 @@ public class GasNetwork extends AbstractNetwork<IGasPipe, SubtypeGasPipe, BlockE
 
 	/**
 	 * 
-	 * @param stack The gas being emited
+	 * @param transfer The gas being emited
 	 * @return how much gas was taken and the pumps that accepted gas
 	 */
 	private Pair<GasStack, Set<TileGasPipePump>> emitToPumps(GasStack transfer, ArrayList<BlockEntity> ignored) {
@@ -245,7 +245,7 @@ public class GasNetwork extends AbstractNetwork<IGasPipe, SubtypeGasPipe, BlockE
 
 		// double deltaT = copy.getTemperature() != Gas.ROOM_TEMPERATURE ? -Math.signum(copy.getTemperature() - Gas.ROOM_TEMPERATURE) : 0;
 
-		double /* deltaDegreesKelvin, newTemperature, */ amtTaken, takenAmt;
+		int /* deltaDegreesKelvin, newTemperature, */ amtTaken, takenAmt;
 
 		int connectionCount;
 

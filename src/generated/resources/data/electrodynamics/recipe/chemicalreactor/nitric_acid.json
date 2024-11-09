@@ -12,10 +12,10 @@
   },
   "gasinputs": [
     {
-      "amount": 1000.0,
+      "amount": 1000,
       "pressure": 4,
       "tag": "c:ammonia",
-      "temp": 700.0
+      "temp": 700
     }
   ],
   "group": "electrodynamics",

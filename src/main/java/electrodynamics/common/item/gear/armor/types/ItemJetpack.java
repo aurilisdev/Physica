@@ -62,7 +62,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     public static final double VERT_SPEED_INCREASE = 0.5;
     public static final double TERMINAL_VERTICAL_VELOCITY = 1;
     public static final int MAX_PRESSURE = 4;
-    public static final double MAX_TEMPERATURE = Gas.ROOM_TEMPERATURE;
+    public static final int MAX_TEMPERATURE = Gas.ROOM_TEMPERATURE;
 
     private static final String ARMOR_TEXTURE_LOCATION = References.ID + ":textures/model/armor/jetpack.png";
 
@@ -111,7 +111,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
 
         GasStack gas = new GasStack(ElectrodynamicsGases.HYDROGEN.value(), MAX_CAPACITY, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL);
 
-        handler.fillTank(0, gas, GasAction.EXECUTE);
+        handler.fill(gas, GasAction.EXECUTE);
 
         items.add(full);
 
@@ -391,7 +391,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
             return;
         }
 
-        handler.drainTank(0, ItemJetpack.USAGE_PER_TICK, GasAction.EXECUTE);
+        handler.drain(ItemJetpack.USAGE_PER_TICK, GasAction.EXECUTE);
 
     }
 

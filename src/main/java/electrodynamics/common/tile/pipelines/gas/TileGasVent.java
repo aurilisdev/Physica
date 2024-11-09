@@ -52,7 +52,7 @@ public class TileGasVent extends GenericMaterialTile {
         }
 
         for (int i = 0; i < handler.getTanks(); i++) {
-            handler.drainTank(i, Double.MAX_VALUE, GasAction.EXECUTE);
+            handler.drain(Integer.MAX_VALUE, GasAction.EXECUTE);
         }
 
     }

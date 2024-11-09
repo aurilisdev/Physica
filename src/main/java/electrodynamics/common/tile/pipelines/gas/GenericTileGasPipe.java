@@ -42,7 +42,7 @@ public abstract class GenericTileGasPipe extends GenericConnectTile implements I
 				}
 
 				@Override
-				public double heat(int tank, double deltaTemperature, GasAction action) {
+				public int heat(int tank, int deltaTemperature, GasAction action) {
 					return -1;
 				}
 
@@ -52,7 +52,7 @@ public abstract class GenericTileGasPipe extends GenericConnectTile implements I
 				}
 
 				@Override
-				public double getTankMaxTemperature(int tank) {
+				public int getTankMaxTemperature(int tank) {
 					return -1;
 				}
 
@@ -62,7 +62,7 @@ public abstract class GenericTileGasPipe extends GenericConnectTile implements I
 				}
 
 				@Override
-				public double getTankCapacity(int tank) {
+				public int getTankCapacity(int tank) {
 					return 0;
 				}
 
@@ -72,7 +72,7 @@ public abstract class GenericTileGasPipe extends GenericConnectTile implements I
 				}
 
 				@Override
-				public double fillTank(int tank, GasStack gas, GasAction action) {
+				public int fill(GasStack gas, GasAction action) {
 					if (action == GasAction.SIMULATE || getNetwork() == null) {
 						return 0;
 					}
@@ -80,17 +80,17 @@ public abstract class GenericTileGasPipe extends GenericConnectTile implements I
 				}
 
 				@Override
-				public GasStack drainTank(int tank, double maxFill, GasAction action) {
+				public GasStack drain(int maxFill, GasAction action) {
 					return GasStack.EMPTY;
 				}
 
 				@Override
-				public GasStack drainTank(int tank, GasStack gas, GasAction action) {
+				public GasStack drain(GasStack gas, GasAction action) {
 					return GasStack.EMPTY;
 				}
 
 				@Override
-				public double bringPressureTo(int tank, int atm, GasAction action) {
+				public int bringPressureTo(int tank, int atm, GasAction action) {
 					return -1;
 				}
 			};

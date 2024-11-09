@@ -82,7 +82,7 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
     @Override
     public void process(ComponentProcessor processor) {
 
-        double conversionRate = getConversionRate() * processor.operatingSpeed.get();
+        int conversionRate = (int) (getConversionRate() * processor.operatingSpeed.get());
 
         ComponentGasHandlerMulti gasHandler = getComponent(IComponentType.GasHandler);
         GasTank inputTank = gasHandler.getInputTanks()[0];
@@ -96,7 +96,7 @@ public abstract class GenericTileCompressor extends GenericTileGasTransformer {
 
         toTake.bringPressureTo(newPressure);
 
-        double taken = outputTank.fill(toTake.copy(), GasAction.EXECUTE);
+        int taken = outputTank.fill(toTake.copy(), GasAction.EXECUTE);
 
         if (taken == 0) {
             return;
