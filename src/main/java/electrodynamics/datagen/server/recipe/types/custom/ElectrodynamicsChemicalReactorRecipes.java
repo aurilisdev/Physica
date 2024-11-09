@@ -4,6 +4,7 @@ import electrodynamics.api.References;
 import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
+import electrodynamics.common.item.subtype.SubtypeOxide;
 import electrodynamics.common.recipe.recipeutils.ProbableFluid;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
@@ -11,8 +12,11 @@ import electrodynamics.datagen.utils.recipe.builders.ChemicalReactorBuilder;
 import electrodynamics.datagen.utils.recipe.builders.ElectrodynamicsRecipeBuilder;
 import electrodynamics.registers.ElectrodynamicsFluids;
 import electrodynamics.registers.ElectrodynamicsGases;
+import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerator {
@@ -75,6 +79,35 @@ public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerat
                 .addFluidTagInput(FluidTags.WATER, 3000)
                 //
                 .addGasTagInput(ElectrodynamicsTags.Gases.AMMONIA, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 700, 4))
+                //
+                .save(output);
+        newRecipe(0, 200, 500, "sulfur_trioxide_alternative", modID)
+                //
+                .setItemOutput(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.trisulfur)))
+                //
+                .addGasTagInput(ElectrodynamicsTags.Gases.SULFUR_DIOXIDE, new ElectrodynamicsRecipeBuilder.GasIngWrapper(1000, 373, Gas.PRESSURE_AT_SEA_LEVEL))
+                //
+                .addItemTagInput(ElectrodynamicsTags.Items.OXIDE_VANADIUM, 1)
+                //
+                .save(output);
+        newRecipe(0, 200, 500, "aqua_regia", modID)
+                //
+                .setFluidOutput(new FluidStack(ElectrodynamicsFluids.FLUID_AQUAREGIA, 100))
+                //
+                .addFluidTagInput(ElectrodynamicsTags.Fluids.HYDROCHLORIC_ACID, 1000)
+                //
+                .addFluidTagInput(ElectrodynamicsTags.Fluids.NITRIC_ACID, 1000)
+                //
+                .save(output);
+        newRecipe(0, 200, 200, "fertilizer", modID)
+                //
+                .setItemOutput(new ItemStack(ElectrodynamicsItems.ITEM_MOLYBDENUMFERTILIZER, 16))
+                //
+                .addItemTagInput(ElectrodynamicsTags.Items.DUST_MOLYBDENUM, 2)
+                //
+                .addItemStackInput(new ItemStack(Items.BONE_MEAL))
+                //
+                .addGasTagInput(ElectrodynamicsTags.Gases.AMMONIA, new ElectrodynamicsRecipeBuilder.GasIngWrapper(100, Gas.ROOM_TEMPERATURE, 4))
                 //
                 .save(output);
 

@@ -10,7 +10,7 @@ public class FluidPureMineral extends FluidNonPlaceable {
 
     public SubtypePureMineralFluid subtype;
     public FluidPureMineral(SubtypePureMineralFluid subtype) {
-        super(ElectrodynamicsItems.ITEM_CANISTERREINFORCED, new SimpleWaterBasedFluidType(References.ID, "fluidpuremineral" + subtype.name(), "pure/" + subtype.name()));
+        super(ElectrodynamicsItems.ITEM_CANISTERREINFORCED, new SimpleWaterBasedFluidType(References.ID, "fluidpuremineral" + subtype.name(), "pure/" + subtype.name(), subtype.color));
         this.subtype = subtype;
     }
 

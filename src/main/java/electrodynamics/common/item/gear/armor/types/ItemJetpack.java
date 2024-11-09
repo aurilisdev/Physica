@@ -13,9 +13,7 @@ import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
-import electrodynamics.client.ClientRegister;
 import electrodynamics.client.keys.KeyBinds;
-import electrodynamics.client.render.model.armor.types.ModelJetpack;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.common.packet.types.client.PacketRenderJetpackParticles;
 import electrodynamics.common.packet.types.server.PacketJetpackFlightServer;
@@ -24,7 +22,6 @@ import electrodynamics.registers.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -39,9 +36,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,23 +69,6 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
         super(ElectrodynamicsArmorMaterials.JETPACK, Type.CHESTPLATE, new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN);
     }
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            @Override
-            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
-
-                ModelJetpack<LivingEntity> model = new ModelJetpack<>(ClientRegister.JETPACK.bakeRoot());
-
-                model.crouching = properties.crouching;
-                model.riding = properties.riding;
-                model.young = properties.young;
-
-                return model;
-            }
-        });
-    }
 
     @Override
     public void addCreativeModeItems(CreativeModeTab tab, List<ItemStack> items) {

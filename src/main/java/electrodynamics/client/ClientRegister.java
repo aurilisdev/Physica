@@ -7,6 +7,7 @@ import java.util.List;
 import electrodynamics.api.References;
 import electrodynamics.client.guidebook.ModuleElectrodynamics;
 import electrodynamics.client.guidebook.ScreenGuidebook;
+import electrodynamics.client.misc.SWBFClientExtensions;
 import electrodynamics.client.modelbakers.bakerytypes.CableModelLoader;
 import electrodynamics.client.particle.fluiddrop.ParticleFluidDrop;
 import electrodynamics.client.particle.lavawithphysics.ParticleLavaWithPhysics;
@@ -14,6 +15,7 @@ import electrodynamics.client.particle.plasmaball.ParticlePlasmaBall;
 import electrodynamics.client.reloadlistener.ReloadListenerResetGuidebook;
 import electrodynamics.client.render.entity.RenderEnergyBlast;
 import electrodynamics.client.render.entity.RenderMetalRod;
+import electrodynamics.client.render.itemdecorators.ItemDecoratorCombatArmor;
 import electrodynamics.client.render.model.armor.types.ModelCombatArmor;
 import electrodynamics.client.render.model.armor.types.ModelCompositeArmor;
 import electrodynamics.client.render.model.armor.types.ModelHydraulicBoots;
@@ -25,15 +27,13 @@ import electrodynamics.client.screen.item.ScreenElectricDrill;
 import electrodynamics.client.screen.item.ScreenSeismicScanner;
 import electrodynamics.client.screen.tile.*;
 import electrodynamics.client.texture.atlas.AtlasHolderElectrodynamicsCustom;
+import electrodynamics.common.fluid.SimpleWaterBasedFluidType;
 import electrodynamics.common.item.gear.tools.electric.ItemElectricBaton;
 import electrodynamics.common.item.gear.tools.electric.ItemElectricChainsaw;
 import electrodynamics.common.item.gear.tools.electric.ItemElectricDrill;
-import electrodynamics.registers.ElectrodynamicsTiles;
-import electrodynamics.registers.ElectrodynamicsEntities;
-import electrodynamics.registers.ElectrodynamicsItems;
-import electrodynamics.registers.ElectrodynamicsMenuTypes;
-import electrodynamics.registers.ElectrodynamicsParticles;
+import electrodynamics.registers.*;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -41,15 +41,20 @@ import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD, value = { Dist.CLIENT })
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD, value = {Dist.CLIENT})
 public class ClientRegister {
 
     private static final String BLOCK_LOC = References.ID + ":block/";
@@ -75,9 +80,6 @@ public class ClientRegister {
     public static LayerDefinition COMBAT_ARMOR_LAYER_LEG_CHEST = ModelCombatArmor.createBodyLayer(1, false);
     public static LayerDefinition COMBAT_ARMOR_LAYER_COMB_CHEST = ModelCombatArmor.createBodyLayer(3, false);
 
-    public static HashMap<ResourceLocation, TextureAtlasSprite> CACHED_TEXTUREATLASSPRITES = new HashMap<>();
-    // for registration purposes only!
-    private static final List<ResourceLocation> CUSTOM_TEXTURES = new ArrayList<>();
 
     public static final ResourceLocation ON = ResourceLocation.withDefaultNamespace("on");
 
@@ -132,6 +134,10 @@ public class ClientRegister {
     public static final ResourceLocation TEXTURE_QUARRYARM_DARK = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/quarrydark");
     public static final ResourceLocation TEXTURE_MERCURY = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/mercury");
     public static final ResourceLocation TEXTURE_GAS = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/gastexture");
+
+    public static HashMap<ResourceLocation, TextureAtlasSprite> CACHED_TEXTUREATLASSPRITES = new HashMap<>();
+    // for registration purposes only!
+    private static final List<ResourceLocation> CUSTOM_TEXTURES = List.of(ClientRegister.TEXTURE_WHITE, ClientRegister.TEXTURE_MERCURY, ClientRegister.TEXTURE_QUARRYARM, ClientRegister.TEXTURE_QUARRYARM_DARK, ClientRegister.TEXTURE_GAS);
 
     public static void setup() {
         ClientEvents.init();
@@ -289,14 +295,6 @@ public class ClientRegister {
         return type == RenderType.translucent() || type == RenderType.solid();
     }
 
-    static {
-        CUSTOM_TEXTURES.add(ClientRegister.TEXTURE_WHITE);
-        CUSTOM_TEXTURES.add(ClientRegister.TEXTURE_MERCURY);
-        CUSTOM_TEXTURES.add(ClientRegister.TEXTURE_QUARRYARM);
-        CUSTOM_TEXTURES.add(ClientRegister.TEXTURE_QUARRYARM_DARK);
-        CUSTOM_TEXTURES.add(ClientRegister.TEXTURE_GAS);
-    }
-
     @SubscribeEvent
     public static void cacheCustomTextureAtlases(TextureAtlasStitchedEvent event) {
         if (event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS)) {
@@ -322,6 +320,160 @@ public class ClientRegister {
     @SubscribeEvent
     public static void registerGeometryLoaders(final ModelEvent.RegisterGeometryLoaders event) {
         event.register(CableModelLoader.ID, CableModelLoader.INSTANCE);
+    }
+
+    @SubscribeEvent
+    public static void registerItemDecorators(final RegisterItemDecorationsEvent event) {
+        event.register(ElectrodynamicsItems.ITEM_COMBATHELMET.get(), new ItemDecoratorCombatArmor());
+        event.register(ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get(), new ItemDecoratorCombatArmor());
+    }
+
+    @SubscribeEvent
+    public static void registerClientExtensions(final RegisterClientExtensionsEvent event) {
+
+        /* ITEMS */
+
+        //Combat Armor
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
+                ItemStack[] armorPiecesArray = new ItemStack[]{new ItemStack(ElectrodynamicsItems.ITEM_COMBATHELMET.get()), new ItemStack(ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get()), new ItemStack(ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get()), new ItemStack(ElectrodynamicsItems.ITEM_COMBATBOOTS.get())};
+
+                List<ItemStack> armorPieces = new ArrayList<>();
+                entity.getArmorSlots().forEach(armorPieces::add);
+
+                boolean isBoth = armorPieces.get(0).getItem() == armorPiecesArray[3].getItem() && armorPieces.get(1).getItem() == armorPiecesArray[2].getItem();
+
+                boolean hasChest = armorPieces.get(2).getItem() == armorPiecesArray[1].getItem();
+
+                ModelCombatArmor<LivingEntity> model;
+
+                if (isBoth) {
+                    if (hasChest) {
+                        model = new ModelCombatArmor<>(ClientRegister.COMBAT_ARMOR_LAYER_COMB_CHEST.bakeRoot(), armorSlot);
+                    } else {
+                        model = new ModelCombatArmor<>(ClientRegister.COMBAT_ARMOR_LAYER_COMB_NOCHEST.bakeRoot(), armorSlot);
+                    }
+                } else if (armorSlot == EquipmentSlot.FEET) {
+                    model = new ModelCombatArmor<>(ClientRegister.COMBAT_ARMOR_LAYER_BOOTS.bakeRoot(), armorSlot);
+                } else if (hasChest) {
+                    model = new ModelCombatArmor<>(ClientRegister.COMBAT_ARMOR_LAYER_LEG_CHEST.bakeRoot(), armorSlot);
+                } else {
+                    model = new ModelCombatArmor<>(ClientRegister.COMBAT_ARMOR_LAYER_LEG_NOCHEST.bakeRoot(), armorSlot);
+                }
+
+                model.crouching = properties.crouching;
+                model.riding = properties.riding;
+                model.young = properties.young;
+
+                return model;
+            }
+        }, ElectrodynamicsItems.ITEM_COMBATHELMET, ElectrodynamicsItems.ITEM_COMBATCHESTPLATE, ElectrodynamicsItems.ITEM_COMBATLEGGINGS, ElectrodynamicsItems.ITEM_COMBATBOOTS);
+
+        //Composite Armor
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
+
+                ItemStack[] armorPiecesArray = new ItemStack[]{new ItemStack(ElectrodynamicsItems.ITEM_COMPOSITEHELMET.get()), new ItemStack(ElectrodynamicsItems.ITEM_COMPOSITECHESTPLATE.get()), new ItemStack(ElectrodynamicsItems.ITEM_COMPOSITELEGGINGS.get()), new ItemStack(ElectrodynamicsItems.ITEM_COMPOSITEBOOTS.get())};
+
+                List<ItemStack> armorPieces = new ArrayList<>();
+                entity.getArmorSlots().forEach(armorPieces::add);
+
+                boolean isBoth = armorPieces.get(0).getItem() == armorPiecesArray[3].getItem() && armorPieces.get(1).getItem() == armorPiecesArray[2].getItem();
+
+                boolean hasChest = armorPieces.get(2).getItem() == armorPiecesArray[1].getItem();
+
+                ModelCompositeArmor<LivingEntity> model;
+
+                if (isBoth) {
+                    if (hasChest) {
+                        model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_COMB_CHEST.bakeRoot(), armorSlot);
+                    } else {
+                        model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_COMB_NOCHEST.bakeRoot(), armorSlot);
+                    }
+                } else if (armorSlot == EquipmentSlot.FEET) {
+                    model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_BOOTS.bakeRoot(), armorSlot);
+                } else if (hasChest) {
+                    model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_LEG_CHEST.bakeRoot(), armorSlot);
+                } else {
+                    model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_LEG_NOCHEST.bakeRoot(), armorSlot);
+                }
+
+                model.crouching = properties.crouching;
+                model.riding = properties.riding;
+                model.young = properties.young;
+
+                return model;
+            }
+        }, ElectrodynamicsItems.ITEM_COMPOSITEHELMET, ElectrodynamicsItems.ITEM_COMPOSITECHESTPLATE, ElectrodynamicsItems.ITEM_COMPOSITELEGGINGS, ElectrodynamicsItems.ITEM_COMPOSITEBOOTS);
+
+        //Night Vision Goggles
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
+                ModelNightVisionGoggles<LivingEntity> model = new ModelNightVisionGoggles<>(ClientRegister.NIGHT_VISION_GOGGLES.bakeRoot());
+
+                model.crouching = properties.crouching;
+                model.riding = properties.riding;
+                model.young = properties.young;
+
+                return model;
+            }
+        }, ElectrodynamicsItems.ITEM_NIGHTVISIONGOGGLES);
+
+        //Jetpack
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
+
+                ModelJetpack<LivingEntity> model = new ModelJetpack<>(ClientRegister.JETPACK.bakeRoot());
+
+                model.crouching = properties.crouching;
+                model.riding = properties.riding;
+                model.young = properties.young;
+
+                return model;
+            }
+        }, ElectrodynamicsItems.ITEM_JETPACK);
+
+        //Servo Leggings
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
+
+                ModelServoLeggings<LivingEntity> model = new ModelServoLeggings<>(ClientRegister.SERVO_LEGGINGS.bakeRoot());
+
+                model.crouching = properties.crouching;
+                model.riding = properties.riding;
+                model.young = properties.young;
+
+                return model;
+            }
+        }, ElectrodynamicsItems.ITEM_SERVOLEGGINGS);
+
+        //Hydraulic Boots
+        event.registerItem(new IClientItemExtensions() {
+            @Override
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
+
+                ModelHydraulicBoots<LivingEntity> model = new ModelHydraulicBoots<>(ClientRegister.HYDRAULIC_BOOTS.bakeRoot());
+
+                model.crouching = properties.crouching;
+                model.riding = properties.riding;
+                model.young = properties.young;
+
+                return model;
+            }
+        }, ElectrodynamicsItems.ITEM_HYDRAULICBOOTS);
+
+        /* FLUIDS */
+
+        ElectrodynamicsFluids.FLUIDS.getEntries().forEach(fluid -> {
+            event.registerFluidType(new SWBFClientExtensions((SimpleWaterBasedFluidType) fluid.get().getFluidType()), fluid.get().getFluidType());
+        });
+
+
     }
 
 }

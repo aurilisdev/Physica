@@ -8,8 +8,6 @@ import electrodynamics.api.References;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.item.IItemElectric;
-import electrodynamics.client.ClientRegister;
-import electrodynamics.client.render.model.armor.types.ModelServoLeggings;
 import electrodynamics.common.entity.ElectrodynamicsAttributeModifiers;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.prefab.item.ElectricItemProperties;
@@ -19,12 +17,10 @@ import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -33,7 +29,6 @@ import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemServoLeggings extends ItemElectrodynamicsArmor implements IItemElectric {
@@ -56,23 +51,6 @@ public class ItemServoLeggings extends ItemElectrodynamicsArmor implements IItem
     public ItemServoLeggings(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
         super(ElectrodynamicsArmorMaterials.SERVO_LEGGINGS, Type.LEGGINGS, properties, creativeTab);
         this.properties = properties;
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            @Override
-            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
-
-                ModelServoLeggings<LivingEntity> model = new ModelServoLeggings<>(ClientRegister.SERVO_LEGGINGS.bakeRoot());
-
-                model.crouching = properties.crouching;
-                model.riding = properties.riding;
-                model.young = properties.young;
-
-                return model;
-            }
-        });
     }
 
     @Override

@@ -14,7 +14,9 @@ import static electrodynamics.registers.ElectrodynamicsFluids.*;
 public class ElectrodynamicsFluidTypes {
 	public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, References.ID);
 
-	// liquids
+
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_AMMONIA = FLUID_TYPES.register("fluidammonia", () -> FLUID_AMMONIA.get().getFluidType());
+	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_AQUAREGIA = FLUID_TYPES.register("fluidaquaregia", () -> FLUID_AQUAREGIA.get().getFluidType());
 	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_CLAY = FLUID_TYPES.register("fluidclay", () -> FLUID_CLAY.get().getFluidType());
 	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_ETHANOL = FLUID_TYPES.register("fluidethanol", () -> FLUID_ETHANOL.get().getFluidType());
 	public static final DeferredHolder<FluidType, FluidType> FLUID_TYPE_HYDRAULIC = FLUID_TYPES.register("fluidhydraulic", () -> FLUID_HYDRAULIC.get().getFluidType());

@@ -626,6 +626,8 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 
 			addBlock(ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING, "Steel Scaffold");
 
+			addFluid(ElectrodynamicsFluids.FLUID_AMMONIA, "Liquid Ammonia");
+			addFluid(ElectrodynamicsFluids.FLUID_AQUAREGIA, "Aqua Regia");
 			addFluid(ElectrodynamicsFluids.FLUID_CLAY, "Clay Slurry");
 			addFluid(ElectrodynamicsFluids.FLUID_ETHANOL, "Ethanol");
 			addFluid(ElectrodynamicsFluids.FLUID_HYDRAULIC, "Hydraulic Fluid");
@@ -1577,7 +1579,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGuidebook("chapter.gases.l4.3", "It should be noted that gas pipes will display their maximum pressure rating in their noraml tooltip.");
 			addGuidebook("chapter.gases.l5", "Another crucial aspect to keep in mind is that gases will seek equilibrium and equalize pressures when two amounts of the same gas at different pressures are mixed. As pressure is always a whole value, the gas with the lowest pressure will become the ruling pressure, and the higher " + "pressure amount will have its pressure lowered in kind.");
 
-			addGuidebook("chapter.gases.l6", "Now we will cover the mechanics of %1$s. Temperature is measured in units of Kelvin (K), and the minimum temperature a gas can achieve is 1 degree Kelvin. Unlike pressure, temperature can take a non-whole value, meaning a gas can have a temperature of 273.163K. As a gas's temperatrure "
+			addGuidebook("chapter.gases.l6", "Now we will cover the mechanics of %1$s. Temperature is measured in units of Kelvin (K), and the minimum temperature a gas can achieve is 1 degree Kelvin. Like pressure, temperature cannot take a non-whole value, meaning a gas cannot have a temperature of 273.163K. As a gas's temperatrure "
 					+ "increases, its volume increases linearly. For example, if you double the temperature of a gas, you will also double its volume.");
 			addGuidebook("chapter.gases.temperature", "Temperature");
 			addGuidebook("chapter.gases.l7.1", "As with pressure, all items and machines that work with gases have a maximum rated temperature. If this temperature is exceded, then the machine or item may be damaged or even melt! By convention, items with a temperature cap will display the cap when shift is held:");
@@ -1619,7 +1621,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGuidebook("chapter.gases.l16.1", "You may notice however that the input and output tanks on these two blocks have a rather limited storage capacity. This can especially be a problem if you are decompressing a gas. Fortunately, the Compressor and Decompressor can have thier storage tank capacities increased by the "
 					+ "addition of a %1$s. The Pressurized Tank is placed atop of the input and output tank like so:");
 
-			addGuidebook("chapter.gases.l16.2", "A total of 5 can be stacked to increase the tank capacity.");
+			addGuidebook("chapter.gases.l16.2", "A total of %s can be stacked to increase the tank capacity.");
 
 			addGuidebook("chapter.gases.l17.1", "The third block for manipulating gases is the %1$s. The Thermoelectric Manipulator is able to heat or cool a gas to any specified temperature. To program the temperature, open the GUI, and input it:");
 

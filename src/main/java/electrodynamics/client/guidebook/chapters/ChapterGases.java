@@ -20,6 +20,7 @@ import electrodynamics.client.guidebook.utils.pagedata.graphics.ItemWrapperObjec
 import electrodynamics.client.guidebook.utils.pagedata.text.TextWrapperObject;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
 import electrodynamics.common.block.subtype.SubtypeMachine;
+import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.common.tile.pipelines.gas.tank.GenericTileGasTank;
 import electrodynamics.compatibility.jei.JeiBuffer;
@@ -210,7 +211,7 @@ public class ChapterGases extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l15", ElectrodynamicsItems.ITEM_COMPRESSOR.get().getDescription().copy().withStyle(ChatFormatting.BOLD), ElectrodynamicsItems.ITEM_DECOMPRESSOR.get().getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l16.1", ElectrodynamicsItems.ITEM_COMPRESSOR_ADDONTANK.get().getDescription(), ElectrodynamicsItems.ITEM_COMPRESSOR_ADDONTANK.get().getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
 		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/pressurizedtankuse.png")));
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l16.2")).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l16.2", Constants.GAS_TRANSFORMER_ADDON_TANK_LIMIT)).setSeparateStart());
 
 		// thermal manip
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l17.1", ElectrodynamicsItems.ITEM_THERMOELECTRIC_MANIPULATOR.get().getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());

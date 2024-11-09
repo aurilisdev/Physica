@@ -1,7 +1,6 @@
 package electrodynamics.common.item.gear.tools.electric;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.api.capability.types.itemhandler.CapabilityItemStackHandler;
 import electrodynamics.common.inventory.container.item.ContainerSeismicScanner;

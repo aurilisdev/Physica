@@ -8,8 +8,6 @@ import java.util.function.Predicate;
 import electrodynamics.api.References;
 import electrodynamics.api.capability.types.fluid.RestrictedFluidHandlerItemStack;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
-import electrodynamics.client.ClientRegister;
-import electrodynamics.client.render.model.armor.types.ModelHydraulicBoots;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
@@ -18,15 +16,10 @@ import electrodynamics.registers.ElectrodynamicsCreativeTabs;
 import electrodynamics.registers.ElectrodynamicsFluids;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import org.jetbrains.annotations.Nullable;
@@ -45,24 +38,6 @@ public class ItemHydraulicBoots extends ItemElectrodynamicsArmor {
 
     public ItemHydraulicBoots() {
         super(ElectrodynamicsArmorMaterials.HYDRAULIC_BOOTS, Type.BOOTS, new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            @Override
-            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
-
-                ModelHydraulicBoots<LivingEntity> model = new ModelHydraulicBoots<>(ClientRegister.HYDRAULIC_BOOTS.bakeRoot());
-
-                model.crouching = properties.crouching;
-                model.riding = properties.riding;
-                model.young = properties.young;
-
-                return model;
-            }
-        });
     }
 
     @Override

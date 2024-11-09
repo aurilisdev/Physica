@@ -1,19 +1,15 @@
 package electrodynamics.common.item.gear.armor.types;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 
 import electrodynamics.api.References;
-import electrodynamics.client.ClientRegister;
-import electrodynamics.client.render.model.armor.types.ModelCompositeArmor;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.registers.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -26,9 +22,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
@@ -46,46 +39,6 @@ public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
 		super(ElectrodynamicsArmorMaterials.COMPOSITE_ARMOR, slot, new Item.Properties().stacksTo(1).fireResistant().setNoRepair().durability(2000), ElectrodynamicsCreativeTabs.MAIN);
 	}
 
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-		consumer.accept(new IClientItemExtensions() {
-			@Override
-			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> properties) {
-
-				ItemStack[] armorPiecesArray = new ItemStack[] { new ItemStack(ElectrodynamicsItems.ITEM_COMPOSITEHELMET.get()), new ItemStack(ElectrodynamicsItems.ITEM_COMPOSITECHESTPLATE.get()), new ItemStack(ElectrodynamicsItems.ITEM_COMPOSITELEGGINGS.get()), new ItemStack(ElectrodynamicsItems.ITEM_COMPOSITEBOOTS.get()) };
-
-				List<ItemStack> armorPieces = new ArrayList<>();
-				entity.getArmorSlots().forEach(armorPieces::add);
-
-				boolean isBoth = armorPieces.get(0).getItem() == armorPiecesArray[3].getItem() && armorPieces.get(1).getItem() == armorPiecesArray[2].getItem();
-
-				boolean hasChest = armorPieces.get(2).getItem() == armorPiecesArray[1].getItem();
-
-				ModelCompositeArmor<LivingEntity> model;
-
-				if (isBoth) {
-					if (hasChest) {
-						model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_COMB_CHEST.bakeRoot(), getEquipmentSlot());
-					} else {
-						model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_COMB_NOCHEST.bakeRoot(), getEquipmentSlot());
-					}
-				} else if (getEquipmentSlot() == EquipmentSlot.FEET) {
-					model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_BOOTS.bakeRoot(), getEquipmentSlot());
-				} else if (hasChest) {
-					model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_LEG_CHEST.bakeRoot(), getEquipmentSlot());
-				} else {
-					model = new ModelCompositeArmor<>(ClientRegister.COMPOSITE_ARMOR_LAYER_LEG_NOCHEST.bakeRoot(), getEquipmentSlot());
-				}
-
-				model.crouching = properties.crouching;
-				model.riding = properties.riding;
-				model.young = properties.young;
-
-				return model;
-			}
-		});
-	}
 
 	@Override
 	public void addCreativeModeItems(CreativeModeTab group, List<ItemStack> items) {

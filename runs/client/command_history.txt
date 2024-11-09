@@ -8,3 +8,6 @@
 /gamerule doTraderSpawning false
 /gamerule doDaylightCycle false
 /time set night
+/time set noon
+/gamerule doWeatherCycle false
+/weather clear

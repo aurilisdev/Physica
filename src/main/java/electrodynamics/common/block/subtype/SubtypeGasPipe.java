@@ -124,9 +124,9 @@ public enum SubtypeGasPipe implements ISubtype {
      */
     public static enum PipeMaterial {
 
-        COPPER(10, 20, true, "pipematerialcopper"), // Them Con: 383, Ten Str: 70MPa (690 ATM)
-        STEEL(1, 100, true, "pipematerialsteel"), // Them Con: 54, Ten Str: 250MPa (2467 ATM)
-        HDPE(0.05, 10, false, "pipematerialplastic"); // Them Con: 0.48, Ten Str: 31MPa (305 ATM)
+        COPPER(10, 16, true, "pipematerialcopper"), // Them Con: 383, Ten Str: 70MPa (690 ATM)
+        STEEL(1, 128, true, "pipematerialsteel"), // Them Con: 54, Ten Str: 250MPa (2467 ATM)
+        HDPE(0.05, 16, false, "pipematerialplastic"); // Them Con: 0.48, Ten Str: 31MPa (305 ATM)
 
         public final double heatLoss;// degree Kelvin per Pipe
         public final int maxPressure;// atm

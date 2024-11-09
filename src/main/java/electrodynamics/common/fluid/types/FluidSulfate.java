@@ -10,7 +10,7 @@ public class FluidSulfate extends FluidNonPlaceable {
 
     public SubtypeSulfateFluid subtype;
     public FluidSulfate(SubtypeSulfateFluid subtype) {
-        super(ElectrodynamicsItems.ITEM_CANISTERREINFORCED, new SimpleWaterBasedFluidType(References.ID, "fluidsulfate" + subtype.name(), "sulfate/" + subtype.name()));
+        super(ElectrodynamicsItems.ITEM_CANISTERREINFORCED, new SimpleWaterBasedFluidType(References.ID, "fluidsulfate" + subtype.name(), "sulfate/" + subtype.name(), subtype.color));
         this.subtype = subtype;
     }
 
