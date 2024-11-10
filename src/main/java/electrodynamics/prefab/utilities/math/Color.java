@@ -109,6 +109,11 @@ public class Color {
 		return new Color((this.r * other.r) / 255, (this.g * other.g) / 255, (this.b * other.b) / 255, (this.a * other.a) / 255);
 	}
 
+	public Color blend(Color other, double amtOther) {
+		double amtThis = 1 - amtOther;
+		return new Color((int) ((r * amtThis + other.r * amtOther)), (int) ((g * amtThis + other.g * amtOther)), (int) ((b * amtThis + other.b * amtOther)), (int) ((a * amtThis + other.a * amtOther)));
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {

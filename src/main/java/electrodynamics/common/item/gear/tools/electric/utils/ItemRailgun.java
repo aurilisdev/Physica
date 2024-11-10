@@ -3,8 +3,8 @@ package electrodynamics.common.item.gear.tools.electric.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
+import electrodynamics.api.References;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.item.IItemTemperate;
@@ -12,6 +12,7 @@ import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.prefab.item.ItemElectric;
 import electrodynamics.prefab.item.TemperateItemProperties;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -21,8 +22,16 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 public class ItemRailgun extends ItemElectric implements IItemTemperate {
+
+	private static final List<ItemRailgun> ITEMS = new ArrayList<>();
+
+	public static final Color[]  HEAT_COLORS = {new Color(183, 183, 183, 255), new Color(102, 0, 0, 255), new Color(152, 1, 0, 255), new Color(204, 0 ,1, 255), new Color(253, 51, 1, 255), new Color(255, 102, 51, 255), new Color(254, 154, 100, 255), new Color(255, 203, 102, 255), new Color(254, 204, 50, 255), new Color(255, 255, 101, 255), new Color(255, 255, 153, 255)};
 
 	private final TemperateItemProperties temperateProperties = new TemperateItemProperties();
 	private double overheatTemperature = 0;
@@ -34,6 +43,7 @@ public class ItemRailgun extends ItemElectric implements IItemTemperate {
 		this.overheatTemperature = overheatTemperature;
 		this.tempThreshold = tempThreshold;
 		this.tempPerTick = tempPerTick;
+		ITEMS.add(this);
 	}
 
 	@Override
@@ -80,6 +90,42 @@ public class ItemRailgun extends ItemElectric implements IItemTemperate {
 	@Override
 	public TemperateItemProperties getTemperteProperties() {
 		return temperateProperties;
+	}
+
+	@EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
+	private static class ColorHandler {
+
+		@SubscribeEvent
+		public static void registerColoredBlocks(RegisterColorHandlersEvent.Item event) {
+			ITEMS.forEach(item -> event.register((stack, index) -> {
+				if (index != 1) {
+					return Color.WHITE.color();
+				}
+
+				double currHeat = IItemTemperate.getTemperature(stack);
+
+				if(currHeat <= 0){
+					return HEAT_COLORS[0].color();
+				}
+
+				double maxHeat = item.getMaxTemp();
+
+				double amtPerTier = maxHeat / (double) HEAT_COLORS.length;
+
+				int threshhold = (int) (currHeat / amtPerTier);
+
+				if(threshhold == HEAT_COLORS.length - 1){
+					return HEAT_COLORS[threshhold].color();
+				}
+
+				double amtNextTier = (currHeat - amtPerTier * threshhold) / amtPerTier;
+
+				return HEAT_COLORS[threshhold].blend(HEAT_COLORS[threshhold + 1], amtNextTier).color();
+
+
+			}, item));
+		}
+
 	}
 
 }
