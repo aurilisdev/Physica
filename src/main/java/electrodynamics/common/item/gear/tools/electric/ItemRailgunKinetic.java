@@ -1,8 +1,6 @@
 package electrodynamics.common.item.gear.tools.electric;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 import net.minecraft.core.Holder;
 import org.joml.Quaternionf;
@@ -27,6 +25,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class ItemRailgunKinetic extends ItemRailgun {
+
+	private static final List<Ingredient> RAILGUN_AMMO = List.of(Ingredient.of(ElectrodynamicsTags.Items.ROD_STEEL), Ingredient.of(ElectrodynamicsTags.Items.ROD_STAINLESSSTEEL), Ingredient.of(ElectrodynamicsTags.Items.ROD_HSLASTEEL));
 
 	public static final double JOULES_PER_SHOT = 100000.0;
 	private static final int OVERHEAT_TEMPERATURE = 400;
@@ -67,7 +67,7 @@ public class ItemRailgunKinetic extends ItemRailgun {
 		EntityCustomProjectile projectile = null;
 		int i = 0;
 
-		for (Ingredient ammo : getRailgunAmmo()) {
+		for (Ingredient ammo : RAILGUN_AMMO) {
 			if (ammo.test(ammoStack)) {
 				projectile = new EntityMetalRod(player, world, i);
 				break;
@@ -94,7 +94,7 @@ public class ItemRailgunKinetic extends ItemRailgun {
 
 		Vector3f viewVector = playerViewVector.toVector3f().rotate(quaternionf);
 
-		projectile.shoot(viewVector.x(), viewVector.y(), viewVector.z(), 20.0F, 0.0F);
+		projectile.shoot(viewVector.x(), viewVector.y(), viewVector.z(), 0.1F, 0.0F);
 
 		world.addFreshEntity(projectile);
 		railgun.recieveHeat(gunStack, TEMPERATURE_PER_SHOT, false);
@@ -106,14 +106,4 @@ public class ItemRailgunKinetic extends ItemRailgun {
 		return InteractionResultHolder.pass(gunStack);
 	}
 
-	/*
-	 * Allows easy addition of ammo types in the future Uses the Ingredient of the item to allow cross-mod compatibility
-	 */
-	public List<Ingredient> getRailgunAmmo() {
-		List<Ingredient> railgunAmmo = new ArrayList<>();
-		railgunAmmo.add(Ingredient.of(ElectrodynamicsTags.Items.ROD_STEEL));
-		railgunAmmo.add(Ingredient.of(ElectrodynamicsTags.Items.ROD_STAINLESSSTEEL));
-		railgunAmmo.add(Ingredient.of(ElectrodynamicsTags.Items.ROD_HSLASTEEL));
-		return railgunAmmo;
-	}
 }

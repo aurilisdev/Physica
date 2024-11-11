@@ -1,7 +1,5 @@
 package electrodynamics.common.item.gear.tools.electric;
 
-import java.util.function.Supplier;
-
 import electrodynamics.api.item.IItemTemperate;
 import electrodynamics.common.entity.projectile.EntityCustomProjectile;
 import electrodynamics.common.entity.projectile.types.EntityEnergyBlast;

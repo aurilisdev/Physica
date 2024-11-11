@@ -11,3 +11,4 @@
 /time set noon
 /gamerule doWeatherCycle false
 /weather clear
+/kill @e[type=electrodynamics:metalrod]

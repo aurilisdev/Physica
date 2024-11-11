@@ -129,7 +129,7 @@ public class ClientRegister {
     public static final ResourceLocation TEXTURE_RODHSLASTEEL = ResourceLocation.parse(References.ID + ":textures/entity/projectile/rodhslasteel.png");
 
     // Custom Textures
-    public static final ResourceLocation TEXTURE_WHITE = ResourceLocation.fromNamespaceAndPath("forge", "white");
+    public static final ResourceLocation TEXTURE_WHITE = ResourceLocation.fromNamespaceAndPath("neoforge", "white");
     public static final ResourceLocation TEXTURE_QUARRYARM = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/quarryarm");
     public static final ResourceLocation TEXTURE_QUARRYARM_DARK = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/quarrydark");
     public static final ResourceLocation TEXTURE_MERCURY = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/mercury");
