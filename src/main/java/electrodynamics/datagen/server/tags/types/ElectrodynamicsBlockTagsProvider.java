@@ -3,6 +3,11 @@ package electrodynamics.datagen.server.tags.types;
 import java.util.concurrent.CompletableFuture;
 
 import electrodynamics.api.References;
+import electrodynamics.common.block.BlockCustomGlass;
+import electrodynamics.common.block.BlockMachine;
+import electrodynamics.common.block.BlockOre;
+import electrodynamics.common.block.connect.BlockFluidPipe;
+import electrodynamics.common.block.connect.BlockWire;
 import electrodynamics.common.block.subtype.SubtypeOre;
 import electrodynamics.common.block.subtype.SubtypeOreDeepslate;
 import electrodynamics.common.block.subtype.SubtypeRawOreBlock;
@@ -28,21 +33,21 @@ public class ElectrodynamicsBlockTagsProvider extends BlockTagsProvider {
     protected void addTags(Provider provider) {
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getAllValuesArray(new BlockOre[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getAllValuesArray(new BlockOre[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getAllValuesArray(new Block[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_MACHINE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_MACHINE.getAllValuesArray(new BlockMachine[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_WIRE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_WIRE.getAllValuesArray(new BlockWire[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_FLUIDPIPE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_FLUIDPIPE.getAllValuesArray(new BlockFluidPipe[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getAllValuesArray(new BlockCustomGlass[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getAllValuesArray(new Block[0]))
                 //
                 .add(ElectrodynamicsBlocks.BLOCK_SEISMICMARKER.get())
                 //
@@ -90,17 +95,17 @@ public class ElectrodynamicsBlockTagsProvider extends BlockTagsProvider {
 
         tag(Tags.Blocks.NEEDS_WOOD_TOOL)
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getAllValuesArray(new BlockCustomGlass[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getSpecificValuesArray(SubtypeOre.getOreForMiningLevel(0)))
+                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getSpecificValuesArray(new BlockOre[0], SubtypeOre.getOreForMiningLevel(0)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getSpecificValuesArray(SubtypeOreDeepslate.getOreForMiningLevel(0)))
+                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getSpecificValuesArray(new BlockOre[0], SubtypeOreDeepslate.getOreForMiningLevel(0)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getSpecificValuesArray(SubtypeRawOreBlock.getForMiningLevel(0)))
+                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getSpecificValuesArray(new Block[0], SubtypeRawOreBlock.getForMiningLevel(0)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getSpecificValuesArray(SubtypeResourceBlock.getForMiningLevel(0)))
+                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getSpecificValuesArray(new Block[0], SubtypeResourceBlock.getForMiningLevel(0)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_WIRE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_WIRE.getAllValuesArray(new BlockWire[0]))
                 //
                 .add(ElectrodynamicsBlocks.BLOCK_FRAME.get())
                 //
@@ -108,17 +113,17 @@ public class ElectrodynamicsBlockTagsProvider extends BlockTagsProvider {
 
         tag(BlockTags.NEEDS_STONE_TOOL)
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_MACHINE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_MACHINE.getAllValuesArray(new BlockMachine[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_FLUIDPIPE.getAllValuesArray())
+                .add(ElectrodynamicsBlocks.BLOCKS_FLUIDPIPE.getAllValuesArray(new BlockFluidPipe[0]))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getSpecificValuesArray(SubtypeOre.getOreForMiningLevel(1)))
+                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getSpecificValuesArray(new BlockOre[0], SubtypeOre.getOreForMiningLevel(1)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getSpecificValuesArray(SubtypeOreDeepslate.getOreForMiningLevel(1)))
+                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getSpecificValuesArray(new BlockOre[0], SubtypeOreDeepslate.getOreForMiningLevel(1)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getSpecificValuesArray(SubtypeRawOreBlock.getForMiningLevel(1)))
+                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getSpecificValuesArray(new Block[0], SubtypeRawOreBlock.getForMiningLevel(1)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getSpecificValuesArray(SubtypeResourceBlock.getForMiningLevel(1)))
+                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getSpecificValuesArray(new Block[0], SubtypeResourceBlock.getForMiningLevel(1)))
                 //
                 .add(ElectrodynamicsBlocks.BLOCK_SEISMICMARKER.get())
                 //
@@ -160,23 +165,23 @@ public class ElectrodynamicsBlockTagsProvider extends BlockTagsProvider {
 
         tag(BlockTags.NEEDS_IRON_TOOL)
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getSpecificValuesArray(SubtypeOre.getOreForMiningLevel(2)))
+                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getSpecificValuesArray(new BlockOre[0], SubtypeOre.getOreForMiningLevel(2)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getSpecificValuesArray(SubtypeOreDeepslate.getOreForMiningLevel(2)))
+                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getSpecificValuesArray(new BlockOre[0], SubtypeOreDeepslate.getOreForMiningLevel(2)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getSpecificValuesArray(SubtypeRawOreBlock.getForMiningLevel(2)))
+                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getSpecificValuesArray(new Block[0], SubtypeRawOreBlock.getForMiningLevel(2)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getSpecificValuesArray(SubtypeResourceBlock.getForMiningLevel(2)));
+                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getSpecificValuesArray(new Block[0], SubtypeResourceBlock.getForMiningLevel(2)));
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getSpecificValuesArray(SubtypeOre.getOreForMiningLevel(3)))
+                .add(ElectrodynamicsBlocks.BLOCKS_ORE.getSpecificValuesArray(new BlockOre[0], SubtypeOre.getOreForMiningLevel(3)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getSpecificValuesArray(SubtypeOreDeepslate.getOreForMiningLevel(3)))
+                .add(ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getSpecificValuesArray(new BlockOre[0], SubtypeOreDeepslate.getOreForMiningLevel(3)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getSpecificValuesArray(SubtypeRawOreBlock.getForMiningLevel(3)))
+                .add(ElectrodynamicsBlocks.BLOCKS_RAWORE.getSpecificValuesArray(new Block[0], SubtypeRawOreBlock.getForMiningLevel(3)))
                 //
-                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getSpecificValuesArray(SubtypeResourceBlock.getForMiningLevel(3)));
+                .add(ElectrodynamicsBlocks.BLOCKS_RESOURCE.getSpecificValuesArray(new Block[0], SubtypeResourceBlock.getForMiningLevel(3)));
 
         for (SubtypeOre ore : SubtypeOre.values()) {
             tag(ore.blockTag).add(ElectrodynamicsBlocks.BLOCKS_ORE.getValue(ore));

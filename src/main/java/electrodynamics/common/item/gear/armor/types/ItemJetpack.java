@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
@@ -24,16 +23,14 @@ import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -58,7 +55,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     public static final int MAX_PRESSURE = 4;
     public static final int MAX_TEMPERATURE = Gas.ROOM_TEMPERATURE;
 
-    private static final String ARMOR_TEXTURE_LOCATION = References.ID + ":textures/model/armor/jetpack.png";
+    private static final ResourceLocation ARMOR_TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/jetpack.png");
 
     public static final float OFFSET = 0.1F;
 
@@ -146,8 +143,6 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
 
     public static void wearingTick(ItemStack stack, Level world, Player player, float particleZ, boolean isCombat) {
         if (world.isClientSide) {
-
-            Electrodynamics.LOGGER.info(player.getDeltaMovement().y);
 
             ArmorItem item = (ArmorItem) stack.getItem();
             if (item.getEquipmentSlot() == EquipmentSlot.CHEST) {
@@ -433,5 +428,8 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     }
     */
 
-
+    @Override
+    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+        return ARMOR_TEXTURE_LOCATION;
+    }
 }

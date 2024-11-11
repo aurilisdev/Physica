@@ -15,7 +15,9 @@ import electrodynamics.client.particle.plasmaball.ParticlePlasmaBall;
 import electrodynamics.client.reloadlistener.ReloadListenerResetGuidebook;
 import electrodynamics.client.render.entity.RenderEnergyBlast;
 import electrodynamics.client.render.entity.RenderMetalRod;
-import electrodynamics.client.render.itemdecorators.ItemDecoratorCombatArmor;
+import electrodynamics.client.render.itemdecorators.ItemDecoratorCombatHelmet;
+import electrodynamics.client.render.itemdecorators.ItemDecoratorCombatLeggings;
+import electrodynamics.client.render.itemdecorators.ItemDecoratorRailgun;
 import electrodynamics.client.render.model.armor.types.ModelCombatArmor;
 import electrodynamics.client.render.model.armor.types.ModelCompositeArmor;
 import electrodynamics.client.render.model.armor.types.ModelHydraulicBoots;
@@ -324,8 +326,11 @@ public class ClientRegister {
 
     @SubscribeEvent
     public static void registerItemDecorators(final RegisterItemDecorationsEvent event) {
-        event.register(ElectrodynamicsItems.ITEM_COMBATHELMET.get(), new ItemDecoratorCombatArmor());
-        event.register(ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get(), new ItemDecoratorCombatArmor());
+        event.register(ElectrodynamicsItems.ITEM_COMBATHELMET.get(), new ItemDecoratorCombatHelmet());
+        event.register(ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get(), new ItemDecoratorCombatLeggings());
+
+        event.register(ElectrodynamicsItems.ITEM_KINETICRAILGUN.get(), new ItemDecoratorRailgun());
+        event.register(ElectrodynamicsItems.ITEM_PLASMARAILGUN.get(), new ItemDecoratorRailgun());
     }
 
     @SubscribeEvent

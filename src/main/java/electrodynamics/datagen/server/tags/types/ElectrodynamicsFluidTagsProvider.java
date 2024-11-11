@@ -31,6 +31,7 @@ public class ElectrodynamicsFluidTagsProvider extends FluidTagsProvider {
 		tag(ElectrodynamicsTags.Fluids.SULFURIC_ACID).add(ElectrodynamicsFluids.FLUID_SULFURICACID.get());
 		tag(ElectrodynamicsTags.Fluids.NITRIC_ACID).add(ElectrodynamicsFluids.FLUID_NITRICACID.get());
 		tag(ElectrodynamicsTags.Fluids.HYDROCHLORIC_ACID).add(ElectrodynamicsFluids.FLUID_HYDROCHLORICACID.get());
+		tag(ElectrodynamicsTags.Fluids.AMMONIA).add(ElectrodynamicsFluids.FLUID_AMMONIA.get());
 		for (SubtypeSulfateFluid sulfate : SubtypeSulfateFluid.values()) {
 			tag(sulfate.tag).add(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(sulfate));
 		}

@@ -2,7 +2,10 @@ package electrodynamics.common.item.gear.tools.electric;
 
 import java.util.List;
 
+import electrodynamics.api.fluid.FluidStackComponent;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import net.minecraft.core.Holder;
+import net.neoforged.neoforge.fluids.FluidStack;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -26,84 +29,100 @@ import net.minecraft.world.phys.Vec3;
 
 public class ItemRailgunKinetic extends ItemRailgun {
 
-	private static final List<Ingredient> RAILGUN_AMMO = List.of(Ingredient.of(ElectrodynamicsTags.Items.ROD_STEEL), Ingredient.of(ElectrodynamicsTags.Items.ROD_STAINLESSSTEEL), Ingredient.of(ElectrodynamicsTags.Items.ROD_HSLASTEEL));
+    private static final List<Ingredient> RAILGUN_AMMO = List.of(Ingredient.of(ElectrodynamicsTags.Items.ROD_STEEL), Ingredient.of(ElectrodynamicsTags.Items.ROD_STAINLESSSTEEL), Ingredient.of(ElectrodynamicsTags.Items.ROD_HSLASTEEL));
 
-	public static final double JOULES_PER_SHOT = 100000.0;
-	private static final int OVERHEAT_TEMPERATURE = 400;
-	private static final int TEMPERATURE_PER_SHOT = 300;
-	private static final double TEMPERATURE_REDUCED_PER_TICK = 2.0;
-	private static final double OVERHEAT_WARNING_THRESHOLD = 0.75;
+    public static final double JOULES_PER_SHOT = 100000.0;
+    private static final int OVERHEAT_TEMPERATURE = 400;
+    public static final int TEMPERATURE_PER_SHOT = 300;
+    private static final double TEMPERATURE_REDUCED_PER_TICK = 2.0;
+    private static final double OVERHEAT_WARNING_THRESHOLD = 0.75;
 
-	public ItemRailgunKinetic(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
-		super(properties, creativeTab, OVERHEAT_TEMPERATURE, OVERHEAT_WARNING_THRESHOLD, TEMPERATURE_REDUCED_PER_TICK, item -> ElectrodynamicsItems.ITEM_LITHIUMBATTERY.get());
-	}
+    public static final int COOLANT_PER_SHOT = 200;
 
-	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-		ItemStack gunStack;
-		ItemStack ammoStack;
+    public ItemRailgunKinetic(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
+        super(properties, creativeTab, OVERHEAT_TEMPERATURE, OVERHEAT_WARNING_THRESHOLD, TEMPERATURE_REDUCED_PER_TICK, item -> ElectrodynamicsItems.ITEM_LITHIUMBATTERY.get());
+    }
 
-		if (hand == InteractionHand.MAIN_HAND) {
-			gunStack = player.getMainHandItem();
-			ammoStack = player.getOffhandItem();
-		} else {
-			gunStack = player.getOffhandItem();
-			ammoStack = player.getMainHandItem();
-		}
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+        ItemStack gunStack;
+        ItemStack ammoStack;
 
-		if (world.isClientSide) {
-			return InteractionResultHolder.pass(gunStack);
-		}
+        if (hand == InteractionHand.MAIN_HAND) {
+            gunStack = player.getMainHandItem();
+            ammoStack = player.getOffhandItem();
+        } else {
+            gunStack = player.getOffhandItem();
+            ammoStack = player.getMainHandItem();
+        }
 
-		ItemRailgunKinetic railgun = (ItemRailgunKinetic) gunStack.getItem();
+        if (world.isClientSide) {
+            return InteractionResultHolder.pass(gunStack);
+        }
 
-		if (railgun.getJoulesStored(gunStack) < JOULES_PER_SHOT || ammoStack.isEmpty() || IItemTemperate.getTemperature(gunStack) > OVERHEAT_TEMPERATURE - TEMPERATURE_PER_SHOT) {
+        ItemRailgunKinetic railgun = (ItemRailgunKinetic) gunStack.getItem();
 
-			world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_RAILGUNKINETIC_NOAMMO.get(), SoundSource.PLAYERS, 1, 1);
-			return InteractionResultHolder.pass(gunStack);
+        if (railgun.getJoulesStored(gunStack) < JOULES_PER_SHOT || ammoStack.isEmpty() || IItemTemperate.getTemperature(gunStack) > OVERHEAT_TEMPERATURE - TEMPERATURE_PER_SHOT) {
 
-		}
+            world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_RAILGUNKINETIC_NOAMMO.get(), SoundSource.PLAYERS, 1, 1);
+            return InteractionResultHolder.pass(gunStack);
 
-		EntityCustomProjectile projectile = null;
-		int i = 0;
+        }
 
-		for (Ingredient ammo : RAILGUN_AMMO) {
-			if (ammo.test(ammoStack)) {
-				projectile = new EntityMetalRod(player, world, i);
-				break;
-			}
-			i++;
-		}
+        EntityCustomProjectile projectile = null;
+        int i = 0;
 
-		if (projectile == null) {
-			world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_RAILGUNKINETIC_NOAMMO.get(), SoundSource.PLAYERS, 1, 1);
-			return InteractionResultHolder.pass(gunStack);
-		}
+        for (Ingredient ammo : RAILGUN_AMMO) {
+            if (ammo.test(ammoStack)) {
+                projectile = new EntityMetalRod(player, world, i);
+                break;
+            }
+            i++;
+        }
 
-		railgun.extractPower(gunStack, JOULES_PER_SHOT, false);
-		world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_RAILGUNKINETIC.get(), SoundSource.PLAYERS, 1, 1);
-		projectile.setItem(ammoStack);
-		projectile.setNoGravity(true);
-		projectile.setOwner(player);
+        if (projectile == null) {
+            world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_RAILGUNKINETIC_NOAMMO.get(), SoundSource.PLAYERS, 1, 1);
+            return InteractionResultHolder.pass(gunStack);
+        }
 
-		Vec3 vec31 = player.getUpVector(1.0F);
+        railgun.extractPower(gunStack, JOULES_PER_SHOT, false);
+        world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_RAILGUNKINETIC.get(), SoundSource.PLAYERS, 1, 1);
+        projectile.setItem(ammoStack);
+        projectile.setNoGravity(true);
+        projectile.setOwner(player);
 
-		Quaternionf quaternionf = (new Quaternionf()).setAngleAxis(0, vec31.x, vec31.y, vec31.z);
+        Vec3 vec31 = player.getUpVector(1.0F);
 
-		Vec3 playerViewVector = player.getViewVector(1.0F);
+        Quaternionf quaternionf = (new Quaternionf()).setAngleAxis(0, vec31.x, vec31.y, vec31.z);
 
-		Vector3f viewVector = playerViewVector.toVector3f().rotate(quaternionf);
+        Vec3 playerViewVector = player.getViewVector(1.0F);
 
-		projectile.shoot(viewVector.x(), viewVector.y(), viewVector.z(), 0.1F, 0.0F);
+        Vector3f viewVector = playerViewVector.toVector3f().rotate(quaternionf);
 
-		world.addFreshEntity(projectile);
-		railgun.recieveHeat(gunStack, TEMPERATURE_PER_SHOT, false);
+        projectile.shoot(viewVector.x(), viewVector.y(), viewVector.z(), 10, 0.0F);
 
-		if (!player.isCreative()) {
-			ammoStack.shrink(1);
-		}
+        world.addFreshEntity(projectile);
 
-		return InteractionResultHolder.pass(gunStack);
-	}
+        FluidStack fluidStack = gunStack.getOrDefault(ElectrodynamicsDataComponentTypes.FLUID_STACK.get(), FluidStackComponent.EMPTY).fluid;
+
+        if (fluidStack.isEmpty()) {
+            railgun.recieveHeat(gunStack, TEMPERATURE_PER_SHOT, false);
+        } else {
+            if (fluidStack.getAmount() < COOLANT_PER_SHOT) {
+                railgun.recieveHeat(gunStack, TEMPERATURE_PER_SHOT, false);
+            } else {
+                fluidStack.shrink(COOLANT_PER_SHOT);
+                world.playSound(null, player.blockPosition(), ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), SoundSource.PLAYERS, 0.25F, 1);
+                gunStack.set(ElectrodynamicsDataComponentTypes.FLUID_STACK, new FluidStackComponent(fluidStack.copy()));
+            }
+        }
+
+
+        if (!player.isCreative()) {
+            ammoStack.shrink(1);
+        }
+
+        return InteractionResultHolder.pass(gunStack);
+    }
 
 }

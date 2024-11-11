@@ -1,4 +1,4 @@
-package electrodynamics.common.event.types.living.damage;
+package electrodynamics.common.event.types.living.livingdamage;
 
 import electrodynamics.prefab.utilities.ItemUtils;
 import electrodynamics.registers.ElectrodynamicsItems;

@@ -12,3 +12,7 @@
 /gamerule doWeatherCycle false
 /weather clear
 /kill @e[type=electrodynamics:metalrod]
+/gamemode survival
+/gamemode creative
+/gamemode spectator
+/gamemode survival

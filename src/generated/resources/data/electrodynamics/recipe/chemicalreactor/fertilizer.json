@@ -1,0 +1,32 @@
+{
+  "type": "electrodynamics:chemical_reactor_recipe",
+  "gasinputs": [
+    {
+      "amount": 100,
+      "pressure": 4,
+      "tag": "c:ammonia",
+      "temp": 293
+    }
+  ],
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:bone_meal"
+      }
+    },
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "c:dusts/molybdenum"
+      }
+    }
+  ],
+  "itemoutput": {
+    "count": 16,
+    "id": "electrodynamics:molybdenumfertilizer"
+  },
+  "ticks": 200,
+  "usagepertick": 200.0
+}

@@ -1,4 +1,4 @@
-package electrodynamics.common.event.types.living.damage;
+package electrodynamics.common.event.types.living.livingdamage;
 
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 

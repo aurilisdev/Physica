@@ -113,7 +113,7 @@ public class ModelCompositeArmor<T extends LivingEntity> extends GenericArmorMod
 	// Call me a butcher, because I am hacking this game
 	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, int light) {
 		if (parentHead.visible) {
-			parentHead.render(poseStack, getCustomConsumer(RenderType.entityTranslucent(ResourceLocation.parse(ItemCompositeArmor.ARMOR_TEXTURE_LOCATION))), packedLight, packedOverlay);
+			parentHead.render(poseStack, getCustomConsumer(RenderType.entityTranslucent(ItemCompositeArmor.ARMOR_TEXTURE_LOCATION)), packedLight, packedOverlay);
 		}
 		if (parentChest.visible) {
 			parentChest.render(poseStack, buffer, packedLight, packedOverlay);

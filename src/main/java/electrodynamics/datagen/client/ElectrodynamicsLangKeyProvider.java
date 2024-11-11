@@ -1783,11 +1783,13 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGuidebook("chapter.tools.ap", " AP*");
 			addGuidebook("chapter.tools.apnote", "*ignores armor");
 
-			addGuidebook("chapter.tools.kineticl1", "To use the Kinetic Railgun, hold the gun in one hand and the ammo type of your choice in the other.");
+			addGuidebook("chapter.tools.kineticl1", "To use the Kinetic Railgun, hold the gun in one hand and the ammo type of your choice in the other. The Kinetic Railgun generates %1$s Joules of heat per shot. This can be mitigated by filling it with Liquid Ammonia. The Railgun will attempt to use %2$s mB per shot, and can store up to %3$s mB. If the gun runs out of coolant to use, it will still work!");
 
 			addGuidebook("chapter.tools.energy", "Energy");
 			addGuidebook("chapter.tools.initial", "Initial");
 			addGuidebook("chapter.tools.after", "After %s");
+
+			addGuidebook("chapter.tools.plasmal1", "The Plasma Railgun generates %1$s Joules of heat per shot. This can be mitigated by filling it with Liquid Ammonia. The Railgun will attempt to use %2$s mB per shot, and can store up to %3$s mB. If the gun runs out of coolant to use, it will still work!");
 
 			addGuidebook("chapter.tools.seismicl1", "The Seismic Scanner is a very useful item. It is able to scan for a selected block within a 16 block radius from the player. To use the Scanner, Right-Click to access it's GUI and insert the desired block into the scanning slot. Next, Shift + Right-Click to start a "
 					+ "scan. If the Scanner is able to find the block, it will list the coordinates in its GUI and temporarily highlight the block in the world. Note, you will not see the highlight if you can't see the block itself. The Scanner has a 10s cooldown between scans.");
@@ -1801,8 +1803,10 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGuidebook("chapter.armor.jetpack", "The Jetpack uses Hydrogen Gas at 1ATM as fuel. It can be filled in either a Gas Cylinder or directly in the Electrolyzer. The Jetpack has 4 modes: Regular, Hover, Elytra, and Off. Elytra mode allows you to glide as if you had an Elytra on, and gives you the ability to slowly "
 					+ "ascend. It is worth mentioning that the Jetpack has a maximum pressure tolerance of 4 ATM. I wonder what happens with higher pressure gas?");
 			addGuidebook("chapter.armor.hydraulicboots", "Hydraulic Boots use Hydraulic Fluid as their \"fuel\". They can be filled either in a tank or directly in a Chemical Mixer. Hydraulic Boots will heavily reduce fall damage, but not completely eliminate it.");
+			addGuidebook("chapter.armor.combathelmet", "The Combat Helmet has an internal air tank that can be filled with Oxygen gas. This will allow you to breathe under water for a time.");
 			addGuidebook("chapter.armor.combatchestplate", "The Jetpack uses Hydrogen Gas at 1ATM as fuel. It can be filled in either a Gas Cylinder or directly in the Electrolyzer. The Jetpack has 4 modes: Regular, Hover, Elytra, and Off. Elytra mode allows you to glide as if you had an Elytra on, and gives you the ability to "
 					+ "slowly ascend. It is worth mentioning that the Combat Chestplate has a maximum pressure tolerance of 4 ATM. I wonder what happens with higher pressure gas?");
+			addGuidebook("chapter.armor.combatleggings", "The Combat Leggings have an internal air tank that can be filled with Argon gas. If wearing a full suit, this will allow you to avoid taking fire damage at the cost of Argon gas.");
 			addGuidebook("chapter.armor.combatboots", "Combat Boots use Hydraulic Fluid as their \"fuel\". They can be filled either in a tank or directly in a Chemical Mixer. Combat Boots will heavily reduce fall damage, but not completely eliminate it.");
 
 			addGuidebook("chapter.armor.ceramicheader", "Ceramic Plate Protection:");

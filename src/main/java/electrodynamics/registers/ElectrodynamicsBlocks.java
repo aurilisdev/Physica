@@ -51,7 +51,7 @@ public class ElectrodynamicsBlocks {
     public static final BulkDeferredHolder<Block, Block, SubtypeRawOreBlock> BLOCKS_RAWORE = new BulkDeferredHolder<>(SubtypeRawOreBlock.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new Block(Blocks.STONE.properties().requiresCorrectToolForDrops().strength(5.0F, 6.0F))));
     public static final BulkDeferredHolder<Block, BlockMachine, SubtypeMachine> BLOCKS_MACHINE = new BulkDeferredHolder<>(SubtypeMachine.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockMachine(subtype)));
     public static final DeferredHolder<Block, BlockChemicalReactor> BLOCK_CHEMICALREACTOR = BLOCKS.register("chemicalreactor", BlockChemicalReactor::new);
-    public static final BulkDeferredHolder<Block, ? extends BlockWire, SubtypeWire> BLOCKS_WIRE = new BulkDeferredHolder<>(SubtypeWire.values(), subtype -> {
+    public static final BulkDeferredHolder<Block, BlockWire, SubtypeWire> BLOCKS_WIRE = new BulkDeferredHolder<>(SubtypeWire.values(), subtype -> {
         if(subtype.wireClass == WireClass.LOGISTICAL) {
             return BLOCKS.register(subtype.tag(), () -> new BlockLogisticalWire(subtype));
         } else {

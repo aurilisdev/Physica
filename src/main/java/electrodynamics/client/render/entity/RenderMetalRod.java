@@ -1,9 +1,7 @@
 package electrodynamics.client.render.entity;
 
 import com.mojang.math.Axis;
-import electrodynamics.Electrodynamics;
 import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,7 +9,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import electrodynamics.client.ClientRegister;
 import electrodynamics.common.entity.projectile.types.EntityMetalRod;
 import electrodynamics.prefab.utilities.RenderingUtils;
-import electrodynamics.prefab.utilities.math.MathUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -41,12 +38,12 @@ public class RenderMetalRod extends EntityRenderer<EntityMetalRod> {
 
 		matrixStack.pushPose();
 
-		matrixStack.translate(-0.5, -0.5, -0.5);
-
 		TextureAtlasSprite sprite = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_WHITE);
 
 		matrixStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
 		matrixStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
+
+		matrixStack.translate(-0.5, -0.5, -0.5);
 
 		//Electrodynamics.LOGGER.info("y: " + entity.yRotO);
 		//Electrodynamics.LOGGER.info("y: " + entity.yRotO);
@@ -63,7 +60,7 @@ public class RenderMetalRod extends EntityRenderer<EntityMetalRod> {
 		double offsetY = entity.getY() - (int) entity.getY();
 		double offsetZ = entity.getZ() - (int) entity.getZ();
 
-		RenderingUtils.renderFilledBoxNoOverlay(matrixStack, bufferIn.getBuffer(RenderType.solid()), new AABB(0.0625, 0.46875, 0.46875, 0.9375, 0.53125, 0.53125), color[0], color[1], color[2], 1.0F, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), packedLightIn);
+		RenderingUtils.renderFilledBoxNoOverlay(matrixStack, bufferIn.getBuffer(RenderType.solid()), ROD, color[0], color[1], color[2], 1.0F, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), packedLightIn);
 		//RenderingUtils.renderFilledBoxNoOverlay(matrixStack, bufferIn.getBuffer(RenderType.lightning()), new AABB(0, 0, 0, 1, 1, 1), color[0], color[1], color[2], 1.0F, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), packedLightIn);
 
 		matrixStack.popPose();

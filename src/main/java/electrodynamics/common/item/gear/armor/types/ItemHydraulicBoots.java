@@ -17,6 +17,9 @@ import electrodynamics.registers.ElectrodynamicsFluids;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -34,7 +37,7 @@ public class ItemHydraulicBoots extends ItemElectrodynamicsArmor {
     });
     public static final int MAX_CAPACITY = 2000;
 
-    private static final String TEXTURE_LOCATION = References.ID + ":textures/model/armor/hydraulicboots.png";
+    private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/hydraulicboots.png");
 
     public ItemHydraulicBoots() {
         super(ElectrodynamicsArmorMaterials.HYDRAULIC_BOOTS, Type.BOOTS, new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN);
@@ -146,6 +149,11 @@ public class ItemHydraulicBoots extends ItemElectrodynamicsArmor {
 
     public static Predicate<FluidStack> getPredicate() {
         return fluid -> fluid.getFluid().builtInRegistryHolder().is(ElectrodynamicsTags.Fluids.HYDRAULIC_FLUID);
+    }
+
+    @Override
+    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+        return TEXTURE_LOCATION;
     }
 
     /*

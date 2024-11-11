@@ -11,16 +11,14 @@ import electrodynamics.registers.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +31,7 @@ public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
 		map.put(Type.BOOTS, 6);
 	});
 
-	public static final String ARMOR_TEXTURE_LOCATION = References.ID + ":textures/model/armor/compositearmor.png";
+	public static final ResourceLocation ARMOR_TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/compositearmor.png");
 
 	public ItemCompositeArmor(Type slot) {
 		super(ElectrodynamicsArmorMaterials.COMPOSITE_ARMOR, slot, new Item.Properties().stacksTo(1).fireResistant().setNoRepair().durability(2000), ElectrodynamicsCreativeTabs.MAIN);
@@ -84,6 +82,11 @@ public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
 	public void onWearingTick(ItemStack stack, Level world, Player player, int slotId, boolean isSelected) {
 		super.onWearingTick(stack, world, player, slotId, isSelected);
 		player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20));
+	}
+
+	@Override
+	public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+		return ARMOR_TEXTURE_LOCATION;
 	}
 
 	/*

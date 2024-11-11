@@ -6,10 +6,12 @@ import java.util.List;
 import electrodynamics.api.References;
 import electrodynamics.common.event.types.living.equipmentchange.AbstractEquipmentChangeHandler;
 import electrodynamics.common.event.types.living.equipmentchange.HandlerJetpackEquiped;
-import electrodynamics.common.event.types.living.damage.AbstractLivingDamageHandler;
-import electrodynamics.common.event.types.living.damage.HandlerCompositeArmor;
-import electrodynamics.common.event.types.living.damage.HandlerHydraulicBoots;
-import electrodynamics.common.event.types.living.damage.HandlerJetpackDamage;
+import electrodynamics.common.event.types.living.incomingdamage.AbstractIncomingDamageHandler;
+import electrodynamics.common.event.types.living.incomingdamage.HandlerCombatArmor;
+import electrodynamics.common.event.types.living.livingdamage.AbstractLivingDamageHandler;
+import electrodynamics.common.event.types.living.livingdamage.HandlerCompositeArmor;
+import electrodynamics.common.event.types.living.livingdamage.HandlerHydraulicBoots;
+import electrodynamics.common.event.types.living.livingdamage.HandlerJetpackDamage;
 import electrodynamics.common.event.types.living.knockback.AbstractLivingKnockbackHandler;
 import electrodynamics.common.event.types.living.knockback.HandlerJetpackKnockbackImpulse;
 import electrodynamics.common.event.types.player.rightclick.AbstractRightClickBlockHandler;
@@ -25,6 +27,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
@@ -38,6 +41,7 @@ public class ServerEventHandler {
 	private static final List<AbstractLivingKnockbackHandler> LIVING_KNOCKBACK_HANDLERS = new ArrayList<>();
 	private static final List<AbstractEquipmentChangeHandler> EQUIPMENT_CHANGE_HANDLERS = new ArrayList<>();
 	private static final List<AbstractPlayerStartTrackingHandler> START_TRACKING_PLAYER_HANDLERS = new ArrayList<>();
+	private static final List<AbstractIncomingDamageHandler> INCOMING_DAMAGE_HANDLERS = new ArrayList<>();
 
 	public static void init() {
 		RIGHT_CLICK_HANDLERS.add(new HandlerWrench());
@@ -51,6 +55,8 @@ public class ServerEventHandler {
 		EQUIPMENT_CHANGE_HANDLERS.add(new HandlerJetpackEquiped());
 
 		START_TRACKING_PLAYER_HANDLERS.add(new HandlerJetpackSound());
+
+		INCOMING_DAMAGE_HANDLERS.add(new HandlerCombatArmor());
 	}
 
 
@@ -77,6 +83,11 @@ public class ServerEventHandler {
 	@SubscribeEvent
 	public static void handlerStartTrackingPlayer(PlayerEvent.StartTracking event) {
 		START_TRACKING_PLAYER_HANDLERS.forEach(handler -> handler.handle(event));
+	}
+
+	@SubscribeEvent
+	public static void handlerLivingIncomingDamage(LivingIncomingDamageEvent event) {
+		INCOMING_DAMAGE_HANDLERS.forEach(handler -> handler.handle(event));
 	}
 
 	@SubscribeEvent

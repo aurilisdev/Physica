@@ -1,5 +1,7 @@
 package electrodynamics.registers;
 
+import electrodynamics.common.item.gear.armor.types.ItemCombatArmor;
+import electrodynamics.common.item.gear.tools.electric.utils.ItemRailgun;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -132,7 +134,7 @@ public class ElectrodynamicsCapabilities {
         event.registerItem(Capabilities.ItemHandler.ITEM, (itemStack, context) -> new CapabilityItemStackHandler(ItemSeismicScanner.SLOT_COUNT, itemStack), ElectrodynamicsItems.ITEM_SEISMICSCANNER.get());
 
         // Reinforced Cannister
-        // TODO remember to do this for the Nuclear Science cannister as well
+        // TODO remember to do this for the Nuclear Science canister as well
 
         event.registerItem(Capabilities.FluidHandler.ITEM, (itemStack, context) -> new RestrictedFluidHandlerItemStack.SwapEmpty(itemStack, itemStack, ItemCanister.MAX_FLUID_CAPACITY), ElectrodynamicsItems.ITEM_CANISTERREINFORCED.get());
 
@@ -148,13 +150,26 @@ public class ElectrodynamicsCapabilities {
 
         event.registerItem(Capabilities.FluidHandler.ITEM, (itemStack, context) -> new RestrictedFluidHandlerItemStack(itemStack, ItemHydraulicBoots.MAX_CAPACITY).setValidator(ItemHydraulicBoots.getPredicate()), ElectrodynamicsItems.ITEM_HYDRAULICBOOTS.get());
 
+        // Combat Helmet
+
+        event.registerItem(CAPABILITY_GASHANDLER_ITEM, (itemStack, context) -> new GasHandlerItemStack(itemStack, ItemCombatArmor.HELMET_CAPACITY, ItemCombatArmor.HELMET_MAX_TEMP, ItemCombatArmor.HELMET_MAX_PRESSURE).setPredicate(ItemCombatArmor.getHelmetGasValidator()), ElectrodynamicsItems.ITEM_COMBATHELMET.get());
+
         // Combat Chestplate
 
         event.registerItem(CAPABILITY_GASHANDLER_ITEM, (itemStack, context) -> new GasHandlerItemStack(itemStack, ItemJetpack.MAX_CAPACITY, ItemJetpack.MAX_TEMPERATURE, ItemJetpack.MAX_PRESSURE).setPredicate(ItemJetpack.getGasValidator()), ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get());
 
+        // Combat Leggings
+
+        event.registerItem(CAPABILITY_GASHANDLER_ITEM, (itemStack, context) -> new GasHandlerItemStack(itemStack, ItemCombatArmor.LEGGINGS_CAPACITY, ItemCombatArmor.LEGGINGS_MAX_TEMP, ItemCombatArmor.LEGGINGS_MAX_PRESSURE).setPredicate(ItemCombatArmor.getLeggingsGasValidator()), ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get());
+
         // Combat Boots
 
         event.registerItem(Capabilities.FluidHandler.ITEM, (itemStack, context) -> new RestrictedFluidHandlerItemStack(itemStack, ItemHydraulicBoots.MAX_CAPACITY).setValidator(ItemHydraulicBoots.getPredicate()), ElectrodynamicsItems.ITEM_COMBATBOOTS.get());
+
+        // Railguns
+
+        event.registerItem(Capabilities.FluidHandler.ITEM, (itemStack, context) -> new RestrictedFluidHandlerItemStack(itemStack, ItemRailgun.CAPACITY).setValidator(ItemRailgun.getPredicate()), ElectrodynamicsItems.ITEM_KINETICRAILGUN.get());
+        event.registerItem(Capabilities.FluidHandler.ITEM, (itemStack, context) -> new RestrictedFluidHandlerItemStack(itemStack, ItemRailgun.CAPACITY).setValidator(ItemRailgun.getPredicate()), ElectrodynamicsItems.ITEM_PLASMARAILGUN.get());
 
         /* TILES */
 

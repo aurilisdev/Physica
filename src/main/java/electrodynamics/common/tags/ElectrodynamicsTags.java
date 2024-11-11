@@ -287,6 +287,7 @@ public class ElectrodynamicsTags {
 	// Only the Tag objects should ever be visible from this class!
 	public static class Fluids {
 
+		public static final TagKey<Fluid> AMMONIA = forgeTag("ammonia");
 		public static final TagKey<Fluid> SULFURIC_ACID = forgeTag("sulfuric_acid");
 		public static final TagKey<Fluid> HYDROFLUORIC_ACID = forgeTag("hydrofluoric_acid");
 		public static final TagKey<Fluid> HYDROCHLORIC_ACID = forgeTag("hydrochloric_acid");

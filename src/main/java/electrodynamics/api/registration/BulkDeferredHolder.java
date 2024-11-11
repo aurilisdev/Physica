@@ -1,11 +1,8 @@
 package electrodynamics.api.registration;
 
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
@@ -47,21 +44,17 @@ public class BulkDeferredHolder<T, A extends T, SUBTYPE> {
         return extractedValues;
     }
 
-    public A[] getAllValuesArray() {
+    public A[] getAllValuesArray(A[] newArray) {
         if(extractedValuesArray == null) {
-            extractedValuesArray = getAllValues().toArray((A[]) Array.newInstance(getAllValues().get(0).getClass(), 0));
+            extractedValuesArray = getAllValues().toArray(newArray);
         }
         return extractedValuesArray;
     }
 
-    public A[] getSpecificValuesArray(SUBTYPE... subtypes) {
+    public A[] getSpecificValuesArray(A[] newArray, SUBTYPE... subtypes) {
 
         List<A> values = getSpecificValues(subtypes);
-        A[] valuesArr = (A[]) Array.newInstance(getAllValues().get(0).getClass(), values.size()); // when its stupid but it works
-        for(int i = 0; i < subtypes.length; i++){
-            valuesArr[i] = getValue(subtypes[i]);
-        }
-        return valuesArr;
+        return values.toArray(newArray);
 
 
     }

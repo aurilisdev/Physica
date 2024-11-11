@@ -19,8 +19,11 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -44,7 +47,7 @@ public class ItemServoLeggings extends ItemElectrodynamicsArmor implements IItem
 
     public static final float DEFAULT_VANILLA_STEPUP = 0.6F;
 
-    private static final String ARMOR_TEXTURE = References.ID + ":textures/model/armor/servoleggings.png";
+    private static final ResourceLocation ARMOR_TEXTURE = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/servoleggings.png");
 
     final ElectricItemProperties properties;
 
@@ -250,4 +253,8 @@ public class ItemServoLeggings extends ItemElectrodynamicsArmor implements IItem
 
     }
 
+    @Override
+    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+        return ARMOR_TEXTURE;
+    }
 }
