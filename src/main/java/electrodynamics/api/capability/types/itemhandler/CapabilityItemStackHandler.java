@@ -5,15 +5,14 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.Level;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.util.INBTSerializable;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ComponentItemHandler;
 
-public class CapabilityItemStackHandler extends ItemStackHandler implements INBTSerializable<CompoundTag> {
+public class CapabilityItemStackHandler extends ComponentItemHandler {
 
     private final ItemStack owner;
 
@@ -25,7 +24,7 @@ public class CapabilityItemStackHandler extends ItemStackHandler implements INBT
     };
 
     public CapabilityItemStackHandler(int size, ItemStack owner) {
-        super(size);
+        super(owner, DataComponents.CONTAINER, size);
         this.owner = owner;
     }
 
@@ -40,7 +39,7 @@ public class CapabilityItemStackHandler extends ItemStackHandler implements INBT
     }
 
     @Override
-    protected void onContentsChanged(int slot) {
+    protected void onContentsChanged(int slot, ItemStack oldStack, ItemStack newStack) {
         onChange.accept(new OnChangeWrapper(owner, this, slot, access));
     }
 
@@ -50,7 +49,7 @@ public class CapabilityItemStackHandler extends ItemStackHandler implements INBT
     }
 
     public List<ItemStack> getItems() {
-        return stacks;
+        return getContents().stream().toList();
     }
 
     public void setLevelAccess(Level level, BlockPos pos) {
