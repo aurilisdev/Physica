@@ -78,7 +78,7 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
             graphics.setColor(color.rFloat(), color.gFloat(), color.bFloat(), color.aFloat());
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
-            graphics.blitSprite(VANILLA_BUTTON_SPRITES.get(isActive(), this.isHoveredOrFocused()), this.xLocation + guiWidth, this.yLocation + guiHeight, this.width, this.height);
+            graphics.blitSprite(VANILLA_BUTTON_SPRITES.get(isActive(), this.isHovered()), this.xLocation + guiWidth, this.yLocation + guiHeight, this.width, this.height);
             graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
             Font font = minecraft.font;

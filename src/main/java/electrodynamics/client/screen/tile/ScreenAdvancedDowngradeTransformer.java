@@ -30,7 +30,7 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 
 			graphics.drawString(font, top, xStart + offset, 28, 4210752, false);
 
-			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedDowngradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
@@ -53,56 +53,56 @@ public class ScreenAdvancedDowngradeTransformer extends GenericScreen<ContainerA
 
 		}));
 		addComponent(new ScreenComponentButton<>(75, 20, 40, 20).setLabel(Component.literal("2 : 1")).setOnPress(button -> {
-			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedDowngradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 2.0);
 		}));
 		addComponent(new ScreenComponentButton<>(75, 40, 40, 20).setLabel(Component.literal("4 : 1")).setOnPress(button -> {
-			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedDowngradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 4.0);
 		}));
 		addComponent(new ScreenComponentButton<>(75, 60, 40, 20).setLabel(Component.literal("8 : 1")).setOnPress(button -> {
-			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedDowngradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 8.0);
 		}));
 		addComponent(new ScreenComponentButton<>(75, 80, 40, 20).setLabel(Component.literal("16 : 1")).setOnPress(button -> {
-			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedDowngradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 16.0);
 		}));
 		addComponent(new ScreenComponentButton<>(120, 20, 40, 20).setLabel(Component.literal("32 : 1")).setOnPress(button -> {
-			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedDowngradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 32.0);
 		}));
 		addComponent(new ScreenComponentButton<>(120, 40, 40, 20).setLabel(Component.literal("64 : 1")).setOnPress(button -> {
-			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedDowngradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 64.0);
 		}));
 		addComponent(new ScreenComponentButton<>(120, 60, 40, 20).setLabel(Component.literal("128 : 1")).setOnPress(button -> {
-			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedDowngradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(1.0 / 128.0);
 		}));
 		addComponent(new ScreenComponentButton<>(120, 80, 40, 20).setLabel(Component.literal("256 : 1")).setOnPress(button -> {
-			TileAdvancedDowngradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedDowngradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}

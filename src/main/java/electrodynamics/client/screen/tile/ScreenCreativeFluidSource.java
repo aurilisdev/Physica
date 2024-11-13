@@ -19,7 +19,7 @@ public class ScreenCreativeFluidSource extends GenericMaterialScreen<ContainerCr
 		super(container, inv, titleIn);
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_RIGHT_OFF, 102, 33));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			TileCreativeFluidSource boiler = menu.getHostFromIntArray();
+			TileCreativeFluidSource boiler = menu.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerSimple>getComponent(IComponentType.FluidHandler);
 			}

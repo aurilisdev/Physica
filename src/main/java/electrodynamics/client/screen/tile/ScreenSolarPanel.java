@@ -22,7 +22,7 @@ public class ScreenSolarPanel extends GenericScreen<ContainerSolarPanel> {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
-			TileSolarPanel panel = menu.getHostFromIntArray();
+			TileSolarPanel panel = menu.getSafeHost();
 			if (panel == null) {
 				return;
 			}

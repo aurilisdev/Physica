@@ -2,7 +2,7 @@ package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.compressor.GenericTileAdvancedCompressor;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotGas;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotUpgrade;
 import electrodynamics.registers.ElectrodynamicsMenuTypes;
@@ -26,7 +26,7 @@ public class ContainerAdvancedCompressor extends GenericContainerBlockEntity<Gen
 
     @Override
     public void addInventorySlots(Container inv, Inventory playerinv) {
-        playerInvOffset += 47;
+        setPlayerInvOffset(47);
         addSlot(new SlotGas(inv, nextIndex(), 20, 50));
         addSlot(new SlotGas(inv, nextIndex(), 109, 50));
         addSlot(new SlotUpgrade(inv, nextIndex(), 153, 14, VALID_UPGRADES));

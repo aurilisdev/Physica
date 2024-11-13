@@ -20,7 +20,7 @@ public class ScreenSeismicRelay extends GenericScreen<ContainerSeismicRelay> {
 		addComponent(new ScreenComponentSimpleLabel(70, 20, 10, 4210752, ElectroTextUtils.gui("seismicrelay.dataheader")));
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
 
-			TileSeismicRelay relay = menu.getHostFromIntArray();
+			TileSeismicRelay relay = menu.getSafeHost();
 
 			if (relay != null) {
 				List<BlockPos> markers = relay.markerLocs.get();

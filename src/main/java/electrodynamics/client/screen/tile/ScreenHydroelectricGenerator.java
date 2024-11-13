@@ -22,7 +22,7 @@ public class ScreenHydroelectricGenerator extends GenericScreen<ContainerHydroel
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
-			TileHydroelectricGenerator hydro = menu.getHostFromIntArray();
+			TileHydroelectricGenerator hydro = menu.getSafeHost();
 			if (hydro == null) {
 				return;
 			}

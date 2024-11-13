@@ -29,7 +29,7 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
 
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 
 			if (monitor == null) {
 				return;
@@ -56,42 +56,42 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 		// network value
 
 		addComponent(new ScreenComponentButton<>(13, 50, 70, 20).setLabel(getPropertyLabel(0)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(0);
 		}));
 		addComponent(new ScreenComponentButton<>(13, 70, 70, 20).setLabel(getPropertyLabel(1)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(1);
 		}));
 		addComponent(new ScreenComponentButton<>(13, 90, 70, 20).setLabel(getPropertyLabel(2)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(2);
 		}));
 		addComponent(new ScreenComponentButton<>(93, 50, 70, 20).setLabel(getPropertyLabel(3)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(3);
 		}));
 		addComponent(new ScreenComponentButton<>(93, 70, 70, 20).setLabel(getPropertyLabel(4)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(4);
 		}));
 		addComponent(new ScreenComponentButton<>(93, 90, 70, 20).setLabel(getPropertyLabel(5)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
@@ -101,42 +101,42 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 		// boolean operator
 
 		addComponent(new ScreenComponentButton<>(13, 130, 20, 20).setLabel(getOperatorLabel(0)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(0);
 		}));
 		addComponent(new ScreenComponentButton<>(39, 130, 20, 20).setLabel(getOperatorLabel(1)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(1);
 		}));
 		addComponent(new ScreenComponentButton<>(65, 130, 20, 20).setLabel(getOperatorLabel(2)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(2);
 		}));
 		addComponent(new ScreenComponentButton<>(91, 130, 20, 20).setLabel(getOperatorLabel(3)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(3);
 		}));
 		addComponent(new ScreenComponentButton<>(117, 130, 20, 20).setLabel(getOperatorLabel(4)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(4);
 		}));
 		addComponent(new ScreenComponentButton<>(143, 130, 20, 20).setLabel(getOperatorLabel(5)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
@@ -155,7 +155,7 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor != null) {
 				value.setValue("" + monitor.value.get());
 			}
@@ -167,7 +167,7 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 			return;
 		}
 
-		TileCircuitMonitor monitor = menu.getHostFromIntArray();
+		TileCircuitMonitor monitor = menu.getSafeHost();
 
 		if (monitor == null) {
 			return;

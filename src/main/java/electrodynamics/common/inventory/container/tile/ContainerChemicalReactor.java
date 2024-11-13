@@ -2,7 +2,7 @@ package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactor;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotUpgrade;
@@ -28,7 +28,7 @@ public class ContainerChemicalReactor extends GenericContainerBlockEntity<TileCh
 
     @Override
     public void addInventorySlots(Container inv, Inventory playerinv) {
-        playerInvOffset += 35;
+        setPlayerInvOffset(35);
         addSlot(new SlotGeneric(inv, nextIndex(), 46, 42).setIOColor(new Color(0, 255, 30, 255)));
         addSlot(new SlotGeneric(inv, nextIndex(), 46 , 62).setIOColor(new Color(144, 0, 255, 255)));
         addSlot(new SlotRestricted(inv, nextIndex(), 92, 22).setIOColor(new Color(255, 0, 0, 255)));

@@ -3,7 +3,7 @@ package electrodynamics.prefab.screen.component.types;
 import java.util.function.Supplier;
 
 import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.IconType;
@@ -77,7 +77,7 @@ public class ScreenComponentCondensedFluid extends ScreenComponentGeneric {
 
         GenericScreen<?> screen = (GenericScreen<?>) gui;
 
-        GenericTile owner = (GenericTile) ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray();
+        GenericTile owner = (GenericTile) ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost();
 
         if (owner == null) {
             return;

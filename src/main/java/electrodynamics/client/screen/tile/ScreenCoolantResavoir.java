@@ -17,7 +17,7 @@ public class ScreenCoolantResavoir extends GenericMaterialScreen<ContainerCoolan
 		super(container, inv, titleIn);
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_RIGHT_OFF, 72, 33));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			TileCoolantResavoir boiler = menu.getHostFromIntArray();
+			TileCoolantResavoir boiler = menu.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerSimple>getComponent(IComponentType.FluidHandler);
 			}

@@ -22,7 +22,7 @@ public class ScreenWindmill extends GenericScreen<ContainerWindmill> {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
-			TileWindmill windmill = menu.getHostFromIntArray();
+			TileWindmill windmill = menu.getSafeHost();
 			if (windmill == null) {
 				return;
 			}

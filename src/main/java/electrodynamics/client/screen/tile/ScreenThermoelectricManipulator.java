@@ -36,28 +36,28 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 		imageHeight += 30;
 		inventoryLabelY += 30;
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			GenericTileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
 			}
 			return null;
 		}, 10, 18));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			GenericTileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getOutputTanks()[0];
 			}
 			return null;
 		}, 96, 18));
 		addComponent(new ScreenComponentGasGauge(() -> {
-			GenericTileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getInputTanks()[0];
 			}
 			return null;
 		}, 46, 18));
 		addComponent(new ScreenComponentGasGauge(() -> {
-			GenericTileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getOutputTanks()[0];
 			}
@@ -76,7 +76,7 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 
 	private void setTemperature(String temp) {
 
-		GenericTileThermoelectricManipulator manipulator = menu.getHostFromIntArray();
+		GenericTileThermoelectricManipulator manipulator = menu.getSafeHost();
 
 		if (manipulator == null) {
 			return;
@@ -110,7 +110,7 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			GenericTileThermoelectricManipulator manipulator = menu.getHostFromIntArray();
+			GenericTileThermoelectricManipulator manipulator = menu.getSafeHost();
 			if (manipulator != null) {
 				temperature.setValue("" + manipulator.targetTemperature.get());
 			}

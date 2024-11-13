@@ -30,7 +30,7 @@ public class ScreenPotentiometer extends GenericScreen<ContainerPotentiometer> {
 			return;
 		}
 
-		TilePotentiometer potentiometer = menu.getHostFromIntArray();
+		TilePotentiometer potentiometer = menu.getSafeHost();
 
 		if (potentiometer == null) {
 			return;
@@ -53,7 +53,7 @@ public class ScreenPotentiometer extends GenericScreen<ContainerPotentiometer> {
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			TilePotentiometer source = menu.getHostFromIntArray();
+			TilePotentiometer source = menu.getSafeHost();
 			if (source != null) {
 				consumption.setValue("" + source.powerConsumption.get());
 			}

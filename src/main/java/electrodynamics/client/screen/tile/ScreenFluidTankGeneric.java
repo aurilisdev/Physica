@@ -19,7 +19,7 @@ public class ScreenFluidTankGeneric extends GenericMaterialScreen<ContainerFluid
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_RIGHT_OFF, 52, 33));
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_RIGHT_OFF, 102, 33));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			GenericTileFluidTank boiler = menu.getHostFromIntArray();
+			GenericTileFluidTank boiler = menu.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerSimple>getComponent(IComponentType.FluidHandler);
 			}

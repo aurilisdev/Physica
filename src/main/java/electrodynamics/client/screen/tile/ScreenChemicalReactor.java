@@ -27,7 +27,7 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
         inventoryLabelY += 35;
 
         addComponent(new ScreenComponentProgress(ScreenComponentProgress.ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-            GenericTile furnace = container.getHostFromIntArray();
+            GenericTile furnace = container.getSafeHost();
             if (furnace != null) {
                 ComponentProcessor processor = furnace.getComponent(IComponentType.Processor);
                 if (processor.isActive()) {
@@ -151,7 +151,7 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
         addComponent(new ScreenComponentGasPressure(-AbstractScreenComponentInfo.SIZE + 1, 2 + AbstractScreenComponentInfo.SIZE));
         addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
         addComponent(new ScreenComponentCondensedFluid(() -> {
-            TileChemicalReactor electric = container.getHostFromIntArray();
+            TileChemicalReactor electric = container.getSafeHost();
             if (electric == null) {
                 return null;
             }

@@ -47,7 +47,7 @@ public class ScreenQuarry extends GenericScreen<ContainerQuarry> {
 
 	private List<? extends FormattedCharSequence> getElectricInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileQuarry quarry = menu.getHostFromIntArray();
+		TileQuarry quarry = menu.getSafeHost();
 		if (quarry != null) {
 			ComponentElectrodynamic electro = quarry.getComponent(IComponentType.Electrodynamic);
 			list.add(ElectroTextUtils.gui("quarry.ringusage", ChatFormatter.getChatDisplayShort(quarry.setupPowerUsage.get() * 20, DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
@@ -59,7 +59,7 @@ public class ScreenQuarry extends GenericScreen<ContainerQuarry> {
 
 	private List<? extends FormattedCharSequence> getEnchantmentInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileQuarry quarry = menu.getHostFromIntArray();
+		TileQuarry quarry = menu.getSafeHost();
 		if (quarry == null) {
 			return list;
 		}
@@ -72,7 +72,7 @@ public class ScreenQuarry extends GenericScreen<ContainerQuarry> {
 
 	private List<? extends FormattedCharSequence> getFluidInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileQuarry quarry = menu.getHostFromIntArray();
+		TileQuarry quarry = menu.getSafeHost();
 		if (quarry == null) {
 			return list;
 		}
@@ -90,7 +90,7 @@ public class ScreenQuarry extends GenericScreen<ContainerQuarry> {
 
 	private List<? extends FormattedCharSequence> getComponentInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileQuarry quarry = menu.getHostFromIntArray();
+		TileQuarry quarry = menu.getSafeHost();
 		if (quarry == null) {
 			return list;
 		}
@@ -139,7 +139,7 @@ public class ScreenQuarry extends GenericScreen<ContainerQuarry> {
 
 	private List<? extends FormattedCharSequence> getMiningLocationInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileQuarry quarry = menu.getHostFromIntArray();
+		TileQuarry quarry = menu.getSafeHost();
 		if (quarry == null) {
 			return list;
 		}
@@ -168,7 +168,7 @@ public class ScreenQuarry extends GenericScreen<ContainerQuarry> {
 	@Override
 	protected void renderLabels(GuiGraphics graphics, int x, int y) {
 		super.renderLabels(graphics, x, y);
-		TileQuarry quarry = menu.getHostFromIntArray();
+		TileQuarry quarry = menu.getSafeHost();
 		if (quarry == null) {
 			return;
 		}

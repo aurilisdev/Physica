@@ -6,7 +6,7 @@ import java.util.List;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import electrodynamics.common.tile.pipelines.fluid.TileFluidPipeFilter;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.types.gauges.AbstractScreenComponentGauge.GaugeTextures;
@@ -42,7 +42,7 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
     public void renderBackground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
         super.renderBackground(graphics, xAxis, yAxis, guiWidth, guiHeight);
 
-        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getHostFromIntArray();
+        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getSafeHost();
 
         if (filter == null) {
             return;
@@ -93,7 +93,7 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
             return;
         }
 
-        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getHostFromIntArray();
+        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getSafeHost();
 
         if (filter == null) {
             return;
@@ -133,7 +133,7 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
 
         GenericScreen<?> screen = (GenericScreen<?>) gui;
 
-        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray();
+        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost();
 
         if (filter == null) {
             return;

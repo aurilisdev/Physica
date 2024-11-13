@@ -2,7 +2,6 @@ package electrodynamics.common.item.gear.tools.electric;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.api.References;
 import electrodynamics.api.capability.types.itemhandler.CapabilityItemStackHandler;
@@ -15,6 +14,7 @@ import electrodynamics.common.item.ItemDrillHead;
 import electrodynamics.common.item.gear.tools.electric.utils.ElectricItemTier;
 import electrodynamics.common.item.subtype.SubtypeDrillHead;
 import electrodynamics.common.tags.ElectrodynamicsTags;
+import electrodynamics.prefab.inventory.container.types.GenericContainerItem;
 import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.math.Color;
@@ -140,20 +140,20 @@ public class ItemElectricDrill extends DiggerItem implements IItemElectric, Crea
 
         if (!level.isClientSide) {
 
-            player.openMenu(getMenuProvider(level, player, player.getItemInHand(hand)));
+            player.openMenu(getMenuProvider(level, player, player.getItemInHand(hand), hand));
 
         }
 
         return super.use(level, player, hand);
     }
 
-    public MenuProvider getMenuProvider(Level world, Player player, ItemStack stack) {
+    public MenuProvider getMenuProvider(Level world, Player player, ItemStack stack, InteractionHand hand) {
         return new SimpleMenuProvider((id, inv, play) -> {
             CapabilityItemStackHandler handler = (CapabilityItemStackHandler) stack.getCapability(Capabilities.ItemHandler.ITEM);
             if (handler == null) {
                 handler = new CapabilityItemStackHandler(SLOT_COUNT, stack);
             }
-            return new ContainerElectricDrill(id, player.getInventory(), handler);
+            return new ContainerElectricDrill(id, player.getInventory(), handler, GenericContainerItem.makeData(hand));
         }, CONTAINER_TITLE);
     }
 

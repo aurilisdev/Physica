@@ -8,7 +8,7 @@ import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.PropertyGasTank;
 import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
@@ -169,7 +169,7 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 
 		GenericScreen<?> screen = (GenericScreen<?>) gui;
 
-		GenericTile owner = (GenericTile) ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray();
+		GenericTile owner = (GenericTile) ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost();
 
 		if (owner == null) {
 			return;
@@ -196,7 +196,7 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 
 			stack = handler.getContainer();
 
-			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray().getBlockPos(), Minecraft.getInstance().player.getUUID()));
+			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost().getBlockPos(), Minecraft.getInstance().player.getUUID()));
 
 			return;
 		}
@@ -213,7 +213,7 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 
 			stack = handler.getContainer();
 
-			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray().getBlockPos(), Minecraft.getInstance().player.getUUID()));
+			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost().getBlockPos(), Minecraft.getInstance().player.getUUID()));
 
 			return;
 		}

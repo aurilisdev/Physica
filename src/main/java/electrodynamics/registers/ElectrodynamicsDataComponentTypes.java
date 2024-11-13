@@ -12,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -25,6 +26,7 @@ public class ElectrodynamicsDataComponentTypes {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<IItemElectric.ElectricItemData>> ELECTRIC_ITEM_DATA = DATA_COMPONENT_TYPES.register("electricitemdata", () -> DataComponentType.<IItemElectric.ElectricItemData>builder().persistent(IItemElectric.ElectricItemData.CODEC).networkSynchronized(IItemElectric.ElectricItemData.STREAM_CODEC).build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Double>> HEAT_STORED = DATA_COMPONENT_TYPES.register("heatstored", () -> DataComponentType.<Double>builder().persistent(Codec.DOUBLE).networkSynchronized(ByteBufCodecs.DOUBLE).cacheEncoding().build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Double>> PATTERN_INTEGRITY = DATA_COMPONENT_TYPES.register("patternintegrity", () -> DataComponentType.<Double>builder().persistent(Codec.DOUBLE).networkSynchronized(ByteBufCodecs.DOUBLE).cacheEncoding().build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Double>> SPEED = DATA_COMPONENT_TYPES.register("speed", () -> DataComponentType.<Double>builder().persistent(Codec.DOUBLE).networkSynchronized(ByteBufCodecs.DOUBLE).cacheEncoding().build());
 
@@ -47,11 +49,13 @@ public class ElectrodynamicsDataComponentTypes {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> PLATES = DATA_COMPONENT_TYPES.register(NBTUtils.PLATES, () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).cacheEncoding().build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ENUM = DATA_COMPONENT_TYPES.register("enumval", () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).cacheEncoding().build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> RANGE = DATA_COMPONENT_TYPES.register("range", () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> MODE = DATA_COMPONENT_TYPES.register(NBTUtils.MODE, () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> TIMER = DATA_COMPONENT_TYPES.register(NBTUtils.TIMER, () -> DataComponentType.<Integer>builder().persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Location>> LOCATION_1 = DATA_COMPONENT_TYPES.register(NBTUtils.LOCATION + "1", () -> DataComponentType.<Location>builder().persistent(Location.CODEC).networkSynchronized(Location.STREAM_CODEC).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Location>> LOCATION_2 = DATA_COMPONENT_TYPES.register(NBTUtils.LOCATION + "2", () -> DataComponentType.<Location>builder().persistent(Location.CODEC).networkSynchronized(Location.STREAM_CODEC).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<FluidStackComponent>> FLUID_STACK = DATA_COMPONENT_TYPES.register("fluidstack", () -> DataComponentType.<FluidStackComponent>builder().persistent(FluidStackComponent.CODEC).networkSynchronized(FluidStackComponent.STREAM_CODEC).cacheEncoding().build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Block>> BLOCK = DATA_COMPONENT_TYPES.register("block", () -> DataComponentType.<Block>builder().persistent(BuiltInRegistries.BLOCK.byNameCodec()).networkSynchronized(ByteBufCodecs.fromCodec(BuiltInRegistries.BLOCK.byNameCodec())).cacheEncoding().build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<Direction>>> DIRECTIONS = DATA_COMPONENT_TYPES.register("direction_list", () -> DataComponentType.<List<Direction>>builder().persistent(Direction.CODEC.listOf()).networkSynchronized(ByteBufCodecs.fromCodec(Direction.CODEC.listOf())).cacheEncoding().build());
 

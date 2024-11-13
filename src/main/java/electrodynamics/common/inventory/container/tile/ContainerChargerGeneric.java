@@ -1,7 +1,7 @@
 package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.tile.machines.charger.GenericTileCharger;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotCharging;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
 import electrodynamics.prefab.utilities.math.Color;

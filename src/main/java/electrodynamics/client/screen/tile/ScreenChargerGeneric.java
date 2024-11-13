@@ -26,7 +26,7 @@ public class ScreenChargerGeneric extends GenericScreen<ContainerChargerGeneric>
 		super(screenContainer, inv, titleIn);
 
 		addComponent(new ScreenComponentProgress(ProgressBars.BATTERY_CHARGE_RIGHT, () -> {
-			GenericTileCharger charger = menu.getHostFromIntArray();
+			GenericTileCharger charger = menu.getSafeHost();
 			if (charger != null) {
 				ItemStack chargingItem = menu.getSlot(0).getItem();
 				if (!chargingItem.isEmpty() && chargingItem.getItem() instanceof IItemElectric electricItem) {
@@ -39,7 +39,7 @@ public class ScreenChargerGeneric extends GenericScreen<ContainerChargerGeneric>
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2).wattage(e -> e.getMaxJoulesStored() * 20));
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
 
-			GenericTileCharger charger = menu.getHostFromIntArray();
+			GenericTileCharger charger = menu.getSafeHost();
 
 			if (charger == null) {
 				return;

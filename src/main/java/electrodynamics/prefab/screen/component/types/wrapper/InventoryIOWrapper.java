@@ -10,7 +10,7 @@ import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.button.type.ButtonInventoryIOView;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
-import electrodynamics.prefab.screen.component.types.io.ScreenComponentInventoryIO;
+import electrodynamics.prefab.screen.component.types.ScreenComponentInventoryIO;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.ChatFormatting;
@@ -45,13 +45,13 @@ public class InventoryIOWrapper {
 
 				this.screen.playerInvLabel.setVisible(false);
 
-				for (int i = this.screen.getMenu().slotCount; i < this.screen.getMenu().slots.size(); i++) {
+				for (int i = this.screen.getMenu().getAdditionalSlotCount(); i < this.screen.getMenu().slots.size(); i++) {
 
 					((SlotGeneric) this.screen.getMenu().slots.get(i)).setActive(false);
 
 				}
 
-				for (int i = 0; i < this.screen.getMenu().slotCount; i++) {
+				for (int i = 0; i < this.screen.getMenu().getAdditionalSlotCount(); i++) {
 
 					SlotGeneric generic = (SlotGeneric) this.screen.getMenu().slots.get(i);
 
@@ -78,13 +78,13 @@ public class InventoryIOWrapper {
 
 				this.screen.playerInvLabel.setVisible(true);
 
-				for (int i = this.screen.getMenu().slotCount; i < this.screen.getMenu().slots.size(); i++) {
+				for (int i = this.screen.getMenu().getAdditionalSlotCount(); i < this.screen.getMenu().slots.size(); i++) {
 
 					((SlotGeneric) this.screen.getMenu().slots.get(i)).setActive(true);
 
 				}
 
-				for (int i = 0; i < this.screen.getMenu().slotCount; i++) {
+				for (int i = 0; i < this.screen.getMenu().getAdditionalSlotCount(); i++) {
 
 					SlotGeneric generic = (SlotGeneric) this.screen.getMenu().slots.get(i);
 

@@ -13,6 +13,8 @@ public class SlotItemHandlerGeneric extends SlotItemHandler implements SlotTextu
 	private final ISlotTexture slotType;
 	private final ITexture iconType;
 
+	private boolean active = true;
+
 	public SlotItemHandlerGeneric(ISlotTexture slotType, ITexture iconType, IItemHandler itemHandler, int index, int xPosition, int yPosition) {
 		super(itemHandler, index, xPosition, yPosition);
 		this.slotType = slotType;
@@ -31,6 +33,15 @@ public class SlotItemHandlerGeneric extends SlotItemHandler implements SlotTextu
 	@Override
 	public ITexture getIconType() {
 		return iconType;
+	}
+
+	@Override
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

@@ -18,7 +18,7 @@ public class ScreenCreativeGasSource extends GenericMaterialScreen<ContainerCrea
         super(container, inv, titleIn);
         addComponent(new ScreenComponentGeneric(ScreenComponentProgress.ProgressTextures.ARROW_RIGHT_OFF, 102, 33));
         addComponent(new ScreenComponentGasGauge(() -> {
-            TileCreativeGasSource boiler = container.getHostFromIntArray();
+            TileCreativeGasSource boiler = container.getSafeHost();
             if (boiler != null) {
                 return boiler.<ComponentGasHandlerSimple>getComponent(IComponentType.GasHandler);
             }

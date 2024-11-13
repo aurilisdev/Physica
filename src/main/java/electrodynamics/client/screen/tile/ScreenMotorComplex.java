@@ -27,7 +27,7 @@ public class ScreenMotorComplex extends GenericScreen<ContainerMotorComplex> {
 		addComponent(new ScreenComponentElectricInfo(this::getElectricInformation, -AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentSimpleLabel(30, 40, 10, 4210752, () -> {
 			int blocksPerTick = 0;
-			TileMotorComplex motor = menu.getHostFromIntArray();
+			TileMotorComplex motor = menu.getSafeHost();
 			if (motor != null && motor.isPowered.get()) {
 				blocksPerTick = motor.speed.get();
 			}
@@ -37,7 +37,7 @@ public class ScreenMotorComplex extends GenericScreen<ContainerMotorComplex> {
 
 	private List<? extends FormattedCharSequence> getElectricInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileMotorComplex motor = menu.getHostFromIntArray();
+		TileMotorComplex motor = menu.getSafeHost();
 		if (motor == null) {
 			return list;
 		}

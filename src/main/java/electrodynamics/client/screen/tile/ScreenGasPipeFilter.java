@@ -23,13 +23,13 @@ public class ScreenGasPipeFilter extends GenericScreen<ContainerGasPipeFilter> {
 		addComponent(new ScreenComponentGasFilter(132, 18, 3));
 
 		addComponent(new ButtonSwappableLabel(38, 70, 100, 20, ElectroTextUtils.gui("filter.blacklist"), ElectroTextUtils.gui("filter.whitelist"), () -> {
-			TileGasPipeFilter filter = menu.getHostFromIntArray();
+			TileGasPipeFilter filter = menu.getSafeHost();
 			if (filter == null) {
 				return false;
 			}
 			return filter.isWhitelist.get();
 		}).setOnPress(button -> {
-			TileGasPipeFilter filter = menu.getHostFromIntArray();
+			TileGasPipeFilter filter = menu.getSafeHost();
 			if (filter == null) {
 				return;
 			}

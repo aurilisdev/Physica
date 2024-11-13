@@ -25,7 +25,7 @@ public class ScreenGasPipePump extends GenericScreen<ContainerGasPipePump> {
 
 	private void setPriority(String prior) {
 
-		TileGasPipePump pump = menu.getHostFromIntArray();
+		TileGasPipePump pump = menu.getSafeHost();
 
 		if (pump == null) {
 			return;
@@ -60,7 +60,7 @@ public class ScreenGasPipePump extends GenericScreen<ContainerGasPipePump> {
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			TileGasPipePump pump = menu.getHostFromIntArray();
+			TileGasPipePump pump = menu.getSafeHost();
 			if (pump != null) {
 				priority.setValue("" + pump.priority.get());
 			}

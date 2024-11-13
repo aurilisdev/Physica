@@ -23,7 +23,7 @@ public class ScreenCombustionChamber extends GenericMaterialScreen<ContainerComb
 	public ScreenCombustionChamber(ContainerCombustionChamber container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			TileCombustionChamber boiler = container.getHostFromIntArray();
+			TileCombustionChamber boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
 			}
@@ -31,7 +31,7 @@ public class ScreenCombustionChamber extends GenericMaterialScreen<ContainerComb
 		}, 98, 18));
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_RIGHT_OFF, 69, 33));
 		addComponent(new ScreenComponentProgress(ProgressBars.COUNTDOWN_FLAME, () -> {
-			TileCombustionChamber boiler = container.getHostFromIntArray();
+			TileCombustionChamber boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.burnTime.get() / (double) TileCombustionChamber.TICKS_PER_MILLIBUCKET;
 			}

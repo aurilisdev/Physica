@@ -2,7 +2,6 @@ package electrodynamics.prefab.inventory.container;
 
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
 import electrodynamics.prefab.utilities.ContainerUtils;
-import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -10,15 +9,17 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-public abstract class GenericContainer extends AbstractContainerMenu {
+public abstract class GenericContainer<CONTAINERTYPE> extends AbstractContainerMenu {
 
-	protected final Container inventory;
-	protected final Level world;
-	public final int slotCount;
-	protected int playerInvOffset = 0;
+	public static final SimpleContainer EMPTY = new SimpleContainer(0);
+
+	private final CONTAINERTYPE inventory;
+	private final Level world;
+	private final Inventory playerinv;
+	private final Player player;
+	private final int slotCount;
+	private int playerInvOffset = 0;
 	private int nextIndex = 0;
 
 	public int nextIndex() {
@@ -30,65 +31,66 @@ public abstract class GenericContainer extends AbstractContainerMenu {
 		return nextIndex ++;
 	}
 
-	// Specialized constructor for screen with no player inv
-	protected GenericContainer(MenuType<?> type, int id, Inventory playerInv) {
+	public GenericContainer(MenuType<?> type, int id, Inventory playerinv, CONTAINERTYPE inventory) {
 		super(type, id);
-		inventory = new SimpleContainer(0);
-		world = playerInv.player.level();
-		slotCount = 0;
-	}
-
-	protected GenericContainer(MenuType<?> type, int id, Inventory playerinv, Container inventory) {
-		super(type, id);
-		checkContainerSize(inventory, inventory.getContainerSize());
+		validateContainer(inventory);
 		this.inventory = inventory;
-		world = playerinv.player.level();
+		this.playerinv = playerinv;
+		this.player = playerinv.player;
+		this.world = playerinv.player.level();
 		addInventorySlots(inventory, playerinv);
-		slotCount = slots.size();
+		this.slotCount = slots.size();
 		addPlayerInventory(playerinv);
 	}
 
-	protected void addPlayerInventory(Inventory playerinv) {
+	public void addPlayerInventory(Inventory playerinv) {
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				addSlot(new SlotGeneric(playerinv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + playerInvOffset));
+				addSlot(new SlotGeneric(playerinv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 + getPlayerInvOffset()));
 			}
 		}
 
 		for (int k = 0; k < 9; ++k) {
-			addSlot(new SlotGeneric(playerinv, k, 8 + k * 18, 142 + playerInvOffset));
+			addSlot(new SlotGeneric(playerinv, k, 8 + k * 18, 142 + getPlayerInvOffset()));
 		}
 	}
 
-	public abstract void addInventorySlots(Container inv, Inventory playerinv);
 
-	public void clear() {
-		inventory.clearContent();
+	public abstract void validateContainer(CONTAINERTYPE inventory);
+
+	public abstract void addInventorySlots(CONTAINERTYPE inv, Inventory playerinv);
+
+	public void setPlayerInvOffset(int offset) {
+		playerInvOffset = offset;
 	}
 
-	@OnlyIn(Dist.CLIENT)
-	public int getSize() {
-		return inventory.getContainerSize();
-	}
-
-	public Container getIInventory() {
+	public CONTAINERTYPE getContainer() {
 		return inventory;
 	}
 
-	@Override
-	public boolean stillValid(Player player) {
-		return inventory.stillValid(player);
+	public Level getLevel() {
+		return world;
+	}
+
+	public Inventory getPlayerInventory() {
+		return playerinv;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public int getAdditionalSlotCount() {
+		return slotCount;
+	}
+
+	public int getPlayerInvOffset() {
+		return playerInvOffset;
 	}
 
 	@Override
 	public ItemStack quickMoveStack(Player player, int index) {
 		return ContainerUtils.handleShiftClick(slots, player, index);
-	}
-
-	@Override
-	public void removed(Player player) {
-		super.removed(player);
-		inventory.stopOpen(player);
 	}
 
 }

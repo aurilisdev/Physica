@@ -20,7 +20,7 @@ public class ScreenO2OProcessorTriple extends GenericScreen<ContainerO2OProcesso
 	public ScreenO2OProcessorTriple(ContainerO2OProcessorTriple container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(0);
 				if (processor.isActive()) {
@@ -30,7 +30,7 @@ public class ScreenO2OProcessorTriple extends GenericScreen<ContainerO2OProcesso
 			return 0;
 		}, 84 - ContainerO2OProcessor.startXOffset, 24));
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(1);
 				if (processor.isActive()) {
@@ -40,7 +40,7 @@ public class ScreenO2OProcessorTriple extends GenericScreen<ContainerO2OProcesso
 			return 0;
 		}, 84 - ContainerO2OProcessor.startXOffset, 44));
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(2);
 				if (processor.isActive()) {

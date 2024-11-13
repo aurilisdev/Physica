@@ -25,7 +25,7 @@ public class ScreenChemicalMixer extends GenericMaterialScreen<ContainerChemical
 	public ScreenChemicalMixer(ContainerChemicalMixer container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getComponent(IComponentType.Processor);
 				if (processor.operatingTicks.get() > 0) {
@@ -35,7 +35,7 @@ public class ScreenChemicalMixer extends GenericMaterialScreen<ContainerChemical
 			return 0;
 		}, 42, 30));
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getComponent(IComponentType.Processor);
 				if (processor.operatingTicks.get() > processor.requiredTicks.get() / 2.0) {
@@ -46,14 +46,14 @@ public class ScreenChemicalMixer extends GenericMaterialScreen<ContainerChemical
 		}, 98, 30));
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_LEFT_OFF, 42, 50));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			TileChemicalMixer boiler = container.getHostFromIntArray();
+			TileChemicalMixer boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
 			}
 			return null;
 		}, 21, 18));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			TileChemicalMixer boiler = container.getHostFromIntArray();
+			TileChemicalMixer boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getOutputTanks()[0];
 			}

@@ -48,7 +48,7 @@ public class ScreenCreativePowerSource extends GenericScreen<ContainerCreativePo
 
 		}
 
-		TileCreativePowerSource tile = menu.getHostFromIntArray();
+		TileCreativePowerSource tile = menu.getSafeHost();
 
 		if (tile == null) {
 			return;
@@ -77,7 +77,7 @@ public class ScreenCreativePowerSource extends GenericScreen<ContainerCreativePo
 
 		}
 
-		TileCreativePowerSource tile = menu.getHostFromIntArray();
+		TileCreativePowerSource tile = menu.getSafeHost();
 
 		if (tile == null) {
 			return;
@@ -92,7 +92,7 @@ public class ScreenCreativePowerSource extends GenericScreen<ContainerCreativePo
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			TileCreativePowerSource source = menu.getHostFromIntArray();
+			TileCreativePowerSource source = menu.getSafeHost();
 			if (source != null) {
 				voltage.setValue("" + source.voltage.get());
 				power.setValue("" + source.power.get());

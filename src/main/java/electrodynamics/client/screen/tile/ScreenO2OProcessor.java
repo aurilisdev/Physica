@@ -20,7 +20,7 @@ public class ScreenO2OProcessor extends GenericScreen<ContainerO2OProcessor> {
 	public ScreenO2OProcessor(ContainerO2OProcessor container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(0);
 				if (processor.isActive()) {

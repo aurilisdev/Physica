@@ -33,14 +33,14 @@ public class ScreenGasCollector extends GenericMaterialScreen<ContainerGasCollec
     public ScreenGasCollector(ContainerGasCollector container, Inventory inv, Component titleIn) {
         super(container, inv, titleIn);
         addComponent(new ScreenComponentGasGauge(() -> {
-            TileGasCollector boiler = container.getHostFromIntArray();
+            TileGasCollector boiler = container.getSafeHost();
             if (boiler != null) {
                 return boiler.<ComponentGasHandlerSimple>getComponent(IComponentType.GasHandler);
             }
             return null;
         }, 90, 18));
         addComponent(new ScreenComponentProgress(ScreenComponentProgress.ProgressBars.FAN, () -> {
-            GenericTile furnace = container.getHostFromIntArray();
+            GenericTile furnace = container.getSafeHost();
             if (furnace != null) {
                 ComponentProcessor processor = furnace.getComponent(IComponentType.Processor);
                 if (processor.isActive()) {
@@ -49,7 +49,7 @@ public class ScreenGasCollector extends GenericMaterialScreen<ContainerGasCollec
             }
             return 0;
         }, 57, 34).onTooltip((graphics, component, xAxis, yAxis) -> {
-            TileGasCollector boiler = container.getHostFromIntArray();
+            TileGasCollector boiler = container.getSafeHost();
             if (boiler == null) {
                 return;
             }
@@ -71,7 +71,7 @@ public class ScreenGasCollector extends GenericMaterialScreen<ContainerGasCollec
         addComponent(new ScreenComponentGasPressure(-AbstractScreenComponentInfo.SIZE + 1, 2 + AbstractScreenComponentInfo.SIZE));
         addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2).wattage(Constants.GAS_COLLECTOR_USAGE_PER_TICK * 20));
         addComponent(new ScreenComponentCondensedFluid(() -> {
-            TileGasCollector electric = container.getHostFromIntArray();
+            TileGasCollector electric = container.getSafeHost();
             if (electric == null) {
                 return null;
             }

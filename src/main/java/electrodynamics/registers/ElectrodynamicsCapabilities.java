@@ -131,7 +131,27 @@ public class ElectrodynamicsCapabilities {
 
         // Seismic Scanner
 
-        event.registerItem(Capabilities.ItemHandler.ITEM, (itemStack, context) -> new CapabilityItemStackHandler(ItemSeismicScanner.SLOT_COUNT, itemStack), ElectrodynamicsItems.ITEM_SEISMICSCANNER.get());
+        event.registerItem(Capabilities.ItemHandler.ITEM, (itemStack, context) -> new CapabilityItemStackHandler(ItemSeismicScanner.SLOT_COUNT, itemStack).setOnChange(wrapper -> {
+            int range = 1;
+
+            for (ItemStack content : wrapper.capability().getItems()) {
+                if (!content.isEmpty() && content.getItem() instanceof ItemUpgrade upgrade && upgrade.subtype.isEmpty) {
+                    for (int i = 0; i < content.getCount(); i++) {
+
+                        switch (upgrade.subtype) {
+
+                            case range:
+                                range = Math.min(4, range + 1);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+
+            wrapper.owner().set(ElectrodynamicsDataComponentTypes.RANGE, range);
+        }), ElectrodynamicsItems.ITEM_SEISMICSCANNER.get());
 
         // Reinforced Cannister
         // TODO remember to do this for the Nuclear Science canister as well

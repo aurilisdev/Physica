@@ -30,7 +30,7 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 
 			graphics.drawString(font, top, xStart + offset, 28, 4210752, false);
 
-			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedUpgradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
@@ -53,56 +53,56 @@ public class ScreenAdvancedUpgradeTransformer extends GenericScreen<ContainerAdv
 
 		}));
 		addComponent(new ScreenComponentButton<>(75, 20, 40, 20).setLabel(Component.literal("1 : 2")).setOnPress(button -> {
-			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedUpgradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(2.0);
 		}));
 		addComponent(new ScreenComponentButton<>(75, 40, 40, 20).setLabel(Component.literal("1 : 4")).setOnPress(button -> {
-			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedUpgradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(4.0);
 		}));
 		addComponent(new ScreenComponentButton<>(75, 60, 40, 20).setLabel(Component.literal("1 : 8")).setOnPress(button -> {
-			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedUpgradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(8.0);
 		}));
 		addComponent(new ScreenComponentButton<>(75, 80, 40, 20).setLabel(Component.literal("1 : 16")).setOnPress(button -> {
-			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedUpgradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(16.0);
 		}));
 		addComponent(new ScreenComponentButton<>(120, 20, 40, 20).setLabel(Component.literal("1 : 32")).setOnPress(button -> {
-			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedUpgradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(32.0);
 		}));
 		addComponent(new ScreenComponentButton<>(120, 40, 40, 20).setLabel(Component.literal("1 : 64")).setOnPress(button -> {
-			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedUpgradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(64.0);
 		}));
 		addComponent(new ScreenComponentButton<>(120, 60, 40, 20).setLabel(Component.literal("1 : 128")).setOnPress(button -> {
-			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedUpgradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}
 			xfmr.coilRatio.set(128.0);
 		}));
 		addComponent(new ScreenComponentButton<>(120, 80, 40, 20).setLabel(Component.literal("1 : 256")).setOnPress(button -> {
-			TileAdvancedUpgradeTransformer xfmr = menu.getHostFromIntArray();
+			TileAdvancedUpgradeTransformer xfmr = menu.getSafeHost();
 			if (xfmr == null) {
 				return;
 			}

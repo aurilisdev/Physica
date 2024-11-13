@@ -16,6 +16,9 @@ public class ScreenComponentMultiLabel extends AbstractScreenComponent {
 
 	@Override
 	public void renderForeground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
+		if(!isVisible()){
+			return;
+		}
 		fontConsumer.accept(graphics);
 	}
 

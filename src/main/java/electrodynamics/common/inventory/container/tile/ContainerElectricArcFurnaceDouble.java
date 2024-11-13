@@ -1,7 +1,7 @@
 package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnaceDouble;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotUpgrade;
@@ -16,11 +16,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 public class ContainerElectricArcFurnaceDouble extends GenericContainerBlockEntity<TileElectricArcFurnaceDouble> {
 
 	public ContainerElectricArcFurnaceDouble(int id, Inventory playerinv) {
-		this(id, playerinv, new SimpleContainer(7));
-	}
-
-	public ContainerElectricArcFurnaceDouble(int id, Inventory playerinv, Container inventory) {
-		this(id, playerinv, inventory, new SimpleContainerData(3));
+		this(id, playerinv, new SimpleContainer(7) ,new SimpleContainerData(3));
 	}
 
 	public ContainerElectricArcFurnaceDouble(int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {

@@ -99,7 +99,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addItem(ElectrodynamicsItems.ITEM_NIGHTVISIONGOGGLES, "Night Vision Goggles");
 			addItem(ElectrodynamicsItems.ITEM_PLASMARAILGUN, "Plasma Rail Gun");
 			addItem(ElectrodynamicsItems.ITEM_RUBBERBOOTS, "Rubber Boots");
-			addItem(ElectrodynamicsItems.ITEM_SEISMICSCANNER, "Seismic Scanner");
+			addItem(ElectrodynamicsItems.ITEM_SEISMICSCANNER, "Sonic Scanner");
 			addItem(ElectrodynamicsItems.ITEM_SERVOLEGGINGS, "Servo Leggings");
 
 			addItem(ElectrodynamicsItems.ITEM_SHEETPLASTIC, "Polyethylene Sheet");
@@ -724,7 +724,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addContainer(SubtypeMachine.wiremilltriple, "Triple Wire Mill");
 
 			addContainer("guidebook", "Guidebook");
-			addContainer("seismicscanner", "Seismic Scanner");
+			addContainer("seismicscanner", "Sonic Scanner");
 			addContainer("electricdrill", "Electric Drill");
 
 			addContainer(SubtypeMachine.gastanksteel, "Steel Gas Cylinder");
@@ -784,8 +784,8 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addTooltip("creativepowersource.joke", "\"Unlimited Power\" - Buck Rogers from Star Trek");
 			addTooltip("creativefluidsource.joke", "\"More\" - Crylo Ren");
 			addTooltip("fluidvoid", "Voids fluids");
-			addTooltip("seismicscanner.use", "Scans for ores in a 16 block radius");
-			addTooltip("seismicscanner.opengui", "Right-Click to view status");
+			addTooltip("seismicscanner.range", "Radius: %s Blocks");
+			addTooltip("seismicscanner.cooldown", "COOLDOWN: %s");
 			addTooltip("seismicscanner.oncooldown", "COOLDOWN");
 			addTooltip("seismicscanner.showuse", "Shift + Right-Click to scan");
 			addTooltip("seismicscanner.currentore", "Current Ore: %s");
@@ -859,6 +859,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addTooltip("inventoryio", "Inventory I/O");
 			addTooltip("inventoryio.presstoshow", "press to show");
 			addTooltip("inventoryio.presstohide", "press to hide");
+			addTooltip("scannerpattern", "Sonar Pattern");
 			addTooltip("inventoryio.top", "Top");
 			addTooltip("inventoryio.bottom", "Bottom");
 			addTooltip("inventoryio.left", "Left");
@@ -882,13 +883,20 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGuiLabel("coalgenerator.timeleft", "Time Left: %s");
 			addGuiLabel("seismicscanner.dataheader", "Scan Results:");
 			addGuiLabel("seismicscanner.notfound", "Block not found!");
-			addGuiLabel("seismicscanner.xcoord", "X , %s");
-			addGuiLabel("seismicscanner.ycoord", "Y , %s");
-			addGuiLabel("seismicscanner.zcoord", "Z , %s");
-			addGuiLabel("seismicscanner.xcoordna", "X , Not Found");
-			addGuiLabel("seismicscanner.ycoordna", "Y , Not Found");
-			addGuiLabel("seismicscanner.zcoordna", "Z , Not Found");
-			addGuiLabel("seismicscanner.material", "Material:");
+			addGuiLabel("seismicscanner.xcoord", "X: %s");
+			addGuiLabel("seismicscanner.ycoord", "Y: %s");
+			addGuiLabel("seismicscanner.zcoord", "Z: %s");
+			addGuiLabel("seismicscanner.xcoordna", "X: Not Found");
+			addGuiLabel("seismicscanner.ycoordna", "Y: Not Found");
+			addGuiLabel("seismicscanner.zcoordna", "Z: Not Found");
+			addGuiLabel("seismicscanner.material", "Active Pattern:");
+			addGuiLabel("seismicscanner.pattern", "Scanned Pattern:");
+			addGuiLabel("seismicscanner.patternintegrity", "Integrity: %s");
+			addGuiLabel("seismicscanner.nopattern", "N/A");
+			addGuiLabel("seismicscanner.nopatternstored", "No Pattern");
+			addGuiLabel("seismicscanner.scanpassive", "Passive");
+			addGuiLabel("seismicscanner.scanactive", "Active");
+			addGuiLabel("seismicscanner.performscan", "Scan");
 			addGuiLabel("genericcharger.chargeperc", "Charge: %s");
 			addGuiLabel("genericcharger.chargecapable", "Possible: %s");
 			addGuiLabel("seismicrelay.dataheader", "Markers");
@@ -1119,6 +1127,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addSubtitle(ElectrodynamicsSounds.SOUND_COMPRESSORRUNNING, "Compressor pressurizes gas");
 			addSubtitle(ElectrodynamicsSounds.SOUND_DECOMPRESSORRUNNING, "Decompressor depressurizes gas");
 			addSubtitle(ElectrodynamicsSounds.SOUND_TRANSFORMERHUM, "Transformer hums");
+			addSubtitle(ElectrodynamicsSounds.SOUND_MOTORRUNNING, "Motor Spins");
 
 			addDimension(Level.OVERWORLD, "The Overworld");
 			addDimension(Level.NETHER, "The Nether");
@@ -1615,15 +1624,18 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGuidebook("chapter.gases.l14", "Up until this point, there has been mention of gases at different temperatures and pressures, but no talk of how those values are actually achieved. Sure, some machines might produce a gas at a certain temperature and pressure, but what if another process calls for it to be "
 					+ "at twice the temperature and twice the pressure? We now come to what this chapter has been building towards: gas manipulation. Electrodynamics offers dedicated machines for manipulating a gas's pressure and temperature.");
 
-			addGuidebook("chapter.gases.l15", "The first of these are the Compressor and Decompressor. The %1$s will take any gas input to it and double the pressure. The %2$s conversely will take any gas input to it and halve the pressure. By convention, gases produced by machines will be a power of two. This means the Compressor "
-					+ "and Decompressor " + "effectively function as Upgrade and Downgrade Transformers!");
+			addGuidebook("chapter.gases.l15", "The first category of these machines are the compressors. An important guideline for the Electrodynamics gas system is that recipes will only produce gases at pressures that are powers of 2. The %1$s will take any gas input to it and double the pressure. " +
+					"The %2$s conversely will take any gas input to it and halve the pressure. With this in mind, a parallel can be drawn between the compressors and transformers, in that they function similarly. The base compressors can only process %3$s mB of gas per tick due to their small size. Electrodynamics offers a MK2 variant, that while" +
+					" bigger, is able to process up to %4$s mB of gas per tick.");
 
-			addGuidebook("chapter.gases.l16.1", "You may notice however that the input and output tanks on these two blocks have a rather limited storage capacity. This can especially be a problem if you are decompressing a gas. Fortunately, the Compressor and Decompressor can have thier storage tank capacities increased by the "
+			addGuidebook("chapter.gases.l16.1", "You may notice however that the input and output tanks on these two blocks have a rather limited storage capacity. This can especially be a problem if you are decompressing a gas. Fortunately, the Compressor and Decompressor can have their storage tank capacities increased by the "
 					+ "addition of a %1$s. The Pressurized Tank is placed atop of the input and output tank like so:");
 
 			addGuidebook("chapter.gases.l16.2", "A total of %s can be stacked to increase the tank capacity.");
 
-			addGuidebook("chapter.gases.l17.1", "The third block for manipulating gases is the %1$s. The Thermoelectric Manipulator is able to heat or cool a gas to any specified temperature. To program the temperature, open the GUI, and input it:");
+			addGuidebook("chapter.gases.l17.1", "The second category of these gas manipulating machines are \"Gas Thermal Liquid\" Chambers, or \"GTL\" for short. The %1$s is able to heat or cool a gas to any specified temperature. The base model is capable of processing up to %2$s mB of gas per tick. " +
+					"Being as small as it is however, the heating unit on board is only able to transfer %3$s Joules per tick. As with the compressors, a MK2 variant is offered that while bigger is size, is able to process up to %4$s mB of gas per tick, and is able to transfer %5$s Joules of heat per tick. To program " +
+					"the temperature, open the GUI, and input it using the text input bar:");
 
 			addGuidebook("chapter.gases.l17.2", "If you paid attention to the condensed gases list from earlier, you may also notice that the %1$s has a fluid input and output tank. If you program the temperature to the gas's condensation point, the Manipulator will in turn condense the gas into a fluid. The manipulator is also "
 					+ "capable of converting fluids into gases if the temperature is above the gas's condensation point. Also, like the %2$s and %3$s, the %1$s can have its tank capacity increased with a %4$s.");

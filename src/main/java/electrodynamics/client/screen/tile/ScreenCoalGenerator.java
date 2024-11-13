@@ -30,7 +30,7 @@ public class ScreenCoalGenerator extends GenericScreen<ContainerCoalGenerator> {
 	public ScreenCoalGenerator(ContainerCoalGenerator container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentProgress(ProgressBars.COUNTDOWN_FLAME, () -> {
-			TileCoalGenerator box = container.getHostFromIntArray();
+			TileCoalGenerator box = container.getSafeHost();
 			if (box != null) {
 				return (double) box.burnTime.get() / (double) box.maxBurnTime.get();
 			}
@@ -39,7 +39,7 @@ public class ScreenCoalGenerator extends GenericScreen<ContainerCoalGenerator> {
 		addComponent(new ScreenComponentTemperature(this::getTemperatureInformation, -AbstractScreenComponentInfo.SIZE + 1, 2 + AbstractScreenComponentInfo.SIZE));
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
-			TileCoalGenerator coal = menu.getHostFromIntArray();
+			TileCoalGenerator coal = menu.getSafeHost();
 			if (coal == null) {
 				return;
 			}
@@ -55,7 +55,7 @@ public class ScreenCoalGenerator extends GenericScreen<ContainerCoalGenerator> {
 
 	private List<FormattedCharSequence> getTemperatureInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileCoalGenerator box = menu.getHostFromIntArray();
+		TileCoalGenerator box = menu.getSafeHost();
 		if (box == null) {
 			return list;
 		}

@@ -1,6 +1,6 @@
 package electrodynamics.prefab.screen.component.types.wrapper;
 
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.button.type.ButtonTankSlider;
@@ -29,7 +29,7 @@ public class WrapperCyclableGasGauge {
         yOffset += 8;
 
         components.add(screen.addComponent(new ScreenComponentGasGauge(() -> {
-            GenericTile tile = container.getHostFromIntArray();
+            GenericTile tile = container.getSafeHost();
             if (tile == null) {
                 return null;
             }
@@ -43,7 +43,7 @@ public class WrapperCyclableGasGauge {
         yOffset += 50;
 
         components.add(screen.addComponent(new ButtonTankSlider(ButtonTankSlider.TankSliderPair.LEFT, x, y + yOffset).setOnPress(button -> {
-            GenericTile tile = container.getHostFromIntArray();
+            GenericTile tile = container.getSafeHost();
             if (tile == null) {
                 return;
             }
@@ -61,7 +61,7 @@ public class WrapperCyclableGasGauge {
         })));
 
         components.add(screen.addComponent(new ButtonTankSlider(ButtonTankSlider.TankSliderPair.RIGHT, x + 8, y + yOffset).setOnPress(button -> {
-            GenericTile tile = container.getHostFromIntArray();
+            GenericTile tile = container.getSafeHost();
             if (tile == null) {
                 return;
             }

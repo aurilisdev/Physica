@@ -1,7 +1,7 @@
 package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.tile.machines.quarry.TileSeismicRelay;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
 import electrodynamics.registers.ElectrodynamicsMenuTypes;
 import net.minecraft.world.Container;

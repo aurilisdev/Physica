@@ -20,7 +20,7 @@ public class ScreenElectricArcFurnace extends GenericScreen<ContainerElectricArc
 	public ScreenElectricArcFurnace(ContainerElectricArcFurnace container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			TileElectricArcFurnace furnace = container.getHostFromIntArray();
+			TileElectricArcFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(0);
 				if (processor.isActive()) {
@@ -30,7 +30,7 @@ public class ScreenElectricArcFurnace extends GenericScreen<ContainerElectricArc
 			return 0;
 		}, 84, 34));
 		addComponent(new ScreenComponentProgress(ProgressBars.COUNTDOWN_FLAME, () -> {
-			TileElectricArcFurnace furnace = container.getHostFromIntArray();
+			TileElectricArcFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(0);
 				if (processor.isActive()) {

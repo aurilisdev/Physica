@@ -1,4 +1,4 @@
-package electrodynamics.prefab.screen.component.types.io;
+package electrodynamics.prefab.screen.component.types;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,10 +6,9 @@ import java.util.List;
 
 import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
 import electrodynamics.prefab.screen.GenericScreen;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
@@ -46,7 +45,7 @@ public class ScreenComponentInventoryIO extends ScreenComponentGeneric {
 
 		GenericContainerBlockEntity<?> container = (GenericContainerBlockEntity<?>) screen.getMenu();
 
-		GenericTile tile = (GenericTile) container.getHostFromIntArray();
+		GenericTile tile = (GenericTile) container.getSafeHost();
 
 		if (tile == null || !tile.hasComponent(IComponentType.Inventory)) {
 			return;

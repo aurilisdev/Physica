@@ -26,7 +26,7 @@ public class ScreenFluidPipePump extends GenericScreen<ContainerFluidPipePump> {
 
 	private void setPriority(String prior) {
 
-		TileFluidPipePump pump = menu.getHostFromIntArray();
+		TileFluidPipePump pump = menu.getSafeHost();
 
 		if (pump == null) {
 			return;
@@ -61,7 +61,7 @@ public class ScreenFluidPipePump extends GenericScreen<ContainerFluidPipePump> {
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			TileFluidPipePump pump = menu.getHostFromIntArray();
+			TileFluidPipePump pump = menu.getSafeHost();
 			if (pump != null) {
 				priority.setValue("" + pump.priority.get());
 			}
