@@ -13,13 +13,14 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class ContainerSeismicScanner extends GenericContainerItem {
 
 	public static final SubtypeItemUpgrade[] VALID_UPGRADES = {SubtypeItemUpgrade.range};
 
 	public ContainerSeismicScanner(int id, Inventory playerinv) {
-		this(id, playerinv, new CapabilityItemStackHandler(ItemSeismicScanner.SLOT_COUNT, ItemStack.EMPTY), makeDefaultData(1));
+		this(id, playerinv, new CapabilityItemStackHandler(ItemSeismicScanner.SLOT_COUNT, new ItemStack(Items.COBBLESTONE)), makeDefaultData(1));
 	}
 
 	public ContainerSeismicScanner(int id, Inventory playerinv, CapabilityItemStackHandler handler, ContainerData data) {

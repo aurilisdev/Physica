@@ -9,6 +9,7 @@ import electrodynamics.registers.ElectrodynamicsMenuTypes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class ContainerElectricDrill extends GenericContainerItem {
 
@@ -19,7 +20,7 @@ public class ContainerElectricDrill extends GenericContainerItem {
 	}
 
 	public ContainerElectricDrill(int id, Inventory playerInv) {
-		this(id, playerInv, new CapabilityItemStackHandler(ItemElectricDrill.SLOT_COUNT, ItemStack.EMPTY), makeDefaultData(1));
+		this(id, playerInv, new CapabilityItemStackHandler(ItemElectricDrill.SLOT_COUNT, new ItemStack(Items.COBBLESTONE)), makeDefaultData(1));
 	}
 
 	@Override

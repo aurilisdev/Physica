@@ -12,6 +12,10 @@ import net.minecraft.world.item.ItemStack;
 
 public abstract class GenericContainerItem extends GenericContainerSlotData<CapabilityItemStackHandler> {
 
+    /**
+     * Documentation note here: DO NOT use ItemStack.EMPTY for the dummy handler created on the client. The empty
+     * ItemStack cannot store data components. Use a piece of cobblestone or something generic like that!
+     */
     public GenericContainerItem(MenuType<?> type, int id, Inventory playerinv, CapabilityItemStackHandler handler, ContainerData data) {
         super(type, id, playerinv, handler, data);
         getContainer().setLevelAccess(playerinv.player.level(), playerinv.player.getOnPos());
