@@ -1,6 +1,7 @@
 package electrodynamics.datagen.server.recipe.types.custom.fluiditem2fluid;
 
 import electrodynamics.api.References;
+import electrodynamics.common.fluid.subtype.SubtypeRoyalMineralFluid;
 import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import electrodynamics.common.recipe.categories.fluiditem2fluid.specificmachines.MineralWasherRecipe;
 import electrodynamics.common.tags.ElectrodynamicsTags;
@@ -48,6 +49,18 @@ public class ElectrodynamicsMineralWasherRecipes extends AbstractRecipeGenerator
 						.addItemTagInput(fluid.source, 1)
 						//
 						.addFluidTagInput(ElectrodynamicsTags.Fluids.SULFURIC_ACID, 1000)
+						//
+						.save(output);
+			}
+		}
+
+		for (SubtypeRoyalMineralFluid fluid : SubtypeRoyalMineralFluid.values()) {
+			if (fluid.source != null) {
+				newRecipe(new FluidStack(ElectrodynamicsFluids.FLUIDS_ROYALMINERAL.getValue(fluid), 3000), 0, 200, 400.0, "royalmineral_" + fluid.name(), modID)
+						//
+						.addItemTagInput(fluid.source, 1)
+						//
+						.addFluidTagInput(ElectrodynamicsTags.Fluids.AQUA_REGIA, 1000)
 						//
 						.save(output);
 			}

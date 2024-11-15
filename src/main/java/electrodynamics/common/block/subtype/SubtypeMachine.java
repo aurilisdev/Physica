@@ -1,7 +1,5 @@
 package electrodynamics.common.block.subtype;
 
-import java.lang.reflect.InvocationTargetException;
-
 import electrodynamics.api.ISubtype;
 import electrodynamics.common.tile.electricitygrid.TileCircuitBreaker;
 import electrodynamics.common.tile.electricitygrid.TileCircuitMonitor;
@@ -59,92 +57,91 @@ import electrodynamics.common.tile.pipelines.fluid.tank.TileFluidTankSteel;
 import electrodynamics.common.tile.pipelines.gas.tank.TileGasTankHSLA;
 import electrodynamics.common.tile.pipelines.gas.tank.TileGasTankReinforced;
 import electrodynamics.common.tile.pipelines.gas.tank.TileGasTankSteel;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public enum SubtypeMachine implements ISubtype {
 
-    electricfurnace(true, TileElectricFurnace.class, RenderShape.MODEL, 8, false),
-    electricfurnacedouble(true, TileElectricFurnaceDouble.class, RenderShape.MODEL, 8, false),
-    electricfurnacetriple(true, TileElectricFurnaceTriple.class, RenderShape.MODEL, 8, false),
-    electricarcfurnace(true, TileElectricArcFurnace.class, RenderShape.MODEL, 9, false),
-    electricarcfurnacedouble(true, TileElectricArcFurnaceDouble.class, RenderShape.MODEL, 9, false),
-    electricarcfurnacetriple(true, TileElectricArcFurnaceTriple.class, RenderShape.MODEL, 9, false),
-    coalgenerator(true, TileCoalGenerator.class, RenderShape.MODEL, 12, false),
-    wiremill(true, TileWireMill.class),
-    wiremilldouble(true, TileWireMillDouble.class),
-    wiremilltriple(true, TileWireMillTriple.class),
-    mineralcrusher(true, TileMineralCrusher.class),
-    mineralcrusherdouble(true, TileMineralCrusherDouble.class),
-    mineralcrushertriple(true, TileMineralCrusherTriple.class),
-    mineralgrinder(true, TileMineralGrinder.class),
-    mineralgrinderdouble(true, TileMineralGrinderDouble.class),
-    mineralgrindertriple(true, TileMineralGrinderTriple.class),
-    batterybox(true, TileBatteryBox.class, RenderShape.ENTITYBLOCK_ANIMATED, 0, false),
-    lithiumbatterybox(true, TileLithiumBatteryBox.class, RenderShape.ENTITYBLOCK_ANIMATED, 0, false),
-    carbynebatterybox(true, TileCarbyneBatteryBox.class, RenderShape.ENTITYBLOCK_ANIMATED, 0, false),
-    oxidationfurnace(true, TileOxidationFurnace.class, RenderShape.MODEL, 6, false),
-    downgradetransformer(true, TileDowngradeTransformer.class),
-    upgradetransformer(true, TileUpgradeTransformer.class),
-    solarpanel(true, TileSolarPanel.class),
-    advancedsolarpanel(true, TileAdvancedSolarPanel.class),
-    electricpump(true, TileElectricPump.class),
-    thermoelectricgenerator(true, TileThermoelectricGenerator.class),
-    fermentationplant(true, TileFermentationPlant.class),
-    combustionchamber(true, TileCombustionChamber.class),
-    hydroelectricgenerator(true, TileHydroelectricGenerator.class),
-    windmill(true, TileWindmill.class),
-    mineralwasher(true, TileMineralWasher.class),
-    chemicalmixer(true, TileChemicalMixer.class, RenderShape.ENTITYBLOCK_ANIMATED, 0, false),
-    chemicalcrystallizer(true, TileChemicalCrystallizer.class),
-    circuitbreaker(true, TileCircuitBreaker.class),
-    multimeterblock(true, TileMultimeterBlock.class),
-    energizedalloyer(true, TileEnergizedAlloyer.class, RenderShape.MODEL, 10, false),
-    lathe(true, TileLathe.class),
-    reinforcedalloyer(true, TileReinforcedAlloyer.class),
-    chargerlv(true, TileChargerLV.class),
-    chargermv(true, TileChargerMV.class),
-    chargerhv(true, TileChargerHV.class),
-    tanksteel(true, TileFluidTankSteel.class),
-    tankreinforced(true, TileFluidTankReinforced.class, RenderShape.MODEL, 15, false),
-    tankhsla(true, TileFluidTankHSLA.class),
-    creativepowersource(true, TileCreativePowerSource.class),
-    creativefluidsource(true, TileCreativeFluidSource.class),
-    fluidvoid(true, TileFluidVoid.class),
-    electrolyticseparator(true, TileElectrolyticSeparator.class),
-    seismicrelay(true, TileSeismicRelay.class),
-    quarry(true, TileQuarry.class),
-    coolantresavoir(true, TileCoolantResavoir.class),
-    motorcomplex(true, TileMotorComplex.class),
-    gastanksteel(true, TileGasTankSteel.class),
-    gastankreinforced(true, TileGasTankReinforced.class),
-    gastankhsla(true, TileGasTankHSLA.class),
-    gasvent(true, TileGasVent.class),
-    relay(true, TileRelay.class),
-    potentiometer(true, TilePotentiometer.class),
-    advancedupgradetransformer(true, TileAdvancedUpgradeTransformer.class),
-    advanceddowngradetransformer(true, TileAdvancedDowngradeTransformer.class),
-    circuitmonitor(true, TileCircuitMonitor.class),
-    currentregulator(true, TileCurrentRegulator.class),
-    gascollector(true, TileGasCollector.class),
-    creativegassource(true, TileCreativeGasSource.class),
+    electricfurnace(true, TileElectricFurnace::new, RenderShape.MODEL, 8, false),
+    electricfurnacedouble(true, TileElectricFurnaceDouble::new, RenderShape.MODEL, 8, false),
+    electricfurnacetriple(true, TileElectricFurnaceTriple::new, RenderShape.MODEL, 8, false),
+    electricarcfurnace(true, TileElectricArcFurnace::new, RenderShape.MODEL, 9, false),
+    electricarcfurnacedouble(true, TileElectricArcFurnaceDouble::new, RenderShape.MODEL, 9, false),
+    electricarcfurnacetriple(true, TileElectricArcFurnaceTriple::new, RenderShape.MODEL, 9, false),
+    coalgenerator(true, TileCoalGenerator::new, RenderShape.MODEL, 12, false),
+    wiremill(true, TileWireMill::new),
+    wiremilldouble(true, TileWireMillDouble::new),
+    wiremilltriple(true, TileWireMillTriple::new),
+    mineralcrusher(true, TileMineralCrusher::new),
+    mineralcrusherdouble(true, TileMineralCrusherDouble::new),
+    mineralcrushertriple(true, TileMineralCrusherTriple::new),
+    mineralgrinder(true, TileMineralGrinder::new),
+    mineralgrinderdouble(true, TileMineralGrinderDouble::new),
+    mineralgrindertriple(true, TileMineralGrinderTriple::new),
+    batterybox(true, TileBatteryBox::new, RenderShape.ENTITYBLOCK_ANIMATED, 0, false),
+    lithiumbatterybox(true, TileLithiumBatteryBox::new, RenderShape.ENTITYBLOCK_ANIMATED, 0, false),
+    carbynebatterybox(true, TileCarbyneBatteryBox::new, RenderShape.ENTITYBLOCK_ANIMATED, 0, false),
+    oxidationfurnace(true, TileOxidationFurnace::new, RenderShape.MODEL, 6, false),
+    downgradetransformer(true, TileDowngradeTransformer::new),
+    upgradetransformer(true, TileUpgradeTransformer::new),
+    solarpanel(true, TileSolarPanel::new),
+    advancedsolarpanel(true, TileAdvancedSolarPanel::new),
+    electricpump(true, TileElectricPump::new),
+    thermoelectricgenerator(true, TileThermoelectricGenerator::new),
+    fermentationplant(true, TileFermentationPlant::new),
+    combustionchamber(true, TileCombustionChamber::new),
+    hydroelectricgenerator(true, TileHydroelectricGenerator::new),
+    windmill(true, TileWindmill::new),
+    mineralwasher(true, TileMineralWasher::new),
+    chemicalmixer(true, TileChemicalMixer::new, RenderShape.ENTITYBLOCK_ANIMATED, 0, false),
+    chemicalcrystallizer(true, TileChemicalCrystallizer::new),
+    circuitbreaker(true, TileCircuitBreaker::new),
+    multimeterblock(true, TileMultimeterBlock::new),
+    energizedalloyer(true, TileEnergizedAlloyer::new, RenderShape.MODEL, 10, false),
+    lathe(true, TileLathe::new),
+    reinforcedalloyer(true, TileReinforcedAlloyer::new),
+    chargerlv(true, TileChargerLV::new),
+    chargermv(true, TileChargerMV::new),
+    chargerhv(true, TileChargerHV::new),
+    tanksteel(true, TileFluidTankSteel::new),
+    tankreinforced(true, TileFluidTankReinforced::new, RenderShape.MODEL, 15, false),
+    tankhsla(true, TileFluidTankHSLA::new),
+    creativepowersource(true, TileCreativePowerSource::new),
+    creativefluidsource(true, TileCreativeFluidSource::new),
+    fluidvoid(true, TileFluidVoid::new),
+    electrolyticseparator(true, TileElectrolyticSeparator::new),
+    seismicrelay(true, TileSeismicRelay::new),
+    quarry(true, TileQuarry::new),
+    coolantresavoir(true, TileCoolantResavoir::new),
+    motorcomplex(true, TileMotorComplex::new),
+    gastanksteel(true, TileGasTankSteel::new),
+    gastankreinforced(true, TileGasTankReinforced::new),
+    gastankhsla(true, TileGasTankHSLA::new),
+    gasvent(true, TileGasVent::new),
+    relay(true, TileRelay::new),
+    potentiometer(true, TilePotentiometer::new),
+    advancedupgradetransformer(true, TileAdvancedUpgradeTransformer::new),
+    advanceddowngradetransformer(true, TileAdvancedDowngradeTransformer::new),
+    circuitmonitor(true, TileCircuitMonitor::new),
+    currentregulator(true, TileCurrentRegulator::new),
+    gascollector(true, TileGasCollector::new),
+    creativegassource(true, TileCreativeGasSource::new),
     ;
 
-    public final Class<? extends BlockEntity> tileclass;
+    private final BlockEntityType.BlockEntitySupplier<BlockEntity> blockEntitySupplier;
     public final boolean showInItemGroup;
-    private RenderShape type = RenderShape.MODEL;
+    private final RenderShape type;
     public final int litBrightness;
     public final boolean propogateLightDown;
 
-    SubtypeMachine(boolean showInItemGroup, Class<? extends BlockEntity> tileclass) {
-        this(showInItemGroup, tileclass, RenderShape.MODEL, 0, false);
+    private SubtypeMachine(boolean showInItemGroup, BlockEntityType.BlockEntitySupplier<BlockEntity> blockEntitySupplier) {
+        this(showInItemGroup, blockEntitySupplier, RenderShape.MODEL, 0, false);
     }
 
-    SubtypeMachine(boolean showInItemGroup, Class<? extends BlockEntity> tileclass, RenderShape renderShape, int litBrightness, boolean propogateLightDown) {
+    private SubtypeMachine(boolean showInItemGroup, BlockEntityType.BlockEntitySupplier<BlockEntity> blockEntitySupplier, RenderShape renderShape, int litBrightness, boolean propogateLightDown) {
         this.showInItemGroup = showInItemGroup;
-        this.tileclass = tileclass;
+        this.blockEntitySupplier = blockEntitySupplier;
         this.litBrightness = litBrightness;
         this.type = renderShape;
         this.propogateLightDown = propogateLightDown;
@@ -154,15 +151,8 @@ public enum SubtypeMachine implements ISubtype {
         return type;
     }
 
-    public BlockEntity createTileEntity(BlockPos pos, BlockState state) {
-        if (tileclass != null) {
-            try {
-                return tileclass.getConstructor(BlockPos.class, BlockState.class).newInstance(pos, state);
-            } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
+    public BlockEntityType.BlockEntitySupplier<BlockEntity> getBlockEntitySupplier() {
+        return blockEntitySupplier;
     }
 
     @Override

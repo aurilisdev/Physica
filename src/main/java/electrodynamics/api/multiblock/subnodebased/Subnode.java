@@ -1,4 +1,4 @@
-package electrodynamics.api.multiblock;
+package electrodynamics.api.multiblock.subnodebased;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

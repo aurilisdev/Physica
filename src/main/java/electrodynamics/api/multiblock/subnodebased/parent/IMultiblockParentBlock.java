@@ -1,6 +1,6 @@
-package electrodynamics.api.multiblock.parent;
+package electrodynamics.api.multiblock.subnodebased.parent;
 
-import electrodynamics.api.multiblock.Subnode;
+import electrodynamics.api.multiblock.subnodebased.Subnode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;

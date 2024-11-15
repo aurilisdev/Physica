@@ -1,7 +1,7 @@
 package electrodynamics.common.tile.electricitygrid.generators;
 
-import electrodynamics.api.multiblock.Subnode;
-import electrodynamics.api.multiblock.parent.IMultiblockParentTile;
+import electrodynamics.api.multiblock.subnodebased.Subnode;
+import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentTile;
 import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerSolarPanel;

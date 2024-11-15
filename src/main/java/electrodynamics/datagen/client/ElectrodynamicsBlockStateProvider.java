@@ -284,6 +284,8 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
                 .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(270).addModel();
         blockItem(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get(), existingBlock(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR));
 
+        airBlock(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE, "block/multisubnode",false);
+
 
 
         genWires();

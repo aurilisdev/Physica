@@ -14,6 +14,7 @@ import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider.Locale;
 import electrodynamics.datagen.client.ElectrodynamicsSoundProvider;
 import electrodynamics.datagen.server.*;
 import electrodynamics.datagen.server.advancement.ElectrodynamicsAdvancementProvider;
+import electrodynamics.datagen.server.multiblock.ElectrodynamicsMultiblockProvider;
 import electrodynamics.datagen.server.recipe.ElectrodynamicsRecipeProvider;
 import electrodynamics.datagen.server.tags.ElectrodynamicsTagsProvider;
 import electrodynamics.registers.ElectrodynamicsDamageTypes;
@@ -71,6 +72,7 @@ public class DataGenerators {
 			ElectrodynamicsTagsProvider.addTagProviders(generator, output, datapacks.getRegistryProvider(), helper);
 			generator.addProvider(true, new ElectrodynamicsRecipeProvider(output, lookupProvider));
 			generator.addProvider(true, new ElectrodynamicsAdvancementProvider(output, datapacks.getRegistryProvider()));
+			generator.addProvider(true, new ElectrodynamicsMultiblockProvider(output, datapacks.getRegistryProvider(), helper));
 		}
 		if (event.includeClient()) {
 			generator.addProvider(true, new ElectrodynamicsBlockStateProvider(output, helper));

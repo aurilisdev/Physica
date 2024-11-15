@@ -2,9 +2,9 @@ package electrodynamics.common.block;
 
 import com.mojang.serialization.MapCodec;
 
-import electrodynamics.api.multiblock.Subnode;
-import electrodynamics.api.multiblock.parent.IMultiblockParentBlock;
-import electrodynamics.api.multiblock.parent.IMultiblockParentTile;
+import electrodynamics.api.multiblock.subnodebased.Subnode;
+import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
+import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentTile;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.tile.machines.quarry.TileQuarry;
 import electrodynamics.prefab.block.GenericMachineBlock;
@@ -64,7 +64,7 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
     public final SubtypeMachine machine;
 
     public BlockMachine(SubtypeMachine machine) {
-        super(machine::createTileEntity);
+        super(machine.getBlockEntitySupplier());
         this.machine = machine;
         if (machine.litBrightness > 0) {
             registerDefaultState(stateDefinition.any().setValue(ON, false));

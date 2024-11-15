@@ -3,6 +3,7 @@ package electrodynamics.registers;
 import com.google.common.collect.Sets;
 
 import electrodynamics.api.References;
+import electrodynamics.api.multiblock.assemblybased.TileMultiblockSlave;
 import electrodynamics.common.block.connect.BlockFluidPipe;
 import electrodynamics.common.block.connect.BlockGasPipe;
 import electrodynamics.common.block.connect.BlockLogisticalWire;
@@ -192,4 +193,6 @@ public class ElectrodynamicsTiles {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileChemicalReactor>> TILE_CHEMICALREACTOR = BLOCK_ENTITY_TYPES.register("chemicalreactor", () -> new BlockEntityType<>(TileChemicalReactor::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get()), null));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileChemicalReactorDummy>> TILE_CHEMICALREACTOR_DUMMY = BLOCK_ENTITY_TYPES.register("chemicalreactordummy", () -> new BlockEntityType<>(TileChemicalReactorDummy::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_MIDDLE.get(), ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_TOP.get()), null));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileCreativeGasSource>> TILE_CREATIVEGASSOURCE = BLOCK_ENTITY_TYPES.register(SubtypeMachine.creativegassource.tag(), () -> new BlockEntityType<>(TileCreativeGasSource::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativegassource)), null));
+
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileMultiblockSlave>> TILE_MULTIBLOCK_SLAVE = BLOCK_ENTITY_TYPES.register("multiblockslave", () -> new BlockEntityType<>(TileMultiblockSlave::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get()), null));
 }

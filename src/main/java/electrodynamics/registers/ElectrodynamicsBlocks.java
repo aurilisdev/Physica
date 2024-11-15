@@ -2,16 +2,7 @@ package electrodynamics.registers;
 
 import electrodynamics.api.References;
 import electrodynamics.api.registration.BulkDeferredHolder;
-import electrodynamics.common.block.BlockCustomGlass;
-import electrodynamics.common.block.BlockFrame;
-import electrodynamics.common.block.BlockLogisticalManager;
-import electrodynamics.common.block.BlockMachine;
-import electrodynamics.common.block.BlockMultiSubnode;
-import electrodynamics.common.block.BlockOre;
-import electrodynamics.common.block.BlockPipeFilter;
-import electrodynamics.common.block.BlockPipePump;
-import electrodynamics.common.block.BlockSeismicMarker;
-import electrodynamics.common.block.BlockValve;
+import electrodynamics.common.block.*;
 import electrodynamics.common.block.chemicalreactor.BlockChemicalReactor;
 import electrodynamics.common.block.chemicalreactor.BlockChemicalReactorExtra;
 import electrodynamics.common.block.connect.BlockFluidPipe;
@@ -85,5 +76,7 @@ public class ElectrodynamicsBlocks {
     public static final DeferredHolder<Block, BlockScaffold> BLOCK_STEELSCAFFOLDING = BLOCKS.register("steelscaffold", () -> new BlockScaffold(Blocks.IRON_BLOCK.properties().requiresCorrectToolForDrops().strength(2.0F, 3.0F).sound(SoundType.METAL).noOcclusion()));
     public static final DeferredHolder<Block, BlockChemicalReactorExtra> BLOCK_CHEMICALREACTOREXTRA_MIDDLE = BLOCKS.register("chemicalreactorextramiddle", () -> new BlockChemicalReactorExtra(BlockChemicalReactorExtra.Location.MIDDLE));
     public static final DeferredHolder<Block, BlockChemicalReactorExtra> BLOCK_CHEMICALREACTOREXTRA_TOP = BLOCKS.register("chemicalreactorextratop", () -> new BlockChemicalReactorExtra(BlockChemicalReactorExtra.Location.TOP));
+
+    public static final DeferredHolder<Block, BlockMultiblockSlave> BLOCK_MULTIBLOCK_SLAVE = BLOCKS.register("multiblockslave", () -> new BlockMultiblockSlave());
 
 }

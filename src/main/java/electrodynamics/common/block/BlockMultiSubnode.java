@@ -2,7 +2,7 @@ package electrodynamics.common.block;
 
 import com.mojang.serialization.MapCodec;
 
-import electrodynamics.api.multiblock.child.IMultiblockChildBlock;
+import electrodynamics.api.multiblock.subnodebased.child.IMultiblockChildBlock;
 import electrodynamics.common.tile.TileMultiSubnode;
 import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.tile.GenericTile;

@@ -1,9 +1,9 @@
-package electrodynamics.api.multiblock.parent;
+package electrodynamics.api.multiblock.subnodebased.parent;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.capability.types.gas.IGasHandler;
-import electrodynamics.api.multiblock.Subnode;
-import electrodynamics.api.multiblock.child.IMultiblockChildBlock;
+import electrodynamics.api.multiblock.subnodebased.Subnode;
+import electrodynamics.api.multiblock.subnodebased.child.IMultiblockChildBlock;
 import electrodynamics.common.tile.TileMultiSubnode;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.BlockPos;
