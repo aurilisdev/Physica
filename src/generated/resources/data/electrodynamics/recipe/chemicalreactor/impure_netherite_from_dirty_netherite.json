@@ -1,0 +1,27 @@
+{
+  "type": "electrodynamics:chemical_reactor_recipe",
+  "fluidbi": [
+    {
+      "amount": 500,
+      "chance": 1.0,
+      "fluid": "electrodynamics:fluidsulfuricacid"
+    }
+  ],
+  "fluidinputs": [
+    {
+      "amount": 200,
+      "fluid": "electrodynamics:fluiddirtymineralnetherite"
+    },
+    {
+      "amount": 1000,
+      "tag": "minecraft:water"
+    }
+  ],
+  "fluidoutput": {
+    "amount": 200,
+    "id": "electrodynamics:fluidimpuremineralnetherite"
+  },
+  "group": "electrodynamics",
+  "ticks": 100,
+  "usagepertick": 700.0
+}

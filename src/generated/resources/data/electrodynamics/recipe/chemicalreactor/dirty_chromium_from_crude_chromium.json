@@ -1,0 +1,27 @@
+{
+  "type": "electrodynamics:chemical_reactor_recipe",
+  "fluidbi": [
+    {
+      "amount": 200,
+      "chance": 0.25,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "fluidinputs": [
+    {
+      "amount": 200,
+      "fluid": "electrodynamics:fluidcrudemineralchromium"
+    },
+    {
+      "amount": 500,
+      "tag": "c:sulfuric_acid"
+    }
+  ],
+  "fluidoutput": {
+    "amount": 200,
+    "id": "electrodynamics:fluiddirtymineralchromium"
+  },
+  "group": "electrodynamics",
+  "ticks": 100,
+  "usagepertick": 600.0
+}

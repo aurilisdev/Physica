@@ -3,6 +3,9 @@ package electrodynamics.datagen.server.recipe.types.custom;
 import electrodynamics.api.References;
 import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasStack;
+import electrodynamics.common.fluid.subtype.SubtypeCrudeMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeDirtyMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeRoyalMineralFluid;
 import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import electrodynamics.common.item.subtype.SubtypeOxide;
 import electrodynamics.common.recipe.recipeutils.ProbableFluid;
@@ -17,6 +20,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerator {
@@ -110,6 +114,49 @@ public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerat
                 .addGasTagInput(ElectrodynamicsTags.Gases.AMMONIA, new ElectrodynamicsRecipeBuilder.GasIngWrapper(100, Gas.ROOM_TEMPERATURE, 4))
                 //
                 .save(output);
+
+        for (SubtypeRoyalMineralFluid fluid : SubtypeRoyalMineralFluid.values()) {
+            newRecipe(0, 100, 800.0, "crude_" + fluid.name() + "_from_royal_" + fluid.name(), modID)
+                    //
+                    .setFluidOutput(new FluidStack(fluid.result.get(), 200))
+                    //
+                    .addFluidStackInput(new FluidStack(ElectrodynamicsFluids.FLUIDS_ROYALMINERAL.getValue(fluid), 200))
+                    //
+                    .addFluidTagInput(FluidTags.WATER, 1000)
+                    //
+                    .addFluidBiproduct(new ProbableFluid(new FluidStack(ElectrodynamicsFluids.FLUID_AQUAREGIA.get(), 200), 1))
+                    //
+                    .save(output);
+        }
+
+        for (SubtypeCrudeMineralFluid fluid : SubtypeCrudeMineralFluid.values()) {
+            newRecipe(0, 100, 600.0, "dirty_" + fluid.name() + "_from_crude_" + fluid.name(), modID)
+                    //
+                    .setFluidOutput(new FluidStack(fluid.result.get(), 200))
+                    //
+                    .addFluidStackInput(new FluidStack(ElectrodynamicsFluids.FLUIDS_CRUDEMINERAL.getValue(fluid), 200))
+                    //
+                    .addFluidTagInput(ElectrodynamicsTags.Fluids.SULFURIC_ACID, 500)
+                    //
+                    .addFluidBiproduct(new ProbableFluid(new FluidStack(Fluids.WATER, 200), 0.25))
+                    //
+                    .save(output);
+        }
+
+        for (SubtypeDirtyMineralFluid fluid : SubtypeDirtyMineralFluid.values()) {
+            newRecipe(0, 100, 700.0, "impure_" + fluid.name() + "_from_dirty_" + fluid.name(), modID)
+                    //
+                    .setFluidOutput(new FluidStack(fluid.result.get(), 200))
+                    //
+                    .addFluidStackInput(new FluidStack(ElectrodynamicsFluids.FLUIDS_DIRTYMINERAL.getValue(fluid), 200))
+                    //
+                    .addFluidTagInput(FluidTags.WATER, 1000)
+                    //
+                    .addFluidBiproduct(new ProbableFluid(new FluidStack(ElectrodynamicsFluids.FLUID_SULFURICACID, 500), 1))
+                    //
+                    .save(output);
+        }
+        
 
     }
 

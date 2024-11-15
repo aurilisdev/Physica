@@ -241,7 +241,7 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(Items.GLOWSTONE, 4), 0, 200, 450.0, "glowstone_dust_from_glowstone_block", modID)
+        newRecipe(new ItemStack(Items.GLOWSTONE_DUST, 4), 0, 200, 450.0, "glowstone_dust_from_glowstone_block", modID)
                 //
                 .addItemStackInput(new ItemStack(Blocks.GLOWSTONE))
                 //

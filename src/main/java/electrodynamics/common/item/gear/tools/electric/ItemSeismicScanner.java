@@ -64,7 +64,7 @@ public class ItemSeismicScanner extends ItemElectric {
         tooltips.add(ElectroTextUtils.tooltip("seismicscanner.range", stack.getOrDefault(ElectrodynamicsDataComponentTypes.RANGE.get(), 1) * RADUIS_BLOCKS).withStyle(ChatFormatting.YELLOW));
         int cooldown = stack.getOrDefault(ElectrodynamicsDataComponentTypes.TIMER, 0);
         if (cooldown > 0) {
-            tooltips.add(ElectroTextUtils.tooltip("seismicscanner.cooldown", ChatFormatter.getChatDisplayShort(cooldown, DisplayUnit.TIME_TICKS)).withStyle(ChatFormatting.BOLD, ChatFormatting.RED));
+            tooltips.add(ElectroTextUtils.tooltip("seismicscanner.cooldown", ChatFormatter.getChatDisplay(cooldown, DisplayUnit.TIME_TICKS)).withStyle(ChatFormatting.BOLD, ChatFormatting.RED));
         }
 
     }

@@ -2388,6 +2388,98 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "pipe_gasfilter", output);
 
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_CHEMICALREACTOR.get(), 1)
+                //
+                .addPattern("GFG")
+                //
+                .addPattern("CAM")
+                //
+                .addPattern("WPW")
+                //
+                .addKey('G', ElectrodynamicsTags.Items.GEAR_TIN)
+                //
+                .addKey('F', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gastanksteel))
+                //
+                .addKey('C', ElectrodynamicsTags.Items.CIRCUITS_ADVANCED)
+                //
+                .addKey('A', ElectrodynamicsItems.ITEMS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum))
+                //
+                .addKey('M', ElectrodynamicsItems.ITEM_MOTOR.get())
+                //
+                .addKey('W', ElectrodynamicsItems.ITEMS_WIRE.getValue(SubtypeWire.silver))
+                //
+                .addKey('P', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gastanksteel))
+                //
+                .complete(References.ID, "machine_chemicalreactor", output);
+
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_ADVANCEDCOMPRESSOR.get(), 1)
+                //
+                .addPattern("PCP")
+                //
+                .addPattern("VMV")
+                //
+                .addPattern("OWO")
+                //
+                .addKey('P', ElectrodynamicsTags.Items.PLATE_STEEL)
+                //
+                .addKey('C', ElectrodynamicsTags.Items.CIRCUITS_ADVANCED)
+                //
+                .addKey('V', ElectrodynamicsItems.ITEM_MECHANICALVALVE.get())
+                //
+                .addKey('M', ElectrodynamicsItems.ITEM_COMPRESSOR.get())
+                //
+                .addKey('W', ElectrodynamicsItems.ITEMS_WIRE.getValue(SubtypeWire.silver))
+                //
+                .addKey('O', ElectrodynamicsItems.ITEM_MOTOR.get())
+                //
+                .complete(References.ID, "machine_advancedcompressor", output);
+
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_ADVANCEDDECOMPRESSOR.get(), 1)
+                //
+                .addPattern("PCP")
+                //
+                .addPattern("VMV")
+                //
+                .addPattern("OWO")
+                //
+                .addKey('P', ElectrodynamicsTags.Items.PLATE_STEEL)
+                //
+                .addKey('C', ElectrodynamicsTags.Items.CIRCUITS_ADVANCED)
+                //
+                .addKey('V', ElectrodynamicsItems.ITEM_MECHANICALVALVE.get())
+                //
+                .addKey('M', ElectrodynamicsItems.ITEM_DECOMPRESSOR.get())
+                //
+                .addKey('W', ElectrodynamicsItems.ITEMS_WIRE.getValue(SubtypeWire.silver))
+                //
+                .addKey('O', ElectrodynamicsItems.ITEM_MOTOR.get())
+                //
+                .complete(References.ID, "machine_advanceddecompressor", output);
+
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_ADVANCED_THERMOELECTRIC_MANIPULATOR.get(), 1)
+                //
+                .addPattern("PCP")
+                //
+                .addPattern("VMV")
+                //
+                .addPattern("WCW")
+                //
+                .addKey('P', ElectrodynamicsTags.Items.PLATE_STEEL)
+                //
+                .addKey('C', ElectrodynamicsTags.Items.CIRCUITS_ADVANCED)
+                //
+                .addKey('V', ElectrodynamicsItems.ITEM_MECHANICALVALVE.get())
+                //
+                .addKey('M', ElectrodynamicsItems.ITEM_THERMOELECTRIC_MANIPULATOR.get())
+                //
+                .addKey('W', ElectrodynamicsItems.ITEMS_WIRE.getValue(SubtypeWire.silver))
+                //
+                .addKey('C', ElectrodynamicsItems.ITEM_TITANIUM_COIL.get())
+                //
+                .complete(References.ID, "machine_advancedthermoelectricmanipulator", output);
+
+
+
     }
 
     private void addGear(RecipeOutput output) {

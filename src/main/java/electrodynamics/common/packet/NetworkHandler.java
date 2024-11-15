@@ -4,15 +4,7 @@ import java.util.HashMap;
 
 import electrodynamics.api.References;
 import electrodynamics.common.packet.types.client.*;
-import electrodynamics.common.packet.types.server.PacketJetpackFlightServer;
-import electrodynamics.common.packet.types.server.PacketModeSwitchServer;
-import electrodynamics.common.packet.types.server.PacketPlayerInformation;
-import electrodynamics.common.packet.types.server.PacketPowerSetting;
-import electrodynamics.common.packet.types.server.PacketSendUpdatePropertiesServer;
-import electrodynamics.common.packet.types.server.PacketServerUpdateTile;
-import electrodynamics.common.packet.types.server.PacketSwapBattery;
-import electrodynamics.common.packet.types.server.PacketToggleOnServer;
-import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
+import electrodynamics.common.packet.types.server.*;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -54,6 +46,7 @@ public class NetworkHandler {
         registry.playToServer(PacketSwapBattery.TYPE, PacketSwapBattery.CODEC, (packet, context) -> PacketSwapBattery.handle(packet, context));
         registry.playToServer(PacketToggleOnServer.TYPE, PacketToggleOnServer.CODEC, (packet, server) -> PacketToggleOnServer.handle(packet, server));
         registry.playToServer(PacketUpdateCarriedItemServer.TYPE, PacketUpdateCarriedItemServer.CODEC, (packet, context) -> PacketUpdateCarriedItemServer.handle(packet, context));
+        registry.playToServer(PacketSeismicScanner.TYPE, PacketSeismicScanner.CODEC, (packet, context) -> PacketSeismicScanner.handle(packet, context));
 
     }
 

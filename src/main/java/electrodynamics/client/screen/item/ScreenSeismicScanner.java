@@ -7,6 +7,7 @@ import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.common.inventory.container.item.ContainerSeismicScanner;
 import electrodynamics.common.item.gear.tools.electric.ItemSeismicScanner;
+import electrodynamics.common.packet.types.server.PacketSeismicScanner;
 import electrodynamics.prefab.inventory.container.slot.itemhandler.SlotItemHandlerGeneric;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.AbstractScreenComponent;
@@ -25,12 +26,12 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ScreenSeismicScanner extends GenericScreen<ContainerSeismicScanner> {
 
@@ -109,7 +110,15 @@ public class ScreenSeismicScanner extends GenericScreen<ContainerSeismicScanner>
 
 		componentsToHide.add(addComponent(new ScreenComponentButton<>(15, 24, 120, 20).setLabel(ElectroTextUtils.gui("seismicscanner.performscan")).setOnPress(
 				button -> {
-
+					ItemStack owner = menu.getOwnerItem();
+					if(owner.isEmpty()){
+						return;
+					}
+					InteractionHand hand = menu.getHand();
+					if(hand == null){
+						return;
+					}
+					PacketDistributor.sendToServer(new PacketSeismicScanner(inv.player.getUUID(), PacketSeismicScanner.Type.manualping, 0, hand.ordinal()));
 				}
 		)));
 		componentsToHide.add(addComponent(new ScreenComponentButton<>(15, 46, 120, 20) {
@@ -124,7 +133,21 @@ public class ScreenSeismicScanner extends GenericScreen<ContainerSeismicScanner>
 				return mode == ItemSeismicScanner.ScannerMode.PASSIVE ? ElectroTextUtils.gui("seismicscanner.scanpassive") : ElectroTextUtils.gui("seismicscanner.scanactive");
 			}
 		}.setOnPress(button -> {
-
+			ItemStack owner = menu.getOwnerItem();
+			if(owner.isEmpty()){
+				return;
+			}
+			InteractionHand hand = menu.getHand();
+			if(hand == null){
+				return;
+			}
+			ItemSeismicScanner.ScannerMode mode = ItemSeismicScanner.ScannerMode.values()[owner.getOrDefault(ElectrodynamicsDataComponentTypes.ENUM, 0)];
+			if(mode == ItemSeismicScanner.ScannerMode.PASSIVE) {
+				mode = ItemSeismicScanner.ScannerMode.ACTIVE;
+			} else {
+				mode = ItemSeismicScanner.ScannerMode.PASSIVE;
+			}
+			PacketDistributor.sendToServer(new PacketSeismicScanner(inv.player.getUUID(), PacketSeismicScanner.Type.switchsonarmode, mode.ordinal(), hand.ordinal()));
 		})));
 
 		componentsToShow.forEach(component -> {

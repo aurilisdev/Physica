@@ -4,10 +4,8 @@ import electrodynamics.api.References;
 import electrodynamics.api.registration.BulkDeferredHolder;
 import electrodynamics.common.fluid.FluidNonPlaceable;
 import electrodynamics.common.fluid.SimpleWaterBasedFluidType;
-import electrodynamics.common.fluid.subtype.SubtypePureMineralFluid;
-import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
-import electrodynamics.common.fluid.types.FluidPureMineral;
-import electrodynamics.common.fluid.types.FluidSulfate;
+import electrodynamics.common.fluid.subtype.*;
+import electrodynamics.common.fluid.types.*;
 import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.material.Fluid;
@@ -33,5 +31,9 @@ public class ElectrodynamicsFluids {
 
 	public static final BulkDeferredHolder<Fluid, FluidSulfate, SubtypeSulfateFluid> FLUIDS_SULFATE = new BulkDeferredHolder<>(SubtypeSulfateFluid.values(), subtype -> FLUIDS.register("fluidsulfate" + subtype.name(), () -> new FluidSulfate(subtype)));
 	public static final BulkDeferredHolder<Fluid, FluidPureMineral, SubtypePureMineralFluid> FLUIDS_PUREMINERAL = new BulkDeferredHolder<>(SubtypePureMineralFluid.values(), subtype -> FLUIDS.register("fluidpuremineral" + subtype.name(), () -> new FluidPureMineral(subtype)));
+	public static final BulkDeferredHolder<Fluid, FluidImpureMineral, SubtypeImpureMineralFluid> FLUIDS_IMPUREMINERAL = new BulkDeferredHolder<>(SubtypeImpureMineralFluid.values(), subtype -> FLUIDS.register("fluidimpuremineral" + subtype.name(), () -> new FluidImpureMineral(subtype)));
+	public static final BulkDeferredHolder<Fluid, FluidDirtyMineral, SubtypeDirtyMineralFluid> FLUIDS_DIRTYMINERAL = new BulkDeferredHolder<>(SubtypeDirtyMineralFluid.values(), subtype -> FLUIDS.register("fluiddirtymineral" + subtype.name(), () -> new FluidDirtyMineral(subtype)));
+	public static final BulkDeferredHolder<Fluid, FluidCrudeMineral, SubtypeCrudeMineralFluid> FLUIDS_CRUDEMINERAL = new BulkDeferredHolder<>(SubtypeCrudeMineralFluid.values(), subtype -> FLUIDS.register("fluidcrudemineral" + subtype.name(), () -> new FluidCrudeMineral(subtype)));
+	public static final BulkDeferredHolder<Fluid, FluidRoyalMineral, SubtypeRoyalMineralFluid> FLUIDS_ROYALMINERAL = new BulkDeferredHolder<>(SubtypeRoyalMineralFluid.values(), subtype -> FLUIDS.register("fluidroyalmineral" + subtype.name(), () -> new FluidRoyalMineral(subtype)));
 
 }

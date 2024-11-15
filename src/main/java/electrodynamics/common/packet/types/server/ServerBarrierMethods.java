@@ -5,7 +5,6 @@ import electrodynamics.api.tile.IPacketServerUpdateTile;
 import electrodynamics.common.item.gear.armor.types.ItemNightVisionGoggles;
 import electrodynamics.common.packet.NetworkHandler;
 import electrodynamics.common.tile.electricitygrid.generators.TileCreativePowerSource;
-import electrodynamics.prefab.properties.PropertyManager;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.IPropertyHolderTile;
 import electrodynamics.prefab.utilities.ItemUtils;
@@ -171,4 +170,33 @@ public class ServerBarrierMethods {
         }
     }
 
+    public static void handleSeismicScanner(Level level, UUID playerId, PacketSeismicScanner.Type mode, int scannerMode, int hand) {
+        ServerLevel world = (ServerLevel) level;
+        if (world == null) {
+            return;
+        }
+        Player player = world.getPlayerByUUID(playerId);
+
+        ItemStack stack = player.getItemInHand(InteractionHand.values()[hand]);
+
+        if (stack.isEmpty()) {
+            return;
+        }
+
+        switch (mode) {
+
+            case manualping:
+                stack.set(ElectrodynamicsDataComponentTypes.USED, true);
+
+                break;
+            case switchsonarmode:
+                stack.set(ElectrodynamicsDataComponentTypes.ENUM, scannerMode);
+
+
+                break;
+
+        }
+
+
+    }
 }

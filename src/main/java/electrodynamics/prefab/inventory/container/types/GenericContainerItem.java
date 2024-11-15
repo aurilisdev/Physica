@@ -10,6 +10,8 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.Nullable;
+
 public abstract class GenericContainerItem extends GenericContainerSlotData<CapabilityItemStackHandler> {
 
     /**
@@ -64,6 +66,18 @@ public abstract class GenericContainerItem extends GenericContainerSlotData<Capa
             return ItemStack.EMPTY;
         }
 
+    }
+
+    public @Nullable InteractionHand getHand() {
+        if (getData().getCount() == 0 || getData().get(0) == -1) {
+            return null;
+        }
+
+        try {
+            return InteractionHand.values()[getData().get(0)];
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static SimpleContainerData makeDefaultData(int size) {

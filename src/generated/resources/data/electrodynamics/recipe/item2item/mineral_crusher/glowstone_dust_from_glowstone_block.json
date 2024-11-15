@@ -11,7 +11,7 @@
   ],
   "output": {
     "count": 4,
-    "id": "minecraft:glowstone"
+    "id": "minecraft:glowstone_dust"
   },
   "ticks": 200,
   "usagepertick": 450.0
