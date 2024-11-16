@@ -6,11 +6,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import electrodynamics.api.References;
 import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
+import electrodynamics.api.multiblock.assemblybased.TileMultiblockSlave;
 import electrodynamics.client.modelbakers.ModelStateRotation;
-import electrodynamics.client.modelbakers.modelproperties.ModelPropertyConnections;
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertySlaveNode;
-import electrodynamics.common.block.connect.util.EnumConnectType;
-import electrodynamics.prefab.tile.types.IConnectTile;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockModel;
@@ -33,7 +32,6 @@ import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -155,17 +153,13 @@ public class SlaveNodeModelLoader implements IGeometryLoader<SlaveNodeModelLoade
                 return NO_QUADS;
             }
 
-            /**
-             * TODO implement model switch?
-             */
-
-            return models[data.facing().ordinal()].getQuads(state, side, rand, extraData, renderType);
+            return ((SlaveNodeModel) Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(data.id()))).models[data.facing().ordinal()].getQuads(state, side, rand, extraData, renderType);
         }
 
         @Override
         public @NotNull ModelData getModelData(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ModelData modelData) {
-            if (level.getBlockEntity(pos) instanceof IConnectTile tile) {
-                return ModelData.builder().with(ModelPropertyConnections.INSTANCE, () -> tile.readConnections()).build();
+            if (level.getBlockEntity(pos) instanceof TileMultiblockSlave slave) {
+                return ModelData.builder().with(ModelPropertySlaveNode.INSTANCE, new ModelPropertySlaveNode.SlaveNodeWrapper(slave.renderModel.get(), slave.getFacing())).build();
             }
             return modelData;
         }
