@@ -38,7 +38,7 @@ public class RenderMetalRod extends EntityRenderer<EntityMetalRod> {
 
 		matrixStack.pushPose();
 
-		TextureAtlasSprite sprite = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_WHITE);
+		TextureAtlasSprite sprite = ClientRegister.getSprite(ClientRegister.TEXTURE_WHITE);
 
 		matrixStack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 90.0F));
 		matrixStack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));

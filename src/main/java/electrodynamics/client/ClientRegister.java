@@ -37,12 +37,13 @@ import electrodynamics.registers.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -62,25 +63,25 @@ public class ClientRegister {
     private static final String BLOCK_LOC = References.ID + ":block/";
 
     // sometimes I fucking hate this game
-    public static LayerDefinition COMPOSITE_ARMOR_LAYER_LEG_NOCHEST = ModelCompositeArmor.createBodyLayer(1, true);
-    public static LayerDefinition COMPOSITE_ARMOR_LAYER_BOOTS = ModelCompositeArmor.createBodyLayer(2, false);
-    public static LayerDefinition COMPOSITE_ARMOR_LAYER_COMB_NOCHEST = ModelCompositeArmor.createBodyLayer(3, true);
-    public static LayerDefinition COMPOSITE_ARMOR_LAYER_LEG_CHEST = ModelCompositeArmor.createBodyLayer(1, false);
-    public static LayerDefinition COMPOSITE_ARMOR_LAYER_COMB_CHEST = ModelCompositeArmor.createBodyLayer(3, false);
+    public static final LayerDefinition COMPOSITE_ARMOR_LAYER_LEG_NOCHEST = ModelCompositeArmor.createBodyLayer(1, true);
+    public static final LayerDefinition COMPOSITE_ARMOR_LAYER_BOOTS = ModelCompositeArmor.createBodyLayer(2, false);
+    public static final LayerDefinition COMPOSITE_ARMOR_LAYER_COMB_NOCHEST = ModelCompositeArmor.createBodyLayer(3, true);
+    public static final LayerDefinition COMPOSITE_ARMOR_LAYER_LEG_CHEST = ModelCompositeArmor.createBodyLayer(1, false);
+    public static final LayerDefinition COMPOSITE_ARMOR_LAYER_COMB_CHEST = ModelCompositeArmor.createBodyLayer(3, false);
 
-    public static LayerDefinition NIGHT_VISION_GOGGLES = ModelNightVisionGoggles.createBodyLayer();
+    public static final LayerDefinition NIGHT_VISION_GOGGLES = ModelNightVisionGoggles.createBodyLayer();
 
-    public static LayerDefinition HYDRAULIC_BOOTS = ModelHydraulicBoots.createBodyLayer();
+    public static final LayerDefinition HYDRAULIC_BOOTS = ModelHydraulicBoots.createBodyLayer();
 
-    public static LayerDefinition JETPACK = ModelJetpack.createBodyLayer();
+    public static final LayerDefinition JETPACK = ModelJetpack.createBodyLayer();
 
-    public static LayerDefinition SERVO_LEGGINGS = ModelServoLeggings.createBodyLayer();
+    public static final LayerDefinition SERVO_LEGGINGS = ModelServoLeggings.createBodyLayer();
 
-    public static LayerDefinition COMBAT_ARMOR_LAYER_LEG_NOCHEST = ModelCombatArmor.createBodyLayer(1, true);
-    public static LayerDefinition COMBAT_ARMOR_LAYER_BOOTS = ModelCombatArmor.createBodyLayer(2, false);
-    public static LayerDefinition COMBAT_ARMOR_LAYER_COMB_NOCHEST = ModelCombatArmor.createBodyLayer(3, true);
-    public static LayerDefinition COMBAT_ARMOR_LAYER_LEG_CHEST = ModelCombatArmor.createBodyLayer(1, false);
-    public static LayerDefinition COMBAT_ARMOR_LAYER_COMB_CHEST = ModelCombatArmor.createBodyLayer(3, false);
+    public static final LayerDefinition COMBAT_ARMOR_LAYER_LEG_NOCHEST = ModelCombatArmor.createBodyLayer(1, true);
+    public static final LayerDefinition COMBAT_ARMOR_LAYER_BOOTS = ModelCombatArmor.createBodyLayer(2, false);
+    public static final LayerDefinition COMBAT_ARMOR_LAYER_COMB_NOCHEST = ModelCombatArmor.createBodyLayer(3, true);
+    public static final LayerDefinition COMBAT_ARMOR_LAYER_LEG_CHEST = ModelCombatArmor.createBodyLayer(1, false);
+    public static final LayerDefinition COMBAT_ARMOR_LAYER_COMB_CHEST = ModelCombatArmor.createBodyLayer(3, false);
 
 
     public static final ResourceLocation ON = ResourceLocation.withDefaultNamespace("on");
@@ -126,10 +127,6 @@ public class ClientRegister {
     public static final ModelResourceLocation MODEL_QUARRYWHEEL_STILL = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "quarrywheelstill"));
     public static final ModelResourceLocation MODEL_QUARRYWHEEL_ROT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "quarrywheelrot"));
 
-    public static final ResourceLocation TEXTURE_RODSTEEL = ResourceLocation.parse(References.ID + ":textures/entity/projectile/rodsteel.png");
-    public static final ResourceLocation TEXTURE_RODSTAINLESSSTEEL = ResourceLocation.parse(References.ID + ":textures/entity/projectile/rodstainlesssteel.png");
-    public static final ResourceLocation TEXTURE_RODHSLASTEEL = ResourceLocation.parse(References.ID + ":textures/entity/projectile/rodhslasteel.png");
-
     // Custom Textures
     public static final ResourceLocation TEXTURE_WHITE = ResourceLocation.fromNamespaceAndPath("neoforge", "white");
     public static final ResourceLocation TEXTURE_QUARRYARM = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/quarryarm");
@@ -137,7 +134,9 @@ public class ClientRegister {
     public static final ResourceLocation TEXTURE_MERCURY = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/mercury");
     public static final ResourceLocation TEXTURE_GAS = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/gastexture");
 
-    public static HashMap<ResourceLocation, TextureAtlasSprite> CACHED_TEXTUREATLASSPRITES = new HashMap<>();
+    private static final String MULTIBLOCK_API_MODEL_FOLDER = "multiblockmodels";
+
+    private static final HashMap<ResourceLocation, TextureAtlasSprite> CACHED_TEXTUREATLASSPRITES = new HashMap<>();
     // for registration purposes only!
     private static final List<ResourceLocation> CUSTOM_TEXTURES = List.of(ClientRegister.TEXTURE_WHITE, ClientRegister.TEXTURE_MERCURY, ClientRegister.TEXTURE_QUARRYARM, ClientRegister.TEXTURE_QUARRYARM_DARK, ClientRegister.TEXTURE_GAS);
 
@@ -191,6 +190,10 @@ public class ClientRegister {
         event.register(MODEL_QUARRYWHEEL_STILL);
         event.register(MODEL_QUARRYWHEEL_ROT);
         event.register(MODEL_CHEMICALREACTOR_ROTOR);
+
+        ResourceManager manager = Minecraft.getInstance().getResourceManager();
+        FileToIdConverter converter = FileToIdConverter.json("models/" + MULTIBLOCK_API_MODEL_FOLDER);
+        converter.listMatchingResources(manager).forEach((location, resource) -> event.register(ModelResourceLocation.standalone(converter.fileToId(location).withPrefix(MULTIBLOCK_API_MODEL_FOLDER))));
     }
 
     @SubscribeEvent
@@ -293,13 +296,10 @@ public class ClientRegister {
         event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_CHEMICALREACTOR.get(), RenderChemicalReactor::new);
     }
 
-    public static boolean shouldMultilayerRender(RenderType type) {
-        return type == RenderType.translucent() || type == RenderType.solid();
-    }
-
     @SubscribeEvent
     public static void cacheCustomTextureAtlases(TextureAtlasStitchedEvent event) {
         if (event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS)) {
+            CACHED_TEXTUREATLASSPRITES.clear();
             for (ResourceLocation loc : CUSTOM_TEXTURES) {
                 ClientRegister.CACHED_TEXTUREATLASSPRITES.put(loc, event.getAtlas().getSprite(loc));
             }
@@ -479,6 +479,10 @@ public class ClientRegister {
         });
 
 
+    }
+
+    public static TextureAtlasSprite getSprite(ResourceLocation sprite) {
+        return CACHED_TEXTUREATLASSPRITES.getOrDefault(sprite, CACHED_TEXTUREATLASSPRITES.get(TEXTURE_WHITE));
     }
 
 }

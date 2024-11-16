@@ -5,8 +5,8 @@ import electrodynamics.prefab.block.GenericMachineBlock;
 
 public class BlockMultiblockSlave extends GenericMachineBlock {
 
-	public BlockMultiblockSlave() {
-		super(TileMultiblockSlave::new);
-	}
+    public BlockMultiblockSlave() {
+        super(TileMultiblockSlave::new);
+    }
 
 }

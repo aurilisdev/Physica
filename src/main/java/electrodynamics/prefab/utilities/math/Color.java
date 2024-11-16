@@ -1,5 +1,7 @@
 package electrodynamics.prefab.utilities.math;
 
+import org.joml.Vector3f;
+
 /**
  * Wrapper class that standardizes all color value operations into fields
  * 
@@ -25,6 +27,7 @@ public class Color {
 
 	private final int[] colorArr;
 	private final float[] colorFloatArr;
+	private final Vector3f floatVector;
 
 	public Color(int r, int g, int b, int a) {
 
@@ -42,11 +45,12 @@ public class Color {
 
 		colorArr = new int[] { this.r, this.g, this.b, this.a };
 		colorFloatArr = new float[] { this.rFloat, this.gFloat, this.bFloat, this.aFloat };
+		floatVector = new Vector3f(this.rFloat, this.gFloat, this.bFloat);
 
 	}
 
-	public Color(int color) {
-		this((color >> 16 & 0xFF), (color >> 8 & 0xFF), (color & 0xFF), (color >> 24 & 0xFF));
+	public Color(int argb) {
+		this((argb >> 16 & 0xFF), (argb >> 8 & 0xFF), (argb & 0xFF), (argb >> 24 & 0xFF));
 	}
 
 	public Color(float r, float g, float b, float a) {
@@ -105,6 +109,10 @@ public class Color {
 		return colorFloatArr;
 	}
 
+	public Vector3f getFloatVector() {
+		return floatVector;
+	}
+
 	public Color multiply(Color other) {
 		return new Color((this.r * other.r) / 255, (this.g * other.g) / 255, (this.b * other.b) / 255, (this.a * other.a) / 255);
 	}
@@ -128,6 +136,10 @@ public class Color {
 	@Override
 	public String toString() {
 		return "r: " + r + ", g: " + g + ", b: " + b + ", a: " + a;
+	}
+
+	public static Color fromABGR(int abgr){
+		return new Color((abgr & 0xFF), (abgr >> 8 & 0xFF), (abgr >> 16 & 0xFF), (abgr >> 24 & 0xFF));
 	}
 
 }

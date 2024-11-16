@@ -136,5 +136,7 @@ public class PropertyTypes {
     public static final PropertyType<BlockState, ByteBuf> BLOCK_STATE = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "blockstate"), null, ByteBufCodecs.fromCodec(BlockState.CODEC), writer -> writer.tag().putInt(writer.prop().getName(), BLOCK_STATE_REGISTRY.getId(writer.prop().get())), reader -> BLOCK_STATE_REGISTRY.byId(reader.tag().getInt(reader.prop().getName())));
     public static final PropertyType<TransferPack, FriendlyByteBuf> TRANSFER_PACK = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "transferpack"), null, TransferPack.STREAM_CODEC, writer -> writer.tag().put(writer.prop().getName(), writer.prop().get().writeToTag()), reader -> TransferPack.readFromTag(reader.tag().getCompound(reader.prop().getName())));
 
+    public static final PropertyType<ResourceLocation, ByteBuf> RESOURCE_LOCATION = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(References.ID, "modelresourcelocation"), null, ResourceLocation.STREAM_CODEC, writer -> writer.tag().putString(writer.prop().getName(), writer.prop().get().toString()), reader -> ResourceLocation.parse(reader.tag().getString(reader.prop().getName())));
+
 
 }

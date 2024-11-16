@@ -17,7 +17,7 @@ public class GasWrapperObject extends AbstractGraphicWrapper<GasWrapperObject> {
 	@Override
 	public void render(GuiGraphics graphics, int wrapperX, int wrapperY, int xShift, int guiWidth, int guiHeight, Page page) {
 
-		graphics.blit(guiWidth + wrapperX + xShift, guiHeight + wrapperY, 0, width, height, ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_GAS));
+		graphics.blit(guiWidth + wrapperX + xShift, guiHeight + wrapperY, 0, width, height, ClientRegister.getSprite(ClientRegister.TEXTURE_GAS));
 
 	}
 

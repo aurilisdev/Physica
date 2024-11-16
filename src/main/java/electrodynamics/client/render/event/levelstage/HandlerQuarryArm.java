@@ -52,14 +52,14 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 		MultiBufferSource.BufferSource buffer = minecraft.renderBuffers().bufferSource();
 		Vec3 camPos = camera.getPosition();
 
-		TextureAtlasSprite armTexture = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_QUARRYARM);
+		TextureAtlasSprite armTexture = ClientRegister.getSprite(ClientRegister.TEXTURE_QUARRYARM);
 		float u0Frame = armTexture.getU0();
 		float u1Frame = armTexture.getU1();
 		float v0Frame = armTexture.getV0();
 		float v1Frame = armTexture.getV1();
 		Color colorFrame = new Color(armTexture.getPixelRGBA(0, 10, 10));
 
-		TextureAtlasSprite darkArmTexture = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_QUARRYARM_DARK);
+		TextureAtlasSprite darkArmTexture = ClientRegister.getSprite(ClientRegister.TEXTURE_QUARRYARM_DARK);
 		float u0FrameDark = darkArmTexture.getU0();
 		float u1FrameDark = darkArmTexture.getU1();
 		float v0FrameDark = darkArmTexture.getV0();
@@ -73,7 +73,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 		float v1Titanium = titaniumTexture.getV1();
 		Color colorTitanium = new Color(armTexture.getPixelRGBA(0, 10, 10));
 
-		TextureAtlasSprite whiteTexture = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_WHITE);
+		TextureAtlasSprite whiteTexture = ClientRegister.getSprite(ClientRegister.TEXTURE_WHITE);
 		float u0White = whiteTexture.getU0();
 		float u1White = whiteTexture.getU1();
 		float v0White = whiteTexture.getV0();

@@ -62,7 +62,7 @@ public class RenderGasPipePump extends AbstractTileRenderer<TileGasPipePump> {
 			box2 = aabb(9, 13 - offset2, 12, 11, 17 - offset2, 14);
 		}
 
-		TextureAtlasSprite whiteTexture = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_WHITE);
+		TextureAtlasSprite whiteTexture = ClientRegister.getSprite(ClientRegister.TEXTURE_WHITE);
 		float u0 = whiteTexture.getU0();
 		float u1 = whiteTexture.getU1();
 		float v0 = whiteTexture.getV0();

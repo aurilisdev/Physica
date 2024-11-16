@@ -5,6 +5,11 @@ import net.minecraft.network.codec.StreamCodec;
 
 import java.util.function.Function;
 
+/**
+ * Utility class for Codecs
+ *
+ * @author skip999
+ */
 public class CodecUtils {
 
     public static <B, C, T1, T2, T3, T4, T5, T6, T7> StreamCodec<B, C> composite(

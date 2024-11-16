@@ -107,7 +107,7 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 
 	public static void renderMercuryTexture(GuiGraphics graphics, int x, int y, float progress) {
 
-		TextureAtlasSprite mercury = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_MERCURY);
+		TextureAtlasSprite mercury = ClientRegister.getSprite(ClientRegister.TEXTURE_MERCURY);
 
 		Matrix4f matrix = graphics.pose().last().pose();
 

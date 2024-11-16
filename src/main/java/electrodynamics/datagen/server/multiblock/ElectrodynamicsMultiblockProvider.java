@@ -8,6 +8,7 @@ import java.util.concurrent.CompletableFuture;
 import electrodynamics.api.References;
 import electrodynamics.api.multiblock.assemblybased.Multiblock;
 import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
+import electrodynamics.client.ClientRegister;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -38,7 +39,7 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
 
 	@Override
 	protected void gather() {
-		addMultiblock("testing", List.of(new MultiblockSlaveNode(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState(), Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block())));
+		addMultiblock("testing", List.of(new MultiblockSlaveNode(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState(), Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block(), ClientRegister.MODEL_BATTERYBOX.id())));
 	}
 
     public void addMultiblock(String name, List<MultiblockSlaveNode> northFacingNodes) {
@@ -104,7 +105,7 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
 
             offset = rotateVector(Rotation.COUNTERCLOCKWISE_90, slaveNode.offset());
 
-            returner.add(new MultiblockSlaveNode(placeState, replaceState, slaveNode.taggedBlocks(), offset, shape));
+            returner.add(new MultiblockSlaveNode(placeState, replaceState, slaveNode.taggedBlocks(), offset, shape, slaveNode.model()));
         }
 
         return returner;

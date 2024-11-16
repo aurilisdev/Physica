@@ -28,6 +28,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
+/**
+ * @author skip999
+ */
 public abstract class TileMultiblockController extends TileReplaceable {
 
 	public final List<TileMultiblockSlave> slaveList = new ArrayList<>();
@@ -103,13 +106,13 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 			nodeState = level.getBlockState(nodePos);
 
-			if (node.taggedBlocks() != null && !nodeState.is(node.taggedBlocks()) || nodeState != node.replaceState()) {
+			if (node.hasBlockTag() && !nodeState.is(node.taggedBlocks()) || nodeState != node.replaceState()) {
 
 				formed = false;
 				break;
 			}
 
-			if (node.taggedBlocks() != null) {
+			if (node.hasBlockTag()) {
 
 				for (net.minecraft.world.level.block.state.properties.Property<?> prop : node.placeState().getProperties()) {
 
@@ -164,6 +167,8 @@ public abstract class TileMultiblockController extends TileReplaceable {
 			slave.controller.set(getBlockPos());
 
 			slave.index.set(index);
+
+			slave.renderModel.set(node.model());
 
 			index++;
 

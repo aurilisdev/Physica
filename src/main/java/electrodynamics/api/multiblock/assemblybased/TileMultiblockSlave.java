@@ -1,6 +1,7 @@
 package electrodynamics.api.multiblock.assemblybased;
 
 import electrodynamics.api.gas.GasTank;
+import electrodynamics.client.modelbakers.modelproperties.ModelPropertySlaveNode;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -11,6 +12,7 @@ import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -20,12 +22,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
+/**
+ * @author skip999
+ */
 public class TileMultiblockSlave extends TileReplaceable {
 
 	public final Property<BlockPos> controller = property(new Property<>(PropertyTypes.BLOCK_POS, "controllerpos", BlockEntityUtils.OUT_OF_REACH));
 	public final Property<Integer> index = property(new Property<>(PropertyTypes.INTEGER, "nodeindex", -1));
+	public final Property<ResourceLocation> renderModel = property(new Property<>(PropertyTypes.RESOURCE_LOCATION, "model", MultiblockSlaveNode.NOMODEL));
 	
 	private boolean destroyed = false;
 	
@@ -166,6 +173,9 @@ public class TileMultiblockSlave extends TileReplaceable {
 			controller.onSlavePlace(this, state, isMoving);
 		}
 	}
-	
 
+	@Override
+	public ModelData getModelData() {
+		return ModelData.builder().with(ModelPropertySlaveNode.INSTANCE, new ModelPropertySlaveNode.SlaveNodeWrapper(renderModel.get(), getFacing())).build();
+	}
 }
