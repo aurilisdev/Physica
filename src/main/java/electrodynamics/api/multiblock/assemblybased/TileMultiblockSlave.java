@@ -22,6 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
@@ -172,6 +174,13 @@ public class TileMultiblockSlave extends TileReplaceable {
 		if(level.getBlockEntity(controller.get()) instanceof TileMultiblockController controller) {
 			controller.onSlavePlace(this, state, isMoving);
 		}
+	}
+
+	public VoxelShape getShape() {
+		if(level.getBlockEntity(controller.get()) instanceof TileMultiblockController controller) {
+			return controller.getSlaveShape(this);
+		}
+		return Shapes.block();
 	}
 
 	@Override

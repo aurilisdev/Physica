@@ -3,6 +3,8 @@ package electrodynamics.api.multiblock.assemblybased;
 import java.util.ArrayList;
 import java.util.List;
 
+import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
+import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.properties.Property;
@@ -26,7 +28,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+
+import javax.annotation.Nullable;
 
 /**
  * @author skip999
@@ -58,22 +65,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 		super(tileEntityTypeIn, worldPos, blockState);
 
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentTickable(this).tickServer(this::tickServerTotal).tickCommon(this::tickCommon).tickClient(this::tickClient));
-
-	}
-
-	private void tickServerTotal(ComponentTickable tickable) {
-
-		if (isFormed.get()) {
-			tickServer(tickable);
-		} else if (tickable.getTicks() % 10 == 0) {
-			checkFormed();
-			if (isFormed.get()) {
-
-				formMultiblock();
-
-			}
-		}
+		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickCommon(this::tickCommon).tickClient(this::tickClient));
 
 	}
 
@@ -89,7 +81,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 	}
 
-	private void checkFormed() {
+	public void checkFormed() {
 
 		Direction facing = getFacing();
 
@@ -132,9 +124,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 		}
 
-		if (formed) {
-			isFormed.set(true);
-		}
+		isFormed.set(formed);
 
 	}
 
@@ -178,7 +168,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 	}
 
-	private void destroyMultiblock() {
+	public void destroyMultiblock() {
 
 		isDestroyed = true;
 
@@ -198,6 +188,22 @@ public abstract class TileMultiblockController extends TileReplaceable {
 		
 		isDestroyed = false;
 
+	}
+
+	public @Nullable ICapabilityElectrodynamic getSlaveCapabilityElectrodynamic(TileMultiblockSlave slave, @Nullable Direction side) {
+		return null;
+	}
+
+	public @Nullable IItemHandler getSlaveItemHandlerCapability(TileMultiblockSlave slave, @Nullable Direction side) {
+		return null;
+	}
+
+	public @Nullable IFluidHandler getSlaveFluidHandlerCapability(TileMultiblockSlave slave, @Nullable Direction side) {
+		return null;
+	}
+
+	public @Nullable IGasHandler getSlaveGasHandlerCapability(TileMultiblockSlave slave, @Nullable Direction side) {
+		return null;
 	}
 
 	public int getSlaveComparatorSignal(TileMultiblockSlave slave) {
@@ -271,6 +277,10 @@ public abstract class TileMultiblockController extends TileReplaceable {
 		if (!level.isClientSide) {
 			destroyMultiblock();
 		}
+	}
+
+	public VoxelShape getSlaveShape(TileMultiblockSlave slave) {
+		return Multiblock.getNodes(level, getResourceKey(), getFacing()).get(slave.index.get()).renderShape();
 	}
 
 	public abstract ResourceLocation getMultiblockId();

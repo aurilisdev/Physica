@@ -68,11 +68,11 @@ public class CommandScanMultiblock {
 
 	private static int parseCommand(CommandSourceStack source, Coordinates contPos, Coordinates stCorner, Coordinates stpCorner, int air, String name) {
 
-		BlockPos controllerPos = contPos.getBlockPos(source).subtract(new Vec3i(1, 0, 1));
+		BlockPos controllerPos = contPos.getBlockPos(source);
 
-		BlockPos startCorner = stCorner.getBlockPos(source).subtract(new Vec3i(1, 0, 1));
+		BlockPos startCorner = stCorner.getBlockPos(source);
 
-		BlockPos stopCorner = stpCorner.getBlockPos(source).subtract(new Vec3i(1, 0, 1));
+		BlockPos stopCorner = stpCorner.getBlockPos(source);
 
 		boolean includeAir = air == 1;
 
@@ -106,7 +106,7 @@ public class CommandScanMultiblock {
 
 			element.add("placestate", BlockState.CODEC.encode(member.state(), JsonOps.INSTANCE, new JsonObject()).getOrThrow());
 
-			element.addProperty("offset", "new BlockPos(" + member.offset().getX() + ", " + member.offset().getY() + ", " + member.offset().getZ() + ");");
+			element.addProperty("offset", "new Vec3i(" + member.offset().getX() + ", " + member.offset().getY() + ", " + member.offset().getZ() + ");");
 
 			String shape = "";
 			
@@ -141,7 +141,7 @@ public class CommandScanMultiblock {
 			index++;
 		}
 
-		Path path = Paths.get("Industrial Electricity/" + name + ".json");
+		Path path = Paths.get("Electrodynamics/" + name + ".json");
 
 		try {
 			String s = GSON.toJson(json);

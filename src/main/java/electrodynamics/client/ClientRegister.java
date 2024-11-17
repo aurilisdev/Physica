@@ -9,6 +9,8 @@ import electrodynamics.client.guidebook.ModuleElectrodynamics;
 import electrodynamics.client.guidebook.ScreenGuidebook;
 import electrodynamics.client.misc.SWBFClientExtensions;
 import electrodynamics.client.modelbakers.bakerytypes.CableModelLoader;
+import electrodynamics.client.modelbakers.bakerytypes.MultiblockModelLoader;
+import electrodynamics.client.modelbakers.bakerytypes.SlaveNodeModelLoader;
 import electrodynamics.client.particle.fluiddrop.ParticleFluidDrop;
 import electrodynamics.client.particle.lavawithphysics.ParticleLavaWithPhysics;
 import electrodynamics.client.particle.plasmaball.ParticlePlasmaBall;
@@ -322,6 +324,8 @@ public class ClientRegister {
     @SubscribeEvent
     public static void registerGeometryLoaders(final ModelEvent.RegisterGeometryLoaders event) {
         event.register(CableModelLoader.ID, CableModelLoader.INSTANCE);
+        event.register(SlaveNodeModelLoader.ID, SlaveNodeModelLoader.INSTANCE);
+        event.register(MultiblockModelLoader.ID, MultiblockModelLoader.INSTANCE);
     }
 
     @SubscribeEvent

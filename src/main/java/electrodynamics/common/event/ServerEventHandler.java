@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import electrodynamics.api.References;
+import electrodynamics.api.multiblock.assemblybased.CommandScanMultiblock;
 import electrodynamics.common.event.types.living.equipmentchange.AbstractEquipmentChangeHandler;
 import electrodynamics.common.event.types.living.equipmentchange.HandlerJetpackEquiped;
 import electrodynamics.common.event.types.living.incomingdamage.AbstractIncomingDamageHandler;
@@ -25,6 +26,7 @@ import electrodynamics.common.reloadlistener.ThermoelectricGeneratorHeatRegister
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
@@ -103,6 +105,11 @@ public class ServerEventHandler {
 		CoalGeneratorFuelRegister.INSTANCE.generateTagValues();
 		ThermoelectricGeneratorHeatRegister.INSTANCE.generateTagValues();
 		GasCollectorChromoCardsRegister.INSTANCE.generateTagValues();
+	}
+
+	@SubscribeEvent
+	public static void registerCommands(RegisterCommandsEvent event) {
+		CommandScanMultiblock.register(event.getDispatcher());
 	}
 
 	// TODO: Why was this commented?

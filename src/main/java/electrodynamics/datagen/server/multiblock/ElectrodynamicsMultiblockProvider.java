@@ -9,6 +9,8 @@ import electrodynamics.api.References;
 import electrodynamics.api.multiblock.assemblybased.Multiblock;
 import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
 import electrodynamics.client.ClientRegister;
+import electrodynamics.common.block.subtype.SubtypeGlass;
+import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -37,14 +39,202 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
         this(output, lookupProvider, existingFileHelper, References.ID);
     }
 
-	@Override
-	protected void gather() {
-		addMultiblock("testing", List.of(new MultiblockSlaveNode(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState(), Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block(), ClientRegister.MODEL_BATTERYBOX.id())));
-	}
+    @Override
+    protected void gather() {
+
+        BlockState slave = ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState();
+        BlockState scaffold = ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING.get().defaultBlockState();
+
+        addMultiblock("testing", List.of(new MultiblockSlaveNode(slave, Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block(), ClientRegister.MODEL_BATTERYBOX.id())));
+
+        addMultiblock("electrolosischamber", List.of(
+
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.upgradetransformer).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.upgradetransformer).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.upgradetransformer).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.upgradetransformer).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL)
+
+
+        ));
+
+
+    }
 
     public void addMultiblock(String name, List<MultiblockSlaveNode> northFacingNodes) {
 
-		ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modid, name);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modid, name);
 
         HashMap<Direction, List<MultiblockSlaveNode>> nodeMap = new HashMap<>();
 
@@ -56,9 +246,9 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
 
         nodeMap.put(Direction.EAST, getRotatedNodes(nodeMap.get(Direction.SOUTH), Direction.EAST.get2DDataValue() - Direction.SOUTH.get2DDataValue()));
 
-		if(conditions.containsKey(id)){
-			throw new UnsupportedOperationException("Multiblock with id " + id.toString() + " already provided!");
-		}
+        if (conditions.containsKey(id)) {
+            throw new UnsupportedOperationException("Multiblock with id " + id.toString() + " already provided!");
+        }
 
         conditions.put(id, new WithConditions<>(List.of(), new Multiblock(nodeMap)));
     }
