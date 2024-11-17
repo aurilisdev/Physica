@@ -19,6 +19,7 @@ import electrodynamics.common.block.subtype.SubtypeWire.Conductor;
 import electrodynamics.common.block.subtype.SubtypeWire.InsulationMaterial;
 import electrodynamics.common.block.subtype.SubtypeWire.WireClass;
 import electrodynamics.common.block.subtype.SubtypeWire.WireColor;
+import electrodynamics.datagen.utils.model.SlaveNodeModelBuilder;
 import electrodynamics.datagen.utils.model.WireModelBuilder;
 import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.registers.ElectrodynamicsBlocks;
@@ -28,6 +29,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SnowyDirtBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -284,7 +286,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
                 .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(270).addModel();
         blockItem(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get(), existingBlock(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR));
 
-        airBlock(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE, "block/multisubnode",false);
+        slaveNode(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get(), "block/multisubnode");
 
 
 
@@ -583,6 +585,11 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
             simpleBlockItem(block, none);
         }
 
+    }
+
+    public void slaveNode(Block block, String particleTexture) {
+        BlockModelBuilder builder = models().getBuilder(name(block)).customLoader(SlaveNodeModelBuilder::begin).model(existingBlock(Blocks.AIR)).end().texture("particle", modLoc(particleTexture)).renderType("cutout");
+        getVariantBuilder(block).partialState().setModels(new ConfiguredModel(builder));
     }
 
     public ItemModelBuilder snowyBlock(Block block, ModelFile noSnow, ModelFile withSnow, boolean registerItem) {

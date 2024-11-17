@@ -127,6 +127,7 @@ public enum SubtypeMachine implements ISubtype {
     currentregulator(true, TileCurrentRegulator::new),
     gascollector(true, TileGasCollector::new),
     creativegassource(true, TileCreativeGasSource::new),
+    electrolosischamber(true, TileElectrolosisChamber::new)
     ;
 
     private final BlockEntityType.BlockEntitySupplier<BlockEntity> blockEntitySupplier;

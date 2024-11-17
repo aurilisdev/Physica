@@ -195,4 +195,5 @@ public class ElectrodynamicsTiles {
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileCreativeGasSource>> TILE_CREATIVEGASSOURCE = BLOCK_ENTITY_TYPES.register(SubtypeMachine.creativegassource.tag(), () -> new BlockEntityType<>(TileCreativeGasSource::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.creativegassource)), null));
 
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileMultiblockSlave>> TILE_MULTIBLOCK_SLAVE = BLOCK_ENTITY_TYPES.register("multiblockslave", () -> new BlockEntityType<>(TileMultiblockSlave::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get()), null));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileElectrolosisChamber>> TILE_ELECTROLOSISCHAMBER = BLOCK_ENTITY_TYPES.register(SubtypeMachine.electrolosischamber.tag(), () -> new BlockEntityType<>(TileElectrolosisChamber::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber)), null));
 }

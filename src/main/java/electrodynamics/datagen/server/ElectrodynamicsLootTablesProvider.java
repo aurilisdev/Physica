@@ -169,6 +169,7 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
         addMachineTable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gascollector), ElectrodynamicsTiles.TILE_GASCOLLECTOR, true, false, true, true, false);
         addMachineTable(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get(), ElectrodynamicsTiles.TILE_CHEMICALREACTOR, true, true, true, true, true);
 
+
         addSimpleBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK.get());
 
         addSimpleBlock(ElectrodynamicsBlocks.BLOCK_GASVALVE.get());
@@ -185,6 +186,8 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
         addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.currentregulator));
 
         addSimpleBlock(ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING.get());
+
+        addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber));
 
     }
 

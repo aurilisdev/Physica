@@ -1,4 +1,8 @@
 {
+  "loader": "electrodynamics:electrodynamicsslavenodeloader",
+  "model": {
+    "parent": "minecraft:block/air"
+  },
   "render_type": "minecraft:cutout",
   "textures": {
     "particle": "electrodynamics:block/multisubnode"

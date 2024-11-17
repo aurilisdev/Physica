@@ -11,6 +11,7 @@ import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
 import electrodynamics.client.ClientRegister;
 import electrodynamics.common.block.subtype.SubtypeGlass;
 import electrodynamics.common.block.subtype.SubtypeMachine;
+import electrodynamics.common.tile.machines.TileElectrolosisChamber;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -45,9 +46,9 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
         BlockState slave = ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState();
         BlockState scaffold = ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING.get().defaultBlockState();
 
-        addMultiblock("testing", List.of(new MultiblockSlaveNode(slave, Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block(), ClientRegister.MODEL_BATTERYBOX.id())));
+        addMultiblock(ResourceLocation.fromNamespaceAndPath(References.ID, "testing"), List.of(new MultiblockSlaveNode(slave, Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block(), ClientRegister.MODEL_BATTERYBOX.id())));
 
-        addMultiblock("electrolosischamber", List.of(
+        addMultiblock(TileElectrolosisChamber.ID, List.of(
 
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
@@ -232,9 +233,7 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
 
     }
 
-    public void addMultiblock(String name, List<MultiblockSlaveNode> northFacingNodes) {
-
-        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(modid, name);
+    public void addMultiblock(ResourceLocation id, List<MultiblockSlaveNode> northFacingNodes) {
 
         HashMap<Direction, List<MultiblockSlaveNode>> nodeMap = new HashMap<>();
 

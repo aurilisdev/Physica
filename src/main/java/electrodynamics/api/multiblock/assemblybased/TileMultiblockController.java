@@ -44,7 +44,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 	public final Property<List<BlockPos>> slavePositions = property(new Property<List<BlockPos>>(PropertyTypes.BLOCK_POS_LIST, "slavepositions", List.of())).onTileLoaded((prop) -> {
 
-		if (level.isClientSide) {
+		if (level.isClientSide()) {
 			return;
 		}
 
@@ -128,7 +128,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 	}
 
-	private void formMultiblock() {
+	public void formMultiblock() {
 
 		Direction facing = getFacing();
 
@@ -225,7 +225,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 	@Override
 	public void onBlockDestroyed() {
 		super.onBlockDestroyed();
-		if (level.isClientSide) {
+		if (!level.isClientSide()) {
 			destroyMultiblock();
 		}
 	}

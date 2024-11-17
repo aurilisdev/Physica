@@ -24,9 +24,8 @@ import net.neoforged.neoforge.registries.DataPackRegistryEvent;
  */
 public record Multiblock(Map<Direction, List<MultiblockSlaveNode>> nodes) {
 
-    public static final ResourceKey<Registry<Multiblock>> REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(References.ID, "multiblock"));
-
     public static final String FOLDER = "machines/multiblock";
+    public static final ResourceKey<Registry<Multiblock>> REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(References.ID, FOLDER));
 
     public static final String MEMBER_FIELD = "members";
 
@@ -40,6 +39,10 @@ public record Multiblock(Map<Direction, List<MultiblockSlaveNode>> nodes) {
 
     public static List<MultiblockSlaveNode> getNodes(Level world, ResourceKey<Multiblock> id, Direction facing) {
         return world.registryAccess().lookupOrThrow(Multiblock.REGISTRY_KEY).getOrThrow(id).value().nodes().get(facing);
+    }
+
+    public static ResourceKey makeKey(ResourceLocation id) {
+        return ResourceKey.create(REGISTRY_KEY, id);
     }
 
     @EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
