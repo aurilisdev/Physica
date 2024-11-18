@@ -25,3 +25,6 @@
 /electrodynamics multiblock -63 -57 -66 -65 -59 -66 -61 -57 -70 1 testing
 /electrodynamics multiblock -63 -58 -66 -65 -59 -66 -61 -57 -70 1 testing
 /electrodynamics multiblock -63 -59 -66 -65 -60 -66 -61 -58 -70 1 testing
+/clone -66 -62 -65
+/clone -66 -62 -65 ~ ~ ~
+/clone -66 -62 -65 ~ ~ ~ to minecraft:overworld

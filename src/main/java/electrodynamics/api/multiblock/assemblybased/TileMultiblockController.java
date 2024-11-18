@@ -42,7 +42,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 	public final List<TileMultiblockSlave> slaveList = new ArrayList<>();
 
-	public final Property<List<BlockPos>> slavePositions = property(new Property<List<BlockPos>>(PropertyTypes.BLOCK_POS_LIST, "slavepositions", List.of())).onTileLoaded((prop) -> {
+	public final Property<List<BlockPos>> slavePositions = property(new Property<List<BlockPos>>(PropertyTypes.BLOCK_POS_LIST, "slavepositions", new ArrayList<>())).onTileLoaded((prop) -> {
 
 		if (level.isClientSide()) {
 			return;
@@ -51,7 +51,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 		Scheduler.schedule(2, () -> {
 			slaveList.clear();
 			prop.get().forEach(blockPos -> {
-				slaveList.add((TileMultiblockSlave) level.getBlockEntity(worldPosition));
+				slaveList.add((TileMultiblockSlave) level.getBlockEntity(worldPosition.offset(blockPos)));
 			});
 		});
 
@@ -83,7 +83,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 	public void checkFormed() {
 
-		Direction facing = getFacing();
+		Direction facing = getFacing().getOpposite();
 
 		List<MultiblockSlaveNode> nodes = Multiblock.getNodes(level, getResourceKey(), facing);
 
@@ -98,11 +98,12 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 			nodeState = level.getBlockState(nodePos);
 
-			if (node.hasBlockTag() && !nodeState.is(node.taggedBlocks()) || nodeState != node.replaceState()) {
+			if (node.hasBlockTag() && !nodeState.is(node.taggedBlocks()) || !nodeState.is(node.replaceState().getBlock())) {
 
 				formed = false;
 				break;
 			}
+			/*
 
 			if (node.hasBlockTag()) {
 
@@ -122,6 +123,8 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 			}
 
+			 */
+
 		}
 
 		isFormed.set(formed);
@@ -130,7 +133,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 	public void formMultiblock() {
 
-		Direction facing = getFacing();
+		Direction facing = getFacing().getOpposite();
 
 		List<MultiblockSlaveNode> nodes = Multiblock.getNodes(level, getResourceKey(), facing);
 

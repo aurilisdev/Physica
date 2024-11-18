@@ -1,5 +1,6 @@
 package electrodynamics.api.multiblock.assemblybased;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertySlaveNode;
 import electrodynamics.prefab.properties.Property;
@@ -41,9 +42,15 @@ public class TileMultiblockSlave extends TileReplaceable {
 	public TileMultiblockSlave(BlockPos worldPos, BlockState blockState) {
 		super(ElectrodynamicsTiles.TILE_MULTIBLOCK_SLAVE.get(), worldPos, blockState);
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentTickable(this));
+		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 	}
-	
+
+	private void tickServer(ComponentTickable componentTickable) {
+		if(disguisedBlock.get() == 27068) {
+			Electrodynamics.LOGGER.info(getDisguise());
+		}
+	}
+
 	@Override
 	public int getComparatorSignal() {
 		if(level.getBlockEntity(controller.get()) instanceof TileMultiblockController controller) {

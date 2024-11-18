@@ -34,6 +34,7 @@ public class TileElectrolosisChamber extends TileMultiblockController {
             } else {
                 destroyMultiblock();
             }
+            return ItemInteractionResult.CONSUME;
 
 
         }

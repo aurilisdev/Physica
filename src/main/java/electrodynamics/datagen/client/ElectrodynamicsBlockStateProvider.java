@@ -588,7 +588,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
     }
 
     public void slaveNode(Block block, String particleTexture) {
-        BlockModelBuilder builder = models().getBuilder(name(block)).customLoader(SlaveNodeModelBuilder::begin).model(existingBlock(Blocks.AIR)).end().texture("particle", modLoc(particleTexture)).renderType("cutout");
+        BlockModelBuilder builder = models().getBuilder(name(block)).customLoader(SlaveNodeModelBuilder::begin).model(existingBlock(ElectrodynamicsBlocks.BLOCK_MULTISUBNODE.get())).end().texture("particle", modLoc(particleTexture)).renderType("cutout");
         getVariantBuilder(block).partialState().setModels(new ConfiguredModel(builder));
     }
 

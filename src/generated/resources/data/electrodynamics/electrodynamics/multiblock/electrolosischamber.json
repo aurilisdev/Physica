@@ -11,7 +11,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -40,7 +40,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -69,7 +69,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -98,7 +98,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -127,7 +127,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -156,7 +156,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -185,7 +185,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -214,16 +214,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -248,7 +243,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -277,7 +272,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -306,7 +301,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -335,7 +330,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -364,7 +359,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -393,7 +388,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -422,7 +417,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -451,7 +446,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -480,7 +475,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -509,7 +504,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -538,7 +533,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -567,7 +562,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -596,7 +591,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -625,15 +620,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -659,16 +654,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -693,15 +683,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -727,7 +717,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -756,7 +746,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -785,7 +775,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -814,7 +804,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -843,7 +833,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -872,7 +862,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -901,7 +891,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -930,7 +920,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -959,7 +949,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -988,7 +978,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1017,7 +1007,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1046,15 +1036,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -1080,15 +1070,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -1114,15 +1104,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
+          "Name": "electrodynamics:electrolyticseparator",
           "Properties": {
             "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -1148,15 +1138,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -1182,15 +1172,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -1216,7 +1206,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1245,7 +1235,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1274,7 +1264,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1303,7 +1293,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1332,7 +1322,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1361,7 +1351,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1390,7 +1380,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1419,7 +1409,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1448,7 +1438,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1477,7 +1467,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1506,7 +1496,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1535,15 +1525,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -1569,16 +1559,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -1603,15 +1588,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "east",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -1637,7 +1622,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1666,7 +1651,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1695,7 +1680,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1724,7 +1709,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1753,7 +1738,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1782,7 +1767,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1811,7 +1796,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1840,7 +1825,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1869,7 +1854,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1898,7 +1883,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1927,7 +1912,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1956,7 +1941,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -1985,7 +1970,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2014,7 +1999,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2043,7 +2028,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2072,7 +2057,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2101,7 +2086,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2130,7 +2115,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2159,7 +2144,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2188,7 +2173,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2219,7 +2204,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2248,7 +2233,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2277,7 +2262,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2306,7 +2291,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2335,7 +2320,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2364,7 +2349,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2393,7 +2378,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2422,16 +2407,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -2456,7 +2436,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2485,7 +2465,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2514,7 +2494,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2543,7 +2523,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2572,7 +2552,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2601,7 +2581,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2630,7 +2610,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2659,7 +2639,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2688,7 +2668,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2717,7 +2697,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2746,7 +2726,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2775,7 +2755,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2804,7 +2784,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2833,15 +2813,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -2867,16 +2847,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -2901,15 +2876,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -2935,7 +2910,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2964,7 +2939,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -2993,7 +2968,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3022,7 +2997,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3051,7 +3026,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3080,7 +3055,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3109,7 +3084,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3138,7 +3113,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3167,7 +3142,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3196,7 +3171,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3225,7 +3200,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3254,15 +3229,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -3288,15 +3263,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -3322,15 +3297,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
+          "Name": "electrodynamics:electrolyticseparator",
           "Properties": {
             "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -3356,15 +3331,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -3390,15 +3365,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -3424,7 +3399,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3453,7 +3428,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3482,7 +3457,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3511,7 +3486,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3540,7 +3515,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3569,7 +3544,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3598,7 +3573,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3627,7 +3602,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3656,7 +3631,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3685,7 +3660,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3714,7 +3689,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3743,15 +3718,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -3777,16 +3752,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -3811,15 +3781,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "north",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -3845,7 +3815,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3874,7 +3844,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3903,7 +3873,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3932,7 +3902,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3961,7 +3931,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -3990,7 +3960,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4019,7 +3989,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4048,7 +4018,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4077,7 +4047,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4106,7 +4076,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4135,7 +4105,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4164,7 +4134,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4193,7 +4163,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4222,7 +4192,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4251,7 +4221,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4280,7 +4250,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4309,7 +4279,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4338,7 +4308,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4367,7 +4337,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4396,7 +4366,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4427,7 +4397,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4456,7 +4426,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4485,7 +4455,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4514,7 +4484,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4543,7 +4513,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4572,7 +4542,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4601,7 +4571,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4630,16 +4600,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -4664,7 +4629,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4693,7 +4658,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4722,7 +4687,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4751,7 +4716,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4780,7 +4745,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4809,7 +4774,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4838,7 +4803,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4867,7 +4832,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4896,7 +4861,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4925,7 +4890,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4954,7 +4919,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -4983,7 +4948,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5012,7 +4977,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5041,15 +5006,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -5075,16 +5040,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -5109,15 +5069,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -5143,7 +5103,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5172,7 +5132,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5201,7 +5161,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5230,7 +5190,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5259,7 +5219,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5288,7 +5248,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5317,7 +5277,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5346,7 +5306,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5375,7 +5335,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5404,7 +5364,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5433,7 +5393,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5462,15 +5422,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -5496,15 +5456,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -5530,15 +5490,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
+          "Name": "electrodynamics:electrolyticseparator",
           "Properties": {
             "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -5564,15 +5524,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -5598,15 +5558,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -5632,7 +5592,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5661,7 +5621,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5690,7 +5650,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5719,7 +5679,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5748,7 +5708,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5777,7 +5737,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5806,7 +5766,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5835,7 +5795,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5864,7 +5824,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5893,7 +5853,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5922,7 +5882,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -5951,15 +5911,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -5985,16 +5945,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -6019,15 +5974,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "south",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -6053,7 +6008,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6082,7 +6037,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6111,7 +6066,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6140,7 +6095,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6169,7 +6124,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6198,7 +6153,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6227,7 +6182,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6256,7 +6211,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6285,7 +6240,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6314,7 +6269,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6343,7 +6298,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6372,7 +6327,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6401,7 +6356,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6430,7 +6385,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6459,7 +6414,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6488,7 +6443,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6517,7 +6472,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6546,7 +6501,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6575,7 +6530,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6604,7 +6559,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6635,7 +6590,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6664,7 +6619,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6693,7 +6648,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6722,7 +6677,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6751,7 +6706,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6780,7 +6735,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6809,7 +6764,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6838,16 +6793,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -6872,7 +6822,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6901,7 +6851,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6930,7 +6880,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6959,7 +6909,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -6988,7 +6938,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7017,7 +6967,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7046,7 +6996,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7075,7 +7025,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7104,7 +7054,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7133,7 +7083,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7162,7 +7112,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7191,7 +7141,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7220,7 +7170,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7249,15 +7199,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -7283,16 +7233,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -7317,15 +7262,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -7351,7 +7296,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7380,7 +7325,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7409,7 +7354,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7438,7 +7383,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7467,7 +7412,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7496,7 +7441,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7525,7 +7470,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7554,7 +7499,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7583,7 +7528,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7612,7 +7557,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7641,7 +7586,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7670,15 +7615,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -7704,15 +7649,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -7738,15 +7683,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
+          "Name": "electrodynamics:electrolyticseparator",
           "Properties": {
             "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -7772,15 +7717,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -7806,15 +7751,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -7840,7 +7785,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7869,7 +7814,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7898,7 +7843,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7927,7 +7872,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7956,7 +7901,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -7985,7 +7930,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8014,7 +7959,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8043,7 +7988,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8072,7 +8017,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8101,7 +8046,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8130,7 +8075,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8159,15 +8104,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -8193,16 +8138,11 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
-          "Name": "electrodynamics:upgradetransformer",
-          "Properties": {
-            "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
-          }
+          "Name": "minecraft:gold_block"
         },
         "voxelshape": {
           "aabbs": [
@@ -8227,15 +8167,15 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
           "Name": "electrodynamics:tanksteel",
           "Properties": {
             "facing": "west",
-            "lit": "true",
-            "waterlogged": "true"
+            "lit": "false",
+            "waterlogged": "false"
           }
         },
         "voxelshape": {
@@ -8261,7 +8201,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8290,7 +8230,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8319,7 +8259,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8348,7 +8288,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8377,7 +8317,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8406,7 +8346,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8435,7 +8375,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8464,7 +8404,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8493,7 +8433,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8522,7 +8462,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8551,7 +8491,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8580,7 +8520,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8609,7 +8549,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8638,7 +8578,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8667,7 +8607,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8696,7 +8636,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8725,7 +8665,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8754,7 +8694,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8783,7 +8723,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -8812,7 +8752,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {

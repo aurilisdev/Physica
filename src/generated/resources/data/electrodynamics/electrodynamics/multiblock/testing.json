@@ -12,7 +12,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "east",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -48,7 +48,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "north",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -84,7 +84,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "south",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {
@@ -120,7 +120,7 @@
           "Name": "electrodynamics:multiblockslave",
           "Properties": {
             "facing": "west",
-            "waterlogged": "true"
+            "waterlogged": "false"
           }
         },
         "replacestate": {

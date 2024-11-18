@@ -24,7 +24,7 @@ import net.neoforged.neoforge.registries.DataPackRegistryEvent;
  */
 public record Multiblock(Map<Direction, List<MultiblockSlaveNode>> nodes) {
 
-    public static final String FOLDER = "machines/multiblock";
+    public static final String FOLDER = "multiblock";
     public static final ResourceKey<Registry<Multiblock>> REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(References.ID, FOLDER));
 
     public static final String MEMBER_FIELD = "members";

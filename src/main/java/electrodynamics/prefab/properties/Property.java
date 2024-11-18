@@ -3,7 +3,9 @@ package electrodynamics.prefab.properties;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.common.packet.types.server.PacketSendUpdatePropertiesServer;
+import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
@@ -84,12 +86,16 @@ public class Property<T> {
     }
 
     public Property<T> set(Object updated) {
+
         if (alreadySynced) {
             return this;
         }
+        /*
         if (!updated.getClass().equals(value.getClass())) {
             throw new RuntimeException("Value " + updated + " being set for " + getName() + " on tile " + getPropertyManager().getOwner() + " is an invalid data type!");
         }
+
+         */
         checkForChange((T) updated);
         T old = value;
         value = (T) updated;
@@ -199,6 +205,7 @@ public class Property<T> {
             value = data;
             onChange.accept(this, value);
         }
+
     }
 
     public void saveToTag(CompoundTag tag, HolderLookup.Provider registries) {
