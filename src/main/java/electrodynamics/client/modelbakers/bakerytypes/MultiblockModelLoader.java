@@ -44,7 +44,7 @@ public class MultiblockModelLoader implements IGeometryLoader<MultiblockModelLoa
     @Override
     public MultiblockModelLoader.WirePartGeometry read(JsonObject json, JsonDeserializationContext context) throws JsonParseException {
 
-        return new MultiblockModelLoader.WirePartGeometry(context.deserialize(GsonHelper.getAsJsonObject(json, "model"), BlockModel.class));
+        return new MultiblockModelLoader.WirePartGeometry(context.deserialize(json, BlockModel.class));
     }
 
     public static class WirePartGeometry implements IUnbakedGeometry<MultiblockModelLoader.WirePartGeometry> {
