@@ -46,6 +46,8 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
 
         BlockState slave = ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false);
         BlockState scaffold = ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING.get().defaultBlockState();
+        
+        ResourceLocation glassId = ResourceLocation.fromNamespaceAndPath(References.ID, "electrolosiswindow");
 
         addMultiblock(ResourceLocation.fromNamespaceAndPath(References.ID, "testing"), List.of(new MultiblockSlaveNode(slave, Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block(), ClientRegister.MODEL_BATTERYBOX.id())));
 
@@ -66,11 +68,11 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -4), Shapes.block(), glassId),
                 //
                 new MultiblockSlaveNode(slave, Blocks.GOLD_BLOCK.defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -4), Shapes.block(), glassId),
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
@@ -100,7 +102,7 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -3), Shapes.block(), glassId),
                 //
                 new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
@@ -108,17 +110,17 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
                 //
                 new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -3), Shapes.block(), glassId),
                 //
                 //
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -3), Shapes.block(), glassId),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -3), Shapes.block(), glassId),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -3), Shapes.block(), glassId),
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
@@ -150,11 +152,11 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -2), Shapes.block(), glassId),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -2), Shapes.block(), glassId),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -2), Shapes.block(), glassId),
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
@@ -186,11 +188,11 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -1), Shapes.block(), glassId),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -1), Shapes.block(), glassId),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -1), Shapes.block(), glassId),
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
@@ -210,9 +212,9 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, 0), Shapes.block(), glassId),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, 0), Shapes.block(), glassId),
                 //
                 new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //

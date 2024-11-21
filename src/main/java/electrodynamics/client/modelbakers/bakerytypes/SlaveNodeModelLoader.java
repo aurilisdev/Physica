@@ -5,20 +5,18 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import electrodynamics.api.References;
-import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
 import electrodynamics.api.multiblock.assemblybased.TileMultiblockSlave;
+import electrodynamics.client.ClientRegister;
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertySlaveNode;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -32,49 +30,30 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Set;
 import java.util.function.Function;
 
 /**
  * @author skip999
  */
-public class SlaveNodeModelLoader implements IGeometryLoader<SlaveNodeModelLoader.WirePartGeometry> {
+public class SlaveNodeModelLoader implements IGeometryLoader<SlaveNodeModelLoader.SlaveNodeGeometry> {
 
     public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(References.ID, "electrodynamicsslavenodeloader");
 
     public static final SlaveNodeModelLoader INSTANCE = new SlaveNodeModelLoader();
 
     @Override
-    public SlaveNodeModelLoader.WirePartGeometry read(JsonObject json, JsonDeserializationContext context) throws JsonParseException {
+    public SlaveNodeGeometry read(JsonObject json, JsonDeserializationContext context) throws JsonParseException {
 
-        return new SlaveNodeModelLoader.WirePartGeometry(context.deserialize(GsonHelper.getAsJsonObject(json, "model"), BlockModel.class));
+        return new SlaveNodeGeometry();
     }
 
-    public static class WirePartGeometry implements IUnbakedGeometry<SlaveNodeModelLoader.WirePartGeometry> {
+    public static class SlaveNodeGeometry implements IUnbakedGeometry<SlaveNodeGeometry> {
 
-        private final BlockModel model;
-
-        public WirePartGeometry(BlockModel model) {
-            this.model = model;
-
-        }
+        public SlaveNodeGeometry() {}
 
         @Override
         public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
-            boolean useBlockLight = context.useBlockLight();
-
-
-            return new SlaveNodeModelLoader.SlaveNodeModel(context.useAmbientOcclusion(), context.isGui3d(), useBlockLight, spriteGetter.apply(this.model.getMaterial("particle")), model.bake(baker, model, spriteGetter, modelState, context.isGui3d()));
-        }
-
-        @Override
-        public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter, IGeometryBakingContext context) {
-            this.model.resolveParents(modelGetter);
-        }
-
-        @Override
-        public Set<String> getConfigurableComponentNames() {
-            return IUnbakedGeometry.super.getConfigurableComponentNames();
+            return new SlaveNodeModelLoader.SlaveNodeModel();
         }
 
     }
@@ -82,71 +61,50 @@ public class SlaveNodeModelLoader implements IGeometryLoader<SlaveNodeModelLoade
     public static class SlaveNodeModel implements IDynamicBakedModel {
 
         private static final List<BakedQuad> NO_QUADS = ImmutableList.of();
-
-        private final boolean isAmbientOcclusion;
-        private final boolean isGui3d;
-        private final boolean isSideLit;
-        private final TextureAtlasSprite particle;
-
-        private final BakedModel model;
-
-        public SlaveNodeModel(boolean isAmbientOcclusion, boolean isGui3d, boolean isSideLit, TextureAtlasSprite particle, BakedModel model) {
-            this.isAmbientOcclusion = isAmbientOcclusion;
-            this.isGui3d = isGui3d;
-            this.isSideLit = isSideLit;
-            this.particle = particle;
-            this.model = model;
-        }
+        @Nullable private BakedModel model;
+        @Nullable private BlockState disguisedState;
 
         @Override
         public boolean useAmbientOcclusion() {
-            return this.isAmbientOcclusion;
+            return model == null ? false : model.useAmbientOcclusion();
         }
 
         @Override
         public boolean isGui3d() {
-            return this.isGui3d;
+            return model == null ? false : model.isGui3d();
         }
 
         @Override
         public boolean usesBlockLight() {
-            return isSideLit;
+            return model == null ? false : model.usesBlockLight();
         }
 
         @Override
         public boolean isCustomRenderer() {
-            return false;
+            return model == null ? false : model.isCustomRenderer();
         }
 
         @Override
         public TextureAtlasSprite getParticleIcon() {
-            return this.particle;
+            return model == null ? ClientRegister.getSprite(ClientRegister.TEXTURE_WHITE) : model.getParticleIcon();
         }
 
         @Override
         public ItemOverrides getOverrides() {
-            return ItemOverrides.EMPTY;
+            return model == null ? ItemOverrides.EMPTY : model.getOverrides();
         }
 
         @Override
         public ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource rand, @NotNull ModelData data) {
 
-            return model.getRenderTypes(state, rand, data);
+            return model == null ? ChunkRenderTypeSet.none() : model.getRenderTypes(disguisedState, rand, data);
 
         }
 
         @Override
         public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData extraData, @Nullable RenderType renderType) {
-            ModelPropertySlaveNode.SlaveNodeWrapper data = extraData.get(ModelPropertySlaveNode.INSTANCE);
-
-            if (data == null || !MultiblockSlaveNode.hasModel(data.id())) {
-                return NO_QUADS;
-            }
-
-            BakedModel model = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(data.id()));
-
             if(model instanceof MultiblockModelLoader.MultiblockModel slave) {
-                return slave.getQuads(state, side, rand, extraData, renderType);
+                return slave.getQuads(disguisedState, side, rand, extraData, renderType);
             }
 
             return NO_QUADS;
@@ -155,7 +113,10 @@ public class SlaveNodeModelLoader implements IGeometryLoader<SlaveNodeModelLoade
         @Override
         public @NotNull ModelData getModelData(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ModelData modelData) {
             if (level.getBlockEntity(pos) instanceof TileMultiblockSlave slave) {
-                return ModelData.builder().with(ModelPropertySlaveNode.INSTANCE, new ModelPropertySlaveNode.SlaveNodeWrapper(slave.renderModel.get(), slave.getFacing())).build();
+                ModelData data = slave.getModelData();
+                model = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(data.get(ModelPropertySlaveNode.INSTANCE).id()));
+                disguisedState = slave.getDisguise();
+                return data;
             }
             return modelData;
         }

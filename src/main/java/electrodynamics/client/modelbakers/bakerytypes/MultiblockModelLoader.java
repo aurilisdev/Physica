@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import electrodynamics.api.References;
 import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
-import electrodynamics.api.multiblock.assemblybased.TileMultiblockSlave;
 import electrodynamics.client.modelbakers.ModelStateRotation;
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertySlaveNode;
 import net.minecraft.client.renderer.RenderType;
@@ -15,14 +14,13 @@ import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.ChunkRenderTypeSet;
+import net.neoforged.neoforge.client.NamedRenderTypeManager;
+import net.neoforged.neoforge.client.model.ExtendedBlockModelDeserializer;
 import net.neoforged.neoforge.client.model.IDynamicBakedModel;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.geometry.IGeometryBakingContext;
@@ -35,30 +33,45 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
-public class MultiblockModelLoader implements IGeometryLoader<MultiblockModelLoader.WirePartGeometry> {
+public class MultiblockModelLoader implements IGeometryLoader<MultiblockModelLoader.MultiblockModelGeometry> {
 
     public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(References.ID, "electrodynamicsmultiblockmodelloader");
 
     public static final MultiblockModelLoader INSTANCE = new MultiblockModelLoader();
 
-    @Override
-    public MultiblockModelLoader.WirePartGeometry read(JsonObject json, JsonDeserializationContext context) throws JsonParseException {
+    private static final ExtendedBlockModelDeserializer DESERIALIZER = new ExtendedBlockModelDeserializer();
 
-        return new MultiblockModelLoader.WirePartGeometry(context.deserialize(json, BlockModel.class));
+    @Override
+    public MultiblockModelGeometry read(JsonObject json, JsonDeserializationContext context) throws JsonParseException {
+
+        json.remove("loader");
+        if (json.has("modelloader")) {
+            json.addProperty("loader", json.get("modelloader").getAsString());
+            json.remove("modelloader");
+        }
+
+        ResourceLocation loc = null;
+
+        if(json.has("render_type")){
+             loc = ResourceLocation.parse(json.get("render_type").getAsString());
+        }
+
+        return new MultiblockModelGeometry(DESERIALIZER.deserialize(json, null, context), loc);
     }
 
-    public static class WirePartGeometry implements IUnbakedGeometry<MultiblockModelLoader.WirePartGeometry> {
+    public static class MultiblockModelGeometry implements IUnbakedGeometry<MultiblockModelGeometry> {
 
         private final BlockModel model;
+        @Nullable
+        private final ResourceLocation renderType;
 
-        public WirePartGeometry(BlockModel model) {
+        public MultiblockModelGeometry(BlockModel model, @Nullable ResourceLocation renderType) {
             this.model = model;
-
+            this.renderType = renderType;
         }
 
         @Override
         public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
-            boolean useBlockLight = context.useBlockLight();
 
             BakedModel[] models = new BakedModel[6];
 
@@ -66,17 +79,19 @@ public class MultiblockModelLoader implements IGeometryLoader<MultiblockModelLoa
 
                 ModelState transform = ModelStateRotation.ROTATIONS.get(dir);
 
-                models[dir.ordinal()] = this.model.bake(baker, this.model, spriteGetter, transform, useBlockLight);
+                models[dir.ordinal()] = this.model.customData.getCustomGeometry().bake(context, baker, spriteGetter, transform, overrides);
 
             }
 
-            return new MultiblockModelLoader.MultiblockModel(context.useAmbientOcclusion(), context.isGui3d(), useBlockLight, spriteGetter.apply(this.model.getMaterial("particle")), models);
+
+            return new MultiblockModelLoader.MultiblockModel(models, renderType == null ? null : ChunkRenderTypeSet.of(NamedRenderTypeManager.get(renderType).block()));
         }
 
         @Override
         public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter, IGeometryBakingContext context) {
             this.model.resolveParents(modelGetter);
         }
+
 
         @Override
         public Set<String> getConfigurableComponentNames() {
@@ -89,55 +104,48 @@ public class MultiblockModelLoader implements IGeometryLoader<MultiblockModelLoa
 
         private static final List<BakedQuad> NO_QUADS = ImmutableList.of();
 
-        private final boolean isAmbientOcclusion;
-        private final boolean isGui3d;
-        private final boolean isSideLit;
-        private final TextureAtlasSprite particle;
-        // render type for general model defined by this one
         private final BakedModel[] models;
+        @Nullable
+        private final ChunkRenderTypeSet renderType;
 
-        public MultiblockModel(boolean isAmbientOcclusion, boolean isGui3d, boolean isSideLit, TextureAtlasSprite particle, BakedModel[] models) {
-            this.isAmbientOcclusion = isAmbientOcclusion;
-            this.isGui3d = isGui3d;
-            this.isSideLit = isSideLit;
-            this.particle = particle;
+        public MultiblockModel(BakedModel[] models, @Nullable ChunkRenderTypeSet renderType) {
             this.models = models;
+            this.renderType = renderType;
         }
 
         @Override
         public boolean useAmbientOcclusion() {
-            return this.isAmbientOcclusion;
+            return models[0].useAmbientOcclusion();
         }
 
         @Override
         public boolean isGui3d() {
-            return this.isGui3d;
+            return models[0].isGui3d();
         }
 
         @Override
         public boolean usesBlockLight() {
-            return isSideLit;
+            return models[0].usesBlockLight();
         }
 
         @Override
         public boolean isCustomRenderer() {
-            return false;
+            return models[0].isCustomRenderer();
         }
 
         @Override
         public TextureAtlasSprite getParticleIcon() {
-            return this.particle;
+            return models[0].getParticleIcon();
         }
 
         @Override
         public ItemOverrides getOverrides() {
-            return ItemOverrides.EMPTY;
+            return models[0].getOverrides();
         }
 
         @Override
         public ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource rand, @NotNull ModelData data) {
-
-            return models[0].getRenderTypes(state, rand, data);
+            return renderType == null ? models[0].getRenderTypes(state, rand, data) : renderType;
 
         }
 
@@ -150,14 +158,6 @@ public class MultiblockModelLoader implements IGeometryLoader<MultiblockModelLoa
             }
 
             return models[data.facing().ordinal()].getQuads(state, side, rand, extraData, renderType);
-        }
-
-        @Override
-        public @NotNull ModelData getModelData(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ModelData modelData) {
-            if (level.getBlockEntity(pos) instanceof TileMultiblockSlave slave) {
-                return ModelData.builder().with(ModelPropertySlaveNode.INSTANCE, new ModelPropertySlaveNode.SlaveNodeWrapper(slave.renderModel.get(), slave.getFacing())).build();
-            }
-            return modelData;
         }
 
     }
