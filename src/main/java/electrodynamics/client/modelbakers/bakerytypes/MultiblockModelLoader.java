@@ -79,7 +79,13 @@ public class MultiblockModelLoader implements IGeometryLoader<MultiblockModelLoa
 
                 ModelState transform = ModelStateRotation.ROTATIONS.get(dir);
 
-                models[dir.ordinal()] = this.model.customData.getCustomGeometry().bake(context, baker, spriteGetter, transform, overrides);
+                if(model.customData.getCustomGeometry() != null) {
+                    models[dir.ordinal()] = this.model.customData.getCustomGeometry().bake(context, baker, spriteGetter, transform, overrides);
+                } else {
+                    models[dir.ordinal()] = this.model.bake(baker, model, spriteGetter, transform, context.isGui3d());
+                }
+
+
 
             }
 
