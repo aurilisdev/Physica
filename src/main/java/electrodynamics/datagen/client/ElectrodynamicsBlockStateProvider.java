@@ -288,6 +288,12 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
 
         slaveNode(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get(), "block/multisubnode");
 
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber),
+                //
+                models().cube(name(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber)), blockLoc("multiblock/electrolosischamberbulkhead"), blockLoc("multiblock/electrolosischamberbulkhead"), blockLoc("electrolosischamberfront"), blockLoc("multiblock/electrolosischambercontacts"), blockLoc("multiblock/electrolosischamberbulkhead"), blockLoc("multiblock/electrolosischamberbulkhead")).texture("particle", modLoc("block/multisubnode")),
+                //
+                90, 0, true);
+
 
 
         genWires();

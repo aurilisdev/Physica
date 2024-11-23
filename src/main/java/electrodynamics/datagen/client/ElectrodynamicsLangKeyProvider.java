@@ -313,7 +313,8 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnacedouble), "Double Electric Furnace");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnacetriple), "Triple Electric Furnace");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricpump), "Electric Pump");
-			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolyticseparator), "Electrolyic Separator");
+			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber), "Electrolysis Chamber");
+			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolyticseparator), "Electrolytic Separator");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.energizedalloyer), "Energized Alloyer");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fermentationplant), "Fermentation Plant");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidvoid), "Fluid Void");
@@ -750,6 +751,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addContainer(SubtypeMachine.electricfurnace, "Electric Furnace");
 			addContainer(SubtypeMachine.electricfurnacedouble, "Double Electric Furnace");
 			addContainer(SubtypeMachine.electricfurnacetriple, "Triple Electric Furnace");
+			addContainer(SubtypeMachine.electrolosischamber, "Electrolosys Chamber");
 			addContainer(SubtypeMachine.electrolyticseparator, "Electrolytic Separator");
 			addContainer(SubtypeMachine.energizedalloyer, "Energized Alloyer");
 			addContainer(SubtypeMachine.fermentationplant, "Fermentation Plant");

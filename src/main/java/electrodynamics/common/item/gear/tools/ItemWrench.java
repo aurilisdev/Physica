@@ -1,7 +1,5 @@
 package electrodynamics.common.item.gear.tools;
 
-import java.util.function.Supplier;
-
 import electrodynamics.api.IWrenchItem;
 import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.prefab.tile.IWrenchable;
@@ -43,7 +41,7 @@ public class ItemWrench extends ItemElectrodynamics implements IWrenchItem {
 
 			if (player.isShiftKeyDown()) {
 
-				if (onPickup(stack, pos, player)) {
+				if (shouldPickup(stack, pos, player)) {
 
 					wrenchable.onPickup(stack, pos, player);
 
@@ -51,7 +49,7 @@ public class ItemWrench extends ItemElectrodynamics implements IWrenchItem {
 
 				}
 
-			} else if (onRotate(stack, pos, player)) {
+			} else if (shouldRotate(stack, pos, player)) {
 
 				wrenchable.onRotate(stack, pos, player);
 
@@ -70,12 +68,12 @@ public class ItemWrench extends ItemElectrodynamics implements IWrenchItem {
 	}
 
 	@Override
-	public boolean onRotate(ItemStack stack, BlockPos pos, Player player) {
+	public boolean shouldRotate(ItemStack stack, BlockPos pos, Player player) {
 		return true;
 	}
 
 	@Override
-	public boolean onPickup(ItemStack stack, BlockPos pos, Player player) {
+	public boolean shouldPickup(ItemStack stack, BlockPos pos, Player player) {
 		return true;
 	}
 }

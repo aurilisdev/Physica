@@ -18,6 +18,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -169,6 +171,8 @@ public abstract class TileMultiblockController extends TileReplaceable {
 		
 		slavePositions.forceDirty();
 
+		level.playSound(null, getBlockPos(), SoundEvents.ANVIL_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
+
 	}
 
 	public void destroyMultiblock() {
@@ -177,7 +181,9 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 		for (BlockPos pos : slavePositions.get()) {
 
-			level.destroyBlock(pos, false);
+			if(level.getBlockEntity(pos) instanceof TileMultiblockSlave slave) {
+				slave.onBlockDestroyed();
+			}
 
 		}
 
@@ -190,6 +196,8 @@ public abstract class TileMultiblockController extends TileReplaceable {
 		slaveList.clear();
 		
 		isDestroyed = false;
+
+		level.playSound(null, getBlockPos(), SoundEvents.ANVIL_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
 
 	}
 

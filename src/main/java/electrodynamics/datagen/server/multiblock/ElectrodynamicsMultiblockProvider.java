@@ -46,189 +46,213 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
 
         BlockState slave = ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false);
         BlockState scaffold = ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING.get().defaultBlockState();
-        
-        ResourceLocation glassId = ResourceLocation.fromNamespaceAndPath(References.ID, "electrolosiswindow");
+
+        ResourceLocation ecWindow = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindow");
+        ResourceLocation ecWindowTopC1 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindowc1");
+        ResourceLocation ecWindowTopC2 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindowc2");
+        ResourceLocation ecWindowTopC3 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindowc3");
+        ResourceLocation ecWindowTopC4 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindowc4");
+        ResourceLocation ecWindowTopS1 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindows1");
+        ResourceLocation ecWindowTopS2 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindows2");
+        ResourceLocation ecWindowTopS3 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindows3");
+        ResourceLocation ecWindowTopS4 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindows4");
+        ResourceLocation ecCorner = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercorner");
+        ResourceLocation ecVertSide = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambervertside");
+        ResourceLocation ecHorSideFB = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberhorsidefb");
+        ResourceLocation ecHorSideLR = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberhorsidelr");
+        ResourceLocation ecBottom = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberbottom");
+        ResourceLocation ecPowerIn = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberpowerin");
+        ResourceLocation ecFluidIn = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberfluidin");
+        ResourceLocation ecFluidOut = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberfluidout");
+        ResourceLocation ecCoilC1 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoilc1");
+        ResourceLocation ecCoilC2 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoilc2");
+        ResourceLocation ecCoilC3 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoilc3");
+        ResourceLocation ecCoilC4 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoilc4");
+        ResourceLocation ecCoilS1 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoils1");
+        ResourceLocation ecCoilS2 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoils2");
+        ResourceLocation ecCoilS3 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoils3");
+        ResourceLocation ecCoilS4 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoils4");
 
         addMultiblock(ResourceLocation.fromNamespaceAndPath(References.ID, "testing"), List.of(new MultiblockSlaveNode(slave, Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block(), ClientRegister.MODEL_BATTERYBOX.id())));
 
         addMultiblock(TileElectrolosisChamber.ID, List.of(
 
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -4), Shapes.block(), ecCorner),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -4), Shapes.block(), ecHorSideFB),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -4), Shapes.block(), ecHorSideFB),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -4), Shapes.block(), ecHorSideFB),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                //
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -4), Shapes.block(), glassId),
-                //
-                new MultiblockSlaveNode(slave, Blocks.GOLD_BLOCK.defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -4), Shapes.block(), glassId),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -4), Shapes.block(), ecCorner),
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -4), Shapes.block(), ecVertSide),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -4), Shapes.block(), ecWindow),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, Blocks.GOLD_BLOCK.defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -4), Shapes.block(), ecPowerIn),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -4), Shapes.block(), ecWindow),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -4), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                //
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -4), Shapes.block(), ecVertSide),
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -3), Shapes.block(), glassId),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -4), Shapes.block(), ecCorner),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -4), Shapes.block(), ecHorSideFB),
                 //
-                new MultiblockSlaveNode(slave, Blocks.GOLD_BLOCK.defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -4), Shapes.block(), ecHorSideFB),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -4), Shapes.block(), ecHorSideFB),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -3), Shapes.block(), glassId),
-                //
-                //
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -3), Shapes.block(), glassId),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -3), Shapes.block(), glassId),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -3), Shapes.block(), glassId),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -3), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -4), Shapes.block(), ecCorner),
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -3), Shapes.block(), ecHorSideLR),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -3), Shapes.block(), ecBottom),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -3), Shapes.block(), ecBottom),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -3), Shapes.block(), ecBottom),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -3), Shapes.block(), ecHorSideLR),
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -3), Shapes.block(), ecWindow),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -3), Shapes.block(), ecCoilC1),
+                //
+                new MultiblockSlaveNode(slave, Blocks.GOLD_BLOCK.defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -3), Shapes.block(), ecCoilS1),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -3), Shapes.block(), ecCoilC2),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -3), Shapes.block(), ecWindow),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -3), Shapes.block(), ecHorSideLR),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -3), Shapes.block(), ecWindowTopC3),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -3), Shapes.block(), ecWindowTopS4),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -3), Shapes.block(), ecWindowTopC4),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -3), Shapes.block(), ecHorSideLR),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -2), Shapes.block(), ecHorSideLR),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -2), Shapes.block(), ecBottom),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -2), Shapes.block(), ecBottom),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -2), Shapes.block(), ecBottom),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -2), Shapes.block(), ecHorSideLR),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -2), Shapes.block(), ecFluidIn),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -2), Shapes.block(), ecCoilS4),
                 //
                 new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolyticseparator).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -2), Shapes.block(), ecCoilS2),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                //
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -2), Shapes.block(), glassId),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -2), Shapes.block(), glassId),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -2), Shapes.block(), glassId),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -2), Shapes.block(), ecFluidOut),
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -2), Shapes.block(), ecHorSideLR),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -2), Shapes.block(), ecWindowTopS3),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -2), Shapes.block(), ecWindowTopS1),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                //
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, Blocks.GOLD_BLOCK.defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -2), Shapes.block(), ecHorSideLR),
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, -1), Shapes.block(), ecHorSideLR),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -1), Shapes.block(), glassId),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, -1), Shapes.block(), ecBottom),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -1), Shapes.block(), glassId),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, -1), Shapes.block(), ecBottom),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -1), Shapes.block(), glassId),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, -1), Shapes.block(), ecBottom),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -1), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                //
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
-                //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, -1), Shapes.block(), ecHorSideLR),
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -1), Shapes.block(), ecWindow),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, 0), Shapes.block(), glassId),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -1), Shapes.block(), ecCoilC4),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, 0), Shapes.block(), glassId),
+                new MultiblockSlaveNode(slave, Blocks.GOLD_BLOCK.defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -1), Shapes.block(), ecCoilS3),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -1), Shapes.block(), ecCoilC3),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -1), Shapes.block(), ecWindow),
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, -1), Shapes.block(), ecHorSideLR),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, -1), Shapes.block(), ecWindowTopC2),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, -1), Shapes.block(), ecWindowTopS2),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, -1), Shapes.block(), ecWindowTopC1),
                 //
-                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, 0), Shapes.block(), MultiblockSlaveNode.NOMODEL)
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, -1), Shapes.block(), ecHorSideLR),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, -1, 0), Shapes.block(), ecCorner),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, -1, 0), Shapes.block(), ecHorSideFB),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, -1, 0), Shapes.block(), ecHorSideFB),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, -1, 0), Shapes.block(), ecHorSideFB),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, -1, 0), Shapes.block(), ecCorner),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, 0), Shapes.block(), ecVertSide),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, 0), Shapes.block(), ecWindow),
+                //
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, 0), Shapes.block(), ecWindow),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, 0), Shapes.block(), ecVertSide),
+                //
+                //
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-2, 1, 0), Shapes.block(), ecCorner),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(-1, 1, 0), Shapes.block(), ecHorSideFB),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(0, 1, 0), Shapes.block(), ecHorSideFB),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(1, 1, 0), Shapes.block(), ecHorSideFB),
+                //
+                new MultiblockSlaveNode(slave, scaffold, MultiblockSlaveNode.NOTAG, new Vec3i(2, 1, 0), Shapes.block(), ecCorner)
 
 
         ));

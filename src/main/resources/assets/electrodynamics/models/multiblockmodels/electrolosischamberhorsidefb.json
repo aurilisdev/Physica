@@ -1,8 +1,7 @@
 {
   "loader": "electrodynamics:electrodynamicsmultiblockmodelloader",
   "parent": "minecraft:block/cube_all",
-  "render_type": "minecraft:cutout",
   "textures": {
-    "all": "electrodynamics:block/glass/glassaluminum"
+    "all": "electrodynamics:block/multiblock/electrolosischamberhorside"
   }
 }

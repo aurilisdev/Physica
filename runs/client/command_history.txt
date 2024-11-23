@@ -28,3 +28,6 @@
 /clone -66 -62 -65
 /clone -66 -62 -65 ~ ~ ~
 /clone -66 -62 -65 ~ ~ ~ to minecraft:overworld
+/time set noon
+/time set night
+/time set noon

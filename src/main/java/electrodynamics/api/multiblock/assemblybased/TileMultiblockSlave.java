@@ -1,6 +1,8 @@
 package electrodynamics.api.multiblock.assemblybased;
 
 import electrodynamics.Electrodynamics;
+import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
+import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertySlaveNode;
 import electrodynamics.prefab.properties.Property;
@@ -26,7 +28,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author skip999
@@ -188,6 +193,38 @@ public class TileMultiblockSlave extends TileReplaceable {
 			return controller.getSlaveShape(this);
 		}
 		return Shapes.block();
+	}
+
+	@Override
+	public @Nullable ICapabilityElectrodynamic getElectrodynamicCapability(@Nullable Direction side) {
+		if(level.getBlockEntity(controller.get()) instanceof TileMultiblockController controller) {
+			return controller.getSlaveCapabilityElectrodynamic(this, side);
+		}
+		return super.getElectrodynamicCapability(side);
+	}
+
+	@Override
+	public @Nullable IItemHandler getItemHandlerCapability(@Nullable Direction side) {
+		if(level.getBlockEntity(controller.get()) instanceof TileMultiblockController controller) {
+			return controller.getSlaveItemHandlerCapability(this, side);
+		}
+		return super.getItemHandlerCapability(side);
+	}
+
+	@Override
+	public @Nullable IFluidHandler getFluidHandlerCapability(@Nullable Direction side) {
+		if(level.getBlockEntity(controller.get()) instanceof TileMultiblockController controller) {
+			return controller.getSlaveFluidHandlerCapability(this, side);
+		}
+		return super.getFluidHandlerCapability(side);
+	}
+
+	@Override
+	public @Nullable IGasHandler getGasHandlerCapability(@Nullable Direction side) {
+		if(level.getBlockEntity(controller.get()) instanceof TileMultiblockController controller) {
+			return controller.getSlaveGasHandlerCapability(this, side);
+		}
+		return super.getGasHandlerCapability(side);
 	}
 
 	@Override

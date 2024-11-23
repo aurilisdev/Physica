@@ -251,6 +251,7 @@ public class ClientRegister {
         event.register(ElectrodynamicsMenuTypes.CONTAINER_GASCOLLECTOR.get(), ScreenGasCollector::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_CHEMICALREACTOR.get(), ScreenChemicalReactor::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_CREATIVEGASSOURCE.get(), ScreenCreativeGasSource::new);
+        event.register(ElectrodynamicsMenuTypes.CONTAINER_ELECTROLOSISCHAMBER.get(), ScreenElectrolosisChamber::new);
     }
 
     @SubscribeEvent
@@ -289,6 +290,7 @@ public class ClientRegister {
         event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_GASPIPEPUMP.get(), RenderGasPipePump::new);
         event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_FLUIDPIPEPUMP.get(), RenderFluidPipePump::new);
         event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_LOGISTICALWIRE.get(), RenderLogisticalWire::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_ELECTROLOSISCHAMBER.get(), RenderElectrolosisChamber::new);
 
         event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_WIRE.get(), RenderConnectBlock::new);
         event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_LOGISTICALWIRE.get(), RenderConnectBlock::new);
