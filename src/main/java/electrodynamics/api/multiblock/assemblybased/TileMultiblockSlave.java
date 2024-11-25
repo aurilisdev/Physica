@@ -12,6 +12,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
+import electrodynamics.prefab.utilities.Scheduler;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -38,7 +39,14 @@ import org.jetbrains.annotations.Nullable;
  */
 public class TileMultiblockSlave extends TileReplaceable {
 
-	public final Property<BlockPos> controller = property(new Property<>(PropertyTypes.BLOCK_POS, "controllerpos", BlockEntityUtils.OUT_OF_REACH));
+	public final Property<BlockPos> controller = property(new Property<>(PropertyTypes.BLOCK_POS, "controllerpos", BlockEntityUtils.OUT_OF_REACH)).onTileLoaded(prop -> {
+		if(!getLevel().isClientSide()) {
+			return;
+		}
+		if(!(getLevel().getBlockEntity(prop.get()) instanceof TileMultiblockController)) {
+			Scheduler.schedule(1, () -> level.setBlockAndUpdate(getBlockPos(), getDisguise()));
+		}
+	});
 	public final Property<Integer> index = property(new Property<>(PropertyTypes.INTEGER, "nodeindex", -1));
 	public final Property<ResourceLocation> renderModel = property(new Property<>(PropertyTypes.RESOURCE_LOCATION, "model", MultiblockSlaveNode.NOMODEL));
 	

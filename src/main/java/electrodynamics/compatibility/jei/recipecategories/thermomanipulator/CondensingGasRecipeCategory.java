@@ -22,6 +22,7 @@ import electrodynamics.compatibility.jei.utils.gui.types.gasgauge.GasGaugeObject
 import electrodynamics.compatibility.jei.utils.label.AbstractLabelWrapper;
 import electrodynamics.compatibility.jei.utils.label.types.PowerLabelWrapperConstant;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
@@ -42,7 +43,7 @@ public class CondensingGasRecipeCategory extends AbstractRecipeCategory<PsuedoGa
 	private static final ScreenObject OUT_GAS_GAUGE = new ScreenObject(JeiTextures.FAKE_GAS_GAUGE, 108, 5);
 
 	private static final PowerLabelWrapperConstant POWER_LABEL = new PowerLabelWrapperConstant(2, 60, Constants.THERMOELECTRIC_MANIPULATOR_USAGE_PER_TICK, 120);
-	private static final AbstractLabelWrapper TEMPERATURE_LABEL = new AbstractLabelWrapper(0xFF808080, 60, 130, true) {
+	private static final AbstractLabelWrapper TEMPERATURE_LABEL = new AbstractLabelWrapper(Color.JEI_TEXT_GRAY, 60, 130, true) {
 
 		@Override
 		public Component getComponent(AbstractRecipeCategory<?> category, Object recipe) {

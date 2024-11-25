@@ -44,7 +44,6 @@ public class ScreenMineralWasher extends GenericMaterialScreen<ContainerMineralW
 			}
 			return 0;
 		}, 98, 30));
-		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_LEFT_OFF, 42, 50));
 		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileMineralWasher boiler = container.getSafeHost();
 			if (boiler != null) {

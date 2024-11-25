@@ -44,7 +44,6 @@ public class ScreenFermentationPlant extends GenericMaterialScreen<ContainerFerm
 			}
 			return 0;
 		}, 98, 30));
-		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_LEFT_OFF, 42, 50));
 		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileFermentationPlant boiler = container.getSafeHost();
 			if (boiler != null) {

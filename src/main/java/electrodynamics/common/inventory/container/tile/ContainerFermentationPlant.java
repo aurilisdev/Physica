@@ -28,8 +28,8 @@ public class ContainerFermentationPlant extends GenericContainerBlockEntity<Tile
 
 	@Override
 	public void addInventorySlots(Container inv, Inventory playerinv) {
-		addSlot(new SlotGeneric(inv, nextIndex(), 74, 31).setIOColor(new Color(0, 240, 255, 255)));
-		addSlot(new SlotFluid(inv, nextIndex(), 74, 51));
+		addSlot(new SlotGeneric(inv, nextIndex(), 73, 31).setIOColor(new Color(0, 240, 255, 255)));
+		addSlot(new SlotFluid(inv, nextIndex(), 38, 51));
 		addSlot(new SlotFluid(inv, nextIndex(), 108, 51));
 		addSlot(new SlotUpgrade(inv, nextIndex(), 150, 14, VALID_UPGRADES));
 		addSlot(new SlotUpgrade(inv, nextIndex(), 150, 34, VALID_UPGRADES));

@@ -11,6 +11,7 @@ import electrodynamics.common.recipe.recipeutils.ProbableGas;
 import electrodynamics.common.recipe.recipeutils.ProbableItem;
 import electrodynamics.compatibility.jei.recipecategories.utils.AbstractRecipeCategory;
 import electrodynamics.compatibility.jei.utils.label.AbstractLabelWrapper;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.network.chat.Component;
 
 public class BiproductPercentWrapperElectroRecipe extends AbstractLabelWrapper {
@@ -19,7 +20,7 @@ public class BiproductPercentWrapperElectroRecipe extends AbstractLabelWrapper {
 	private final int index;
 
 	public BiproductPercentWrapperElectroRecipe(int xPos, int yPos, BiproductType type, int index) {
-		super(0xFF808080, yPos, xPos, false);
+		super(Color.JEI_TEXT_GRAY, yPos, xPos, false);
 		this.type = type;
 		this.index = index;
 	}

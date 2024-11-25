@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -44,7 +45,7 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 
 	public static final int BACKWARDS = -1;
 	public static final int FORWARDS = 1;
-	public static final int DEFAULT_TEXT_COLOR = 14737632;
+	public static final Color DEFAULT_TEXT_COLOR = new Color(224, 224, 224, 0);
 	private final Font font;
 	/** Has the current text being edited on the textbox. */
 	private String value = "";
@@ -60,8 +61,8 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 	private int cursorPos;
 	/** other selection position, maybe the same as the cursor */
 	private int highlightPos;
-	private int textColor = 14737632;
-	private int textColorUneditable = 7368816;
+	private Color textColor = DEFAULT_TEXT_COLOR;
+	private Color textColorUneditable = new Color(112, 112, 112, 0);
 	@Nullable
 	private String suggestion;
 	@Nullable
@@ -429,7 +430,7 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 
 		drawExpandedBox(graphics, texture.getLocation(), this.xLocation + guiWidth, this.yLocation + guiHeight, width, height);
 
-		int textColor = this.isEditable ? this.textColor : this.textColorUneditable;
+		Color textColor = this.isEditable ? this.textColor : this.textColorUneditable;
 		int highlightedSize = this.cursorPos - this.displayPos;
 		int highlightedLength = this.highlightPos - this.displayPos;
 
@@ -449,7 +450,7 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 
 		if (!displayedText.isEmpty()) {
 			String highlightedText = isHighlightedValid ? displayedText.substring(0, highlightedSize) : displayedText;
-			textStartPre = graphics.drawString(font, this.formatter.apply(highlightedText, this.displayPos), textStartX, textStartY, textColor);
+			textStartPre = graphics.drawString(font, this.formatter.apply(highlightedText, this.displayPos), textStartX, textStartY, textColor.color());
 		}
 
 		boolean isCursorPastLength = this.cursorPos < this.value.length() || this.value.length() >= this.getMaxLength();
@@ -464,7 +465,7 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 		}
 
 		if (!displayedText.isEmpty() && isHighlightedValid && highlightedSize < displayedText.length()) {
-			graphics.drawString(font, this.formatter.apply(displayedText.substring(highlightedSize), this.cursorPos), textStartPre, textStartY, textColor);
+			graphics.drawString(font, this.formatter.apply(displayedText.substring(highlightedSize), this.cursorPos), textStartPre, textStartY, textColor.color());
 		}
 
 		if (!isCursorPastLength && this.suggestion != null) {
@@ -475,7 +476,7 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 			if (isCursorPastLength) {
 				graphics.fill(RenderType.guiOverlay(), textStartPreCopy, textStartY - 1, textStartPreCopy + 1, textStartY + 1 + 9, -3092272);
 			} else {
-				graphics.drawString(font, "_", textStartPreCopy, textStartY, textColor);
+				graphics.drawString(font, "_", textStartPreCopy, textStartY, textColor.color());
 			}
 		}
 
@@ -543,7 +544,7 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 	/**
 	 * Sets the color to use when drawing this text box's text. A different color is used if this text box is disabled.
 	 */
-	public ScreenComponentEditBox setTextColor(int pColor) {
+	public ScreenComponentEditBox setTextColor(Color pColor) {
 		this.textColor = pColor;
 		return this;
 	}
@@ -551,7 +552,7 @@ public class ScreenComponentEditBox extends ScreenComponentGeneric {
 	/**
 	 * Sets the color to use for text in this text box when this text box is disabled.
 	 */
-	public ScreenComponentEditBox setTextColorUneditable(int pColor) {
+	public ScreenComponentEditBox setTextColorUneditable(Color pColor) {
 		this.textColorUneditable = pColor;
 		return this;
 	}

@@ -847,7 +847,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 		searchBox = new EditBoxSpecificPage(92, 10, TEXT_WIDTH, 12, nextPageNumber, getFontRenderer());
 		searchBox.setResponder(this::onTextSearched);
-		searchBox.setTextColor(0xFFFFFFFF);
+		searchBox.setTextColor(Color.WHITE);
 		searchBox.setMaxLength(100);
 
 		for (int i = 0; i < SEARCH_BUTTON_COUNT; i++) {

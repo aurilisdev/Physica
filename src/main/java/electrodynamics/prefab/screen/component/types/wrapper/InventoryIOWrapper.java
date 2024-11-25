@@ -124,7 +124,7 @@ public class InventoryIOWrapper {
 
 		}));
 
-		this.screen.addComponent(label = new ScreenComponentSimpleLabel(labelX, labelY, 10, 4210752, ElectroTextUtils.tooltip("inventoryio.slotmap")));
+		this.screen.addComponent(label = new ScreenComponentSimpleLabel(labelX, labelY, 10, Color.TEXT_GRAY, ElectroTextUtils.tooltip("inventoryio.slotmap")));
 
 		label.setVisible(false);
 

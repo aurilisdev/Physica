@@ -60,7 +60,7 @@ public class RenderMetalRod extends EntityRenderer<EntityMetalRod> {
 		double offsetY = entity.getY() - (int) entity.getY();
 		double offsetZ = entity.getZ() - (int) entity.getZ();
 
-		RenderingUtils.renderFilledBoxNoOverlay(matrixStack, bufferIn.getBuffer(RenderType.solid()), ROD, color[0], color[1], color[2], 1.0F, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), packedLightIn);
+		RenderingUtils.renderFilledBoxNoOverlay(matrixStack, bufferIn.getBuffer(RenderType.solid()), ROD, color[0], color[1], color[2], 1.0F, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), packedLightIn, RenderingUtils.ALL_FACES);
 		//RenderingUtils.renderFilledBoxNoOverlay(matrixStack, bufferIn.getBuffer(RenderType.lightning()), new AABB(0, 0, 0, 1, 1, 1), color[0], color[1], color[2], 1.0F, sprite.getU0(), sprite.getV0(), sprite.getU1(), sprite.getV1(), packedLightIn);
 
 		matrixStack.popPose();

@@ -4,6 +4,7 @@ import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.compatibility.jei.recipecategories.utils.AbstractRecipeCategory;
 import electrodynamics.compatibility.jei.utils.label.AbstractLabelWrapper;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.network.chat.Component;
 
 public class BiproductPercentWrapperConstant extends AbstractLabelWrapper {
@@ -11,7 +12,7 @@ public class BiproductPercentWrapperConstant extends AbstractLabelWrapper {
 	private final double percentage;
 
 	public BiproductPercentWrapperConstant(int xPos, int yPos, double percentage) {
-		super(0xFF808080, yPos, xPos, false);
+		super(Color.JEI_TEXT_GRAY, yPos, xPos, false);
 		this.percentage = percentage;
 	}
 

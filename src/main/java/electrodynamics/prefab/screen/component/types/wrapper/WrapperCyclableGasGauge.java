@@ -24,7 +24,7 @@ public class WrapperCyclableGasGauge {
 
         int yOffset = 0;
 
-        components.add(screen.addComponent(new ScreenComponentSimpleLabel(x + 4, y + yOffset, 7, Color.WHITE.color(), () -> Component.literal("" + (gauge + 1)))));
+        components.add(screen.addComponent(new ScreenComponentSimpleLabel(x + 4, y + yOffset, 7, Color.WHITE, () -> Component.literal("" + (gauge + 1)))));
 
         yOffset += 8;
 

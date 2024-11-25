@@ -197,15 +197,15 @@ public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReac
 
                 if (stack1.isEmpty()) {
                     poseStack.translate(0, 1, 0);
-                    RenderingUtils.renderFluidBox(poseStack, minecraft(), bufferSource.getBuffer(RenderType.translucentMovingBlock()), new AABB(0.0625, 0.25, 0.0625, 0.9375, 1, 0.9375), stack2, packedLight, packedOverlay);
+                    RenderingUtils.renderFluidBox(poseStack, minecraft(), bufferSource.getBuffer(RenderType.translucentMovingBlock()), new AABB(0.0625, 0.25, 0.0625, 0.9375, 1, 0.9375), stack2, packedLight, packedOverlay, RenderingUtils.ALL_FACES);
                 } else if (stack2.isEmpty()) {
                     poseStack.translate(0, 1, 0);
-                    RenderingUtils.renderFluidBox(poseStack, minecraft(), bufferSource.getBuffer(RenderType.translucentMovingBlock()), new AABB(0.0625, 0.25, 0.0625, 0.9375, 1, 0.9375), stack1, packedLight, packedOverlay);
+                    RenderingUtils.renderFluidBox(poseStack, minecraft(), bufferSource.getBuffer(RenderType.translucentMovingBlock()), new AABB(0.0625, 0.25, 0.0625, 0.9375, 1, 0.9375), stack1, packedLight, packedOverlay, RenderingUtils.ALL_FACES);
                 } else {
 
                     poseStack.pushPose();
                     poseStack.translate(0, 1, 0);
-                    RenderingUtils.renderFluidBox(poseStack, minecraft(), bufferSource.getBuffer(RenderType.translucentMovingBlock()), new AABB(0.0625, 0.25, 0.0625, 0.9375, 1, 0.9375), stack1, packedLight, packedOverlay);
+                    RenderingUtils.renderFluidBox(poseStack, minecraft(), bufferSource.getBuffer(RenderType.translucentMovingBlock()), new AABB(0.0625, 0.25, 0.0625, 0.9375, 1, 0.9375), stack1, packedLight, packedOverlay, RenderingUtils.ALL_FACES);
                     poseStack.popPose();
                     if (!stack2.isEmpty() && tile.getLevel().getRandom().nextDouble() < 0.1) {
 

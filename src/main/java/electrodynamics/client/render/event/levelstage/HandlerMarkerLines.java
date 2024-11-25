@@ -43,7 +43,7 @@ public class HandlerMarkerLines extends AbstractLevelStageHandler {
 		markerLines.forEach((pos, list) -> list.forEach(aabb -> {
 			stack.pushPose();
 			stack.translate(-camPos.x, -camPos.y, -camPos.z);
-			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, aabb, 1.0F, 0F, 0F, 1.0F, 255, 0);
+			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, aabb, 1.0F, 0F, 0F, 1.0F, 255, 0, RenderingUtils.ALL_FACES);
 			stack.popPose();
 		}));
 		buffer.endBatch(beaconType);

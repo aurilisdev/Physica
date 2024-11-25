@@ -5,6 +5,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import electrodynamics.api.References;
+import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
 import electrodynamics.api.multiblock.assemblybased.TileMultiblockSlave;
 import electrodynamics.client.ClientRegister;
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertySlaveNode;
@@ -29,6 +30,7 @@ import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
@@ -49,11 +51,12 @@ public class SlaveNodeModelLoader implements IGeometryLoader<SlaveNodeModelLoade
 
     public static class SlaveNodeGeometry implements IUnbakedGeometry<SlaveNodeGeometry> {
 
-        public SlaveNodeGeometry() {}
+        public SlaveNodeGeometry() {
+        }
 
         @Override
         public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
-            return new SlaveNodeModelLoader.SlaveNodeModel();
+            return new SlaveNodeModelLoader.SlaveNodeModel(context.useAmbientOcclusion(), context.isGui3d(), context.useBlockLight());
         }
 
     }
@@ -61,50 +64,67 @@ public class SlaveNodeModelLoader implements IGeometryLoader<SlaveNodeModelLoade
     public static class SlaveNodeModel implements IDynamicBakedModel {
 
         private static final List<BakedQuad> NO_QUADS = ImmutableList.of();
-        @Nullable private BakedModel model;
-        @Nullable private BlockState disguisedState;
+
+        private final HashMap<ResourceLocation, BakedModel> modelMap = new HashMap<>();
+
+        private final boolean useAmbientOcclusion;
+        private final boolean isGui3d;
+        private final boolean usesBlockLight;
+
+        public SlaveNodeModel(boolean useAmbientOcclusion, boolean isGui3d, boolean usesBlockLight) {
+            this.useAmbientOcclusion = useAmbientOcclusion;
+            this.isGui3d = isGui3d;
+            this.usesBlockLight = usesBlockLight;
+        }
 
         @Override
         public boolean useAmbientOcclusion() {
-            return model == null ? false : model.useAmbientOcclusion();
+            return useAmbientOcclusion;
         }
 
         @Override
         public boolean isGui3d() {
-            return model == null ? false : model.isGui3d();
+            return isGui3d;
         }
 
         @Override
         public boolean usesBlockLight() {
-            return model == null ? false : model.usesBlockLight();
+            return usesBlockLight;
         }
 
         @Override
         public boolean isCustomRenderer() {
-            return model == null ? false : model.isCustomRenderer();
+            return false;
         }
 
         @Override
         public TextureAtlasSprite getParticleIcon() {
-            return model == null ? ClientRegister.getSprite(ClientRegister.TEXTURE_WHITE) : model.getParticleIcon();
+            return ClientRegister.getSprite(ClientRegister.TEXTURE_MULTISUBNODE);
         }
 
         @Override
         public ItemOverrides getOverrides() {
-            return model == null ? ItemOverrides.EMPTY : model.getOverrides();
+            return ItemOverrides.EMPTY;
         }
 
         @Override
         public ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource rand, @NotNull ModelData data) {
-
-            return model == null ? ChunkRenderTypeSet.none() : model.getRenderTypes(disguisedState, rand, data);
-
+            if (data.has(ModelPropertySlaveNode.INSTANCE)) {
+                BakedModel model = modelMap.get(data.get(ModelPropertySlaveNode.INSTANCE).id());
+                return model == null ? ChunkRenderTypeSet.none() : model.getRenderTypes(state, rand, data);
+            }
+            return ChunkRenderTypeSet.none();
         }
 
         @Override
         public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData extraData, @Nullable RenderType renderType) {
-            if(model instanceof MultiblockModelLoader.MultiblockModel slave) {
-                return slave.getQuads(disguisedState, side, rand, extraData, renderType);
+            ModelPropertySlaveNode.SlaveNodeWrapper data = extraData.get(ModelPropertySlaveNode.INSTANCE);
+            if (data == null || !MultiblockSlaveNode.hasModel(data.id())) {
+                return NO_QUADS;
+            }
+            BakedModel model = modelMap.get(data.id());
+            if (model instanceof MultiblockModelLoader.MultiblockModel slave) {
+                return slave.getQuads(state, side, rand, extraData, renderType);
             }
 
             return NO_QUADS;
@@ -112,11 +132,11 @@ public class SlaveNodeModelLoader implements IGeometryLoader<SlaveNodeModelLoade
 
         @Override
         public @NotNull ModelData getModelData(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ModelData modelData) {
-            if (level.getBlockEntity(pos) instanceof TileMultiblockSlave slave) {
-                ModelData data = slave.getModelData();
-                model = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(data.get(ModelPropertySlaveNode.INSTANCE).id()));
-                disguisedState = slave.getDisguise();
-                return data;
+            if (level.getBlockEntity(pos) instanceof TileMultiblockSlave slave && MultiblockSlaveNode.hasModel(slave.renderModel.get())) {
+                if (modelMap.get(slave.renderModel.get()) == null) {
+                    modelMap.put(slave.renderModel.get(), Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(slave.renderModel.get())));
+                }
+                return slave.getModelData();
             }
             return modelData;
         }

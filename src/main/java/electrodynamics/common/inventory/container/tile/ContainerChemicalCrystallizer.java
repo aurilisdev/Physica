@@ -28,8 +28,8 @@ public class ContainerChemicalCrystallizer extends GenericContainerBlockEntity<T
 
 	@Override
 	public void addInventorySlots(Container inv, Inventory playerinv) {
-		addSlot(new SlotRestricted(inv, nextIndex(), 82, 31).setIOColor(new Color(255, 0, 0, 255)));
-		addSlot(new SlotFluid(inv, nextIndex(), 82, 51));
+		addSlot(new SlotRestricted(inv, nextIndex(), 114, 31).setIOColor(new Color(255, 0, 0, 255)));
+		addSlot(new SlotFluid(inv, nextIndex(), 38, 51));
 		addSlot(new SlotUpgrade(inv, nextIndex(), 150, 14, VALID_UPGRADES));
 		addSlot(new SlotUpgrade(inv, nextIndex(), 150, 34, VALID_UPGRADES));
 		addSlot(new SlotUpgrade(inv, nextIndex(), 150, 54, VALID_UPGRADES));

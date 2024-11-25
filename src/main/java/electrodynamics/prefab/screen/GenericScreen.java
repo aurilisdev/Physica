@@ -16,6 +16,7 @@ import electrodynamics.prefab.screen.component.types.ScreenComponentSlot;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.IconType;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.SlotType;
 import electrodynamics.prefab.screen.component.utils.SlotTextureProvider;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -51,8 +52,8 @@ public class GenericScreen<T extends GenericContainer> extends AbstractContainer
 			addComponent(component);
 			slots.add(component);
 		}
-		addComponent(guiTitle = new ScreenComponentSimpleLabel(this.titleLabelX, this.titleLabelY, 10, 4210752, this.title));
-		addComponent(playerInvLabel = new ScreenComponentSimpleLabel(this.inventoryLabelX, this.inventoryLabelY, 10, 4210752, this.playerInventoryTitle));
+		addComponent(guiTitle = new ScreenComponentSimpleLabel(this.titleLabelX, this.titleLabelY, 10, Color.TEXT_GRAY, this.title));
+		addComponent(playerInvLabel = new ScreenComponentSimpleLabel(this.inventoryLabelX, this.inventoryLabelY, 10, Color.TEXT_GRAY, this.playerInventoryTitle));
 	}
 
 	protected ScreenComponentSlot createScreenSlot(Slot slot) {

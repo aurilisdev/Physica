@@ -135,12 +135,13 @@ public class ClientRegister {
     public static final ResourceLocation TEXTURE_QUARRYARM_DARK = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/quarrydark");
     public static final ResourceLocation TEXTURE_MERCURY = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/mercury");
     public static final ResourceLocation TEXTURE_GAS = ResourceLocation.fromNamespaceAndPath(References.ID, "block/custom/gastexture");
+    public static final ResourceLocation TEXTURE_MULTISUBNODE = ResourceLocation.fromNamespaceAndPath(References.ID, "block/multisubnode");
 
     private static final String MULTIBLOCK_API_MODEL_FOLDER = "multiblockmodels";
 
     private static final HashMap<ResourceLocation, TextureAtlasSprite> CACHED_TEXTUREATLASSPRITES = new HashMap<>();
     // for registration purposes only!
-    private static final List<ResourceLocation> CUSTOM_TEXTURES = List.of(ClientRegister.TEXTURE_WHITE, ClientRegister.TEXTURE_MERCURY, ClientRegister.TEXTURE_QUARRYARM, ClientRegister.TEXTURE_QUARRYARM_DARK, ClientRegister.TEXTURE_GAS);
+    private static final List<ResourceLocation> CUSTOM_TEXTURES = List.of(ClientRegister.TEXTURE_WHITE, ClientRegister.TEXTURE_MERCURY, ClientRegister.TEXTURE_QUARRYARM, ClientRegister.TEXTURE_QUARRYARM_DARK, ClientRegister.TEXTURE_GAS, ClientRegister.TEXTURE_MULTISUBNODE);
 
     public static void setup() {
         ClientEvents.init();

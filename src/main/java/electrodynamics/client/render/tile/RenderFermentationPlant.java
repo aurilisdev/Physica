@@ -51,7 +51,7 @@ public class RenderFermentationPlant extends AbstractTileRenderer<TileFermentati
 				box = new AABB(4.0D / 16.0D, 9.0D / 16.0D, 7.0D / 16.0D, 5.0D / 16.0D, 14.0D / 16.0D, 9.0D / 16.0D);
 			}
 			VertexConsumer builder = bufferIn.getBuffer(Sheets.translucentCullBlockSheet());
-			RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, input, combinedLightIn, combinedOverlayIn);
+			RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, input, combinedLightIn, combinedOverlayIn, RenderingUtils.ALL_FACES);
 		}
 
 		FluidStack output = null;
@@ -73,7 +73,7 @@ public class RenderFermentationPlant extends AbstractTileRenderer<TileFermentati
 				box = new AABB(9.0D / 16.0D, 5.0D / 16.0D, 6.0D / 16.0D, 14.0D / 16.0D, 7.0D / 16.0D, 10.0D / 16.0D);
 			}
 			VertexConsumer builder = bufferIn.getBuffer(Sheets.translucentCullBlockSheet());
-			RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, output, combinedLightIn, combinedOverlayIn);
+			RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, output, combinedLightIn, combinedOverlayIn, RenderingUtils.ALL_FACES);
 		}
 		matrixStackIn.popPose();
 

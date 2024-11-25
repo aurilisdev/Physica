@@ -33,8 +33,8 @@ public class ContainerChemicalMixer extends GenericContainerBlockEntity<TileChem
 
 	@Override
 	public void addInventorySlots(Container inv, Inventory playerinv) {
-		addSlot(new SlotGeneric(inv, nextIndex(), 74, 31).setIOColor(new Color(0, 240, 255, 255)));
-		addSlot(new SlotFluid(inv, nextIndex(), 74, 51));
+		addSlot(new SlotGeneric(inv, nextIndex(), 73, 31).setIOColor(new Color(0, 240, 255, 255)));
+		addSlot(new SlotFluid(inv, nextIndex(), 38, 51));
 		addSlot(new SlotFluid(inv, nextIndex(), 108, 51));
 		addSlot(new SlotUpgrade(inv, nextIndex(), 153, 14, VALID_UPGRADES));
 		addSlot(new SlotUpgrade(inv, nextIndex(), 153, 34, VALID_UPGRADES));

@@ -10,6 +10,7 @@ import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
 import electrodynamics.prefab.screen.component.types.ScreenComponentMultiLabel;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -45,13 +46,13 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 
 			Component symbol = units.getSymbol();
 
-			graphics.drawString(font, symbol, 163 - font.width(symbol), 175, 4210752, false);
+			graphics.drawString(font, symbol, 163 - font.width(symbol), 175, Color.TEXT_GRAY.color(), false);
 
 		}));
 
-		addComponent(new ScreenComponentSimpleLabel(13, 38, 10, 4210752, ElectroTextUtils.gui("property")));
-		addComponent(new ScreenComponentSimpleLabel(13, 118, 10, 4210752, ElectroTextUtils.gui("operator")));
-		addComponent(new ScreenComponentSimpleLabel(13, 158, 10, 4210752, ElectroTextUtils.gui("value")));
+		addComponent(new ScreenComponentSimpleLabel(13, 38, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("property")));
+		addComponent(new ScreenComponentSimpleLabel(13, 118, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("operator")));
+		addComponent(new ScreenComponentSimpleLabel(13, 158, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("value")));
 
 		// network value
 
@@ -144,7 +145,7 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 		}));
 
 		// entered value
-		addEditBox(value = new ScreenComponentEditBox(13, 170, 134, 20, getFontRenderer()).setFilter(ScreenComponentEditBox.POSITIVE_DECIMAL).setMaxLength(30).setTextColor(-1).setTextColorUneditable(-1).setResponder(this::handleValue));
+		addEditBox(value = new ScreenComponentEditBox(13, 170, 134, 20, getFontRenderer()).setFilter(ScreenComponentEditBox.POSITIVE_DECIMAL).setMaxLength(30).setTextColor(Color.WHITE).setTextColorUneditable(Color.WHITE).setResponder(this::handleValue));
 
 		playerInvLabel.setVisible(false);
 

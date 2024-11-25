@@ -218,11 +218,15 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 		registry.addRecipeClickArea(ScreenElectricArcFurnace.class, 85, 35, 22, 15, ElectricArcFurnaceRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenElectricArcFurnaceDouble.class, 85, 25, 22, 35, ElectricArcFurnaceRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenElectricArcFurnaceTriple.class, 85, 25, 22, 55, ElectricArcFurnaceRecipeCategory.RECIPE_TYPE);
+		registry.addRecipeClickArea(ScreenChemicalMixer.class, 42, 31, 22, 15, ChemicalMixerRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenChemicalMixer.class, 97, 31, 22, 15, ChemicalMixerRecipeCategory.RECIPE_TYPE);
+		registry.addRecipeClickArea(ScreenFermentationPlant.class, 42, 31, 22, 15, FermentationPlantRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenFermentationPlant.class, 97, 31, 22, 15, FermentationPlantRecipeCategory.RECIPE_TYPE);
+		registry.addRecipeClickArea(ScreenMineralWasher.class, 42, 31, 22, 15, MineralWasherRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenMineralWasher.class, 97, 31, 22, 15, MineralWasherRecipeCategory.RECIPE_TYPE);
-		registry.addRecipeClickArea(ScreenChemicalCrystallizer.class, 41, 35, 22, 15, ChemicalCrystallizerRecipeCategory.RECIPE_TYPE);
+		registry.addRecipeClickArea(ScreenChemicalCrystallizer.class, 42, 35, 64, 15, ChemicalCrystallizerRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenElectrolyticSeparator.class, 38, 30, 22, 15, ElectrolyticSeparatorRecipeCategory.RECIPE_TYPE);
+		registry.addRecipeClickArea(ScreenElectrolyticSeparator.class, 78, 30, 22, 15, ElectrolyticSeparatorRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenThermoelectricManipulator.class, 62, 19, 32, 47, CondensingGasRecipeCategory.RECIPE_TYPE, EvaporatingFluidRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenChemicalReactor.class, 66, 52, 22, 15, ChemicalReactorRecipeCategory.RECIPE_TYPE);
 		registry.addRecipeClickArea(ScreenGasCollector.class, 57, 34, 17, 17, GasCollectorRecipeCategory.RECIPE_TYPE);

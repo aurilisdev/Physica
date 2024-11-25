@@ -21,6 +21,7 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.tile.components.type.ComponentGasHandlerMulti;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -68,10 +69,10 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentGeneric(Textures.CONDENSER_COLUMN, 62, 19));
 
-		addEditBox(temperature = new ScreenComponentEditBox(94, 75, 59, 16, getFontRenderer()).setTextColor(-1).setTextColorUneditable(-1).setMaxLength(20).setResponder(this::setTemperature).setFilter(ScreenComponentEditBox.POSITIVE_INTEGER));
+		addEditBox(temperature = new ScreenComponentEditBox(94, 75, 59, 16, getFontRenderer()).setTextColor(Color.WHITE).setTextColorUneditable(Color.WHITE).setMaxLength(20).setResponder(this::setTemperature).setFilter(ScreenComponentEditBox.POSITIVE_INTEGER));
 
-		addComponent(new ScreenComponentSimpleLabel(10, 80, 10, 4210752, ElectroTextUtils.gui("thermoelectricmanipulator.temp")));
-		addComponent(new ScreenComponentSimpleLabel(155, 80, 10, 4210752, DisplayUnit.TEMPERATURE_KELVIN.getSymbol()));
+		addComponent(new ScreenComponentSimpleLabel(10, 80, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("thermoelectricmanipulator.temp")));
+		addComponent(new ScreenComponentSimpleLabel(155, 80, 10, Color.TEXT_GRAY, DisplayUnit.TEMPERATURE_KELVIN.getSymbol()));
 	}
 
 	private void setTemperature(String temp) {

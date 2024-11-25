@@ -25,7 +25,7 @@ public class ScreenChemicalCrystallizer extends GenericMaterialScreen<ContainerC
 
 	public ScreenChemicalCrystallizer(ContainerChemicalCrystallizer container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
-		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
+		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT_BIG, () -> {
 			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getComponent(IComponentType.Processor);
@@ -34,8 +34,7 @@ public class ScreenChemicalCrystallizer extends GenericMaterialScreen<ContainerC
 				}
 			}
 			return 0;
-		}, 41, 31));
-		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_LEFT_OFF, 41, 51));
+		}, 42, 31));
 		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileChemicalCrystallizer boiler = container.getSafeHost();
 			if (boiler != null) {

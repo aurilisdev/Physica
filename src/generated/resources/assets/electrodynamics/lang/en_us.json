@@ -1397,6 +1397,8 @@
   "tooltip.electrodynamics.electricdrill.overclock": "Overclock: %s",
   "tooltip.electrodynamics.electricdrill.silktouch": "Silk Touch",
   "tooltip.electrodynamics.electricdrill.usage": "Use / Block: %s",
+  "tooltip.electrodynamics.electrolosischamber.procamount": "Processing Amount: %s",
+  "tooltip.electrodynamics.electrolosischamber.satisfaction": "Satisfaction: %s",
   "tooltip.electrodynamics.fluidtank.capacity": "Capacity: %s",
   "tooltip.electrodynamics.fluidvalve": "Blocks fluids when powered with redstone",
   "tooltip.electrodynamics.fluidvoid": "Voids fluids",

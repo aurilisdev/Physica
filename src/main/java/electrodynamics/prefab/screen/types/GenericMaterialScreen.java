@@ -26,8 +26,8 @@ public class GenericMaterialScreen<T extends GenericContainer> extends GenericSc
 	private Set<ScreenComponentFluidGauge> fluidGauges = new HashSet<>();
 	private Set<ScreenComponentGasGauge> gasGauges = new HashSet<>();
 
-	public GenericMaterialScreen(T screenContainer, Inventory inv, Component titleIn) {
-		super(screenContainer, inv, titleIn);
+	public GenericMaterialScreen(T container, Inventory inv, Component titleIn) {
+		super(container, inv, titleIn);
 	}
 
 	@Override

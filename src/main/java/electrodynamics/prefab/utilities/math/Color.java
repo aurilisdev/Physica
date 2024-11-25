@@ -12,6 +12,8 @@ public class Color {
 
 	public static final Color WHITE = new Color(0xFFFFFFFF);
 	public static final Color BLACK = new Color(0, 0, 0, 0);
+	public static final Color TEXT_GRAY = new Color(64, 64, 64, 255);
+	public static final Color JEI_TEXT_GRAY = new Color(128, 128, 128, 255);
 
 	private final int r;
 	private final int g;

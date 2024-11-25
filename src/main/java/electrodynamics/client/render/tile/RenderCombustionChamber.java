@@ -40,7 +40,7 @@ public class RenderCombustionChamber extends AbstractTileRenderer<TileCombustion
 			}
 
 			VertexConsumer builder = bufferIn.getBuffer(Sheets.translucentCullBlockSheet());
-			RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, fuel, combinedLightIn, combinedOverlayIn);
+			RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, fuel, combinedLightIn, combinedOverlayIn, RenderingUtils.ALL_FACES);
 		}
 		matrixStackIn.popPose();
 	}

@@ -23,6 +23,7 @@ import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -174,32 +175,32 @@ public class ScreenQuarry extends GenericScreen<ContainerQuarry> {
 		}
 		// void card
 		if (quarry.hasItemVoid.get()) {
-			graphics.drawString(font, ElectroTextUtils.gui("quarry.voiditems"), 85, 14, 4210752, false);
+			graphics.drawString(font, ElectroTextUtils.gui("quarry.voiditems"), 85, 14, Color.TEXT_GRAY.color(), false);
 		} else {
-			graphics.drawString(font, ElectroTextUtils.gui("quarry.needvoidcard"), 85, 14, 4210752, false);
+			graphics.drawString(font, ElectroTextUtils.gui("quarry.needvoidcard"), 85, 14, Color.TEXT_GRAY.color(), false);
 		}
 
 		/* STATUS */
 
-		graphics.drawString(font, ElectroTextUtils.gui("quarry.status"), 5, 32, 4210752, false);
+		graphics.drawString(font, ElectroTextUtils.gui("quarry.status"), 5, 32, Color.TEXT_GRAY.color(), false);
 
 		int height = 42;
 		if (!quarry.isAreaCleared.get()) {
-			graphics.drawString(font, ElectroTextUtils.gui("quarry.clearingarea"), 10, height, 4210752, false);
+			graphics.drawString(font, ElectroTextUtils.gui("quarry.clearingarea"), 10, height, Color.TEXT_GRAY.color(), false);
 		} else if (!quarry.hasRing.get()) {
-			graphics.drawString(font, ElectroTextUtils.gui("quarry.setup"), 10, height, 4210752, false);
+			graphics.drawString(font, ElectroTextUtils.gui("quarry.setup"), 10, height, Color.TEXT_GRAY.color(), false);
 		} else if (quarry.running.get()) {
-			graphics.drawString(font, ElectroTextUtils.gui("quarry.mining"), 10, height, 4210752, false);
+			graphics.drawString(font, ElectroTextUtils.gui("quarry.mining"), 10, height, Color.TEXT_GRAY.color(), false);
 		} else if (quarry.isFinished.get()) {
-			graphics.drawString(font, ElectroTextUtils.gui("quarry.finished"), 10, height, 4210752, false);
+			graphics.drawString(font, ElectroTextUtils.gui("quarry.finished"), 10, height, Color.TEXT_GRAY.color(), false);
 		} else {
-			graphics.drawString(font, ElectroTextUtils.gui("quarry.notmining"), 10, height, 4210752, false);
+			graphics.drawString(font, ElectroTextUtils.gui("quarry.notmining"), 10, height, Color.TEXT_GRAY.color(), false);
 		}
 
 		/* ERRORS */
 
-		graphics.drawString(font, ElectroTextUtils.gui("quarry.errors"), 5, 65, 4210752, false);
-		graphics.drawString(font, ElectroTextUtils.gui(getErrorKey(quarry)), 10, 75, 4210752, false);
+		graphics.drawString(font, ElectroTextUtils.gui("quarry.errors"), 5, 65, Color.TEXT_GRAY.color(), false);
+		graphics.drawString(font, ElectroTextUtils.gui(getErrorKey(quarry)), 10, 75, Color.TEXT_GRAY.color(), false);
 
 	}
 

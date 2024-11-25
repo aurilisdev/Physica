@@ -15,6 +15,7 @@ import electrodynamics.compatibility.jei.utils.label.types.PowerLabelWrapperCons
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -35,7 +36,7 @@ public class GasCollectorRecipeCategory extends AbstractRecipeCategory<PsuedoGas
 
     public static final PowerLabelWrapperConstant POWER_LABEL = new PowerLabelWrapperConstant(2, 55, Constants.GAS_COLLECTOR_USAGE_PER_TICK, 240);
 
-    public static final AbstractLabelWrapper BIOME_LABEL = new AbstractLabelWrapper(0xFF808080, 2, 2, false) {
+    public static final AbstractLabelWrapper BIOME_LABEL = new AbstractLabelWrapper(Color.JEI_TEXT_GRAY, 2, 2, false) {
         @Override
         public Component getComponent(AbstractRecipeCategory<?> category, Object recipe) {
             PsuedoGasCollectorRecipe psuedo = (PsuedoGasCollectorRecipe) recipe;

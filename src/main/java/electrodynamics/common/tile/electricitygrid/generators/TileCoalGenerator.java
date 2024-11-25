@@ -22,6 +22,7 @@ import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TargetValue.PropertyTargetValue;
 import electrodynamics.prefab.utilities.object.TransferPack;
+import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -112,7 +113,7 @@ public class TileCoalGenerator extends GenericGeneratorTile {
 
 	@Override
 	public TransferPack getProduced() {
-		return TransferPack.ampsVoltage(multiplier.get() * Constants.COALGENERATOR_MAX_OUTPUT.getAmps() * ((heat.getValue() - 27.0) / (3000.0 - 27.0)), Constants.COALGENERATOR_MAX_OUTPUT.getVoltage());
+		return TransferPack.ampsVoltage(multiplier.get() * Constants.COALGENERATOR_AMPERAGE * ((heat.getValue() - 27.0) / (3000.0 - 27.0)), ElectrodynamicsCapabilities.DEFAULT_VOLTAGE);
 	}
 
 	public static List<Item> getValidItems() {

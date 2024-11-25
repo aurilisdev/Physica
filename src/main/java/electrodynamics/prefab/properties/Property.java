@@ -199,17 +199,27 @@ public class Property<T> {
     }
 
     public void loadFromTag(CompoundTag tag, HolderLookup.Provider registries) {
-        T data = (T) getType().readFromTag(new IPropertyType.TagReader(this, tag, registries));
-        if (data != null) {
-            T old = value;
-            value = data;
-            onChange.accept(this, value);
+        try {
+            T data = (T) getType().readFromTag(new IPropertyType.TagReader(this, tag, registries));
+            if (data != null) {
+                T old = value;
+                value = data;
+                onChange.accept(this, value);
+            }
+        } catch (Exception e) {
+            Electrodynamics.LOGGER.info("Property " + getName() + " was impropertly cast");
         }
+
 
     }
 
     public void saveToTag(CompoundTag tag, HolderLookup.Provider registries) {
-        getType().writeToTag(new IPropertyType.TagWriter<>(this, tag, registries));
+        try {
+            getType().writeToTag(new IPropertyType.TagWriter<>(this, tag, registries));
+        } catch (Exception e) {
+            Electrodynamics.LOGGER.info("Property " + getName() + " was impropertly cast");
+        }
+
     }
 
 }

@@ -7,6 +7,7 @@ import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,9 +20,9 @@ public class ScreenPotentiometer extends GenericScreen<ContainerPotentiometer> {
 
 	public ScreenPotentiometer(ContainerPotentiometer container, Inventory inv, Component title) {
 		super(container, inv, title);
-		addEditBox(consumption = new ScreenComponentEditBox(72, 35, 80, 16, getFontRenderer()).setTextColor(-1).setTextColorUneditable(-1).setMaxLength(30).setFilter(ScreenComponentEditBox.DECIMAL).setResponder(this::setConsumption));
-		addComponent(new ScreenComponentSimpleLabel(10, 39, 10, 4210752, ElectroTextUtils.gui("potentiometer.usage")));
-		addComponent(new ScreenComponentSimpleLabel(155, 39, 10, 4210752, DisplayUnit.WATT.getSymbol()));
+		addEditBox(consumption = new ScreenComponentEditBox(72, 35, 80, 16, getFontRenderer()).setTextColor(Color.WHITE).setTextColorUneditable(Color.WHITE).setMaxLength(30).setFilter(ScreenComponentEditBox.DECIMAL).setResponder(this::setConsumption));
+		addComponent(new ScreenComponentSimpleLabel(10, 39, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("potentiometer.usage")));
+		addComponent(new ScreenComponentSimpleLabel(155, 39, 10, Color.TEXT_GRAY, DisplayUnit.WATT.getSymbol()));
 	}
 
 	private void setConsumption(String value) {

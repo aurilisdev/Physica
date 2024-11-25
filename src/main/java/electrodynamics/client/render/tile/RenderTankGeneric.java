@@ -38,7 +38,7 @@ public class RenderTankGeneric extends AbstractTileRenderer<GenericTileFluidTank
 			float yHeight = Mth.clamp((float) tank.getFluidAmount() / (float) tank.getCapacity(), MIN_Y + 0.065F, MAX_Y);
 			AABB aabb = new AABB(MIN_X, MIN_Y, MIN_Z, MAX_X, yHeight, MAX_Z);
 			VertexConsumer builder = source.getBuffer(Sheets.translucentCullBlockSheet());
-			RenderingUtils.renderFluidBox(stack, Minecraft.getInstance(), builder, aabb, fluid, light, overlay);
+			RenderingUtils.renderFluidBox(stack, Minecraft.getInstance(), builder, aabb, fluid, light, overlay, RenderingUtils.ALL_FACES);
 		}
 	}
 

@@ -20,6 +20,7 @@ import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElect
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.RenderingUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import electrodynamics.prefab.utilities.object.Location;
 import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import net.minecraft.ChatFormatting;
@@ -85,12 +86,12 @@ public class ScreenSeismicScanner extends GenericScreen<ContainerSeismicScanner>
 
 
 		addComponent(new ScreenComponentElectricInfo(this::getElectricInformation, -AbstractScreenComponentInfo.SIZE + 1, 2));
-		componentsToShow.add(addComponent(new ScreenComponentSimpleLabel(15, 23, 10, 4210752, ElectroTextUtils.gui("seismicscanner.material"))));
-		componentsToShow.add(addComponent(new ScreenComponentSimpleLabel(15, 63, 10, 4210752, ElectroTextUtils.gui("seismicscanner.pattern"))));
-		componentsToShow.add(addComponent(new ScreenComponentSimpleLabel(20, 89, 10, 4210752, () -> getPatternName(menu.getOwnerItem()))));
-		componentsToShow.add(addComponent(new ScreenComponentSimpleLabel(20, 99, 10, 4210752, () -> ElectroTextUtils.gui("seismicscanner.patternintegrity", getPatternDurability(menu.getOwnerItem())))));
+		componentsToShow.add(addComponent(new ScreenComponentSimpleLabel(15, 23, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("seismicscanner.material"))));
+		componentsToShow.add(addComponent(new ScreenComponentSimpleLabel(15, 63, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("seismicscanner.pattern"))));
+		componentsToShow.add(addComponent(new ScreenComponentSimpleLabel(20, 89, 10, Color.TEXT_GRAY, () -> getPatternName(menu.getOwnerItem()))));
+		componentsToShow.add(addComponent(new ScreenComponentSimpleLabel(20, 99, 10, Color.TEXT_GRAY, () -> ElectroTextUtils.gui("seismicscanner.patternintegrity", getPatternDurability(menu.getOwnerItem())))));
 
-		componentsToHide.add(addComponent(new ScreenComponentSimpleLabel(20, 80, 10, 4210752, ElectroTextUtils.gui("seismicscanner.dataheader"))));
+		componentsToHide.add(addComponent(new ScreenComponentSimpleLabel(20, 80, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("seismicscanner.dataheader"))));
 		componentsToHide.add(addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
 			ItemStack ownerItem = menu.getOwnerItem();
 
@@ -98,13 +99,13 @@ public class ScreenSeismicScanner extends GenericScreen<ContainerSeismicScanner>
 			Location blockLoc = ownerItem.getOrDefault(ElectrodynamicsDataComponentTypes.LOCATION_2, new Location(0, 0, 0));
 
 			if (blockLoc.equals(playerLoc)) {
-				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.xcoordna"), 30, 90, 4210752, false);
-				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.ycoordna"), 30, 100, 4210752, false);
-				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.zcoordna"), 30, 110, 4210752, false);
+				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.xcoordna"), 30, 90, Color.TEXT_GRAY.color(), false);
+				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.ycoordna"), 30, 100, Color.TEXT_GRAY.color(), false);
+				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.zcoordna"), 30, 110, Color.TEXT_GRAY.color(), false);
 			} else {
-				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.xcoord", blockLoc.intX()), 30, 90, 4210752, false);
-				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.ycoord", blockLoc.intY()), 30, 100, 4210752, false);
-				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.zcoord", blockLoc.intZ()), 30, 110, 4210752, false);
+				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.xcoord", blockLoc.intX()), 30, 90, Color.TEXT_GRAY.color(), false);
+				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.ycoord", blockLoc.intY()), 30, 100, Color.TEXT_GRAY.color(), false);
+				graphics.drawString(font, ElectroTextUtils.gui("seismicscanner.zcoord", blockLoc.intZ()), 30, 110, Color.TEXT_GRAY.color(), false);
 			}
 		})));
 

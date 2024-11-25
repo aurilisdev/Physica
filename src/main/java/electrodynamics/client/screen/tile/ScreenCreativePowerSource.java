@@ -8,6 +8,7 @@ import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,12 +22,12 @@ public class ScreenCreativePowerSource extends GenericScreen<ContainerCreativePo
 
 	public ScreenCreativePowerSource(ContainerCreativePowerSource container, Inventory inv, Component titleIn) {
 		super(container, inv, titleIn);
-		addComponent(voltage = new ScreenComponentEditBox(80, 27, 49, 16, getFontRenderer()).setTextColor(-1).setTextColorUneditable(-1).setMaxLength(6).setFilter(ScreenComponentEditBox.POSITIVE_INTEGER).setResponder(this::setVoltage));
-		addComponent(power = new ScreenComponentEditBox(80, 45, 49, 16, getFontRenderer()).setTextColor(-1).setTextColorUneditable(-1).setFilter(ScreenComponentEditBox.POSITIVE_DECIMAL).setResponder(this::setPower));
-		addComponent(new ScreenComponentSimpleLabel(40, 31, 10, 4210752, ElectroTextUtils.gui("creativepowersource.voltage")));
-		addComponent(new ScreenComponentSimpleLabel(40, 49, 10, 4210752, ElectroTextUtils.gui("creativepowersource.power")));
-		addComponent(new ScreenComponentSimpleLabel(131, 31, 10, 4210752, DisplayUnit.VOLTAGE.getSymbol()));
-		addComponent(new ScreenComponentSimpleLabel(131, 49, 10, 4210752, MeasurementUnit.MEGA.getSymbol().copy().append(DisplayUnit.WATT.getSymbol())));
+		addComponent(voltage = new ScreenComponentEditBox(80, 27, 49, 16, getFontRenderer()).setTextColor(Color.WHITE).setTextColorUneditable(Color.WHITE).setMaxLength(6).setFilter(ScreenComponentEditBox.POSITIVE_INTEGER).setResponder(this::setVoltage));
+		addComponent(power = new ScreenComponentEditBox(80, 45, 49, 16, getFontRenderer()).setTextColor(Color.WHITE).setTextColorUneditable(Color.WHITE).setFilter(ScreenComponentEditBox.POSITIVE_DECIMAL).setResponder(this::setPower));
+		addComponent(new ScreenComponentSimpleLabel(40, 31, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("creativepowersource.voltage")));
+		addComponent(new ScreenComponentSimpleLabel(40, 49, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("creativepowersource.power")));
+		addComponent(new ScreenComponentSimpleLabel(131, 31, 10, Color.TEXT_GRAY, DisplayUnit.VOLTAGE.getSymbol()));
+		addComponent(new ScreenComponentSimpleLabel(131, 49, 10, Color.TEXT_GRAY, MeasurementUnit.MEGA.getSymbol().copy().append(DisplayUnit.WATT.getSymbol())));
 	}
 
 	private void setVoltage(String val) {

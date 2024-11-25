@@ -75,7 +75,7 @@ public class RenderChemicalMixer extends AbstractTileRenderer<TileChemicalMixer>
         if (fluid != null) {
             AABB box = new AABB(2.0D / 16.0D, 7.0D / 16.0D, 2.0D / 16.0D, 14.0D / 16.0D, 10.0D / 16.0D, 14.0D / 16.0D);
             VertexConsumer builder = bufferIn.getBuffer(Sheets.translucentCullBlockSheet());
-            RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, fluid, combinedLightIn, combinedOverlayIn);
+            RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, fluid, combinedLightIn, combinedOverlayIn, RenderingUtils.ALL_FACES);
         }
         matrixStackIn.popPose();
     }

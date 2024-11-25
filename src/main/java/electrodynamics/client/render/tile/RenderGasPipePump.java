@@ -70,8 +70,8 @@ public class RenderGasPipePump extends AbstractTileRenderer<TileGasPipePump> {
 
 		VertexConsumer builder = bufferSource.getBuffer(Sheets.solidBlockSheet());
 
-		RenderingUtils.renderFilledBox(poseStack, builder, box1, 67.0F / 256.0F, 67.0F / 256.0F, 67.0F / 256.0F, 1, u0, v0, u1, v1, packedLight, packedOverlay);
-		RenderingUtils.renderFilledBox(poseStack, builder, box2, 67.0F / 256.0F, 67.0F / 256.0F, 67.0F / 256.0F, 1, u0, v0, u1, v1, packedLight, packedOverlay);
+		RenderingUtils.renderFilledBox(poseStack, builder, box1, 67.0F / 256.0F, 67.0F / 256.0F, 67.0F / 256.0F, 1, u0, v0, u1, v1, packedLight, packedOverlay, RenderingUtils.ALL_FACES);
+		RenderingUtils.renderFilledBox(poseStack, builder, box2, 67.0F / 256.0F, 67.0F / 256.0F, 67.0F / 256.0F, 1, u0, v0, u1, v1, packedLight, packedOverlay, RenderingUtils.ALL_FACES);
 
 		poseStack.popPose();
 

@@ -5,7 +5,6 @@ import electrodynamics.api.configuration.Configuration;
 import electrodynamics.api.configuration.DoubleValue;
 import electrodynamics.api.configuration.FloatValue;
 import electrodynamics.api.configuration.IntValue;
-import electrodynamics.prefab.utilities.object.TransferPack;
 
 @Configuration(name = "Electrodynamics")
 public class Constants {
@@ -98,6 +97,8 @@ public class Constants {
 	public static double MOTORCOMPLEX_USAGE_PER_TICK = 100.0;
 	@DoubleValue(def = 10)
 	public static double PIPE_PUMP_USAGE_PER_TICK = 10.0;
+	@DoubleValue(def = 50000.0)
+	public static double ELECTROLOSIS_CHAMBER_TARGET_JOULES = 50000.0;
 	@DoubleValue(def = 100)
 	public static double QUARRY_USAGE_PER_TICK = 100.0;
 	@IntValue(def = 10)
@@ -128,5 +129,4 @@ public class Constants {
 	@BooleanValue(def = true, comment = "Set to false to disable the HUD rendering for combat armor.")
 	public static boolean RENDER_COMBAT_ARMOR_STATUS = true;
 
-	public static TransferPack COALGENERATOR_MAX_OUTPUT = TransferPack.ampsVoltage(COALGENERATOR_AMPERAGE, 120);
 }

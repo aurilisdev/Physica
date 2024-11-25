@@ -927,6 +927,9 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addTooltip("inventoryio.back", "Back");
 			addTooltip("inventoryio.slotmap", "Slot Map");
 
+			addTooltip("electrolosischamber.satisfaction", "Satisfaction: %s");
+			addTooltip("electrolosischamber.procamount", "Processing Amount: %s");
+
 			addGuiLabel("creativepowersource.voltage", "Voltage: ");
 			addGuiLabel("creativepowersource.power", "Power: ");
 			addGuiLabel("creativefluidsource.setfluid", "Set Fluid");

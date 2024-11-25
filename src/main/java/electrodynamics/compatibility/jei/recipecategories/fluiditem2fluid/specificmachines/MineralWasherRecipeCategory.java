@@ -26,12 +26,11 @@ public class MineralWasherRecipeCategory extends FluidItem2FluidRecipeCategory<M
     public static final BackgroundObject BACK_WRAP = new BackgroundObject(132, 64);
 
     public static final ItemSlotObject INPUT_SLOT = new ItemSlotObject(SlotType.NORMAL, 57, 16, RecipeIngredientRole.INPUT);
-    public static final ItemSlotObject INPUT_BUCKET_SLOT = new ItemSlotObject(SlotType.NORMAL, IconType.FLUID_DARK, 57, 36, RecipeIngredientRole.INPUT);
+    public static final ItemSlotObject INPUT_BUCKET_SLOT = new ItemSlotObject(SlotType.NORMAL, IconType.FLUID_DARK, 26, 36, RecipeIngredientRole.INPUT);
     public static final ItemSlotObject OUTPUT_BUCKET_SLOT = new ItemSlotObject(SlotType.NORMAL, IconType.FLUID_DARK, 88, 36, RecipeIngredientRole.OUTPUT);
 
     public static final ArrowAnimatedObject ANIM_RIGHT_ARROW_1 = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT, 30, 17, StartDirection.LEFT);
     public static final ArrowAnimatedObject ANIM_RIGHT_ARROW_2 = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT, 80, 17, StartDirection.LEFT);
-    public static final ArrowAnimatedObject ANIM_LEFT_ARROW = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_LEFT, 30, 37, StartDirection.RIGHT);
 
     public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(10, 5, 5000);
     public static final FluidGaugeObject OUT_GAUGE = new FluidGaugeObject(108, 5, 5000);
@@ -51,7 +50,7 @@ public class MineralWasherRecipeCategory extends FluidItem2FluidRecipeCategory<M
         setOutputSlots(guiHelper, OUTPUT_BUCKET_SLOT);
         setFluidInputs(guiHelper, IN_GAUGE);
         setFluidOutputs(guiHelper, OUT_GAUGE);
-        setAnimatedArrows(guiHelper, ANIM_LEFT_ARROW, ANIM_RIGHT_ARROW_1, ANIM_RIGHT_ARROW_2);
+        setAnimatedArrows(guiHelper, ANIM_RIGHT_ARROW_1, ANIM_RIGHT_ARROW_2);
         setLabels(POWER_LABEL, TIME_LABEL);
     }
 
