@@ -87,6 +87,22 @@ dependencies {
    
 }
 
+tasks.register('sourcesJar', Jar).configure {
+    dependsOn classes
+    from sourceSets.main.allSource
+    archiveClassifier = 'sources'
+}
+
+tasks.register('deobfJar', Jar).configure {
+    from sourceSets.main.output
+    archiveClassifier = 'deobf'
+}
+
+tasks.named('publish').configure {
+    dependsOn 'reobfJar'
+}
+
+
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
             minecraft_version      : minecraft_version,
@@ -106,6 +122,11 @@ tasks.withType(ProcessResources).configureEach {
     filesMatching(['META-INF/neoforge.mods.toml']) {
         expand replaceProperties
     }
+}
+
+artifacts {
+    archives sourcesJar
+    archives deobfJar
 }
 
 publishing {
