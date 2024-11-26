@@ -97,8 +97,8 @@ public class Constants {
 	public static double MOTORCOMPLEX_USAGE_PER_TICK = 100.0;
 	@DoubleValue(def = 10)
 	public static double PIPE_PUMP_USAGE_PER_TICK = 10.0;
-	@DoubleValue(def = 50000.0)
-	public static double ELECTROLOSIS_CHAMBER_TARGET_JOULES = 50000.0;
+	@DoubleValue(def = 100000.0)
+	public static double ELECTROLOSIS_CHAMBER_TARGET_JOULES = 100000.0;
 	@DoubleValue(def = 100)
 	public static double QUARRY_USAGE_PER_TICK = 100.0;
 	@IntValue(def = 10)

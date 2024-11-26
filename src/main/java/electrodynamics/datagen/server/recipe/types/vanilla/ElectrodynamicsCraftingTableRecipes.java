@@ -2478,6 +2478,24 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "machine_advancedthermoelectricmanipulator", output);
 
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.electrolosischamber), 1)
+                //
+                .addPattern("ITI")
+                //
+                .addPattern("TET")
+                //
+                .addPattern("ICI")
+                //
+                .addKey('I', ElectrodynamicsTags.Items.INGOT_CHROMIUM)
+                //
+                .addKey('T', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.upgradetransformer))
+                //
+                .addKey('E', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.electrolyticseparator))
+                //
+                .addKey('C', ElectrodynamicsTags.Items.CIRCUITS_ULTIMATE)
+                //
+                .complete(References.ID, "machine_electrolosischamber", output);
+
 
 
     }

@@ -79,6 +79,7 @@ public class ChapterElectricity extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.voltageval", 240, ElectroTextUtils.guidebook("chapter.electricity.blue"))).setSeparateStart().setIndentions(1));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.voltageval", 480, ElectroTextUtils.guidebook("chapter.electricity.red"))).setSeparateStart().setIndentions(1));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.voltageval", 960, ElectroTextUtils.guidebook("chapter.electricity.purple"))).setSeparateStart().setIndentions(1));
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.voltageval", 1920, ElectroTextUtils.guidebook("chapter.electricity.white"))).setSeparateStart().setIndentions(1));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l5")).setSeparateStart());
 

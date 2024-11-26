@@ -49,9 +49,19 @@ public class ScreenElectrolosisChamber extends GenericMaterialScreen<ContainerEl
             }
             Component text = ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort((double) chamber.processAmount.get() / 1000.0, DisplayUnit.BUCKETS), ChatFormatter.getChatDisplayShort(chamber.neededTicks.get(), DisplayUnit.TIME_TICKS));
             int width = getFontRenderer().width(text);
-            int diff = 72 - width;
+            float scale = 1;
+            if(width >  70) {
+                scale = 70.0F / (float) width;
+                width = 70;
+            }
+            int diff = 70 - width;
             int half = diff / 2;
-            graphics.drawString(getFontRenderer(), text, 51 + half, 52, Color.TEXT_GRAY.color(), false);
+            int x = (int) Math.ceil((float) (52 + half) / scale) + 1;
+            int y = (int) Math.ceil(52.0F / scale);
+            graphics.pose().pushPose();
+            graphics.pose().scale(scale, scale, scale);
+            graphics.drawString(getFontRenderer(), text, x, y, Color.TEXT_GRAY.color(), false);
+            graphics.pose().popPose();
         }));
 
         addComponent(new ScreenComponentFluidGauge(() -> {
@@ -79,7 +89,7 @@ public class ScreenElectrolosisChamber extends GenericMaterialScreen<ContainerEl
         ComponentElectrodynamic el = chamber.getComponent(IComponentType.Electrodynamic);
         list.add(ElectroTextUtils.gui("machine.usage", ChatFormatter.getChatDisplayShort(Constants.ELECTROLOSIS_CHAMBER_TARGET_JOULES * 20, DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
         list.add(ElectroTextUtils.gui("machine.voltage", ChatFormatter.getChatDisplayShort(el.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
-        list.add(ElectroTextUtils.tooltip("electrolosischamber.satisfaction", ChatFormatter.getChatDisplayShort(el.getJoulesStored() / Constants.ELECTROLOSIS_CHAMBER_TARGET_JOULES, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+        list.add(ElectroTextUtils.tooltip("electrolosischamber.satisfaction", ChatFormatter.getChatDisplayShort(el.getJoulesStored() / Constants.ELECTROLOSIS_CHAMBER_TARGET_JOULES * 100.0, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
         return list;
     }
 }

@@ -33,8 +33,10 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
@@ -62,7 +64,7 @@ public class TileElectrolosisChamber extends TileMultiblockController {
     public TileElectrolosisChamber(BlockPos worldPos, BlockState blockState) {
         super(ElectrodynamicsTiles.TILE_ELECTROLOSISCHAMBER.get(), worldPos, blockState);
 
-        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BACK).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2).maxJoules(Constants.ELECTROLOSIS_CHAMBER_TARGET_JOULES * 20));
+        addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BACK).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 16).maxJoules(Constants.ELECTROLOSIS_CHAMBER_TARGET_JOULES * 20 * 100));
         addComponent(new ComponentFluidHandlerMulti(this).setInputDirections(BlockEntityUtils.MachineDirection.RIGHT).setInputTanks(1, arr(MAX_INPUT_TANK_CAPACITY)).setOutputDirections(BlockEntityUtils.MachineDirection.LEFT).setOutputTanks(1, MAX_OUTPUT_TANK_CAPACITY).setRecipeType(ElectrodynamicsRecipeInit.ELECTROLOSIS_CHAMBER_TYPE.get()));
         addComponent(new ComponentContainerProvider(SubtypeMachine.electrolosischamber, this).createMenu((id, player) -> new ContainerElectrolosisChamber(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
         addComponent(new ComponentInventory(this, ComponentInventory.InventoryBuilder.newInv().bucketInputs(1).bucketOutputs(1)).valid(machineValidator()));
@@ -80,6 +82,8 @@ public class TileElectrolosisChamber extends TileMultiblockController {
         FluidUtilities.drainItem(this, fluidHandler.getInputTanks());
         FluidUtilities.fillItem(this, fluidHandler.getOutputTanks());
 
+        outputToPipe();
+
         if (currRecipe == null) {
             for (RecipeHolder<ElectrolosisChamberRecipe> recipe : getLevel().getRecipeManager().getAllRecipesFor(ElectrodynamicsRecipeInit.ELECTROLOSIS_CHAMBER_TYPE.get())) {
                 if (testRecipe(recipe.value(), fluidHandler.getInputTanks())) {
@@ -91,7 +95,7 @@ public class TileElectrolosisChamber extends TileMultiblockController {
             currRecipe = null;
         }
 
-        if (currRecipe == null || electro.getJoulesStored() <= 0 || !fluidHandler.getOutputTanks()[0].getFluid().is(currRecipe.getFluidRecipeOutput().getFluid())) {
+        if (currRecipe == null || electro.getJoulesStored() <= 0 || (!fluidHandler.getOutputTanks()[0].isEmpty() && !fluidHandler.getOutputTanks()[0].getFluid().is(currRecipe.getFluidRecipeOutput().getFluid()))) {
             operatingTicks.set(0.0);
             isActive.set(false);
             processAmount.set(0);
@@ -143,6 +147,42 @@ public class TileElectrolosisChamber extends TileMultiblockController {
             return true;
         }
         return false;
+    }
+
+    private void outputToPipe() {
+
+        ComponentFluidHandlerMulti component = getComponent(IComponentType.FluidHandler);
+        Direction[] outputDirections = component.outputDirections;
+
+        Direction facing = getFacing();
+
+        for (Direction relative : outputDirections) {
+
+            Direction direction = BlockEntityUtils.getRelativeSide(facing, relative);
+
+            BlockEntity faceTile = getLevel().getBlockEntity(getBlockPos().relative(direction).offset(2, 0, 2));
+
+            if (faceTile == null) {
+                continue;
+            }
+
+            IFluidHandler handler = getLevel().getCapability(Capabilities.FluidHandler.BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction.getOpposite());
+
+            if (handler == null) {
+                continue;
+            }
+
+            for (FluidTank fluidTank : component.getOutputTanks()) {
+
+                FluidStack tankFluid = fluidTank.getFluid();
+
+                int amtAccepted = handler.fill(tankFluid, IFluidHandler.FluidAction.EXECUTE);
+
+                FluidStack taken = new FluidStack(tankFluid.getFluid(), amtAccepted);
+
+                fluidTank.drain(taken, IFluidHandler.FluidAction.EXECUTE);
+            }
+        }
     }
 
     @Override

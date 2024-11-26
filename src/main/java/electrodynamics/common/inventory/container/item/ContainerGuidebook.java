@@ -23,6 +23,11 @@ public class ContainerGuidebook extends GenericContainer<Container> {
 	}
 
 	@Override
+	public void addPlayerInventory(Inventory playerinv) {
+
+	}
+
+	@Override
 	public boolean stillValid(Player player) {
 		return true;
 	}

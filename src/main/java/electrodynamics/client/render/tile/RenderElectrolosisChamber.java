@@ -178,23 +178,27 @@ public class RenderElectrolosisChamber extends AbstractTileRenderer<TileElectrol
             RenderingUtils.renderFluidBox(poseStack, minecraft(), bufferSource.getBuffer(RenderType.TRANSLUCENT), pair.getFirst(), new FluidStack(Fluids.WATER, 100), packedLight, packedOverlay, pair.getSecond());
         }
 
-        /*
+
         if (!tile.isActive.get()) {
             poseStack.popPose();
             return;
         }
 
-         */
+
+        if (level().getRandom().nextDouble() > 0.5) {
+            poseStack.popPose();
+            return;
+        }
 
         BlockPos[] positions = getBlockPositions(facing);
         BlockPos pos;
 
-        for(int i = 0; i < 9; i++) {
-            if(i == 4) {
+        for (int i = 0; i < 9; i++) {
+            if (i == 4) {
                 continue;
             }
             pos = tile.getBlockPos().offset(positions[i]);
-            minecraft().particleEngine.createParticle(ParticleTypes.BUBBLE, pos.getX() + Electrodynamics.RANDOM.nextDouble(1.0), pos.getY() + Electrodynamics.RANDOM.nextDouble(1.0), pos.getZ() + Electrodynamics.RANDOM.nextDouble(1.0), 0, 0 ,0);
+            minecraft().particleEngine.createParticle(ParticleTypes.BUBBLE, pos.getX() + Electrodynamics.RANDOM.nextDouble(1.0), pos.getY() + Electrodynamics.RANDOM.nextDouble(1.0), pos.getZ() + Electrodynamics.RANDOM.nextDouble(1.0), 0, 0, 0);
         }
 
 

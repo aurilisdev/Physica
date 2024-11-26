@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/ultimate"
+    },
+    "E": {
+      "item": "electrodynamics:electrolyticseparator"
+    },
+    "I": {
+      "tag": "c:ingots/chromium"
+    },
+    "T": {
+      "item": "electrodynamics:upgradetransformer"
+    }
+  },
+  "pattern": [
+    "ITI",
+    "TET",
+    "ICI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:electrolosischamber"
+  }
+}

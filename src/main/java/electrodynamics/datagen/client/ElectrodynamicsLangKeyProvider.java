@@ -14,6 +14,7 @@ import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.fluid.subtype.*;
 import electrodynamics.common.item.subtype.*;
 import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
+import electrodynamics.common.recipe.categories.fluid2fluid.specificmachines.ElectrolosisChamberRecipe;
 import electrodynamics.common.recipe.categories.fluid2gas.specificmachines.ElectrolyticSeparatorRecipe;
 import electrodynamics.common.recipe.categories.fluid2item.specificmachines.ChemicalCrystalizerRecipe;
 import electrodynamics.common.recipe.categories.fluiditem2fluid.specificmachines.ChemicalMixerRecipe;
@@ -1153,6 +1154,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addJei("gascollector", "Gas Collection");
 			addJei("validbiome", "Biome: %s");
 			addJei("anybiome", "Any");
+			addJei(ElectrolosisChamberRecipe.RECIPE_GROUP, "Electrolosis Chamber");
 
 			addDamageSource("electricity", "%s was electrocuted");
 			addDamageSource("acceleratedbolt", "%1$s was perforated by %2$s");
@@ -1393,6 +1395,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGuidebook("chapter.electricity.blue", "Blue");
 			addGuidebook("chapter.electricity.red", "Red");
 			addGuidebook("chapter.electricity.purple", "Purple");
+			addGuidebook("chapter.electricity.white", "White");
 
 			addGuidebook("chapter.electricity.l5", "The following pages contain examples of machines with these markings:");
 
@@ -1916,6 +1919,24 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 							+ "new battery will replace the old battery, and you will be left holding the old battery.");
 
 			addGuidebook("chapter.tips.tip4", "Holding the Control key while hoving over an upgrade slot in a GUI will display what upgrades are valid for said slot.");
+
+			addGuidebook("chapter.electrolosischamber", "Electrolosis Chamber");
+			addGuidebook("chapter.electrolosischamber.l1", "The Electrolosis Chamber is Electrodynamics's solution to late game ore processing. While many mods choose to balance their solutions by requiring a finite resource to run, Electrodynamics has chosen to make its limiting factor electricity (somewhat in character I might add). With it, you are able to process " +
+					"any metal ore and decuple (%1$s) it. This may seem broken on the surface until you read the price tag of %2$s to run it. This chapter will walk you through the machine and the decupling process.");
+			addGuidebook("chapter.electrolosischamber.multiply", "10x");
+			addGuidebook("chapter.electrolosischamber.l2", "Before you can use the Electrolosis Chamber itself, you will first need to pre-process the metal. This is accomplished by washing the metallic ore with both Aqua Regia and Sulfuric Acid in a Chemical Reactor. While both of these acids are expensive to make, you will observe that you get back the same amount you put " +
+					"into the process. This allows you to create a feedback loop with the acid to re-use it. The result of this feedback process is %s.");
+			addGuidebook("chapter.electrolosischamber.impurefluid", "Impure Mineral Fluid");
+			addGuidebook("chapter.electrolosischamber.l3", "The Impure Mineral Fluid is what is actually processed by the Electrolosis Chamber. The machine itself is a 5 x 5 x 3 multiblock. To build it, you will need %1$s, %2$s, %3$s, %4$s, %5$s, and the %6$s itself. Below is how to assemble the multiblock:");
+			addGuidebook("chapter.electrolosischamber.count", "%1$s %2$s");
+			addGuidebook("chapter.electrolosischamber.step", "Step %s:");
+			addGuidebook("chapter.electrolosischamber.seperatororient", "Note the orientation of the Electrolytic Seperator doesn't matter");
+			addGuidebook("chapter.electrolosischamber.l4", "Now place the Chamber inside the spot created:");
+			addGuidebook("chapter.electrolosischamber.l5", "Next right-click the chamber with a wrench:");
+			addGuidebook("chapter.electrolosischamber.l6", "This will form the mulitblock. You will hear the sound of an anvil being placed. To dis-assemble the multiblock, you can either right-click the Chamber with a wrench again, or break any of the constituent blocks.");
+			addGuidebook("chapter.electrolosischamber.l7", "Now that the chamber is formed, we can discuss how it works. Upon opening the GUI, you will notice that unlike many Electrodynamics machines, the Chamber cannot accept any upgrades:");
+			addGuidebook("chapter.electrolosischamber.l8", "Instead, speed is measured by the energy satisfaction of the machine, the rating of which is displayed via the energy tab in the GUI. A satisfaction of 100% will result in the chamber processing 1 milibucket of fluid per tick. Any greater than this will result in the chamber processing multiple milibuckets of fluid every tick. In" +
+					" short, the more power you throw at it, the faster it will go.");
 
 			addGuidebook("searchparameters", "Parameters");
 			addGuidebook("selectall", "All");
