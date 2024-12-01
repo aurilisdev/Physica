@@ -64,7 +64,7 @@ public class GasStack {
 
     public GasStack(Gas gas) {
         this.gas = Holder.direct(gas);
-        if (gas == ElectrodynamicsGases.EMPTY) {
+        if (gas.isEmpty()) {
             isEmpty = true;
         }
     }

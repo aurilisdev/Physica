@@ -19,7 +19,7 @@ public class ElectrodynamicsChemicalMixerRecipes extends AbstractRecipeGenerator
 	public static double CHEMICALMIXER_USAGE_PER_TICK = 400.0;
 	public static int CHEMICALMIXER_REQUIRED_TICKS = 200;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsChemicalMixerRecipes(String modID) {
 		this.modID = modID;

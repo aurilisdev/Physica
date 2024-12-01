@@ -8,10 +8,12 @@ import electrodynamics.api.item.IItemElectric;
 import electrodynamics.common.item.gear.armor.types.ItemJetpack;
 import electrodynamics.prefab.utilities.NBTUtils;
 import electrodynamics.prefab.utilities.object.Location;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -56,6 +58,9 @@ public class ElectrodynamicsDataComponentTypes {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Location>> LOCATION_2 = DATA_COMPONENT_TYPES.register(NBTUtils.LOCATION + "2", () -> DataComponentType.<Location>builder().persistent(Location.CODEC).networkSynchronized(Location.STREAM_CODEC).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<FluidStackComponent>> FLUID_STACK = DATA_COMPONENT_TYPES.register("fluidstack", () -> DataComponentType.<FluidStackComponent>builder().persistent(FluidStackComponent.CODEC).networkSynchronized(FluidStackComponent.STREAM_CODEC).cacheEncoding().build());
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Block>> BLOCK = DATA_COMPONENT_TYPES.register("block", () -> DataComponentType.<Block>builder().persistent(BuiltInRegistries.BLOCK.byNameCodec()).networkSynchronized(ByteBufCodecs.fromCodec(BuiltInRegistries.BLOCK.byNameCodec())).cacheEncoding().build());
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> BLOCK_POS = DATA_COMPONENT_TYPES.register("blockpos", () -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC).networkSynchronized(BlockPos.STREAM_CODEC).cacheEncoding().build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> RESOURCE_LOCATION = DATA_COMPONENT_TYPES.register("resourcelocation", () -> DataComponentType.<ResourceLocation>builder().persistent(ResourceLocation.CODEC).networkSynchronized(ResourceLocation.STREAM_CODEC).cacheEncoding().build());
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<Direction>>> DIRECTIONS = DATA_COMPONENT_TYPES.register("direction_list", () -> DataComponentType.<List<Direction>>builder().persistent(Direction.CODEC.listOf()).networkSynchronized(ByteBufCodecs.fromCodec(Direction.CODEC.listOf())).cacheEncoding().build());
 

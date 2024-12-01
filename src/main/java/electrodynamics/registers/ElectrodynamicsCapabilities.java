@@ -154,7 +154,6 @@ public class ElectrodynamicsCapabilities {
         }), ElectrodynamicsItems.ITEM_SEISMICSCANNER.get());
 
         // Reinforced Cannister
-        // TODO remember to do this for the Nuclear Science canister as well
 
         event.registerItem(Capabilities.FluidHandler.ITEM, (itemStack, context) -> new RestrictedFluidHandlerItemStack.SwapEmpty(itemStack, itemStack, ItemCanister.MAX_FLUID_CAPACITY), ElectrodynamicsItems.ITEM_CANISTERREINFORCED.get());
 

@@ -63,7 +63,7 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
     public static final float OFFSET = 0.2F;
 
     public ItemCombatArmor(Properties properties, Type type, Holder<CreativeModeTab> creativeTab) {
-        super(ElectrodynamicsArmorMaterials.COMPOSITE_ARMOR, type, properties, creativeTab);
+        super(ElectrodynamicsArmorMaterials.COMBAT_ARMOR, type, properties, creativeTab);
         switch (type) {
             case HELMET, LEGGINGS:
                 this.properties = (ElectricItemProperties) properties;
