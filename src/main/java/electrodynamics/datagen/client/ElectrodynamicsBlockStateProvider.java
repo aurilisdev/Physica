@@ -29,7 +29,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SnowyDirtBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -535,7 +534,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
     }
 
     public ItemModelBuilder horrRotatedLitBlock(DeferredHolder<Block, ? extends Block> block, ModelFile off, ModelFile on, boolean registerItem) {
-        return horrRotatedBlock(block, on, 0, 0, registerItem);
+        return horrRotatedLitBlock(block, off, on, 0, 0, registerItem);
     }
 
     public ItemModelBuilder horrRotatedLitBlock(DeferredHolder<Block, ? extends Block> block, ModelFile off, ModelFile on, int yRotationOffset, int xRotation, boolean registerItem) {

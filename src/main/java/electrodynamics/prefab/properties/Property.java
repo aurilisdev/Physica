@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 
 import electrodynamics.Electrodynamics;
 import electrodynamics.common.packet.types.server.PacketSendUpdatePropertiesServer;
-import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.Block;
@@ -129,6 +128,10 @@ public class Property<T> {
     public void forceDirty() {
         if (!manager.getOwner().getLevel().isClientSide()) {
             manager.setDirty(this);
+        } else {
+            CompoundTag data = new CompoundTag();
+            saveToTag(data, manager.getOwner().getLevel().registryAccess());
+            PacketDistributor.sendToServer(new PacketSendUpdatePropertiesServer(data, getIndex(), manager.getOwner().getBlockPos()));
         }
     }
 

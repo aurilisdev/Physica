@@ -201,12 +201,12 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
      * @param reg The block that will be added
      * @author SeaRobber69
      */
-    public void addSilkTouchOnlyTable(DeferredHolder<Block, Block> reg) {
+    public void addSilkTouchOnlyTable(DeferredHolder<Block, ? extends Block> reg) {
         Block block = reg.get();
         add(block, createSilkTouchOnlyTable(name(block), block));
     }
 
-    public void addFortuneAndSilkTouchTable(DeferredHolder<Block, Block> reg, Item nonSilk, int minDrop, int maxDrop) {
+    public void addFortuneAndSilkTouchTable(DeferredHolder<Block, ? extends Block> reg, Item nonSilk, int minDrop, int maxDrop) {
         addFortuneAndSilkTouchTable(reg.get(), nonSilk, minDrop, maxDrop);
     }
 
@@ -214,7 +214,7 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
         add(block, createSilkTouchAndFortuneTable(name(block), block, nonSilk, minDrop, maxDrop));
     }
 
-    public void addSimpleBlock(DeferredHolder<Block, Block> reg) {
+    public void addSimpleBlock(DeferredHolder<Block, ? extends Block> reg) {
         addSimpleBlock(reg.get());
     }
 

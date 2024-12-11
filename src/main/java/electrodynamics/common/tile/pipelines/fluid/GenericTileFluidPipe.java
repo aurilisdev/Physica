@@ -3,6 +3,7 @@ package electrodynamics.common.tile.pipelines.fluid;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import electrodynamics.api.network.cable.type.IFluidPipe;
@@ -66,12 +67,10 @@ public abstract class GenericTileFluidPipe extends GenericConnectTile implements
 
                 @Override
                 public int fill(FluidStack resource, FluidAction action) {
-                    if (action == FluidAction.SIMULATE || getNetwork() == null) {
+                    if (action == FluidAction.SIMULATE || getNetwork() == null || resource.isEmpty()) {
                         return 0;
                     }
-                    ArrayList<BlockEntity> ignored = new ArrayList<>();
-                    ignored.add(level.getBlockEntity(new BlockPos(worldPosition).relative(dir)));
-                    return fluidNetwork.emit(resource, ignored, false).getAmount();
+                    return fluidNetwork.emit(resource, Lists.newArrayList(level.getBlockEntity(new BlockPos(worldPosition).relative(dir))), false).getAmount();
                 }
 
                 @Override

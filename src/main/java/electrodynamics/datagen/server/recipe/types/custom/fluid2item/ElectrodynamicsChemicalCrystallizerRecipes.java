@@ -18,7 +18,7 @@ public class ElectrodynamicsChemicalCrystallizerRecipes extends AbstractRecipeGe
 	public static double CHEMICALCRYSTALLIZER_USAGE_PER_TICK = 800.0;
 	public static int CHEMICALCRYSTALLIZER_REQUIRED_TICKS = 200;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsChemicalCrystallizerRecipes(String modID) {
 		this.modID = modID;
