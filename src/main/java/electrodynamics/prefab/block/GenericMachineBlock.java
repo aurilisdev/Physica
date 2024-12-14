@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplie
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class GenericMachineBlock extends GenericEntityBlockWaterloggable {
@@ -85,4 +86,8 @@ public class GenericMachineBlock extends GenericEntityBlockWaterloggable {
         throw new UnsupportedOperationException("Need to implement CODEC");
     }
 
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return hasCollision ? Shapes.block() : Shapes.empty();
+    }
 }
