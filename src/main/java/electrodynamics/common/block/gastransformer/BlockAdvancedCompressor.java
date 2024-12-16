@@ -2,8 +2,8 @@ package electrodynamics.common.block.gastransformer;
 
 import com.mojang.serialization.MapCodec;
 
-import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.block.gastransformer.util.BlockGenericAdvancedGasTransformer;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.compressor.GenericTileAdvancedCompressor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -17,12 +17,12 @@ public class BlockAdvancedCompressor extends BlockGenericAdvancedGasTransformer 
 
     public BlockAdvancedCompressor(boolean isDecompressor) {
         super(isDecompressor ? GenericTileAdvancedCompressor.TileAdvancedDecompressor::new : GenericTileAdvancedCompressor.TileAdvancedCompressor::new);
-        registerDefaultState(stateDefinition.any().setValue(BlockMachine.ON, false));
+        registerDefaultState(stateDefinition.any().setValue(ElectrodynamicsBlockStates.LIT, false));
     }
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        if (state.hasProperty(BlockMachine.ON) && state.getValue(BlockMachine.ON)) {
+        if (state.hasProperty(ElectrodynamicsBlockStates.LIT) && state.getValue(ElectrodynamicsBlockStates.LIT)) {
             return 15;
         }
         return super.getLightEmission(state, level, pos);
@@ -30,13 +30,13 @@ public class BlockAdvancedCompressor extends BlockGenericAdvancedGasTransformer 
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return super.getStateForPlacement(context).setValue(BlockMachine.ON, false);
+        return super.getStateForPlacement(context).setValue(ElectrodynamicsBlockStates.LIT, false);
     }
 
     @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockMachine.ON);
+        builder.add(ElectrodynamicsBlockStates.LIT);
     }
     
     @Override

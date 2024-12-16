@@ -5,10 +5,10 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.api.fluid.PropertyFluidTank;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -124,8 +124,8 @@ public class ComponentFluidHandlerSimple extends PropertyFluidTank implements IC
 
     @Override
     public void refreshIfUpdate(BlockState oldState, BlockState newState) {
-        if (isSided && oldState.hasProperty(GenericEntityBlock.FACING) && newState.hasProperty(GenericEntityBlock.FACING) && oldState.getValue(GenericEntityBlock.FACING) != newState.getValue(GenericEntityBlock.FACING)) {
-            defineOptionals(newState.getValue(GenericEntityBlock.FACING));
+        if (isSided && oldState.hasProperty(ElectrodynamicsBlockStates.FACING) && newState.hasProperty(ElectrodynamicsBlockStates.FACING) && oldState.getValue(ElectrodynamicsBlockStates.FACING) != newState.getValue(ElectrodynamicsBlockStates.FACING)) {
+            defineOptionals(newState.getValue(ElectrodynamicsBlockStates.FACING));
         }
     }
 

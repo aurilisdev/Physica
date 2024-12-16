@@ -1,5 +1,6 @@
 package electrodynamics.common.block.chemicalreactor;
 
+import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactorDummy;
 import electrodynamics.prefab.block.GenericMachineBlock;
 import net.minecraft.core.Vec3i;
@@ -18,7 +19,7 @@ public class BlockChemicalReactorExtra extends GenericMachineBlock {
 
     public final Location loc;
     public BlockChemicalReactorExtra(Location loc) {
-        super(TileChemicalReactorDummy::new);
+        super(TileChemicalReactorDummy::new, VoxelShapeProvider.DEFAULT);
         this.loc = loc;
     }
 

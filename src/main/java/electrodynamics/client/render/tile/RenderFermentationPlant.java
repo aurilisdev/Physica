@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import electrodynamics.common.tile.machines.TileFermentationPlant;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.utilities.RenderingUtils;
@@ -30,7 +29,7 @@ public class RenderFermentationPlant extends AbstractTileRenderer<TileFermentati
 		matrixStackIn.pushPose();
 		ComponentFluidHandlerMulti multi = tileEntityIn.getComponent(IComponentType.FluidHandler);
 
-		Direction facing = tileEntityIn.getBlockState().getValue(GenericEntityBlock.FACING);
+		Direction facing = tileEntityIn.getFacing();
 
 		FluidStack input = null;
 		for (FluidTank tank : multi.getInputTanks()) {

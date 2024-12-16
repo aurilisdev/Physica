@@ -5,6 +5,8 @@ import com.mojang.serialization.MapCodec;
 import electrodynamics.api.multiblock.subnodebased.Subnode;
 import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
 import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentTile;
+import electrodynamics.api.tile.IMachine;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.tile.machines.quarry.TileQuarry;
 import electrodynamics.prefab.block.GenericMachineBlock;
@@ -22,59 +24,27 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockMachine extends GenericMachineBlock implements IMultiblockParentBlock {
-
-    public static final BooleanProperty ON = BlockStateProperties.LIT;
-    public static final IntegerProperty BATTERY_CHARGE = BlockStateProperties.AGE_7;
-
     public static final VoxelShape[] STANDARD_CUBE = new VoxelShape[]{Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block()};
 
-    public static final Subnode[] SUBNODES_ADVANCEDSOLARPANEL = new Subnode[9];
-    public static final Subnode[] SUBNODES_WINDMILL = {new Subnode(new BlockPos(0, 1, 0),
-            new VoxelShape[]{Shapes.block(), Shapes.block(), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11)), Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11))})};
+    private final IMachine machine;
 
-    static {
-
-        int counter = 0;
-
-        int radius = 1;
-
-        for (int i = -radius; i <= radius; i++) {
-
-            for (int j = -radius; j <= radius; j++) {
-                if (i == 0 && j == 0) {
-                    SUBNODES_ADVANCEDSOLARPANEL[counter] = new Subnode(new BlockPos(i, 1, j), Shapes.or(Block.box(6, 0, 6, 10, 16, 10), Block.box(5, 13, 5, 11, 16, 11), Block.box(0, 14, 0, 16, 16, 16)));
-                } else {
-                    SUBNODES_ADVANCEDSOLARPANEL[counter] = new Subnode(new BlockPos(i, 1, j), Block.box(0, 14, 0, 16, 16, 16));
-                }
-
-                counter++;
-            }
-        }
-
-    }
-
-    public final SubtypeMachine machine;
-
-    public BlockMachine(SubtypeMachine machine) {
-        super(machine.getBlockEntitySupplier());
+    public BlockMachine(IMachine machine) {
+        super(machine.getBlockEntitySupplier(), machine.getVoxelShapeProvider());
         this.machine = machine;
-        if (machine.litBrightness > 0) {
-            registerDefaultState(stateDefinition.any().setValue(ON, false));
+        if (machine.getLitBrightness() > 0) {
+            registerDefaultState(stateDefinition.any().setValue(ElectrodynamicsBlockStates.LIT, false));
         }
 
     }
 
     @Override
     public boolean propagatesSkylightDown(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        if (machine.propogateLightDown) {
+        if (machine.propegatesLightDown()) {
             return true;
         }
         return super.propagatesSkylightDown(pState, pLevel, pPos);
@@ -83,10 +53,8 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
     @Override
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 
-        if (machine == SubtypeMachine.advancedsolarpanel) {
-            return isValidMultiblockPlacement(state, worldIn, pos, SUBNODES_ADVANCEDSOLARPANEL);
-        } else if (machine == SubtypeMachine.windmill) {
-            return isValidMultiblockPlacement(state, worldIn, pos, SUBNODES_WINDMILL);
+        if(machine.isMultiblock()) {
+            return isValidMultiblockPlacement(state, worldIn, pos, machine.getSubnodes());
         }
         return super.canSurvive(state, worldIn, pos);
 
@@ -94,14 +62,14 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        return machine.getRenderType();
+        return machine.getRenderShape();
     }
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
 
-        if (machine.litBrightness > 0 && state.hasProperty(ON) && state.getValue(ON)) {
-            return machine.litBrightness;
+        if (machine.getLitBrightness() > 0 && state.hasProperty(ElectrodynamicsBlockStates.LIT) && state.getValue(ElectrodynamicsBlockStates.LIT)) {
+            return machine.getLitBrightness();
         }
 
         return super.getLightEmission(state, world, pos);
@@ -119,7 +87,7 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
     @Override
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         BlockEntity tile = worldIn.getBlockEntity(pos);
-        if (!(state.getBlock() == newState.getBlock() && state.getValue(FACING) != newState.getValue(FACING))) {
+        if (!(state.getBlock() == newState.getBlock() && state.getValue(ElectrodynamicsBlockStates.FACING) != newState.getValue(ElectrodynamicsBlockStates.FACING))) {
 
             if (tile instanceof IMultiblockParentTile multi) {
                 multi.onNodeReplaced(worldIn, pos, true);
@@ -140,7 +108,7 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
 
     @Override
     public boolean hasMultiBlock() {
-        return machine == SubtypeMachine.advancedsolarpanel || machine == SubtypeMachine.windmill;
+        return machine.isMultiblock();
     }
 
     @Override
@@ -160,13 +128,13 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return super.getStateForPlacement(context).setValue(ON, false);
+        return super.getStateForPlacement(context).setValue(ElectrodynamicsBlockStates.LIT, false);
     }
 
     @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(ON);
+        builder.add(ElectrodynamicsBlockStates.LIT);
     }
 
     @Override

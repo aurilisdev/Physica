@@ -9,7 +9,7 @@ import electrodynamics.api.References;
 import electrodynamics.api.multiblock.assemblybased.Multiblock;
 import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
 import electrodynamics.client.ClientRegister;
-import electrodynamics.common.block.BlockMachine;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.subtype.SubtypeGlass;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.tile.machines.TileElectrolosisChamber;
@@ -24,7 +24,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.conditions.WithConditions;
@@ -44,7 +43,7 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
     @Override
     protected void gather() {
 
-        BlockState slave = ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false);
+        BlockState slave = ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false);
         BlockState scaffold = ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING.get().defaultBlockState();
 
         ResourceLocation ecWindow = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindow");
@@ -128,11 +127,11 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
                 //
                 new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -3), Shapes.block(), ecWindow),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -3), Shapes.block(), ecCoilC1),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false).setValue(ElectrodynamicsBlockStates.LIT, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -3), Shapes.block(), ecCoilC1),
                 //
                 new MultiblockSlaveNode(slave, Blocks.GOLD_BLOCK.defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -3), Shapes.block(), ecCoilS1),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -3), Shapes.block(), ecCoilC2),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false).setValue(ElectrodynamicsBlockStates.LIT, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -3), Shapes.block(), ecCoilC2),
                 //
                 new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -3), Shapes.block(), ecWindow),
                 //
@@ -162,15 +161,15 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
                 //
                 //
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -2), Shapes.block(), ecFluidIn),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false).setValue(ElectrodynamicsBlockStates.LIT, false), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -2), Shapes.block(), ecFluidIn),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -2), Shapes.block(), ecCoilS4),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false).setValue(ElectrodynamicsBlockStates.LIT, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -2), Shapes.block(), ecCoilS4),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolyticseparator).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolyticseparator).defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false).setValue(ElectrodynamicsBlockStates.LIT, false), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -2), Shapes.block(), MultiblockSlaveNode.NOMODEL),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -2), Shapes.block(), ecCoilS2),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false).setValue(ElectrodynamicsBlockStates.LIT, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -2), Shapes.block(), ecCoilS2),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -2), Shapes.block(), ecFluidOut),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false).setValue(ElectrodynamicsBlockStates.LIT, false), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -2), Shapes.block(), ecFluidOut),
                 //
                 //
                 //
@@ -200,11 +199,11 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
                 //
                 new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(-2, 0, -1), Shapes.block(), ecWindow),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -1), Shapes.block(), ecCoilC4),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false).setValue(ElectrodynamicsBlockStates.LIT, false), MultiblockSlaveNode.NOTAG, new Vec3i(-1, 0, -1), Shapes.block(), ecCoilC4),
                 //
                 new MultiblockSlaveNode(slave, Blocks.GOLD_BLOCK.defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(0, 0, -1), Shapes.block(), ecCoilS3),
                 //
-                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(BlockMachine.ON, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -1), Shapes.block(), ecCoilC3),
+                new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.tanksteel).defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false).setValue(ElectrodynamicsBlockStates.LIT, false), MultiblockSlaveNode.NOTAG, new Vec3i(1, 0, -1), Shapes.block(), ecCoilC3),
                 //
                 new MultiblockSlaveNode(slave, ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(SubtypeGlass.aluminum).defaultBlockState(), MultiblockSlaveNode.NOTAG, new Vec3i(2, 0, -1), Shapes.block(), ecWindow),
                 //
@@ -296,14 +295,14 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
 
             placeState = slaveNode.placeState();
 
-            if (placeState.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
-                placeState = placeState.setValue(BlockStateProperties.HORIZONTAL_FACING, placeState.getValue(BlockStateProperties.HORIZONTAL_FACING).getCounterClockWise());
+            if (placeState.hasProperty(ElectrodynamicsBlockStates.FACING)) {
+                placeState = placeState.setValue(ElectrodynamicsBlockStates.FACING, placeState.getValue(ElectrodynamicsBlockStates.FACING).getCounterClockWise());
             }
 
             replaceState = slaveNode.replaceState();
 
-            if (replaceState.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
-                replaceState = replaceState.setValue(BlockStateProperties.HORIZONTAL_FACING, replaceState.getValue(BlockStateProperties.HORIZONTAL_FACING).getCounterClockWise());
+            if (replaceState.hasProperty(ElectrodynamicsBlockStates.FACING)) {
+                replaceState = replaceState.setValue(ElectrodynamicsBlockStates.FACING, replaceState.getValue(ElectrodynamicsBlockStates.FACING).getCounterClockWise());
             }
 
             shape = slaveNode.renderShape();

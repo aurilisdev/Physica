@@ -1,6 +1,7 @@
 package electrodynamics.common.block;
 
 import electrodynamics.api.multiblock.assemblybased.TileMultiblockSlave;
+import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import electrodynamics.prefab.block.GenericMachineBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +18,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class BlockMultiblockSlave extends GenericMachineBlock {
 
     public BlockMultiblockSlave() {
-        super(TileMultiblockSlave::new);
+        super(TileMultiblockSlave::new, VoxelShapeProvider.DEFAULT);
     }
 
     @Override

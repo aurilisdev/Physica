@@ -2,7 +2,6 @@ package electrodynamics.common.tile.electricitygrid.generators;
 
 import electrodynamics.api.multiblock.subnodebased.Subnode;
 import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentTile;
-import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerWindmill;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
@@ -112,7 +111,7 @@ public class TileWindmill extends GenericGeneratorTile implements IMultiblockPar
 
 	@Override
 	public Subnode[] getSubNodes() {
-		return BlockMachine.SUBNODES_WINDMILL;
+		return SubtypeMachine.Subnodes.SUBNODES_WINDMILL;
 	}
 
 	@Override

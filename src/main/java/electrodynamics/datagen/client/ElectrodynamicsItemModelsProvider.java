@@ -205,8 +205,8 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get(), existingBlock(blockLoc("advancedthermoelectricmanipulatoritem"))).transforms().transform(ItemDisplayContext.GUI).rotation(30.0F, 225.0F, 0.0F).scale(0.3333F).end();
 		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get(), existingBlock(blockLoc("chemicalreactoritem"))).transforms().transform(ItemDisplayContext.GUI).scale(0.3F).rotation(30.0F, 225.0F, 0.0F).end();
 
-		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP.get(), existingBlock(blockLoc("gaspipepumpitem")));
-		simpleBlockItem(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP.get(), existingBlock(blockLoc("fluidpipepumpitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipepump), existingBlock(blockLoc("gaspipepumpitem")));
+		simpleBlockItem(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidpipepump), existingBlock(blockLoc("fluidpipepumpitem")));
 
 	}
 

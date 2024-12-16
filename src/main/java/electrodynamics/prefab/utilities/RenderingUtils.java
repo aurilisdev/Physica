@@ -3,6 +3,7 @@ package electrodynamics.prefab.utilities;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.platform.Lighting;
@@ -15,7 +16,6 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.utilities.math.Color;
 import electrodynamics.prefab.utilities.math.MathUtils;
 import net.minecraft.CrashReport;
@@ -33,7 +33,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -50,7 +49,6 @@ import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtension
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class RenderingUtils {
 
@@ -110,8 +108,8 @@ public class RenderingUtils {
     public static void prepareRotationalTileModel(BlockEntity tile, PoseStack stack) {
         BlockState state = tile.getBlockState();
         stack.translate(0.5, 7.0 / 16.0, 0.5);
-        if (state.hasProperty(GenericEntityBlock.FACING)) {
-            Direction facing = state.getValue(GenericEntityBlock.FACING);
+        if (state.hasProperty(ElectrodynamicsBlockStates.FACING)) {
+            Direction facing = state.getValue(ElectrodynamicsBlockStates.FACING);
             if (facing == Direction.NORTH) {
                 stack.mulPose(MathUtils.rotQuaternionDeg(0, 90, 0));
                 // stack.mulPose(new Quaternionf(0, 90, 0, true));

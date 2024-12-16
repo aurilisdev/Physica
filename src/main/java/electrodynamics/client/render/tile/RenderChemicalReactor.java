@@ -6,7 +6,6 @@ import electrodynamics.api.fluid.PropertyFluidTank;
 import electrodynamics.client.ClientRegister;
 import electrodynamics.client.particle.fluiddrop.ParticleOptionFluidDrop;
 import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactor;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
@@ -18,7 +17,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -27,7 +25,6 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3f;
 
 public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReactor> {
     public RenderChemicalReactor(BlockEntityRendererProvider.Context context) {
@@ -39,7 +36,7 @@ public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReac
 
         poseStack.pushPose();
 
-        switch (tile.getBlockState().getValue(GenericEntityBlock.FACING)) {
+        switch (tile.getFacing()) {
             case NORTH -> {
                 poseStack.mulPose(MathUtils.rotQuaternionDeg(0, 90, 0));
                 // matrixStackIn.mulPose(new Quaternion(0, 90, 0, true));

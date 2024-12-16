@@ -52,6 +52,7 @@ public class Electrodynamics {
         ConfigurationHandler.registerConfig(OreConfig.class);
         // MUST GO BEFORE BLOCKS!!!!
         ElectrodynamicsBlockStates.init();
+        ElectrodynamicsVoxelShapeRegistry.init();
         UnifiedElectrodynamicsRegister.register(bus);
 
         ElectrodynamicsAttributeModifiers.init();

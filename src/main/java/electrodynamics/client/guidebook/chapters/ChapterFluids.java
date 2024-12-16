@@ -167,8 +167,8 @@ public class ChapterFluids extends Chapter {
 
         // Fluid Valve
 
-        pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_FLUIDVALVE.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEM_FLUIDVALVE.get()).onTooltip(new OnTooltip() {
+        pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidvalve).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidvalve)).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -188,7 +188,7 @@ public class ChapterFluids extends Chapter {
 
             @Override
             public Object getJeiLookup() {
-                return new ItemStack(ElectrodynamicsItems.ITEM_FLUIDVALVE.get());
+                return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidvalve));
             }
 
         }));
@@ -200,8 +200,8 @@ public class ChapterFluids extends Chapter {
 
         // Fluid Pipe Pump
 
-        pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_FLUIDPIPEPUMP.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEM_FLUIDPIPEPUMP.get()).onTooltip(new OnTooltip() {
+        pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidpipepump).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidpipepump)).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -221,7 +221,7 @@ public class ChapterFluids extends Chapter {
 
             @Override
             public Object getJeiLookup() {
-                return new ItemStack(ElectrodynamicsItems.ITEM_FLUIDPIPEPUMP.get());
+                return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidpipepump));
             }
 
         }));
@@ -234,8 +234,8 @@ public class ChapterFluids extends Chapter {
 
         // Fluid Pipe Filter
 
-        pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_FLUIDPIPEFILTER.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEM_FLUIDPIPEFILTER.get()).onTooltip(new OnTooltip() {
+        pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidpipefilter).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+        pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidpipefilter)).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -255,7 +255,7 @@ public class ChapterFluids extends Chapter {
 
             @Override
             public Object getJeiLookup() {
-                return new ItemStack(ElectrodynamicsItems.ITEM_FLUIDPIPEFILTER.get());
+                return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidpipefilter));
             }
 
         }));

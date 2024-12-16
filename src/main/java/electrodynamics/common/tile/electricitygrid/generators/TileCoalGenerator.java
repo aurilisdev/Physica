@@ -3,7 +3,7 @@ package electrodynamics.common.tile.electricitygrid.generators;
 import java.util.ArrayList;
 import java.util.List;
 
-import electrodynamics.common.block.BlockMachine;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerCoalGenerator;
 import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
@@ -87,7 +87,7 @@ public class TileCoalGenerator extends GenericGeneratorTile {
 	}
 
 	protected void tickClient(ComponentTickable tickable) {
-		if (getBlockState().getValue(BlockMachine.ON)) {
+		if (getBlockState().getValue(ElectrodynamicsBlockStates.LIT)) {
 			Direction dir = getFacing();
 			if (level.random.nextInt(10) == 0) {
 				level.playLocalSound(worldPosition.getX() + 0.5D, worldPosition.getY() + 0.5D, worldPosition.getZ() + 0.5D, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + level.random.nextFloat(), level.random.nextFloat() * 0.7F + 0.6F, false);

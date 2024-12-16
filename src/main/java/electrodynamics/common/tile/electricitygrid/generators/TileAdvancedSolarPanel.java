@@ -2,7 +2,6 @@ package electrodynamics.common.tile.electricitygrid.generators;
 
 import electrodynamics.api.multiblock.subnodebased.Subnode;
 import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentTile;
-import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerSolarPanel;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
@@ -46,7 +45,7 @@ public class TileAdvancedSolarPanel extends TileSolarPanel implements IMultibloc
 
 	@Override
 	public Subnode[] getSubNodes() {
-		return BlockMachine.SUBNODES_ADVANCEDSOLARPANEL;
+		return SubtypeMachine.Subnodes.SUBNODES_ADVANCEDSOLARPANEL;
 	}
 
 	@Override

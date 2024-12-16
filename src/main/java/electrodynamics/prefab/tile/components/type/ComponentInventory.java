@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.capability.types.itemhandler.IndexedSidedInvWrapper;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
@@ -100,7 +100,7 @@ public class ComponentInventory implements IComponent, WorldlyContainer {
     public ComponentInventory(GenericTile holder, InventoryBuilder builder) {
         holder(holder);
 
-        if (!holder.getBlockState().hasProperty(GenericEntityBlock.FACING)) {
+        if (!holder.getBlockState().hasProperty(ElectrodynamicsBlockStates.FACING)) {
             throw new UnsupportedOperationException("The tile " + holder + " must have the FACING direction property!");
         }
 
@@ -225,8 +225,8 @@ public class ComponentInventory implements IComponent, WorldlyContainer {
 
     @Override
     public void refreshIfUpdate(BlockState oldState, BlockState newState) {
-        if (oldState.hasProperty(GenericEntityBlock.FACING) && newState.hasProperty(GenericEntityBlock.FACING) && oldState.getValue(GenericEntityBlock.FACING) != newState.getValue(GenericEntityBlock.FACING)) {
-            defineOptionals(newState.getValue(GenericEntityBlock.FACING));
+        if (oldState.hasProperty(ElectrodynamicsBlockStates.FACING) && newState.hasProperty(ElectrodynamicsBlockStates.FACING) && oldState.getValue(ElectrodynamicsBlockStates.FACING) != newState.getValue(ElectrodynamicsBlockStates.FACING)) {
+            defineOptionals(newState.getValue(ElectrodynamicsBlockStates.FACING));
         }
     }
 

@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates.AddonTankNeighborType;
+import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransformerAddonTank;
 import electrodynamics.prefab.block.GenericMachineBlock;
 import electrodynamics.registers.ElectrodynamicsBlocks;
@@ -16,16 +17,18 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
-import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockGasTransformerAddonTank extends GenericMachineBlock {
 
-    public static final VoxelShape SHAPE = Shapes.or(Block.box(4, 0, 2, 12, 16, 14), Block.box(2, 0, 4, 4, 16, 12), Block.box(12, 0, 4, 14, 16, 12));
+    public static final VoxelShapeProvider SHAPE = VoxelShapeProvider.createOmni(
+            //
+            Shapes.or(Block.box(4, 0, 2, 12, 16, 14), Block.box(2, 0, 4, 4, 16, 12), Block.box(12, 0, 4, 14, 16, 12))
+            //
+    );
 
     public BlockGasTransformerAddonTank() {
-        super(TileGasTransformerAddonTank::new);
+        super(TileGasTransformerAddonTank::new, SHAPE);
         registerDefaultState(stateDefinition.any().setValue(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS, AddonTankNeighborType.NONE));
     }
 
@@ -33,11 +36,6 @@ public class BlockGasTransformerAddonTank extends GenericMachineBlock {
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(ElectrodynamicsBlockStates.ADDONTANK_NEIGHBOR_STATUS);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        return SHAPE;
     }
 
     @Override
@@ -52,7 +50,7 @@ public class BlockGasTransformerAddonTank extends GenericMachineBlock {
         }
         BlockState above = world.getBlockState(pos.above());
         BlockState below = world.getBlockState(pos.below());
-        boolean isTankBelow = below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE) || below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK) || below.is(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR) || below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR)  || below.is(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR);
+        boolean isTankBelow = below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE) || below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK) || below.is(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR) || below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR) || below.is(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR);
         boolean isTankAbove = above.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK);
         AddonTankNeighborType type;
         if (isTankAbove && isTankBelow) {
@@ -79,7 +77,7 @@ public class BlockGasTransformerAddonTank extends GenericMachineBlock {
     public boolean propagatesSkylightDown(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
         return true;
     }
-    
+
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         throw new UnsupportedOperationException("Need to implement CODEC");

@@ -53,7 +53,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -324,7 +323,7 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
             return 0;
         }
 
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 150;
+        return state.hasProperty(ElectrodynamicsBlockStates.WATERLOGGED) && state.getValue(ElectrodynamicsBlockStates.WATERLOGGED) ? 0 : 150;
     }
 
     @Override
@@ -333,7 +332,7 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
             return 0;
         }
 
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 400;
+        return state.hasProperty(ElectrodynamicsBlockStates.WATERLOGGED) && state.getValue(ElectrodynamicsBlockStates.WATERLOGGED) ? 0 : 400;
     }
 
     @Override

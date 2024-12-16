@@ -6,6 +6,7 @@ import java.util.List;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasTank;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
@@ -151,7 +152,7 @@ public abstract class TileMultiblockController extends TileReplaceable {
 
 			slavePositions.get().add(nodePos);
 
-			level.setBlockAndUpdate(nodePos, node.placeState().setValue(GenericEntityBlock.FACING, getFacing()));
+			level.setBlockAndUpdate(nodePos, node.placeState().setValue(ElectrodynamicsBlockStates.FACING, getFacing()));
 
 			slave = (TileMultiblockSlave) level.getBlockEntity(nodePos);
 

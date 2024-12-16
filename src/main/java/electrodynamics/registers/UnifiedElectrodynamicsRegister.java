@@ -71,8 +71,8 @@ public class UnifiedElectrodynamicsRegister {
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK, ElectroTextUtils.tooltip("addontankcap", ChatFormatter.formatFluidMilibuckets(Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY)));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR, ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR, ElectroTextUtils.voltageTooltip(120));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP, ElectroTextUtils.voltageTooltip(120));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP, ElectroTextUtils.voltageTooltip(120));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gaspipepump), ElectroTextUtils.voltageTooltip(120));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.fluidpipepump), ElectroTextUtils.voltageTooltip(120));
 
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastanksteel), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(8, DisplayUnit.BUCKETS)));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastankreinforced), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(32, DisplayUnit.BUCKETS)));
@@ -111,8 +111,8 @@ public class UnifiedElectrodynamicsRegister {
 
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gasvent), ElectroTextUtils.tooltip("gasvent"));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gascollector), ElectroTextUtils.voltageTooltip(240));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_GASVALVE, ElectroTextUtils.tooltip("gasvalve"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE, ElectroTextUtils.tooltip("fluidvalve"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gasvalve), ElectroTextUtils.tooltip("gasvalve"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.fluidvalve), ElectroTextUtils.tooltip("fluidvalve"));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.potentiometer), ElectroTextUtils.tooltip("potentiometer.use"));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR, ElectroTextUtils.voltageTooltip(480));
 	}

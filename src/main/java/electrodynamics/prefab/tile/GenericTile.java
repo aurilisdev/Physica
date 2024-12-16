@@ -2,6 +2,7 @@ package electrodynamics.prefab.tile;
 
 import java.util.UUID;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -16,7 +17,6 @@ import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodyn
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.common.item.ItemUpgrade;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyManager;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
@@ -308,7 +308,7 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
      * @return
      */
     public Direction getFacing() {
-        return getBlockState().hasProperty(GenericEntityBlock.FACING) ? getBlockState().getValue(GenericEntityBlock.FACING) : Direction.NORTH;
+        return getBlockState().hasProperty(ElectrodynamicsBlockStates.FACING) ? getBlockState().getValue(ElectrodynamicsBlockStates.FACING) : Direction.NORTH;
     }
 
     public void onEnergyChange(ComponentElectrodynamic cap) {

@@ -9,6 +9,7 @@ import electrodynamics.api.network.cable.IRefreshableCable;
 import electrodynamics.api.network.cable.type.IGasPipe;
 import electrodynamics.common.block.connect.util.AbstractRefreshingConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
 import electrodynamics.common.block.subtype.SubtypeGasPipe.InsulationMaterial;
 import electrodynamics.common.network.type.GasNetwork;
@@ -27,7 +28,6 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class BlockGasPipe extends AbstractRefreshingConnectBlock {
 
@@ -55,7 +55,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
             return 0;
         }
 
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 150;
+        return state.hasProperty(ElectrodynamicsBlockStates.WATERLOGGED) && state.getValue(ElectrodynamicsBlockStates.WATERLOGGED) ? 0 : 150;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
             return 0;
         }
 
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 400;
+        return state.hasProperty(ElectrodynamicsBlockStates.WATERLOGGED) && state.getValue(ElectrodynamicsBlockStates.WATERLOGGED) ? 0 : 400;
     }
 
     @Override

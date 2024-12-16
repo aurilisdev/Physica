@@ -2,7 +2,6 @@ package electrodynamics.common.block.gastransformer.thermoelectricmanipulator;
 
 import com.mojang.serialization.MapCodec;
 
-import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.block.gastransformer.util.BlockGenericAdvancedGasTransformer;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates.ManipulatorHeatingStatus;
@@ -19,12 +18,12 @@ public class BlockAdvancedThermoelectricManipulator extends BlockGenericAdvanced
 
     public BlockAdvancedThermoelectricManipulator() {
         super(TileAdvancedThermoelectricManipulator::new);
-        registerDefaultState(stateDefinition.any().setValue(BlockMachine.ON, false).setValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF));
+        registerDefaultState(stateDefinition.any().setValue(ElectrodynamicsBlockStates.LIT, false).setValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF));
     }
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        if (state.hasProperty(BlockMachine.ON) && state.getValue(BlockMachine.ON)) {
+        if (state.hasProperty(ElectrodynamicsBlockStates.LIT) && state.getValue(ElectrodynamicsBlockStates.LIT)) {
             return 15;
         }
         return super.getLightEmission(state, level, pos);
@@ -32,13 +31,13 @@ public class BlockAdvancedThermoelectricManipulator extends BlockGenericAdvanced
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return super.getStateForPlacement(context).setValue(BlockMachine.ON, false).setValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF);
+        return super.getStateForPlacement(context).setValue(ElectrodynamicsBlockStates.LIT, false).setValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF);
     }
 
     @Override
     protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockMachine.ON);
+        builder.add(ElectrodynamicsBlockStates.LIT);
         builder.add(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS);
     }
     

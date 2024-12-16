@@ -25,7 +25,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerator {
 
-    private final String modID;
+    public final String modID;
 
     public ElectrodynamicsChemicalReactorRecipes(String modID) {
         this.modID = modID;

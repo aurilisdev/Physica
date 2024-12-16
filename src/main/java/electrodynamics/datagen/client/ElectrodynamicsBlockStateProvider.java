@@ -21,7 +21,6 @@ import electrodynamics.common.block.subtype.SubtypeWire.WireClass;
 import electrodynamics.common.block.subtype.SubtypeWire.WireColor;
 import electrodynamics.datagen.utils.model.SlaveNodeModelBuilder;
 import electrodynamics.datagen.utils.model.WireModelBuilder;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -31,7 +30,6 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.SnowyDirtBlock;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
@@ -157,14 +155,14 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         ModelFile top = existingBlock(blockLoc("compressorsidet"));
 
         getVariantBuilder(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_SIDE.get())//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(270).addModel();
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(270).addModel();
 
         simpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvent), blockLoc("gasvent"), true);
 
@@ -175,27 +173,27 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
 
         getVariantBuilder(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get())
                 //
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).modelForState().modelFile(off).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).modelForState().modelFile(off).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).modelForState().modelFile(off).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).modelForState().modelFile(off).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).modelForState().modelFile(cool).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).modelForState().modelFile(cool).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).modelForState().modelFile(cool).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).modelForState().modelFile(cool).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).modelForState().modelFile(heat).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).modelForState().modelFile(heat).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).modelForState().modelFile(heat).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).modelForState().modelFile(heat).rotationY(0).addModel();
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).modelForState().modelFile(off).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).modelForState().modelFile(off).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).modelForState().modelFile(off).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).modelForState().modelFile(off).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).modelForState().modelFile(cool).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).modelForState().modelFile(cool).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).modelForState().modelFile(cool).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).modelForState().modelFile(cool).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).modelForState().modelFile(heat).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).modelForState().modelFile(heat).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).modelForState().modelFile(heat).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).modelForState().modelFile(heat).rotationY(0).addModel();
 
-        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCK_GASVALVE, existingBlock(ElectrodynamicsBlocks.BLOCK_GASVALVE.get()), existingBlock(blockLoc("gasvalveon")), 90, 0, true);
-        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE, existingBlock(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE.get()), existingBlock(blockLoc("fluidvalveon")), 90, 0, true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvalve), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvalve)), existingBlock(blockLoc("gasvalveon")), 90, 0, true);
+        horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidvalve), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidvalve)), existingBlock(blockLoc("fluidvalveon")), 90, 0, true);
 
-        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP, existingBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP.get()), false);
-        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP, existingBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP.get()), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipepump), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipepump)), false);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidpipepump), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidpipepump)), false);
 
-        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEFILTER, existingBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEFILTER.get()), true);
-        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEFILTER, existingBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEFILTER.get()), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipefilter), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipefilter)), true);
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidpipefilter), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipefilter)), true);
 
         horrRotatedLitBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.relay), existingBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.relay)), existingBlock(blockLoc("relayon")), 180, 0, true);
 
@@ -223,14 +221,14 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         top = existingBlock(blockLoc("compressortoptank"));
 
         getVariantBuilder(ElectrodynamicsBlocks.BLOCK_COMPRESSOR.get())//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(270).addModel();
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(270).addModel();
         blockItem(ElectrodynamicsBlocks.BLOCK_COMPRESSOR.get(), existingBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR));
 
         //Decompressor
@@ -238,14 +236,14 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         top = existingBlock(blockLoc("decompressortoptank"));
 
         getVariantBuilder(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR.get())//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(270).addModel();
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(none).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(top).rotationY(270).addModel();
         blockItem(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR.get(), existingBlock(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR));
 
         //Thermoelectric Manipulator
@@ -258,41 +256,56 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
         ModelFile heattop = existingBlock(blockLoc("thermoelectricmanipulatortoptank"));
         getVariantBuilder(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get())
                 //
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(off).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(off).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(off).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(off).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(cool).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(cool).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(cool).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(cool).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(heat).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(heat).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(heat).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(heat).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(off).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(off).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(off).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(off).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(cool).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(cool).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(cool).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(cool).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(heat).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(heat).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(heat).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false).modelForState().modelFile(heat).rotationY(270).addModel()//
                 //
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(offtop).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(offtop).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(offtop).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(offtop).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(cooltop).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(cooltop).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(cooltop).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(cooltop).rotationY(270).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(0).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(90).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(180).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(270).addModel();
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(offtop).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(offtop).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(offtop).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.OFF).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(offtop).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(cooltop).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(cooltop).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(cooltop).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.COOL).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(cooltop).rotationY(270).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(0).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(90).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(180).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ManipulatorHeatingStatus.HEAT).with(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, true).modelForState().modelFile(heattop).rotationY(270).addModel();
         blockItem(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get(), existingBlock(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR));
 
         slaveNode(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get(), "block/multisubnode");
 
         horrRotatedBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber),
                 //
-                models().cube(name(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber)), blockLoc("multiblock/electrolosischamberbulkhead"), blockLoc("multiblock/electrolosischamberbulkhead"), blockLoc("electrolosischamberfront"), blockLoc("multiblock/electrolosischambercontacts"), blockLoc("multiblock/electrolosischamberbulkhead"), blockLoc("multiblock/electrolosischamberbulkhead")).texture("particle", modLoc("block/multisubnode")),
+                models().cube(
+                                //
+                                name(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber)),
+                                //
+                                blockLoc("multiblock/electrolosischamberbulkhead"),
+                                //
+                                blockLoc("multiblock/electrolosischamberbulkhead"),
+                                //
+                                blockLoc("electrolosischamberfront"),
+                                //
+                                blockLoc("multiblock/electrolosischambercontacts"),
+                                //
+                                blockLoc("multiblock/electrolosischamberbulkhead"),
+                                //
+                                blockLoc("multiblock/electrolosischamberbulkhead"))
+                        //
+                        .texture("particle", modLoc("block/multisubnode")),
                 //
                 90, 0, true);
-
 
 
         genWires();
@@ -523,10 +536,10 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
 
     public ItemModelBuilder horrRotatedBlock(Block block, ModelFile file, int yRotationOffset, int xRotation, boolean registerItem) {
         getVariantBuilder(block)//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).modelForState().modelFile(file).rotationY((270 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).modelForState().modelFile(file).rotationY((0 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).modelForState().modelFile(file).rotationY((90 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).modelForState().modelFile(file).rotationY((180 + yRotationOffset) % 360).rotationX(xRotation).addModel();
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).modelForState().modelFile(file).rotationY((270 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).modelForState().modelFile(file).rotationY((0 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).modelForState().modelFile(file).rotationY((90 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).modelForState().modelFile(file).rotationY((180 + yRotationOffset) % 360).rotationX(xRotation).addModel();
         if (registerItem) {
             return blockItem(block, file);
         }
@@ -547,14 +560,14 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
 
     public ItemModelBuilder horrRotatedLitBlock(Block block, ModelFile off, ModelFile on, int yRotationOffset, int xRotation, boolean registerItem) {
         getVariantBuilder(block)//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(BlockStateProperties.LIT, false).modelForState().modelFile(off).rotationY((270 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(BlockStateProperties.LIT, false).modelForState().modelFile(off).rotationY((0 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(BlockStateProperties.LIT, false).modelForState().modelFile(off).rotationY((90 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(BlockStateProperties.LIT, false).modelForState().modelFile(off).rotationY((180 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.NORTH).with(BlockStateProperties.LIT, true).modelForState().modelFile(on).rotationY((270 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.EAST).with(BlockStateProperties.LIT, true).modelForState().modelFile(on).rotationY((0 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.SOUTH).with(BlockStateProperties.LIT, true).modelForState().modelFile(on).rotationY((90 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
-                .partialState().with(GenericEntityBlock.FACING, Direction.WEST).with(BlockStateProperties.LIT, true).modelForState().modelFile(on).rotationY((180 + yRotationOffset) % 360).rotationX(xRotation).addModel();
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.LIT, false).modelForState().modelFile(off).rotationY((270 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.LIT, false).modelForState().modelFile(off).rotationY((0 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.LIT, false).modelForState().modelFile(off).rotationY((90 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.LIT, false).modelForState().modelFile(off).rotationY((180 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH).with(ElectrodynamicsBlockStates.LIT, true).modelForState().modelFile(on).rotationY((270 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST).with(ElectrodynamicsBlockStates.LIT, true).modelForState().modelFile(on).rotationY((0 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH).with(ElectrodynamicsBlockStates.LIT, true).modelForState().modelFile(on).rotationY((90 + yRotationOffset) % 360).rotationX(xRotation).addModel()//
+                .partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST).with(ElectrodynamicsBlockStates.LIT, true).modelForState().modelFile(on).rotationY((180 + yRotationOffset) % 360).rotationX(xRotation).addModel();
         if (registerItem) {
             return blockItem(block, off);
         }
@@ -567,7 +580,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
     }
 
     public ItemModelBuilder redstoneToggleBlock(Block block, ModelFile off, ModelFile on, boolean registerItem) {
-        getVariantBuilder(block).partialState().with(BlockStateProperties.LIT, false).modelForState().modelFile(off).addModel().partialState().with(BlockStateProperties.LIT, true).modelForState().modelFile(on).addModel();
+        getVariantBuilder(block).partialState().with(ElectrodynamicsBlockStates.LIT, false).modelForState().modelFile(off).addModel().partialState().with(ElectrodynamicsBlockStates.LIT, true).modelForState().modelFile(on).addModel();
         if (registerItem) {
             return blockItem(block, off);
         }
@@ -576,8 +589,8 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
     }
 
     /*
-     * private void omniDirBlock(DeferredHolder<Block, Block> block, ModelFile model, boolean registerItem) { getVariantBuilder(block.get()).partialState().with(GenericEntityBlock.FACING, Direction.NORTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.NONE).modelForState().modelFile(model) .rotationY(0).addModel().partialState().with(GenericEntityBlock.FACING, Direction.EAST) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.NONE).modelForState().modelFile(model) .rotationY(90).addModel().partialState().with(GenericEntityBlock.FACING, Direction.SOUTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.NONE).modelForState().modelFile(model) .rotationY(180).addModel().partialState().with(GenericEntityBlock.FACING, Direction.WEST) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.NONE).modelForState().modelFile(model) .rotationY(270).addModel().partialState().with(GenericEntityBlock.FACING, Direction.NORTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.UP).modelForState().modelFile(model) .rotationY(0).rotationX(270).addModel().partialState().with(GenericEntityBlock.FACING, Direction.EAST) .with(OverdriveBlockStates.VERTICAL_FACING,
-     * VerticalFacing.UP).modelForState().modelFile(model) .rotationY(90).rotationX(270).addModel().partialState().with(GenericEntityBlock.FACING, Direction.SOUTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.UP).modelForState().modelFile(model) .rotationY(180).rotationX(270).addModel().partialState().with(GenericEntityBlock.FACING, Direction.WEST) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.UP).modelForState().modelFile(model) .rotationY(270).rotationX(270).addModel().partialState() .with(GenericEntityBlock.FACING, Direction.NORTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.DOWN).modelForState().modelFile(model) .rotationY(0).rotationX(90).addModel().partialState().with(GenericEntityBlock.FACING, Direction.EAST) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.DOWN).modelForState().modelFile(model) .rotationY(90).rotationX(90).addModel().partialState().with(GenericEntityBlock.FACING, Direction.SOUTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.DOWN).modelForState().modelFile(model) .rotationY(180).rotationX(90).addModel().partialState().with(GenericEntityBlock.FACING, Direction.WEST)
+     * private void omniDirBlock(DeferredHolder<Block, Block> block, ModelFile model, boolean registerItem) { getVariantBuilder(block.get()).partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.NONE).modelForState().modelFile(model) .rotationY(0).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.NONE).modelForState().modelFile(model) .rotationY(90).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.NONE).modelForState().modelFile(model) .rotationY(180).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.NONE).modelForState().modelFile(model) .rotationY(270).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.NORTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.UP).modelForState().modelFile(model) .rotationY(0).rotationX(270).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST) .with(OverdriveBlockStates.VERTICAL_FACING,
+     * VerticalFacing.UP).modelForState().modelFile(model) .rotationY(90).rotationX(270).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.UP).modelForState().modelFile(model) .rotationY(180).rotationX(270).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.UP).modelForState().modelFile(model) .rotationY(270).rotationX(270).addModel().partialState() .with(ElectrodynamicsBlockStates.FACING, Direction.NORTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.DOWN).modelForState().modelFile(model) .rotationY(0).rotationX(90).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.EAST) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.DOWN).modelForState().modelFile(model) .rotationY(90).rotationX(90).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.SOUTH) .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.DOWN).modelForState().modelFile(model) .rotationY(180).rotationX(90).addModel().partialState().with(ElectrodynamicsBlockStates.FACING, Direction.WEST)
      * .with(OverdriveBlockStates.VERTICAL_FACING, VerticalFacing.DOWN).modelForState().modelFile(model) .rotationY(270).rotationX(90).addModel(); if (registerItem) simpleBlockItem(block.get(), model); }
      *
      */

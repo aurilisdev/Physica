@@ -172,12 +172,12 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
 
         addSimpleBlock(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK.get());
 
-        addSimpleBlock(ElectrodynamicsBlocks.BLOCK_GASVALVE.get());
-        addSimpleBlock(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE.get());
-        addSimpleBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP.get());
-        addSimpleBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP.get());
-        addSimpleBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEFILTER.get());
-        addSimpleBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEFILTER.get());
+        addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvalve));
+        addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidvalve));
+        addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipepump));
+        addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidpipepump));
+        addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipefilter));
+        addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidpipefilter));
         addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvent));
         addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.potentiometer));
 

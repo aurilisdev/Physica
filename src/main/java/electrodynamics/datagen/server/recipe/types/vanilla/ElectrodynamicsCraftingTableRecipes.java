@@ -2292,7 +2292,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "machine_thermoelectric_manipulator", output);
 
-        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_FLUIDVALVE.get(), 1)
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidvalve), 1)
                 //
                 .addPattern("VPR")
                 //
@@ -2304,7 +2304,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "pipe_fluidvalve", output);
 
-        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_GASVALVE.get(), 1)
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvalve), 1)
                 //
                 .addPattern("VPR")
                 //
@@ -2316,7 +2316,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "pipe_gasvalve", output);
 
-        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_FLUIDPIPEPUMP.get(), 1)
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidpipepump), 1)
                 //
                 .addPattern(" C ")
                 //
@@ -2334,7 +2334,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "pipe_fluidpump", output);
 
-        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_FLUIDPIPEPUMP.get(), 1)
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipepump), 1)
                 //
                 .addPattern(" C ")
                 //
@@ -2352,7 +2352,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "pipe_gaspump", output);
 
-        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_FLUIDPIPEFILTER.get(), 1)
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.fluidpipefilter), 1)
                 //
                 .addPattern(" C ")
                 //
@@ -2370,7 +2370,7 @@ public class ElectrodynamicsCraftingTableRecipes extends AbstractRecipeGenerator
                 //
                 .complete(References.ID, "pipe_fluidfilter", output);
 
-        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEM_GASPIPEFILTER.get(), 1)
+        ShapedCraftingRecipeBuilder.start(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipefilter), 1)
                 //
                 .addPattern(" C ")
                 //

@@ -169,7 +169,7 @@ public class ChapterGases extends Chapter {
 				List<FormattedCharSequence> tooltips = new ArrayList<>();
 				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvent).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
 				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.electrolyticseparator).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.ITEM_GASPIPEFILTER.get().getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipefilter).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
 
 				graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
 			}
@@ -256,8 +256,8 @@ public class ChapterGases extends Chapter {
 
 		// Gas Valve
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_GASVALVE.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEM_GASVALVE.get()).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvalve).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvalve)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -277,7 +277,7 @@ public class ChapterGases extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.ITEM_GASVALVE.get());
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvalve));
 			}
 
 		}));
@@ -289,8 +289,8 @@ public class ChapterGases extends Chapter {
 
 		// Gas Pipe Pump
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_GASPIPEPUMP.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEM_GASPIPEPUMP.get()).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipepump).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipepump)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -310,7 +310,7 @@ public class ChapterGases extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.ITEM_GASPIPEPUMP.get());
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipepump));
 			}
 
 		}));
@@ -323,8 +323,8 @@ public class ChapterGases extends Chapter {
 
 		// Gas Filter Pipe
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_GASPIPEFILTER.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEM_GASPIPEFILTER.get()).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipefilter).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipefilter)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -344,7 +344,7 @@ public class ChapterGases extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.ITEM_GASPIPEFILTER.get());
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipefilter));
 			}
 
 		}));

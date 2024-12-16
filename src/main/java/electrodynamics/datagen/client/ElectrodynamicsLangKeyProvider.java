@@ -357,12 +357,12 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addBlock(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR, "GTL Chamber");
 			addBlock(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR, "GTL Chamber MK2");
 
-			addBlock(ElectrodynamicsBlocks.BLOCK_GASVALVE, "Gas Valve");
-			addBlock(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE, "Fluid Valve");
-			addBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP, "Gas Pipe Pump");
-			addBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP, "Fluid Pipe Pump");
-			addBlock(ElectrodynamicsBlocks.BLOCK_GASPIPEFILTER, "Gas Pipe Filter");
-			addBlock(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEFILTER, "Fluid Pipe Filter");
+			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvalve), "Gas Valve");
+			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidvalve), "Fluid Valve");
+			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipepump), "Gas Pipe Pump");
+			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidpipepump), "Fluid Pipe Pump");
+			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipefilter), "Gas Pipe Filter");
+			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidpipefilter), "Fluid Pipe Filter");
 
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.relay), "Relay");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.potentiometer), "Potentiometer");

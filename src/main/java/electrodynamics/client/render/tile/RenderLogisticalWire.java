@@ -1,10 +1,10 @@
 package electrodynamics.client.render.tile;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.tile.electricitygrid.TileLogisticalWire;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,7 +22,7 @@ public class RenderLogisticalWire extends AbstractTileRenderer<TileLogisticalWir
 	@Override
 	public void render(@NotNull TileLogisticalWire tile, float partialTick, @NotNull PoseStack poseStack, @NotNull MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
 
-		if (!tile.getBlockState().getValue(BlockMachine.ON)) {
+		if (!tile.getBlockState().getValue(ElectrodynamicsBlockStates.LIT)) {
 			return;
 		}
 

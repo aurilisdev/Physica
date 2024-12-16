@@ -69,18 +69,6 @@ public class ElectrodynamicsBlockTagsProvider extends BlockTagsProvider {
                 //
                 .add(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get())
                 //
-                .add(ElectrodynamicsBlocks.BLOCK_GASVALVE.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_GASPIPEFILTER.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEFILTER.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP.get())
-                //
                 .add(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get())
                 //
                 .add(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_MIDDLE.get())
@@ -150,18 +138,6 @@ public class ElectrodynamicsBlockTagsProvider extends BlockTagsProvider {
                 .add(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK.get())
                 //
                 .add(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_GASVALVE.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_GASPIPEFILTER.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEFILTER.get())
-                //
-                .add(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP.get())
                 //
                 .add(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get())
                 //

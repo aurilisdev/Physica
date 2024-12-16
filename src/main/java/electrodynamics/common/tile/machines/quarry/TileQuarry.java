@@ -643,7 +643,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 			return;
 		}
 		electro.joules(electro.getJoulesStored() - Constants.QUARRY_USAGE_PER_TICK);
-		BlockState cornerState = ElectrodynamicsBlocks.BLOCK_FRAME_CORNER.get().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE);
+		BlockState cornerState = ElectrodynamicsBlocks.BLOCK_FRAME_CORNER.get().defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false);
 		Level world = getLevel();
 		BlockPos frontOfQuarry = corners.get().get(0);
 		BlockPos foqFar = corners.get().get(1);
@@ -770,7 +770,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 			currPos = null;
 			return;
 		} else {
-			world.setBlockAndUpdate(currPos, ElectrodynamicsBlocks.BLOCK_FRAME.get().defaultBlockState().setValue(GenericEntityBlock.FACING, frameFace).setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
+			world.setBlockAndUpdate(currPos, ElectrodynamicsBlocks.BLOCK_FRAME.get().defaultBlockState().setValue(ElectrodynamicsBlockStates.FACING, frameFace).setValue(ElectrodynamicsBlockStates.WATERLOGGED, Boolean.FALSE));
 			repairedFrames.add(currPos);
 			prevIsCorner = false;
 		}
@@ -788,7 +788,7 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 			return;
 		}
 		isTryingToMineFrame.set(false);
-		world.setBlockAndUpdate(currPos, ElectrodynamicsBlocks.BLOCK_FRAME.get().defaultBlockState().setValue(GenericEntityBlock.FACING, cornerOnRight.get() ? frameFace.getOpposite() : frameFace).setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE));
+		world.setBlockAndUpdate(currPos, ElectrodynamicsBlocks.BLOCK_FRAME.get().defaultBlockState().setValue(ElectrodynamicsBlockStates.FACING, cornerOnRight.get() ? frameFace.getOpposite() : frameFace).setValue(ElectrodynamicsBlockStates.WATERLOGGED, Boolean.FALSE));
 		repairedFrames.add(currPos);
 		world.playSound(null, currPos, SoundEvents.ANVIL_PLACE, SoundSource.BLOCKS, 0.5F, 1.0F);
 		prevPos = new BlockPos(currPos.getX(), currPos.getY(), currPos.getZ());

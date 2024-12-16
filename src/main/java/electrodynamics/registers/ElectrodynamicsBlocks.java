@@ -67,12 +67,6 @@ public class ElectrodynamicsBlocks {
     public static final DeferredHolder<Block, BlockGasTransformerAddonTank> BLOCK_COMPRESSOR_ADDONTANK = BLOCKS.register("compressoraddontank", () -> new BlockGasTransformerAddonTank());
     public static final DeferredHolder<Block, BlockThermoelectricManipulator> BLOCK_THERMOELECTRICMANIPULATOR = BLOCKS.register("thermoelectricmanipulator", () -> new BlockThermoelectricManipulator());
     public static final DeferredHolder<Block, BlockAdvancedThermoelectricManipulator> BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR = BLOCKS.register("advancedthermoelectricmanipulator", () -> new BlockAdvancedThermoelectricManipulator());
-    public static final DeferredHolder<Block, BlockValve> BLOCK_GASVALVE = BLOCKS.register("gasvalve", () -> new BlockValve(true));
-    public static final DeferredHolder<Block, BlockValve> BLOCK_FLUIDVALVE = BLOCKS.register("fluidvalve", () -> new BlockValve(false));
-    public static final DeferredHolder<Block, BlockPipePump> BLOCK_GASPIPEPUMP = BLOCKS.register("gaspipepump", () -> new BlockPipePump(true));
-    public static final DeferredHolder<Block, BlockPipePump> BLOCK_FLUIDPIPEPUMP = BLOCKS.register("fluidpipepump", () -> new BlockPipePump(false));
-    public static final DeferredHolder<Block, BlockPipeFilter> BLOCK_GASPIPEFILTER = BLOCKS.register("gaspipefilter", () -> new BlockPipeFilter(false));
-    public static final DeferredHolder<Block, BlockPipeFilter> BLOCK_FLUIDPIPEFILTER = BLOCKS.register("fluidpipefilter", () -> new BlockPipeFilter(true));
     public static final DeferredHolder<Block, BlockScaffold> BLOCK_STEELSCAFFOLDING = BLOCKS.register("steelscaffold", () -> new BlockScaffold(Blocks.IRON_BLOCK.properties().requiresCorrectToolForDrops().strength(2.0F, 3.0F).sound(SoundType.METAL).noOcclusion()));
     public static final DeferredHolder<Block, BlockChemicalReactorExtra> BLOCK_CHEMICALREACTOREXTRA_MIDDLE = BLOCKS.register("chemicalreactorextramiddle", () -> new BlockChemicalReactorExtra(BlockChemicalReactorExtra.Location.MIDDLE));
     public static final DeferredHolder<Block, BlockChemicalReactorExtra> BLOCK_CHEMICALREACTOREXTRA_TOP = BLOCKS.register("chemicalreactorextratop", () -> new BlockChemicalReactorExtra(BlockChemicalReactorExtra.Location.TOP));

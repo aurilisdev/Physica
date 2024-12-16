@@ -1,6 +1,6 @@
 package electrodynamics.prefab.utilities;
 
-import electrodynamics.common.block.BlockMachine;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,14 +30,14 @@ public class BlockEntityUtils {
 	public static void updateLit(GenericTile tile, Boolean value) {
 		Level world = tile.getLevel();
 		BlockPos pos = tile.getBlockPos();
-		if (tile.getBlockState().hasProperty(BlockMachine.ON)) {
-			world.setBlockAndUpdate(pos, world.getBlockState(pos).setValue(BlockMachine.ON, value));
+		if (tile.getBlockState().hasProperty(ElectrodynamicsBlockStates.LIT)) {
+			world.setBlockAndUpdate(pos, world.getBlockState(pos).setValue(ElectrodynamicsBlockStates.LIT, value));
 		}
 	}
 
 	public static boolean isLit(GenericTile tile) {
-		if (tile.getBlockState().hasProperty(BlockMachine.ON)) {
-			return tile.getBlockState().getValue(BlockMachine.ON);
+		if (tile.getBlockState().hasProperty(ElectrodynamicsBlockStates.LIT)) {
+			return tile.getBlockState().getValue(ElectrodynamicsBlockStates.LIT);
 		}
 		return false;
 	}

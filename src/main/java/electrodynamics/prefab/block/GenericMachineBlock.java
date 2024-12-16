@@ -6,7 +6,8 @@ import javax.annotation.Nullable;
 
 import com.mojang.serialization.MapCodec;
 
-import electrodynamics.common.block.voxelshapes.VoxelShapes;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
+import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,29 +24,35 @@ import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplie
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class GenericMachineBlock extends GenericEntityBlockWaterloggable {
 
-    protected BlockEntitySupplier<BlockEntity> blockEntitySupplier;
+    private final BlockEntitySupplier<BlockEntity> blockEntitySupplier;
+    private final VoxelShapeProvider shapeProvider;
 
     public static HashMap<BlockPos, LivingEntity> IPLAYERSTORABLE_MAP = new HashMap<>();
 
-    public GenericMachineBlock(BlockEntitySupplier<BlockEntity> blockEntitySupplier) {
+    public GenericMachineBlock(BlockEntitySupplier<BlockEntity> blockEntitySupplier, VoxelShapeProvider provider) {
         super(Blocks.IRON_BLOCK.properties().strength(3.5F).sound(SoundType.METAL).noOcclusion().requiresCorrectToolForDrops());
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
+        registerDefaultState(stateDefinition.any().setValue(ElectrodynamicsBlockStates.FACING, Direction.NORTH));
         this.blockEntitySupplier = blockEntitySupplier;
+        this.shapeProvider = provider;
+    }
+
+    public GenericMachineBlock(BlockEntitySupplier<BlockEntity> blockEntitySupplier, boolean temp) {
+        this(blockEntitySupplier, VoxelShapeProvider.DEFAULT);
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        if (state.hasProperty(GenericEntityBlock.FACING)) {
+        Direction dir = null;
+        if (state.hasProperty(ElectrodynamicsBlockStates.FACING)) {
 
-            return VoxelShapes.getShape(worldIn.getBlockState(pos).getBlock(), state.getValue(GenericEntityBlock.FACING));
+            dir = state.getValue(ElectrodynamicsBlockStates.FACING);
 
         }
-        return super.getShape(state, worldIn, pos, context);
+        return shapeProvider.getShape(dir);
     }
 
     @Override
@@ -68,13 +75,13 @@ public class GenericMachineBlock extends GenericEntityBlockWaterloggable {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return super.getStateForPlacement(context).setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return super.getStateForPlacement(context).setValue(ElectrodynamicsBlockStates.FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING);
+        builder.add(ElectrodynamicsBlockStates.FACING);
     }
 
     public boolean isIPlayerStorable() {
@@ -84,10 +91,5 @@ public class GenericMachineBlock extends GenericEntityBlockWaterloggable {
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         throw new UnsupportedOperationException("Need to implement CODEC");
-    }
-
-    @Override
-    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return hasCollision ? Shapes.block() : Shapes.empty();
     }
 }

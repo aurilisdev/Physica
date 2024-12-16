@@ -1,7 +1,7 @@
 package electrodynamics.common.block.gastransformer.thermoelectricmanipulator;
 
-import electrodynamics.common.block.BlockMachine;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
+import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileBasicThermoelectricManipulator;
 import electrodynamics.prefab.block.GenericMachineBlock;
 import electrodynamics.registers.ElectrodynamicsBlocks;
@@ -16,21 +16,21 @@ import net.minecraft.world.level.block.state.StateDefinition;
 
 public class BlockThermoelectricManipulator extends GenericMachineBlock {
     public BlockThermoelectricManipulator() {
-        super(TileBasicThermoelectricManipulator::new);
-        registerDefaultState(stateDefinition.any().setValue(BlockMachine.ON, false).setValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF).setValue(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false));
+        super(TileBasicThermoelectricManipulator::new, VoxelShapeProvider.DEFAULT);
+        registerDefaultState(stateDefinition.any().setValue(ElectrodynamicsBlockStates.LIT, false).setValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF).setValue(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockMachine.ON);
+        builder.add(ElectrodynamicsBlockStates.LIT);
         builder.add(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS);
         builder.add(ElectrodynamicsBlockStates.COMPRESSORSIDE_HAS_TOPTANK);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return getStatusFromTop(context.getLevel(), context.getClickedPos(), super.getStateForPlacement(context).setValue(BlockMachine.ON, false).setValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF));
+        return getStatusFromTop(context.getLevel(), context.getClickedPos(), super.getStateForPlacement(context).setValue(ElectrodynamicsBlockStates.LIT, false).setValue(ElectrodynamicsBlockStates.MANIPULATOR_HEATING_STATUS, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF));
     }
 
     public BlockState getStatusFromTop(Level world, BlockPos pos, BlockState baseState) {
@@ -53,7 +53,7 @@ public class BlockThermoelectricManipulator extends GenericMachineBlock {
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        if (state.hasProperty(BlockMachine.ON) && state.getValue(BlockMachine.ON)) {
+        if (state.hasProperty(ElectrodynamicsBlockStates.LIT) && state.getValue(ElectrodynamicsBlockStates.LIT)) {
             return 15;
         }
         return super.getLightEmission(state, level, pos);

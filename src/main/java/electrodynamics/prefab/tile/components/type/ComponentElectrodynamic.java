@@ -7,12 +7,12 @@ import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.item.IItemElectric;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
@@ -128,8 +128,8 @@ public class ComponentElectrodynamic implements IComponent, ICapabilityElectrody
 
     @Override
     public void refreshIfUpdate(BlockState oldState, BlockState newState) {
-        if (isSided && oldState.hasProperty(GenericEntityBlock.FACING) && newState.hasProperty(GenericEntityBlock.FACING) && oldState.getValue(GenericEntityBlock.FACING) != newState.getValue(GenericEntityBlock.FACING)) {
-            defineOptionals(newState.getValue(GenericEntityBlock.FACING));
+        if (isSided && oldState.hasProperty(ElectrodynamicsBlockStates.FACING) && newState.hasProperty(ElectrodynamicsBlockStates.FACING) && oldState.getValue(ElectrodynamicsBlockStates.FACING) != newState.getValue(ElectrodynamicsBlockStates.FACING)) {
+            defineOptionals(newState.getValue(ElectrodynamicsBlockStates.FACING));
         }
     }
 

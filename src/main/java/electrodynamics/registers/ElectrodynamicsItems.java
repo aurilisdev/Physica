@@ -69,9 +69,9 @@ public class ElectrodynamicsItems {
 	public static final BulkDeferredHolder<Item, BlockItemDescriptable, SubtypeGlass> ITEMS_CUSTOMGLASS = new BulkDeferredHolder<>(SubtypeGlass.values(), subtype -> ITEMS.register(subtype.tag(), () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCKS_CUSTOMGLASS.getValue(subtype), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN)));
 	public static final BulkDeferredHolder<Item, BlockItemDescriptable, SubtypeMachine> ITEMS_MACHINE = new BulkDeferredHolder<>(SubtypeMachine.values(), subtype -> {
 		if(subtype == SubtypeMachine.downgradetransformer || subtype == SubtypeMachine.upgradetransformer || subtype == SubtypeMachine.multimeterblock || subtype == SubtypeMachine.circuitbreaker || subtype == SubtypeMachine.relay || subtype == SubtypeMachine.potentiometer || subtype == SubtypeMachine.advanceddowngradetransformer || subtype == SubtypeMachine.advancedupgradetransformer || subtype == SubtypeMachine.circuitmonitor || subtype == SubtypeMachine.currentregulator) {
-			return ITEMS.register(subtype.tag(), () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(subtype), new Item.Properties(), subtype.showInItemGroup ? ElectrodynamicsCreativeTabs.GRID : null));
+			return ITEMS.register(subtype.tag(), () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(subtype), new Item.Properties(), subtype.showInItemGroup() ? ElectrodynamicsCreativeTabs.GRID : null));
 		} else {
-			return ITEMS.register(subtype.tag(), () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(subtype), new Item.Properties(), subtype.showInItemGroup ? ElectrodynamicsCreativeTabs.MAIN : null));
+			return ITEMS.register(subtype.tag(), () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(subtype), new Item.Properties(), subtype.showInItemGroup() ? ElectrodynamicsCreativeTabs.MAIN : null));
 		}
 
 	});
@@ -91,13 +91,7 @@ public class ElectrodynamicsItems {
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_COMPRESSOR_ADDONTANK = ITEMS.register("compressoraddontank", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
 	public static final BulkDeferredHolder<Item, BlockItemWire, SubtypeWire> ITEMS_WIRE = new BulkDeferredHolder<>(SubtypeWire.values(), subtype -> ITEMS.register(subtype.tag(), () -> new BlockItemWire(ElectrodynamicsBlocks.BLOCKS_WIRE.getValue(subtype), new Item.Properties(), ElectrodynamicsCreativeTabs.GRID)));
 	public static final BulkDeferredHolder<Item, BlockItemDescriptable, SubtypeFluidPipe> ITEMS_PIPE = new BulkDeferredHolder<>(SubtypeFluidPipe.values(), subtype -> ITEMS.register(subtype.tag(), () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCKS_FLUIDPIPE.getValue(subtype), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN)));
-	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_FLUIDVALVE = ITEMS.register("fluidvalve", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_FLUIDVALVE.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
-	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_FLUIDPIPEPUMP = ITEMS.register("fluidpipepump", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEPUMP.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
-	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_FLUIDPIPEFILTER = ITEMS.register("fluidpipefilter", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_FLUIDPIPEFILTER.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
 	public static final BulkDeferredHolder<Item, BlockItemGasPipe, SubtypeGasPipe> ITEMS_GASPIPE = new BulkDeferredHolder<>(SubtypeGasPipe.values(), subtype -> ITEMS.register(subtype.tag(), () -> new BlockItemGasPipe(ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(subtype), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN)));
-	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_GASVALVE = ITEMS.register("gasvalve", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_GASVALVE.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
-	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_GASPIPEPUMP = ITEMS.register("gaspipepump", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_GASPIPEPUMP.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
-	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_GASPIPEFILTER = ITEMS.register("gaspipefilter", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_GASPIPEFILTER.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
 
 
 	/* ITEMS */
