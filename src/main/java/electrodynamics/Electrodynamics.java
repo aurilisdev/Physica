@@ -82,7 +82,6 @@ public class Electrodynamics {
 
             PropertyManager.registerProperties(properties.getRegisteredProperties());
         });
-        ElectrodynamicsVoxelShapeRegistry.init();
 
     }
 
