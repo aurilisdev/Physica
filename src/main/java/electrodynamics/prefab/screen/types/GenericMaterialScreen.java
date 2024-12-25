@@ -5,7 +5,7 @@ import java.util.Set;
 
 import electrodynamics.prefab.inventory.container.GenericContainer;
 import electrodynamics.prefab.screen.GenericScreen;
-import electrodynamics.prefab.screen.component.AbstractScreenComponent;
+import electrodynamics.prefab.screen.component.utils.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
 import net.minecraft.network.chat.Component;

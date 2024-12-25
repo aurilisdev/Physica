@@ -2,13 +2,12 @@ package electrodynamics.client.screen.tile;
 
 import electrodynamics.common.inventory.container.tile.ContainerChemicalReactor;
 import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactor;
-import electrodynamics.prefab.screen.component.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.types.ScreenComponentCondensedFluid;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasTemperature;
-import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
+import electrodynamics.prefab.screen.component.types.wrapper.WrapperInventoryIO;
 import electrodynamics.prefab.screen.component.types.wrapper.WrapperCyclableFluidGauge;
 import electrodynamics.prefab.screen.component.types.wrapper.WrapperCyclableGasGauge;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
@@ -36,116 +35,38 @@ public class ScreenChemicalReactor extends GenericMaterialScreen<ContainerChemic
             }
             return 0;
         }, 66, 52));
-        /*
-        addComponent(new ScreenComponentProgress(ScreenComponentProgress.ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-            GenericTile furnace = container.getHostFromIntArray();
-            if (furnace != null) {
-                ComponentProcessor processor = furnace.getComponent(IComponentType.Processor);
-                if (processor.isActive()) {
-                    return processor.operatingTicks.get() / processor.requiredTicks.get();
-                }
-            }
-            return 0;
-        }, 48, 88));
-
-        addComponent(new ScreenComponentProgress(ScreenComponentProgress.ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-            GenericTile furnace = container.getHostFromIntArray();
-            if (furnace != null) {
-                ComponentProcessor processor = furnace.getComponent(IComponentType.Processor);
-                if (processor.isActive()) {
-                    return processor.operatingTicks.get() / processor.requiredTicks.get();
-                }
-            }
-            return 0;
-        }, 48, 142));
-
-         */
 
         WrapperCyclableFluidGauge fluidInput = new WrapperCyclableFluidGauge(6, 26, container, this, true);
         WrapperCyclableGasGauge gasInput = new WrapperCyclableGasGauge(26, 26, container, this, true);
 
-        /*
-        addComponent(new ScreenComponentFluidGaugeInput(() -> {
-            TileChemicalReactor boiler = container.getHostFromIntArray();
-            if (boiler != null) {
-                return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
-            }
-            return null;
-        }, 10, 18));
-        addComponent(new ScreenComponentFluidGaugeInput(() -> {
-            TileChemicalReactor boiler = container.getHostFromIntArray();
-            if (boiler != null) {
-                return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[1];
-            }
-            return null;
-        }, 46, 18));
-
-         */
-        /*
-        addComponent(new ScreenComponentFluidGauge(() -> {
-            TileChemicalReactor boiler = container.getHostFromIntArray();
-            if (boiler != null) {
-                return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getOutputTanks()[0];
-            }
-            return null;
-        }, 96, 18));
-        addComponent(new ScreenComponentFluidGauge(() -> {
-            TileChemicalReactor boiler = container.getHostFromIntArray();
-            if (boiler != null) {
-                return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getOutputTanks()[1];
-            }
-            return null;
-        }, 132, 18));
-
-         */
-
         WrapperCyclableFluidGauge fluidOutput = new WrapperCyclableFluidGauge(112, 26, container, this, false);
         WrapperCyclableGasGauge gasOutput = new WrapperCyclableGasGauge(132, 26, container, this, false);
 
-        /*
-        addComponent(new ScreenComponentGasGaugeInput(() -> {
-            TileChemicalReactor boiler = container.getHostFromIntArray();
-            if (boiler != null) {
-                return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getInputTanks()[0];
-            }
-            return null;
-        }, 10, 72));
-        addComponent(new ScreenComponentGasGaugeInput(() -> {
-            TileChemicalReactor boiler = container.getHostFromIntArray();
-            if (boiler != null) {
-                return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getInputTanks()[1];
-            }
-            return null;
-        }, 46, 72));
-
-         */
-        /*
-        addComponent(new ScreenComponentGasGauge(() -> {
-            TileChemicalReactor boiler = container.getHostFromIntArray();
-            if (boiler != null) {
-                return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getOutputTanks()[0];
-            }
-            return null;
-        }, 96, 72));
-        addComponent(new ScreenComponentGasGauge(() -> {
-            TileChemicalReactor boiler = container.getHostFromIntArray();
-            if (boiler != null) {
-                return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getOutputTanks()[1];
-            }
-            return null;
-        }, 132, 72));
-
-         */
-
-        new InventoryIOWrapper(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE * 3 + 2, 75, 117, 8, 107)
+        new WrapperInventoryIO(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE * 3 + 2, 75, 117, 8, 107)
                 //
-                .hideAdditional(fluidInput.getComponents().toArray(new AbstractScreenComponent[0]))
-                //
-                .hideAdditional(gasInput.getComponents().toArray(new AbstractScreenComponent[0]))
-                //
-                .hideAdditional(fluidOutput.getComponents().toArray(new AbstractScreenComponent[0]))
-                //
-                .hideAdditional(gasOutput.getComponents().toArray(new AbstractScreenComponent[0]));
+                .hideAdditional(show -> {
+                    //
+                    fluidInput.getComponents().forEach(component -> {
+                        component.setActive(show);
+                        component.setVisible(show);
+                    });
+                    //
+                    gasInput.getComponents().forEach(component -> {
+                        component.setActive(show);
+                        component.setVisible(show);
+                    });
+                    //
+                    fluidOutput.getComponents().forEach(component -> {
+                        component.setActive(show);
+                        component.setVisible(show);
+                    });
+                    //
+                    gasOutput.getComponents().forEach(component -> {
+                        component.setActive(show);
+                        component.setVisible(show);
+                    });
+                    //
+                });
 
         addComponent(new ScreenComponentGasTemperature(-AbstractScreenComponentInfo.SIZE + 1, 2 + AbstractScreenComponentInfo.SIZE * 2));
         addComponent(new ScreenComponentGasPressure(-AbstractScreenComponentInfo.SIZE + 1, 2 + AbstractScreenComponentInfo.SIZE));

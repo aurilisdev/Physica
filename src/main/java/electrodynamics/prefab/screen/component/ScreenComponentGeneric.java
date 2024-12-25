@@ -1,8 +1,8 @@
-package electrodynamics.prefab.screen.component.types;
+package electrodynamics.prefab.screen.component;
 
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.api.screen.ITexture.Textures;
-import electrodynamics.prefab.screen.component.AbstractScreenComponent;
+import electrodynamics.prefab.screen.component.utils.AbstractScreenComponent;
 import electrodynamics.prefab.utilities.RenderingUtils;
 import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,6 +18,9 @@ import javax.annotation.Nullable;
 public class ScreenComponentGeneric extends AbstractScreenComponent {
 
 	public ITexture texture;
+
+	@Nullable
+	public ITexture icon;
 
 	public Color color = Color.WHITE;
 
@@ -44,6 +47,11 @@ public class ScreenComponentGeneric extends AbstractScreenComponent {
 		return this;
 	}
 
+	public ScreenComponentGeneric setIcon(ITexture icon) {
+		this.icon = icon;
+		return this;
+	}
+
 	@Override
 	public void renderBackground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
 		if (!isVisible()) {
@@ -51,6 +59,11 @@ public class ScreenComponentGeneric extends AbstractScreenComponent {
 		}
 		RenderingUtils.setShaderColor(color);
 		graphics.blit(texture.getLocation(), guiWidth + xLocation, guiHeight + yLocation, texture.textureU(), texture.textureV(), texture.textureWidth(), texture.textureHeight(), texture.imageWidth(), texture.imageHeight());
+		if(icon != null) {
+			int xOffset = (texture.imageWidth() - icon.imageWidth()) / 2;
+			int yOffset = (texture.imageHeight() - icon.imageHeight()) / 2;
+			graphics.blit(icon.getLocation(), guiWidth + xLocation + xOffset, guiHeight + yLocation + yOffset, icon.textureU(), icon.textureV(), icon.textureWidth(), icon.textureHeight(), icon.imageWidth(), icon.imageHeight());
+		}
 		RenderingUtils.resetShaderColor();
 	}
 

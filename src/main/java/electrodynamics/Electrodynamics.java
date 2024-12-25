@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import electrodynamics.api.References;
 import electrodynamics.client.ClientRegister;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
-import electrodynamics.common.block.voxelshapes.ElectrodynamicsVoxelShapeRegistry;
+import electrodynamics.common.block.voxelshapes.ElectrodynamicsVoxelShapes;
 import electrodynamics.common.entity.ElectrodynamicsAttributeModifiers;
 import electrodynamics.common.event.ServerEventHandler;
 import electrodynamics.common.eventbus.RegisterPropertiesEvent;
@@ -52,7 +52,7 @@ public class Electrodynamics {
         ConfigurationHandler.registerConfig(OreConfig.class);
         // MUST GO BEFORE BLOCKS!!!!
         ElectrodynamicsBlockStates.init();
-        ElectrodynamicsVoxelShapeRegistry.init();
+        ElectrodynamicsVoxelShapes.init();
         UnifiedElectrodynamicsRegister.register(bus);
 
         ElectrodynamicsAttributeModifiers.init();

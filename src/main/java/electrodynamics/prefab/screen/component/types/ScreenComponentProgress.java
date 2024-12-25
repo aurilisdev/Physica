@@ -4,6 +4,7 @@ import java.util.function.DoubleSupplier;
 
 import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;

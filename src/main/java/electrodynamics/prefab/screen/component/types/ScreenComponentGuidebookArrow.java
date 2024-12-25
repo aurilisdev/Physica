@@ -3,6 +3,7 @@ package electrodynamics.prefab.screen.component.types;
 import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.client.guidebook.ScreenGuidebook;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import net.minecraft.resources.ResourceLocation;
 
 public class ScreenComponentGuidebookArrow extends ScreenComponentGeneric {

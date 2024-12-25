@@ -8,6 +8,7 @@ import electrodynamics.api.screen.ITexture;
 import electrodynamics.api.screen.component.ISlotTexture;
 import electrodynamics.api.screen.component.TextSupplier;
 import electrodynamics.prefab.inventory.container.slot.utils.IUpgradeSlot;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;

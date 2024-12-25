@@ -6,7 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.Shapes;
 
-public class ElectrodynamicsVoxelShapeRegistry {
+public class ElectrodynamicsVoxelShapes {
 
     public static void init() {
 

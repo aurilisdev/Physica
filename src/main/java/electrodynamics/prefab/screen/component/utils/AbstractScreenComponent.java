@@ -1,9 +1,8 @@
-package electrodynamics.prefab.screen.component;
+package electrodynamics.prefab.screen.component.utils;
 
 import javax.annotation.Nullable;
 
 import electrodynamics.api.screen.IScreenWrapper;
-import electrodynamics.prefab.screen.component.button.ScreenComponentButton;
 import net.minecraft.client.gui.ComponentPath;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;

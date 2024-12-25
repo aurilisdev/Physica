@@ -33,7 +33,7 @@ import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.gas.utils.IGasTank;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.client.ClientRegister;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.ChatFormatting;

@@ -2,7 +2,7 @@ package electrodynamics.prefab.screen.component.types.wrapper;
 
 import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.screen.GenericScreen;
-import electrodynamics.prefab.screen.component.AbstractScreenComponent;
+import electrodynamics.prefab.screen.component.utils.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.button.type.ButtonTankSlider;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;

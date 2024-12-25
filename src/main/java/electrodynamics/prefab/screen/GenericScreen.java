@@ -9,7 +9,7 @@ import electrodynamics.api.References;
 import electrodynamics.api.screen.IScreenWrapper;
 import electrodynamics.api.screen.component.ISlotTexture;
 import electrodynamics.prefab.inventory.container.GenericContainer;
-import electrodynamics.prefab.screen.component.AbstractScreenComponent;
+import electrodynamics.prefab.screen.component.utils.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot;

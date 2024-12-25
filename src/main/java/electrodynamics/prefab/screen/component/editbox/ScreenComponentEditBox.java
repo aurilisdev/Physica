@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
