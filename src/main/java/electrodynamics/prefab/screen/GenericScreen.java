@@ -1,9 +1,7 @@
 package electrodynamics.prefab.screen;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import electrodynamics.api.References;
 import electrodynamics.api.screen.IScreenWrapper;
@@ -32,9 +30,9 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class GenericScreen<T extends GenericContainer> extends AbstractContainerScreen<T> implements IScreenWrapper {
 
 	protected ResourceLocation defaultResource = ResourceLocation.parse(References.ID + ":textures/screen/component/base.png");
-	private Set<AbstractScreenComponent> components = new HashSet<>();
+	private List<AbstractScreenComponent> components = new ArrayList<>();
 	public List<ScreenComponentSlot> slots = new ArrayList<>();
-	private Set<ScreenComponentEditBox> editBoxes = new HashSet<>();
+	private List<ScreenComponentEditBox> editBoxes = new ArrayList<>();
 	protected int playerInvOffset = 0;
 
 	// Ability to manipulate labels
@@ -181,7 +179,7 @@ public class GenericScreen<T extends GenericContainer> extends AbstractContainer
 		return component;
 	}
 
-	public Set<AbstractScreenComponent> getComponents() {
+	public List<AbstractScreenComponent> getComponents() {
 		return components;
 	}
 
