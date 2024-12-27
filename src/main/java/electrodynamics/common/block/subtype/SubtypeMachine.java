@@ -210,6 +210,11 @@ public enum SubtypeMachine implements ISubtype, IMachine {
         return properties.provider;
     }
 
+    @Override
+    public boolean usesLit() {
+        return properties.usesLit;
+    }
+
     public boolean showInItemGroup() {
         return showInItemGroup;
     }

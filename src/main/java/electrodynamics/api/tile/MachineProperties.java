@@ -8,6 +8,7 @@ public class MachineProperties {
 
     public boolean isMultiblock = false;
     public int litBrightness = 0;
+    public boolean usesLit = false;
     public RenderShape renderShape = RenderShape.MODEL;
     public boolean propegatesLightDown = false;
     public boolean isPlayerStorable = false;
@@ -22,7 +23,7 @@ public class MachineProperties {
 
     public MachineProperties setLitBrightness(int brightness) {
         this.litBrightness = brightness;
-        return this;
+        return setUsesLit();
     }
 
     public MachineProperties setPropegateLightDown() {
@@ -48,6 +49,11 @@ public class MachineProperties {
 
     public MachineProperties setShapeProvider(VoxelShapeProvider provider) {
         this.provider = provider;
+        return this;
+    }
+
+    public MachineProperties setUsesLit() {
+        usesLit = true;
         return this;
     }
 

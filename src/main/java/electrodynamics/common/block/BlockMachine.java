@@ -36,7 +36,7 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
     public BlockMachine(IMachine machine) {
         super(machine.getBlockEntitySupplier(), machine.getVoxelShapeProvider());
         this.machine = machine;
-        if (machine.getLitBrightness() > 0) {
+        if (machine.usesLit()) {
             registerDefaultState(stateDefinition.any().setValue(ElectrodynamicsBlockStates.LIT, false));
         }
 

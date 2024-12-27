@@ -26,4 +26,6 @@ public interface IMachine {
 
     public VoxelShapeProvider getVoxelShapeProvider();
 
+    public boolean usesLit();
+
 }
