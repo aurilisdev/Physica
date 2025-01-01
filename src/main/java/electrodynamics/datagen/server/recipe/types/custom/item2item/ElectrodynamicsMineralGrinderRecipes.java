@@ -24,7 +24,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 	public static double MINERALGRINDER_USAGE_PER_TICK = 350.0;
 	public static int MINERALGRINDER_REQUIRED_TICKS = 200;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsMineralGrinderRecipes(String modID) {
 		this.modID = modID;
