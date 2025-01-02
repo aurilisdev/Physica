@@ -23,30 +23,30 @@ public class NetworkHandler {
 
         // CLIENT
 
-        registry.playToClient(PacketAddClientRenderInfo.TYPE, PacketAddClientRenderInfo.CODEC, (packet, context) -> PacketAddClientRenderInfo.handle(packet, context));
-        registry.playToClient(PacketJetpackEquipedSound.TYPE, PacketJetpackEquipedSound.CODEC, (packet, context) -> PacketJetpackEquipedSound.handle(packet, context));
-        registry.playToClient(PacketRenderJetpackParticles.TYPE, PacketRenderJetpackParticles.CODEC, (packet, context) -> PacketRenderJetpackParticles.handle(packet, context));
-        registry.playToClient(PacketResetGuidebookPages.TYPE, PacketResetGuidebookPages.CODEC, (packet, context) -> PacketResetGuidebookPages.handle(packet, context));
-        registry.playToClient(PacketSendUpdatePropertiesClient.TYPE, PacketSendUpdatePropertiesClient.CODEC, (packet, context) -> PacketSendUpdatePropertiesClient.handle(packet, context));
-        registry.playToClient(PacketSetClientCoalGenFuels.TYPE, PacketSetClientCoalGenFuels.CODEC, (packet, context) -> PacketSetClientCoalGenFuels.handle(packet, context));
-        registry.playToClient(PacketSetClientCombustionFuel.TYPE, PacketSetClientCombustionFuel.CODEC, (packet, context) -> PacketSetClientCombustionFuel.handle(packet, context));
-        registry.playToClient(PacketSetClientGasCollectorCards.TYPE, PacketSetClientGasCollectorCards.CODEC, (packet, context) -> PacketSetClientGasCollectorCards.handle(packet, context));
-        registry.playToClient(PacketSetClientThermoGenSources.TYPE, PacketSetClientThermoGenSources.CODEC, (packet, context) -> PacketSetClientThermoGenSources.handle(packet, context));
-        registry.playToClient(PacketSpawnSmokeParticle.TYPE, PacketSpawnSmokeParticle.CODEC, (packet, context) -> PacketSpawnSmokeParticle.handle(packet, context));
-        registry.playToClient(PacketUpdateSpecificPropertyClient.TYPE, PacketUpdateSpecificPropertyClient.CODEC, (packet, context) -> PacketUpdateSpecificPropertyClient.handle(packet, context));
+        registry.playToClient(PacketAddClientRenderInfo.TYPE, PacketAddClientRenderInfo.CODEC, PacketAddClientRenderInfo::handle);
+        registry.playToClient(PacketJetpackEquipedSound.TYPE, PacketJetpackEquipedSound.CODEC, PacketJetpackEquipedSound::handle);
+        registry.playToClient(PacketRenderJetpackParticles.TYPE, PacketRenderJetpackParticles.CODEC, PacketRenderJetpackParticles::handle);
+        registry.playToClient(PacketResetGuidebookPages.TYPE, PacketResetGuidebookPages.CODEC, PacketResetGuidebookPages::handle);
+        registry.playToClient(PacketSendUpdatePropertiesClient.TYPE, PacketSendUpdatePropertiesClient.CODEC, PacketSendUpdatePropertiesClient::handle);
+        registry.playToClient(PacketSetClientCoalGenFuels.TYPE, PacketSetClientCoalGenFuels.CODEC, PacketSetClientCoalGenFuels::handle);
+        registry.playToClient(PacketSetClientCombustionFuel.TYPE, PacketSetClientCombustionFuel.CODEC, PacketSetClientCombustionFuel::handle);
+        registry.playToClient(PacketSetClientGasCollectorCards.TYPE, PacketSetClientGasCollectorCards.CODEC, PacketSetClientGasCollectorCards::handle);
+        registry.playToClient(PacketSetClientThermoGenSources.TYPE, PacketSetClientThermoGenSources.CODEC, PacketSetClientThermoGenSources::handle);
+        registry.playToClient(PacketSpawnSmokeParticle.TYPE, PacketSpawnSmokeParticle.CODEC, PacketSpawnSmokeParticle::handle);
+        registry.playToClient(PacketUpdateSpecificPropertyClient.TYPE, PacketUpdateSpecificPropertyClient.CODEC, PacketUpdateSpecificPropertyClient::handle);
 
         // SERVER
 
-        registry.playToServer(PacketJetpackFlightServer.TYPE, PacketJetpackFlightServer.CODEC, (packet, context) -> PacketJetpackFlightServer.handle(packet, context));
-        registry.playToServer(PacketModeSwitchServer.TYPE, PacketModeSwitchServer.CODEC, (packet, context) -> PacketModeSwitchServer.handle(packet, context));
-        registry.playToServer(PacketPlayerInformation.TYPE, PacketPlayerInformation.CODEC, (packet, context) -> PacketPlayerInformation.handle(packet, context));
-        registry.playToServer(PacketPowerSetting.TYPE, PacketPowerSetting.CODEC, (packet, context) -> PacketPowerSetting.handle(packet, context));
-        registry.playToServer(PacketSendUpdatePropertiesServer.TYPE, PacketSendUpdatePropertiesServer.CODEC, (packet, context) -> PacketSendUpdatePropertiesServer.handle(packet, context));
-        registry.playToServer(PacketServerUpdateTile.TYPE, PacketServerUpdateTile.CODEC, (packet, context) -> PacketServerUpdateTile.handle(packet, context));
-        registry.playToServer(PacketSwapBattery.TYPE, PacketSwapBattery.CODEC, (packet, context) -> PacketSwapBattery.handle(packet, context));
-        registry.playToServer(PacketToggleOnServer.TYPE, PacketToggleOnServer.CODEC, (packet, server) -> PacketToggleOnServer.handle(packet, server));
-        registry.playToServer(PacketUpdateCarriedItemServer.TYPE, PacketUpdateCarriedItemServer.CODEC, (packet, context) -> PacketUpdateCarriedItemServer.handle(packet, context));
-        registry.playToServer(PacketSeismicScanner.TYPE, PacketSeismicScanner.CODEC, (packet, context) -> PacketSeismicScanner.handle(packet, context));
+        registry.playToServer(PacketJetpackFlightServer.TYPE, PacketJetpackFlightServer.CODEC, PacketJetpackFlightServer::handle);
+        registry.playToServer(PacketModeSwitchServer.TYPE, PacketModeSwitchServer.CODEC, PacketModeSwitchServer::handle);
+        registry.playToServer(PacketPlayerInformation.TYPE, PacketPlayerInformation.CODEC, PacketPlayerInformation::handle);
+        registry.playToServer(PacketPowerSetting.TYPE, PacketPowerSetting.CODEC, PacketPowerSetting::handle);
+        registry.playToServer(PacketSendUpdatePropertiesServer.TYPE, PacketSendUpdatePropertiesServer.CODEC, PacketSendUpdatePropertiesServer::handle);
+        registry.playToServer(PacketServerUpdateTile.TYPE, PacketServerUpdateTile.CODEC, PacketServerUpdateTile::handle);
+        registry.playToServer(PacketSwapBattery.TYPE, PacketSwapBattery.CODEC, PacketSwapBattery::handle);
+        registry.playToServer(PacketToggleOnServer.TYPE, PacketToggleOnServer.CODEC, PacketToggleOnServer::handle);
+        registry.playToServer(PacketUpdateCarriedItemServer.TYPE, PacketUpdateCarriedItemServer.CODEC, PacketUpdateCarriedItemServer::handle);
+        registry.playToServer(PacketSeismicScanner.TYPE, PacketSeismicScanner.CODEC, PacketSeismicScanner::handle);
 
     }
 

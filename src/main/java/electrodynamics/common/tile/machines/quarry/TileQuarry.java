@@ -13,6 +13,7 @@ import javax.annotation.Nullable;
 
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
+import electrodynamics.prefab.utilities.ItemUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 
@@ -26,7 +27,6 @@ import electrodynamics.common.item.ItemDrillHead;
 import electrodynamics.common.item.ItemUpgrade;
 import electrodynamics.common.item.subtype.SubtypeDrillHead;
 import electrodynamics.common.settings.Constants;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.block.GenericMachineBlock;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.tile.GenericTile;
@@ -37,7 +37,6 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
-import electrodynamics.prefab.utilities.InventoryUtils;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
@@ -59,7 +58,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.common.util.FakePlayerFactory;
@@ -531,7 +529,45 @@ public class TileQuarry extends GenericTile implements IPlayerStorable {
 			} else {
 				items.addAll(lootItems);
 			}
-			InventoryUtils.addItemsToInventory(inv, items, inv.getOutputStartIndex(), inv.getOutputContents().size());
+
+			int max = inv.getOutputStartIndex() + inv.getOutputContents().size();
+
+			for(ItemStack item : items) {
+
+				for (int i = inv.getOutputStartIndex(); i < max; i++) {
+
+					ItemStack contained = inv.getItem(i);
+
+					int room = contained.getMaxStackSize() - contained.getCount();
+
+					int amtAccepted = Math.min(room, item.getCount());
+
+					if(amtAccepted == 0) {
+						continue;
+					}
+
+					if (contained.isEmpty()) {
+
+						inv.setItem(i, new ItemStack(item.getItem(), amtAccepted));
+
+						item.shrink(amtAccepted);
+
+					} else if (ItemUtils.testItems(item.getItem(), contained.getItem())) {
+
+						contained.grow(amtAccepted);
+
+						item.shrink(amtAccepted);
+
+						inv.setChanged();
+
+					}
+					if(item.isEmpty()) {
+						break;
+					}
+				}
+
+			}
+
 			world.playSound(null, pos, state.getSoundType().getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
 		}
 		return sucess;
