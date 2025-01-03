@@ -18,7 +18,7 @@ public class ElectrodynamicsFermentationPlantRecipes extends AbstractRecipeGener
 	public static double FERMENTATIONPLANT_USAGE_PER_TICK = 20.0;
 	public static int FERMENTATIONPLANT_REQUIRED_TICKS = 2000;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsFermentationPlantRecipes(String modID) {
 		this.modID = modID;

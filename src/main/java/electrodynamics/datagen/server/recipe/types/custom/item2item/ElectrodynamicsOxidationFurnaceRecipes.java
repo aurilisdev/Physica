@@ -22,7 +22,7 @@ public class ElectrodynamicsOxidationFurnaceRecipes extends AbstractRecipeGenera
     public static double OXIDATIONFURNACE_USAGE_PER_TICK = 350.0;
     public static int OXIDATIONFURNACE_REQUIRED_TICKS = 200;
 
-    private final String modID;
+    public final String modID;
 
     public ElectrodynamicsOxidationFurnaceRecipes(String modID) {
         this.modID = modID;

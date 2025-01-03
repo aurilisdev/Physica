@@ -20,7 +20,7 @@ public class ElectrodynamicsReinforcedAlloyerRecipes extends AbstractRecipeGener
 	public static int REINFORCEDALLOYER_REQUIRED_TICKS = 50;
 	public static double REINFORCEDALLOYER_USAGE_PER_TICK = 50.0;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsReinforcedAlloyerRecipes(String modID) {
 		this.modID = modID;

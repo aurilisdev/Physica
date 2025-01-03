@@ -21,7 +21,7 @@ public class ElectrodynamicsMineralWasherRecipes extends AbstractRecipeGenerator
 	public static double MINERALWASHER_USAGE_PER_TICK = 400.0;
 	public static int MINERALWASHER_REQUIRED_TICKS = 200;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsMineralWasherRecipes(String modID) {
 		this.modID = modID;

@@ -18,7 +18,7 @@ public class ElectrodynamicsLatheRecipes extends AbstractRecipeGenerator {
 	public static int LATHE_REQUIRED_TICKS = 200;
 	public static double LATHE_USAGE_PER_TICK = 350.0;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsLatheRecipes(String modID) {
 		this.modID = modID;

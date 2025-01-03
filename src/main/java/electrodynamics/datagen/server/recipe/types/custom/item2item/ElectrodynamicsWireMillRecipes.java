@@ -20,7 +20,7 @@ public class ElectrodynamicsWireMillRecipes extends AbstractRecipeGenerator {
 	public static double WIREMILL_USAGE_PER_TICK = 125.0;
 	public static int WIREMILL_REQUIRED_TICKS = 200;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsWireMillRecipes(String modID) {
 		this.modID = modID;

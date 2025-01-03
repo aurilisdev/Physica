@@ -12,7 +12,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 public class ElectrodynamicsElectrolosisChamberRecipes extends AbstractRecipeGenerator {
 
-    private final String modID;
+    public final String modID;
 
     public ElectrodynamicsElectrolosisChamberRecipes(String modID) {
         this.modID = modID;

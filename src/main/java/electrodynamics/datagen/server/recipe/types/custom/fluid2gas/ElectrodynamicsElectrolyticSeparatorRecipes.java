@@ -17,7 +17,7 @@ public class ElectrodynamicsElectrolyticSeparatorRecipes extends AbstractRecipeG
 	public static int ELECTROLYTICSEPARATOR_REQUIRED_TICKS = 200;
 	public static double ELECTROLYTICSEPARATOR_USAGE_PER_TICK = 250.0;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsElectrolyticSeparatorRecipes(String modID) {
 		this.modID = modID;

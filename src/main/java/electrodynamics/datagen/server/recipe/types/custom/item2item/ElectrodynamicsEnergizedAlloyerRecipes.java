@@ -20,7 +20,7 @@ public class ElectrodynamicsEnergizedAlloyerRecipes extends AbstractRecipeGenera
 	public static int ENERGIZEDALLOYER_REQUIRED_TICKS = 50;
 	public static double ENERGIZEDALLOYER_USAGE_PER_TICK = 50.0;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsEnergizedAlloyerRecipes(String modID) {
 		this.modID = modID;
