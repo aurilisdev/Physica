@@ -31,3 +31,6 @@
 /time set noon
 /time set night
 /time set noon
+/time set da
+/time set day
+/gamerule doDaylightCycle false

@@ -26,6 +26,7 @@ public class Property<T> {
     //set this if you want to update a property without having a tile tick
     //otherwise the property will be synced to the client upon change at the end of the tile's tick
     private boolean shouldUpdateOnChange = false;
+    private boolean shouldUpdateServer = true;
     private String name;
     private T value;
 
@@ -107,7 +108,7 @@ public class Property<T> {
                     alreadySynced = false;
                 }
                 manager.setDirty(this);
-            } else {
+            } else if(shouldUpdateServer) {
                 CompoundTag data = new CompoundTag();
                 saveToTag(data, manager.getOwner().getLevel().registryAccess());
                 PacketDistributor.sendToServer(new PacketSendUpdatePropertiesServer(data, getIndex(), manager.getOwner().getBlockPos()));
@@ -165,13 +166,13 @@ public class Property<T> {
         return shouldSave;
     }
 
+    public boolean shouldUpdateClient() {
+        return shouldUpdateClient;
+    }
+
     public Property<T> setNoSave() {
         shouldSave = false;
         return this;
-    }
-
-    public boolean shouldUpdateClient() {
-        return shouldUpdateClient;
     }
 
     public Property<T> setNoUpdateClient() {
@@ -181,6 +182,11 @@ public class Property<T> {
 
     public Property<T> setShouldUpdateOnChange() {
         shouldUpdateOnChange = true;
+        return this;
+    }
+
+    public Property<T> setNoUpdateServer() {
+        shouldUpdateServer = false;
         return this;
     }
 

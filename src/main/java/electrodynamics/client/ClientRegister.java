@@ -298,6 +298,9 @@ public class ClientRegister {
         event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_PIPE.get(), RenderConnectBlock::new);
         event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_GAS_PIPE.get(), RenderConnectBlock::new);
 
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_ADVANCEDUPGRADETRANSFORMER.get(), RenderAdvancedTransformer.RenderAdvancedUpgradeTransformer::new);
+        event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_ADVANCEDDOWNGRADETRANSFORMER.get(), RenderAdvancedTransformer.RenderAdvancedDowngradeTransformer::new);
+
         event.registerBlockEntityRenderer(ElectrodynamicsTiles.TILE_CHEMICALREACTOR.get(), RenderChemicalReactor::new);
     }
 
