@@ -299,10 +299,10 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
     }
 
     public static Predicate<GasStack> getHelmetGasValidator() {
-        return gas -> gas.getGas().is(ElectrodynamicsTags.Gases.OXYGEN);
+        return gas -> gas.is(ElectrodynamicsTags.Gases.OXYGEN);
     }
     public static Predicate<GasStack> getLeggingsGasValidator() {
-        return gas -> gas.getGas().is(ElectrodynamicsTags.Gases.ARGON);
+        return gas -> gas.is(ElectrodynamicsTags.Gases.ARGON);
     }
 
 

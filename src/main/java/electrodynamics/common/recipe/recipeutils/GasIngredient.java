@@ -47,7 +47,7 @@ public class GasIngredient implements Predicate<GasStack>, ICustomIngredient {
             Codec.INT.fieldOf("pressure").forGetter(instance0 -> instance0.pressure)
 
     //
-    ).apply(instance, (gas, amount, temp, pressure) -> new GasIngredient(gas, amount, temp, pressure))
+    ).apply(instance, GasIngredient::new)
     //
 
     );
@@ -66,7 +66,7 @@ public class GasIngredient implements Predicate<GasStack>, ICustomIngredient {
             Codec.INT.fieldOf("pressure").forGetter(instance0 -> instance0.pressure)
 
     //
-    ).apply(instance, (gas, amount, temp, pressure) -> new GasIngredient(gas, amount, temp, pressure))
+    ).apply(instance, GasIngredient::new)
     //
 
     );

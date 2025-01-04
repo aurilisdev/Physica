@@ -18,9 +18,7 @@ import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.common.tile.pipelines.gas.TileGasPipePump;
 import electrodynamics.prefab.network.AbstractNetwork;
-import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 // NOTE to add in pipe heat loss, uncomment commented code
@@ -323,11 +321,11 @@ public class GasNetwork extends AbstractNetwork<IGasPipe, SubtypeGasPipe, BlockE
 
 	private boolean checkForOverloadAndHandle(GasStack stack, boolean live) {
 
-		if (stack.getPressure() <= maxPressure) {
+		boolean isCorrosive = stack.is(ElectrodynamicsTags.Gases.IS_CORROSIVE);
+
+		if (stack.getPressure() <= maxPressure && !isCorrosive) {
 			return false;
 		}
-
-		boolean isCorrosive = ElectrodynamicsGases.GAS_REGISTRY.getTag(ElectrodynamicsTags.Gases.IS_CORROSIVE).get().contains(new Holder.Direct<>(stack.getGas()));
 
 		boolean exploded = false;
 		HashSet<SubtypeGasPipe> overloadedPipes = new HashSet<>();
@@ -342,7 +340,7 @@ public class GasNetwork extends AbstractNetwork<IGasPipe, SubtypeGasPipe, BlockE
 
 		}
 		for (SubtypeGasPipe pipe : overloadedPipes) {
-			for (IGasPipe gasPipe : conductorTypeMap.get(pipe)) {
+			for (IGasPipe gasPipe : conductorTypeMap.getOrDefault(pipe, new HashSet<>())) {
 				if (live) {
 					gasPipe.destroyViolently();
 				}

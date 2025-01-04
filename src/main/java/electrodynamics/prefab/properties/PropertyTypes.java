@@ -284,7 +284,7 @@ public class PropertyTypes {
             //
     );
 
-    public static final PropertyType<GasStack, FriendlyByteBuf> GAS_STACK = new PropertyType<>(
+    public static final PropertyType<GasStack, RegistryFriendlyByteBuf> GAS_STACK = new PropertyType<>(
             //
             ResourceLocation.fromNamespaceAndPath(References.ID, "gasstack"),
             //

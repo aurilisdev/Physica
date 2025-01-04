@@ -73,7 +73,7 @@ public abstract class GenericTileGasPipe extends GenericConnectTile implements I
 
 				@Override
 				public int fill(GasStack gas, GasAction action) {
-					if (action == GasAction.SIMULATE || getNetwork() == null) {
+					if (action == GasAction.SIMULATE || getNetwork() == null || gas.isEmpty()) {
 						return 0;
 					}
 					return gasNetwork.emit(gas, Lists.newArrayList(level.getBlockEntity(worldPos.relative(dir))), action == GasAction.SIMULATE).getAmount();

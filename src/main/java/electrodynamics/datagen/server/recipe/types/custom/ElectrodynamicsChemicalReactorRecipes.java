@@ -124,7 +124,7 @@ public class ElectrodynamicsChemicalReactorRecipes extends AbstractRecipeGenerat
                     //
                     .addFluidTagInput(FluidTags.WATER, 1000)
                     //
-                    .addFluidBiproduct(new ProbableFluid(new FluidStack(ElectrodynamicsFluids.FLUID_AQUAREGIA.get(), 200), 1))
+                    .addFluidBiproduct(new ProbableFluid(new FluidStack(ElectrodynamicsFluids.FLUID_AQUAREGIA.get(), 50), 1))
                     //
                     .save(output);
         }

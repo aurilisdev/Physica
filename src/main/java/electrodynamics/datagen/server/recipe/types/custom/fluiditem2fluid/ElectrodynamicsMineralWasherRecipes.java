@@ -56,7 +56,7 @@ public class ElectrodynamicsMineralWasherRecipes extends AbstractRecipeGenerator
 
 		for (SubtypeRoyalMineralFluid fluid : SubtypeRoyalMineralFluid.values()) {
 			if (fluid.source != null) {
-				newRecipe(new FluidStack(ElectrodynamicsFluids.FLUIDS_ROYALMINERAL.getValue(fluid), 3000), 0, 200, 400.0, "royalmineral_" + fluid.name(), modID)
+				newRecipe(new FluidStack(ElectrodynamicsFluids.FLUIDS_ROYALMINERAL.getValue(fluid), 4000), 0, 200, 400.0, "royalmineral_" + fluid.name(), modID)
 						//
 						.addItemTagInput(fluid.source, 1)
 						//
