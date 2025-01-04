@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
+import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.client.guidebook.ScreenGuidebook;
 import electrodynamics.client.screen.tile.*;
@@ -43,17 +44,14 @@ import electrodynamics.prefab.screen.types.GenericMaterialScreen;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.object.CombustionFuelSource;
 import electrodynamics.registers.ElectrodynamicsBlocks;
+import electrodynamics.registers.ElectrodynamicsFluids;
+import electrodynamics.registers.ElectrodynamicsGases;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.neoforge.NeoForgeTypes;
-import mezz.jei.api.registration.IAdvancedRegistration;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IModIngredientRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
@@ -61,7 +59,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 @JeiPlugin
@@ -271,6 +271,25 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 
         // registration.addRecipeManagerPlugin(new RecipeManagerPluginCanister());
 
+    }
+
+    @Override
+    public void registerExtraIngredients(IExtraIngredientRegistration registration) {
+        List<FluidStack> fluids = new ArrayList<>();
+        for (DeferredHolder<Fluid, ? extends Fluid> fluid : ElectrodynamicsFluids.FLUIDS.getEntries()) {
+            fluids.add(new FluidStack(fluid.get(), 1000));
+        }
+        registration.addExtraIngredients(NeoForgeTypes.FLUID_STACK, fluids);
+
+        List<GasStack> gases = new ArrayList<>();
+        for(DeferredHolder<Gas, ? extends Gas> gas : ElectrodynamicsGases.GASES.getEntries()) {
+            if(gas.get() == ElectrodynamicsGases.EMPTY.value()) {
+                continue;
+            }
+
+            gases.add(new GasStack(gas.get(), 1000, Gas.ROOM_TEMPERATURE, Gas.PRESSURE_AT_SEA_LEVEL));
+        }
+        registration.addExtraIngredients(ElectrodynamicsJeiTypes.GAS_STACK, gases);
     }
 
 }
