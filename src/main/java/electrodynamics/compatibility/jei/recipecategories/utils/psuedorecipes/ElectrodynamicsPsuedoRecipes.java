@@ -30,6 +30,9 @@ public class ElectrodynamicsPsuedoRecipes {
 
 	public static void initRecipes() {
 
+		EVAPORATION_RECIPES.clear();
+		CONDENSATION_RECIPES.clear();
+
 		for (Gas gas : ElectrodynamicsGases.GAS_REGISTRY.stream().toList()) {
 
 			if (gas.isEmpty()) {

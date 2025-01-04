@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.gas.GasStack;
+import electrodynamics.client.ClientRegister;
 import electrodynamics.compatibility.jei.utils.gui.types.gasgauge.IGasGaugeTexture;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
 import mezz.jei.api.ingredients.IIngredientRenderer;
@@ -22,11 +23,12 @@ public class IngredientRendererGasStack implements IIngredientRenderer<GasStack>
 
 		@Override
 		public void render(GuiGraphics graphics, GasStack ingredient) {
+			graphics.blit(0, 0, 0, 16, 16, ClientRegister.getSprite(ClientRegister.TEXTURE_GAS));
 		}
 
 		@Override
 		public List<Component> getTooltip(GasStack ingredient, TooltipFlag tooltipFlag) {
-			return new ArrayList<>();
+			return List.of(ingredient.getGas().getDescription());
 		}
 
 	};

@@ -2,7 +2,7 @@
   "type": "electrodynamics:chemical_reactor_recipe",
   "fluidbi": [
     {
-      "amount": 200,
+      "amount": 50,
       "chance": 1.0,
       "fluid": "electrodynamics:fluidaquaregia"
     }

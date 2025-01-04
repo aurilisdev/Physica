@@ -1,12 +1,10 @@
 package electrodynamics.api.gas;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -27,23 +25,20 @@ public class Gas {
 	public static final int MINIMUM_FREEZE_TEMP = 260;
 
 	private final Holder<Item> container;
-	private final TagKey<Gas> tag;
 	private final Component description;
 	private final int condensationTemp; // Degrees Kelvin; set to 0 if this gas does not condense
 	@Nullable
 	private final Holder<Fluid> condensedFluid; // set to empty if gas does not condense
 
-	public Gas(Holder<Item> container, @Nullable TagKey<Gas> tag, Component description) {
+	public Gas(Holder<Item> container, Component description) {
 		this.container = container;
-		this.tag = tag;
 		this.description = description;
 		this.condensationTemp = 0;
-		this.condensedFluid = new Holder.Direct(Fluids.EMPTY);
+		this.condensedFluid = new Holder.Direct<>(Fluids.EMPTY);
 	}
 
-	public Gas(Holder<Item> container, @Nullable TagKey<Gas> tag, Component description, int condensationTemp, Holder<Fluid> condensedFluid) {
+	public Gas(Holder<Item> container, Component description, int condensationTemp, Holder<Fluid> condensedFluid) {
 		this.container = container;
-		this.tag = tag;
 		this.description = description;
 		this.condensationTemp = condensationTemp;
 		this.condensedFluid = condensedFluid;
@@ -58,8 +53,8 @@ public class Gas {
 		return container.value();
 	}
 
-	public boolean is(@Nonnull TagKey<Gas> tag) {
-		return this.tag == null ? false : this.tag.equals(tag);
+	public Holder<Gas> getBuiltInRegistry() {
+		return ElectrodynamicsGases.GAS_REGISTRY.wrapAsHolder(this);
 	}
 
 	public boolean isEmpty() {
