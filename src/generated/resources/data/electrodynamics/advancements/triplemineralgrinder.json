@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:mineralgrindertriple"
-            ]
+            "items": "electrodynamics:mineralgrindertriple"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.triplemineralgrinder.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:mineralgrindertriple"
+      "count": 1,
+      "id": "electrodynamics:mineralgrindertriple"
     },
-    "show_toast": true,
     "title": {
       "color": "red",
       "translate": "advancement.electrodynamics.triplemineralgrinder.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 100
-  },
-  "sends_telemetry_event": false
+  }
 }

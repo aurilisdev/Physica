@@ -44,7 +44,7 @@ public class ElectricFurnaceRecipeCategory extends AbstractRecipeCategory<Smelti
 
 	public static final String RECIPE_GROUP = "smelting";
 
-	public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricfurnace));
+	public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electricfurnace));
 
 	public static final RecipeType<SmeltingRecipe> RECIPE_TYPE = RecipeType.create(References.ID, RECIPE_GROUP, SmeltingRecipe.class);
 

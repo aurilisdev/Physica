@@ -1,10 +1,13 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer;
 
-import org.jetbrains.annotations.NotNull;
+import electrodynamics.common.settings.Constants;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.item.ItemStack;
 
-import electrodynamics.common.tile.machines.quarry.TileQuarry;
 import electrodynamics.prefab.tile.GenericTile;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -16,16 +19,15 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
+import java.util.Optional;
+
 public class TileGasTransformerAddonTank extends GenericTile {
 
-	public static final int MAX_ADDON_TANKS = 5;
-	public static final double ADDITIONAL_CAPACITY = 5000;
-
-	private BlockPos ownerPos = TileQuarry.OUT_OF_REACH;
+	private BlockPos ownerPos = BlockEntityUtils.OUT_OF_REACH;
 	// public boolean isDestroyed = false;
 
 	public TileGasTransformerAddonTank(BlockPos worldPos, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_COMPRESSOR_ADDONTANK.get(), worldPos, blockState);
+		super(ElectrodynamicsTiles.TILE_COMPRESSOR_ADDONTANK.get(), worldPos, blockState);
 	}
 
 	public void setOwnerPos(BlockPos ownerPos) {
@@ -39,16 +41,16 @@ public class TileGasTransformerAddonTank extends GenericTile {
 		}
 		BlockPos above = getBlockPos().above();
 		BlockEntity aboveTile = getLevel().getBlockEntity(above);
-		for (int i = 0; i < MAX_ADDON_TANKS; i++) {
+		for (int i = 0; i < Constants.GAS_TRANSFORMER_ADDON_TANK_LIMIT; i++) {
 			if (aboveTile instanceof TileGasTransformerAddonTank tank) {
-				tank.setOwnerPos(TileQuarry.OUT_OF_REACH);
+				tank.setOwnerPos(BlockEntityUtils.OUT_OF_REACH);
 			}
 			above = above.above();
 			aboveTile = getLevel().getBlockEntity(above);
 		}
-		if (getLevel().getBlockEntity(ownerPos) instanceof TileGasTransformerSideBlock side) {
+		if (getLevel().getBlockEntity(ownerPos) instanceof IAddonTankManager manager) {
 			// isDestroyed = true;
-			side.updateTankCount();
+			manager.updateTankCount();
 		}
 	}
 
@@ -60,14 +62,12 @@ public class TileGasTransformerAddonTank extends GenericTile {
 		}
 		BlockPos belowPos = getBlockPos().below();
 		BlockState below = getLevel().getBlockState(belowPos);
-		for (int i = 0; i < MAX_ADDON_TANKS; i++) {
-			if (below.is(ElectrodynamicsBlocks.blockGasTransformerSide)) {
-				if (getLevel().getBlockEntity(belowPos) instanceof TileGasTransformerSideBlock side) {
-					side.updateTankCount();
-				}
+		for (int i = 0; i < Constants.GAS_TRANSFORMER_ADDON_TANK_LIMIT; i++) {
+			if (getLevel().getBlockEntity(belowPos) instanceof IAddonTankManager manager) {
+				manager.updateTankCount();
 				break;
 			}
-			if (!below.is(ElectrodynamicsBlocks.blockGasTransformerAddonTank)) {
+			if (!below.is(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK)) {
 				break;
 			}
 			belowPos = belowPos.below();
@@ -76,23 +76,32 @@ public class TileGasTransformerAddonTank extends GenericTile {
 	}
 
 	@Override
-	public InteractionResult use(Player player, InteractionHand handIn, BlockHitResult hit) {
-		if (getLevel().getBlockEntity(ownerPos) instanceof TileGasTransformerSideBlock compressor) {
-			return compressor.use(player, handIn, hit);
+	public ItemInteractionResult useWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit) {
+		if (getLevel().getBlockEntity(ownerPos) instanceof GenericTile compressor) {
+			return compressor.useWithItem(used, player, hand, hit);
+		}
+		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+	}
+
+	@Override
+	public InteractionResult useWithoutItem(Player player, BlockHitResult hit) {
+		if (getLevel().getBlockEntity(ownerPos) instanceof GenericTile compressor) {
+			return compressor.useWithoutItem(player, hit);
 		}
 		return InteractionResult.FAIL;
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound) {
-		super.saveAdditional(compound);
+	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.saveAdditional(compound, registries);
 		compound.put("owner", NbtUtils.writeBlockPos(ownerPos));
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag compound) {
-		super.load(compound);
-		ownerPos = NbtUtils.readBlockPos(compound.getCompound("owner"));
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
+		Optional<BlockPos> optional = NbtUtils.readBlockPos(compound, "owner");
+		ownerPos = optional.isPresent() ? optional.get() : BlockEntityUtils.OUT_OF_REACH;
 	}
 
 }

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/elite"
+    },
+    "G": {
+      "tag": "c:gems/diamond"
+    },
+    "P": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "W": {
+      "item": "electrodynamics:wirecopper"
+    }
+  },
+  "pattern": [
+    " G ",
+    "WPW",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:chromotographycardoxygen"
+  }
+}

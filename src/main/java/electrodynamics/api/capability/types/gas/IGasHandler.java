@@ -26,15 +26,15 @@ public interface IGasHandler {
 
 	/**
 	 * @param tank : The tank to check.
-	 * @return A double representing the maximum storage capacity of the checked tank.
+	 * @return An integer representing the maximum storage capacity of the checked tank.
 	 */
-	double getTankCapacity(int tank);
+	int getTankCapacity(int tank);
 
 	/**
 	 * @param tank : The tank to check.
-	 * @return A double representing the maximum temperature (in degrees Kelvin) of the checked tank
+	 * @return An integer representing the maximum temperature (in degrees Kelvin) of the checked tank
 	 */
-	double getTankMaxTemperature(int tank);
+	int getTankMaxTemperature(int tank);
 
 	/**
 	 * @param tank : The tank to check
@@ -50,43 +50,39 @@ public interface IGasHandler {
 	boolean isGasValid(int tank, @Nonnull GasStack gas);
 
 	/**
-	 * @param tank   : The tank to fill
 	 * @param gas    : The gas to fill
 	 * @param action : If SIMULATE, the action will only be simulated
 	 * @return The amount of gas that was accepted
 	 */
-	double fillTank(int tank, GasStack gas, GasAction action);
+	int fill(GasStack gas, GasAction action);
 
 	/**
-	 * @param tank   : The tank to drain
 	 * @param gas    : The gas to be drained
 	 * @param action : If SIMULATE, the action will only be simulated
 	 * @return A GasStack representing how much gas was actually drained
 	 */
-	GasStack drainTank(int tank, GasStack gas, GasAction action);
+	GasStack drain(GasStack gas, GasAction action);
 
 	/**
-	 * @param tank    : The tank to drain
 	 * @param maxFill : The amount of gas to drain
 	 * @param action  : If SIMULATE, the action will only be simulated
 	 * @return A GasStack representing how much gas was actually drained
 	 */
-	GasStack drainTank(int tank, double maxFill, GasAction action);
+	GasStack drain(int maxFill, GasAction action);
 
 	/**
-	 * @param tank             : The tank to heat
+	 * @param tank : the tank to heat
 	 * @param deltaTemperature : The amount the temperature should change.
 	 * @param action           : If SIMULATE, the heating will only be simulated.
 	 * @return How much room is left in the tank after the gas is heated. A VALUE OF NEGATIVE ONE INDICATES THERE IS NOT ENOUGH ROOM.
 	 */
-	double heat(int tank, double deltaTemperature, GasAction action);
+	int heat(int tank, int deltaTemperature, GasAction action);
 
 	/**
-	 * @param tank          : the tank to pressurize
-	 * @param deltaPressure : The new pressure the GasHandler should have
+	 * @param tank : the tank to pressurize
 	 * @param action        : If SIMULATE, the pressurizing will only be simulated.
 	 * @return How much room is left in the tank after the gas is pressurized. A VALUE OF NEGATIVE ONE INDICATES THERE IS NOT ENOUGH ROOM.
 	 */
-	double bringPressureTo(int tank, int atm, GasAction action);
+	int bringPressureTo(int tank, int atm, GasAction action);
 
 }

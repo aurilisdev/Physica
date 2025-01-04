@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "P": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "V": {
+      "item": "electrodynamics:mechanicalvalve"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "PMV",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:gascollector"
+  }
+}

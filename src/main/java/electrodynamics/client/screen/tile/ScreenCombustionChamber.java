@@ -2,11 +2,11 @@ package electrodynamics.client.screen.tile;
 
 import electrodynamics.common.inventory.container.tile.ContainerCombustionChamber;
 import electrodynamics.common.tile.electricitygrid.generators.TileCombustionChamber;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressTextures;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGaugeInput;
+import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.screen.types.GenericMaterialScreen;
@@ -22,8 +22,8 @@ public class ScreenCombustionChamber extends GenericMaterialScreen<ContainerComb
 
 	public ScreenCombustionChamber(ContainerCombustionChamber container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
-		addComponent(new ScreenComponentFluidGaugeInput(() -> {
-			TileCombustionChamber boiler = container.getHostFromIntArray();
+		addComponent(new ScreenComponentFluidGauge(() -> {
+			TileCombustionChamber boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
 			}
@@ -31,7 +31,7 @@ public class ScreenCombustionChamber extends GenericMaterialScreen<ContainerComb
 		}, 98, 18));
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_RIGHT_OFF, 69, 33));
 		addComponent(new ScreenComponentProgress(ProgressBars.COUNTDOWN_FLAME, () -> {
-			TileCombustionChamber boiler = container.getHostFromIntArray();
+			TileCombustionChamber boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.burnTime.get() / (double) TileCombustionChamber.TICKS_PER_MILLIBUCKET;
 			}

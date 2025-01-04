@@ -1,0 +1,10 @@
+{
+  "loader": "electrodynamics:electrodynamicsslavenodeloader",
+  "model": {
+    "parent": "electrodynamics:block/multisubnode"
+  },
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "electrodynamics:block/multisubnode"
+  }
+}

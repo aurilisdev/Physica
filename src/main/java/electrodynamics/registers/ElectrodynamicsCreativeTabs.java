@@ -13,7 +13,7 @@ public class ElectrodynamicsCreativeTabs {
 
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, References.ID);
 
-	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = CREATIVE_TABS.register("main", () -> CreativeModeTab.builder().title(ElectroTextUtils.creativeTab("main")).icon(() -> new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.electricarcfurnace))).build());
-	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> GRID = CREATIVE_TABS.register("grid", () -> CreativeModeTab.builder().title(ElectroTextUtils.creativeTab("grid")).icon(() -> new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.downgradetransformer))).build());
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = CREATIVE_TABS.register("main", () -> CreativeModeTab.builder().title(ElectroTextUtils.creativeTab("main")).icon(() -> new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.wiremill))).build());
+	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> GRID = CREATIVE_TABS.register("grid", () -> CreativeModeTab.builder().title(ElectroTextUtils.creativeTab("grid")).icon(() -> new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.downgradetransformer))).build());
 
 }

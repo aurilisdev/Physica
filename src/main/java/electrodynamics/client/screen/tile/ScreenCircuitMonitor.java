@@ -10,6 +10,7 @@ import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
 import electrodynamics.prefab.screen.component.types.ScreenComponentMultiLabel;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -29,7 +30,7 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
 
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 
 			if (monitor == null) {
 				return;
@@ -45,118 +46,106 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 
 			Component symbol = units.getSymbol();
 
-			graphics.drawString(font, symbol, 163 - font.width(symbol), 175, 4210752, false);
+			graphics.drawString(font, symbol, 163 - font.width(symbol), 175, Color.TEXT_GRAY.color(), false);
 
 		}));
 
-		addComponent(new ScreenComponentSimpleLabel(13, 38, 10, 4210752, ElectroTextUtils.gui("property")));
-		addComponent(new ScreenComponentSimpleLabel(13, 118, 10, 4210752, ElectroTextUtils.gui("operator")));
-		addComponent(new ScreenComponentSimpleLabel(13, 158, 10, 4210752, ElectroTextUtils.gui("value")));
+		addComponent(new ScreenComponentSimpleLabel(13, 38, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("property")));
+		addComponent(new ScreenComponentSimpleLabel(13, 118, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("operator")));
+		addComponent(new ScreenComponentSimpleLabel(13, 158, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("value")));
 
 		// network value
 
 		addComponent(new ScreenComponentButton<>(13, 50, 70, 20).setLabel(getPropertyLabel(0)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(0);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(13, 70, 70, 20).setLabel(getPropertyLabel(1)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(1);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(13, 90, 70, 20).setLabel(getPropertyLabel(2)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(2);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(93, 50, 70, 20).setLabel(getPropertyLabel(3)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(3);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(93, 70, 70, 20).setLabel(getPropertyLabel(4)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(4);
-			monitor.networkProperty.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(93, 90, 70, 20).setLabel(getPropertyLabel(5)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.networkProperty.set(5);
-			monitor.networkProperty.updateServer();
 		}));
 
 		// boolean operator
 
 		addComponent(new ScreenComponentButton<>(13, 130, 20, 20).setLabel(getOperatorLabel(0)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(0);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(39, 130, 20, 20).setLabel(getOperatorLabel(1)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(1);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(65, 130, 20, 20).setLabel(getOperatorLabel(2)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(2);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(91, 130, 20, 20).setLabel(getOperatorLabel(3)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(3);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(117, 130, 20, 20).setLabel(getOperatorLabel(4)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(4);
-			monitor.booleanOperator.updateServer();
 		}));
 		addComponent(new ScreenComponentButton<>(143, 130, 20, 20).setLabel(getOperatorLabel(5)).setOnPress(button -> {
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor == null) {
 				return;
 			}
 			monitor.booleanOperator.set(5);
-			monitor.booleanOperator.updateServer();
 		}));
 
 		// entered value
-		addEditBox(value = new ScreenComponentEditBox(13, 170, 134, 20, getFontRenderer()).setFilter(ScreenComponentEditBox.POSITIVE_DECIMAL).setMaxLength(30).setTextColor(-1).setTextColorUneditable(-1).setResponder(this::handleValue));
+		addEditBox(value = new ScreenComponentEditBox(13, 170, 134, 20, getFontRenderer()).setFilter(ScreenComponentEditBox.POSITIVE_DECIMAL).setMaxLength(30).setTextColor(Color.WHITE).setTextColorUneditable(Color.WHITE).setResponder(this::handleValue));
 
 		playerInvLabel.setVisible(false);
 
@@ -167,7 +156,7 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			TileCircuitMonitor monitor = menu.getHostFromIntArray();
+			TileCircuitMonitor monitor = menu.getSafeHost();
 			if (monitor != null) {
 				value.setValue("" + monitor.value.get());
 			}
@@ -179,7 +168,7 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 			return;
 		}
 
-		TileCircuitMonitor monitor = menu.getHostFromIntArray();
+		TileCircuitMonitor monitor = menu.getSafeHost();
 
 		if (monitor == null) {
 			return;
@@ -194,7 +183,6 @@ public class ScreenCircuitMonitor extends GenericScreen<ContainerCircuitMonitor>
 		}
 
 		monitor.value.set(value);
-		monitor.value.updateServer();
 
 	}
 

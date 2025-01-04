@@ -1,48 +1,38 @@
 package electrodynamics.common.packet.types.server;
 
-import electrodynamics.api.tile.IPacketServerUpdateTile;
 import electrodynamics.common.packet.NetworkHandler;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PacketServerUpdateTile implements CustomPacketPayload {
-	private final BlockPos target;
-	private final CompoundTag nbt;
 
-	public PacketServerUpdateTile(CompoundTag nbt, BlockPos target) {
-		this.nbt = nbt;
-		this.target = target;
-	}
+    public static final ResourceLocation PACKET_SERVERUPDATETILE_PACKETID = NetworkHandler.id("packetserverupdatetile");
+    public static final Type<PacketServerUpdateTile> TYPE = new Type<>(PACKET_SERVERUPDATETILE_PACKETID);
+    public static final StreamCodec<ByteBuf, PacketServerUpdateTile> CODEC = StreamCodec.composite(
+            ByteBufCodecs.fromCodec(CompoundTag.CODEC), instance -> instance.nbt,
+            BlockPos.STREAM_CODEC, instance -> instance.target,
+            PacketServerUpdateTile::new
+    );
+    private final BlockPos target;
+    private final CompoundTag nbt;
 
-	public static void handle(PacketServerUpdateTile message, PlayPayloadContext context) {
-	    ServerLevel world = (ServerLevel) context.level().get();
-        if (world == null) {
-            return;
-        }
-        BlockEntity tile = world.getBlockEntity(message.target);
-        if (tile instanceof IPacketServerUpdateTile serv) {
-            serv.readCustomUpdate(message.nbt);
-        }
-	}
+    public PacketServerUpdateTile(CompoundTag nbt, BlockPos target) {
+        this.nbt = nbt;
+        this.target = target;
+    }
 
-	public static PacketServerUpdateTile read(FriendlyByteBuf buf) {
-		return new PacketServerUpdateTile(buf.readNbt(), buf.readBlockPos());
-	}
-
-    @Override
-    public void write(FriendlyByteBuf buf) {
-        buf.writeNbt(nbt);
-        buf.writeBlockPos(target);
+    public static void handle(PacketServerUpdateTile message, IPayloadContext context) {
+        ServerBarrierMethods.handleServerUpdateTile(context.player().level(), message.target, message.nbt);
     }
 
     @Override
-    public ResourceLocation id() {
-        return NetworkHandler.PACKET_SERVERUPDATETILE_PACKETID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 }

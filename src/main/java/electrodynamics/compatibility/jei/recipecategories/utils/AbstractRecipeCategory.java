@@ -14,7 +14,6 @@ import electrodynamics.compatibility.jei.utils.gui.types.gasgauge.AbstractGasGau
 import electrodynamics.compatibility.jei.utils.ingredients.ElectrodynamicsJeiTypes;
 import electrodynamics.compatibility.jei.utils.ingredients.IngredientRendererGasStack;
 import electrodynamics.compatibility.jei.utils.label.AbstractLabelWrapper;
-import electrodynamics.compatibility.jei.utils.label.types.BiproductPercentWrapperElectroRecipe;
 import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
 import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
 import mezz.jei.api.constants.VanillaTypes;
@@ -38,397 +37,422 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 
-	private int animationTime;
+    protected int animationTime;
 
-	private Component title;
+    protected Component title;
 
-	private IDrawable background;
-	private IDrawable icon;
+    protected IDrawable background;
+    protected IDrawable icon;
 
-	private RecipeType<T> recipeType;
+    protected RecipeType<T> recipeType;
 
-	public AbstractLabelWrapper[] labels = new AbstractLabelWrapper[0];
+    public AbstractLabelWrapper[] labels = new AbstractLabelWrapper[0];
 
-	public int itemBiLabelFirstIndex;
+    protected ArrayList<AnimatedWrapper> animatedDrawables = new ArrayList<>();
+    protected ArrayList<StaticWrapper> staticDrawables = new ArrayList<>();
 
-	private ArrayList<AnimatedWrapper> animatedDrawables = new ArrayList<>();
-	private ArrayList<StaticWrapper> staticDrawables = new ArrayList<>();
+    protected SlotDataWrapper[] inputSlotWrappers = new SlotDataWrapper[0];
+    protected SlotDataWrapper[] outputSlotWrappers = new SlotDataWrapper[0];
+    protected AbstractFluidGaugeObject[] fluidInputWrappers = new AbstractFluidGaugeObject[0];
+    protected AbstractFluidGaugeObject[] fluidOutputWrappers = new AbstractFluidGaugeObject[0];
+    protected AbstractGasGaugeObject[] gasInputWrappers = new AbstractGasGaugeObject[0];
+    protected AbstractGasGaugeObject[] gasOutputWrappers = new AbstractGasGaugeObject[0];
 
-	private SlotDataWrapper[] inputSlotWrappers = new SlotDataWrapper[0];
-	private SlotDataWrapper[] outputSlotWrappers = new SlotDataWrapper[0];
-	private AbstractFluidGaugeObject[] fluidInputWrappers = new AbstractFluidGaugeObject[0];
-	private AbstractFluidGaugeObject[] fluidOutputWrappers = new AbstractFluidGaugeObject[0];
-	private AbstractGasGaugeObject[] gasInputWrappers = new AbstractGasGaugeObject[0];
-	private AbstractGasGaugeObject[] gasOutputWrappers = new AbstractGasGaugeObject[0];
-
-	public AbstractRecipeCategory(IGuiHelper guiHelper, Component title, ItemStack inputMachine, BackgroundObject wrapper, RecipeType<T> recipeType, int animationTime) {
-
-		this.title = title;
-
-		this.recipeType = recipeType;
-
-		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, inputMachine);
-
-		ITexture texture = wrapper.getTexture();
-		background = guiHelper.drawableBuilder(texture.getLocation(), wrapper.getX(), wrapper.getY(), wrapper.getWidth(), wrapper.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build();
-
-		this.animationTime = animationTime;
-	}
-
-	@Override
-	public RecipeType<T> getRecipeType() {
-		return recipeType;
-	}
-
-	@Override
-	public Component getTitle() {
-		return title;
-	}
-
-	@Override
-	public IDrawable getBackground() {
-		return background;
-	}
-
-	@Override
-	public IDrawable getIcon() {
-		return icon;
-	}
-
-	@Override
-	public void draw(T recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-
-		drawPre(graphics, recipe);
-
-		drawStatic(graphics);
-		drawAnimated(graphics);
-
-		drawPost(graphics, recipe);
-
-		preLabels(graphics, recipe);
-
-		addLabels(graphics, recipe);
-
-		postLabels(graphics, recipe);
-	}
-
-	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
-		setItemInputs(getItemInputs(recipe), builder);
-		setFluidInputs(getFluidInputs(recipe), builder);
-		setItemOutputs(getItemOutputs(recipe), builder);
-		setFluidOutputs(getFluidOutputs(recipe), builder);
-		setGasInputs(getGasInputs(recipe), builder);
-		setGasOutputs(getGasOutputs(recipe), builder);
-	}
-
-	public int getAnimationTime() {
-		return animationTime;
-	}
+    public AbstractRecipeCategory(IGuiHelper guiHelper, Component title, ItemStack inputMachine, BackgroundObject wrapper, RecipeType<T> recipeType, int animationTime) {
+
+        this.title = title;
 
-	public void setLabels(AbstractLabelWrapper... labels) {
-		this.labels = labels;
-		AbstractLabelWrapper wrap;
-		boolean firstItemBi = false;
-		for (int i = 0; i < labels.length; i++) {
-			wrap = labels[i];
-			if (!firstItemBi && wrap instanceof BiproductPercentWrapperElectroRecipe) {
-				this.itemBiLabelFirstIndex = i;
-				firstItemBi = true;
-			}
-		}
+        this.recipeType = recipeType;
+
+        icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, inputMachine);
+
+        ITexture texture = wrapper.getTexture();
+        background = guiHelper.drawableBuilder(texture.getLocation(), wrapper.getX(), wrapper.getY(), wrapper.getWidth(), wrapper.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build();
+
+        this.animationTime = animationTime;
+    }
+
+    @Override
+    public RecipeType<T> getRecipeType() {
+        return recipeType;
+    }
+
+    @Override
+    public Component getTitle() {
+        return title;
+    }
+
+
+    @Override
+    public IDrawable getIcon() {
+        return icon;
+    }
+
+    @Override
+    public void draw(T recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
+
+        drawnBackground(recipe, recipeSlotsView, graphics);
+
+        drawPre(graphics, recipe);
+
+        drawStatic(graphics);
+        drawAnimated(graphics);
+
+        drawPost(graphics, recipe);
+
+        preLabels(graphics, recipe);
 
-	}
-
-	public void setInputSlots(IGuiHelper guiHelper, ItemSlotObject... inputSlots) {
-		inputSlotWrappers = new SlotDataWrapper[inputSlots.length];
-		ItemSlotObject slot;
-		for (int i = 0; i < inputSlots.length; i++) {
-			slot = inputSlots[i];
-			inputSlotWrappers[i] = new SlotDataWrapper(slot.getItemXStart(), slot.getItemYStart(), slot.getRole());
-			ITexture texture = slot.getTexture();
-			staticDrawables.add(new StaticWrapper(slot.getX(), slot.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), slot.getWidth(), slot.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
-			if (slot.getIcon() != null) {
-				ScreenObject icon = slot.getIcon();
-				texture = icon.getTexture();
-				staticDrawables.add(new StaticWrapper(icon.getX(), icon.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), icon.getWidth(), icon.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
-			}
-		}
-	}
-
-	public void setOutputSlots(IGuiHelper guiHelper, ItemSlotObject... outputSlots) {
-		outputSlotWrappers = new SlotDataWrapper[outputSlots.length];
-		ItemSlotObject slot;
-		for (int i = 0; i < outputSlots.length; i++) {
-			slot = outputSlots[i];
-			outputSlotWrappers[i] = new SlotDataWrapper(slot.getItemXStart(), slot.getItemYStart(), slot.getRole());
-			ITexture texture = slot.getTexture();
-			staticDrawables.add(new StaticWrapper(slot.getX(), slot.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), slot.getWidth(), slot.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
-			if (slot.getIcon() != null) {
-				ScreenObject icon = slot.getIcon();
-				texture = icon.getTexture();
-				staticDrawables.add(new StaticWrapper(icon.getX(), icon.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), icon.getWidth(), icon.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
-			}
-		}
-	}
-
-	public void setFluidInputs(IGuiHelper guiHelper, AbstractFluidGaugeObject... gauges) {
-		fluidInputWrappers = gauges;
-		for (AbstractFluidGaugeObject gauge : fluidInputWrappers) {
-			ITexture texture = gauge.getTexture();
-			staticDrawables.add(new StaticWrapper(gauge.getX(), gauge.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), gauge.getWidth(), gauge.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
-		}
-	}
-
-	public void setFluidOutputs(IGuiHelper guiHelper, AbstractFluidGaugeObject... gauges) {
-		fluidOutputWrappers = gauges;
-		for (AbstractFluidGaugeObject gauge : fluidOutputWrappers) {
-			ITexture texture = gauge.getTexture();
-			staticDrawables.add(new StaticWrapper(gauge.getX(), gauge.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), gauge.getWidth(), gauge.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
-		}
-	}
-
-	public void setGasInputs(IGuiHelper guiHelper, AbstractGasGaugeObject... gauges) {
-		gasInputWrappers = gauges;
-		for (AbstractGasGaugeObject gauge : gasInputWrappers) {
-
-			ITexture texture = gauge.getTexture();
-			staticDrawables.add(new StaticWrapper(gauge.getX(), gauge.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), gauge.getWidth(), gauge.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
-
-		}
-	}
+        addLabels(graphics, recipe);
+
+        postLabels(graphics, recipe);
+    }
 
-	public void setGasOutputs(IGuiHelper guiHelper, AbstractGasGaugeObject... gauges) {
-		gasOutputWrappers = gauges;
-		for (AbstractGasGaugeObject gauge : gasOutputWrappers) {
-
-			ITexture texture = gauge.getTexture();
-			staticDrawables.add(new StaticWrapper(gauge.getX(), gauge.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), gauge.getWidth(), gauge.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
+    public void drawnBackground(T recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics) {
+        background.draw(graphics);
+    }
 
-		}
-	}
-
-	public void setScreenObjects(IGuiHelper guiHelper, ScreenObject... objects) {
+    @Override
+    public void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
+        setItemInputs(getItemInputs(recipe), builder);
+        setFluidInputs(getFluidInputs(recipe), builder);
+        setItemOutputs(getItemOutputs(recipe), builder);
+        setFluidOutputs(getFluidOutputs(recipe), builder);
+        setGasInputs(getGasInputs(recipe), builder);
+        setGasOutputs(getGasOutputs(recipe), builder);
+    }
 
-		for (ScreenObject object : objects) {
-
-			ITexture texture = object.getTexture();
-			staticDrawables.add(new StaticWrapper(object.getX(), object.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), object.getWidth(), object.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
+    public int getAnimationTime() {
+        return animationTime;
+    }
 
-		}
+    public void setLabels(AbstractLabelWrapper... labels) {
+        this.labels = labels;
+    }
 
-	}
+    public void setInputSlots(IGuiHelper guiHelper, ItemSlotObject... inputSlots) {
+        inputSlotWrappers = new SlotDataWrapper[inputSlots.length];
+        ItemSlotObject slot;
+        for (int i = 0; i < inputSlots.length; i++) {
+            slot = inputSlots[i];
+            inputSlotWrappers[i] = new SlotDataWrapper(slot.getItemXStart(), slot.getItemYStart(), slot.getRole());
+            ITexture texture = slot.getTexture();
+            staticDrawables.add(new StaticWrapper(slot.getX(), slot.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), slot.getWidth(), slot.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
+            if (slot.getIcon() != null) {
+                ScreenObject icon = slot.getIcon();
+                texture = icon.getTexture();
+                staticDrawables.add(new StaticWrapper(icon.getX(), icon.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), icon.getWidth(), icon.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
+            }
+        }
+    }
+
+    public void setOutputSlots(IGuiHelper guiHelper, ItemSlotObject... outputSlots) {
+        outputSlotWrappers = new SlotDataWrapper[outputSlots.length];
+        ItemSlotObject slot;
+        for (int i = 0; i < outputSlots.length; i++) {
+            slot = outputSlots[i];
+            outputSlotWrappers[i] = new SlotDataWrapper(slot.getItemXStart(), slot.getItemYStart(), slot.getRole());
+            ITexture texture = slot.getTexture();
+            staticDrawables.add(new StaticWrapper(slot.getX(), slot.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), slot.getWidth(), slot.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
+            if (slot.getIcon() != null) {
+                ScreenObject icon = slot.getIcon();
+                texture = icon.getTexture();
+                staticDrawables.add(new StaticWrapper(icon.getX(), icon.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), icon.getWidth(), icon.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
+            }
+        }
+    }
+
+    public void setFluidInputs(IGuiHelper guiHelper, AbstractFluidGaugeObject... gauges) {
+        fluidInputWrappers = gauges;
+        for (AbstractFluidGaugeObject gauge : fluidInputWrappers) {
+            ITexture texture = gauge.getTexture();
+            staticDrawables.add(new StaticWrapper(gauge.getX(), gauge.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), gauge.getWidth(), gauge.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
+        }
+    }
 
-	public void setAnimatedArrows(IGuiHelper guiHelper, ArrowAnimatedObject... arrows) {
+    public void setFluidOutputs(IGuiHelper guiHelper, AbstractFluidGaugeObject... gauges) {
+        fluidOutputWrappers = gauges;
+        for (AbstractFluidGaugeObject gauge : fluidOutputWrappers) {
+            ITexture texture = gauge.getTexture();
+            staticDrawables.add(new StaticWrapper(gauge.getX(), gauge.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), gauge.getWidth(), gauge.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
+        }
+    }
+
+    public void setGasInputs(IGuiHelper guiHelper, AbstractGasGaugeObject... gauges) {
+        gasInputWrappers = gauges;
+        for (AbstractGasGaugeObject gauge : gasInputWrappers) {
 
-		ScreenObject staticArrow;
+            ITexture texture = gauge.getTexture();
+            staticDrawables.add(new StaticWrapper(gauge.getX(), gauge.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), gauge.getWidth(), gauge.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
 
-		for (ArrowAnimatedObject arrow : arrows) {
+        }
+    }
 
-			ITexture texture = arrow.getTexture();
-			animatedDrawables.add(new AnimatedWrapper(arrow.getX(), arrow.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), arrow.getWidth(), arrow.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).buildAnimated(getAnimationTime(), arrow.startDirection(), false)));
+    public void setGasOutputs(IGuiHelper guiHelper, AbstractGasGaugeObject... gauges) {
+        gasOutputWrappers = gauges;
+        for (AbstractGasGaugeObject gauge : gasOutputWrappers) {
 
-			staticArrow = arrow.getOffArrow();
+            ITexture texture = gauge.getTexture();
+            staticDrawables.add(new StaticWrapper(gauge.getX(), gauge.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), gauge.getWidth(), gauge.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
 
-			texture = staticArrow.getTexture();
-			staticDrawables.add(new StaticWrapper(staticArrow.getX(), staticArrow.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), staticArrow.getWidth(), staticArrow.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
+        }
+    }
 
-		}
+    public void setScreenObjects(IGuiHelper guiHelper, ScreenObject... objects) {
 
-	}
+        for (ScreenObject object : objects) {
 
-	public void setItemInputs(List<List<ItemStack>> inputs, IRecipeLayoutBuilder builder) {
-		SlotDataWrapper wrapper;
-		for (int i = 0; i < inputSlotWrappers.length; i++) {
-			wrapper = inputSlotWrappers[i];
-			builder.addSlot(wrapper.role(), wrapper.x(), wrapper.y()).addItemStacks(inputs.get(i));
-		}
-	}
+            ITexture texture = object.getTexture();
+            staticDrawables.add(new StaticWrapper(object.getX(), object.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), object.getWidth(), object.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
 
-	public void setItemOutputs(List<ItemStack> outputs, IRecipeLayoutBuilder builder) {
-		SlotDataWrapper wrapper;
-		for (int i = 0; i < outputSlotWrappers.length; i++) {
-			wrapper = outputSlotWrappers[i];
-			if (i < outputs.size()) {
-				builder.addSlot(wrapper.role(), wrapper.x(), wrapper.y()).addItemStack(outputs.get(i));
-			}
-		}
-	}
+        }
 
-	public void setFluidInputs(List<List<FluidStack>> inputs, IRecipeLayoutBuilder builder) {
-		AbstractFluidGaugeObject wrapper;
-		RecipeIngredientRole role = RecipeIngredientRole.INPUT;
-		FluidStack stack;
-		for (int i = 0; i < fluidInputWrappers.length; i++) {
-			wrapper = fluidInputWrappers[i];
-			stack = inputs.get(i).get(0);
+    }
 
-			int amt = stack.getAmount();
+    public void setAnimatedArrows(IGuiHelper guiHelper, ArrowAnimatedObject... arrows) {
 
-			int gaugeCap = wrapper.getAmount();
+        ScreenObject staticArrow;
 
-			if (amt > gaugeCap) {
+        for (ArrowAnimatedObject arrow : arrows) {
 
-				gaugeCap = (amt / IComponentFluidHandler.TANK_MULTIPLER) * IComponentFluidHandler.TANK_MULTIPLER + IComponentFluidHandler.TANK_MULTIPLER;
+            ITexture texture = arrow.getTexture();
+            animatedDrawables.add(new AnimatedWrapper(arrow.getX(), arrow.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), arrow.getWidth(), arrow.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).buildAnimated(getAnimationTime(), arrow.startDirection(), false)));
 
-			}
+            staticArrow = arrow.getOffArrow();
 
-			int height = (int) Math.ceil((float) amt / (float) gaugeCap * wrapper.getFluidTextHeight());
+            texture = staticArrow.getTexture();
+            staticDrawables.add(new StaticWrapper(staticArrow.getX(), staticArrow.getY(), guiHelper.drawableBuilder(texture.getLocation(), texture.textureU(), texture.textureV(), staticArrow.getWidth(), staticArrow.getHeight()).setTextureSize(texture.imageWidth(), texture.imageHeight()).build()));
 
-			builder.addSlot(role, wrapper.getFluidXPos(), wrapper.getFluidYPos() - height).setFluidRenderer(stack.getAmount(), false, wrapper.getFluidTextWidth(), height).addIngredients(NeoForgeTypes.FLUID_STACK, inputs.get(i));
-		}
-	}
+        }
 
-	public void setFluidOutputs(List<FluidStack> outputs, IRecipeLayoutBuilder builder) {
-		AbstractFluidGaugeObject wrapper;
-		RecipeIngredientRole role = RecipeIngredientRole.OUTPUT;
-		FluidStack stack;
-		for (int i = 0; i < fluidOutputWrappers.length; i++) {
-			wrapper = fluidOutputWrappers[i];
-			stack = outputs.get(i);
+    }
 
-			int amt = stack.getAmount();
+    public void setItemInputs(List<List<ItemStack>> inputs, IRecipeLayoutBuilder builder) {
+        SlotDataWrapper wrapper;
+        for (int i = 0; i < inputSlotWrappers.length; i++) {
+            wrapper = inputSlotWrappers[i];
+            builder.addSlot(wrapper.role(), wrapper.x(), wrapper.y()).addItemStacks(inputs.get(i));
+        }
+    }
 
-			int gaugeCap = wrapper.getAmount();
+    public void setItemOutputs(List<ItemStack> outputs, IRecipeLayoutBuilder builder) {
+        SlotDataWrapper wrapper;
+        for (int i = 0; i < outputSlotWrappers.length; i++) {
+            wrapper = outputSlotWrappers[i];
+            if (i < outputs.size()) {
+                builder.addSlot(wrapper.role(), wrapper.x(), wrapper.y()).addItemStack(outputs.get(i));
+            }
+        }
+    }
 
-			if (amt > gaugeCap) {
+    public void setFluidInputs(List<List<FluidStack>> inputs, IRecipeLayoutBuilder builder) {
+        AbstractFluidGaugeObject wrapper;
+        RecipeIngredientRole role = RecipeIngredientRole.INPUT;
+        FluidStack stack;
+        for (int i = 0; i < fluidInputWrappers.length; i++) {
+            wrapper = fluidInputWrappers[i];
+            stack = inputs.get(i).get(0);
 
-				gaugeCap = (amt / IComponentFluidHandler.TANK_MULTIPLER) * IComponentFluidHandler.TANK_MULTIPLER + IComponentFluidHandler.TANK_MULTIPLER;
+            int amt = stack.getAmount();
 
-			}
+            int gaugeCap = wrapper.getAmount();
 
-			int height = (int) Math.ceil((float) amt / (float) gaugeCap * wrapper.getFluidTextHeight());
-			builder.addSlot(role, wrapper.getFluidXPos(), wrapper.getFluidYPos() - height).setFluidRenderer(stack.getAmount(), false, wrapper.getFluidTextWidth(), height).addIngredient(NeoForgeTypes.FLUID_STACK, stack);
-		}
-	}
+            if (amt > gaugeCap) {
 
-	public void setGasInputs(List<List<GasStack>> inputs, IRecipeLayoutBuilder builder) {
+                gaugeCap = (amt / IComponentFluidHandler.TANK_MULTIPLER) * IComponentFluidHandler.TANK_MULTIPLER + IComponentFluidHandler.TANK_MULTIPLER;
 
-		AbstractGasGaugeObject wrapper;
-		RecipeIngredientRole role = RecipeIngredientRole.INPUT;
-		List<GasStack> stacks;
-		for (int i = 0; i < gasInputWrappers.length; i++) {
+            }
 
-			wrapper = gasInputWrappers[i];
-			stacks = inputs.get(i);
+            int height = (int) Math.ceil((float) amt / (float) gaugeCap * wrapper.getFluidTextHeight());
 
-			double amt = stacks.get(0).getAmount();
+            builder.addSlot(role, wrapper.getFluidXPos(), wrapper.getFluidYPos() - height).setFluidRenderer(stack.getAmount(), false, wrapper.getFluidTextWidth(), height).addIngredients(NeoForgeTypes.FLUID_STACK, inputs.get(i));
+        }
+    }
 
-			double gaugeCap = wrapper.getAmount();
+    public void setFluidOutputs(List<FluidStack> outputs, IRecipeLayoutBuilder builder) {
+        AbstractFluidGaugeObject wrapper;
+        RecipeIngredientRole role = RecipeIngredientRole.OUTPUT;
+        FluidStack stack;
+        for (int i = 0; i < fluidOutputWrappers.length; i++) {
+            wrapper = fluidOutputWrappers[i];
+            stack = outputs.get(i);
 
-			if (amt > gaugeCap) {
-				gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;
-			}
+            int amt = stack.getAmount();
 
-			int height = (int) (Math.ceil(amt / gaugeCap * (wrapper.getHeight() - 2)));
+            int gaugeCap = wrapper.getAmount();
 
-			int oneMinusHeight = wrapper.getHeight() - height;
+            if (amt > gaugeCap) {
 
-			builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) gaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
-		}
+                gaugeCap = (amt / IComponentFluidHandler.TANK_MULTIPLER) * IComponentFluidHandler.TANK_MULTIPLER + IComponentFluidHandler.TANK_MULTIPLER;
 
-	}
+            }
 
-	public void setGasOutputs(List<GasStack> outputs, IRecipeLayoutBuilder builder) {
+            int height = (int) Math.ceil((float) amt / (float) gaugeCap * wrapper.getFluidTextHeight());
+            builder.addSlot(role, wrapper.getFluidXPos(), wrapper.getFluidYPos() - height).setFluidRenderer(stack.getAmount(), false, wrapper.getFluidTextWidth(), height).addIngredient(NeoForgeTypes.FLUID_STACK, stack);
+        }
+    }
 
-		AbstractGasGaugeObject wrapper;
-		RecipeIngredientRole role = RecipeIngredientRole.OUTPUT;
-		GasStack stack;
-		for (int i = 0; i < gasOutputWrappers.length; i++) {
+    public void setGasInputs(List<List<GasStack>> inputs, IRecipeLayoutBuilder builder) {
 
-			wrapper = gasOutputWrappers[i];
-			stack = outputs.get(i);
+        AbstractGasGaugeObject wrapper;
+        RecipeIngredientRole role = RecipeIngredientRole.INPUT;
+        List<GasStack> stacks;
+        for (int i = 0; i < gasInputWrappers.length; i++) {
 
-			double amt = stack.getAmount();
+            wrapper = gasInputWrappers[i];
+            stacks = inputs.get(i);
 
-			double gaugeCap = wrapper.getAmount();
+            double amt = stacks.get(0).getAmount();
 
-			if (amt > gaugeCap) {
-				gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;
-			}
+            double gaugeCap = wrapper.getAmount();
 
-			int height = (int) (Math.ceil(amt / gaugeCap * (wrapper.getHeight() - 2)));
+            if (amt < gaugeCap / 50) {
+                double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));
+                if (amtPowTen == 0) {
+                    amtPowTen = 1;
+                }
+                double gaugePowTen = Math.log10(Math.pow(10, Math.round(Math.log10(gaugeCap) - Math.log10(5.5) + 0.5)));
+                double logAmtPowTen = Math.log10(amtPowTen);
 
-			int oneMinusHeight = wrapper.getHeight() - height;
+                double delta = gaugePowTen - logAmtPowTen;
 
-			builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) gaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
-		}
-	}
+                amt *= Math.pow(10, delta);
+            }
 
-	public void drawStatic(GuiGraphics graphics) {
-		for (StaticWrapper wrapper : staticDrawables) {
-			wrapper.stat().draw(graphics, wrapper.x(), wrapper.y());
-		}
-	}
+            if (amt > gaugeCap) {
+                gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;
+            }
 
-	public void drawAnimated(GuiGraphics graphics) {
-		for (AnimatedWrapper wrapper : animatedDrawables) {
-			wrapper.anim().draw(graphics, wrapper.x(), wrapper.y());
-		}
-	}
+            int height = (int) (Math.ceil(amt / gaugeCap * (wrapper.getHeight() - 2)));
 
-	public void drawPre(GuiGraphics graphics, T recipe) {
+            int oneMinusHeight = wrapper.getHeight() - height;
 
-	}
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) gaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+        }
 
-	public void drawPost(GuiGraphics graphics, T recipe) {
+    }
 
-	}
+    public void setGasOutputs(List<GasStack> outputs, IRecipeLayoutBuilder builder) {
 
-	public void addLabels(GuiGraphics graphics, T recipe) {
-		Font font = Minecraft.getInstance().font;
-		for (AbstractLabelWrapper wrap : labels) {
-			Component text = wrap.getComponent(this, recipe);
-			if (wrap.xIsEnd()) {
-				graphics.drawString(font, text, wrap.getXPos() - font.width(text.getVisualOrderText()), wrap.getYPos(), wrap.getColor(), false);
-			} else {
-				graphics.drawString(font, text, wrap.getXPos(), wrap.getYPos(), wrap.getColor(), false);
-			}
-		}
-	}
+        AbstractGasGaugeObject wrapper;
+        RecipeIngredientRole role = RecipeIngredientRole.OUTPUT;
+        GasStack stack;
+        for (int i = 0; i < gasOutputWrappers.length; i++) {
 
-	public void preLabels(GuiGraphics graphics, T recipe) {
+            wrapper = gasOutputWrappers[i];
+            stack = outputs.get(i);
 
-	}
+            double amt = stack.getAmount();
 
-	public void postLabels(GuiGraphics graphics, T recipe) {
+            double gaugeCap = wrapper.getAmount();
 
-	}
+            if (amt < gaugeCap / 50) {
+                double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));
+                if (amtPowTen == 0) {
+                    amtPowTen = 1;
+                }
+                double gaugePowTen = Math.log10(Math.pow(10, Math.round(Math.log10(gaugeCap) - Math.log10(5.5) + 0.5)));
+                double logAmtPowTen = Math.log10(amtPowTen);
 
-	public List<List<ItemStack>> getItemInputs(T recipe) {
-		return new ArrayList<>();
-	}
+                double delta = gaugePowTen - logAmtPowTen;
 
-	public List<ItemStack> getItemOutputs(T recipe) {
-		return new ArrayList<>();
-	}
+                amt *= Math.pow(10, delta);
+            }
 
-	public List<List<FluidStack>> getFluidInputs(T recipe) {
-		return new ArrayList<>();
-	}
+            if (amt > gaugeCap) {
+                gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;
+            }
 
-	public List<FluidStack> getFluidOutputs(T recipeo) {
-		return new ArrayList<>();
-	}
+            int height = (int) (Math.ceil(amt / gaugeCap * (wrapper.getHeight() - 2)));
 
-	public List<List<GasStack>> getGasInputs(T recipe) {
-		return new ArrayList<>();
-	}
+            int oneMinusHeight = wrapper.getHeight() - height;
 
-	public List<GasStack> getGasOutputs(T recipe) {
-		return new ArrayList<>();
-	}
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) gaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+        }
+    }
 
-	private static record SlotDataWrapper(int x, int y, RecipeIngredientRole role) {
+    public void drawStatic(GuiGraphics graphics) {
+        for (StaticWrapper wrapper : staticDrawables) {
+            wrapper.stat().draw(graphics, wrapper.x(), wrapper.y());
+        }
+    }
 
-	}
+    public void drawAnimated(GuiGraphics graphics) {
+        for (AnimatedWrapper wrapper : animatedDrawables) {
+            wrapper.anim().draw(graphics, wrapper.x(), wrapper.y());
+        }
+    }
 
-	private static record StaticWrapper(int x, int y, IDrawableStatic stat) {
+    public void drawPre(GuiGraphics graphics, T recipe) {
 
-	}
+    }
 
-	private static record AnimatedWrapper(int x, int y, IDrawableAnimated anim) {
+    public void drawPost(GuiGraphics graphics, T recipe) {
 
-	}
+    }
 
+    public void addLabels(GuiGraphics graphics, T recipe) {
+        Font font = Minecraft.getInstance().font;
+        for (AbstractLabelWrapper wrap : labels) {
+            Component text = wrap.getComponent(this, recipe);
+            if (wrap.xIsEnd()) {
+                graphics.drawString(font, text, wrap.getXPos() - font.width(text.getVisualOrderText()), wrap.getYPos(), wrap.getColor().color(), false);
+            } else {
+                graphics.drawString(font, text, wrap.getXPos(), wrap.getYPos(), wrap.getColor().color(), false);
+            }
+        }
+    }
+
+    public void preLabels(GuiGraphics graphics, T recipe) {
+
+    }
+
+    public void postLabels(GuiGraphics graphics, T recipe) {
+
+    }
+
+    public List<List<ItemStack>> getItemInputs(T recipe) {
+        return new ArrayList<>();
+    }
+
+    public List<ItemStack> getItemOutputs(T recipe) {
+        return new ArrayList<>();
+    }
+
+    public List<List<FluidStack>> getFluidInputs(T recipe) {
+        return new ArrayList<>();
+    }
+
+    public List<FluidStack> getFluidOutputs(T recipeo) {
+        return new ArrayList<>();
+    }
+
+    public List<List<GasStack>> getGasInputs(T recipe) {
+        return new ArrayList<>();
+    }
+
+    public List<GasStack> getGasOutputs(T recipe) {
+        return new ArrayList<>();
+    }
+
+    public static record SlotDataWrapper(int x, int y, RecipeIngredientRole role) {
+
+    }
+
+    public static record StaticWrapper(int x, int y, IDrawableStatic stat) {
+
+    }
+
+    public static record AnimatedWrapper(int x, int y, IDrawableAnimated anim) {
+
+    }
+
+    @Override
+    public int getWidth() {
+        return background.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return background.getHeight();
+    }
 }

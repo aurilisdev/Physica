@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:circuits/basic"
+    },
+    "G": {
+      "tag": "c:gears/bronze"
+    },
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "PBP",
+    "MGM",
+    "PGP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:wiremill"
+  }
+}

@@ -15,7 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChapterMachines extends Chapter {
 
-	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.electricfurnace));
+	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.electricfurnace));
 
 	public ChapterMachines(Module module) {
 		super(module);
@@ -38,13 +38,13 @@ public class ChapterMachines extends Chapter {
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.inventoryio.header").withStyle(ChatFormatting.UNDERLINE, ChatFormatting.BOLD)).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.inventoryio.1")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/inventoryio1.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/inventoryio1.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.inventoryio.2")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/inventoryio2.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/inventoryio2.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.inventoryio.3")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 150, 150, 150, new ResourceLocation(References.ID, "textures/screen/guidebook/inventoryio3.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 150, 150, 150, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/inventoryio3.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.inventoryio.4")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/inventoryio4.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/inventoryio4.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.inventoryio.5")).setSeparateStart());
 
 		/* Charger Tutorial */
@@ -54,7 +54,7 @@ public class ChapterMachines extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.chargeformula")).setIndentions(1).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.charger.2")).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.charger.3")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 70, 150, 70, new ResourceLocation(References.ID, "textures/screen/guidebook/chargerbatteryslots.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 70, 150, 70, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/chargerbatteryslots.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.machines.charger.4")).setSeparateStart());
 
 	}

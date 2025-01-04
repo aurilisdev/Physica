@@ -1,6 +1,10 @@
 package electrodynamics.common.recipe;
 
 import electrodynamics.api.References;
+import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
+import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipeSerializer;
+import electrodynamics.common.recipe.categories.fluid2fluid.Fluid2FluidRecipeSerializer;
+import electrodynamics.common.recipe.categories.fluid2fluid.specificmachines.ElectrolosisChamberRecipe;
 import electrodynamics.common.recipe.categories.fluid2gas.Fluid2GasRecipeSerializer;
 import electrodynamics.common.recipe.categories.fluid2gas.specificmachines.ElectrolyticSeparatorRecipe;
 import electrodynamics.common.recipe.categories.fluid2item.Fluid2ItemRecipeSerializer;
@@ -18,6 +22,7 @@ import electrodynamics.common.recipe.categories.item2item.specificmachines.Oxida
 import electrodynamics.common.recipe.categories.item2item.specificmachines.ReinforcedAlloyerRecipe;
 import electrodynamics.common.recipe.categories.item2item.specificmachines.WireMillRecipe;
 import electrodynamics.common.recipe.recipeutils.CountableIngredient;
+import electrodynamics.common.recipe.recipeutils.EnchantmentIngredient;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
 import electrodynamics.common.recipe.recipeutils.GasIngredient;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -44,6 +49,7 @@ public class ElectrodynamicsRecipeInit {
     public static final DeferredHolder<IngredientType<?>, IngredientType<CountableIngredient>> COUNTABLE_INGREDIENT_TYPE = INGREDIENT_TYPES.register("countableingredient", () -> new IngredientType<>(CountableIngredient.CODEC));
     public static final DeferredHolder<IngredientType<?>, IngredientType<FluidIngredient>> FLUID_INGREDIENT_TYPE = INGREDIENT_TYPES.register("fluidingredient", () -> new IngredientType<>(FluidIngredient.CODEC));
     public static final DeferredHolder<IngredientType<?>, IngredientType<GasIngredient>> GAS_INGREDIENT_TYPE = INGREDIENT_TYPES.register("gasingredient", () -> new IngredientType<>(GasIngredient.CODEC));
+    public static final DeferredHolder<IngredientType<?>, IngredientType<EnchantmentIngredient>> ENCHANTMENT_INGREDIENT_TYPE = INGREDIENT_TYPES.register("enchantmentingredient", () -> new IngredientType<>(EnchantmentIngredient.CODEC));
     
     /* RECIPE TYPES */
 
@@ -67,6 +73,12 @@ public class ElectrodynamicsRecipeInit {
     // Fluid2Gas
     public static final DeferredHolder<RecipeType<?>, RecipeType<ElectrolyticSeparatorRecipe>> ELECTROLYTIC_SEPERATOR_TYPE = RECIPE_TYPES.register(ElectrolyticSeparatorRecipe.RECIPE_GROUP, CustomRecipeType::new);
 
+    public static final DeferredHolder<RecipeType<?>, RecipeType<ChemicalReactorRecipe>> CHEMICAL_REACTOR_TYPE = RECIPE_TYPES.register(ChemicalReactorRecipe.RECIPE_GROUP, CustomRecipeType::new);
+
+    // Fluid2Fluid
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<ElectrolosisChamberRecipe>> ELECTROLOSIS_CHAMBER_TYPE = RECIPE_TYPES.register(ElectrolosisChamberRecipe.RECIPE_GROUP, CustomRecipeType::new);
+
     /* SERIALIZERS */
 
     // Item2Item
@@ -88,6 +100,12 @@ public class ElectrodynamicsRecipeInit {
 
     // Fluid2Gas
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> ELECTROLYTIC_SEPARATOR_SERIALIZER = RECIPE_SERIALIZER.register(ElectrolyticSeparatorRecipe.RECIPE_GROUP, () -> new Fluid2GasRecipeSerializer<>(ElectrolyticSeparatorRecipe::new));
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> CHEMICAL_REACTOR_SERIALIZER = RECIPE_SERIALIZER.register(ChemicalReactorRecipe.RECIPE_GROUP, () -> new ChemicalReactorRecipeSerializer());
+
+    //Fluid2Fluid
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<?>> ELECTROLOSIS_CHAMBER_SERIALIZER = RECIPE_SERIALIZER.register(ElectrolosisChamberRecipe.RECIPE_GROUP,  () -> new Fluid2FluidRecipeSerializer<>(ElectrolosisChamberRecipe::new));
 
     /* Functional Methods */
 

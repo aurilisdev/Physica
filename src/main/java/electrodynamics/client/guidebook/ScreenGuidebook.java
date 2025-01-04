@@ -95,12 +95,12 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 	private int nextPageNumber = 0;
 
-	private static final List<Page> pages = new ArrayList<>();
+	private static final List<Page> PAGES = new ArrayList<>();
 
 	public static final HashSet<Object> JEI_INGREDIENTS = new HashSet<>();
 
-	private static final ResourceLocation PAGE_TEXTURE_LEFT = new ResourceLocation(References.ID, "textures/screen/guidebook/resources/guidebookpageleft.png");
-	private static final ResourceLocation PAGE_TEXTURE_RIGHT = new ResourceLocation(References.ID, "textures/screen/guidebook/resources/guidebookpageright.png");
+	private static final ResourceLocation PAGE_TEXTURE_LEFT = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/resources/guidebookpageleft.png");
+	private static final ResourceLocation PAGE_TEXTURE_RIGHT = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/resources/guidebookpageright.png");
 
 	private static ButtonGuidebook forward;
 	private static ButtonGuidebook back;
@@ -116,11 +116,11 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 	private static ButtonModuleSelector caseSensitive;
 
-	private static final List<ButtonModuleSelector> moduleParameters = new ArrayList<>();
+	private static final List<ButtonModuleSelector> MODULE_PARAMETERS = new ArrayList<>();
 
-	private static final List<SearchHit> searches = new ArrayList<>();
+	private static final List<SearchHit> SEARCHES = new ArrayList<>();
 
-	private static final List<ButtonSearchedText> searchButtons = new ArrayList<>();
+	private static final List<ButtonSearchedText> SEARCH_BUTTONS = new ArrayList<>();
 
 	private int lineY = TEXT_START_Y;
 
@@ -145,7 +145,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 	private static boolean hasInitHappened = false;
 
-	private static final List<ScreenComponentButton<?>> buttons = new ArrayList<>();
+	private static final List<ScreenComponentButton<?>> BUTTONS = new ArrayList<>();
 
 	public ScreenGuidebook(ContainerGuidebook screenContainer, Inventory inv, Component titleIn) {
 		super(screenContainer, inv, titleIn);
@@ -158,15 +158,17 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 		if (!hasInitHappened) {
 
-			buttons.clear();
-			moduleParameters.clear();
-			searchButtons.clear();
-			searches.clear();
-			pages.clear();
+			BUTTONS.clear();
+			MODULE_PARAMETERS.clear();
+			SEARCH_BUTTONS.clear();
+			SEARCHES.clear();
+			PAGES.clear();
+
+			initPageButtons();
 
 			sortModules();
 
-			pages.add(getCoverPage());
+			PAGES.add(getCoverPage());
 			nextPageNumber++;
 
 			genModulePages();
@@ -174,8 +176,6 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 			genPages();
 
 			genSearchPages();
-
-			initPageButtons();
 
 			hasInitHappened = true;
 		}
@@ -195,13 +195,13 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 		addComponent(chapters);
 		addComponent(search);
 
-		for (ScreenComponentButton<?> button : buttons) {
+		for (ScreenComponentButton<?> button : BUTTONS) {
 			addComponent(button);
 		}
-		for (ButtonModuleSelector button : moduleParameters) {
+		for (ButtonModuleSelector button : MODULE_PARAMETERS) {
 			addComponent(button);
 		}
-		for (ButtonSearchedText button : searchButtons) {
+		for (ButtonSearchedText button : SEARCH_BUTTONS) {
 			addComponent(button);
 		}
 
@@ -273,11 +273,11 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 					page.keyPressGraphics.add(wrapper);
 				}
 				int xShift = nextPageNumber % 2 == 0 ? LEFT_X_SHIFT : RIGHT_X_SHIFT - 8;
-				buttons.add(new ButtonSpecificPage(45 + xShift, 43 + j * MODULE_SEPERATION, 120, 20, nextPageNumber).setLabel(module.getTitle()).setOnPress(button -> setPageNumber(module.getPage())));
+				BUTTONS.add(new ButtonSpecificPage(45 + xShift, 43 + j * MODULE_SEPERATION, 120, 20, nextPageNumber).setLabel(module.getTitle()).setOnPress(button -> setPageNumber(module.getPage())));
 				index++;
 			}
 
-			pages.add(page);
+			PAGES.add(page);
 
 			nextPageNumber++;
 		}
@@ -319,11 +319,11 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 					int xShift = nextPageNumber % 2 == 0 ? LEFT_X_SHIFT : RIGHT_X_SHIFT - 8;
 
-					buttons.add(new ButtonSpecificPage(45 + xShift, 56 + j * CHAPTER_SEPERATION, 120, 20, nextPageNumber).setLabel(chapter.getTitle()).setOnPress(button -> setPageNumber(chapter.getStartPage())));
+					BUTTONS.add(new ButtonSpecificPage(45 + xShift, 56 + j * CHAPTER_SEPERATION, 120, 20, nextPageNumber).setLabel(chapter.getTitle()).setOnPress(button -> setPageNumber(chapter.getStartPage())));
 
 					index++;
 				}
-				pages.add(chapterPage);
+				PAGES.add(chapterPage);
 				nextPageNumber++;
 
 			}
@@ -478,7 +478,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 				}
 
 				currentPage = writeCurrentTextToPage(currentPage, chapter);
-				pages.add(currentPage);
+				PAGES.add(currentPage);
 				graphicPixelHeightLeft = Y_PIXELS_PER_PAGE;
 				lineY = TEXT_START_Y;
 				lineX = TEXT_START_X;
@@ -488,8 +488,8 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 		}
 
-		if (pages.size() % 2 == 1) {
-			pages.add(new CoverPage(nextPageNumber));
+		if (PAGES.size() % 2 == 1) {
+			PAGES.add(new CoverPage(nextPageNumber));
 			nextPageNumber++;
 		}
 
@@ -544,7 +544,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 	}
 
 	private Page resetToNewPage(Page page, Chapter chapter) {
-		pages.add(page);
+		PAGES.add(page);
 		page = new Page(nextPageNumber);
 		page.associatedChapter = chapter;
 		nextPageNumber++;
@@ -559,10 +559,10 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 	private void genSearchPages() {
 
-		pages.add(getSearchPageLeft());
+		PAGES.add(getSearchPageLeft());
 		nextPageNumber++;
 
-		pages.add(getSeatchPageRight());
+		PAGES.add(getSeatchPageRight());
 		nextPageNumber++;
 
 	}
@@ -685,21 +685,21 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 	public Page getCurrentPage() {
 
-		if (currPageNumber >= pages.size()) {
-			currPageNumber = pages.size() - 2;
+		if (currPageNumber >= PAGES.size()) {
+			currPageNumber = PAGES.size() - 2;
 		}
-		return pages.get(currPageNumber);
+		return PAGES.get(currPageNumber);
 	}
 
 	public Page getNextPage() {
-		if (currPageNumber >= pages.size()) {
-			currPageNumber = pages.size() - 2;
+		if (currPageNumber >= PAGES.size()) {
+			currPageNumber = PAGES.size() - 2;
 		}
-		return pages.get(currPageNumber + 1);
+		return PAGES.get(currPageNumber + 1);
 	}
 
 	protected void pageForward() {
-		if (currPageNumber < pages.size() - 2) {
+		if (currPageNumber < PAGES.size() - 2) {
 			movePage(2);
 		}
 		updatePageArrowVis();
@@ -724,7 +724,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 	}
 
 	protected void goToSearchPage() {
-		setPageNumber(pages.size() - 2);
+		setPageNumber(PAGES.size() - 2);
 	}
 
 	protected void goToModulePage() {
@@ -733,7 +733,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 	private void movePage(int number) {
 		currPageNumber += number;
-		currPageNumber = Mth.clamp(currPageNumber, 0, pages.size() - 4);
+		currPageNumber = Mth.clamp(currPageNumber, 0, PAGES.size() - 4);
 	}
 
 	private static void setPageNumber(int number) {
@@ -744,11 +744,11 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 	}
 
 	private void updatePageArrowVis() {
-		forward.setVisible(currPageNumber < pages.size() - 4);
-		back.setVisible(currPageNumber > GUIDEBOOK_STARTING_PAGE && currPageNumber < pages.size() - 2);
+		forward.setVisible(currPageNumber < PAGES.size() - 4);
+		back.setVisible(currPageNumber > GUIDEBOOK_STARTING_PAGE && currPageNumber < PAGES.size() - 2);
 		home.setVisible(currPageNumber != 0);
-		chapters.setVisible(currPageNumber != 0 && currPageNumber < pages.size() - 4);
-		search.setVisible(currPageNumber < pages.size() - 3);
+		chapters.setVisible(currPageNumber != 0 && currPageNumber < PAGES.size() - 4);
+		search.setVisible(currPageNumber < PAGES.size() - 3);
 	}
 
 	public static void addGuidebookModule(Module module) {
@@ -779,7 +779,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 		int xOffset = (TEXT_WIDTH - 74) / 2;
 
-		page.graphics.add(new GraphicWrapper(TEXT_START_X, y, new ImageWrapperObject(xOffset, 0, 0, 0, 74, 100, 74, 100, new ResourceLocation(References.ID, "textures/screen/guidebook/resources/guidebookcover.png")), null, null, null));
+		page.graphics.add(new GraphicWrapper(TEXT_START_X, y, new ImageWrapperObject(xOffset, 0, 0, 0, 74, 100, 74, 100, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/resources/guidebookcover.png")), null, null, null));
 
 		y += 105;
 
@@ -818,7 +818,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 			ButtonModuleSelector selector = new ButtonModuleSelector(70, -1 + y, nextPageNumber, true);
 
-			moduleParameters.add(selector);
+			MODULE_PARAMETERS.add(selector);
 
 			y += LINE_HEIGHT;
 
@@ -827,14 +827,14 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 		page.text.add(new TextWrapper(TEXT_START_X + 15, 165, ElectroTextUtils.guidebook("casesensitive"), TextWrapperObject.DEFAULT_COLOR, false, null, null, null));
 		caseSensitive = new ButtonModuleSelector(70, 165, nextPageNumber, false);
 
-		buttons.add(new ButtonSpecificPage(-71, 180, 75, 20, nextPageNumber).setLabel(ElectroTextUtils.guidebook("selectall")).setOnPress(button -> {
-			for (ButtonModuleSelector selector : moduleParameters) {
+		BUTTONS.add(new ButtonSpecificPage(-71, 180, 75, 20, nextPageNumber).setLabel(ElectroTextUtils.guidebook("selectall")).setOnPress(button -> {
+			for (ButtonModuleSelector selector : MODULE_PARAMETERS) {
 				selector.setSelected(true);
 			}
 		}));
 
-		buttons.add(new ButtonSpecificPage(8, 180, 75, 20, nextPageNumber).setLabel(ElectroTextUtils.guidebook("selectnone")).setOnPress(button -> {
-			for (ButtonModuleSelector selector : moduleParameters) {
+		BUTTONS.add(new ButtonSpecificPage(8, 180, 75, 20, nextPageNumber).setLabel(ElectroTextUtils.guidebook("selectnone")).setOnPress(button -> {
+			for (ButtonModuleSelector selector : MODULE_PARAMETERS) {
 				selector.setSelected(false);
 			}
 		}));
@@ -847,12 +847,12 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 		searchBox = new EditBoxSpecificPage(92, 10, TEXT_WIDTH, 12, nextPageNumber, getFontRenderer());
 		searchBox.setResponder(this::onTextSearched);
-		searchBox.setTextColor(0xFFFFFFFF);
+		searchBox.setTextColor(Color.WHITE);
 		searchBox.setMaxLength(100);
 
 		for (int i = 0; i < SEARCH_BUTTON_COUNT; i++) {
 			ButtonSearchedText search = (ButtonSearchedText) new ButtonSearchedText(92, 35 + 35 * i, TEXT_WIDTH, 20, nextPageNumber).setOnPress(button -> setPageNumber(((ButtonSearchedText) button).specifiedPage));
-			searchButtons.add(search);
+			SEARCH_BUTTONS.add(search);
 			search.setShouldShow(false);
 		}
 
@@ -871,7 +871,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 	private void onTextSearched(String text) {
 
-		searches.clear();
+		SEARCHES.clear();
 
 		if (text.isEmpty() || text.isBlank()) {
 			maxScroll = 0;
@@ -885,12 +885,12 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 		List<Module> selectedModules = new ArrayList<>();
 
 		for (int i = 0; i < GUIDEBOOK_MODULES.size(); i++) {
-			if (moduleParameters.get(i).isSelected()) {
+			if (MODULE_PARAMETERS.get(i).isSelected()) {
 				selectedModules.add(GUIDEBOOK_MODULES.get(i));
 			}
 		}
 
-		for (Page page : pages) {
+		for (Page page : PAGES) {
 
 			if (!(page instanceof ChapterPage || page instanceof ModulePage || page instanceof CoverPage)) {
 
@@ -929,9 +929,9 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 			}
 
 		}
-		searches.addAll(found);
+		SEARCHES.addAll(found);
 
-		maxScroll = Math.max(0, searches.size() - SEARCH_BUTTON_COUNT);
+		maxScroll = Math.max(0, SEARCHES.size() - SEARCH_BUTTON_COUNT);
 
 		if (scrollIndex > maxScroll) {
 			scrollIndex = maxScroll;
@@ -944,12 +944,12 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 	@Override
 	public boolean mouseScrolled(double mouseX, double mouseY, double deltaX, double deltaY) {
 
-		if (searches.size() == 0) {
+		if (SEARCHES.size() == 0) {
 			resetSearchButtons();
 			return super.mouseScrolled(mouseX, mouseY, deltaX, deltaY);
 		}
 
-		if (currPageNumber >= pages.size() - 2) {
+		if (currPageNumber >= PAGES.size() - 2) {
 
 			int scrollDelta = deltaY > 0 ? -1 : 1;
 
@@ -967,7 +967,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 		resetSearchButtons();
 
-		if (searches.size() == 0) {
+		if (SEARCHES.size() == 0) {
 			return;
 		}
 
@@ -975,12 +975,12 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 			scrollIndex = maxScroll;
 		}
 
-		int listSize = Math.min(SEARCH_BUTTON_COUNT, searches.size());
+		int listSize = Math.min(SEARCH_BUTTON_COUNT, SEARCHES.size());
 
 		for (int i = 0; i < listSize; i++) {
 
-			ButtonSearchedText searched = searchButtons.get(i);
-			SearchHit hit = searches.get(i + scrollIndex);
+			ButtonSearchedText searched = SEARCH_BUTTONS.get(i);
+			SearchHit hit = SEARCHES.get(i + scrollIndex);
 
 			searched.setShouldShow(true);
 			searched.setChapter(hit.chapter.getTitle());
@@ -992,7 +992,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 	}
 
 	private void resetSearchButtons() {
-		for (ButtonSearchedText button : searchButtons) {
+		for (ButtonSearchedText button : SEARCH_BUTTONS) {
 			button.setLine(Component.empty());
 			button.setChapter(Component.empty());
 			button.setShouldShow(false);

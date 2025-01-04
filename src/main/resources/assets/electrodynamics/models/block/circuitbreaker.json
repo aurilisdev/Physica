@@ -29,7 +29,7 @@
 			"children": [27]
 		}
 	],
-	"loader": "forge:composite",
+	"loader": "neoforge:composite",
 	"children": {
 		"solid": {
 			"render_type": "minecraft:solid",

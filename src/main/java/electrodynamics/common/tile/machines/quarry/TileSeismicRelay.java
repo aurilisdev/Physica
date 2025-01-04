@@ -3,12 +3,12 @@ package electrodynamics.common.tile.machines.quarry;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
+import electrodynamics.prefab.properties.PropertyTypes;
+import net.minecraft.core.HolderLookup;
 
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerSeismicRelay;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -17,7 +17,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.ItemUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,12 +32,12 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TileSeismicRelay extends GenericTile {
 
-	public Property<List<BlockPos>> markerLocs = property(new Property<>(PropertyType.BlockPosList, "markerlocs", new ArrayList<>()));
+	public Property<List<BlockPos>> markerLocs = property(new Property<>(PropertyTypes.BLOCK_POS_LIST, "markerlocs", new ArrayList<>()));
 
 	public boolean cornerOnRight = false;
 
 	public TileSeismicRelay(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_SEISMICRELAY.get(), worldPosition, blockState);
+		super(ElectrodynamicsTiles.TILE_SEISMICRELAY.get(), worldPosition, blockState);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().outputs(1)).valid((slot, stack, i) -> ItemUtils.testItems(stack.getItem(), ElectrodynamicsItems.ITEM_SEISMICMARKER.get())));
@@ -127,14 +127,14 @@ public class TileSeismicRelay extends GenericTile {
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound) {
-		super.saveAdditional(compound);
+	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.saveAdditional(compound, registries);
 		compound.putBoolean("onRight", cornerOnRight);
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag compound) {
-		super.load(compound);
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
 		cornerOnRight = compound.getBoolean("onRight");
 	}
 

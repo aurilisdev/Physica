@@ -1,5 +1,6 @@
 {
   "parent": "electrodynamics:parent/insulatedwire_side",
+  "render_type": "minecraft:cutout",
   "textures": {
     "insulation": "electrodynamics:block/wire/insulationwool",
     "particle": "#insulation"

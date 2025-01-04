@@ -7,9 +7,10 @@ import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.tile.pipelines.gas.TileGasPipeFilter;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.screen.GenericScreen;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge.GasGaugeTextures;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
@@ -34,7 +35,7 @@ public class ScreenComponentGasFilter extends ScreenComponentGeneric {
     public void renderBackground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
         super.renderBackground(graphics, xAxis, yAxis, guiWidth, guiHeight);
 
-        TileGasPipeFilter filter = (TileGasPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getHostFromIntArray();
+        TileGasPipeFilter filter = (TileGasPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getSafeHost();
 
         if (filter == null) {
             return;
@@ -60,7 +61,7 @@ public class ScreenComponentGasFilter extends ScreenComponentGeneric {
             return;
         }
 
-        TileGasPipeFilter filter = (TileGasPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getHostFromIntArray();
+        TileGasPipeFilter filter = (TileGasPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getSafeHost();
 
         if (filter == null) {
             return;
@@ -100,7 +101,7 @@ public class ScreenComponentGasFilter extends ScreenComponentGeneric {
 
         GenericScreen<?> screen = (GenericScreen<?>) gui;
 
-        TileGasPipeFilter filter = (TileGasPipeFilter) ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray();
+        TileGasPipeFilter filter = (TileGasPipeFilter) ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost();
 
         if (filter == null) {
             return;
@@ -116,7 +117,6 @@ public class ScreenComponentGasFilter extends ScreenComponentGeneric {
                 return;
             }
             property.set(GasStack.EMPTY);
-            property.updateServer();
 
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
 
@@ -130,7 +130,7 @@ public class ScreenComponentGasFilter extends ScreenComponentGeneric {
             return;
         }
 
-        GasStack taken = handler.drainTank(0, Double.MAX_VALUE, GasAction.SIMULATE);
+        GasStack taken = handler.drain(Integer.MAX_VALUE, GasAction.SIMULATE);
 
         if (taken.isEmpty()) {
             return;
@@ -139,7 +139,6 @@ public class ScreenComponentGasFilter extends ScreenComponentGeneric {
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
 
         property.set(taken);
-        property.updateServer();
 
     }
 

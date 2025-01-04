@@ -1,1 +1,1 @@
-gradlew genEclipse
+gradlew genIntellijRuns

@@ -3,22 +3,23 @@ package electrodynamics.common.packet.types.server;
 import java.util.UUID;
 
 import electrodynamics.common.packet.NetworkHandler;
-import electrodynamics.prefab.utilities.ItemUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
-import electrodynamics.registers.ElectrodynamicsItems;
-import electrodynamics.registers.ElectrodynamicsSounds;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PacketModeSwitchServer implements CustomPacketPayload {
+
+    public static final ResourceLocation PACKET_MODESWITCHSERVER_PACKETID = NetworkHandler.id("packetmodeswitchserver");
+    public static final Type<PacketModeSwitchServer> TYPE = new Type<>(PACKET_MODESWITCHSERVER_PACKETID);
+    public static final StreamCodec<ByteBuf, PacketModeSwitchServer> CODEC = StreamCodec.composite(
+            UUIDUtil.STREAM_CODEC, instance -> instance.playerId,
+            ByteBufCodecs.INT, instance -> instance.mode.ordinal(),
+            (id, mode) -> new PacketModeSwitchServer(id, Mode.values()[mode])
+    );
 
     private final UUID playerId;
     private final Mode mode;
@@ -28,59 +29,13 @@ public class PacketModeSwitchServer implements CustomPacketPayload {
         this.mode = mode;
     }
 
-    public static void handle(PacketModeSwitchServer message, PlayPayloadContext context) {
-        ServerLevel serverWorld = (ServerLevel) context.level().get();
-        if (serverWorld == null) {
-            return;
-        }
-        ServerPlayer serverPlayer = (ServerPlayer) serverWorld.getPlayerByUUID(message.playerId);
-        switch (message.mode) {
-        case JETPACK:
-            ItemStack chest = serverPlayer.getItemBySlot(EquipmentSlot.CHEST);
-            if (ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_JETPACK.get()) || ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get())) {
-                CompoundTag tag = chest.getOrCreateTag();
-                int curMode = tag.getInt(NBTUtils.MODE);
-                if (curMode < 3) {
-                    curMode++;
-                } else {
-                    curMode = 0;
-                }
-                tag.putInt(NBTUtils.MODE, curMode);
-                serverPlayer.playNotifySound(ElectrodynamicsSounds.SOUND_JETPACKSWITCHMODE.get(), SoundSource.PLAYERS, 1, 1);
-            }
-            break;
-        case SERVOLEGS:
-            ItemStack legs = serverPlayer.getItemBySlot(EquipmentSlot.LEGS);
-            if (ItemUtils.testItems(legs.getItem(), ElectrodynamicsItems.ITEM_SERVOLEGGINGS.get()) || ItemUtils.testItems(legs.getItem(), ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get())) {
-                CompoundTag tag = legs.getOrCreateTag();
-                int curMode = tag.getInt(NBTUtils.MODE);
-                if (curMode < 2) {
-                    curMode++;
-                } else {
-                    curMode = 0;
-                }
-                tag.putInt(NBTUtils.MODE, curMode);
-                serverPlayer.playNotifySound(ElectrodynamicsSounds.SOUND_HYDRAULICBOOTS.get(), SoundSource.PLAYERS, 1, 1);
-            }
-            break;
-        default:
-            break;
-        }
-    }
-
-    public static PacketModeSwitchServer read(FriendlyByteBuf buf) {
-        return new PacketModeSwitchServer(buf.readUUID(), buf.readEnum(Mode.class));
+    public static void handle(PacketModeSwitchServer message, IPayloadContext context) {
+        ServerBarrierMethods.handleModeSwitchServer(context.player().level(), message.playerId, message.mode);
     }
 
     @Override
-    public void write(FriendlyByteBuf buf) {
-        buf.writeUUID(playerId);
-        buf.writeEnum(mode);
-    }
-
-    @Override
-    public ResourceLocation id() {
-        return NetworkHandler.PACKET_MODESWITCHSERVER_PACKETID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 
     // Mekanism gave me this idea

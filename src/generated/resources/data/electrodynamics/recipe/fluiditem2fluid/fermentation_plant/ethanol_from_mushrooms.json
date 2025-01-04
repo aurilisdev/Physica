@@ -1,0 +1,24 @@
+{
+  "type": "electrodynamics:fermentation_plant_recipe",
+  "fluidinputs": [
+    {
+      "amount": 1000,
+      "tag": "minecraft:water"
+    }
+  ],
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 11,
+      "ingredient": {
+        "tag": "c:mushrooms"
+      }
+    }
+  ],
+  "output": {
+    "amount": 100,
+    "id": "electrodynamics:fluidethanol"
+  },
+  "ticks": 2000,
+  "usagepertick": 20.0
+}

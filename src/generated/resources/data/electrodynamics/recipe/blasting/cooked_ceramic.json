@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 300,
+  "experience": 0.1,
+  "group": "electrodynamics",
+  "ingredient": {
+    "item": "electrodynamics:ceramicwet"
+  },
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:ceramiccooked"
+  }
+}

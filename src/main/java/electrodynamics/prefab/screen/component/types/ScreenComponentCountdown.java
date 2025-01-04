@@ -20,7 +20,7 @@ public class ScreenComponentCountdown extends AbstractScreenComponentInfo {
 	private final DoubleSupplier progressInfoHandler;
 	private TextPropertySupplier tooltip;
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/countdown.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/countdown.png");
 
 	public ScreenComponentCountdown(TextPropertySupplier tooltip, DoubleSupplier progressInfoHandler, int x, int y) {
 		super(CountdownTextures.BACKGROUND_DEFAULT, AbstractScreenComponentInfo.EMPTY, x, y);
@@ -30,13 +30,6 @@ public class ScreenComponentCountdown extends AbstractScreenComponentInfo {
 
 	public ScreenComponentCountdown(DoubleSupplier progressInfoHandler, int x, int y) {
 		this(null, progressInfoHandler, x, y);
-	}
-
-	@Override
-	public void renderForeground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
-		if (isPointInRegion(xLocation, yLocation, xAxis, yAxis, texture.textureWidth(), texture.textureHeight())) {
-			graphics.renderTooltip(gui.getFontRenderer(), getInfo(infoHandler.getInfo()), xAxis, yAxis);
-		}
 	}
 
 	@Override

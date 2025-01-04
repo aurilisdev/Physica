@@ -1,0 +1,25 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.10000000149011612,
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/vanadium"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "minecraft:coals"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:oxidevanadium"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

@@ -1,0 +1,18 @@
+{
+  "type": "electrodynamics:mineral_grinder_recipe",
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/superconductive"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:dustsuperconductive"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

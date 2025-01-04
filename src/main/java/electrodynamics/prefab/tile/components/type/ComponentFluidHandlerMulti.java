@@ -6,13 +6,13 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.api.fluid.PropertyFluidTank;
 import electrodynamics.common.recipe.ElectrodynamicsRecipe;
 import electrodynamics.common.recipe.recipeutils.AbstractMaterialRecipe;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -79,7 +79,7 @@ public class ComponentFluidHandlerMulti implements IComponentFluidHandler {
     public ComponentFluidHandlerMulti(GenericTile holder) {
         this.holder = holder;
 
-        if (!holder.getBlockState().hasProperty(GenericEntityBlock.FACING)) {
+        if (!holder.getBlockState().hasProperty(ElectrodynamicsBlockStates.FACING)) {
             throw new UnsupportedOperationException("The tile " + holder + " must have the FACING direction property!");
         }
 
@@ -131,14 +131,14 @@ public class ComponentFluidHandlerMulti implements IComponentFluidHandler {
         return this;
     }
 
-    public ComponentFluidHandlerMulti setInputDirections(Direction... directions) {
-        inputDirections = directions;
+    public ComponentFluidHandlerMulti setInputDirections(BlockEntityUtils.MachineDirection... directions) {
+        inputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         isSided = true;
         return this;
     }
 
-    public ComponentFluidHandlerMulti setOutputDirections(Direction... directions) {
-        outputDirections = directions;
+    public ComponentFluidHandlerMulti setOutputDirections(BlockEntityUtils.MachineDirection... directions) {
+        outputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         isSided = true;
         return this;
     }
@@ -239,8 +239,8 @@ public class ComponentFluidHandlerMulti implements IComponentFluidHandler {
 
     @Override
     public void refreshIfUpdate(BlockState oldState, BlockState newState) {
-        if (isSided && oldState.hasProperty(GenericEntityBlock.FACING) && newState.hasProperty(GenericEntityBlock.FACING) && oldState.getValue(GenericEntityBlock.FACING) != newState.getValue(GenericEntityBlock.FACING)) {
-            defineOptionals(newState.getValue(GenericEntityBlock.FACING));
+        if (isSided && oldState.hasProperty(ElectrodynamicsBlockStates.FACING) && newState.hasProperty(ElectrodynamicsBlockStates.FACING) && oldState.getValue(ElectrodynamicsBlockStates.FACING) != newState.getValue(ElectrodynamicsBlockStates.FACING)) {
+            defineOptionals(newState.getValue(ElectrodynamicsBlockStates.FACING));
         }
     }
 

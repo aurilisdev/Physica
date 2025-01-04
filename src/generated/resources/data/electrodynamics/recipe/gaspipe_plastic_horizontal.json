@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "tag": "c:plastic"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "   ",
+    "PPP"
+  ],
+  "result": {
+    "count": 6,
+    "id": "electrodynamics:gaspipeuninsulatedplastic"
+  }
+}

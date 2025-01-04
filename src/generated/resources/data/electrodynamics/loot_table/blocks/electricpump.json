@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:copy_custom_data",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "joules",
+                  "target": "BlockEntityTag.joules"
+                }
+              ],
+              "source": "block_entity"
+            },
+            {
+              "component": "minecraft:container",
+              "entries": [
+                {
+                  "type": "minecraft:dynamic",
+                  "name": "minecraft:contents"
+                }
+              ],
+              "function": "minecraft:set_contents"
+            }
+          ],
+          "name": "electrodynamics:electricpump"
+        }
+      ],
+      "name": "electricpump",
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "electrodynamics:blocks/electricpump"
+}

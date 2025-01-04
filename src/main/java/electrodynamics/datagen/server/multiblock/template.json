@@ -1,0 +1,73 @@
+{
+	// NORTH is the direction that all rotations will be derived from
+	"members": {
+		"east": [
+			{
+				"offset": {
+				},
+				// The blockstate the slave node is tied to
+				"placestate": {
+				},
+				// The blockstate the controller will look for
+				"replacestate": {
+				},
+				// A list of valid blocks the controller will look for. Do not include this field if there is no tag
+				"tag": "minecraft:dirt",
+				// The voxelshape the slave node will have. Exclude to have a shape of a box
+				"voxelshape": {
+				}
+			},
+			{
+				//...
+			}
+		],
+		"north": [
+			{
+				"offset": {
+				},
+				"placestate": {
+				},
+				"replacestate": {
+				},
+				"tag": "minecraft:dirt",
+				"voxelshape": {
+				}
+			},
+			{
+				//...
+			}
+		],
+		"south": [
+			{
+				"offset": {
+				},
+				"placestate": {
+				},
+				"replacestate": {
+				},
+				"tag": "minecraft:dirt",
+				"voxelshape": {
+				}
+			},
+			{
+				//...
+			}
+		],
+		"west": [
+			{
+				"offset": {
+				},
+				"placestate": {
+				},
+				"replacestate": {
+				},
+				"tag": "minecraft:dirt",
+				"voxelshape": {
+				}
+			},
+			{
+				//...
+			}
+		]
+	}
+}

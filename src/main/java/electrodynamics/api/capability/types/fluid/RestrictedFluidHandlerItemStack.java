@@ -2,9 +2,10 @@ package electrodynamics.api.capability.types.fluid;
 
 import java.util.function.Predicate;
 
+import electrodynamics.api.fluid.FluidStackComponent;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import org.jetbrains.annotations.NotNull;
 
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
@@ -73,7 +74,7 @@ public class RestrictedFluidHandlerItemStack implements IFluidHandlerItem {
 
             return fillAmount;
         }
-        if (contained.isFluidEqual(resource)) {
+        if (FluidStack.isSameFluidSameComponents(resource, contained)) {
             int fillAmount = Math.min(capacity - contained.getAmount(), resource.getAmount());
 
             if (action.execute() && fillAmount > 0) {
@@ -89,7 +90,7 @@ public class RestrictedFluidHandlerItemStack implements IFluidHandlerItem {
 
     @Override
     public @NotNull FluidStack drain(FluidStack resource, FluidAction action) {
-        if (container.getCount() != 1 || resource.isEmpty() || !resource.isFluidEqual(getFluid())) {
+        if (container.getCount() != 1 || resource.isEmpty() || !FluidStack.isSameFluidSameComponents(getFluid(), resource)) {
             return FluidStack.EMPTY;
         }
         return drain(resource.getAmount(), action);
@@ -108,8 +109,7 @@ public class RestrictedFluidHandlerItemStack implements IFluidHandlerItem {
 
         final int drainAmount = Math.min(contained.getAmount(), maxDrain);
 
-        FluidStack drained = contained.copy();
-        drained.setAmount(drainAmount);
+        FluidStack drained = contained.copyWithAmount(drainAmount);
 
         if (action.execute()) {
             contained.shrink(drainAmount);
@@ -130,25 +130,15 @@ public class RestrictedFluidHandlerItemStack implements IFluidHandlerItem {
 
     @NotNull
     public FluidStack getFluid() {
-        CompoundTag tagCompound = container.getTag();
-        if (tagCompound == null || !tagCompound.contains(FLUID_NBT_KEY)) {
-            return FluidStack.EMPTY;
-        }
-        return FluidStack.loadFluidStackFromNBT(tagCompound.getCompound(FLUID_NBT_KEY));
+        return container.getOrDefault(ElectrodynamicsDataComponentTypes.FLUID_STACK, FluidStackComponent.EMPTY).fluid;
     }
 
     public void setFluid(FluidStack fluid) {
-        if (!container.hasTag()) {
-            container.setTag(new CompoundTag());
-        }
-
-        CompoundTag fluidTag = new CompoundTag();
-        fluid.writeToNBT(fluidTag);
-        container.getTag().put(FLUID_NBT_KEY, fluidTag);
+        container.set(ElectrodynamicsDataComponentTypes.FLUID_STACK, new FluidStackComponent(fluid));
     }
 
     public void setContainerToEmpty() {
-        container.removeTagKey(FLUID_NBT_KEY);
+        container.remove(ElectrodynamicsDataComponentTypes.FLUID_STACK);
     }
 
     public static class Consumable extends RestrictedFluidHandlerItemStack {

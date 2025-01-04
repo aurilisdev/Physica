@@ -2,23 +2,27 @@ package electrodynamics.common.packet.types.server;
 
 import java.util.UUID;
 
-import electrodynamics.common.item.gear.armor.types.ItemJetpack;
 import electrodynamics.common.packet.NetworkHandler;
-import electrodynamics.prefab.utilities.ItemUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
-import electrodynamics.registers.ElectrodynamicsItems;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PacketJetpackFlightServer implements CustomPacketPayload {
 
+    public static final ResourceLocation PACKET_JETPACKFLIGHTSERVER_PACKETID = NetworkHandler.id("packetjetpackflightserver");
+    public static final Type<PacketJetpackFlightServer> TYPE = new Type<>(PACKET_JETPACKFLIGHTSERVER_PACKETID);
+    public static final StreamCodec<ByteBuf, PacketJetpackFlightServer> CODEC = StreamCodec.composite(
+            UUIDUtil.STREAM_CODEC, instance -> instance.playerId,
+            ByteBufCodecs.BOOL, instance -> instance.bool,
+            ByteBufCodecs.DOUBLE, instance -> instance.prevDeltaY,
+            PacketJetpackFlightServer::new
+
+
+    );
     private final UUID playerId;
     private final boolean bool;
     private final double prevDeltaY;
@@ -29,35 +33,12 @@ public class PacketJetpackFlightServer implements CustomPacketPayload {
         this.prevDeltaY = prevDeltaY;
     }
 
-    public static void handle(PacketJetpackFlightServer message, PlayPayloadContext context) {
-        if (context.level().isEmpty()) {
-            return;
-        }
-        ServerLevel world = (ServerLevel) context.level().get();
-        Player player = world.getPlayerByUUID(message.playerId);
-        ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
-        if (ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_JETPACK.get()) || ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get())) {
-            CompoundTag tag = chest.getOrCreateTag();
-            tag.putBoolean(NBTUtils.USED, message.bool);
-            tag.putBoolean(ItemJetpack.WAS_HURT_KEY, false);
-            tag.putDouble(ItemJetpack.DELTA_Y_KEY, message.prevDeltaY);
-        }
-    }
-
-    public static PacketJetpackFlightServer read(FriendlyByteBuf buf) {
-        return new PacketJetpackFlightServer(buf.readUUID(), buf.readBoolean(), buf.readDouble());
+    public static void handle(PacketJetpackFlightServer message, IPayloadContext context) {
+        ServerBarrierMethods.handleJetpackFlightServer(context.player().level(), message.playerId, message.bool, message.prevDeltaY);
     }
 
     @Override
-    public void write(FriendlyByteBuf buf) {
-        buf.writeUUID(playerId);
-        buf.writeBoolean(bool);
-        buf.writeDouble(prevDeltaY);
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
-
-    @Override
-    public ResourceLocation id() {
-        return NetworkHandler.PACKET_JETPACKFLIGHTSERVER_PACKETID;
-    }
-
 }

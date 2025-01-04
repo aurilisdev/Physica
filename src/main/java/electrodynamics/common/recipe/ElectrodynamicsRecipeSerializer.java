@@ -1,6 +1,5 @@
 package electrodynamics.common.recipe;
 
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public abstract class ElectrodynamicsRecipeSerializer<T extends ElectrodynamicsRecipe> implements RecipeSerializer<T> {
@@ -17,9 +16,5 @@ public abstract class ElectrodynamicsRecipeSerializer<T extends ElectrodynamicsR
     public static final String TICKS = "ticks";
     public static final String USAGE_PER_TICK = "usagepertick";
     public static final String GROUP = "group";
-
-    public abstract T fromNetwork(FriendlyByteBuf buffer);
-
-    public abstract void toNetwork(FriendlyByteBuf buffer, T recipe);
 
 }

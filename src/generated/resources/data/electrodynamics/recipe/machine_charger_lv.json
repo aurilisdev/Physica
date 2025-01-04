@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "electrodynamics:batterybox"
+    },
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "W": {
+      "tag": "c:wires/insulated_copper"
+    }
+  },
+  "pattern": [
+    "W W",
+    "PBP",
+    "PCP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:chargerlv"
+  }
+}

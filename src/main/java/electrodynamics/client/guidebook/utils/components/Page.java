@@ -44,15 +44,15 @@ public class Page {
 		Module currMod = associatedChapter.module;
 		Component moduleTitle = currMod.getTitle().withStyle(ChatFormatting.BOLD);
 		int xShift = (textWidth - font.width(moduleTitle)) / 2;
-		graphics.drawString(font, moduleTitle, refX + textStartX + xShift + xPageShift, refY + 16, 4210752, false);
+		graphics.drawString(font, moduleTitle, refX + textStartX + xShift + xPageShift, refY + 16, Color.TEXT_GRAY.color(), false);
 
 		Component chapTitle = associatedChapter.getTitle().withStyle(ChatFormatting.UNDERLINE);
 		xShift = (textWidth - font.width(chapTitle)) / 2;
-		graphics.drawString(font, chapTitle, refX + textStartX + xShift + xPageShift, refY + 26, 4210752, false);
+		graphics.drawString(font, chapTitle, refX + textStartX + xShift + xPageShift, refY + 26, Color.TEXT_GRAY.color(), false);
 
 		Component pageNumber = Component.literal(getPage() + 1 + "");
 		xShift = (textWidth - font.width(pageNumber)) / 2;
-		graphics.drawString(font, pageNumber, refX + textStartX + xShift + xPageShift, refY + 200, 4210752, false);
+		graphics.drawString(font, pageNumber, refX + textStartX + xShift + xPageShift, refY + 200, Color.TEXT_GRAY.color(), false);
 
 	}
 
@@ -79,11 +79,11 @@ public class Page {
 			Module currMod = associatedModule;
 			Component moduleTitle = currMod.getTitle().withStyle(ChatFormatting.BOLD);
 			int xShift = (textWidth - font.width(moduleTitle)) / 2;
-			graphics.drawString(font, moduleTitle, refX + xShift + textStartX + xPageShift, refY + 16, 4210752, false);
+			graphics.drawString(font, moduleTitle, refX + xShift + textStartX + xPageShift, refY + 16, Color.TEXT_GRAY.color(), false);
 
 			Component chapTitle = ElectroTextUtils.guidebook("chapters").withStyle(ChatFormatting.UNDERLINE);
 			xShift = (textWidth - font.width(chapTitle)) / 2;
-			graphics.drawString(font, chapTitle, refX + textStartX + xShift + xPageShift, refY + 31, 4210752, false);
+			graphics.drawString(font, chapTitle, refX + textStartX + xShift + xPageShift, refY + 31, Color.TEXT_GRAY.color(), false);
 		}
 
 	}
@@ -98,7 +98,7 @@ public class Page {
 		public void renderAdditionalText(GuiGraphics graphics, int refX, int refY, int xPageShift, Font font, int textWidth, int textStartX) {
 			Component modTitle = ElectroTextUtils.guidebook("availablemodules").withStyle(ChatFormatting.BOLD);
 			int xShift = (textWidth - font.width(modTitle)) / 2;
-			graphics.drawString(font, modTitle, refX + textStartX + xShift + xPageShift, refY + 16, 4210752, false);
+			graphics.drawString(font, modTitle, refX + textStartX + xShift + xPageShift, refY + 16, Color.TEXT_GRAY.color(), false);
 		}
 
 	}

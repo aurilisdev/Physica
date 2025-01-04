@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:mineral_grinder_recipe",
+  "experience": 1.0,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.1,
+      "item": {
+        "count": 1,
+        "id": "minecraft:coal"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "minecraft:diamond_ores"
+      }
+    }
+  ],
+  "output": {
+    "count": 3,
+    "id": "minecraft:diamond"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

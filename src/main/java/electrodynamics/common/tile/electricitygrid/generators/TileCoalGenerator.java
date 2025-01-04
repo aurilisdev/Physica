@@ -3,13 +3,13 @@ package electrodynamics.common.tile.electricitygrid.generators;
 import java.util.ArrayList;
 import java.util.List;
 
-import electrodynamics.common.block.BlockMachine;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerCoalGenerator;
 import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -22,7 +22,8 @@ import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TargetValue.PropertyTargetValue;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -31,24 +32,25 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.CommonHooks;
 
 public class TileCoalGenerator extends GenericGeneratorTile {
 	protected CachedTileOutput output;
 	protected TransferPack currentOutput = TransferPack.EMPTY;
-	public PropertyTargetValue heat = new PropertyTargetValue(property(new Property<>(PropertyType.Double, "heat", 27.0)));
-	public Property<Integer> burnTime = property(new Property<>(PropertyType.Integer, "burnTime", 0));
-	public Property<Integer> maxBurnTime = property(new Property<>(PropertyType.Integer, "maxBurnTime", 1));
+	public PropertyTargetValue heat = new PropertyTargetValue(property(new Property<>(PropertyTypes.DOUBLE, "heat", 27.0)));
+	public Property<Integer> burnTime = property(new Property<>(PropertyTypes.INTEGER, "burnTime", 0));
+	public Property<Integer> maxBurnTime = property(new Property<>(PropertyTypes.INTEGER, "maxBurnTime", 1));
 	// for future planned upgrades
-	private Property<Double> multiplier = property(new Property<>(PropertyType.Double, "multiplier", 1.0));
-	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	private Property<Double> multiplier = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 1.0));
+	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 
 	public TileCoalGenerator(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_COALGENERATOR.get(), worldPosition, blockState, 1.0);
+		super(ElectrodynamicsTiles.TILE_COALGENERATOR.get(), worldPosition, blockState, 1.0);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient).tickServer(this::tickServer));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.NORTH));
-		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1)).setDirectionsBySlot(0, Direction.UP, Direction.EAST, Direction.WEST, Direction.SOUTH, Direction.NORTH).valid((index, stack, i) -> getValidItems().contains(stack.getItem())));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.BACK));
+		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1)).setDirectionsBySlot(0, BlockEntityUtils.MachineDirection.TOP, BlockEntityUtils.MachineDirection.BOTTOM, BlockEntityUtils.MachineDirection.FRONT, BlockEntityUtils.MachineDirection.LEFT, BlockEntityUtils.MachineDirection.RIGHT)
+				//
+				.valid((index, stack, i) -> getValidItems().contains(stack.getItem())));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.coalgenerator, this).createMenu((id, player) -> new ContainerCoalGenerator(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}
 
@@ -69,7 +71,7 @@ public class TileCoalGenerator extends GenericGeneratorTile {
 		ComponentInventory inv = getComponent(IComponentType.Inventory);
 		ItemStack fuel = inv.getItem(0);
 		if (burnTime.get() <= 0 && !fuel.isEmpty()) {
-			burnTime.set(CommonHooks.getBurnTime(fuel, null));
+			burnTime.set(fuel.getBurnTime(null));
 			fuel.shrink(1);
 			maxBurnTime.set(Math.max(burnTime.get(), 1));
 		}
@@ -85,7 +87,7 @@ public class TileCoalGenerator extends GenericGeneratorTile {
 	}
 
 	protected void tickClient(ComponentTickable tickable) {
-		if (getBlockState().getValue(BlockMachine.ON)) {
+		if (getBlockState().getValue(ElectrodynamicsBlockStates.LIT)) {
 			Direction dir = getFacing();
 			if (level.random.nextInt(10) == 0) {
 				level.playLocalSound(worldPosition.getX() + 0.5D, worldPosition.getY() + 0.5D, worldPosition.getZ() + 0.5D, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + level.random.nextFloat(), level.random.nextFloat() * 0.7F + 0.6F, false);
@@ -111,7 +113,7 @@ public class TileCoalGenerator extends GenericGeneratorTile {
 
 	@Override
 	public TransferPack getProduced() {
-		return TransferPack.ampsVoltage(multiplier.get() * Constants.COALGENERATOR_MAX_OUTPUT.getAmps() * ((heat.getValue() - 27.0) / (3000.0 - 27.0)), Constants.COALGENERATOR_MAX_OUTPUT.getVoltage());
+		return TransferPack.ampsVoltage(multiplier.get() * Constants.COALGENERATOR_AMPERAGE * ((heat.getValue() - 27.0) / (3000.0 - 27.0)), ElectrodynamicsCapabilities.DEFAULT_VOLTAGE);
 	}
 
 	public static List<Item> getValidItems() {

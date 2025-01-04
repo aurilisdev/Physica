@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:gears/bronze"
+    },
+    "I": {
+      "tag": "c:gears/iron"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "SLS",
+    "BIB",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:mechanicalvalve"
+  }
+}

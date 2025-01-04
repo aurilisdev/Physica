@@ -3,17 +3,20 @@ package electrodynamics.prefab.block;
 import java.util.Arrays;
 import java.util.List;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.IWrenchable;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +25,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
@@ -30,13 +32,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.storage.loot.LootParams.Builder;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 
 public abstract class GenericEntityBlock extends BaseEntityBlock implements IWrenchable {
-	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
 	protected GenericEntityBlock(Properties properties) {
 		super(properties);
@@ -61,7 +61,7 @@ public abstract class GenericEntityBlock extends BaseEntityBlock implements IWre
 
 	@Override
 	public void onRotate(ItemStack stack, BlockPos pos, Player player) {
-		if (player.level().getBlockState(pos).hasProperty(FACING)) {
+		if (player.level().getBlockState(pos).hasProperty(ElectrodynamicsBlockStates.FACING)) {
 			BlockState state = rotate(player.level().getBlockState(pos), Rotation.CLOCKWISE_90);
 			player.level().setBlockAndUpdate(pos, state);
 		}
@@ -69,16 +69,16 @@ public abstract class GenericEntityBlock extends BaseEntityBlock implements IWre
 
 	@Override
 	public BlockState rotate(BlockState state, Rotation rot) {
-		if (state.hasProperty(FACING)) {
-			return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+		if (state.hasProperty(ElectrodynamicsBlockStates.FACING)) {
+			return state.setValue(ElectrodynamicsBlockStates.FACING, rot.rotate(state.getValue(ElectrodynamicsBlockStates.FACING)));
 		}
 		return super.rotate(state, rot);
 	}
 
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		if (state.hasProperty(FACING)) {
-			return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
+		if (state.hasProperty(ElectrodynamicsBlockStates.FACING)) {
+			return state.rotate(mirrorIn.getRotation(state.getValue(ElectrodynamicsBlockStates.FACING)));
 		}
 		return super.mirror(state, mirrorIn);
 	}
@@ -105,7 +105,7 @@ public abstract class GenericEntityBlock extends BaseEntityBlock implements IWre
 				    
 				    double joules = electro.getJoulesStored();
                     if (joules > 0) {
-                        stack.getOrCreateTag().putDouble("joules", joules);
+						stack.set(ElectrodynamicsDataComponentTypes.JOULES, joules);
                     }
 				    
 				}
@@ -176,12 +176,19 @@ public abstract class GenericEntityBlock extends BaseEntityBlock implements IWre
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		if (worldIn.getBlockEntity(pos) instanceof GenericTile generic) {
-			return generic.use(player, handIn, hit);
+	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+		if (level.getBlockEntity(pos) instanceof GenericTile generic) {
+			return generic.useWithoutItem(player, hitResult);
 		}
+		return super.useWithoutItem(state, level, pos, player, hitResult);
+	}
 
-		return super.use(state, worldIn, pos, player, handIn, hit);
+	@Override
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+		if (level.getBlockEntity(pos) instanceof GenericTile generic) {
+			return generic.useWithItem(stack, player, hand, hitResult);
+		}
+		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}
 
 	@Override

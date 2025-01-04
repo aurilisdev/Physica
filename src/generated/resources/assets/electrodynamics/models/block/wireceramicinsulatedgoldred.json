@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:block/cube",
+  "inventory": {
+    "parent": "electrodynamics:block/wire/wireceramicinsulatedgoldred_side"
+  },
+  "loader": "electrodynamics:electrodynamicscableloader",
+  "none": {
+    "parent": "electrodynamics:block/wire/wireceramicinsulatedgoldred_none"
+  },
+  "render_type": "minecraft:cutout",
+  "wire": {
+    "parent": "electrodynamics:block/wire/wireceramicinsulatedgoldred_side"
+  }
+}

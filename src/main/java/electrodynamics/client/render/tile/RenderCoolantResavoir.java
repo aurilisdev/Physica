@@ -37,7 +37,7 @@ public class RenderCoolantResavoir extends AbstractTileRenderer<TileCoolantResav
 			float yHeight = Math.max(Math.min((float) tank.getFluidAmount() / (float) tank.getCapacity(), MAX_Y), MIN_Y);
 			AABB aabb = new AABB(MIN_X, MIN_Y, MIN_Z, MAX_X, yHeight, MAX_Z);
 			VertexConsumer builder = source.getBuffer(Sheets.translucentCullBlockSheet());
-			RenderingUtils.renderFluidBox(stack, Minecraft.getInstance(), builder, aabb, fluid, light, overlay);
+			RenderingUtils.renderFluidBox(stack, Minecraft.getInstance(), builder, aabb, fluid, light, overlay, RenderingUtils.ALL_FACES);
 		}
 	}
 

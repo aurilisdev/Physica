@@ -5,7 +5,7 @@ import electrodynamics.common.tile.machines.TileElectrolyticSeparator;
 import electrodynamics.prefab.screen.component.types.ScreenComponentCondensedFluid;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGaugeInput;
+import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;
@@ -25,7 +25,7 @@ public class ScreenElectrolyticSeparator extends GenericMaterialScreen<Container
 	public ScreenElectrolyticSeparator(ContainerElectrolyticSeparator container, Inventory inv, Component titleIn) {
 		super(container, inv, titleIn);
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getComponent(IComponentType.Processor);
 				if (processor.operatingTicks.get() > 0) {
@@ -35,7 +35,7 @@ public class ScreenElectrolyticSeparator extends GenericMaterialScreen<Container
 			return 0;
 		}, 38, 30));
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getComponent(IComponentType.Processor);
 				if (processor.operatingTicks.get() > processor.requiredTicks.get() / 2.0) {
@@ -44,22 +44,22 @@ public class ScreenElectrolyticSeparator extends GenericMaterialScreen<Container
 			}
 			return 0;
 		}, 78, 30));
-		addComponent(new ScreenComponentFluidGaugeInput(() -> {
-			TileElectrolyticSeparator boiler = container.getHostFromIntArray();
+		addComponent(new ScreenComponentFluidGauge(() -> {
+			TileElectrolyticSeparator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
 			}
 			return null;
 		}, 21, 18));
 		addComponent(new ScreenComponentGasGauge(() -> {
-			TileElectrolyticSeparator boiler = container.getHostFromIntArray();
+			TileElectrolyticSeparator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getOutputTanks()[0];
 			}
 			return null;
 		}, 62, 18));
 		addComponent(new ScreenComponentGasGauge(() -> {
-			TileElectrolyticSeparator boiler = container.getHostFromIntArray();
+			TileElectrolyticSeparator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getOutputTanks()[1];
 			}
@@ -69,7 +69,7 @@ public class ScreenElectrolyticSeparator extends GenericMaterialScreen<Container
 		addComponent(new ScreenComponentGasPressure(-AbstractScreenComponentInfo.SIZE + 1, 2 + AbstractScreenComponentInfo.SIZE));
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentCondensedFluid(() -> {
-			TileElectrolyticSeparator electric = container.getHostFromIntArray();
+			TileElectrolyticSeparator electric = container.getSafeHost();
 			if (electric == null) {
 				return null;
 			}

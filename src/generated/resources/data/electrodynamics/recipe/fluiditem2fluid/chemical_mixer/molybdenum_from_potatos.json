@@ -1,0 +1,24 @@
+{
+  "type": "electrodynamics:chemical_mixer_recipe",
+  "fluidinputs": [
+    {
+      "amount": 100,
+      "tag": "c:sulfuric_acid"
+    }
+  ],
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 4,
+      "ingredient": {
+        "tag": "c:crops/potato"
+      }
+    }
+  ],
+  "output": {
+    "amount": 250,
+    "id": "electrodynamics:fluidsulfatemolybdenum"
+  },
+  "ticks": 200,
+  "usagepertick": 400.0
+}

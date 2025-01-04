@@ -9,11 +9,13 @@ import electrodynamics.api.network.cable.IRefreshableCable;
 import electrodynamics.api.network.cable.type.IGasPipe;
 import electrodynamics.common.block.connect.util.AbstractRefreshingConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
 import electrodynamics.common.block.subtype.SubtypeGasPipe.InsulationMaterial;
 import electrodynamics.common.network.type.GasNetwork;
 import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.common.tile.pipelines.gas.TileGasPipe;
+import electrodynamics.prefab.tile.types.GenericConnectTile;
 import electrodynamics.prefab.utilities.Scheduler;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.BlockPos;
@@ -26,8 +28,6 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 public class BlockGasPipe extends AbstractRefreshingConnectBlock {
 
@@ -55,7 +55,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
             return 0;
         }
 
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 150;
+        return state.hasProperty(ElectrodynamicsBlockStates.WATERLOGGED) && state.getValue(ElectrodynamicsBlockStates.WATERLOGGED) ? 0 : 150;
     }
 
     @Override
@@ -64,13 +64,13 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
             return 0;
         }
 
-        return state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED) ? 0 : 400;
+        return state.hasProperty(ElectrodynamicsBlockStates.WATERLOGGED) && state.getValue(ElectrodynamicsBlockStates.WATERLOGGED) ? 0 : 400;
     }
 
     @Override
     public void onCaughtFire(BlockState state, Level world, BlockPos pos, Direction face, LivingEntity igniter) {
         super.onCaughtFire(state, world, pos, face, igniter);
-        Scheduler.schedule(5, () -> world.setBlockAndUpdate(pos, ElectrodynamicsBlocks.getBlock(SubtypeGasPipe.getPipeForType(pipe.pipeMaterial, InsulationMaterial.NONE)).defaultBlockState()));
+        Scheduler.schedule(5, () -> world.setBlockAndUpdate(pos, ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(SubtypeGasPipe.getPipeForType(pipe.pipeMaterial, InsulationMaterial.NONE)).defaultBlockState()));
     }
 
     @Override
@@ -96,17 +96,18 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
     }
 
     @Override
-    public BlockState refreshConnections(BlockState otherState, BlockEntity tile, BlockState state, Direction dir) {
-        EnumProperty<EnumConnectType> property = FACING_TO_PROPERTY_MAP.get(dir);
-        if (tile instanceof IGasPipe) {
-            return state.setValue(property, EnumConnectType.WIRE);
+    public BlockState refreshConnections(BlockState otherState, BlockEntity otherTile, BlockState state, BlockEntity thisTile, Direction dir) {
+        if(!(thisTile instanceof GenericConnectTile)) {
+            return state;
         }
-        if (GasUtilities.isGasReciever(tile, dir.getOpposite())) {
-            return state.setValue(property, EnumConnectType.INVENTORY);
+        GenericConnectTile thisConnect = (GenericConnectTile) thisTile;
+        EnumConnectType connection = EnumConnectType.NONE;
+        if (otherTile instanceof IGasPipe) {
+            connection = EnumConnectType.WIRE;
+        } else if (GasUtilities.isGasReciever(otherTile, dir.getOpposite())) {
+            connection = EnumConnectType.INVENTORY;
         }
-        if (state.hasProperty(property)) {
-            return state.setValue(property, EnumConnectType.NONE);
-        }
+        thisConnect.writeConnection(dir, connection);
         return state;
     }
 
@@ -117,6 +118,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
         }
         return null;
     }
+
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {

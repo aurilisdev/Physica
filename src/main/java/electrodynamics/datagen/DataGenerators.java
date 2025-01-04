@@ -12,11 +12,9 @@ import electrodynamics.datagen.client.ElectrodynamicsItemModelsProvider;
 import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider;
 import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider.Locale;
 import electrodynamics.datagen.client.ElectrodynamicsSoundProvider;
-import electrodynamics.datagen.server.CoalGeneratorFuelSourceProvider;
-import electrodynamics.datagen.server.CombustionChamberFuelSourceProvider;
-import electrodynamics.datagen.server.ElectrodynamicsLootTablesProvider;
-import electrodynamics.datagen.server.ThermoelectricGenHeatSourceProvider;
+import electrodynamics.datagen.server.*;
 import electrodynamics.datagen.server.advancement.ElectrodynamicsAdvancementProvider;
+import electrodynamics.datagen.server.multiblock.ElectrodynamicsMultiblockProvider;
 import electrodynamics.datagen.server.recipe.ElectrodynamicsRecipeProvider;
 import electrodynamics.datagen.server.tags.ElectrodynamicsTagsProvider;
 import electrodynamics.registers.ElectrodynamicsDamageTypes;
@@ -29,13 +27,13 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
-@Mod.EventBusSubscriber(modid = References.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
 	@SubscribeEvent
@@ -49,13 +47,14 @@ public class DataGenerators {
 
 		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
+
 		if (event.includeServer()) {
-			generator.addProvider(true, new LootTableProvider(output, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(ElectrodynamicsLootTablesProvider::new, LootContextParamSets.BLOCK))));
-			generator.addProvider(true, new ElectrodynamicsRecipeProvider(output, lookupProvider));
+			generator.addProvider(true, new LootTableProvider(output, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(ElectrodynamicsLootTablesProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+
 			generator.addProvider(true, new CombustionChamberFuelSourceProvider(output));
 			generator.addProvider(true, new CoalGeneratorFuelSourceProvider(output));
 			generator.addProvider(true, new ThermoelectricGenHeatSourceProvider(output));
-			generator.addProvider(true, new ElectrodynamicsAdvancementProvider(output, lookupProvider));
+			generator.addProvider(true, new GasCollectorChromoCardsProvider(output));
 
 			DatapackBuiltinEntriesProvider datapacks = new DatapackBuiltinEntriesProvider(output, lookupProvider, new RegistrySetBuilder()
 					//
@@ -71,6 +70,9 @@ public class DataGenerators {
 
 			generator.addProvider(true, datapacks);
 			ElectrodynamicsTagsProvider.addTagProviders(generator, output, datapacks.getRegistryProvider(), helper);
+			generator.addProvider(true, new ElectrodynamicsRecipeProvider(output, lookupProvider));
+			generator.addProvider(true, new ElectrodynamicsAdvancementProvider(output, datapacks.getRegistryProvider()));
+			generator.addProvider(true, new ElectrodynamicsMultiblockProvider(output, datapacks.getRegistryProvider(), helper));
 		}
 		if (event.includeClient()) {
 			generator.addProvider(true, new ElectrodynamicsBlockStateProvider(output, helper));

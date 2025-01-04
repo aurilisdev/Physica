@@ -6,7 +6,7 @@ import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
-import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
+import electrodynamics.prefab.screen.component.types.wrapper.WrapperInventoryIO;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import net.minecraft.network.chat.Component;
@@ -20,7 +20,7 @@ public class ScreenElectricFurnace extends GenericScreen<ContainerElectricFurnac
 	public ScreenElectricFurnace(ContainerElectricFurnace container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			TileElectricFurnace furnace = container.getHostFromIntArray();
+			TileElectricFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(0);
 				if (processor.isActive()) {
@@ -30,7 +30,7 @@ public class ScreenElectricFurnace extends GenericScreen<ContainerElectricFurnac
 			return 0;
 		}, 84, 34));
 		addComponent(new ScreenComponentProgress(ProgressBars.COUNTDOWN_FLAME, () -> {
-			TileElectricFurnace furnace = container.getHostFromIntArray();
+			TileElectricFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(0);
 				if (processor.isActive()) {
@@ -41,6 +41,6 @@ public class ScreenElectricFurnace extends GenericScreen<ContainerElectricFurnac
 		}, 39, 36));
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 
-		new InventoryIOWrapper(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE + 2, 75, 82, 8, 72);
+		new WrapperInventoryIO(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE + 2, 75, 82, 8, 72);
 	}
 }

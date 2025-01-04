@@ -1,10 +1,10 @@
 package electrodynamics.common.tile.pipelines.gas;
 
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.core.HolderLookup;
 
 import electrodynamics.common.block.connect.BlockGasPipe;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level.ExplosionInteraction;
@@ -15,7 +15,7 @@ public class TileGasPipe extends GenericTileGasPipe {
 	public SubtypeGasPipe pipe = null;
 
 	public TileGasPipe(BlockPos worldPos, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_GAS_PIPE.get(), worldPos, blockState);
+		super(ElectrodynamicsTiles.TILE_GAS_PIPE.get(), worldPos, blockState);
 	}
 
 	@Override
@@ -35,14 +35,14 @@ public class TileGasPipe extends GenericTileGasPipe {
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound) {
+	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.saveAdditional(compound, registries);
 		compound.putInt("ord", getPipeType().ordinal());
-		super.saveAdditional(compound);
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag compound) {
-		super.load(compound);
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
 		pipe = SubtypeGasPipe.values()[compound.getInt("ord")];
 	}
 

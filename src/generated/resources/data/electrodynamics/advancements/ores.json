@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:wooden_pickaxe"
-            ]
+            "items": "minecraft:wooden_pickaxe"
           }
         ]
       },
@@ -19,10 +17,9 @@
     "description": {
       "translate": "advancement.electrodynamics.ores.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:oretin"
+      "count": 1,
+      "id": "electrodynamics:oretin"
     },
     "show_toast": false,
     "title": {
@@ -37,6 +34,5 @@
   ],
   "rewards": {
     "experience": 10
-  },
-  "sends_telemetry_event": false
+  }
 }

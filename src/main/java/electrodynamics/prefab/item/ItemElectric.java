@@ -10,6 +10,7 @@ import electrodynamics.api.item.IItemElectric;
 import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
@@ -27,7 +28,7 @@ public class ItemElectric extends ItemElectrodynamics implements IItemElectric {
 	private final ElectricItemProperties properties;
 	private final Function<Item, Item> getBatteryItem;
 
-	public ItemElectric(ElectricItemProperties properties, Supplier<CreativeModeTab> creativeTab, Function<Item, Item> getBatteryItem) {
+	public ItemElectric(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab, Function<Item, Item> getBatteryItem) {
 		super(properties, creativeTab);
 		this.properties = properties;
 		this.getBatteryItem = getBatteryItem;
@@ -40,28 +41,28 @@ public class ItemElectric extends ItemElectrodynamics implements IItemElectric {
 		IItemElectric.setEnergyStored(empty, 0);
 		items.add(empty);
 		ItemStack charged = new ItemStack(this);
-		IItemElectric.setEnergyStored(charged, properties.capacity);
+		IItemElectric.setEnergyStored(charged, getMaximumCapacity(charged));
 		items.add(charged);
 
 	}
 
 	@Override
 	public int getBarWidth(ItemStack stack) {
-		return (int) Math.round(13.0f * getJoulesStored(stack) / properties.capacity);
+		return (int) Math.round(13.0f * getJoulesStored(stack) / getMaximumCapacity(stack));
 	}
 
 	@Override
 	public boolean isBarVisible(ItemStack stack) {
-		return getJoulesStored(stack) < properties.capacity;
+		return getJoulesStored(stack) < getMaximumCapacity(stack);
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		super.appendHoverText(stack, worldIn, tooltip, flagIn);
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+		super.appendHoverText(stack, context, tooltip, flagIn);
 		tooltip.add(ElectroTextUtils.tooltip("item.electric.info", ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY));
 		tooltip.add(ElectroTextUtils.tooltip("item.electric.voltage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE), ChatFormatter.getChatDisplayShort(properties.extract.getVoltage(), DisplayUnit.VOLTAGE))).withStyle(ChatFormatting.RED));
 		if (getDefaultStorageBattery() != Items.AIR) {
-			IItemElectric.addBatteryTooltip(stack, worldIn, tooltip);
+			IItemElectric.addBatteryTooltip(stack, context, tooltip);
 		}
 	}
 

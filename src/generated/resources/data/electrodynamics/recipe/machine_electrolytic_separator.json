@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "P": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "T": {
+      "item": "electrodynamics:gastanksteel"
+    },
+    "X": {
+      "item": "electrodynamics:upgradetransformer"
+    }
+  },
+  "pattern": [
+    "PTP",
+    "TXT",
+    "PCP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:electrolyticseparator"
+  }
+}

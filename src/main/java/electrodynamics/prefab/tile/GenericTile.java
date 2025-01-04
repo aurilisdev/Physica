@@ -2,6 +2,12 @@ package electrodynamics.prefab.tile;
 
 import java.util.UUID;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.ItemInteractionResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,9 +17,6 @@ import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodyn
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.common.item.ItemUpgrade;
-import electrodynamics.prefab.block.GenericEntityBlock;
-import electrodynamics.prefab.properties.IPropertyType.TagReader;
-import electrodynamics.prefab.properties.IPropertyType.TagWriter;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyManager;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
@@ -22,7 +25,6 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentName;
-import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
 import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
@@ -44,7 +46,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.util.TriPredicate;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -121,14 +122,15 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
         return this;
     }
 
+
+    // called when tile is created/loaded from memory
     @Override
-    public void load(@NotNull CompoundTag compound) {
-        super.load(compound);
-        for (Property<?> prop : propertyManager.getProperties()) {
-            if (prop.shouldSave()) {
-                prop.load(prop.getType().readFromTag(new TagReader(prop, compound)));
-                compound.remove(prop.getName());
-            }
+    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
+        if(propertyManager != null && compound.contains(PropertyManager.NBT_KEY)) {
+            CompoundTag propertyData = compound.getCompound(PropertyManager.NBT_KEY);
+            propertyManager.loadFromTag(propertyData, registries);
+            compound.remove(PropertyManager.NBT_KEY);
         }
         for (IComponent component : components) {
             if (component != null) {
@@ -142,15 +144,14 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 pr.loadFromNBT(compound);
             }
         }
-
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag compound) {
-        for (Property<?> prop : propertyManager.getProperties()) {
-            if (prop.shouldSave()) {
-                prop.getType().writeToTag(new TagWriter(prop, compound));
-            }
+    protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        if(propertyManager != null) {
+            CompoundTag propertyData = new CompoundTag();
+            propertyManager.saveToTag(propertyData, registries);
+            compound.put(PropertyManager.NBT_KEY, propertyData);
         }
         for (IComponent component : components) {
             if (component != null) {
@@ -164,9 +165,37 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 pr.saveToNBT(compound);
             }
         }
-        super.saveAdditional(compound);
+        super.saveAdditional(compound, registries);
     }
 
+    //called either from initial client sync
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = super.getUpdateTag(registries);
+        if(propertyManager != null) {
+            CompoundTag propertyData = new CompoundTag();
+            propertyManager.saveAllPropsForClientSync(propertyData, registries);
+            tag.put(PropertyManager.NBT_KEY, propertyData);
+            propertyManager.clean();
+        }
+
+        return tag;
+    }
+
+    //Called when Level#sendBlockUpdated is called
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this, (tile, registries) -> {
+            CompoundTag tag = new CompoundTag();
+            CompoundTag data = new CompoundTag();
+            propertyManager.saveDirtyPropsToTag(data, registries);
+            tag.put(PropertyManager.NBT_KEY, data);
+            return tag;
+        });
+    }
+
+    //Only fires on server side
     @Override
     public void onLoad() {
         super.onLoad();
@@ -177,11 +206,10 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 component.onLoad();
             }
         }
-        /*
-         * if (hasComponent(ComponentType.PacketHandler)) {
-         * this.<ComponentPacketHandler>getComponent(ComponentType.PacketHandler).sendCustomPacket();
-         * this.<ComponentPacketHandler>getComponent(ComponentType.PacketHandler).sendGuiPacketToTracking(); }
-         */
+
+        if(propertyManager != null) {
+            propertyManager.onTileLoaded();
+        }
     }
 
     @Override
@@ -233,23 +261,6 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
         }
     }
 
-    @Override
-    public @NotNull CompoundTag getUpdateTag() {
-        CompoundTag tag = super.getUpdateTag();
-        saveAdditional(tag);
-        return tag;
-    }
-
-    @Override
-    public void setChanged() {
-        super.setChanged();
-        if (!level.isClientSide) {
-            if (hasComponent(IComponentType.PacketHandler)) {
-                this.<ComponentPacketHandler>getComponent(IComponentType.PacketHandler).sendProperties();
-            }
-        }
-    }
-
     public SimpleContainerData getCoordsArray() {
         SimpleContainerData array = new SimpleContainerData(3);
         array.set(0, worldPosition.getX());
@@ -293,11 +304,11 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
 
     /**
      * NORTH is defined as the default direction
-     * 
+     *
      * @return
      */
     public Direction getFacing() {
-        return getBlockState().hasProperty(GenericEntityBlock.FACING) ? getBlockState().getValue(GenericEntityBlock.FACING) : Direction.NORTH;
+        return getBlockState().hasProperty(ElectrodynamicsBlockStates.FACING) ? getBlockState().getValue(ElectrodynamicsBlockStates.FACING) : Direction.NORTH;
     }
 
     public void onEnergyChange(ComponentElectrodynamic cap) {
@@ -325,57 +336,59 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
 
     }
 
-    // This is ceded to the tile to allow for greater control with the use function
-    public InteractionResult use(Player player, InteractionHand handIn, BlockHitResult hit) {
+    public InteractionResult useWithoutItem(Player player, BlockHitResult hit) {
+        if (hasComponent(IComponentType.ContainerProvider)) {
 
-        ItemStack stack = player.getItemInHand(handIn);
-        if (stack.getItem() instanceof ItemUpgrade upgrade && hasComponent(IComponentType.Inventory)) {
+            if (!level.isClientSide) {
+
+                player.openMenu(getComponent(IComponentType.ContainerProvider));
+
+                player.awardStat(Stats.INTERACT_WITH_FURNACE);
+
+            }
+
+            return InteractionResult.CONSUME;
+
+        }
+        return InteractionResult.PASS;
+    }
+
+    public ItemInteractionResult useWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (used.getItem() instanceof ItemUpgrade upgrade && hasComponent(IComponentType.Inventory)) {
 
             ComponentInventory inv = getComponent(IComponentType.Inventory);
             // null check for safety
             if (inv != null && inv.upgrades() > 0) {
                 int upgradeIndex = inv.getUpgradeSlotStartIndex();
                 for (int i = 0; i < inv.upgrades(); i++) {
-                    if (inv.canPlaceItem(upgradeIndex + i, stack)) {
+                    if (inv.canPlaceItem(upgradeIndex + i, used)) {
                         ItemStack upgradeStack = inv.getItem(upgradeIndex + i);
                         if (upgradeStack.isEmpty()) {
                             if (!level.isClientSide()) {
-                                inv.setItem(upgradeIndex + i, stack.copy());
-                                stack.shrink(stack.getCount());
+                                inv.setItem(upgradeIndex + i, used.copy());
+                                used.shrink(used.getCount());
                             }
-                            return InteractionResult.CONSUME;
+                            return ItemInteractionResult.CONSUME;
                         }
                         if (ItemUtils.testItems(upgrade, upgradeStack.getItem())) {
                             int room = upgradeStack.getMaxStackSize() - upgradeStack.getCount();
                             if (room > 0) {
                                 if (!level.isClientSide()) {
-                                    int accepted = room > stack.getCount() ? stack.getCount() : room;
+                                    int accepted = room > used.getCount() ? used.getCount() : room;
                                     upgradeStack.grow(accepted);
-                                    stack.shrink(accepted);
+                                    used.shrink(accepted);
                                 }
-                                return InteractionResult.CONSUME;
+                                return ItemInteractionResult.CONSUME;
                             }
                         }
                     }
                 }
             }
 
-        } else if (!(stack.getItem() instanceof IWrenchItem)) {
-            if (hasComponent(IComponentType.ContainerProvider)) {
+        } else if (!(used.getItem() instanceof IWrenchItem)) {
 
-                if (!level.isClientSide) {
-
-                    player.openMenu(getComponent(IComponentType.ContainerProvider));
-
-                    player.awardStat(Stats.INTERACT_WITH_FURNACE);
-
-                }
-
-                return InteractionResult.CONSUME;
-
-            }
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     public void onBlockDestroyed() {
@@ -425,17 +438,13 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 || x >= i.getUpgradeSlotStartIndex() && y.getItem() instanceof ItemUpgrade upgrade && i.isUpgradeValid(upgrade.subtype);
     }
 
-    public static double[] arr(double... values) {
-        return values;
-    }
-
     public static int[] arr(int... values) {
         return values;
     }
 
     /**
      * This method will never have air as the newState unless something has gone horribly horribly wrong!
-     * 
+     *
      * @param oldState
      * @param newState
      */

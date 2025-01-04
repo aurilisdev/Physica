@@ -25,12 +25,11 @@ public class ChemicalCrystallizerRecipeCategory extends Fluid2ItemRecipeCategory
 
     public static final BackgroundObject BACK_WRAP = new BackgroundObject(132, 64);
 
-    public static final ItemSlotObject IN_BUCKET_SLOT = new ItemSlotObject(SlotType.NORMAL, IconType.FLUID_DARK, 58, 36, RecipeIngredientRole.INPUT);
+    public static final ItemSlotObject IN_BUCKET_SLOT = new ItemSlotObject(SlotType.NORMAL, IconType.FLUID_DARK, 26, 36, RecipeIngredientRole.INPUT);
 
     public static final ItemSlotObject OUT_SLOT = new ItemSlotObject(SlotType.NORMAL, 100, 16, RecipeIngredientRole.OUTPUT);
 
     public static final ArrowAnimatedObject ANIM_RIGHT_ARROW = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT_BIG, 32, 17, StartDirection.LEFT);
-    public static final ArrowAnimatedObject ANIM_LEFT_ARROW = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_LEFT, 32, 37, StartDirection.RIGHT);
 
     public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(14, 5, 5000);
 
@@ -39,7 +38,7 @@ public class ChemicalCrystallizerRecipeCategory extends Fluid2ItemRecipeCategory
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.chemicalcrystallizer));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.chemicalcrystallizer));
 
     public static final RecipeType<ChemicalCrystalizerRecipe> RECIPE_TYPE = RecipeType.create(References.ID, ChemicalCrystalizerRecipe.RECIPE_GROUP, ChemicalCrystalizerRecipe.class);
 
@@ -48,7 +47,7 @@ public class ChemicalCrystallizerRecipeCategory extends Fluid2ItemRecipeCategory
         setInputSlots(guiHelper, IN_BUCKET_SLOT);
         setOutputSlots(guiHelper, OUT_SLOT);
         setFluidInputs(guiHelper, IN_GAUGE);
-        setAnimatedArrows(guiHelper, ANIM_LEFT_ARROW, ANIM_RIGHT_ARROW);
+        setAnimatedArrows(guiHelper, ANIM_RIGHT_ARROW);
         setLabels(POWER_LABEL, TIME_LABEL);
     }
 

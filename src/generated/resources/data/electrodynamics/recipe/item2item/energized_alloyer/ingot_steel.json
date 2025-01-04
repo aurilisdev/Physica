@@ -1,0 +1,34 @@
+{
+  "type": "electrodynamics:energized_alloyer_recipe",
+  "experience": 0.30000001192092896,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.5,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:slag"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "c:ingots/iron"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:coal_coke"
+      }
+    }
+  ],
+  "output": {
+    "count": 3,
+    "id": "electrodynamics:ingotsteel"
+  },
+  "ticks": 50,
+  "usagepertick": 50.0
+}

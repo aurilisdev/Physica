@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:dyes/red"
+    },
+    "W": {
+      "tag": "c:wires/logistical_tin"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WDW",
+    "WWW"
+  ],
+  "result": {
+    "count": 8,
+    "id": "electrodynamics:wirelogisticstinred"
+  }
+}

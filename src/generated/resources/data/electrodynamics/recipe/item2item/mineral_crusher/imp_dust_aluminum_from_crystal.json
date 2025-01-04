@@ -1,0 +1,18 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "electrodynamics:crystalaluminum"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:impuredustaluminum"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

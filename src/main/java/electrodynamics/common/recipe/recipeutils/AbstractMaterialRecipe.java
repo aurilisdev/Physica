@@ -5,6 +5,7 @@ import java.util.List;
 
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.recipe.ElectrodynamicsRecipe;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -17,13 +18,13 @@ public abstract class AbstractMaterialRecipe extends ElectrodynamicsRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(RecipeWrapper container, RegistryAccess registryAccess) {
-		return getItemOutputNoAccess();
+	public ItemStack assemble(ElectrodynamicsRecipe p_345149_, HolderLookup.Provider p_346030_) {
+		return getItemRecipeOutput();
 	}
 
 	@Override
-	public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
-		return getItemOutputNoAccess();
+	public ItemStack getResultItem(HolderLookup.Provider pRegistries) {
+		return getItemRecipeOutput();
 	}
 
 	public FluidStack getFluidRecipeOutput() {
@@ -42,7 +43,7 @@ public abstract class AbstractMaterialRecipe extends ElectrodynamicsRecipe {
 		return Collections.emptyList();
 	}
 
-	public ItemStack getItemOutputNoAccess() {
+	public ItemStack getItemRecipeOutput() {
 		return ItemStack.EMPTY;
 	}
 

@@ -32,12 +32,12 @@ public class MineralGrinderRecipeCategory extends Item2ItemRecipeCategory<Minera
     public static final ArrowAnimatedObject ANIM_ARROW = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT, 41, 23, StartDirection.LEFT);
 
     public static final PowerLabelWrapperElectroRecipe POWER_LABEL = new PowerLabelWrapperElectroRecipe(2, 48, 120);
-    public static final BiproductPercentWrapperElectroRecipe ITEM_LABEL = new BiproductPercentWrapperElectroRecipe(100, 40, false);
+    public static final BiproductPercentWrapperElectroRecipe ITEM_LABEL = new BiproductPercentWrapperElectroRecipe(100, 40, BiproductPercentWrapperElectroRecipe.BiproductType.ITEM, 0);
     public static final TimeLabelWrapperElectroRecipe TIME_LABEL = new TimeLabelWrapperElectroRecipe(130, 48);
 
     public static final int ANIM_TIME = 50;
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.mineralgrinder));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.mineralgrinder));
 
     public static final RecipeType<MineralGrinderRecipe> RECIPE_TYPE = RecipeType.create(References.ID, MineralGrinderRecipe.RECIPE_GROUP, MineralGrinderRecipe.class);
 

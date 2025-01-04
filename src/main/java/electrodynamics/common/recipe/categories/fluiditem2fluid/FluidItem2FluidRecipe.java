@@ -52,18 +52,6 @@ public abstract class FluidItem2FluidRecipe extends AbstractMaterialRecipe {
     }
 
     @Override
-    public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> list = NonNullList.create();
-        for (Ingredient ing : ingredients) {
-            list.add(ing);
-        }
-        for (Ingredient ing : fluidIngredients) {
-            list.add(ing);
-        }
-        return list;
-    }
-
-    @Override
     public List<FluidIngredient> getFluidIngredients() {
         return fluidIngredients;
     }

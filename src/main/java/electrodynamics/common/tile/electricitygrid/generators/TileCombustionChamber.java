@@ -7,7 +7,7 @@ import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -19,11 +19,12 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.CombustionFuelSource;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,27 +35,29 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
+import javax.crypto.Mac;
+
 public class TileCombustionChamber extends GenericMaterialTile implements IElectricGenerator, ITickableSound {
 
 	public static final int TICKS_PER_MILLIBUCKET = 200;
 	public static final int TANK_CAPACITY = 1000;
-	public Property<Boolean> running = property(new Property<>(PropertyType.Boolean, "running", false));
-	public Property<Integer> burnTime = property(new Property<>(PropertyType.Integer, "burnTime", 0));
+	public Property<Boolean> running = property(new Property<>(PropertyTypes.BOOLEAN, "running", false));
+	public Property<Integer> burnTime = property(new Property<>(PropertyTypes.INTEGER, "burnTime", 0));
 	private double fuelMultiplier = 1;
 	private CachedTileOutput output;
 	// for future upgrades
-	private Property<Double> multiplier = property(new Property<>(PropertyType.Double, "multiplier", 1.0));
-	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	private Property<Double> multiplier = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 1.0));
+	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 
 	private boolean isSoundPlaying = false;
 
 	public TileCombustionChamber(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_COMBUSTIONCHAMBER.get(), worldPosition, blockState);
+		super(ElectrodynamicsTiles.TILE_COMBUSTIONCHAMBER.get(), worldPosition, blockState);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.EAST));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.RIGHT));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().bucketInputs(1)).valid((slot, stack, i) -> stack.getCapability(Capabilities.FluidHandler.ITEM) != null));
-		addComponent(new ComponentFluidHandlerMulti(this).setInputTanks(1, TANK_CAPACITY).setInputDirections(Direction.WEST).setInputFluidTags(CombustionFuelRegister.INSTANCE.getFluidTags()));
+		addComponent(new ComponentFluidHandlerMulti(this).setInputTanks(1, TANK_CAPACITY).setInputDirections(BlockEntityUtils.MachineDirection.LEFT).setInputFluidTags(CombustionFuelRegister.INSTANCE.getFluidTags()));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.combustionchamber, this).createMenu((id, player) -> new ContainerCombustionChamber(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}
 

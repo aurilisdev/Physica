@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:wirecopper"
-            ]
+            "items": "electrodynamics:wirecopper"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.basicwiring.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:wirecopper"
+      "count": 1,
+      "id": "electrodynamics:wirecopper"
     },
-    "show_toast": true,
     "title": {
       "color": "gray",
       "translate": "advancement.electrodynamics.basicwiring.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 20
-  },
-  "sends_telemetry_event": false
+  }
 }

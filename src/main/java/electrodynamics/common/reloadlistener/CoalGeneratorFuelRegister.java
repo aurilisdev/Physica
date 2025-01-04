@@ -38,7 +38,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.PacketDistributor.PacketTarget;
 
 public class CoalGeneratorFuelRegister extends SimplePreparableReloadListener<JsonObject> {
 
@@ -72,7 +71,7 @@ public class CoalGeneratorFuelRegister extends SimplePreparableReloadListener<Js
             final String filePath = loc.getPath();
             final String dataPath = filePath.substring(FOLDER.length() + 1, filePath.length() - JSON_EXTENSION_LENGTH);
 
-            final ResourceLocation jsonFile = new ResourceLocation(namespace, dataPath);
+            final ResourceLocation jsonFile = ResourceLocation.fromNamespaceAndPath(namespace, dataPath);
 
             Resource resource = entry.getValue();
             try (final InputStream inputStream = resource.open(); final Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));) {
@@ -95,9 +94,9 @@ public class CoalGeneratorFuelRegister extends SimplePreparableReloadListener<Js
         ArrayList<String> list = GSON.fromJson(json.get(KEY).getAsJsonArray(), ArrayList.class);
         list.forEach(key -> {
             if (key.charAt(0) == '#') {
-                tags.add(ItemTags.create(new ResourceLocation(key.substring(1))));
+                tags.add(ItemTags.create(ResourceLocation.parse(key.substring(1))));
             } else {
-                fuels.add(BuiltInRegistries.ITEM.get(new ResourceLocation(key)));
+                fuels.add(BuiltInRegistries.ITEM.get(ResourceLocation.parse(key)));
             }
         });
 
@@ -135,8 +134,11 @@ public class CoalGeneratorFuelRegister extends SimplePreparableReloadListener<Js
             generateTagValues();
             ServerPlayer player = event.getPlayer();
             PacketSetClientCoalGenFuels packet = new PacketSetClientCoalGenFuels(fuels);
-            PacketTarget target = player == null ? PacketDistributor.ALL.noArg() : PacketDistributor.PLAYER.with(player);
-            target.send(packet);
+            if (player == null) {
+                PacketDistributor.sendToAllPlayers(packet);
+            } else {
+                PacketDistributor.sendToPlayer(player, packet);
+            }
         };
     }
 

@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:mineralgrinderdouble"
-            ]
+            "items": "electrodynamics:mineralgrinderdouble"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.doublemineralgrinder.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:mineralgrinderdouble"
+      "count": 1,
+      "id": "electrodynamics:mineralgrinderdouble"
     },
-    "show_toast": true,
     "title": {
       "color": "blue",
       "translate": "advancement.electrodynamics.doublemineralgrinder.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 50
-  },
-  "sends_telemetry_event": false
+  }
 }

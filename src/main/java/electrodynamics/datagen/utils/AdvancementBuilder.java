@@ -13,7 +13,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 
-import net.minecraft.Util;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -21,7 +20,9 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.DisplayInfo;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -74,7 +75,7 @@ public class AdvancementBuilder implements IAdvancementBuilderExtension {
     }
 
     public AdvancementBuilder display(Item item, Component title, Component description, AdvancementBackgrounds background, AdvancementType frame, boolean showToast, boolean announceToChat, boolean hidden) {
-        return this.display(new DisplayInfo(new ItemStack(item), title, description, Optional.of(background.loc), frame, showToast, announceToChat, hidden));
+        return this.display(new DisplayInfo(new ItemStack(item), title, description, Optional.ofNullable(background.loc), frame, showToast, announceToChat, hidden));
     }
 
     public AdvancementBuilder display(ItemStack stack, Component title, Component description, AdvancementBackgrounds background, AdvancementType frame, boolean showToast, boolean announceToChat, boolean hidden) {
@@ -161,15 +162,17 @@ public class AdvancementBuilder implements IAdvancementBuilderExtension {
             this.requirements = this.requirementsStrategy.create(this.criteria.keySet());
         }
 
-        return holder = new AdvancementHolder(id, new Advancement(Optional.of(parent == null ? parentId : this.parent.id()), Optional.of(this.display), this.rewards, this.criteria, this.requirements, false));
+        return holder = new AdvancementHolder(id, new Advancement(Optional.ofNullable(parent == null ? parentId : this.parent.id()), Optional.ofNullable(this.display), this.rewards, this.criteria, this.requirements, false));
     }
 
-    public JsonObject serializeToJson() {
+    public JsonObject serializeToJson(HolderLookup.Provider registries) {
         if (holder == null) {
             build();
         }
 
-        JsonElement jsonElement = Util.getOrThrow(Advancement.CODEC.encodeStart(JsonOps.INSTANCE, holder.value()), IllegalStateException::new);
+        RegistryOps<JsonElement> registryops = registries.createSerializationContext(JsonOps.INSTANCE);
+
+        JsonElement jsonElement = Advancement.CODEC.encodeStart(registryops, holder.value()).getOrThrow();
 
         if (!jsonElement.isJsonObject()) {
             throw new UnsupportedOperationException("Advancement " + holder.id().toString() + " is not a Json Object!");
@@ -192,11 +195,11 @@ public class AdvancementBuilder implements IAdvancementBuilderExtension {
 
         NONE(null),
         // Vanilla
-        ADVENTURE(new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png")), //
-        END(new ResourceLocation("textures/gui/advancements/backgrounds/end.png")), //
-        HUSBANDRY(new ResourceLocation("textures/gui/advancements/backgrounds/husbandry.png")), //
-        NETHER(new ResourceLocation("textures/gui/advancements/backgrounds/nether.png")), //
-        STONE(new ResourceLocation("textures/gui/advancements/backgrounds/stone.png")); //
+        ADVENTURE(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/adventure.png")), //
+        END(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/end.png")), //
+        HUSBANDRY(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/husbandry.png")), //
+        NETHER(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/nether.png")), //
+        STONE(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png")); //
 
         public final ResourceLocation loc;
 

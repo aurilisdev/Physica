@@ -12,17 +12,17 @@ import net.minecraft.network.FriendlyByteBuf;
 public class GasTank implements IGasTank, IGasHandler {
 
 	protected Predicate<GasStack> isGasValid;
-	private double capacity;
-	private double maxTemperature;
+	private int capacity;
+	private int maxTemperature;
 	private int maxPressure;
 	@Nonnull
 	private GasStack gas = GasStack.EMPTY;
 
-	public GasTank(double capacity, double maxTemperature, int maxPressure) {
+	public GasTank(int capacity, int maxTemperature, int maxPressure) {
 		this(capacity, maxTemperature, maxPressure, gas -> true);
 	}
 
-	public GasTank(double capacity, double maxTemperature, int maxPressure, Predicate<GasStack> isGasValid) {
+	public GasTank(int capacity, int maxTemperature, int maxPressure, Predicate<GasStack> isGasValid) {
 		this.capacity = capacity;
 		this.maxTemperature = maxTemperature;
 		this.maxPressure = maxPressure;
@@ -44,25 +44,25 @@ public class GasTank implements IGasTank, IGasHandler {
 	}
 
 	@Override
-	public double getGasAmount() {
+	public int getGasAmount() {
 		return getGas().getAmount();
 	}
 
-	public void setCapacity(double capacity) {
+	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
 
 	@Override
-	public double getCapacity() {
+	public int getCapacity() {
 		return capacity;
 	}
 
-	public void setMaxTemperature(double temperature) {
+	public void setMaxTemperature(int temperature) {
 		maxTemperature = temperature;
 	}
 
 	@Override
-	public double getMaxTemperature() {
+	public int getMaxTemperature() {
 		return maxTemperature;
 	}
 
@@ -81,7 +81,7 @@ public class GasTank implements IGasTank, IGasHandler {
 	}
 
 	@Override
-	public double fill(GasStack resource, GasAction action) {
+	public int fill(GasStack resource, GasAction action) {
 
 		if (resource.isEmpty()) {
 			return 0;
@@ -93,7 +93,7 @@ public class GasTank implements IGasTank, IGasHandler {
 
 		if (isEmpty()) {
 
-			double accepted = resource.getAmount() > getCapacity() ? getCapacity() : resource.getAmount();
+			int accepted = resource.getAmount() > getCapacity() ? getCapacity() : resource.getAmount();
 
 			if (action == GasAction.EXECUTE) {
 
@@ -132,7 +132,7 @@ public class GasTank implements IGasTank, IGasHandler {
 			return 0;
 		}
 
-		double canTake = GasStack.getMaximumAcceptance(getGas(), resource, getCapacity());
+		int canTake = GasStack.getMaximumAcceptance(getGas(), resource, getCapacity());
 
 		if (canTake == 0) {
 			return 0;
@@ -175,13 +175,13 @@ public class GasTank implements IGasTank, IGasHandler {
 	}
 
 	@Override
-	public GasStack drain(double amount, GasAction action) {
+	public GasStack drain(int amount, GasAction action) {
 
 		if (isEmpty() || amount == 0) {
 			return GasStack.EMPTY;
 		}
 
-		double taken = getGas().getAmount() > amount ? amount : getGas().getAmount();
+		int taken = Math.min(getGas().getAmount(), amount);
 
 		GasStack takenStack = new GasStack(getGas().getGas(), taken, getGas().getTemperature(), getGas().getPressure());
 
@@ -218,7 +218,7 @@ public class GasTank implements IGasTank, IGasHandler {
 	}
 
 	@Override
-	public double heat(double deltaTemperature, GasAction action) {
+	public int heat(int tank, int deltaTemperature, GasAction action) {
 
 		if (getGas().isAbsoluteZero() && deltaTemperature < 0) {
 			return -1;
@@ -252,7 +252,7 @@ public class GasTank implements IGasTank, IGasHandler {
 	}
 
 	@Override
-	public double bringPressureTo(int atm, GasAction action) {
+	public int bringPressureTo(int tank, int atm, GasAction action) {
 
 		if (getGas().isVacuum() && atm < GasStack.VACUUM) {
 			return -1;
@@ -286,7 +286,7 @@ public class GasTank implements IGasTank, IGasHandler {
 
 	}
 
-	public double getSpace() {
+	public int getSpace() {
 		return Math.max(getCapacity() - getGasAmount(), 0);
 	}
 
@@ -313,8 +313,8 @@ public class GasTank implements IGasTank, IGasHandler {
 	public CompoundTag writeToNbt() {
 		CompoundTag tag = new CompoundTag();
 		tag.put("gasstack", getGas().writeToNbt());
-		tag.putDouble("capacity", getCapacity());
-		tag.putDouble("maxtemp", getMaxTemperature());
+		tag.putInt("capacity", getCapacity());
+		tag.putInt("maxtemp", getMaxTemperature());
 		tag.putInt("maxpres", getMaxPressure());
 		return tag;
 	}
@@ -323,7 +323,7 @@ public class GasTank implements IGasTank, IGasHandler {
 
 		GasStack stack = GasStack.readFromNbt(tag.getCompound("gasstack"));
 
-		GasTank tank = new GasTank(tag.getDouble("capacity"), tag.getDouble("maxtemp"), tag.getInt("maxpres"));
+		GasTank tank = new GasTank(tag.getInt("capacity"), tag.getInt("maxtemp"), tag.getInt("maxpres"));
 
 		tank.setGas(stack);
 
@@ -333,7 +333,7 @@ public class GasTank implements IGasTank, IGasHandler {
 
 	public void writeToBuffer(FriendlyByteBuf buffer) {
 
-		getGas().writeToBuffer(buffer);
+		GasStack.STREAM_CODEC.encode(buffer, getGas());
 
 		buffer.writeDouble(getCapacity());
 
@@ -345,9 +345,9 @@ public class GasTank implements IGasTank, IGasHandler {
 
 	public static GasTank readFromBuffer(FriendlyByteBuf buffer) {
 
-		GasStack stack = GasStack.readFromBuffer(buffer);
+		GasStack stack = GasStack.STREAM_CODEC.decode(buffer);
 
-		GasTank tank = new GasTank(buffer.readDouble(), buffer.readDouble(), buffer.readInt());
+		GasTank tank = new GasTank(buffer.readInt(), buffer.readInt(), buffer.readInt());
 
 		tank.setGas(stack);
 
@@ -381,12 +381,12 @@ public class GasTank implements IGasTank, IGasHandler {
 	}
 
 	@Override
-	public double getTankCapacity(int tank) {
+	public int getTankCapacity(int tank) {
 		return getCapacity();
 	}
 
 	@Override
-	public double getTankMaxTemperature(int tank) {
+	public int getTankMaxTemperature(int tank) {
 		return getMaxTemperature();
 	}
 
@@ -399,33 +399,8 @@ public class GasTank implements IGasTank, IGasHandler {
 	public boolean isGasValid(int tank, GasStack gas) {
 		return isGasValid(gas);
 	}
-
-	@Override
-	public double fillTank(int tank, GasStack gas, GasAction action) {
-		return fill(gas, action);
-	}
-
-	@Override
-	public GasStack drainTank(int tank, GasStack gas, GasAction action) {
-		return drain(gas, action);
-	}
-
-	@Override
-	public GasStack drainTank(int tank, double maxFill, GasAction action) {
-		return drain(maxFill, action);
-	}
-
-	@Override
-	public double heat(int tank, double deltaTemperature, GasAction action) {
-		return heat(deltaTemperature, action);
-	}
-
-	@Override
-	public double bringPressureTo(int tank, int atm, GasAction action) {
-		return bringPressureTo(atm, action);
-	}
 	
-	public double getRoom() {
+	public int getRoom() {
 		return getCapacity() - getGasAmount();
 	}
 

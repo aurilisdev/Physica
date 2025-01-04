@@ -4,26 +4,27 @@ import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerCircuitMonitor;
 import electrodynamics.common.network.type.ElectricNetwork;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TileCircuitMonitor extends GenericTile {
 
-	public final Property<Integer> networkProperty = property(new Property<>(PropertyType.Integer, "networkproperty", 0));
-	public final Property<Integer> booleanOperator = property(new Property<>(PropertyType.Integer, "booleanoperator", 0));
-	public final Property<Double> value = property(new Property<>(PropertyType.Double, "value", 0.0));
-	public final Property<Boolean> redstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false)).setNoUpdateClient().onChange((prop, old) -> {
-		if (level.isClientSide) {
+	public final Property<Integer> networkProperty = property(new Property<>(PropertyTypes.INTEGER, "networkproperty", 0));
+	public final Property<Integer> booleanOperator = property(new Property<>(PropertyTypes.INTEGER, "booleanoperator", 0));
+	public final Property<Double> value = property(new Property<>(PropertyTypes.DOUBLE, "value", 0.0));
+	public final Property<Boolean> redstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false)).setNoUpdateClient().onChange((prop, old) -> {
+		if (level == null || level.isClientSide) {
 			return;
 		}
 
@@ -36,10 +37,10 @@ public class TileCircuitMonitor extends GenericTile {
 	protected CachedTileOutput output;
 
 	public TileCircuitMonitor(BlockPos worldPos, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_CIRCUITMONITOR.get(), worldPos, blockState);
+		super(ElectrodynamicsTiles.TILE_CIRCUITMONITOR.get(), worldPos, blockState);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
-		addComponent(new ComponentElectrodynamic(this, false, false).voltage(-1).receivePower((transfer, debug) -> TransferPack.EMPTY).getConnectedLoad((profile, dir) -> TransferPack.EMPTY).setInputDirections(Direction.SOUTH));
+		addComponent(new ComponentElectrodynamic(this, false, false).voltage(-1).receivePower((transfer, debug) -> TransferPack.EMPTY).getConnectedLoad((profile, dir) -> TransferPack.EMPTY).setInputDirections(BlockEntityUtils.MachineDirection.BACK));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.circuitmonitor, this).createMenu((id, inv) -> new ContainerCircuitMonitor(id, inv, getCoordsArray())));
 	}
 
@@ -89,6 +90,7 @@ public class TileCircuitMonitor extends GenericTile {
 			case 3 -> network.getMinimumVoltage(); // The lowest voltage a connected machine has in volts
 			case 4 -> network.getResistance(); // The current resistance of the network in ohms
 			case 5 -> network.getMaxJoulesStored() / 20.0; // The connected load on the network in watts
+			//case 6 -> TransferPack.joulesVoltage(network.getActiveTransmitted(), network.getActiveVoltage()).getAmps();
 			default -> -1;
 			};
 		}

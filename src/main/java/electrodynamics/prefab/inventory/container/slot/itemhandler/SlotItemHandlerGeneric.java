@@ -6,12 +6,14 @@ import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.IconTyp
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.SlotType;
 import electrodynamics.prefab.screen.component.utils.SlotTextureProvider;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerCopySlot;
 
-public class SlotItemHandlerGeneric extends SlotItemHandler implements SlotTextureProvider {
+public class SlotItemHandlerGeneric extends ItemHandlerCopySlot implements SlotTextureProvider {
 
 	private final ISlotTexture slotType;
 	private final ITexture iconType;
+
+	private boolean active = true;
 
 	public SlotItemHandlerGeneric(ISlotTexture slotType, ITexture iconType, IItemHandler itemHandler, int index, int xPosition, int yPosition) {
 		super(itemHandler, index, xPosition, yPosition);
@@ -31,6 +33,15 @@ public class SlotItemHandlerGeneric extends SlotItemHandler implements SlotTextu
 	@Override
 	public ITexture getIconType() {
 		return iconType;
+	}
+
+	@Override
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

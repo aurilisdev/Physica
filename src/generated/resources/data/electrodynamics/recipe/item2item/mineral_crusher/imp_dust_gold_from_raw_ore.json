@@ -1,0 +1,19 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "experience": 0.30000001192092896,
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:raw_materials/gold"
+      }
+    }
+  ],
+  "output": {
+    "count": 3,
+    "id": "electrodynamics:impuredustgold"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

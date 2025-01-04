@@ -10,7 +10,6 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,7 +22,7 @@ public class GasUtilities {
         return acceptor != null && acceptor.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, acceptor.getBlockPos(), acceptor.getBlockState(), acceptor, dir) != null;
     }
 
-    public static double recieveGas(BlockEntity reciever, Direction dir, GasStack gas, GasAction action) {
+    public static int recieveGas(BlockEntity reciever, Direction dir, GasStack gas, GasAction action) {
         if (gas.isEmpty() || gas.getAmount() <= 0) {
             return 0;
         }
@@ -32,15 +31,15 @@ public class GasUtilities {
         IGasHandler handler = reciever.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, reciever.getBlockPos(), reciever.getBlockState(), reciever, dir);
 
         if (handler == null) {
-            return 0.0;
+            return 0;
         }
 
-        double taken = 0;
-        double recieved = 0;
+        int taken = 0;
+        int recieved = 0;
 
         for (int i = 0; i < handler.getTanks(); i++) {
             if (handler.isGasValid(i, copy)) {
-                recieved = handler.fillTank(i, copy, action);
+                recieved = handler.fill(copy, action);
                 copy.shrink(recieved);
                 taken += recieved;
             }
@@ -54,17 +53,15 @@ public class GasUtilities {
 
         for (Direction relative : outputDirections) {
 
-            Direction direction = BlockEntityUtils.getRelativeSide(facing, relative.getOpposite());
+            Direction direction = BlockEntityUtils.getRelativeSide(facing, relative);
 
-            BlockPos face = tile.getBlockPos().relative(direction.getOpposite());
-
-            BlockEntity faceTile = tile.getLevel().getBlockEntity(face);
+            BlockEntity faceTile = tile.getLevel().getBlockEntity(tile.getBlockPos().relative(direction));
 
             if (faceTile == null) {
                 continue;
             }
 
-            IGasHandler handler = faceTile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), tile, direction);
+            IGasHandler handler = faceTile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_BLOCK, faceTile.getBlockPos(), faceTile.getBlockState(), faceTile, direction.getOpposite());
 
             if (handler == null) {
                 continue;
@@ -76,7 +73,7 @@ public class GasUtilities {
 
                     GasStack tankGas = gasTank.getGas().copy();
 
-                    double amtAccepted = handler.fillTank(i, tankGas, GasAction.EXECUTE);
+                    int amtAccepted = handler.fill(tankGas, GasAction.EXECUTE);
 
                     GasStack taken = new GasStack(tankGas.getGas(), amtAccepted, tankGas.getTemperature(), tankGas.getPressure());
 
@@ -111,7 +108,7 @@ public class GasUtilities {
 
             ItemStack stack = inv.getItem(index);
 
-            double room = tank.getRoom();
+            int room = tank.getRoom();
 
             if (stack.isEmpty() || room <= 0) {
                 continue;
@@ -129,15 +126,15 @@ public class GasUtilities {
                     break;
                 }
 
-                GasStack taken = handler.drainTank(0, room, GasAction.SIMULATE);
+                GasStack taken = handler.drain(room, GasAction.SIMULATE);
 
                 if (taken.isEmpty() || !tank.isGasValid(taken)) {
                     continue;
                 }
 
-                double takenAmt = tank.fill(taken, GasAction.EXECUTE);
+                int takenAmt = tank.fill(taken, GasAction.EXECUTE);
 
-                handler.drainTank(j, takenAmt, GasAction.EXECUTE);
+                handler.drain(takenAmt, GasAction.EXECUTE);
 
                 room = tank.getRoom();
 
@@ -193,11 +190,11 @@ public class GasUtilities {
 
                 if (gas.getTemperature() > handler.getTankMaxTemperature(0) || gas.getPressure() > handler.getTankMaxPressure(0)) {
 
-                    tile.getLevel().playSound(null, tile.getBlockPos(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    tile.getLevel().playSound(null, tile.getBlockPos(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
 
                 }
 
-                double taken = handler.fillTank(j, gas, GasAction.EXECUTE);
+                int taken = handler.fill(gas, GasAction.EXECUTE);
 
                 tank.drain(taken, GasAction.EXECUTE);
 

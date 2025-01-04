@@ -9,18 +9,21 @@ import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.world.item.Item;
 
 public enum SubtypeCrystal implements ISubtype {
-	iron(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.iron)),
-	gold(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.gold)),
-	copper(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.copper)),
-	tin(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.tin)),
-	silver(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.silver)),
-	lead(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.lead)),
-	vanadium(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.vanadium)),
-	lithium(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.lithium)),
-	halite(() -> ElectrodynamicsItems.getItem(SubtypeDust.salt)),
-	molybdenum(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.molybdenum)),
+	iron(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.iron)),
+	gold(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.gold)),
+	copper(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.copper)),
+	tin(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.tin)),
+	silver(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.silver)),
+	lead(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.lead)),
+	vanadium(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.vanadium)),
+	lithium(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.lithium)),
+	halite(() -> ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.salt)),
+	molybdenum(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.molybdenum)),
 	potassiumchloride(null),
-	netherite(() -> ElectrodynamicsItems.getItem(SubtypeImpureDust.netherite));
+	netherite(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.netherite)),
+	aluminum(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.aluminum)),
+	titanium(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.titanium)),
+	chromium(() -> ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.chromium));
 
 	@Nullable
 	public final Supplier<Item> crushedItem;

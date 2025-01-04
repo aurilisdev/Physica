@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "C": {
+      "tag": "c:circuits/elite"
+    },
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "W": {
+      "item": "electrodynamics:wiremill"
+    }
+  },
+  "pattern": [
+    "AMA",
+    "MCM",
+    "AWA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:lathe"
+  }
+}

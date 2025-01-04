@@ -1,0 +1,19 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "experience": 0.10000000149011612,
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/aluminum"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:platealuminum"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

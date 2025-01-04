@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "P": {
+      "item": "minecraft:sticky_piston"
+    }
+  },
+  "pattern": [
+    "C",
+    "P",
+    "A"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:upgradeiteminput"
+  }
+}

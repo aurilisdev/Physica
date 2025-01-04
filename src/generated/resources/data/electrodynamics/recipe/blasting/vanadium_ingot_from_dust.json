@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.0,
+  "group": "electrodynamics",
+  "ingredient": {
+    "tag": "c:dusts/vanadium"
+  },
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:ingotvanadium"
+  }
+}

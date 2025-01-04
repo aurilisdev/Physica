@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:plates/bronze"
+    },
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "P": {
+      "item": "electrodynamics:solarpanelplate"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "BCB",
+    "BSB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:upgradeimprovedsolarcell"
+  }
+}

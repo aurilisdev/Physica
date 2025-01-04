@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:wire_mill_recipe",
+  "experience": 0.10000000149011612,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 1.0,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:nuggetsuperconductive"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/superconductive"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:wiresuperconductive"
+  },
+  "ticks": 200,
+  "usagepertick": 125.0
+}

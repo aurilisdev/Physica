@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "electrodynamics:glassaluminum"
+    },
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "F": {
+      "item": "electrodynamics:gastanksteel"
+    },
+    "G": {
+      "tag": "c:gears/tin"
+    },
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "P": {
+      "item": "electrodynamics:gastanksteel"
+    },
+    "W": {
+      "item": "electrodynamics:wiresilver"
+    }
+  },
+  "pattern": [
+    "GFG",
+    "CAM",
+    "WPW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:chemicalreactor"
+  }
+}

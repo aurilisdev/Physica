@@ -97,6 +97,34 @@ public class ChapterArmor extends Chapter {
 		}));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.armor.hydraulicboots")).setSeparateStart());
 
+		// Combat Helmet
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_COMBATHELMET.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.ITEM_COMBATHELMET.get()).onTooltip(new OnTooltip() {
+
+			@Override
+			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
+				if (JeiBuffer.isJeiInstalled()) {
+					List<FormattedCharSequence> tooltips = new ArrayList<>();
+					tooltips.add(ElectroTextUtils.tooltip("guidebookjeirecipe").withStyle(ChatFormatting.GRAY).getVisualOrderText());
+					graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
+				}
+
+			}
+		}).onKeyPress(new OnKeyPress() {
+
+			@Override
+			public void onKeyPress(int keyCode, int scanCode, int modifiers, int x, int y, int xAxis, int yAxis, ScreenGuidebook screen) {
+
+			}
+
+			@Override
+			public Object getJeiLookup() {
+				return new ItemStack(ElectrodynamicsItems.ITEM_COMBATHELMET.get());
+			}
+
+		}));
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.armor.combathelmet")).setSeparateStart());
+
 		// Combat Chestplate
 		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
 		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get()).onTooltip(new OnTooltip() {
@@ -125,8 +153,37 @@ public class ChapterArmor extends Chapter {
 		}));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.armor.combatchestplate")).setSeparateStart());
 
+		// Combat Leggings
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get()).onTooltip(new OnTooltip() {
+
+			@Override
+			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
+				if (JeiBuffer.isJeiInstalled()) {
+					List<FormattedCharSequence> tooltips = new ArrayList<>();
+					tooltips.add(ElectroTextUtils.tooltip("guidebookjeirecipe").withStyle(ChatFormatting.GRAY).getVisualOrderText());
+					graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
+				}
+
+			}
+		}).onKeyPress(new OnKeyPress() {
+
+			@Override
+			public void onKeyPress(int keyCode, int scanCode, int modifiers, int x, int y, int xAxis, int yAxis, ScreenGuidebook screen) {
+
+			}
+
+			@Override
+			public Object getJeiLookup() {
+				return new ItemStack(ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get());
+			}
+
+		}));
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.armor.combatleggings")).setSeparateStart());
+
 		// Combat Boots
 		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_COMBATBOOTS.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+
 		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.ITEM_COMBATBOOTS.get()).onTooltip(new OnTooltip() {
 
 			@Override
@@ -155,7 +212,7 @@ public class ChapterArmor extends Chapter {
 
 		// Ceramic Plate Protection
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.armor.ceramicheader").withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.getItem(SubtypeCeramic.plate)).onTooltip(new OnTooltip() {
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.ITEMS_CERAMIC.getValue(SubtypeCeramic.plate)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -175,7 +232,7 @@ public class ChapterArmor extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeCeramic.plate));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_CERAMIC.getValue(SubtypeCeramic.plate));
 			}
 
 		}));

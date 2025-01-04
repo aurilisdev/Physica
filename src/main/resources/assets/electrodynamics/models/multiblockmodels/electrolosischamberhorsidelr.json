@@ -1,0 +1,13 @@
+{
+  "loader": "electrodynamics:electrodynamicsmultiblockmodelloader",
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "electrodynamics:block/multiblock/electrolosischamberhorside",
+    "down": "electrodynamics:block/multiblock/electrolosischambervertside",
+    "up": "electrodynamics:block/multiblock/electrolosischambervertside",
+    "north": "electrodynamics:block/multiblock/electrolosischamberhorside",
+    "east": "electrodynamics:block/multiblock/electrolosischamberhorside",
+    "south": "electrodynamics:block/multiblock/electrolosischamberhorside",
+    "west": "electrodynamics:block/multiblock/electrolosischamberhorside"
+  }
+}

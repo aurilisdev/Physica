@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "experience": 0.20000000298023224,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.1,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:impuredustgold"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/silver"
+      }
+    }
+  ],
+  "output": {
+    "count": 3,
+    "id": "electrodynamics:impuredustsilver"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

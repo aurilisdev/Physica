@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "electrodynamics:coil"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "PCP",
+    "CRC",
+    "PCP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:upgradestator"
+  }
+}

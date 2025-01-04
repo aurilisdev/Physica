@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:dusts/copper"
+    },
+    {
+      "tag": "c:dusts/copper"
+    },
+    {
+      "tag": "c:dusts/tin"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "electrodynamics:dustbronze"
+  }
+}

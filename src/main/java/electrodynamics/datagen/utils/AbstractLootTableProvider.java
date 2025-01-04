@@ -5,28 +5,22 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
-import net.minecraft.advancements.critereon.EnchantmentPredicate;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.packs.VanillaBlockLoot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.storage.loot.ContainerComponentManipulators;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
-import net.minecraft.world.level.storage.loot.functions.CopyNameFunction;
-import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
-import net.minecraft.world.level.storage.loot.functions.SetContainerContents;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.MatchTool;
+import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -35,20 +29,21 @@ public abstract class AbstractLootTableProvider extends VanillaBlockLoot {
 
 	private final String modID;
 
-	public AbstractLootTableProvider(String modID) {
+	public AbstractLootTableProvider(HolderLookup.Provider provider, String modID) {
+		super(provider);
 		this.modID = modID;
 	}
 
 	public LootTable.Builder machineTable(String name, Block block, BlockEntityType<?> type, boolean items, boolean fluids, boolean gases, boolean energy, boolean additional) {
-		CopyNbtFunction.Builder function = CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY);
+		CopyCustomDataFunction.Builder function = CopyCustomDataFunction.copyData(ContextNbtProvider.BLOCK_ENTITY);
 
 		if (items) {
-			function = function.copy("Items", "BlockEntityTag", CopyNbtFunction.MergeStrategy.REPLACE);
-			function = function.copy(ComponentInventory.SAVE_KEY + "_size", "BlockEntityTag", CopyNbtFunction.MergeStrategy.REPLACE);
+			function = function.copy("Items", "BlockEntityTag", CopyCustomDataFunction.MergeStrategy.REPLACE);
+			function = function.copy(ComponentInventory.SAVE_KEY + "_size", "BlockEntityTag", CopyCustomDataFunction.MergeStrategy.REPLACE);
 		}
 
 		if (fluids) {
-			function = function.copy("fluid", "BlockEntityTag", CopyNbtFunction.MergeStrategy.REPLACE);
+			function = function.copy("fluid", "BlockEntityTag", CopyCustomDataFunction.MergeStrategy.REPLACE);
 		}
 
 		if (gases) {
@@ -56,14 +51,14 @@ public abstract class AbstractLootTableProvider extends VanillaBlockLoot {
 		}
 
 		if (energy) {
-			function = function.copy("joules", "BlockEntityTag.joules", CopyNbtFunction.MergeStrategy.REPLACE);
+			function = function.copy("joules", "BlockEntityTag.joules", CopyCustomDataFunction.MergeStrategy.REPLACE);
 		}
 
 		if (additional) {
-			function = function.copy("additional", "BlockEntityTag.additional", CopyNbtFunction.MergeStrategy.REPLACE);
+			function = function.copy("additional", "BlockEntityTag.additional", CopyCustomDataFunction.MergeStrategy.REPLACE);
 		}
 
-		LootPool.Builder builder = LootPool.lootPool().name(name).setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(function).apply(SetContainerContents.setContents(type).withEntry(DynamicLoot.dynamicEntry(new ResourceLocation("minecraft", "contents")))));
+		LootPool.Builder builder = LootPool.lootPool().name(name).setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(block).apply(CopyNameFunction.copyName(CopyNameFunction.NameSource.BLOCK_ENTITY)).apply(function).apply(SetContainerContents.setContents(ContainerComponentManipulators.CONTAINER).withEntry(DynamicLoot.dynamicEntry(ResourceLocation.fromNamespaceAndPath("minecraft", "contents")))));
 		return LootTable.lootTable().withPool(builder);
 	}
 
@@ -78,7 +73,7 @@ public abstract class AbstractLootTableProvider extends VanillaBlockLoot {
 	 * @param max      The maximum amount dropped
 	 */
 	protected LootTable.Builder createSilkTouchAndFortuneTable(String name, Block block, Item lootItem, float min, float max) {
-		LootPool.Builder builder = LootPool.lootPool().name(name).setRolls(ConstantValue.exactly(1)).add(AlternativesEntry.alternatives(LootItem.lootTableItem(block).when(MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1))))), LootItem.lootTableItem(lootItem).apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))).apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE, 1)).apply(ApplyExplosionDecay.explosionDecay())));
+		LootPool.Builder builder = LootPool.lootPool().name(name).setRolls(ConstantValue.exactly(1)).add(AlternativesEntry.alternatives(LootItem.lootTableItem(block).when(hasSilkTouch()), LootItem.lootTableItem(lootItem).apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))).apply(ApplyBonusCount.addUniformBonusCount(registries.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE), 1)).apply(ApplyExplosionDecay.explosionDecay())));
 		return LootTable.lootTable().withPool(builder);
 	}
 
@@ -90,7 +85,7 @@ public abstract class AbstractLootTableProvider extends VanillaBlockLoot {
 	 * @param block The block that will be added
 	 */
 	protected LootTable.Builder createSilkTouchOnlyTable(String name, Block block) {
-		LootPool.Builder builder = LootPool.lootPool().name(name).setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(block).when(MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(new EnchantmentPredicate(Enchantments.SILK_TOUCH, MinMaxBounds.Ints.atLeast(1)))))
+		LootPool.Builder builder = LootPool.lootPool().name(name).setRolls(ConstantValue.exactly(1)).add(LootItem.lootTableItem(block).when(hasSilkTouch())
 
 		);
 		return LootTable.lootTable().withPool(builder);

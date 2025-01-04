@@ -3,15 +3,13 @@ package electrodynamics.common.recipe.recipeutils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import electrodynamics.Electrodynamics;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 public class ProbableFluid {
@@ -32,6 +30,42 @@ public class ProbableFluid {
     );
 
     public static final Codec<List<ProbableFluid>> LIST_CODEC = CODEC.listOf();
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, ProbableFluid> STREAM_CODEC = new StreamCodec<>() {
+        @Override
+        public ProbableFluid decode(RegistryFriendlyByteBuf buf) {
+            return new ProbableFluid(FluidStack.STREAM_CODEC.decode(buf), buf.readDouble());
+        }
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf buf, ProbableFluid fluid) {
+            FluidStack.STREAM_CODEC.encode(buf, fluid.fluid);
+            buf.writeDouble(fluid.chance);
+        }
+    };
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<ProbableFluid>> LIST_STREAM_CODEC = new StreamCodec<>() {
+
+        @Override
+        public void encode(RegistryFriendlyByteBuf buf, List<ProbableFluid> probable) {
+            buf.writeInt(probable.size());
+            for (ProbableFluid fluid : probable) {
+                STREAM_CODEC.encode(buf, fluid);
+            }
+        }
+
+        @Override
+        public List<ProbableFluid> decode(RegistryFriendlyByteBuf buf) {
+            int count = buf.readInt();
+            List<ProbableFluid> fluids = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                fluids.add(STREAM_CODEC.decode(buf));
+            }
+            return fluids;
+        }
+    };
+
+    public static final List<ProbableFluid> NONE = new ArrayList<>();
 
     private FluidStack fluid;
     // 0: 0% chance
@@ -60,41 +94,9 @@ public class ProbableFluid {
         if (random > 1 - chance) {
             double amount = chance >= 1 ? fluid.getAmount() : fluid.getAmount() * random;
             int fluidAmount = (int) Math.ceil(amount);
-            return new FluidStack(fluid, fluidAmount);
+            return new FluidStack(fluid.getFluidHolder(), fluidAmount);
         }
         return FluidStack.EMPTY;
-    }
-
-    public static ProbableFluid deserialize(JsonObject json) {
-        ResourceLocation resourceLocation = new ResourceLocation(GsonHelper.getAsString(json, "fluid"));
-        FluidStack fluid = new FluidStack(BuiltInRegistries.FLUID.get(resourceLocation), GsonHelper.getAsInt(json, "amount"));
-        double chance = json.get("chance").getAsDouble();
-        return new ProbableFluid(fluid, chance);
-    }
-
-    public static ProbableFluid read(FriendlyByteBuf buf) {
-        return new ProbableFluid(buf.readFluidStack(), buf.readDouble());
-    }
-
-    public static List<ProbableFluid> readList(FriendlyByteBuf buf) {
-        int count = buf.readInt();
-        List<ProbableFluid> fluids = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            fluids.add(ProbableFluid.read(buf));
-        }
-        return fluids;
-    }
-
-    public void write(FriendlyByteBuf buf) {
-        buf.writeFluidStack(getFullStack());
-        buf.writeDouble(chance);
-    }
-
-    public static void writeList(FriendlyByteBuf buf, List<ProbableFluid> items) {
-        buf.writeInt(items.size());
-        for (ProbableFluid fluid : items) {
-            fluid.write(buf);
-        }
     }
 
 }

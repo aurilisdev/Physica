@@ -12,6 +12,7 @@ import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
 import electrodynamics.datagen.utils.recipe.builders.ElectrodynamicsRecipeBuilder.RecipeCategory;
 import electrodynamics.datagen.utils.recipe.builders.Item2ItemBuilder;
+import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +24,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 	public static double MINERALGRINDER_USAGE_PER_TICK = 350.0;
 	public static int MINERALGRINDER_REQUIRED_TICKS = 200;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsMineralGrinderRecipes(String modID) {
 		this.modID = modID;
@@ -47,25 +48,25 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 
 		}
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.iron.ordinal()]), 0, 200, 350.0, "dust_iron_from_ingot", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.iron)), 0, 200, 350.0, "dust_iron_from_ingot", modID)
 				//
 				.addItemTagInput(Tags.Items.INGOTS_IRON, 1)
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.gold.ordinal()]), 0, 200, 350.0, "dust_gold_from_ingot", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.gold)), 0, 200, 350.0, "dust_gold_from_ingot", modID)
 				//
 				.addItemTagInput(Tags.Items.INGOTS_GOLD, 1)
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.copper.ordinal()]), 0, 200, 350.0, "dust_copper_from_ingot", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.copper)), 0, 200, 350.0, "dust_copper_from_ingot", modID)
 				//
 				.addItemTagInput(Tags.Items.INGOTS_COPPER, 1)
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.netherite.ordinal()]), 0, 200, 350.0, "dust_netherite_from_scrap", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.netherite)), 0, 200, 350.0, "dust_netherite_from_scrap", modID)
 				//
 				.addItemStackInput(new ItemStack(Items.NETHERITE_SCRAP))
 				//
@@ -91,7 +92,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 			}
 		}
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.copper.ordinal()], 2), 0.1F, 200, 350.0, "dust_copper_from_raw_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.copper), 2), 0.1F, 200, 350.0, "dust_copper_from_raw_ore", modID)
 				//
 				.addItemTagInput(Tags.Items.RAW_MATERIALS_COPPER, 1)
 				//
@@ -99,7 +100,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.iron.ordinal()], 2), 0.1F, 200, 350.0, "dust_iron_from_raw_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.iron), 2), 0.1F, 200, 350.0, "dust_iron_from_raw_ore", modID)
 				//
 				.addItemTagInput(Tags.Items.RAW_MATERIALS_IRON, 1)
 				//
@@ -107,7 +108,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.gold.ordinal()], 2), 0.1F, 200, 350.0, "dust_gold_from_raw_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.gold), 2), 0.1F, 200, 350.0, "dust_gold_from_raw_ore", modID)
 				//
 				.addItemTagInput(Tags.Items.RAW_MATERIALS_GOLD, 1)
 				//
@@ -115,7 +116,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.copper.ordinal()], 2), 0.1F, 200, 350.0, "dust_copper_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.copper), 2), 0.1F, 200, 350.0, "dust_copper_from_ore", modID)
 				//
 				.addItemTagInput(ItemTags.COPPER_ORES, 1)
 				//
@@ -123,7 +124,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.gold.ordinal()], 2), 0.5F, 200, 350.0, "dust_gold_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.gold), 2), 0.5F, 200, 350.0, "dust_gold_from_ore", modID)
 				//
 				.addItemTagInput(ItemTags.GOLD_ORES, 1)
 				//
@@ -131,7 +132,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.iron.ordinal()], 2), 0.3F, 200, 350.0, "dust_iron_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.iron), 2), 0.3F, 200, 350.0, "dust_iron_from_ore", modID)
 				//
 				.addItemTagInput(ItemTags.IRON_ORES, 1)
 				//
@@ -139,7 +140,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.lead.ordinal()], 2), 0.3F, 200, 350.0, "dust_lead_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.lead), 2), 0.3F, 200, 350.0, "dust_lead_from_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_LEAD, 1)
 				//
@@ -147,7 +148,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.molybdenum.ordinal()], 2), 0.3F, 200, 350.0, "dust_molybdenum_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.molybdenum), 2), 0.3F, 200, 350.0, "dust_molybdenum_from_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_MOLYBDENUM, 1)
 				//
@@ -155,7 +156,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.netherite.ordinal()], 2), 1F, 200, 350.0, "dust_netherite_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.netherite), 2), 1F, 200, 350.0, "dust_netherite_from_ore", modID)
 				//
 				.addItemTagInput(Tags.Items.ORES_NETHERITE_SCRAP, 1)
 				//
@@ -163,7 +164,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.silver.ordinal()], 2), 0.5F, 200, 350.0, "dust_silver_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.silver), 2), 0.5F, 200, 350.0, "dust_silver_from_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_SILVER, 1)
 				//
@@ -171,7 +172,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.tin.ordinal()], 2), 0.1F, 200, 350.0, "dust_tin_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.tin), 2), 0.1F, 200, 350.0, "dust_tin_from_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_TIN, 1)
 				//
@@ -179,7 +180,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.vanadium.ordinal()], 2), 0.1F, 200, 350.0, "dust_vanadium_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.vanadium), 2), 0.1F, 200, 350.0, "dust_vanadium_from_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_VANADIUM, 1)
 				//
@@ -227,19 +228,19 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.endereye.ordinal()], 2), 1F, 200, 350.0, "dust_ender_eye", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.endereye), 2), 1F, 200, 350.0, "dust_ender_eye", modID)
 				//
 				.addItemTagInput(Tags.Items.ENDER_PEARLS, 1)
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.niter.ordinal()], 3), 0.1F, 200, 350.0, "dust_niter_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.niter), 3), 0.1F, 200, 350.0, "dust_niter_from_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_SALTPETER, 1)
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(CRYSTALS[SubtypeCrystal.potassiumchloride.ordinal()], 3), 0.3F, 200, 350.0, "pot_chloride_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.potassiumchloride), 3), 0.3F, 200, 350.0, "pot_chloride_from_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_POTASSIUMCHLORIDE, 1)
 				//
@@ -253,7 +254,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(DUSTS[SubtypeDust.sulfur.ordinal()], 3), 0.2F, 200, 350.0, "dust_sulfur_from_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.sulfur), 3), 0.2F, 200, 350.0, "dust_sulfur_from_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_SULFUR, 1)
 				//
@@ -263,7 +264,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 
 		newRecipe(new ItemStack(Items.COBBLESTONE, 1), 0.01F, 200, 350.0, "cobblestone_from_stone", modID)
 				//
-				.addItemTagInput(Tags.Items.STONE, 1)
+				.addItemTagInput(Tags.Items.STONES, 1)
 				//
 				.addItemBiproduct(new ProbableItem(new ItemStack(Items.GRAVEL), 0.4))
 				//
@@ -271,7 +272,7 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 
 		newRecipe(new ItemStack(Items.GRAVEL, 1), 0.01F, 200, 350.0, "gravel_from_cobblestone", modID)
 				//
-				.addItemTagInput(Tags.Items.COBBLESTONE, 1)
+				.addItemTagInput(Tags.Items.COBBLESTONES, 1)
 				//
 				.addItemBiproduct(new ProbableItem(new ItemStack(Items.SAND), 0.4))
 				//
@@ -279,29 +280,29 @@ public class ElectrodynamicsMineralGrinderRecipes extends AbstractRecipeGenerato
 
 		newRecipe(new ItemStack(Items.SAND, 1), 0.01F, 200, 350.0, "sand_from_gravel", modID)
 				//
-				.addItemTagInput(Tags.Items.GRAVEL, 1)
+				.addItemTagInput(Tags.Items.GRAVELS, 1)
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(CRYSTALS[SubtypeCrystal.halite.ordinal()], 3), 0.1F, 200, 350.0, "halite_cystal_from_halite_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.halite), 3), 0.1F, 200, 350.0, "halite_cystal_from_halite_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_SALT, 1)
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(RAW_ORES[SubtypeRawOre.uranium.ordinal()]), 0.1F, 200, 350.0, "raw_uranium_from_uranium_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_RAWORE.getValue(SubtypeRawOre.uranium)), 0.1F, 200, 350.0, "raw_uranium_from_uranium_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_URANIUM, 1)
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(RAW_ORES[SubtypeRawOre.thorium.ordinal()]), 0.1F, 200, 350.0, "raw_thorium_from_thorium_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_RAWORE.getValue(SubtypeRawOre.thorium)), 0.1F, 200, 350.0, "raw_thorium_from_thorium_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_THORIUM, 1)
 				//
 				.save(output);
 
-		newRecipe(new ItemStack(RAW_ORES[SubtypeRawOre.fluorite.ordinal()]), 0.1F, 200, 350.0, "fluorite_crystal_from_fluorite_ore", modID)
+		newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_RAWORE.getValue(SubtypeRawOre.fluorite)), 0.1F, 200, 350.0, "fluorite_crystal_from_fluorite_ore", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.ORE_FLUORITE, 1)
 				//

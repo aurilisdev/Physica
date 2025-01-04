@@ -8,6 +8,7 @@ import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.common.network.type.ElectricNetwork;
 import electrodynamics.common.tile.electricitygrid.TileWire;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionResult;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class ItemMultimeter extends ItemElectrodynamics {
 
-	public ItemMultimeter(Properties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemMultimeter(Properties properties, Holder<CreativeModeTab> creativeTab) {
 		super(properties, creativeTab);
 	}
 

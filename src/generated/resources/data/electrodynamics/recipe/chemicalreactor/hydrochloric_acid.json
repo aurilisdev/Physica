@@ -1,0 +1,32 @@
+{
+  "type": "electrodynamics:chemical_reactor_recipe",
+  "fluidinputs": [
+    {
+      "amount": 1000,
+      "tag": "minecraft:water"
+    }
+  ],
+  "fluidoutput": {
+    "amount": 500,
+    "id": "electrodynamics:fluidhydrochloricacid"
+  },
+  "gasinputs": [
+    {
+      "amount": 1000,
+      "pressure": 8,
+      "tag": "c:hydrogen",
+      "temp": 500
+    }
+  ],
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 5,
+      "ingredient": {
+        "tag": "c:dusts/salt"
+      }
+    }
+  ],
+  "ticks": 200,
+  "usagepertick": 700.0
+}

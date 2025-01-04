@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "F": {
+      "item": "electrodynamics:electricfurnace"
+    },
+    "G": {
+      "tag": "c:ingots/gold"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "CSC",
+    "GFG",
+    "CSC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:electricfurnacedouble"
+  }
+}

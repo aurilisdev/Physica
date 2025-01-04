@@ -7,7 +7,7 @@ import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.gas.PropertyGasTank;
 import electrodynamics.api.screen.component.TextPropertySupplier;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.IconType;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
@@ -40,7 +40,7 @@ public class ScreenComponentGasTemperature extends ScreenComponentGuiTab {
 
 		List<FormattedCharSequence> tooltips = new ArrayList<>();
 
-		GenericTile generic = (GenericTile) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getHostFromIntArray();
+		GenericTile generic = (GenericTile) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getSafeHost();
 
 		if (generic == null) {
 			return tooltips;

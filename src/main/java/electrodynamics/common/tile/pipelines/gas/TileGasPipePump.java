@@ -1,5 +1,6 @@
 package electrodynamics.common.tile.pipelines.gas;
 
+import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.capability.types.gas.IGasHandler;
@@ -7,7 +8,6 @@ import electrodynamics.common.inventory.container.tile.ContainerGasPipePump;
 import electrodynamics.common.network.type.GasNetwork;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -16,7 +16,7 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.CapabilityUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,20 +25,20 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TileGasPipePump extends GenericTile {
 
-	public static final Direction INPUT_DIR = Direction.SOUTH;
-	public static final Direction OUTPUT_DIR = Direction.NORTH;
+	public static final BlockEntityUtils.MachineDirection INPUT_DIR = BlockEntityUtils.MachineDirection.FRONT;
+	public static final BlockEntityUtils.MachineDirection OUTPUT_DIR = BlockEntityUtils.MachineDirection.BACK;
 	
 	private boolean isLocked = false;
 
-	public final Property<Integer> priority = property(new Property<>(PropertyType.Integer, "pumppriority", 0).onChange((prop, oldval) -> {
+	public final Property<Integer> priority = property(new Property<>(PropertyTypes.INTEGER, "pumppriority", 0).onChange((prop, oldval) -> {
 
-		if (level.isClientSide) {
+		if (level == null || level.isClientSide) {
 			return;
 		}
 
-		BlockEntity entity = level.getBlockEntity(worldPosition.relative(BlockEntityUtils.getRelativeSide(getFacing(), INPUT_DIR)));
+		BlockEntity entity = level.getBlockEntity(worldPosition.relative(getFacing()));
 
-		if (entity != null && entity instanceof TileGasPipe pipe) {
+		if (entity instanceof TileGasPipe pipe) {
 			GasNetwork network = pipe.getNetwork();
 
 			if (network != null) {
@@ -49,10 +49,10 @@ public class TileGasPipePump extends GenericTile {
 	}));
 
 	public TileGasPipePump(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_GASPIPEPUMP.get(), pos, state);
+		super(ElectrodynamicsTiles.TILE_GASPIPEPUMP.get(), pos, state);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, false, true).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(Constants.PIPE_PUMP_USAGE_PER_TICK * 10).setInputDirections(Direction.WEST));
+		addComponent(new ComponentElectrodynamic(this, false, true).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE).maxJoules(Constants.PIPE_PUMP_USAGE_PER_TICK * 10).setInputDirections(BlockEntityUtils.MachineDirection.LEFT));
 		addComponent(new ComponentContainerProvider("container.gaspipepump", this).createMenu((id, inv) -> new ContainerGasPipePump(id, inv, getCoordsArray())));
 	}
 
@@ -71,11 +71,11 @@ public class TileGasPipePump extends GenericTile {
 	    }
 	    Direction facing = getFacing();
 
-        if (side == BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR)) {
+        if (side == BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR.mappedDir)) {
             return CapabilityUtils.EMPTY_GAS;
         }
 
-        if (side == BlockEntityUtils.getRelativeSide(facing, INPUT_DIR)) {
+        if (side == BlockEntityUtils.getRelativeSide(facing, INPUT_DIR.mappedDir)) {
 
             BlockEntity output = level.getBlockEntity(worldPosition.relative(side.getOpposite()));
             if (output == null) {

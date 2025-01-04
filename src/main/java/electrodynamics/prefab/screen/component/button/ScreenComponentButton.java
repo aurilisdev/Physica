@@ -5,7 +5,8 @@ import javax.annotation.Nullable;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import electrodynamics.api.screen.ITexture;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
+import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,6 +18,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 
+import java.util.function.Supplier;
+
 /**
  * A modification of the vanilla button to integrate it with the Electrodynamics system of doing GUI components as the
  * Button class has several annoying issues
@@ -27,17 +30,16 @@ import net.minecraft.sounds.SoundEvents;
  */
 public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends ScreenComponentGeneric {
 
-    public static final WidgetSprites VANILLA_BUTTON_SPRITES = new WidgetSprites(new ResourceLocation("widget/button"), new ResourceLocation("widget/button_disabled"), new ResourceLocation("widget/button_highlighted"));
+    public static final WidgetSprites VANILLA_BUTTON_SPRITES = new WidgetSprites(ResourceLocation.withDefaultNamespace("widget/button"), ResourceLocation.withDefaultNamespace("widget/button_disabled"), ResourceLocation.withDefaultNamespace("widget/button_highlighted"));
+
+    public boolean isPressed = false;
 
     public final boolean isVanillaRender;
-
-    @Nullable
-    public OnTooltip onTooltip = null;
     @Nullable
     public OnPress onPress = null;
 
     @Nullable
-    public Component label = null;
+    public Supplier<Component> label = null;
 
     public SoundEvent pressSound = SoundEvents.UI_BUTTON_CLICK.value();
 
@@ -54,6 +56,10 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
     }
 
     public T setLabel(Component label) {
+        return setLabel(() -> label);
+    }
+
+    public T setLabel(Supplier<Component> label) {
         this.label = label;
         return (T) this;
     }
@@ -63,7 +69,8 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
         return (T) this;
     }
 
-    public T setOnTooltip(OnTooltip onTooltip) {
+    @Override
+    public T onTooltip(OnTooltip onTooltip) {
         this.onTooltip = onTooltip;
         return (T) this;
     }
@@ -77,18 +84,20 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
     public void renderBackground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
         if (isVanillaRender && isVisible()) {
             Minecraft minecraft = Minecraft.getInstance();
-            graphics.setColor(color.rFloat(), color.gFloat(), color.bFloat(), color.aFloat());
+            RenderingUtils.setShaderColor(color);
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
-            graphics.blitSprite(VANILLA_BUTTON_SPRITES.get(isActive(), this.isHoveredOrFocused()), this.xLocation, this.yLocation, this.width, this.height);
-            graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-
-            Font font = minecraft.font;
-            Component label = getLabel();
-            if (label != null) {
-                graphics.drawCenteredString(font, label, this.xLocation + guiWidth + this.width / 2, this.yLocation + guiHeight + (this.height - 8) / 2, color.color());
+            graphics.blitSprite(VANILLA_BUTTON_SPRITES.get(isActive(), this.isHovered() || isPressed), this.xLocation + guiWidth, this.yLocation + guiHeight, this.width, this.height);
+            if(icon != null) {
+                int xOffset = (width - icon.imageWidth()) / 2;
+                int yOffset = (height - icon.imageHeight()) / 2;
+                graphics.blit(icon.getLocation(), guiWidth + xLocation + xOffset, guiHeight + yLocation + yOffset, icon.textureU(), icon.textureV(), icon.textureWidth(), icon.textureHeight(), icon.imageWidth(), icon.imageHeight());
             }
-
+            Font font = minecraft.font;
+            if (label != null) {
+                graphics.drawCenteredString(font, label.get(), this.xLocation + guiWidth + this.width / 2, this.yLocation + guiHeight + (this.height - 8) / 2, color.color());
+            }
+            RenderingUtils.resetShaderColor();
         } else {
             super.renderBackground(graphics, xAxis, yAxis, guiWidth, guiHeight);
         }
@@ -103,14 +112,6 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
         }
 
         return 1;
-    }
-
-    @Override
-    public void renderForeground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
-        super.renderForeground(graphics, xAxis, yAxis, guiWidth, guiHeight);
-        if (isVisible() && isHovered() && onTooltip != null) {
-            onTooltip.onTooltip(graphics, this, xAxis, yAxis);
-        }
     }
 
     @Override
@@ -166,19 +167,9 @@ public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends S
         soundManager.play(SimpleSoundInstance.forUI(pressSound, 1.0F));
     }
 
-    public Component getLabel() {
-        return label;
-    }
-
     public static interface OnPress {
 
         public void onPress(ScreenComponentButton<?> button);
-
-    }
-
-    public static interface OnTooltip {
-
-        public void onTooltip(GuiGraphics graphics, ScreenComponentButton<?> button, int xAxis, int yAxis);
 
     }
 

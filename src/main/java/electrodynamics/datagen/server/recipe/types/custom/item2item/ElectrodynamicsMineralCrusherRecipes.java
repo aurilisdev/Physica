@@ -18,6 +18,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
 public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerator {
@@ -25,7 +26,7 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
     public static double MINERALCRUSHER_USAGE_PER_TICK = 450.0;
     public static int MINERALCRUSHER_REQUIRED_TICKS = 200;
 
-    private final String modID;
+    public final String modID;
 
     public ElectrodynamicsMineralCrusherRecipes(String modID) {
         this.modID = modID;
@@ -39,7 +40,7 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
     public void addRecipes(RecipeOutput output) {
 
         for (SubtypePlate plate : SubtypePlate.values()) {
-            newRecipe(new ItemStack(PLATES[plate.ordinal()]), 0.1F, 200, 450.0, "plate_" + plate.name() + "_from_ingot", modID)
+            newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_PLATE.getValue(plate)), 0.1F, 200, 450.0, "plate_" + plate.name() + "_from_ingot", modID)
                     //
                     .addItemTagInput(plate.sourceIngot, 1)
                     //
@@ -50,18 +51,16 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
             if (crystal.crushedItem != null && crystal != SubtypeCrystal.halite) {
                 newRecipe(new ItemStack(crystal.crushedItem.get()), 0.0F, 200, 450.0, "imp_dust_" + crystal.name() + "_from_crystal", modID)
                         //
-                        .addItemStackInput(new ItemStack(CRYSTALS[crystal.ordinal()]))
-                        //
-                        .addItemBiproduct(new ProbableItem(new ItemStack(OXIDES[SubtypeOxide.trisulfur.ordinal()]), 0.05))
+                        .addItemStackInput(new ItemStack(ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(crystal)))
                         //
                         .save(output);
             }
 
         }
 
-        newRecipe(new ItemStack(DUSTS[SubtypeDust.salt.ordinal()], 1), 0.1F, 200, 450.0, "salt_from_halite_crystal", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.salt), 1), 0.1F, 200, 450.0, "salt_from_halite_crystal", modID)
                 //
-                .addItemStackInput(new ItemStack(CRYSTALS[SubtypeCrystal.halite.ordinal()]))
+                .addItemStackInput(new ItemStack(ElectrodynamicsItems.ITEMS_CRYSTAL.getValue(SubtypeCrystal.halite)))
                 //
                 .save(output);
 
@@ -72,7 +71,7 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
                             //
                             .addItemTagInput(raw.tag, 1)
                             //
-                            .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeImpureDust.iron)), 0.3))
+                            .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.iron)), 0.3))
                             //
                             .save(output);
                 } else {
@@ -86,71 +85,71 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
             }
         }
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.iron.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_iron_from_raw_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.iron), 3), 0.3F, 200, 450.0, "imp_dust_iron_from_raw_ore", modID)
                 //
                 .addItemTagInput(Tags.Items.RAW_MATERIALS_IRON, 1)
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.gold.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_gold_from_raw_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.gold), 3), 0.3F, 200, 450.0, "imp_dust_gold_from_raw_ore", modID)
                 //
                 .addItemTagInput(Tags.Items.RAW_MATERIALS_GOLD, 1)
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.copper.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_copper_from_raw_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.copper), 3), 0.3F, 200, 450.0, "imp_dust_copper_from_raw_ore", modID)
                 //
                 .addItemTagInput(Tags.Items.RAW_MATERIALS_COPPER, 1)
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.chromite.ordinal()], 3), 0.3F, 200, 450.0, "oxide_chromite_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.chromite), 3), 0.3F, 200, 450.0, "oxide_chromite_from_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_CHROMIUM, 1)
                 //
-                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeImpureDust.iron)), 0.4))
+                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.iron)), 0.4))
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.copper.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_copper_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.copper), 3), 0.3F, 200, 450.0, "imp_dust_copper_from_ore", modID)
                 //
                 .addItemTagInput(ItemTags.COPPER_ORES, 1)
                 //
-                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeImpureDust.gold)), 0.1))
+                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.gold)), 0.1))
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.gold.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_gold_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.gold), 3), 0.3F, 200, 450.0, "imp_dust_gold_from_ore", modID)
                 //
                 .addItemTagInput(ItemTags.GOLD_ORES, 1)
                 //
-                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeImpureDust.silver)), 0.2))
+                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.silver)), 0.2))
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.iron.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_iron_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.iron), 3), 0.3F, 200, 450.0, "imp_dust_iron_from_ore", modID)
                 //
                 .addItemTagInput(ItemTags.IRON_ORES, 1)
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.lead.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_lead_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.lead), 3), 0.3F, 200, 450.0, "imp_dust_lead_from_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_LEAD, 1)
                 //
-                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeImpureDust.silver)), 0.4))
+                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.silver)), 0.4))
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.molybdenum.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_molybdenum_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.molybdenum), 3), 0.3F, 200, 450.0, "imp_dust_molybdenum_from_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_MOLYBDENUM, 1)
                 //
-                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeDust.sulfur)), 0.3))
+                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.sulfur)), 0.3))
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.netherite.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_netherite_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.netherite), 3), 0.3F, 200, 450.0, "imp_dust_netherite_from_ore", modID)
                 //
                 .addItemTagInput(Tags.Items.ORES_NETHERITE_SCRAP, 1)
                 //
@@ -158,15 +157,15 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.silver.ordinal()], 3), 0.2F, 200, 450.0, "imp_dust_silver_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.silver), 3), 0.2F, 200, 450.0, "imp_dust_silver_from_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_SILVER, 1)
                 //
-                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeImpureDust.gold)), 0.1))
+                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.gold)), 0.1))
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.tin.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_tin_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.tin), 3), 0.3F, 200, 450.0, "imp_dust_tin_from_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_TIN, 1)
                 //
@@ -174,31 +173,31 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(IMPURE_DUSTS[SubtypeImpureDust.vanadium.ordinal()], 3), 0.3F, 200, 450.0, "imp_dust_vanadium_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.vanadium), 3), 0.3F, 200, 450.0, "imp_dust_vanadium_from_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_VANADIUM, 1)
                 //
-                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeDust.lead)), 0.2))
+                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.lead)), 0.2))
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(DUSTS[SubtypeDust.niter.ordinal()], 4), 0.1F, 200, 450.0, "niter_dust_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.niter), 4), 0.1F, 200, 450.0, "niter_dust_from_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_SALTPETER, 1)
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(DUSTS[SubtypeDust.sulfur.ordinal()], 4), 0.1F, 200, 450.0, "sulfur_dust_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.sulfur), 4), 0.1F, 200, 450.0, "sulfur_dust_from_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_SULFUR, 1)
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(OXIDES[SubtypeOxide.dititanium.ordinal()], 3), 0.5F, 200, 450.0, "oxide_titanium_from_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.dititanium), 3), 0.5F, 200, 450.0, "oxide_titanium_from_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_TITANIUM, 1)
                 //
-                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeImpureDust.iron)), 0.3))
+                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_IMPUREDUST.getValue(SubtypeImpureDust.iron)), 0.3))
                 //
                 .save(output);
 
@@ -208,27 +207,27 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(DUSTS[SubtypeDust.obsidian.ordinal()], 2), 0.1F, 200, 450.0, "dust_obsidian_from_obsidian", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.obsidian), 2), 0.1F, 200, 450.0, "dust_obsidian_from_obsidian", modID)
                 //
-                .addItemTagInput(Tags.Items.OBSIDIAN, 1)
+                .addItemTagInput(Tags.Items.OBSIDIANS, 1)
                 //
                 .save(output);
 
         newRecipe(new ItemStack(Items.FLINT, 1), 0.1F, 200, 450.0, "flint_from_gravel", modID)
                 //
-                .addItemTagInput(Tags.Items.GRAVEL, 1)
+                .addItemTagInput(Tags.Items.GRAVELS, 1)
                 //
                 .addItemBiproduct(new ProbableItem(new ItemStack(Items.SAND), 0.2))
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(DUSTS[SubtypeDust.salt.ordinal()], 5), 0.1F, 200, 450.0, "salt_from_halite_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_DUST.getValue(SubtypeDust.salt), 5), 0.1F, 200, 450.0, "salt_from_halite_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_SALT, 1)
                 //
                 .save(output);
 
-        newRecipe(new ItemStack(RAW_ORES[SubtypeRawOre.fluorite.ordinal()], 2), 0.1F, 200, 450.0, "fluorite_crystal_from_fluorite_ore", modID)
+        newRecipe(new ItemStack(ElectrodynamicsItems.ITEMS_RAWORE.getValue(SubtypeRawOre.fluorite), 2), 0.1F, 200, 450.0, "fluorite_crystal_from_fluorite_ore", modID)
                 //
                 .addItemTagInput(ElectrodynamicsTags.Items.ORE_FLUORITE, 1)
                 //
@@ -238,10 +237,27 @@ public class ElectrodynamicsMineralCrusherRecipes extends AbstractRecipeGenerato
                 //
                 .addItemStackInput(new ItemStack(ElectrodynamicsItems.ITEM_PLASTIC_FIBERS.get()))
                 //
-                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.getItem(SubtypeOxide.chromiumdisilicide)), 1.0))
+                .addItemBiproduct(new ProbableItem(new ItemStack(ElectrodynamicsItems.ITEMS_OXIDE.getValue(SubtypeOxide.chromiumdisilicide)), 1.0))
                 //
                 .save(output);
 
+        newRecipe(new ItemStack(Items.GLOWSTONE_DUST, 4), 0, 200, 450.0, "glowstone_dust_from_glowstone_block", modID)
+                //
+                .addItemStackInput(new ItemStack(Blocks.GLOWSTONE))
+                //
+                .save(output);
+
+        newRecipe(new ItemStack(Items.AMETHYST_SHARD, 4), 0, 200, 300, "amethyst_shard_from_amethyst_block", modID)
+                //
+                .addItemStackInput(new ItemStack(Items.AMETHYST_BLOCK))
+                //
+                .save(output);
+
+        newRecipe(new ItemStack(Items.QUARTZ, 4), 0, 200, 450, "nether_quartz_from_quartz_block", modID)
+                //
+                .addItemStackInput(new ItemStack(Blocks.QUARTZ_BLOCK))
+                //
+                .save(output);
     }
 
     public Item2ItemBuilder<MineralCrusherRecipe> newRecipe(ItemStack stack, float xp, int ticks, double usagePerTick, String name, String group) {

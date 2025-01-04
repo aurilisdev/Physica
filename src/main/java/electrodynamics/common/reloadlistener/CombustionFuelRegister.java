@@ -35,7 +35,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.PacketDistributor.PacketTarget;
 
 public class CombustionFuelRegister extends SimplePreparableReloadListener<HashSet<JsonObject>> {
 
@@ -64,7 +63,7 @@ public class CombustionFuelRegister extends SimplePreparableReloadListener<HashS
             final String filePath = loc.getPath();
             final String dataPath = filePath.substring(FOLDER.length() + 1, filePath.length() - JSON_EXTENSION_LENGTH);
 
-            final ResourceLocation jsonFile = new ResourceLocation(namespace, dataPath);
+            final ResourceLocation jsonFile = ResourceLocation.fromNamespaceAndPath(namespace, dataPath);
 
             Resource resource = entry.getValue();
             try (final InputStream inputStream = resource.open(); final Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));) {
@@ -123,8 +122,11 @@ public class CombustionFuelRegister extends SimplePreparableReloadListener<HashS
         return event -> {
             ServerPlayer player = event.getPlayer();
             PacketSetClientCombustionFuel packet = new PacketSetClientCombustionFuel(fuels);
-            PacketTarget target = player == null ? PacketDistributor.ALL.noArg() : PacketDistributor.PLAYER.with(player);
-            target.send(packet);
+            if (player == null) {
+                PacketDistributor.sendToAllPlayers(packet);
+            } else {
+                PacketDistributor.sendToPlayer(player, packet);
+            }
         };
     }
 

@@ -34,7 +34,7 @@ public abstract class ElectrodynamicsRecipeBuilder<T extends ElectrodynamicsReci
     public final List<ProbableGas> gasBiproducts = new ArrayList<>();
 
     public ElectrodynamicsRecipeBuilder(RecipeCategory category, String parent, String name, String group, double experience, int processTime, double usagePerTick) {
-        this.id = new ResourceLocation(parent, category.category() + "/" + name);
+        this.id = ResourceLocation.fromNamespaceAndPath(parent, category.category() + "/" + name);
         this.group = group;
         this.experience = experience;
         this.processTime = processTime;
@@ -101,14 +101,15 @@ public abstract class ElectrodynamicsRecipeBuilder<T extends ElectrodynamicsReci
         FLUID_2_ITEM,
         FLUID_2_FLUID,
         FLUID_2_GAS,
-        FLUID_ITEM_2_GAS;
+        FLUID_ITEM_2_GAS,
+        CHEMICAL_REACTOR;
 
         public String category() {
             return toString().toLowerCase(Locale.ROOT).replaceAll("_", "");
         }
     }
 
-    public static record GasIngWrapper(double amt, double temp, double pressure) {
+    public static record GasIngWrapper(int amt, int temp, int pressure) {
 
     }
 

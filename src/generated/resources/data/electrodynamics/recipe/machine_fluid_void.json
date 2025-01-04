@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "C": {
+      "item": "minecraft:cactus"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "SBS",
+    "BCB",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:fluidvoid"
+  }
+}

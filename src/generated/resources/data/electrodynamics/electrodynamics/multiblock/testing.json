@@ -1,0 +1,148 @@
+{
+  "members": {
+    "east": [
+      {
+        "model": "electrodynamics:block/batterybox",
+        "offset": [
+          -1,
+          0,
+          0
+        ],
+        "placestate": {
+          "Name": "electrodynamics:multiblockslave",
+          "Properties": {
+            "facing": "east",
+            "waterlogged": "false"
+          }
+        },
+        "replacestate": {
+          "Name": "minecraft:oak_log",
+          "Properties": {
+            "axis": "y"
+          }
+        },
+        "tag": "minecraft:acacia_logs",
+        "voxelshape": {
+          "aabbs": [
+            {
+              "xMax": 1.0,
+              "xMin": 0.0,
+              "yMax": 1.0,
+              "yMin": 0.0,
+              "zMax": 1.0,
+              "zMin": 0.0
+            }
+          ]
+        }
+      }
+    ],
+    "north": [
+      {
+        "model": "electrodynamics:block/batterybox",
+        "offset": [
+          0,
+          0,
+          1
+        ],
+        "placestate": {
+          "Name": "electrodynamics:multiblockslave",
+          "Properties": {
+            "facing": "north",
+            "waterlogged": "false"
+          }
+        },
+        "replacestate": {
+          "Name": "minecraft:oak_log",
+          "Properties": {
+            "axis": "y"
+          }
+        },
+        "tag": "minecraft:acacia_logs",
+        "voxelshape": {
+          "aabbs": [
+            {
+              "xMax": 1.0,
+              "xMin": 0.0,
+              "yMax": 1.0,
+              "yMin": 0.0,
+              "zMax": 1.0,
+              "zMin": 0.0
+            }
+          ]
+        }
+      }
+    ],
+    "south": [
+      {
+        "model": "electrodynamics:block/batterybox",
+        "offset": [
+          0,
+          0,
+          -1
+        ],
+        "placestate": {
+          "Name": "electrodynamics:multiblockslave",
+          "Properties": {
+            "facing": "south",
+            "waterlogged": "false"
+          }
+        },
+        "replacestate": {
+          "Name": "minecraft:oak_log",
+          "Properties": {
+            "axis": "y"
+          }
+        },
+        "tag": "minecraft:acacia_logs",
+        "voxelshape": {
+          "aabbs": [
+            {
+              "xMax": 1.0,
+              "xMin": 0.0,
+              "yMax": 1.0,
+              "yMin": 0.0,
+              "zMax": 1.0,
+              "zMin": 0.0
+            }
+          ]
+        }
+      }
+    ],
+    "west": [
+      {
+        "model": "electrodynamics:block/batterybox",
+        "offset": [
+          1,
+          0,
+          0
+        ],
+        "placestate": {
+          "Name": "electrodynamics:multiblockslave",
+          "Properties": {
+            "facing": "west",
+            "waterlogged": "false"
+          }
+        },
+        "replacestate": {
+          "Name": "minecraft:oak_log",
+          "Properties": {
+            "axis": "y"
+          }
+        },
+        "tag": "minecraft:acacia_logs",
+        "voxelshape": {
+          "aabbs": [
+            {
+              "xMax": 1.0,
+              "xMin": 0.0,
+              "yMax": 1.0,
+              "yMin": 0.0,
+              "zMax": 1.0,
+              "zMin": 0.0
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

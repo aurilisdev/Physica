@@ -1,6 +1,5 @@
 package electrodynamics.common.condition;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 
 import electrodynamics.common.settings.Constants;
@@ -10,7 +9,7 @@ public class ConfigCondition implements ICondition {
 
     public static final ConfigCondition INSTANCE = new ConfigCondition();
 	
-	public static final Codec<ConfigCondition> CODEC = MapCodec.unit(INSTANCE).stable().codec();
+	public static final MapCodec<ConfigCondition> CODEC = MapCodec.unit(INSTANCE).stable();
 
 	public ConfigCondition() {
 	    
@@ -22,7 +21,7 @@ public class ConfigCondition implements ICondition {
 	}
 
     @Override
-    public Codec<? extends ICondition> codec() {
+    public MapCodec<? extends ICondition> codec() {
         return CODEC;
     }
     

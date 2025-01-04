@@ -2,6 +2,7 @@ package electrodynamics.common.tile.machines.furnace;
 
 import java.util.List;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerElectricFurnace;
 import electrodynamics.common.inventory.container.tile.ContainerElectricFurnaceDouble;
@@ -21,18 +22,17 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -44,12 +44,16 @@ public class TileElectricFurnace extends GenericTile implements ITickableSound {
 
 	private boolean isSoundPlaying = false;
 
+	private final int extra;
+
 	public TileElectricFurnace(BlockPos worldPosition, BlockState blockState) {
 		this(SubtypeMachine.electricfurnace, 0, worldPosition, blockState);
 	}
 
 	public TileElectricFurnace(SubtypeMachine machine, int extra, BlockPos worldPosition, BlockState blockState) {
-		super(extra == 1 ? ElectrodynamicsBlockTypes.TILE_ELECTRICFURNACEDOUBLE.get() : extra == 2 ? ElectrodynamicsBlockTypes.TILE_ELECTRICFURNACETRIPLE.get() : ElectrodynamicsBlockTypes.TILE_ELECTRICFURNACE.get(), worldPosition, blockState);
+		super(extra == 1 ? ElectrodynamicsTiles.TILE_ELECTRICFURNACEDOUBLE.get() : extra == 2 ? ElectrodynamicsTiles.TILE_ELECTRICFURNACETRIPLE.get() : ElectrodynamicsTiles.TILE_ELECTRICFURNACE.get(), worldPosition, blockState);
+
+		this.extra = extra;
 
 		int processorCount = extra + 1;
 		int inputsPerProc = 1;
@@ -57,7 +61,7 @@ public class TileElectricFurnace extends GenericTile implements ITickableSound {
 
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient));
-		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.NORTH).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * Math.pow(2, extra)).maxJoules(Constants.ELECTRICFURNACE_USAGE_PER_TICK * 20 * (extra + 1)));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BACK).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * Math.pow(2, extra)).maxJoules(Constants.ELECTRICFURNACE_USAGE_PER_TICK * 20 * (extra + 1)));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().processors(processorCount, inputsPerProc, outputPerProc, 0).upgrades(3)).validUpgrades(ContainerElectricFurnace.VALID_UPGRADES).valid(machineValidator()).implementMachineInputsAndOutputs());
 		addComponent(new ComponentContainerProvider(machine, this).createMenu((id, player) -> (extra == 0 ? new ContainerElectricFurnace(id, player, getComponent(IComponentType.Inventory), getCoordsArray()) : extra == 1 ? new ContainerElectricFurnaceDouble(id, player, getComponent(IComponentType.Inventory), getCoordsArray()) : extra == 2 ? new ContainerElectricFurnaceTriple(id, player, getComponent(IComponentType.Inventory), getCoordsArray()) : null)));
 
@@ -83,8 +87,7 @@ public class TileElectricFurnace extends GenericTile implements ITickableSound {
 		inv.setItem(inv.getInputSlotsForProcessor(component.getProcessorNumber()).get(0), input.copy());
 		for (ItemStack stack : inv.getUpgradeContents()) {
 			if (!stack.isEmpty() && ((ItemUpgrade) stack.getItem()).subtype == SubtypeItemUpgrade.experience) {
-				CompoundTag tag = stack.getOrCreateTag();
-				tag.putDouble(NBTUtils.XP, tag.getDouble(NBTUtils.XP) + cachedRecipe[component.getProcessorNumber()].getExperience());
+				stack.set(ElectrodynamicsDataComponentTypes.XP, stack.getOrDefault(ElectrodynamicsDataComponentTypes.XP, 0.0) + cachedRecipe[component.getProcessorNumber()].getExperience());
 				break;
 			}
 		}
@@ -127,7 +130,7 @@ public class TileElectricFurnace extends GenericTile implements ITickableSound {
 			component.operatingTicks.set(0.0);
 		}
 
-		if (!cachedRecipe[component.getProcessorNumber()].matches(new SimpleContainer(input), level)) {
+		if (!cachedRecipe[component.getProcessorNumber()].matches(new SingleRecipeInput(input), level)) {
 			cachedRecipe[component.getProcessorNumber()] = null;
 			component.setShouldKeepProgress(false);
 			return false;
@@ -149,13 +152,103 @@ public class TileElectricFurnace extends GenericTile implements ITickableSound {
 		if (!isProcessorActive()) {
 			return;
 		}
-		if (level.random.nextDouble() < 0.15) {
+
+		double threshhold = 0.15;
+
+
+		if(extra == 1){
+			threshhold = 0.20;
+		} else if (extra == 2){
+			threshhold = 0.30;
+		}
+
+		double random = level.random.nextDouble();
+
+		if (random < threshhold) {
+
 			Direction direction = getFacing();
-			double d4 = level.random.nextDouble();
-			double d5 = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -1 ? 0 : 1) : d4;
-			double d6 = level.random.nextDouble();
-			double d7 = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -1 ? 0 : 1) : d4;
-			level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + d5, worldPosition.getY() + d6, worldPosition.getZ() + d7, 0.0D, 0.0D, 0.0D);
+			double axisShift = 0;
+			double yShift = 0;
+
+			switch(extra){
+
+				case 0:
+
+					axisShift = Electrodynamics.RANDOM.nextDouble(0.64) + 0.18;
+					yShift = Electrodynamics.RANDOM.nextDouble(0.57) + 0.25;
+
+					double xShift = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -1 ? 0 : 1) : axisShift;
+					double zShift = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -1 ? 0 : 1) : axisShift;
+
+					level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+					level.addParticle(ParticleTypes.FLAME, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+
+					break;
+				case 1:
+
+					int randInt = level.random.nextIntBetweenInclusive(0,2);
+
+					axisShift = Electrodynamics.RANDOM.nextDouble(0.64) + 0.18;
+					yShift = Electrodynamics.RANDOM.nextDouble(0.38) + 0.37;
+
+					xShift = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -1 ? 0 : 1) : axisShift;
+					zShift = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -1 ? 0 : 1) : axisShift;
+
+					level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+					level.addParticle(ParticleTypes.FLAME, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+
+					if(randInt == 1) {
+						direction = direction.getClockWise();
+					} else if (randInt == 2) {
+						direction = direction.getCounterClockWise();
+					}
+
+					axisShift = Electrodynamics.RANDOM.nextDouble(0.64) + 0.18;
+					yShift = Electrodynamics.RANDOM.nextDouble(0.38) + 0.37;
+
+					xShift = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -1 ? 0 : 1) : axisShift;
+					zShift = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -1 ? 0 : 1) : axisShift;
+
+					level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+					//level.addParticle(ParticleTypes.FLAME, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+
+					break;
+				case 2:
+
+					randInt = level.random.nextIntBetweenInclusive(0,2);
+
+					axisShift = Electrodynamics.RANDOM.nextDouble(0.64) + 0.18;
+					yShift = Electrodynamics.RANDOM.nextDouble(0.38) + 0.37;
+
+					xShift = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -1 ? 0 : 1) : axisShift;
+					zShift = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -1 ? 0 : 1) : axisShift;
+
+					level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+					level.addParticle(ParticleTypes.FLAME, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+
+					if(randInt == 1) {
+						direction = direction.getClockWise();
+					} else if (randInt == 2) {
+						direction = direction.getCounterClockWise();
+					}
+
+					axisShift = Electrodynamics.RANDOM.nextDouble(0.64) + 0.18;
+					yShift = Electrodynamics.RANDOM.nextDouble(0.38) + 0.37;
+
+					xShift = direction.getAxis() == Direction.Axis.X ? direction.getStepX() * (direction.getStepX() == -1 ? 0 : 1) : axisShift;
+					zShift = direction.getAxis() == Direction.Axis.Z ? direction.getStepZ() * (direction.getStepZ() == -1 ? 0 : 1) : axisShift;
+
+					level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + xShift, worldPosition.getY() + yShift, worldPosition.getZ() + zShift, 0.0D, 0.0D, 0.0D);
+
+
+					break;
+				default:
+					break;
+
+
+			}
+
+
 		}
 		if (!isSoundPlaying) {
 			isSoundPlaying = true;
@@ -175,7 +268,7 @@ public class TileElectricFurnace extends GenericTile implements ITickableSound {
 
 	private SmeltingRecipe getMatchedRecipe(ItemStack stack) {
 		for (RecipeHolder<SmeltingRecipe> recipe : cachedRecipes) {
-			if (recipe.value().matches(new SimpleContainer(stack), level)) {
+			if (recipe.value().matches(new SingleRecipeInput(stack), level)) {
 				return recipe.value();
 			}
 		}

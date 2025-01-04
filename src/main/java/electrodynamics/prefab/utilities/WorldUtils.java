@@ -22,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.lighting.LevelLightEngine;
-import net.neoforged.neoforge.fluids.IFluidBlock;
 
 public class WorldUtils {
 
@@ -159,7 +158,7 @@ public class WorldUtils {
 			BlockState oldState = chunk.getBlockState(pos);
 			Block block = oldState.getBlock();
 			if (oldState != Blocks.AIR.defaultBlockState() && oldState != Blocks.VOID_AIR.defaultBlockState() && oldState.getDestroySpeed(level, pos) >= 0) {
-				if (block instanceof EntityBlock || block instanceof Fallable || block instanceof IFluidBlock) {
+				if (block instanceof EntityBlock || block instanceof Fallable) {
 					level.removeBlock(pos, false);
 					level.getLightEngine().checkBlock(pos);
 					return;

@@ -1,0 +1,24 @@
+{
+  "type": "electrodynamics:chemical_mixer_recipe",
+  "fluidinputs": [
+    {
+      "amount": 1000,
+      "tag": "minecraft:water"
+    }
+  ],
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "minecraft:dirt"
+      }
+    }
+  ],
+  "output": {
+    "amount": 1000,
+    "id": "electrodynamics:fluidclay"
+  },
+  "ticks": 200,
+  "usagepertick": 400.0
+}

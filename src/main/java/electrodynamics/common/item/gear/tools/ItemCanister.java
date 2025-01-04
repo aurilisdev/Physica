@@ -11,6 +11,7 @@ import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -41,7 +42,7 @@ public class ItemCanister extends ItemElectrodynamics {
 
     public static final List<InventoryTickConsumer> INVENTORY_TICK_CONSUMERS = new ArrayList<>();
 
-    public ItemCanister(Item.Properties properties, Supplier<CreativeModeTab> creativeTab) {
+    public ItemCanister(Item.Properties properties, Holder<CreativeModeTab> creativeTab) {
         super(properties, creativeTab);
     }
 
@@ -82,17 +83,17 @@ public class ItemCanister extends ItemElectrodynamics {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
         if (Capabilities.FluidHandler.ITEM == null) {
 
-            super.appendHoverText(stack, worldIn, tooltip, flagIn);
+            super.appendHoverText(stack, context, tooltip, flagIn);
 
             return;
         }
         IFluidHandlerItem handler = stack.getCapability(Capabilities.FluidHandler.ITEM);
 
         if (handler == null) {
-            super.appendHoverText(stack, worldIn, tooltip, flagIn);
+            super.appendHoverText(stack, context, tooltip, flagIn);
 
             return;
         }
@@ -100,9 +101,9 @@ public class ItemCanister extends ItemElectrodynamics {
         RestrictedFluidHandlerItemStack restricted = (RestrictedFluidHandlerItemStack) handler;
 
         tooltip.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(restricted.getFluidInTank(0).getAmount()), ChatFormatter.formatFluidMilibuckets(MAX_FLUID_CAPACITY)).withStyle(ChatFormatting.GRAY));
-        tooltip.add(restricted.getFluid().getDisplayName().copy().withStyle(ChatFormatting.DARK_GRAY));
+        tooltip.add(restricted.getFluid().getFluidType().getDescription().copy().withStyle(ChatFormatting.DARK_GRAY));
 
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
+        super.appendHoverText(stack, context, tooltip, flagIn);
     }
 
     @Override

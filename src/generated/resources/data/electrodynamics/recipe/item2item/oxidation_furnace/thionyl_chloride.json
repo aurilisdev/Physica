@@ -1,0 +1,25 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.10000000149011612,
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:oxides/sulfurdichloride"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:oxides/trisulfur"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:oxidethionylchloride"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

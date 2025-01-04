@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "pattern": [
+    " S ",
+    " SS",
+    "S  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:wrench"
+  }
+}

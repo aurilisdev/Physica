@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:lathe_recipe",
+  "experience": 0.10000000149011612,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 1.0,
+      "item": {
+        "count": 2,
+        "id": "electrodynamics:nuggettitaniumcarbide"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 2,
+      "ingredient": {
+        "tag": "c:ingots/titaniumcarbide"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:rodtitaniumcarbide"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

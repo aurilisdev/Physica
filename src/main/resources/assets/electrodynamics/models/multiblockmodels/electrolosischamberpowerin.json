@@ -1,0 +1,13 @@
+{
+  "loader": "electrodynamics:electrodynamicsmultiblockmodelloader",
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "electrodynamics:block/multiblock/electrolosischamberbulkhead",
+    "down": "electrodynamics:block/multiblock/electrolosischamberbulkhead",
+    "up": "electrodynamics:block/multiblock/electrolosischamberbulkhead",
+    "north": "electrodynamics:block/multiblock/electrolosischambercontacts",
+    "east": "electrodynamics:block/multiblock/electrolosischamberbulkhead",
+    "south": "electrodynamics:block/multiblock/electrolosischamberpowerin",
+    "west": "electrodynamics:block/multiblock/electrolosischamberbulkhead"
+  }
+}

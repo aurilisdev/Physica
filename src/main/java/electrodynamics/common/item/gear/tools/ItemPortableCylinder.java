@@ -2,7 +2,6 @@ package electrodynamics.common.item.gear.tools;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
@@ -15,9 +14,9 @@ import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
@@ -27,14 +26,14 @@ import net.minecraft.world.level.Level;
 
 public class ItemPortableCylinder extends ItemElectrodynamics {
 
-    public static final double MAX_GAS_CAPCITY = 5000;
+    public static final int MAX_GAS_CAPCITY = 5000;
 
-    public static final double MAX_TEMPERATURE = 1000;
+    public static final int MAX_TEMPERATURE = 1000;
     public static final int MAX_PRESSURE = 1000;
 
     public static final List<InventoryTickConsumer> INVENTORY_TICK_CONSUMERS = new ArrayList<>();
 
-    public ItemPortableCylinder(Properties properties, Supplier<CreativeModeTab> creativeTab) {
+    public ItemPortableCylinder(Properties properties, Holder<CreativeModeTab> creativeTab) {
         super(properties, creativeTab);
     }
 
@@ -75,13 +74,13 @@ public class ItemPortableCylinder extends ItemElectrodynamics {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltips, TooltipFlag isAdvanced) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltips, TooltipFlag isAdvanced) {
 
         IGasHandlerItem handler = stack.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
 
         if (handler == null) {
 
-            super.appendHoverText(stack, level, tooltips, isAdvanced);
+            super.appendHoverText(stack, context, tooltips, isAdvanced);
 
             return;
 
@@ -100,7 +99,7 @@ public class ItemPortableCylinder extends ItemElectrodynamics {
             tooltips.add(ElectroTextUtils.tooltip("maxpressure", ChatFormatter.getChatDisplayShort(MAX_PRESSURE, DisplayUnit.PRESSURE_ATM)).withStyle(ChatFormatting.GRAY));
             tooltips.add(ElectroTextUtils.tooltip("maxtemperature", ChatFormatter.getChatDisplayShort(MAX_TEMPERATURE, DisplayUnit.TEMPERATURE_KELVIN)).withStyle(ChatFormatting.GRAY));
         }
-        super.appendHoverText(stack, level, tooltips, isAdvanced);
+        super.appendHoverText(stack, context, tooltips, isAdvanced);
     }
 
     @Override

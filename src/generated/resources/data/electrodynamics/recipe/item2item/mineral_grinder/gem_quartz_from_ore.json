@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:mineral_grinder_recipe",
+  "experience": 0.699999988079071,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.1,
+      "item": {
+        "count": 1,
+        "id": "minecraft:coal"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/quartz"
+      }
+    }
+  ],
+  "output": {
+    "count": 7,
+    "id": "minecraft:quartz"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

@@ -3,16 +3,25 @@ package electrodynamics.common.packet.types.server;
 import java.util.UUID;
 
 import electrodynamics.common.packet.NetworkHandler;
-import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PacketUpdateCarriedItemServer implements CustomPacketPayload {
+
+    public static final ResourceLocation PACKET_UPDATECARRIEDITEMSERVER_PACKETID = NetworkHandler.id("packetupdatecarrieditemserver");
+    public static final Type<PacketUpdateCarriedItemServer> TYPE = new Type<>(PACKET_UPDATECARRIEDITEMSERVER_PACKETID);
+    public static final StreamCodec<RegistryFriendlyByteBuf, PacketUpdateCarriedItemServer> CODEC = StreamCodec.composite(
+       ItemStack.STREAM_CODEC, instance -> instance.carriedItem,
+            BlockPos.STREAM_CODEC, instance -> instance.tilePos,
+            UUIDUtil.STREAM_CODEC, instance -> instance.playerId,
+            PacketUpdateCarriedItemServer::new
+    );
 
     private final ItemStack carriedItem;
     private final BlockPos tilePos;
@@ -24,31 +33,12 @@ public class PacketUpdateCarriedItemServer implements CustomPacketPayload {
         this.playerId = playerId;
     }
 
-    public static void handle(PacketUpdateCarriedItemServer message, PlayPayloadContext context) {
-        ServerLevel world = (ServerLevel) context.level().get();
-        if (world == null) {
-            return;
-        }
-        GenericTile tile = (GenericTile) world.getBlockEntity(message.tilePos);
-        if (tile != null) {
-            tile.updateCarriedItemInContainer(message.carriedItem, message.playerId);
-        }
-    }
-
-    public static PacketUpdateCarriedItemServer read(FriendlyByteBuf buf) {
-        return new PacketUpdateCarriedItemServer(buf.readItem(), buf.readBlockPos(), buf.readUUID());
+    public static void handle(PacketUpdateCarriedItemServer message, IPayloadContext context) {
+        ServerBarrierMethods.handleUpdateCarriedItemServer(context.player().level(), message.carriedItem, message.tilePos, message.playerId);
     }
 
     @Override
-    public void write(FriendlyByteBuf buf) {
-        buf.writeItem(carriedItem);
-        buf.writeBlockPos(tilePos);
-        buf.writeUUID(playerId);
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
-
-    @Override
-    public ResourceLocation id() {
-        return NetworkHandler.PACKET_UPDATECARRIEDITEMSERVER_PACKETID;
-    }
-
 }

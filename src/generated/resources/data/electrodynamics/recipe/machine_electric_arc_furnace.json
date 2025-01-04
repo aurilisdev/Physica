@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "electrodynamics:electricfurnace"
+    },
+    {
+      "item": "minecraft:blast_furnace"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:electricarcfurnace"
+  }
+}

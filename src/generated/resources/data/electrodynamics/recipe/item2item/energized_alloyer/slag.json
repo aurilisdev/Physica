@@ -1,0 +1,24 @@
+{
+  "type": "electrodynamics:energized_alloyer_recipe",
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:sands"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:slag"
+  },
+  "ticks": 50,
+  "usagepertick": 50.0
+}

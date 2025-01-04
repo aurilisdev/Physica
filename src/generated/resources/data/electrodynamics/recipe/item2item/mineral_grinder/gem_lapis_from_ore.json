@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:mineral_grinder_recipe",
+  "experience": 0.4000000059604645,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.1,
+      "item": {
+        "count": 1,
+        "id": "minecraft:diamond"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "minecraft:lapis_ores"
+      }
+    }
+  ],
+  "output": {
+    "count": 9,
+    "id": "minecraft:lapis_lazuli"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

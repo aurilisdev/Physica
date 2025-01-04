@@ -20,7 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class ModelJetpack<T extends LivingEntity> extends GenericArmorModel<T> {
 
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(References.ID, "jetpack"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(References.ID, "jetpack"), "main");
 
 	public ModelJetpack(ModelPart root) {
 		super(root);
@@ -53,7 +53,7 @@ public class ModelJetpack<T extends LivingEntity> extends GenericArmorModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(@NotNull PoseStack poseStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, int light) {
 		parentChest.render(poseStack, buffer, packedLight, packedOverlay);
 	}
 }

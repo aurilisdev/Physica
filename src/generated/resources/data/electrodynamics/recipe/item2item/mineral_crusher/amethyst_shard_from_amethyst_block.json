@@ -1,0 +1,18 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:amethyst_block"
+      }
+    }
+  ],
+  "output": {
+    "count": 4,
+    "id": "minecraft:amethyst_shard"
+  },
+  "ticks": 200,
+  "usagepertick": 300.0
+}

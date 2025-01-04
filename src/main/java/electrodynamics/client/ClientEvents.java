@@ -3,6 +3,7 @@ package electrodynamics.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import electrodynamics.api.References;
 import electrodynamics.client.guidebook.ScreenGuidebook;
 import electrodynamics.client.keys.event.AbstractKeyPressHandler;
 import electrodynamics.client.keys.event.HandlerModeSwitchJetpack;
@@ -17,17 +18,22 @@ import electrodynamics.client.render.event.levelstage.AbstractLevelStageHandler;
 import electrodynamics.client.render.event.levelstage.HandlerMarkerLines;
 import electrodynamics.client.render.event.levelstage.HandlerQuarryArm;
 import electrodynamics.client.render.event.levelstage.HandlerSeismicScanner;
+import electrodynamics.common.packet.types.server.PacketPlayerInformation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.InputEvent.Key;
-import net.neoforged.neoforge.client.event.RenderGuiOverlayEvent;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
-@Mod.EventBusSubscriber(Dist.CLIENT)
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.GAME, value = { Dist.CLIENT })
 public class ClientEvents {
 
 	private static final List<AbstractKeyPressHandler> KEY_PRESS_HANDLERS = new ArrayList<>();
@@ -50,8 +56,8 @@ public class ClientEvents {
 	}
 
 	@SubscribeEvent
-	public static void handlerGuiOverlays(RenderGuiOverlayEvent.Post event) {
-		POST_GUI_OVERLAY_HANDLERS.forEach(handler -> handler.renderToScreen(event.getOverlay(), event.getGuiGraphics(), event.getWindow(), Minecraft.getInstance(), event.getPartialTick()));
+	public static void handlerGuiOverlays(RenderGuiEvent.Post event) {
+		POST_GUI_OVERLAY_HANDLERS.forEach(handler -> handler.renderToScreen(event.getGuiGraphics(), event.getPartialTick(), Minecraft.getInstance()));
 	}
 
 	@SubscribeEvent
@@ -75,6 +81,13 @@ public class ClientEvents {
 	@SubscribeEvent
 	public static void handleKeyPress(Key event) {
 		KEY_PRESS_HANDLERS.forEach(handler -> handler.handler(event, Minecraft.getInstance()));
+	}
+
+	@SubscribeEvent
+	public static void tick(PlayerTickEvent.Pre event) {
+		if (event.getEntity().level().isClientSide() && event.getEntity().level().getLevelData().getDayTime() % 50 == 10) {
+			PacketDistributor.sendToServer(new PacketPlayerInformation());
+		}
 	}
 
 }

@@ -1,23 +1,15 @@
 package electrodynamics.common.tags;
 
 import electrodynamics.api.gas.Gas;
-import electrodynamics.common.fluid.types.liquid.FluidClay;
-import electrodynamics.common.fluid.types.liquid.FluidEthanol;
-import electrodynamics.common.fluid.types.liquid.FluidHydraulic;
-import electrodynamics.common.fluid.types.liquid.FluidHydrogen;
-import electrodynamics.common.fluid.types.liquid.FluidHydrogenFluoride;
-import electrodynamics.common.fluid.types.liquid.FluidOxygen;
-import electrodynamics.common.fluid.types.liquid.FluidPolyethylene;
-import electrodynamics.common.fluid.types.liquid.FluidSulfate;
-import electrodynamics.common.fluid.types.liquid.FluidSulfuricAcid;
 import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
@@ -28,6 +20,7 @@ public class ElectrodynamicsTags {
 		Blocks.init();
 		Fluids.init();
 		Gases.init();
+		Enchantments.init();
 	}
 
 	public static class Items {
@@ -37,8 +30,10 @@ public class ElectrodynamicsTags {
 		public static final TagKey<Item> CIRCUITS_ELITE = forgeTag("circuits/elite");
 		public static final TagKey<Item> CIRCUITS_ULTIMATE = forgeTag("circuits/ultimate");
 
+		public static final TagKey<Item> DUST_ALUMINUM = forgeTag("dusts/aluminum");
 		public static final TagKey<Item> DUST_BRONZE = forgeTag("dusts/bronze");
 		public static final TagKey<Item> DUST_COPPER = forgeTag("dusts/copper");
+		public static final TagKey<Item> DUST_CHROMIUM = forgeTag("dusts/chromium");
 		public static final TagKey<Item> DUST_ENDEREYE = forgeTag("dusts/endereye");
 		public static final TagKey<Item> DUST_GOLD = forgeTag("dusts/gold");
 		public static final TagKey<Item> DUST_IRON = forgeTag("dusts/iron");
@@ -55,6 +50,7 @@ public class ElectrodynamicsTags {
 		public static final TagKey<Item> DUST_SULFUR = forgeTag("dusts/sulfur");
 		public static final TagKey<Item> DUST_SUPERCONDUCTIVE = forgeTag("dusts/superconductive");
 		public static final TagKey<Item> DUST_TIN = forgeTag("dusts/tin");
+		public static final TagKey<Item> DUST_TITANIUM = forgeTag("dusts/titanium");
 		public static final TagKey<Item> DUST_VANADIUM = forgeTag("dusts/vanadium");
 
 		public static final TagKey<Item> GEAR_BRONZE = forgeTag("gears/bronze");
@@ -63,16 +59,19 @@ public class ElectrodynamicsTags {
 		public static final TagKey<Item> GEAR_STEEL = forgeTag("gears/steel");
 		public static final TagKey<Item> GEAR_TIN = forgeTag("gears/tin");
 
-		public static final TagKey<Item> IMPURE_DUST_COPPER = forgeTag("impuredust/copper");
-		public static final TagKey<Item> IMPURE_DUST_GOLD = forgeTag("impuredust/gold");
-		public static final TagKey<Item> IMPURE_DUST_IRON = forgeTag("impuredust/iron");
-		public static final TagKey<Item> IMPURE_DUST_LEAD = forgeTag("impuredust/lead");
-		public static final TagKey<Item> IMPURE_DUST_LITHIUM = forgeTag("impuredust/lithium");
-		public static final TagKey<Item> IMPURE_DUST_MOLYBDENUM = forgeTag("impuredust/molybdenum");
-		public static final TagKey<Item> IMPURE_DUST_NETHERITE = forgeTag("impuredust/netherite");
-		public static final TagKey<Item> IMPURE_DUST_SILVER = forgeTag("impuredust/silver");
-		public static final TagKey<Item> IMPURE_DUST_TIN = forgeTag("impuredust/tin");
-		public static final TagKey<Item> IMPURE_DUST_VANADIUM = forgeTag("impuredust/vanadium");
+		public static final TagKey<Item> IMPURE_DUST_ALUMINUM = forgeTag("impuredusts/aluminum");
+		public static final TagKey<Item> IMPURE_DUST_COPPER = forgeTag("impuredusts/copper");
+		public static final TagKey<Item> IMPURE_DUST_CHROMIUM = forgeTag("impuredusts/chromium");
+		public static final TagKey<Item> IMPURE_DUST_GOLD = forgeTag("impuredusts/gold");
+		public static final TagKey<Item> IMPURE_DUST_IRON = forgeTag("impuredusts/iron");
+		public static final TagKey<Item> IMPURE_DUST_LEAD = forgeTag("impuredusts/lead");
+		public static final TagKey<Item> IMPURE_DUST_LITHIUM = forgeTag("impuredusts/lithium");
+		public static final TagKey<Item> IMPURE_DUST_MOLYBDENUM = forgeTag("impuredusts/molybdenum");
+		public static final TagKey<Item> IMPURE_DUST_NETHERITE = forgeTag("impuredusts/netherite");
+		public static final TagKey<Item> IMPURE_DUST_SILVER = forgeTag("impuredusts/silver");
+		public static final TagKey<Item> IMPURE_DUST_TIN = forgeTag("impuredusts/tin");
+		public static final TagKey<Item> IMPURE_DUST_TITANIUM = forgeTag("impuredusts/titanium");
+		public static final TagKey<Item> IMPURE_DUST_VANADIUM = forgeTag("impuredusts/vanadium");
 
 		public static final TagKey<Item> INGOT_ALUMINUM = forgeTag("ingots/aluminum");
 		public static final TagKey<Item> INGOT_BRONZE = forgeTag("ingots/bronze");
@@ -102,7 +101,6 @@ public class ElectrodynamicsTags {
 
 		public static final TagKey<Item> ORE_ALUMINUM = forgeTag("ores/aluminum");
 		public static final TagKey<Item> ORE_CHROMIUM = forgeTag("ores/chromium");
-		public static final TagKey<Item> ORE_COPPER = forgeTag("ores/copper");
 		public static final TagKey<Item> ORE_FLUORITE = forgeTag("ores/fluorite");
 		public static final TagKey<Item> ORE_LEAD = forgeTag("ores/lead");
 		public static final TagKey<Item> ORE_LITHIUM = forgeTag("ores/lithium");
@@ -119,16 +117,16 @@ public class ElectrodynamicsTags {
 		public static final TagKey<Item> ORE_URANIUM = forgeTag("ores/uranium");
 		public static final TagKey<Item> ORE_VANADIUM = forgeTag("ores/vanadium");
 
-		public static final TagKey<Item> OXIDE_CALCIUMCARBONATE = forgeTag("oxide/calciumcarbonate");
-		public static final TagKey<Item> OXIDE_CHROMIUM = forgeTag("oxide/chromium");
-		public static final TagKey<Item> OXIDE_CHROMIUMDISILICIDE = forgeTag("oxide/chromiumdisilicide");
-		public static final TagKey<Item> OXIDE_DISULFUR = forgeTag("oxide/disulfur");
-		public static final TagKey<Item> OXIDE_DITITANIUM = forgeTag("oxide/dititanium");
-		public static final TagKey<Item> OXIDE_SODIUMCARBONATE = forgeTag("oxide/sodiumcarbonate");
-		public static final TagKey<Item> OXIDE_SULFURDICHLORIDE = forgeTag("oxide/sulfurdichloride");
-		public static final TagKey<Item> OXIDE_THIONYLCHLORIDE = forgeTag("oxide/thionylchloride");
-		public static final TagKey<Item> OXIDE_TRISULFUR = forgeTag("oxide/trisulfur");
-		public static final TagKey<Item> OXIDE_VANADIUM = forgeTag("oxide/vanadium");
+		public static final TagKey<Item> OXIDE_CALCIUMCARBONATE = forgeTag("oxides/calciumcarbonate");
+		public static final TagKey<Item> OXIDE_CHROMIUM = forgeTag("oxides/chromium");
+		public static final TagKey<Item> OXIDE_CHROMIUMDISILICIDE = forgeTag("oxides/chromiumdisilicide");
+		public static final TagKey<Item> OXIDE_DISULFUR = forgeTag("oxides/disulfur");
+		public static final TagKey<Item> OXIDE_DITITANIUM = forgeTag("oxides/dititanium");
+		public static final TagKey<Item> OXIDE_SODIUMCARBONATE = forgeTag("oxides/sodiumcarbonate");
+		public static final TagKey<Item> OXIDE_SULFURDICHLORIDE = forgeTag("oxides/sulfurdichloride");
+		public static final TagKey<Item> OXIDE_THIONYLCHLORIDE = forgeTag("oxides/thionylchloride");
+		public static final TagKey<Item> OXIDE_TRISULFUR = forgeTag("oxides/trisulfur");
+		public static final TagKey<Item> OXIDE_VANADIUM = forgeTag("oxides/vanadium");
 
 		public static final TagKey<Item> PLATE_ALUMINUM = forgeTag("plates/aluminum");
 		public static final TagKey<Item> PLATE_BRONZE = forgeTag("plates/bronze");
@@ -162,7 +160,6 @@ public class ElectrodynamicsTags {
 		public static final TagKey<Item> STORAGE_BLOCK_ALUMINUM = forgeTag("storage_blocks/aluminum");
 		public static final TagKey<Item> STORAGE_BLOCK_BRONZE = forgeTag("storage_blocks/bronze");
 		public static final TagKey<Item> STORAGE_BLOCK_CHROMIUM = forgeTag("storage_blocks/chromium");
-		public static final TagKey<Item> STORAGE_BLOCK_COPPER = forgeTag("storage_blocks/copper");
 		public static final TagKey<Item> STORAGE_BLOCK_HSLASTEEL = forgeTag("storage_blocks/hslasteel");
 		public static final TagKey<Item> STORAGE_BLOCK_LEAD = forgeTag("storage_blocks/lead");
 		public static final TagKey<Item> STORAGE_BLOCK_SILVER = forgeTag("storage_blocks/silver");
@@ -225,7 +222,7 @@ public class ElectrodynamicsTags {
 		}
 
 		private static TagKey<Item> forgeTag(String name) {
-			return ItemTags.create(new ResourceLocation("forge", name));
+			return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
 		}
 	}
 
@@ -233,7 +230,6 @@ public class ElectrodynamicsTags {
 
 		public static final TagKey<Block> ORE_ALUMINUM = forgeTag("ores/aluminum");
 		public static final TagKey<Block> ORE_CHROMIUM = forgeTag("ores/chromium");
-		public static final TagKey<Block> ORE_COPPER = forgeTag("ores/copper");
 		public static final TagKey<Block> ORE_FLUORITE = forgeTag("ores/fluorite");
 		public static final TagKey<Block> ORE_LEAD = forgeTag("ores/lead");
 		public static final TagKey<Block> ORE_LITHIUM = forgeTag("ores/lithium");
@@ -253,7 +249,6 @@ public class ElectrodynamicsTags {
 		public static final TagKey<Block> STORAGE_BLOCK_ALUMINUM = forgeTag("storage_blocks/aluminum");
 		public static final TagKey<Block> STORAGE_BLOCK_BRONZE = forgeTag("storage_blocks/bronze");
 		public static final TagKey<Block> STORAGE_BLOCK_CHROMIUM = forgeTag("storage_blocks/chromium");
-		public static final TagKey<Block> STORAGE_BLOCK_COPPER = forgeTag("storage_blocks/copper");
 		public static final TagKey<Block> STORAGE_BLOCK_HSLASTEEL = forgeTag("storage_blocks/hslasteel");
 		public static final TagKey<Block> STORAGE_BLOCK_LEAD = forgeTag("storage_blocks/lead");
 		public static final TagKey<Block> STORAGE_BLOCK_SILVER = forgeTag("storage_blocks/silver");
@@ -275,13 +270,16 @@ public class ElectrodynamicsTags {
 		public static final TagKey<Block> BLOCK_RAW_ORE_URANIUM = forgeTag("storage_blocks/rawuranium");
 		public static final TagKey<Block> BLOCK_RAW_ORE_VANADIUM = forgeTag("storage_blocks/rawvanadinite");
 
+
+		public static final TagKey<Block> ELECTRIC_DRILL_BLOCKS = forgeTag("electricdrillblocks");
+
 		public static final TagKey<Block> ORES = forgeTag("ores");
 
 		private static void init() {
 		}
 
 		private static TagKey<Block> forgeTag(String name) {
-			return BlockTags.create(new ResourceLocation("forge", name));
+			return BlockTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
 		}
 
 	}
@@ -289,31 +287,48 @@ public class ElectrodynamicsTags {
 	// Only the Tag objects should ever be visible from this class!
 	public static class Fluids {
 
-		public static final TagKey<Fluid> SULFURIC_ACID = forgeTag(FluidSulfuricAcid.FORGE_TAG);
-		public static final TagKey<Fluid> ETHANOL = forgeTag(FluidEthanol.FORGE_TAG);
-		public static final TagKey<Fluid> HYDROGEN_FLUORIDE = forgeTag(FluidHydrogenFluoride.FORGE_TAG);
-		public static final TagKey<Fluid> POLYETHLYENE = forgeTag(FluidPolyethylene.FORGE_TAG);
-		public static final TagKey<Fluid> COPPER_SULF = forgeTag(FluidSulfate.FORGE_TAG + "copper");
-		public static final TagKey<Fluid> TIN_SULF = forgeTag(FluidSulfate.FORGE_TAG + "tin");
-		public static final TagKey<Fluid> SILVER_SULF = forgeTag(FluidSulfate.FORGE_TAG + "silver");
-		public static final TagKey<Fluid> LEAD_SULF = forgeTag(FluidSulfate.FORGE_TAG + "lead");
-		public static final TagKey<Fluid> VANADIUM_SULF = forgeTag(FluidSulfate.FORGE_TAG + "vanadium");
-		public static final TagKey<Fluid> IRON_SULF = forgeTag(FluidSulfate.FORGE_TAG + "iron");
-		public static final TagKey<Fluid> GOLD_SULF = forgeTag(FluidSulfate.FORGE_TAG + "gold");
-		public static final TagKey<Fluid> LITHIUM_SULF = forgeTag(FluidSulfate.FORGE_TAG + "lithium");
-		public static final TagKey<Fluid> MOLYBDENUM_SULF = forgeTag(FluidSulfate.FORGE_TAG + "molybdenum");
-		public static final TagKey<Fluid> NETHERITE_SULF = forgeTag(FluidSulfate.FORGE_TAG + "netherite");
-		public static final TagKey<Fluid> CLAY = forgeTag(FluidClay.FORGE_TAG);
-		public static final TagKey<Fluid> OXYGEN = forgeTag(FluidOxygen.FORGE_TAG);
-		public static final TagKey<Fluid> HYDROGEN = forgeTag(FluidHydrogen.FORGE_TAG);
-		public static final TagKey<Fluid> HYDRAULIC_FLUID = forgeTag(FluidHydraulic.FORGE_TAG);
+		public static final TagKey<Fluid> AMMONIA = forgeTag("ammonia");
+		public static final TagKey<Fluid> SULFURIC_ACID = forgeTag("sulfuric_acid");
+		public static final TagKey<Fluid> HYDROFLUORIC_ACID = forgeTag("hydrofluoric_acid");
+		public static final TagKey<Fluid> HYDROCHLORIC_ACID = forgeTag("hydrochloric_acid");
+		public static final TagKey<Fluid> NITRIC_ACID = forgeTag("nitric_acid");
+		public static final TagKey<Fluid> AQUA_REGIA = forgeTag("aquaregia");
+		public static final TagKey<Fluid> ETHANOL = forgeTag("ethanol");
+		public static final TagKey<Fluid> POLYETHLYENE = forgeTag("polyethylene");
+		public static final TagKey<Fluid> CLAY = forgeTag("clay");
+		public static final TagKey<Fluid> OXYGEN = forgeTag("oxygen");
+		public static final TagKey<Fluid> HYDROGEN = forgeTag("hydrogen");
+		public static final TagKey<Fluid> HYDRAULIC_FLUID = forgeTag("hydraulic_fluid");
+		public static final TagKey<Fluid> COPPER_SULFATE = forgeTag("sulfates/copper");
+		public static final TagKey<Fluid> TIN_SULFATE = forgeTag("sulfates/tin");
+		public static final TagKey<Fluid> SILVER_SULFATE = forgeTag("sulfates/silver");
+		public static final TagKey<Fluid> LEAD_SULFATE = forgeTag("sulfates/lead");
+		public static final TagKey<Fluid> VANADIUM_SULFATE = forgeTag("sulfates/vanadium");
+		public static final TagKey<Fluid> IRON_SULFATE = forgeTag("sulfates/iron");
+		public static final TagKey<Fluid> GOLD_SULFATE = forgeTag("sulfates/gold");
+		public static final TagKey<Fluid> LITHIUM_SULFATE = forgeTag("sulfates/lithium");
+		public static final TagKey<Fluid> MOLYBDENUM_SULFATE = forgeTag("sulfates/molybdenum");
+		public static final TagKey<Fluid> NETHERITE_SULFATE = forgeTag("sulfates/netherite");
+		public static final TagKey<Fluid> PURE_COPPER = forgeTag("puremineral/copper");
+		public static final TagKey<Fluid> PURE_TIN = forgeTag("puremineral/tin");
+		public static final TagKey<Fluid> PURE_SILVER = forgeTag("puremineral/silver");
+		public static final TagKey<Fluid> PURE_LEAD = forgeTag("puremineral/lead");
+		public static final TagKey<Fluid> PURE_VANADIUM = forgeTag("puremineral/vanadium");
+		public static final TagKey<Fluid> PURE_IRON = forgeTag("puremineral/iron");
+		public static final TagKey<Fluid> PURE_GOLD = forgeTag("puremineral/gold");
+		public static final TagKey<Fluid> PURE_LITHIUM = forgeTag("puremineral/lithium");
+		public static final TagKey<Fluid> PURE_MOLYBDENUM = forgeTag("puremineral/molybdenum");
+		public static final TagKey<Fluid> PURE_NETHERITE = forgeTag("puremineral/netherite");
+		public static final TagKey<Fluid> PURE_ALUMINUM = forgeTag("puremineral/aluminum");
+		public static final TagKey<Fluid> PURE_CHROMIUM = forgeTag("puremineral/chromium");
+		public static final TagKey<Fluid> PURE_TITANIUM = forgeTag("puremineral/titanium");
 
 		private static void init() {
 
 		}
 
 		private static TagKey<Fluid> forgeTag(String name) {
-			return FluidTags.create(new ResourceLocation("forge", name));
+			return FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
 		}
 
 	}
@@ -323,6 +338,12 @@ public class ElectrodynamicsTags {
 		public static final TagKey<Gas> HYDROGEN = forgeTag("hydrogen");
 		public static final TagKey<Gas> OXYGEN = forgeTag("oxygen");
 		public static final TagKey<Gas> STEAM = forgeTag("steam");
+		public static final TagKey<Gas> NITROGEN = forgeTag("nitrogen");
+		public static final TagKey<Gas> CARBON_DIOXIDE = forgeTag("carbondioxide");
+		public static final TagKey<Gas> ARGON = forgeTag("argon");
+		public static final TagKey<Gas> SULFUR_DIOXIDE = forgeTag("sulfurdioxide");
+		public static final TagKey<Gas> AMMONIA = forgeTag("ammonia");
+
 
 		public static final TagKey<Gas> IS_CORROSIVE = forgeTag("iscorrosive");
 
@@ -331,11 +352,25 @@ public class ElectrodynamicsTags {
 		}
 
 		private static TagKey<Gas> forgeTag(String name) {
-			return create(new ResourceLocation("forge", name));
+			return create(ResourceLocation.fromNamespaceAndPath("c", name));
 		}
 
 		public static TagKey<Gas> create(ResourceLocation loc) {
 			return TagKey.create(ElectrodynamicsGases.GAS_REGISTRY_KEY, loc);
+		}
+	}
+
+	public static class Enchantments {
+
+		public static final TagKey<Enchantment> EFFICIENCY = forgeTag("efficiency");
+		public static final TagKey<Enchantment> UNBREAKING = forgeTag("unbreaking");
+
+		public static final TagKey<Enchantment> SILK_TOUCH = forgeTag("silk_touch");
+
+		private static void init()  { }
+
+		private static TagKey<Enchantment> forgeTag(String name) {
+			return TagKey.create(Registries.ENCHANTMENT,ResourceLocation.fromNamespaceAndPath("c", name));
 		}
 	}
 

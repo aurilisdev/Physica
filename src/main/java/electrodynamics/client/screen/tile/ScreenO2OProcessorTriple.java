@@ -6,7 +6,7 @@ import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
-import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
+import electrodynamics.prefab.screen.component.types.wrapper.WrapperInventoryIO;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
@@ -20,7 +20,7 @@ public class ScreenO2OProcessorTriple extends GenericScreen<ContainerO2OProcesso
 	public ScreenO2OProcessorTriple(ContainerO2OProcessorTriple container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(0);
 				if (processor.isActive()) {
@@ -30,7 +30,7 @@ public class ScreenO2OProcessorTriple extends GenericScreen<ContainerO2OProcesso
 			return 0;
 		}, 84 - ContainerO2OProcessor.startXOffset, 24));
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(1);
 				if (processor.isActive()) {
@@ -40,7 +40,7 @@ public class ScreenO2OProcessorTriple extends GenericScreen<ContainerO2OProcesso
 			return 0;
 		}, 84 - ContainerO2OProcessor.startXOffset, 44));
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			GenericTile furnace = container.getHostFromIntArray();
+			GenericTile furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(2);
 				if (processor.isActive()) {
@@ -53,6 +53,6 @@ public class ScreenO2OProcessorTriple extends GenericScreen<ContainerO2OProcesso
 		inventoryLabelY += 20;
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 
-		new InventoryIOWrapper(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE + 2, 75, 82 + 20, 8, 72 + 20);
+		new WrapperInventoryIO(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE + 2, 75, 82 + 20, 8, 72 + 20);
 	}
 }

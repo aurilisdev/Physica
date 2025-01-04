@@ -1,5 +1,6 @@
 package electrodynamics.client.render.event.levelstage;
 
+import net.minecraft.client.DeltaTracker;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -20,7 +21,7 @@ public abstract class AbstractLevelStageHandler {
 
 	public abstract boolean shouldRender(Stage stage);
 
-	public abstract void render(Camera camera, Frustum frustum, LevelRenderer renderer, PoseStack stack, Matrix4f projectionMatrix, Minecraft minecraft, int renderTick, float partialTick);
+	public abstract void render(Camera camera, Frustum frustum, LevelRenderer renderer, PoseStack stack, Matrix4f projectionMatrix, Minecraft minecraft, int renderTick, DeltaTracker deltaTracker);
 
 	public void clear() {
 

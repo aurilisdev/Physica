@@ -4,6 +4,7 @@ import java.util.function.DoubleSupplier;
 
 import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -12,7 +13,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ScreenComponentProgress extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/progress.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/progress.png");
 
 	private final DoubleSupplier progressInfoHandler;
 	private final ProgressBars bar;
@@ -34,7 +35,7 @@ public class ScreenComponentProgress extends ScreenComponentGeneric {
 			int xStart = on.textureU() + on.textureWidth() - progress;
 			graphics.blit(on.getLocation(), guiWidth + xLocation + on.textureWidth() - progress, guiHeight + yLocation, xStart, on.textureV(), progress, on.textureHeight(), on.imageWidth(), on.imageHeight());
 			break;
-		case COUNTDOWN_FLAME:
+		case COUNTDOWN_FLAME, FAN:
 			progress = (int) (progressInfoHandler.getAsDouble() * on.textureHeight());
 			graphics.blit(on.getLocation(), guiWidth + xLocation, guiHeight + yLocation + on.textureHeight() - progress, on.textureU(), on.textureV() + on.textureHeight() - progress, on.textureWidth(), progress, on.imageWidth(), on.imageHeight());
 			break;
@@ -53,7 +54,8 @@ public class ScreenComponentProgress extends ScreenComponentGeneric {
 		PROGRESS_ARROW_LEFT(ProgressTextures.ARROW_LEFT_OFF, ProgressTextures.ARROW_LEFT_ON),
 		COUNTDOWN_FLAME(ProgressTextures.FLAME_OFF, ProgressTextures.FLAME_ON),
 		BATTERY_CHARGE_RIGHT(ProgressTextures.BATTER_CHARGE_RIGHT_OFF, ProgressTextures.BATTER_CHARGE_RIGHT_ON),
-		PROGRESS_ARROW_RIGHT_BIG(ProgressTextures.ARROW_RIGHT_BIG_OFF, ProgressTextures.ARROW_RIGHT_BIG_ON);
+		PROGRESS_ARROW_RIGHT_BIG(ProgressTextures.ARROW_RIGHT_BIG_OFF, ProgressTextures.ARROW_RIGHT_BIG_ON),
+		FAN(ProgressTextures.FAN_OFF, ProgressTextures.FAN_ON);
 
 		public final ProgressTextures off;
 		public final ProgressTextures on;
@@ -79,7 +81,11 @@ public class ScreenComponentProgress extends ScreenComponentGeneric {
 		COMPRESS_ARROW_OFF(15, 9, 0, 0, 15, 9, "compressarrow"),
 		DECOMPRESS_ARROW_OFF(15, 9, 0, 0, 15, 9, "decompressarrow"),
 		FEYNMAN_DIAGRAM_OFF(65, 46, 0, 0, 65, 92, "feynman_diagram"),
-		FEYNMAN_DIAGRAM_ON(65, 46, 0, 46, 65, 92, "feynman_diagram");
+		FEYNMAN_DIAGRAM_ON(65, 46, 0, 46, 65, 92, "feynman_diagram"),
+		FAN_OFF(17, 17, 0, 0, 34, 17, "fan"),
+		FAN_ON(17, 17, 17, 0, 34, 17, "fan"),
+		;
+
 
 		private final int textureWidth;
 		private final int textureHeight;
@@ -96,7 +102,7 @@ public class ScreenComponentProgress extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = new ResourceLocation(References.ID + ":textures/screen/component/progress/" + name + ".png");
+			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/progress/" + name + ".png");
 		}
 
 		@Override

@@ -1,0 +1,34 @@
+{
+  "type": "electrodynamics:energized_alloyer_recipe",
+  "experience": 0.4000000059604645,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.75,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:slag"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ingots/chromium"
+      }
+    },
+    {
+      "count": 32,
+      "ingredient": {
+        "tag": "c:ingots/steel"
+      }
+    }
+  ],
+  "output": {
+    "count": 32,
+    "id": "electrodynamics:ingotstainlesssteel"
+  },
+  "ticks": 50,
+  "usagepertick": 50.0
+}

@@ -1,0 +1,20 @@
+{
+  "values": [
+    "#c:ingots/tin",
+    "#c:ingots/silver",
+    "#c:ingots/steel",
+    "#c:ingots/lead",
+    "#c:ingots/superconductive",
+    "#c:ingots/bronze",
+    "#c:ingots/vanadium",
+    "#c:ingots/lithium",
+    "#c:ingots/aluminum",
+    "#c:ingots/chromium",
+    "#c:ingots/stainlesssteel",
+    "#c:ingots/vanadiumsteel",
+    "#c:ingots/hslasteel",
+    "#c:ingots/titanium",
+    "#c:ingots/molybdenum",
+    "#c:ingots/titaniumcarbide"
+  ]
+}

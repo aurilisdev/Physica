@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SCS",
+    "SMS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:electricfurnace"
+  }
+}

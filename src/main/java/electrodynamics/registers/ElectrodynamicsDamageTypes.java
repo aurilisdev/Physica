@@ -2,7 +2,7 @@ package electrodynamics.registers;
 
 import electrodynamics.api.References;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageEffects;
@@ -18,10 +18,10 @@ public class ElectrodynamicsDamageTypes {
 	public static final ResourceKey<DamageType> PLASMA_BOLT = create("plasma_bolt");
 
 	public static ResourceKey<DamageType> create(String name) {
-		return ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(References.ID, name));
+		return ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(References.ID, name));
 	}
 
-	public static void registerTypes(BootstapContext<DamageType> context) {
+	public static void registerTypes(BootstrapContext<DamageType> context) {
 		context.register(ELECTRICITY, new DamageType("electricity", DamageScaling.NEVER, 0, DamageEffects.HURT));
 		context.register(RADIATION, new DamageType("radiation", DamageScaling.NEVER, 0.1F, DamageEffects.HURT));
 		context.register(ACCELERATED_BOLT, new DamageType("acceleratedbolt", DamageScaling.NEVER, 0, DamageEffects.HURT));

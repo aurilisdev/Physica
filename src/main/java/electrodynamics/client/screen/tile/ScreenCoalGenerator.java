@@ -14,10 +14,11 @@ import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentTemperature;
-import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
+import electrodynamics.prefab.screen.component.types.wrapper.WrapperInventoryIO;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.object.TransferPack;
+import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
@@ -30,7 +31,7 @@ public class ScreenCoalGenerator extends GenericScreen<ContainerCoalGenerator> {
 	public ScreenCoalGenerator(ContainerCoalGenerator container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentProgress(ProgressBars.COUNTDOWN_FLAME, () -> {
-			TileCoalGenerator box = container.getHostFromIntArray();
+			TileCoalGenerator box = container.getSafeHost();
 			if (box != null) {
 				return (double) box.burnTime.get() / (double) box.maxBurnTime.get();
 			}
@@ -39,23 +40,23 @@ public class ScreenCoalGenerator extends GenericScreen<ContainerCoalGenerator> {
 		addComponent(new ScreenComponentTemperature(this::getTemperatureInformation, -AbstractScreenComponentInfo.SIZE + 1, 2 + AbstractScreenComponentInfo.SIZE));
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
-			TileCoalGenerator coal = menu.getHostFromIntArray();
+			TileCoalGenerator coal = menu.getSafeHost();
 			if (coal == null) {
 				return;
 			}
-			TransferPack output = TransferPack.ampsVoltage(Constants.COALGENERATOR_MAX_OUTPUT.getAmps() * Math.min((coal.heat.getValue() - 27.0) / (3000.0 - 27.0), 1), Constants.COALGENERATOR_MAX_OUTPUT.getVoltage());
+			TransferPack output = TransferPack.ampsVoltage(Constants.COALGENERATOR_AMPERAGE * Math.min((coal.heat.getValue() - 27.0) / (3000.0 - 27.0), 1), ElectrodynamicsCapabilities.DEFAULT_VOLTAGE);
 			graphics.drawString(font, ElectroTextUtils.gui("coalgenerator.timeleft", ChatFormatter.getChatDisplayShort((double) coal.burnTime.get() / 20.0, DisplayUnit.TIME_SECONDS)), inventoryLabelX + 60, inventoryLabelY - 53, 4210752, false);
 			graphics.drawString(font, ElectroTextUtils.gui("machine.current", ChatFormatter.getChatDisplayShort(output.getAmps(), DisplayUnit.AMPERE)), inventoryLabelX + 60, inventoryLabelY - 40, 4210752, false);
 			graphics.drawString(font, ElectroTextUtils.gui("machine.output", ChatFormatter.getChatDisplayShort(output.getWatts(), DisplayUnit.WATT)), inventoryLabelX + 60, inventoryLabelY - 27, 4210752, false);
 			graphics.drawString(font, ElectroTextUtils.gui("machine.voltage", ChatFormatter.getChatDisplayShort(output.getVoltage(), DisplayUnit.VOLTAGE)), inventoryLabelX + 60, inventoryLabelY - 14, 4210752, false);
 		}));
 
-		new InventoryIOWrapper(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE * 2 + 2, 75, 82, 8, 72);
+		new WrapperInventoryIO(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE * 2 + 2, 75, 82, 8, 72);
 	}
 
 	private List<FormattedCharSequence> getTemperatureInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileCoalGenerator box = menu.getHostFromIntArray();
+		TileCoalGenerator box = menu.getSafeHost();
 		if (box == null) {
 			return list;
 		}

@@ -56,14 +56,4 @@ public class TickableSoundTile<T extends BlockEntity & ITickableSound> extends A
         tile.setNotPlaying();
     }
 
-    public void stopAbstract() {
-        super.stop();
-    }
-
-    @Override
-    public float getVolume() {
-        // TODO Auto-generated method stub
-        return super.getVolume();
-    }
-
 }

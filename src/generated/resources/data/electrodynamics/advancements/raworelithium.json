@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:raworelepidolite"
-            ]
+            "items": "electrodynamics:raworelepidolite"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.rawlithium.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:raworelepidolite"
+      "count": 1,
+      "id": "electrodynamics:raworelepidolite"
     },
-    "show_toast": true,
     "title": {
       "color": "gray",
       "translate": "advancement.electrodynamics.rawlithium.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 10
-  },
-  "sends_telemetry_event": false
+  }
 }

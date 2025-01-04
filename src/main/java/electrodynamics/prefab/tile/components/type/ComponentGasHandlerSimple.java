@@ -12,14 +12,13 @@ import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.api.gas.PropertyGasTank;
-import electrodynamics.prefab.block.GenericEntityBlock;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.state.BlockState;
@@ -56,11 +55,11 @@ public class ComponentGasHandlerSimple extends PropertyGasTank implements ICompo
     @Nullable
     private IGasHandler outputOptional = null;
 
-    public ComponentGasHandlerSimple(GenericTile holder, String key, double capacity, double maxTemperature, int maxPressure) {
+    public ComponentGasHandlerSimple(GenericTile holder, String key, int capacity, int maxTemperature, int maxPressure) {
         super(holder, key, capacity, maxTemperature, maxPressure);
     }
 
-    public ComponentGasHandlerSimple(GenericTile holder, String key, double capacity, double maxTemperature, int maxPressure, Predicate<GasStack> isGasValid) {
+    public ComponentGasHandlerSimple(GenericTile holder, String key, int capacity, int maxTemperature, int maxPressure, Predicate<GasStack> isGasValid) {
         super(holder, key, capacity, maxTemperature, maxPressure, isGasValid);
     }
 
@@ -68,15 +67,15 @@ public class ComponentGasHandlerSimple extends PropertyGasTank implements ICompo
         super(other);
     }
 
-    public ComponentGasHandlerSimple setInputDirections(Direction... directions) {
+    public ComponentGasHandlerSimple setInputDirections(BlockEntityUtils.MachineDirection... directions) {
         isSided = true;
-        inputDirections = directions;
+        inputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         return this;
     }
 
-    public ComponentGasHandlerSimple setOutputDirections(Direction... directions) {
+    public ComponentGasHandlerSimple setOutputDirections(BlockEntityUtils.MachineDirection... directions) {
         isSided = true;
-        outputDirections = directions;
+        outputDirections = BlockEntityUtils.MachineDirection.toDirectionArray(directions);
         return this;
     }
 
@@ -137,8 +136,8 @@ public class ComponentGasHandlerSimple extends PropertyGasTank implements ICompo
 
     @Override
     public void refreshIfUpdate(BlockState oldState, BlockState newState) {
-        if (isSided && oldState.hasProperty(GenericEntityBlock.FACING) && newState.hasProperty(GenericEntityBlock.FACING) && oldState.getValue(GenericEntityBlock.FACING) != newState.getValue(GenericEntityBlock.FACING)) {
-            defineOptionals(newState.getValue(GenericEntityBlock.FACING));
+        if (isSided && oldState.hasProperty(ElectrodynamicsBlockStates.FACING) && newState.hasProperty(ElectrodynamicsBlockStates.FACING) && oldState.getValue(ElectrodynamicsBlockStates.FACING) != newState.getValue(ElectrodynamicsBlockStates.FACING)) {
+            defineOptionals(newState.getValue(ElectrodynamicsBlockStates.FACING));
         }
     }
 
@@ -221,7 +220,7 @@ public class ComponentGasHandlerSimple extends PropertyGasTank implements ICompo
         }
 
         @Override
-        public GasStack drain(double amount, GasAction action) {
+        public GasStack drain(int amount, GasAction action) {
             return GasStack.EMPTY;
         }
 
@@ -239,7 +238,7 @@ public class ComponentGasHandlerSimple extends PropertyGasTank implements ICompo
         }
 
         @Override
-        public double fill(GasStack resource, GasAction action) {
+        public int fill(GasStack resource, GasAction action) {
             return 0;
         }
 

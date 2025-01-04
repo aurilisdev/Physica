@@ -3,7 +3,7 @@ package electrodynamics.common.inventory.container.tile;
 import electrodynamics.common.item.ItemDrillHead;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.tile.machines.quarry.TileQuarry;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotQuarryTrashcan;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotUpgrade;
@@ -31,7 +31,7 @@ public class ContainerQuarry extends GenericContainerBlockEntity<TileQuarry> {
 
 	@Override
 	public void addInventorySlots(Container inv, Inventory playerinv) {
-		playerInvOffset = 58;
+		setPlayerInvOffset(58);
 		addSlot(new SlotRestricted(SlotType.NORMAL, IconType.DRILL_HEAD_DARK, inv, nextIndex(), 30, 100).setRestriction(ItemDrillHead.class).setIOColor(new Color(0, 240, 255, 255)));
 		for (int i = 0; i < 2; ++i) {
 			for (int j = 0; j < 3; ++j) {

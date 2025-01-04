@@ -13,6 +13,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
+//Defunct class should be removed at some point
 public class ComponentPacketHandler implements IComponent {
 
     private GenericTile holder;
@@ -31,6 +32,7 @@ public class ComponentPacketHandler implements IComponent {
         return holder;
     }
 
+    /*
     public void sendProperties() {
         Level world = holder.getLevel();
 
@@ -49,11 +51,13 @@ public class ComponentPacketHandler implements IComponent {
 
             PacketSendUpdatePropertiesClient packet = new PacketSendUpdatePropertiesClient(holder);
 
-            players.forEach(p -> PacketDistributor.PLAYER.with(p).send(packet));
+            players.forEach(p -> PacketDistributor.sendToPlayer(p, packet));
 
             holder.getPropertyManager().clean();
         }
     }
+
+     */
 
     @Override
     public IComponentType getType() {

@@ -55,7 +55,7 @@ public abstract class FluidItem2ItemRecipeCategory<T extends FluidItem2ItemRecip
         List<List<ItemStack>> ingredients = new ArrayList<>();
 
         for (CountableIngredient ing : recipe.getCountedIngredients()) {
-            ingredients.add(Arrays.asList(ing.getItems()));
+            ingredients.add(Arrays.asList(ing.getItemsArray()));
         }
 
         for (FluidIngredient ing : recipe.getFluidIngredients()) {
@@ -82,7 +82,7 @@ public abstract class FluidItem2ItemRecipeCategory<T extends FluidItem2ItemRecip
     public List<ItemStack> getItemOutputs(FluidItem2ItemRecipe recipe) {
         List<ItemStack> outputItems = new ArrayList<>();
 
-        outputItems.add(recipe.getItemOutputNoAccess());
+        outputItems.add(recipe.getItemRecipeOutput());
 
         if (recipe.hasItemBiproducts()) {
             outputItems.addAll(Arrays.asList(recipe.getFullItemBiStacks()));

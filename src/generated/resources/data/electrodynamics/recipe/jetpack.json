@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "P": {
+      "item": "electrodynamics:gaspipeuninsulatedsteel"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "T": {
+      "item": "electrodynamics:gastanksteel"
+    }
+  },
+  "pattern": [
+    "CTC",
+    "SPS",
+    "P P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:jetpack"
+  }
+}

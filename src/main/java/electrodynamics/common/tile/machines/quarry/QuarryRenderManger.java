@@ -9,6 +9,7 @@ import com.mojang.datafixers.util.Pair;
 
 import electrodynamics.client.render.event.levelstage.HandlerQuarryArm;
 import electrodynamics.common.item.subtype.SubtypeDrillHead;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.math.PrecisionVector;
 import electrodynamics.prefab.utilities.object.Location;
 import electrodynamics.prefab.utilities.object.QuarryArmDataHolder;
@@ -35,7 +36,7 @@ public class QuarryRenderManger {
 	public void render(TileQuarry quarry) {
 		BlockPos pos = quarry.getBlockPos();
 		HandlerQuarryArm.removeRenderData(pos);
-		if (!quarry.hasCorners() || quarry.miningPos.get() == null || quarry.miningPos.get().equals(TileQuarry.OUT_OF_REACH)) {
+		if (!quarry.hasCorners() || quarry.miningPos.get() == null || quarry.miningPos.get().equals(BlockEntityUtils.OUT_OF_REACH)) {
 			return;
 		}
 		onRight = quarry.cornerOnRight.get();
@@ -1449,11 +1450,11 @@ public class QuarryRenderManger {
 
 	@Nullable
 	private QuarryArmFrameWrapper getCurrentFrame(TileQuarry quarry) {
-		if (quarry.miningPos.get().equals(TileQuarry.OUT_OF_REACH)) {
+		if (quarry.miningPos.get().equals(BlockEntityUtils.OUT_OF_REACH)) {
 			return new QuarryArmFrameWrapper(null, 0, 0, 0);
 		}
 
-		if (quarry.prevMiningPos.get().equals(TileQuarry.OUT_OF_REACH) || quarry.prevMiningPos.get().equals(quarry.miningPos.get())) {
+		if (quarry.prevMiningPos.get().equals(BlockEntityUtils.OUT_OF_REACH) || quarry.prevMiningPos.get().equals(quarry.miningPos.get())) {
 			return new QuarryArmFrameWrapper(new Location(quarry.miningPos.get()).add(-0.5, -0.5, -0.5), 0, 0, 0);
 		}
 

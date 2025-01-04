@@ -1,12 +1,11 @@
 package electrodynamics.client.screen.tile;
 
 import electrodynamics.common.inventory.container.tile.ContainerCompressor;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.compressor.GenericTileCompressor;
+import electrodynamics.common.tile.pipelines.gas.gastransformer.compressor.GenericTileBasicCompressor;
 import electrodynamics.prefab.screen.component.types.ScreenComponentCondensedFluid;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressTextures;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGaugeInput;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasTemperature;
@@ -22,15 +21,15 @@ public class ScreenCompressor extends GenericMaterialScreen<ContainerCompressor>
 	public ScreenCompressor(ContainerCompressor container, Inventory inv, Component titleIn) {
 		super(container, inv, titleIn);
 		addComponent(new ScreenComponentGeneric(ProgressTextures.COMPRESS_ARROW_OFF, 65, 40));
-		addComponent(new ScreenComponentGasGaugeInput(() -> {
-			GenericTileCompressor boiler = container.getHostFromIntArray();
+		addComponent(new ScreenComponentGasGauge(() -> {
+			GenericTileBasicCompressor.TileCompressor boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getInputTanks()[0];
 			}
 			return null;
 		}, 41, 18));
 		addComponent(new ScreenComponentGasGauge(() -> {
-			GenericTileCompressor boiler = container.getHostFromIntArray();
+			GenericTileBasicCompressor.TileCompressor boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getOutputTanks()[0];
 			}
@@ -41,7 +40,7 @@ public class ScreenCompressor extends GenericMaterialScreen<ContainerCompressor>
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 
 		addComponent(new ScreenComponentCondensedFluid(() -> {
-			GenericTileCompressor generic = container.getHostFromIntArray();
+			GenericTileBasicCompressor.TileCompressor generic = container.getSafeHost();
 			if (generic == null) {
 				return null;
 			}

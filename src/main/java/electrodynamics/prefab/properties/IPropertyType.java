@@ -1,46 +1,36 @@
 package electrodynamics.prefab.properties;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
 /**
  * Interface to allow for custom property types in dependent mods
- * 
- * @author skip999
  *
+ * @author skip999
  */
 
-public interface IPropertyType {
+public interface IPropertyType<TYPE, BUFFERTYPE> {
 
-	public boolean hasChanged(Object currentValue, Object newValue);
+    default boolean hasChanged(TYPE currentValue, TYPE newValue) {
+        return currentValue.equals(newValue);
+    }
 
-	public void writeToBuffer(BufferWriter writer);
+    public StreamCodec<BUFFERTYPE, TYPE> getPacketCodec();
 
-	public Object readFromBuffer(BufferReader reader);
+    public void writeToTag(TagWriter<TYPE> writer);
 
-	public void writeToTag(TagWriter writer);
+    public TYPE readFromTag(TagReader<TYPE> reader);
 
-	public Object readFromTag(TagReader reader);
+    public ResourceLocation getId();
 
-	public Object attemptCast(Object value);
+    public static final record TagWriter<TYPE>(Property<TYPE> prop, CompoundTag tag, HolderLookup.Provider registries) {
 
-	public ResourceLocation getId();
+    }
 
-	public static final record BufferWriter(Object value, FriendlyByteBuf buf) {
+    public static final record TagReader<TYPE>(Property<TYPE> prop, CompoundTag tag, HolderLookup.Provider registries) {
 
-	}
-
-	public static final record BufferReader(FriendlyByteBuf buf) {
-
-	}
-
-	public static final record TagWriter(Property<?> prop, CompoundTag tag) {
-
-	}
-
-	public static final record TagReader(Property<?> prop, CompoundTag tag) {
-
-	}
+    }
 
 }

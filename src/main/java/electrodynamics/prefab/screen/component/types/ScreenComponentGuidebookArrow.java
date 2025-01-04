@@ -3,6 +3,7 @@ package electrodynamics.prefab.screen.component.types;
 import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.client.guidebook.ScreenGuidebook;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import net.minecraft.resources.ResourceLocation;
 
 public class ScreenComponentGuidebookArrow extends ScreenComponentGeneric {
@@ -45,7 +46,7 @@ public class ScreenComponentGuidebookArrow extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = new ResourceLocation(References.ID + ":textures/screen//guidebook/buttons/" + name + ".png");
+			loc = ResourceLocation.parse(References.ID + ":textures/screen//guidebook/buttons/" + name + ".png");
 		}
 
 		@Override

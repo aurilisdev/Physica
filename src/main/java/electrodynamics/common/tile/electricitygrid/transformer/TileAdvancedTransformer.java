@@ -4,10 +4,9 @@ import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerAdvancedDowngradeTransformer;
 import electrodynamics.common.inventory.container.tile.ContainerAdvancedUpgradeTransformer;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
-import electrodynamics.prefab.tile.components.IComponentType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -22,12 +21,7 @@ public abstract class TileAdvancedTransformer extends TileGenericTransformer {
 
 	public TileAdvancedTransformer(BlockEntityType<?> type, BlockPos worldPosition, BlockState blockState, double defaultCoilRatio) {
 		super(type, worldPosition, blockState);
-		coilRatio = property(new Property<>(PropertyType.Double, "coilratio", defaultCoilRatio)).onChange((prop, old) -> {
-			if (level.isClientSide || hasComponent(IComponentType.Tickable)) {
-				return;
-			}
-			setChanged();
-		});
+		coilRatio = property(new Property<>(PropertyTypes.DOUBLE, "coilratio", defaultCoilRatio));
 		this.defaultCoilRatio = defaultCoilRatio;
 	}
 
@@ -45,7 +39,7 @@ public abstract class TileAdvancedTransformer extends TileGenericTransformer {
 	public static final class TileAdvancedDowngradeTransformer extends TileAdvancedTransformer {
 
 		public TileAdvancedDowngradeTransformer(BlockPos worldPosition, BlockState blockState) {
-			super(ElectrodynamicsBlockTypes.TILE_ADVANCEDDOWNGRADETRANSFORMER.get(), worldPosition, blockState, 0.5);
+			super(ElectrodynamicsTiles.TILE_ADVANCEDDOWNGRADETRANSFORMER.get(), worldPosition, blockState, 0.5);
 			addComponent(new ComponentContainerProvider(SubtypeMachine.advanceddowngradetransformer, this).createMenu((id, playerinv) -> new ContainerAdvancedDowngradeTransformer(id, playerinv, getCoordsArray())));
 		}
 
@@ -54,7 +48,7 @@ public abstract class TileAdvancedTransformer extends TileGenericTransformer {
 	public static final class TileAdvancedUpgradeTransformer extends TileAdvancedTransformer {
 
 		public TileAdvancedUpgradeTransformer(BlockPos worldPosition, BlockState blockState) {
-			super(ElectrodynamicsBlockTypes.TILE_ADVANCEDUPGRADETRANSFORMER.get(), worldPosition, blockState, 2.0);
+			super(ElectrodynamicsTiles.TILE_ADVANCEDUPGRADETRANSFORMER.get(), worldPosition, blockState, 2.0);
 			addComponent(new ComponentContainerProvider(SubtypeMachine.advancedupgradetransformer, this).createMenu((id, playerinv) -> new ContainerAdvancedUpgradeTransformer(id, playerinv, getCoordsArray())));
 		}
 

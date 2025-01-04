@@ -15,10 +15,6 @@ import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod.EventBusSubscriber;
-import net.neoforged.fml.common.Mod.EventBusSubscriber.Bus;
 import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 
 //@EventBusSubscriber(modid = References.ID, bus = Bus.MOD, value = Dist.CLIENT)
@@ -34,7 +30,7 @@ public class ElectrodynamicsShaders extends RenderType {
 	private static Uniform uniformAlphaCutoff;
 
 	/* SHADER RESOURCE LOCS */
-	private static final ResourceLocation GREATER_ALPHA_LOC = new ResourceLocation(References.ID, "plasmaorb");
+	private static final ResourceLocation GREATER_ALPHA_LOC = ResourceLocation.fromNamespaceAndPath(References.ID, "plasmaorb");
 
 	/* SHADER STATE SHARDS */
 
@@ -45,7 +41,7 @@ public class ElectrodynamicsShaders extends RenderType {
 	//@SubscribeEvent
 	public static void onRegisterShaders(final RegisterShadersEvent event) {
 		try {
-			event.registerShader(new ShaderInstance(event.getResourceProvider(), GREATER_ALPHA_LOC, DefaultVertexFormat.POSITION_COLOR_TEX), shader -> {
+			event.registerShader(new ShaderInstance(event.getResourceProvider(), GREATER_ALPHA_LOC, DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP), shader -> {
 				// shaderPlasmaOrb = shader;
 				uniformAlphaCutoff = shader.getUniform("AlphaCutoff");
 			});

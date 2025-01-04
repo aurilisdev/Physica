@@ -1,0 +1,17 @@
+{
+  "parent": "electrodynamics:block/advancedthermoelectricmanipulatoritem",
+  "display": {
+    "gui": {
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "scale": [
+        0.3333,
+        0.3333,
+        0.3333
+      ]
+    }
+  }
+}

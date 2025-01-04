@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "electrodynamics:glassaluminum"
+    },
+    "S": {
+      "tag": "c:plates/stainlesssteel"
+    }
+  },
+  "pattern": [
+    "S",
+    "A",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:canisterreinforced"
+  }
+}

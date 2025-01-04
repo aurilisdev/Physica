@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import electrodynamics.api.creativetab.CreativeTabSupplier;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 
 public class ItemBoneMeal extends BoneMealItem implements CreativeTabSupplier {
 
-	private final Supplier<CreativeModeTab> creativeTab;
+	private final Holder<CreativeModeTab> creativeTab;
 
-	public ItemBoneMeal(Properties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemBoneMeal(Properties properties, Holder<CreativeModeTab> creativeTab) {
 		super(properties);
 		this.creativeTab = creativeTab;
 	}
@@ -25,7 +26,7 @@ public class ItemBoneMeal extends BoneMealItem implements CreativeTabSupplier {
 
 	@Override
 	public boolean isAllowedInCreativeTab(CreativeModeTab tab) {
-		return creativeTab.get() == tab;
+		return creativeTab.value() == tab;
 	}
 
 	@Override

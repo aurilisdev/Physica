@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "M": {
+      "item": "electrodynamics:decompressor"
+    },
+    "O": {
+      "item": "electrodynamics:motor"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "V": {
+      "item": "electrodynamics:mechanicalvalve"
+    },
+    "W": {
+      "item": "electrodynamics:wiresilver"
+    }
+  },
+  "pattern": [
+    "PCP",
+    "VMV",
+    "OWO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:advanceddecompressor"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/elite"
+    },
+    "O": {
+      "tag": "c:dusts/obsidian"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "OPO",
+    "COC",
+    "OPO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:circuitultimate"
+  }
+}

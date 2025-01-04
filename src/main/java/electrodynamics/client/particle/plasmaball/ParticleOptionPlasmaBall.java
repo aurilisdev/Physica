@@ -1,15 +1,17 @@
 package electrodynamics.client.particle.plasmaball;
 
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import electrodynamics.prefab.utilities.CodecUtils;
 import electrodynamics.registers.ElectrodynamicsParticles;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 public class ParticleOptionPlasmaBall extends ParticleType<ParticleOptionPlasmaBall> implements ParticleOptions {
 
@@ -21,7 +23,7 @@ public class ParticleOptionPlasmaBall extends ParticleType<ParticleOptionPlasmaB
 	public int b;
 	public int a;
 
-	public static final Codec<ParticleOptionPlasmaBall> CODEC = RecordCodecBuilder.create(instance -> 
+	public static final MapCodec<ParticleOptionPlasmaBall> CODEC = RecordCodecBuilder.mapCodec(instance ->
 		instance.group(
 				Codec.FLOAT.fieldOf("scale").forGetter(instance0 -> instance0.scale), 
 				Codec.FLOAT.fieldOf("gravity").forGetter(instance0 -> instance0.gravity), 
@@ -32,6 +34,19 @@ public class ParticleOptionPlasmaBall extends ParticleType<ParticleOptionPlasmaB
 				Codec.INT.fieldOf("a").forGetter(instance0 -> instance0.a)
 		).apply(instance, (scale, gravity, age, r, g, b, a) -> new ParticleOptionPlasmaBall().setParameters(scale, gravity, age, r, g, b, a)));
 
+	public static final StreamCodec<RegistryFriendlyByteBuf, ParticleOptionPlasmaBall> STREAM_CODEC = CodecUtils.composite(
+			ByteBufCodecs.FLOAT, instance0 -> instance0.scale,
+			ByteBufCodecs.FLOAT,instance0 -> instance0.gravity,
+			ByteBufCodecs.INT, instance0 -> instance0.maxAge,
+			ByteBufCodecs.INT, instance0 -> instance0.r,
+			ByteBufCodecs.INT, instance0 -> instance0.g,
+			ByteBufCodecs.INT, instance0 -> instance0.b,
+			ByteBufCodecs.INT, instance0 -> instance0.a,
+			(scale, gravity, age, r, g, b, a) -> new ParticleOptionPlasmaBall().setParameters(scale, gravity, age, r, g, b, a)
+	);
+
+
+	/*
 	public static final ParticleOptions.Deserializer<ParticleOptionPlasmaBall> DESERIALIZER = new ParticleOptions.Deserializer<>() {
 
 		@Override
@@ -69,8 +84,10 @@ public class ParticleOptionPlasmaBall extends ParticleType<ParticleOptionPlasmaB
 		}
 	};
 
+	 */
+
 	public ParticleOptionPlasmaBall() {
-		super(false, DESERIALIZER);
+		super(false);
 	}
 
 	public ParticleOptionPlasmaBall setParameters(float scale, float gravity, int maxAge, int r, int g, int b, int a) {
@@ -90,24 +107,18 @@ public class ParticleOptionPlasmaBall extends ParticleType<ParticleOptionPlasmaB
 	}
 
 	@Override
-	public void writeToNetwork(FriendlyByteBuf buffer) {
-		buffer.writeFloat(scale);
-		buffer.writeFloat(gravity);
-		buffer.writeInt(maxAge);
-		buffer.writeInt(r);
-		buffer.writeInt(g);
-		buffer.writeInt(b);
-		buffer.writeInt(a);
-	}
-
-	@Override
-	public String writeToString() {
+	public String toString() {
 		return BuiltInRegistries.PARTICLE_TYPE.getKey(getType()).toString() + ", scale: " + scale + ", gravity: " + gravity + ", maxage: " + maxAge + ", r: " + r + ", g: " + g + ", b: " + b + ", a: " + a;
 	}
 
 	@Override
-	public Codec<ParticleOptionPlasmaBall> codec() {
+	public MapCodec<ParticleOptionPlasmaBall> codec() {
 		return CODEC;
+	}
+
+	@Override
+	public StreamCodec<? super RegistryFriendlyByteBuf, ParticleOptionPlasmaBall> streamCodec() {
+		return STREAM_CODEC;
 	}
 
 }

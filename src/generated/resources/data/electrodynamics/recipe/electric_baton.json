@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "electrodynamics:lithiumbattery"
+    },
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "P": {
+      "tag": "c:plastic"
+    },
+    "T": {
+      "tag": "c:rods/steel"
+    }
+  },
+  "pattern": [
+    "  T",
+    "PT ",
+    "BC "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:electricbaton"
+  }
+}

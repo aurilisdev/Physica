@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "D": {
+      "tag": "c:dusts/redstone"
+    },
+    "M": {
+      "item": "electrodynamics:multimeterblock"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "R": {
+      "item": "minecraft:comparator"
+    }
+  },
+  "pattern": [
+    "DRD",
+    "PMP",
+    "DCD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:circuitmonitor"
+  }
+}

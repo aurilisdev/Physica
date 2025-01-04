@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "experience": 0.30000001192092896,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.3,
+      "item": {
+        "count": 1,
+        "id": "minecraft:quartz"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/tin"
+      }
+    }
+  ],
+  "output": {
+    "count": 3,
+    "id": "electrodynamics:impuredusttin"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

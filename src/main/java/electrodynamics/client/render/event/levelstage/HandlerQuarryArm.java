@@ -2,6 +2,7 @@ package electrodynamics.client.render.event.levelstage;
 
 import java.util.HashMap;
 
+import net.minecraft.client.DeltaTracker;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -42,7 +43,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 	}
 
 	@Override
-	public void render(Camera camera, Frustum frustum, LevelRenderer renderer, PoseStack stack, Matrix4f projectionMatrix, Minecraft minecraft, int renderTick, float partialTick) {
+	public void render(Camera camera, Frustum frustum, LevelRenderer renderer, PoseStack stack, Matrix4f projectionMatrix, Minecraft minecraft, int renderTick, DeltaTracker deltaTracker) {
 
 		if (armsToRender.isEmpty()) {
 			return;
@@ -51,14 +52,14 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 		MultiBufferSource.BufferSource buffer = minecraft.renderBuffers().bufferSource();
 		Vec3 camPos = camera.getPosition();
 
-		TextureAtlasSprite armTexture = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_QUARRYARM);
+		TextureAtlasSprite armTexture = ClientRegister.getSprite(ClientRegister.TEXTURE_QUARRYARM);
 		float u0Frame = armTexture.getU0();
 		float u1Frame = armTexture.getU1();
 		float v0Frame = armTexture.getV0();
 		float v1Frame = armTexture.getV1();
 		Color colorFrame = new Color(armTexture.getPixelRGBA(0, 10, 10));
 
-		TextureAtlasSprite darkArmTexture = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_QUARRYARM_DARK);
+		TextureAtlasSprite darkArmTexture = ClientRegister.getSprite(ClientRegister.TEXTURE_QUARRYARM_DARK);
 		float u0FrameDark = darkArmTexture.getU0();
 		float u1FrameDark = darkArmTexture.getU1();
 		float v0FrameDark = darkArmTexture.getV0();
@@ -72,7 +73,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 		float v1Titanium = titaniumTexture.getV1();
 		Color colorTitanium = new Color(armTexture.getPixelRGBA(0, 10, 10));
 
-		TextureAtlasSprite whiteTexture = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_WHITE);
+		TextureAtlasSprite whiteTexture = ClientRegister.getSprite(ClientRegister.TEXTURE_WHITE);
 		float u0White = whiteTexture.getU0();
 		float u1White = whiteTexture.getU1();
 		float v0White = whiteTexture.getV0();
@@ -91,7 +92,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 				}
 				stack.pushPose();
 				stack.translate(vec.x, vec.y, vec.z);
-				RenderingUtils.renderFilledBoxNoOverlay(stack, armBuilder, aabb, colorFrame.rFloat(), colorFrame.gFloat(), colorFrame.bFloat(), colorFrame.aFloat(), u0Frame, v0Frame, u1Frame, v1Frame, LevelRenderer.getLightColor(minecraft.level, new BlockPos(vec.x, vec.y, vec.z)));
+				RenderingUtils.renderFilledBoxNoOverlay(stack, armBuilder, aabb, colorFrame.rFloat(), colorFrame.gFloat(), colorFrame.bFloat(), colorFrame.aFloat(), u0Frame, v0Frame, u1Frame, v1Frame, LevelRenderer.getLightColor(minecraft.level, new BlockPos(vec.x, vec.y, vec.z)), RenderingUtils.ALL_FACES);
 				stack.popPose();
 			});
 			data.darkParts().forEach(pair -> {
@@ -102,7 +103,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 				}
 				stack.pushPose();
 				stack.translate(vec.x, vec.y, vec.z);
-				RenderingUtils.renderFilledBoxNoOverlay(stack, armBuilder, aabb, colorFrameDark.rFloat(), colorFrameDark.gFloat(), colorFrameDark.bFloat(), colorFrameDark.aFloat(), u0FrameDark, v0FrameDark, u1FrameDark, v1FrameDark, LevelRenderer.getLightColor(minecraft.level, new BlockPos(vec.x, vec.y, vec.z)));
+				RenderingUtils.renderFilledBoxNoOverlay(stack, armBuilder, aabb, colorFrameDark.rFloat(), colorFrameDark.gFloat(), colorFrameDark.bFloat(), colorFrameDark.aFloat(), u0FrameDark, v0FrameDark, u1FrameDark, v1FrameDark, LevelRenderer.getLightColor(minecraft.level, new BlockPos(vec.x, vec.y, vec.z)), RenderingUtils.ALL_FACES);
 				stack.popPose();
 			});
 			data.titaniumParts().forEach(pair -> {
@@ -113,7 +114,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 				}
 				stack.pushPose();
 				stack.translate(vec.x, vec.y, vec.z);
-				RenderingUtils.renderFilledBoxNoOverlay(stack, armBuilder, aabb, colorTitanium.rFloat(), colorTitanium.gFloat(), colorTitanium.bFloat(), colorTitanium.aFloat(), u0Titanium, v0Titanium, u1Titanium, v1Titanium, LevelRenderer.getLightColor(minecraft.level, new BlockPos(vec.x, vec.y, vec.z)));
+				RenderingUtils.renderFilledBoxNoOverlay(stack, armBuilder, aabb, colorTitanium.rFloat(), colorTitanium.gFloat(), colorTitanium.bFloat(), colorTitanium.aFloat(), u0Titanium, v0Titanium, u1Titanium, v1Titanium, LevelRenderer.getLightColor(minecraft.level, new BlockPos(vec.x, vec.y, vec.z)), RenderingUtils.ALL_FACES);
 				stack.popPose();
 			});
 			if (data.headType() != null) {
@@ -143,7 +144,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 					// stack.mulPose(new Quaternion(0, degrees, 0, true));
 					stack.translate(-vec.remX - 0.5, 0, -vec.remZ - 0.5);
 				}
-				RenderingUtils.renderFilledBoxNoOverlay(stack, armBuilder, aabb, colorHead.rFloat(), colorHead.gFloat(), colorHead.bFloat(), colorHead.aFloat(), u0Head, v0Head, u1Head, v1Head, LevelRenderer.getLightColor(minecraft.level, new BlockPos(vec.x, vec.y, vec.z)));
+				RenderingUtils.renderFilledBoxNoOverlay(stack, armBuilder, aabb, colorHead.rFloat(), colorHead.gFloat(), colorHead.bFloat(), colorHead.aFloat(), u0Head, v0Head, u1Head, v1Head, LevelRenderer.getLightColor(minecraft.level, new BlockPos(vec.x, vec.y, vec.z)), RenderingUtils.ALL_FACES);
 				stack.popPose();
 			}
 
@@ -273,7 +274,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 			if (frustum.isVisible(beam.move(start))) {
 				stack.pushPose();
 				stack.translate(start.getX(), start.getY(), start.getZ());
-				RenderingUtils.renderFilledBoxNoOverlay(stack, lineBuilder, beam, 1.0F, 0, 0, alpha, u0White, v0White, u1White, v1White, 255);
+				RenderingUtils.renderFilledBoxNoOverlay(stack, lineBuilder, beam, 1.0F, 0, 0, alpha, u0White, v0White, u1White, v1White, 255, RenderingUtils.ALL_FACES);
 				stack.popPose();
 			}
 
@@ -284,7 +285,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 			if (frustum.isVisible(beam.move(start))) {
 				stack.pushPose();
 				stack.translate(start.getX(), start.getY(), start.getZ());
-				RenderingUtils.renderFilledBoxNoOverlay(stack, lineBuilder, beam, 1.0F, 0, 0, alpha, u0White, v0White, u1White, v1White, 255);
+				RenderingUtils.renderFilledBoxNoOverlay(stack, lineBuilder, beam, 1.0F, 0, 0, alpha, u0White, v0White, u1White, v1White, 255, RenderingUtils.ALL_FACES);
 				stack.popPose();
 			}
 
@@ -295,7 +296,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 			if (frustum.isVisible(beam.move(end))) {
 				stack.pushPose();
 				stack.translate(end.getX(), end.getY(), end.getZ());
-				RenderingUtils.renderFilledBoxNoOverlay(stack, lineBuilder, beam, 1.0F, 0, 0, alpha, u0White, v0White, u1White, v1White, 255);
+				RenderingUtils.renderFilledBoxNoOverlay(stack, lineBuilder, beam, 1.0F, 0, 0, alpha, u0White, v0White, u1White, v1White, 255, RenderingUtils.ALL_FACES);
 				stack.popPose();
 			}
 
@@ -306,7 +307,7 @@ public class HandlerQuarryArm extends AbstractLevelStageHandler {
 			if (frustum.isVisible(beam.move(end))) {
 				stack.pushPose();
 				stack.translate(end.getX(), end.getY(), end.getZ());
-				RenderingUtils.renderFilledBoxNoOverlay(stack, lineBuilder, beam, 1.0F, 0, 0, alpha, u0White, v0White, u1White, v1White, 255);
+				RenderingUtils.renderFilledBoxNoOverlay(stack, lineBuilder, beam, 1.0F, 0, 0, alpha, u0White, v0White, u1White, v1White, 255, RenderingUtils.ALL_FACES);
 				stack.popPose();
 			}
 

@@ -17,11 +17,11 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryB
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -38,7 +38,7 @@ public class TileMineralGrinder extends GenericTile implements ITickableSound {
 	}
 
 	public TileMineralGrinder(SubtypeMachine machine, int extra, BlockPos pos, BlockState state) {
-		super(extra == 1 ? ElectrodynamicsBlockTypes.TILE_MINERALGRINDERDOUBLE.get() : extra == 2 ? ElectrodynamicsBlockTypes.TILE_MINERALGRINDERTRIPLE.get() : ElectrodynamicsBlockTypes.TILE_MINERALGRINDER.get(), pos, state);
+		super(extra == 1 ? ElectrodynamicsTiles.TILE_MINERALGRINDERDOUBLE.get() : extra == 2 ? ElectrodynamicsTiles.TILE_MINERALGRINDERTRIPLE.get() : ElectrodynamicsTiles.TILE_MINERALGRINDER.get(), pos, state);
 
 		int processorCount = extra + 1;
 		int inputsPerProc = 1;
@@ -47,7 +47,7 @@ public class TileMineralGrinder extends GenericTile implements ITickableSound {
 
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient));
-		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.NORTH).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * Math.pow(2, extra)));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BACK).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * Math.pow(2, extra)));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().processors(processorCount, inputsPerProc, outputPerProc, biprodsPerProc).upgrades(3)).validUpgrades(ContainerO2OProcessor.VALID_UPGRADES).valid(machineValidator()).implementMachineInputsAndOutputs());
 		addComponent(new ComponentContainerProvider(machine, this).createMenu((id, player) -> (extra == 0 ? new ContainerO2OProcessor(id, player, getComponent(IComponentType.Inventory), getCoordsArray()) : extra == 1 ? new ContainerO2OProcessorDouble(id, player, getComponent(IComponentType.Inventory), getCoordsArray()) : extra == 2 ? new ContainerO2OProcessorTriple(id, player, getComponent(IComponentType.Inventory), getCoordsArray()) : null)));
 
@@ -64,7 +64,7 @@ public class TileMineralGrinder extends GenericTile implements ITickableSound {
 		if (level.random.nextDouble() < 0.15) {
 			level.addParticle(ParticleTypes.SMOKE, worldPosition.getX() + level.random.nextDouble(), worldPosition.getY() + level.random.nextDouble() * 0.2 + 0.8, worldPosition.getZ() + level.random.nextDouble(), 0.0D, 0.0D, 0.0D);
 		}
-		int amount = getType() == ElectrodynamicsBlockTypes.TILE_MINERALGRINDERDOUBLE.get() ? 2 : getType() == ElectrodynamicsBlockTypes.TILE_MINERALGRINDERTRIPLE.get() ? 3 : 1;
+		int amount = getType() == ElectrodynamicsTiles.TILE_MINERALGRINDERDOUBLE.get() ? 2 : getType() == ElectrodynamicsTiles.TILE_MINERALGRINDERTRIPLE.get() ? 3 : 1;
 		for (int i = 0; i < amount; i++) {
 			ComponentInventory inv = getComponent(IComponentType.Inventory);
 			ItemStack stack = inv.getInputsForProcessor(getProcessor(i).getProcessorNumber()).get(0);

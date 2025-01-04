@@ -1,0 +1,25 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.10000000149011612,
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/sulfur"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "minecraft:coals"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:oxidedisulfur"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

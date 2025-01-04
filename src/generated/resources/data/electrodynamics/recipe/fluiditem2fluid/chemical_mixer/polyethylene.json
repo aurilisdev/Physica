@@ -1,0 +1,24 @@
+{
+  "type": "electrodynamics:chemical_mixer_recipe",
+  "fluidinputs": [
+    {
+      "amount": 1000,
+      "tag": "c:ethanol"
+    }
+  ],
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:oxides/chromiumdisilicide"
+      }
+    }
+  ],
+  "output": {
+    "amount": 1000,
+    "id": "electrodynamics:fluidpolyethylene"
+  },
+  "ticks": 200,
+  "usagepertick": 400.0
+}

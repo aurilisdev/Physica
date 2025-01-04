@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "electrodynamics:oxidethionylchloride"
+    },
+    "L": {
+      "tag": "c:plates/lithium"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "W": {
+      "item": "electrodynamics:wiregold"
+    }
+  },
+  "pattern": [
+    " L ",
+    "SCS",
+    "SWS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:lithiumbattery"
+  }
+}

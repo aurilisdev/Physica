@@ -33,14 +33,14 @@ public class EnergizedAlloyerRecipeCategory extends Item2ItemRecipeCategory<Ener
     public static final ArrowAnimatedObject ANIM_ARROW = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT, 41, 23, StartDirection.LEFT);
 
     public static final PowerLabelWrapperElectroRecipe POWER_LABEL = new PowerLabelWrapperElectroRecipe(2, 49, 480);
-    public static final BiproductPercentWrapperElectroRecipe ITEM_LABEL = new BiproductPercentWrapperElectroRecipe(100, 40, false);
+    public static final BiproductPercentWrapperElectroRecipe ITEM_LABEL = new BiproductPercentWrapperElectroRecipe(100, 40, BiproductPercentWrapperElectroRecipe.BiproductType.ITEM, 0);
     public static final TimeLabelWrapperElectroRecipe TIME_LABEL = new TimeLabelWrapperElectroRecipe(130, 49);
 
     public static final int ANIM_TIME = 50;
 
     // public static final String RECIPE_GROUP = SubtypeMachine.energizedalloyer.tag();
 
-    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.getBlock(SubtypeMachine.energizedalloyer));
+    public static ItemStack INPUT_MACHINE = new ItemStack(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.energizedalloyer));
 
     public static final RecipeType<EnergizedAlloyerRecipe> RECIPE_TYPE = RecipeType.create(References.ID, EnergizedAlloyerRecipe.RECIPE_GROUP, EnergizedAlloyerRecipe.class);
 

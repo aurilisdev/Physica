@@ -20,7 +20,7 @@ public class HandlerModeSwitchJetpack extends AbstractKeyPressHandler {
         if (KeyBinds.switchJetpackMode.matches(event.getKey(), event.getScanCode()) && KeyBinds.switchJetpackMode.isDown()) {
             ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
             if (ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_JETPACK.get()) || ItemUtils.testItems(chest.getItem(), ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get())) {
-                PacketDistributor.SERVER.noArg().send(new PacketModeSwitchServer(player.getUUID(), Mode.JETPACK));
+                PacketDistributor.sendToServer(new PacketModeSwitchServer(player.getUUID(), Mode.JETPACK));
             }
         }
     }

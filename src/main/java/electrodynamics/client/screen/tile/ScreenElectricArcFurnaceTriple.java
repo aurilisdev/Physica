@@ -6,7 +6,7 @@ import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressBars;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
-import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
+import electrodynamics.prefab.screen.component.types.wrapper.WrapperInventoryIO;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import net.minecraft.network.chat.Component;
@@ -20,7 +20,7 @@ public class ScreenElectricArcFurnaceTriple extends GenericScreen<ContainerElect
 	public ScreenElectricArcFurnaceTriple(ContainerElectricArcFurnaceTriple container, Inventory playerInventory, Component title) {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			TileElectricArcFurnace furnace = container.getHostFromIntArray();
+			TileElectricArcFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(0);
 				if (processor.isActive()) {
@@ -30,7 +30,7 @@ public class ScreenElectricArcFurnaceTriple extends GenericScreen<ContainerElect
 			return 0;
 		}, 84, 24));
 		addComponent(new ScreenComponentProgress(ProgressBars.COUNTDOWN_FLAME, () -> {
-			TileElectricArcFurnace furnace = container.getHostFromIntArray();
+			TileElectricArcFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(0);
 				if (processor.isActive()) {
@@ -40,7 +40,7 @@ public class ScreenElectricArcFurnaceTriple extends GenericScreen<ContainerElect
 			return 0;
 		}, 39, 26));
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			TileElectricArcFurnace furnace = container.getHostFromIntArray();
+			TileElectricArcFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(1);
 				if (processor.isActive()) {
@@ -50,7 +50,7 @@ public class ScreenElectricArcFurnaceTriple extends GenericScreen<ContainerElect
 			return 0;
 		}, 84, 44));
 		addComponent(new ScreenComponentProgress(ProgressBars.COUNTDOWN_FLAME, () -> {
-			TileElectricArcFurnace furnace = container.getHostFromIntArray();
+			TileElectricArcFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(1);
 				if (processor.isActive()) {
@@ -60,7 +60,7 @@ public class ScreenElectricArcFurnaceTriple extends GenericScreen<ContainerElect
 			return 0;
 		}, 39, 46));
 		addComponent(new ScreenComponentProgress(ProgressBars.PROGRESS_ARROW_RIGHT, () -> {
-			TileElectricArcFurnace furnace = container.getHostFromIntArray();
+			TileElectricArcFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(2);
 				if (processor.isActive()) {
@@ -70,7 +70,7 @@ public class ScreenElectricArcFurnaceTriple extends GenericScreen<ContainerElect
 			return 0;
 		}, 84, 64));
 		addComponent(new ScreenComponentProgress(ProgressBars.COUNTDOWN_FLAME, () -> {
-			TileElectricArcFurnace furnace = container.getHostFromIntArray();
+			TileElectricArcFurnace furnace = container.getSafeHost();
 			if (furnace != null) {
 				ComponentProcessor processor = furnace.getProcessor(2);
 				if (processor.isActive()) {
@@ -83,6 +83,6 @@ public class ScreenElectricArcFurnaceTriple extends GenericScreen<ContainerElect
 		inventoryLabelY += 20;
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 
-		new InventoryIOWrapper(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE + 2, 75, 82 + 20, 8, 72 + 20);
+		new WrapperInventoryIO(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE + 2, 75, 82 + 20, 8, 72 + 20);
 	}
 }

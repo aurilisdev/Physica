@@ -7,6 +7,7 @@ import electrodynamics.common.inventory.container.item.ContainerGuidebook;
 import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -24,15 +25,15 @@ public class ItemGuidebook extends ItemElectrodynamics {
 	private static final String LINK = "https://wiki.aurilis.dev";
 	private static final Component CONTAINER_TITLE = Component.translatable("container.guidebook");
 
-	public ItemGuidebook(Properties properties, Supplier<CreativeModeTab> creativeTab) {
+	public ItemGuidebook(Properties properties, Holder<CreativeModeTab> creativeTab) {
 		super(properties, creativeTab);
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltips, TooltipFlag flag) {
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltips, TooltipFlag flag) {
 		tooltips.add(ElectroTextUtils.tooltip("info.guidebookuse").withStyle(ChatFormatting.LIGHT_PURPLE));
 		tooltips.add(ElectroTextUtils.tooltip("guidebookname").withStyle(ChatFormatting.GRAY));
-		super.appendHoverText(stack, world, tooltips, flag);
+		super.appendHoverText(stack, context, tooltips, flag);
 	}
 
 	@Override

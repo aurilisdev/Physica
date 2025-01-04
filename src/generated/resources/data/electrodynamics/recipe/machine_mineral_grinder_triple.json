@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/elite"
+    },
+    "D": {
+      "tag": "c:dusts/superconductive"
+    },
+    "G": {
+      "tag": "c:gears/steel"
+    },
+    "M": {
+      "item": "electrodynamics:mineralgrinderdouble"
+    }
+  },
+  "pattern": [
+    "CDC",
+    "GMG",
+    "CDC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:mineralgrindertriple"
+  }
+}

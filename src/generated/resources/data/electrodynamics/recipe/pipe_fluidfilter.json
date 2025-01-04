@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:paper"
+    },
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "P": {
+      "item": "electrodynamics:pipesteel"
+    },
+    "V": {
+      "item": "electrodynamics:mechanicalvalve"
+    }
+  },
+  "pattern": [
+    " C ",
+    "VPV",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:fluidpipefilter"
+  }
+}

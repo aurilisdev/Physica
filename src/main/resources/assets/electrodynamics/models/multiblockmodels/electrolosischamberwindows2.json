@@ -1,0 +1,14 @@
+{
+  "loader": "electrodynamics:electrodynamicsmultiblockmodelloader",
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "electrodynamics:block/multiblock/electrolosischamberwindows2",
+    "down": "electrodynamics:block/multiblock/electrolosischamberwindows4",
+    "up": "electrodynamics:block/multiblock/electrolosischamberwindows2",
+    "north": "electrodynamics:block/clear",
+    "east": "electrodynamics:block/clear",
+    "south": "electrodynamics:block/clear",
+    "west": "electrodynamics:block/clear"
+  }
+}

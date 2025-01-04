@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "electrodynamics:upgradebasicspeed"
+    },
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "G": {
+      "tag": "c:gears/bronze"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "W": {
+      "tag": "c:wires/insulated_copper"
+    }
+  },
+  "pattern": [
+    "PGP",
+    "BWB",
+    "CGC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:upgradeadvancedspeed"
+  }
+}

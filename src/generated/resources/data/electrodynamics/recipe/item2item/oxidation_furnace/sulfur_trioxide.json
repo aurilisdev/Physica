@@ -1,0 +1,25 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.10000000149011612,
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:oxides/disulfur"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:oxides/vanadium"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:oxidetrisulfur"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

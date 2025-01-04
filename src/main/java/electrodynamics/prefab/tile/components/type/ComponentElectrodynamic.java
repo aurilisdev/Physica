@@ -7,13 +7,13 @@ import java.util.function.Consumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
+import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.item.IItemElectric;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponent;
@@ -69,9 +69,9 @@ public class ComponentElectrodynamic implements IComponent, ICapabilityElectrody
         acceptsEnergy = isReceiver;
 
         holder(source);
-        voltage = source.property(new Property<>(PropertyType.Double, "voltage", ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
-        maxJoules = source.property(new Property<>(PropertyType.Double, "maxJoules", 0.0));
-        joules = source.property(new Property<>(PropertyType.Double, "joules", 0.0));
+        voltage = source.property(new Property<>(PropertyTypes.DOUBLE, "voltage", ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
+        maxJoules = source.property(new Property<>(PropertyTypes.DOUBLE, "maxJoules", 0.0));
+        joules = source.property(new Property<>(PropertyTypes.DOUBLE, "joules", 0.0));
     }
 
     @Override
@@ -128,8 +128,8 @@ public class ComponentElectrodynamic implements IComponent, ICapabilityElectrody
 
     @Override
     public void refreshIfUpdate(BlockState oldState, BlockState newState) {
-        if (isSided && oldState.hasProperty(GenericEntityBlock.FACING) && newState.hasProperty(GenericEntityBlock.FACING) && oldState.getValue(GenericEntityBlock.FACING) != newState.getValue(GenericEntityBlock.FACING)) {
-            defineOptionals(newState.getValue(GenericEntityBlock.FACING));
+        if (isSided && oldState.hasProperty(ElectrodynamicsBlockStates.FACING) && newState.hasProperty(ElectrodynamicsBlockStates.FACING) && oldState.getValue(ElectrodynamicsBlockStates.FACING) != newState.getValue(ElectrodynamicsBlockStates.FACING)) {
+            defineOptionals(newState.getValue(ElectrodynamicsBlockStates.FACING));
         }
     }
 
@@ -217,18 +217,18 @@ public class ComponentElectrodynamic implements IComponent, ICapabilityElectrody
         return this;
     }
 
-    public ComponentElectrodynamic setInputDirections(Direction... dirs) {
+    public ComponentElectrodynamic setInputDirections(BlockEntityUtils.MachineDirection... dirs) {
         isSided = true;
-        for (Direction dir : dirs) {
-            relativeInputDirections.add(dir);
+        for (BlockEntityUtils.MachineDirection dir : dirs) {
+            relativeInputDirections.add(dir.mappedDir);
         }
         return this;
     }
 
-    public ComponentElectrodynamic setOutputDirections(Direction... dirs) {
+    public ComponentElectrodynamic setOutputDirections(BlockEntityUtils.MachineDirection... dirs) {
         isSided = true;
-        for (Direction dir : dirs) {
-            relativeOutputDirections.add(dir);
+        for (BlockEntityUtils.MachineDirection dir : dirs) {
+            relativeOutputDirections.add(dir.mappedDir);
         }
         return this;
     }

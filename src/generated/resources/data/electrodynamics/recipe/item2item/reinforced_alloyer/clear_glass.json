@@ -1,0 +1,25 @@
+{
+  "type": "electrodynamics:reinforced_alloyer_recipe",
+  "experience": 0.10000000149011612,
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:coal_coke"
+      }
+    },
+    {
+      "count": 16,
+      "ingredient": {
+        "tag": "c:sands"
+      }
+    }
+  ],
+  "output": {
+    "count": 16,
+    "id": "electrodynamics:glassclear"
+  },
+  "ticks": 50,
+  "usagepertick": 50.0
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "pattern": [
+    "I I",
+    "I I",
+    "I I"
+  ],
+  "result": {
+    "count": 4,
+    "id": "electrodynamics:pipesteel"
+  }
+}

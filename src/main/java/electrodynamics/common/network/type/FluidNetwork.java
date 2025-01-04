@@ -13,7 +13,7 @@ import electrodynamics.api.network.cable.type.IFluidPipe;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.common.network.NetworkRegistry;
 import electrodynamics.common.network.utils.FluidUtilities;
-import electrodynamics.common.tile.pipelines.fluids.TileFluidPipePump;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidPipePump;
 import electrodynamics.prefab.network.AbstractNetwork;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -80,7 +80,10 @@ public class FluidNetwork extends AbstractNetwork<IFluidPipe, SubtypeFluidPipe, 
 		availableAcceptors.addAll(acceptorSet);
 
 		availableAcceptors.removeAll(ignored);
-		availableAcceptors.removeAll(priorityFilled.getSecond());
+
+		if(priorityFilled.getSecond().size() > 0) {
+			availableAcceptors.removeAll(priorityFilled.getSecond());
+		}
 
 		if (availableAcceptors.isEmpty()) {
 			return FluidStack.EMPTY;
@@ -98,7 +101,7 @@ public class FluidNetwork extends AbstractNetwork<IFluidPipe, SubtypeFluidPipe, 
 
 		for (BlockEntity tile : availableAcceptors) {
 
-			perTile = new FluidStack(initial.getFluid(), initial.getAmount() / size);
+			perTile = new FluidStack(initial.getFluid(), (int) ((double) initial.getAmount() / (double) size));
 			prePerTile = perTile.copy();
 
 			connections = acceptorInputMap.getOrDefault(tile, new HashSet<>());
@@ -107,7 +110,7 @@ public class FluidNetwork extends AbstractNetwork<IFluidPipe, SubtypeFluidPipe, 
 
 			for (Direction dir : connections) {
 
-				perConnection = new FluidStack(initial.getFluid(), perTile.getAmount() / connectionsSize);
+				perConnection = new FluidStack(initial.getFluid(), (int) ((double) perTile.getAmount() / (double) connectionsSize));
 				prePerConnection = perConnection.copy();
 
 				amtTaken = FluidUtilities.receiveFluid(tile, dir, perConnection, false);
@@ -273,7 +276,7 @@ public class FluidNetwork extends AbstractNetwork<IFluidPipe, SubtypeFluidPipe, 
 
 	@Override
 	public boolean isAcceptor(BlockEntity acceptor, Direction orientation) {
-		return FluidUtilities.isFluidReceiver(acceptor);
+		return FluidUtilities.isFluidReceiver(acceptor, orientation.getOpposite());
 	}
 
 	@Override

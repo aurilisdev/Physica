@@ -8,6 +8,7 @@ import electrodynamics.api.screen.ITexture;
 import electrodynamics.api.screen.component.ISlotTexture;
 import electrodynamics.api.screen.component.TextSupplier;
 import electrodynamics.prefab.inventory.container.slot.utils.IUpgradeSlot;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -34,6 +35,12 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 		this.slotType = slotType;
 		this.iconType = iconType;
 		this.slot = slot;
+		onTooltip((graphics, component, xAxis, yAxis) -> {
+			if(tooltip == null){
+				return;
+			}
+			graphics.renderTooltip(gui.getFontRenderer(), tooltip.getText(), xAxis, yAxis);
+		});
 	}
 
 	public ScreenComponentSlot(Slot slot, int x, int y) {
@@ -70,11 +77,8 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 		if (!slot.isActive()) {
 			return;
 		}
+		super.renderForeground(graphics, xAxis, yAxis, guiWidth, guiHeight);
 		if (isHoveredOrFocused()) {
-
-			if (tooltip != null && !tooltip.getText().getString().isEmpty()) {
-				graphics.renderTooltip(gui.getFontRenderer(), tooltip.getText(), xAxis, yAxis);
-			}
 
 			if (Screen.hasControlDown() && slot instanceof IUpgradeSlot upgrade) {
 
@@ -120,7 +124,7 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = new ResourceLocation(References.ID + ":textures/screen/component/slot/" + name + ".png");
+			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/slot/" + name + ".png");
 
 			this.xOffset = xOffset;
 			this.yOffset = yOffset;
@@ -192,7 +196,10 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 		TEMPERATURE(14, 14, 0, 0, 14, 14, "temperature"), //
 		THERMOMETER(16, 16, 0, 0, 16, 16, "thermometer"), //
 		PRESSURE_GAUGE(10, 10, 0, 0, 10, 10, "pressuredial"), //
-		INVENTORY_IO(16, 16, 0, 0, 16, 16, "inventoryio"); //
+		INVENTORY_IO(16, 16, 0, 0, 16, 16, "inventoryio"), //
+		SONAR_PROFILE(16, 16, 0, 0, 16, 16, "sonarpattern"), //
+		CUBE_OUTLINE(16,16, 0, 0, 16, 16, "cubeoutline") //
+		; //
 
 		private final int textureWidth;
 		private final int textureHeight;
@@ -209,7 +216,7 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = new ResourceLocation(References.ID + ":textures/screen/component/icon/" + name + ".png");
+			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/icon/" + name + ".png");
 		}
 
 		@Override

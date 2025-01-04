@@ -5,7 +5,7 @@ import electrodynamics.common.inventory.container.tile.ContainerSolarPanel;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -13,10 +13,11 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -27,9 +28,9 @@ public class TileSolarPanel extends GenericGeneratorTile {
 
 	protected CachedTileOutput output;
 
-	protected Property<Boolean> generating = property(new Property<>(PropertyType.Boolean, "generating", false));
-	protected Property<Double> multiplier = property(new Property<>(PropertyType.Double, "multiplier", 1.0));
-	protected Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	protected Property<Boolean> generating = property(new Property<>(PropertyTypes.BOOLEAN, "generating", false));
+	protected Property<Double> multiplier = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 1.0));
+	protected Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 
 	@Override
 	public double getMultiplier() {
@@ -42,14 +43,14 @@ public class TileSolarPanel extends GenericGeneratorTile {
 	}
 
 	public TileSolarPanel(BlockPos worldPosition, BlockState blockState) {
-		this(ElectrodynamicsBlockTypes.TILE_SOLARPANEL.get(), worldPosition, blockState, 2.25, SubtypeItemUpgrade.improvedsolarcell);
+		this(ElectrodynamicsTiles.TILE_SOLARPANEL.get(), worldPosition, blockState, 2.25, SubtypeItemUpgrade.improvedsolarcell);
 	}
 
 	public TileSolarPanel(BlockEntityType<?> type, BlockPos worldPosition, BlockState blockState, double multiplier, SubtypeItemUpgrade... itemUpgrades) {
 		super(type, worldPosition, blockState, multiplier, itemUpgrades);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.DOWN));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.BOTTOM));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().upgrades(1)).validUpgrades(ContainerSolarPanel.VALID_UPGRADES).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.solarpanel, this).createMenu((id, player) -> new ContainerSolarPanel(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}

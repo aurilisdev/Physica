@@ -5,10 +5,11 @@ import java.util.List;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import electrodynamics.common.tile.pipelines.fluids.TileFluidPipeFilter;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidPipeFilter;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.screen.GenericScreen;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.gauges.AbstractScreenComponentGauge.GaugeTextures;
 import electrodynamics.prefab.utilities.RenderingUtils;
 import electrodynamics.prefab.utilities.math.Color;
@@ -17,6 +18,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
@@ -41,7 +43,7 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
     public void renderBackground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
         super.renderBackground(graphics, xAxis, yAxis, guiWidth, guiHeight);
 
-        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getHostFromIntArray();
+        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getSafeHost();
 
         if (filter == null) {
             return;
@@ -92,7 +94,7 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
             return;
         }
 
-        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getHostFromIntArray();
+        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) ((GenericScreen<?>) gui).getMenu()).getSafeHost();
 
         if (filter == null) {
             return;
@@ -102,7 +104,7 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
 
         List<FormattedCharSequence> tooltips = new ArrayList<>();
 
-        tooltips.add(property.get().getDisplayName().getVisualOrderText());
+        tooltips.add(Component.translatable(property.get().getFluidType().getDescriptionId()).getVisualOrderText());
 
         graphics.renderTooltip(gui.getFontRenderer(), tooltips, xAxis, yAxis);
     }
@@ -132,7 +134,7 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
 
         GenericScreen<?> screen = (GenericScreen<?>) gui;
 
-        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray();
+        TileFluidPipeFilter filter = (TileFluidPipeFilter) ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost();
 
         if (filter == null) {
             return;
@@ -148,7 +150,6 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
                 return;
             }
             property.set(FluidStack.EMPTY);
-            property.updateServer();
 
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BUCKET_EMPTY, 1.0F));
 
@@ -169,7 +170,6 @@ public class ScreenComponentFluidFilter extends ScreenComponentGeneric {
         }
 
         property.set(taken);
-        property.updateServer();
 
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BUCKET_FILL, 1.0F));
 

@@ -77,7 +77,7 @@ public abstract class Fluid2ItemRecipeCategory<T extends Fluid2ItemRecipe> exten
     public List<ItemStack> getItemOutputs(Fluid2ItemRecipe recipe) {
         List<ItemStack> outputItems = new ArrayList<>();
 
-        outputItems.add(recipe.getItemOutputNoAccess());
+        outputItems.add(recipe.getItemRecipeOutput());
 
         if (recipe.hasItemBiproducts()) {
             outputItems.addAll(Arrays.asList(recipe.getFullItemBiStacks()));

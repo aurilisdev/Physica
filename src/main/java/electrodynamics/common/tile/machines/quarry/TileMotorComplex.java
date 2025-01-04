@@ -5,7 +5,7 @@ import electrodynamics.common.inventory.container.tile.ContainerMotorComplex;
 import electrodynamics.common.item.ItemUpgrade;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.GenericTile;
@@ -16,11 +16,11 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -33,15 +33,15 @@ public class TileMotorComplex extends GenericTile implements ITickableSound {
 
 	private boolean isSoundPlaying = false;
 
-	public final Property<Integer> speed = property(new Property<>(PropertyType.Integer, "speed", DEFAULT_SPEED));
-	public final Property<Double> powerMultiplier = property(new Property<>(PropertyType.Double, "powerMultiplier", 1.0));
-	public final Property<Boolean> isPowered = property(new Property<>(PropertyType.Boolean, "isPowered", false));
+	public final Property<Integer> speed = property(new Property<>(PropertyTypes.INTEGER, "speed", DEFAULT_SPEED));
+	public final Property<Double> powerMultiplier = property(new Property<>(PropertyTypes.DOUBLE, "powerMultiplier", 1.0));
+	public final Property<Boolean> isPowered = property(new Property<>(PropertyTypes.BOOLEAN, "isPowered", false));
 
 	public TileMotorComplex(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_MOTORCOMPLEX.get(), pos, state);
+		super(ElectrodynamicsTiles.TILE_MOTORCOMPLEX.get(), pos, state);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
-		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.SOUTH).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2).maxJoules(Constants.MOTORCOMPLEX_USAGE_PER_TICK * 10000));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.FRONT).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2).maxJoules(Constants.MOTORCOMPLEX_USAGE_PER_TICK * 10000));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().upgrades(3)).validUpgrades(ContainerMotorComplex.VALID_UPGRADES).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.motorcomplex, this).createMenu((id, player) -> new ContainerMotorComplex(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}

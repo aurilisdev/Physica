@@ -5,7 +5,6 @@ import electrodynamics.api.configuration.Configuration;
 import electrodynamics.api.configuration.DoubleValue;
 import electrodynamics.api.configuration.FloatValue;
 import electrodynamics.api.configuration.IntValue;
-import electrodynamics.prefab.utilities.object.TransferPack;
 
 @Configuration(name = "Electrodynamics")
 public class Constants {
@@ -46,18 +45,60 @@ public class Constants {
 	public static int WIREMILL_REQUIRED_TICKS = 200;
 	@DoubleValue(def = 350.0)
 	public static double COMBUSTIONCHAMBER_JOULES_PER_TICK = 350.0;
-	@IntValue(def = 10)
-	public static int CHARGER_REQUIRED_TICKS = 100;
 	@DoubleValue(def = 1000.0)
-	public static double CHARGER_USAGER_PER_TICK = 1000.0;
-	@IntValue(def = 100)
-	public static int COBBLE_GEN_REQUIRED_TICKS = 100;
+	public static double CHARGER_USAGE_PER_TICK = 1000.0;
 	@DoubleValue(def = 100)
-	public static double COBBLE_GEN_USAGE_PER_TICK = 100;
+	public static double GAS_COLLECTOR_USAGE_PER_TICK = 100;
+	@DoubleValue(def = 100)
+	public static double COMPRESSOR_USAGE_PER_TICK = 100.0;
+	@IntValue(def = 20)
+	public static int COMPRESSOR_CONVERSION_RATE = 20;
+	@DoubleValue(def = 100)
+	public static double DECOMPRESSOR_USAGE_PER_TICK = 100.0;
+	@IntValue(def = 20)
+	public static int DECOMPRESSOR_CONVERSION_RATE = 20;
+	@DoubleValue(def = 100)
+	public static double ADVACNED_COMPRESSOR_USAGE_PER_TICK = 100.0;
+	@IntValue(def = 80)
+	public static int ADVACNED_COMPRESSOR_CONVERSION_RATE = 80;
+	@DoubleValue(def = 100)
+	public static double ADVANCED_DECOMPRESSOR_USAGE_PER_TICK = 100.0;
+	@IntValue(def = 80)
+	public static int ADVANCED_DECOMPRESSOR_CONVERSION_RATE = 80;
+	@DoubleValue(def = 100)
+	public static double THERMOELECTRIC_MANIPULATOR_USAGE_PER_TICK = 100.0;
+	@IntValue(def = 10)
+	public static int THERMOELECTRIC_MANIPULATOR_HEAT_TRANSFER = 10;
+	@IntValue(def = 20)
+	public static int THERMOELECTRIC_MANIPULATOR_CONVERSION_RATE = 20;
+	@DoubleValue(def = 100)
+	public static double ADVANCED_THERMOELECTRIC_MANIPULATOR_USAGE_PER_TICK = 100.0;
+	@IntValue(def = 10)
+	public static int ADVANCED_THERMOELECTRIC_MANIPULATOR_HEAT_TRANSFER = 80;
+	@IntValue(def = 80)
+	public static int ADVANCED_THERMOELECTRIC_MANIPULATOR_CONVERSION_RATE = 80;
+	@IntValue(def = 1048576)
+	public static int GAS_TRANSFORMER_INPUT_PRESSURE_CAP = 1048576;// 2^20
+	@IntValue(def = 1000000)
+	public static int GAS_TRANSFORMER_INPUT_TEMP_CAP = 1000000;
+	@IntValue(def = 5000)
+	public static int GAS_TRANSFORMER_BASE_INPUT_CAPCITY = 5000;
+	@IntValue(def = 1048576)
+	public static int GAS_TRANSFORMER_OUTPUT_PRESSURE_CAP = 1048576;// 2^20
+	@IntValue(def = 1000000)
+	public static int GAS_TRANSFORMER_OUTPUT_TEMP_CAP = 1000000;
+	@IntValue(def = 5000)
+	public static int GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY = 5000;
+	@IntValue(def = 5000)
+	public static int GAS_TRANSFORMER_ADDON_TANK_CAPCITY = 5000;
+	@IntValue(def = 5)
+	public static int GAS_TRANSFORMER_ADDON_TANK_LIMIT = 5;
 	@DoubleValue(def = 100)
 	public static double MOTORCOMPLEX_USAGE_PER_TICK = 100.0;
 	@DoubleValue(def = 10)
 	public static double PIPE_PUMP_USAGE_PER_TICK = 10.0;
+	@DoubleValue(def = 100000.0)
+	public static double ELECTROLOSIS_CHAMBER_TARGET_JOULES = 100000.0;
 	@DoubleValue(def = 100)
 	public static double QUARRY_USAGE_PER_TICK = 100.0;
 	@IntValue(def = 10)
@@ -88,5 +129,4 @@ public class Constants {
 	@BooleanValue(def = true, comment = "Set to false to disable the HUD rendering for combat armor.")
 	public static boolean RENDER_COMBAT_ARMOR_STATUS = true;
 
-	public static TransferPack COALGENERATOR_MAX_OUTPUT = TransferPack.ampsVoltage(COALGENERATOR_AMPERAGE, 120);
 }

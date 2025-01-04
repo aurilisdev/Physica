@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "T": {
+      "item": "electrodynamics:gastanksteel"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "STS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:gastankreinforced"
+  }
+}

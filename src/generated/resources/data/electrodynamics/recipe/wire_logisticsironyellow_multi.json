@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:dyes/yellow"
+    },
+    "W": {
+      "tag": "c:wires/logistical_iron"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WDW",
+    "WWW"
+  ],
+  "result": {
+    "count": 8,
+    "id": "electrodynamics:wirelogisticsironyellow"
+  }
+}

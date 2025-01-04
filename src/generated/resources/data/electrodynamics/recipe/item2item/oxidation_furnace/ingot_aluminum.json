@@ -1,0 +1,34 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.4000000059604645,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.5,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:slag"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/aluminum"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/saltpeter"
+      }
+    }
+  ],
+  "output": {
+    "count": 3,
+    "id": "electrodynamics:ingotaluminum"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

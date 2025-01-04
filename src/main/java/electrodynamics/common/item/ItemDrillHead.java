@@ -10,7 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 public class ItemDrillHead extends ItemElectrodynamics {
@@ -20,12 +20,12 @@ public class ItemDrillHead extends ItemElectrodynamics {
 	public SubtypeDrillHead head;
 
 	public ItemDrillHead(SubtypeDrillHead head) {
-		super(new Item.Properties().defaultDurability(head.durability).durability(head.durability).rarity(head.isUnbreakable ? Rarity.UNCOMMON : Rarity.COMMON), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+		super(new Item.Properties().durability(head.durability).durability(head.durability).rarity(head.isUnbreakable ? Rarity.UNCOMMON : Rarity.COMMON), ElectrodynamicsCreativeTabs.MAIN);
 		this.head = head;
 		HEADS.add(this);
 	}
 
-	@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+	@EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 	private static class ColorHandler {
 
 		@SubscribeEvent

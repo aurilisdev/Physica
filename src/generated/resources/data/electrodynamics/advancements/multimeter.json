@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:multimeter"
-            ]
+            "items": "electrodynamics:multimeter"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.multimeter.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:multimeter"
+      "count": 1,
+      "id": "electrodynamics:multimeter"
     },
-    "show_toast": true,
     "title": {
       "color": "gray",
       "translate": "advancement.electrodynamics.multimeter.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 10
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import electrodynamics.common.tile.electricitygrid.generators.TileCombustionChamber;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.utilities.RenderingUtils;
@@ -31,7 +30,7 @@ public class RenderCombustionChamber extends AbstractTileRenderer<TileCombustion
 		float prog = fuel.getAmount() / (float) TileCombustionChamber.TANK_CAPACITY;
 		if (prog > 0) {
 
-			Direction facing = tileEntityIn.getBlockState().getValue(GenericEntityBlock.FACING);
+			Direction facing = tileEntityIn.getFacing();
 			AABB box;
 			if (facing == Direction.EAST || facing == Direction.WEST) {
 				box = new AABB(7.0D / 16.0D, 12.0D / 16.0D, 6.0D / 16.0D, 10.0D / 16.0D, 14.0D / 16.0D, 11.0D / 16.0D);
@@ -40,7 +39,7 @@ public class RenderCombustionChamber extends AbstractTileRenderer<TileCombustion
 			}
 
 			VertexConsumer builder = bufferIn.getBuffer(Sheets.translucentCullBlockSheet());
-			RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, fuel, combinedLightIn, combinedOverlayIn);
+			RenderingUtils.renderFluidBox(matrixStackIn, Minecraft.getInstance(), builder, box, fuel, combinedLightIn, combinedOverlayIn, RenderingUtils.ALL_FACES);
 		}
 		matrixStackIn.popPose();
 	}

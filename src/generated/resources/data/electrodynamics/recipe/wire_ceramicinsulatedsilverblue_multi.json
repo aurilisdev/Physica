@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "tag": "c:dyes/blue"
+    },
+    "W": {
+      "tag": "c:wires/ceramic_silver"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WDW",
+    "WWW"
+  ],
+  "result": {
+    "count": 8,
+    "id": "electrodynamics:wireceramicinsulatedsilverblue"
+  }
+}

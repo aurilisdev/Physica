@@ -1,0 +1,24 @@
+{
+  "type": "electrodynamics:chemical_reactor_recipe",
+  "fluidinputs": [
+    {
+      "amount": 3000,
+      "tag": "minecraft:water"
+    }
+  ],
+  "fluidoutput": {
+    "amount": 500,
+    "id": "electrodynamics:fluidnitricacid"
+  },
+  "gasinputs": [
+    {
+      "amount": 1000,
+      "pressure": 4,
+      "tag": "c:ammonia",
+      "temp": 700
+    }
+  ],
+  "group": "electrodynamics",
+  "ticks": 200,
+  "usagepertick": 1000.0
+}

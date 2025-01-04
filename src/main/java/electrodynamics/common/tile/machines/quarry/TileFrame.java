@@ -1,7 +1,8 @@
 package electrodynamics.common.tile.machines.quarry;
 
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -14,7 +15,7 @@ public class TileFrame extends BlockEntity {
 	private static final String KEY = "quarrypos";
 
 	public TileFrame(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_QUARRY_FRAME.get(), pos, state);
+		super(ElectrodynamicsTiles.TILE_QUARRY_FRAME.get(), pos, state);
 	}
 
 	public void purposefullyDestroyed() {
@@ -33,18 +34,18 @@ public class TileFrame extends BlockEntity {
 	}
 
 	@Override
-	protected void saveAdditional(CompoundTag tag) {
-		super.saveAdditional(tag);
+	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+		super.saveAdditional(tag, registries);
 		if (ownerQuarryPos != null) {
 			tag.put(KEY, NbtUtils.writeBlockPos(ownerQuarryPos));
 		}
 	}
 
 	@Override
-	public void load(CompoundTag tag) {
-		super.load(tag);
+	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider pRegistries) {
+		super.loadAdditional(tag, pRegistries);
 		if (tag.contains(KEY)) {
-			ownerQuarryPos = NbtUtils.readBlockPos(tag.getCompound(KEY));
+			ownerQuarryPos = NbtUtils.readBlockPos(tag, KEY).get();
 		}
 	}
 

@@ -20,13 +20,13 @@ import electrodynamics.client.guidebook.utils.pagedata.graphics.ItemWrapperObjec
 import electrodynamics.client.guidebook.utils.pagedata.text.TextWrapperObject;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
 import electrodynamics.common.block.subtype.SubtypeMachine;
+import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tags.ElectrodynamicsTags;
-import electrodynamics.common.tile.pipelines.tanks.gas.GenericTileGasTank;
+import electrodynamics.common.tile.pipelines.gas.tank.GenericTileGasTank;
 import electrodynamics.compatibility.jei.JeiBuffer;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.registers.ElectrodynamicsGases;
 import electrodynamics.registers.ElectrodynamicsItems;
-import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Holder;
@@ -34,11 +34,12 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ChapterGases extends Chapter {
 
-	private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, new ResourceLocation(References.ID, "textures/item/gaspipe/gaspipeuninsulatedsteel.png"));
+	private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/item/gaspipe/gaspipeuninsulatedsteel.png"));
 
 	public ChapterGases(Module module) {
 		super(module);
@@ -117,9 +118,9 @@ public class ChapterGases extends Chapter {
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l3", ElectroTextUtils.guidebook("chapter.gases.pressure").withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l4.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, new ResourceLocation(References.ID, "textures/screen/guidebook/itemmaxgasvals.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/itemmaxgasvals.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l4.2")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, new ResourceLocation(References.ID, "textures/screen/guidebook/machinepressuretooltip.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/machinepressuretooltip.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l4.3")).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l5")).setIndentions(1).setSeparateStart());
 
@@ -129,15 +130,15 @@ public class ChapterGases extends Chapter {
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l6", ElectroTextUtils.guidebook("chapter.gases.temperature").withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l7.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, new ResourceLocation(References.ID, "textures/screen/guidebook/itemmaxgasvals.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/itemmaxgasvals.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l7.2")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, new ResourceLocation(References.ID, "textures/screen/guidebook/machinetemperaturetooltip.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/machinetemperaturetooltip.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l7.3")).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l8")).setIndentions(1).setSeparateStart());
 		// condensed gases
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l9")).setIndentions(1).setSeparateStart());
 		for (DeferredHolder<Gas, ? extends Gas> gas : ElectrodynamicsGases.GASES.getEntries()) {
-			if (gas.get().isEmpty() || gas.get().getCondensedFluid() == null) {
+			if (gas.get().isEmpty() || gas.get().getCondensedFluid().isSame(Fluids.EMPTY)) {
 				continue;
 			}
 			blankLine();
@@ -148,7 +149,7 @@ public class ChapterGases extends Chapter {
 		blankLine();
 		// condensed gas machine handling
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l10.1")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 60, 150, 60, 65, new ResourceLocation(References.ID, "textures/screen/guidebook/gasmachinecondensedgui.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 60, 150, 60, 65, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gasmachinecondensedgui.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l10.2")).setSeparateStart());
 
 		/* Gas IO */
@@ -161,14 +162,14 @@ public class ChapterGases extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.output")).setIndentions(1).setSeparateStart());
 		blankLine();
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l12")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, new ResourceLocation(References.ID, "textures/screen/guidebook/gasio.png")).setNewPage().onTooltip(new OnTooltip() {
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gasio.png")).setNewPage().onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
 				List<FormattedCharSequence> tooltips = new ArrayList<>();
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.getItem(SubtypeMachine.gasvent).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.getItem(SubtypeMachine.electrolyticseparator).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
-				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.ITEM_GASPIPEFILTER.get().getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.left", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvent).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.middle", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.electrolyticseparator).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
+				tooltips.add(ElectroTextUtils.guidebook("chapter.electricity.right", ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipefilter).getDescription().copy().withStyle(ChatFormatting.DARK_GRAY)).withStyle(ChatFormatting.GRAY).getVisualOrderText());
 
 				graphics.renderTooltip(screen.getFontRenderer(), tooltips, xAxis, yAxis);
 			}
@@ -195,7 +196,7 @@ public class ChapterGases extends Chapter {
 		blankLine();
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l13.2")).setSeparateStart());
 		blankLine();
-		for (Holder<Gas> gas : ElectrodynamicsGases.GAS_REGISTRY.getTag(ElectrodynamicsTags.Gases.IS_CORROSIVE).get().unwrap().right().get()) {
+		for (Holder<Gas> gas : ElectrodynamicsGases.GAS_REGISTRY.getTag(ElectrodynamicsTags.Gases.IS_CORROSIVE).get()) {
 			pageData.add(new TextWrapperObject(gas.value().getDescription()).setSeparateStart());
 		}
 		blankLine();
@@ -207,14 +208,14 @@ public class ChapterGases extends Chapter {
 
 		// compressors
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l14")).setIndentions(1).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l15", ElectrodynamicsItems.ITEM_COMPRESSOR.get().getDescription().copy().withStyle(ChatFormatting.BOLD), ElectrodynamicsItems.ITEM_DECOMPRESSOR.get().getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l15", ElectrodynamicsItems.ITEM_COMPRESSOR.get().getDescription().copy().withStyle(ChatFormatting.BOLD), ElectrodynamicsItems.ITEM_DECOMPRESSOR.get().getDescription().copy().withStyle(ChatFormatting.BOLD), Constants.COMPRESSOR_CONVERSION_RATE, Constants.ADVACNED_COMPRESSOR_CONVERSION_RATE)).setIndentions(1).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l16.1", ElectrodynamicsItems.ITEM_COMPRESSOR_ADDONTANK.get().getDescription(), ElectrodynamicsItems.ITEM_COMPRESSOR_ADDONTANK.get().getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, new ResourceLocation(References.ID, "textures/screen/guidebook/pressurizedtankuse.png")));
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l16.2")).setSeparateStart());
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/pressurizedtankuse.png")));
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l16.2", Constants.GAS_TRANSFORMER_ADDON_TANK_LIMIT)).setSeparateStart());
 
 		// thermal manip
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l17.1", ElectrodynamicsItems.ITEM_THERMOELECTRIC_MANIPULATOR.get().getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, new ResourceLocation(References.ID, "textures/screen/guidebook/thermomanipgui.png")));
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l17.1", ElectrodynamicsItems.ITEM_THERMOELECTRIC_MANIPULATOR.get().getDescription().copy().withStyle(ChatFormatting.BOLD), Constants.THERMOELECTRIC_MANIPULATOR_CONVERSION_RATE, Constants.THERMOELECTRIC_MANIPULATOR_HEAT_TRANSFER, Constants.ADVANCED_THERMOELECTRIC_MANIPULATOR_CONVERSION_RATE, Constants.ADVANCED_THERMOELECTRIC_MANIPULATOR_HEAT_TRANSFER)).setIndentions(1).setSeparateStart());
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/thermomanipgui.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l17.2", ElectrodynamicsItems.ITEM_THERMOELECTRIC_MANIPULATOR.get().getDescription(), ElectrodynamicsItems.ITEM_COMPRESSOR.get().getDescription(), ElectrodynamicsItems.ITEM_DECOMPRESSOR.get().getDescription(), ElectrodynamicsItems.ITEM_COMPRESSOR_ADDONTANK.get().getDescription())).setSeparateStart());
 
 		/* Gas Tools */
@@ -255,8 +256,8 @@ public class ChapterGases extends Chapter {
 
 		// Gas Valve
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_GASVALVE.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEM_GASVALVE.get()).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvalve).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvalve)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -276,20 +277,20 @@ public class ChapterGases extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.ITEM_GASVALVE.get());
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvalve));
 			}
 
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gasvalve.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/gasvalveoff.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/gasvalveon.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gasvalveoff.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gasvalveon.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gasvalve.2")).setSeparateStart());
 
 		// Gas Pipe Pump
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_GASPIPEPUMP.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEM_GASPIPEPUMP.get()).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipepump).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipepump)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -309,21 +310,21 @@ public class ChapterGases extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.ITEM_GASPIPEPUMP.get());
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipepump));
 			}
 
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gaspipepump.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 85, new ResourceLocation(References.ID, "textures/screen/guidebook/gaspipepump.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 85, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gaspipepump.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gaspipepump.2")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 85, new ResourceLocation(References.ID, "textures/screen/guidebook/gaspipepumpgui.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 85, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gaspipepumpgui.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gaspipepump.3")).setSeparateStart());
 
 		// Gas Filter Pipe
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEM_GASPIPEFILTER.get().getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEM_GASPIPEFILTER.get()).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipefilter).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipefilter)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -343,25 +344,25 @@ public class ChapterGases extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.ITEM_GASPIPEFILTER.get());
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gaspipefilter));
 			}
 
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gasfilterpipe.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/gasfilterpipe.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gasfilterpipe.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gasfilterpipe.2")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/gasfilterpipegui1.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gasfilterpipegui1.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gasfilterpipe.3", ElectroTextUtils.guidebook("chapter.gases.blacklist").withStyle(ChatFormatting.BOLD), ElectroTextUtils.guidebook("chapter.gases.whitelist").withStyle(ChatFormatting.BOLD))).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gasfilterpipe.4")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/gasfilterpipegui2.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/gasfilterpipegui3.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gasfilterpipegui2.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/gasfilterpipegui3.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gasfilterpipe.5")).setSeparateStart());
 
 		// Gas Vent
 
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeMachine.gasvent).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.gasvent)).onTooltip(new OnTooltip() {
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvent).getDescription().copy().withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvent)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -381,7 +382,7 @@ public class ChapterGases extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.gasvent));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gasvent));
 			}
 
 		}));
@@ -391,7 +392,7 @@ public class ChapterGases extends Chapter {
 		// Gas Cylinders
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.gascylinders").withStyle(ChatFormatting.BOLD)).setCentered().setNewPage());
-		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.gastankhsla)).onTooltip(new OnTooltip() {
+		pageData.add(new ItemWrapperObject(7 + ScreenGuidebook.TEXT_WIDTH / 2 - 16, 5, 32, 30, 30, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gastankhsla)).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -411,14 +412,14 @@ public class ChapterGases extends Chapter {
 
 			@Override
 			public Object getJeiLookup() {
-				return new ItemStack(ElectrodynamicsItems.getItem(SubtypeMachine.gastankhsla));
+				return new ItemStack(ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.gastankhsla));
 			}
 
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l18.gascylinder.1", ChatFormatter.getChatDisplayShort(GenericTileGasTank.HEAT_LOSS * 20, DisplayUnit.TEMPERATURE_KELVIN), ElectrodynamicsItems.ITEM_FIBERGLASSSHEET.get().getDescription().copy().withStyle(ChatFormatting.BOLD), ChatFormatter.getChatDisplayShort(GenericTileGasTank.INSULATION_EFFECTIVENESS * 100 - 100, DisplayUnit.PERCENTAGE), ChatFormatter.getChatDisplayShort(Math.pow(GenericTileGasTank.INSULATION_EFFECTIVENESS, 6) * 100 - 100, DisplayUnit.PERCENTAGE))).setSeparateStart().setIndentions(1));
 
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/fiberglasssheetuse.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fiberglasssheetuse.png")));
 
 		/* Gas GUIs */
 

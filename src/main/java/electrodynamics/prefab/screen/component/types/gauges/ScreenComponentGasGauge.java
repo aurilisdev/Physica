@@ -4,6 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import electrodynamics.api.capability.types.gas.IGasHandlerItem;
+import electrodynamics.api.gas.GasAction;
+import electrodynamics.api.gas.PropertyGasTank;
+import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
+import electrodynamics.prefab.screen.GenericScreen;
+import electrodynamics.prefab.tile.GenericTile;
+import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsSounds;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -20,7 +33,7 @@ import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.gas.utils.IGasTank;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.client.ClientRegister;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.ChatFormatting;
@@ -33,7 +46,7 @@ import net.minecraft.util.FormattedCharSequence;
 
 public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/gas.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/gas.png");
 
 	public final Supplier<IGasTank> gasTank;
 
@@ -94,7 +107,7 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 
 	public static void renderMercuryTexture(GuiGraphics graphics, int x, int y, float progress) {
 
-		TextureAtlasSprite mercury = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_MERCURY);
+		TextureAtlasSprite mercury = ClientRegister.getSprite(ClientRegister.TEXTURE_MERCURY);
 
 		Matrix4f matrix = graphics.pose().last().pose();
 
@@ -119,17 +132,96 @@ public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 		minV = maxV - deltaV * progress;
 
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
-		bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-		bufferbuilder.vertex(matrix, x1, y2, 0).uv(minU, maxV).endVertex();
-		bufferbuilder.vertex(matrix, x2, y2, 0).uv(maxU, maxV).endVertex();
-		bufferbuilder.vertex(matrix, x2, y1, 0).uv(maxU, minV).endVertex();
-		bufferbuilder.vertex(matrix, x1, y1, 0).uv(minU, minV).endVertex();
-		BufferUploader.drawWithShader(bufferbuilder.end());
+		BufferBuilder bufferbuilder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+		bufferbuilder.addVertex(matrix, x1, y2, 0).setUv(minU, maxV).addVertex(matrix, x2, y2, 0).setUv(maxU, maxV).addVertex(matrix, x2, y1, 0).setUv(maxU, minV).addVertex(matrix, x1, y1, 0).setUv(minU, minV);
+		BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
 
 	}
 
-	public enum GasGaugeTextures implements ITexture {
+	@Override
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
+		if (isActiveAndVisible() && isValidClick(button) && isInClickRegion(mouseX, mouseY)) {
+
+			onMouseClick(mouseX, mouseY);
+
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean mouseReleased(double mouseX, double mouseY, int button) {
+		if (isValidClick(button)) {
+			onMouseRelease(mouseX, mouseY);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void onMouseClick(double mouseX, double mouseY) {
+
+		PropertyGasTank tank = (PropertyGasTank) gasTank.get();
+
+		if (tank == null) {
+			return;
+		}
+
+		GenericScreen<?> screen = (GenericScreen<?>) gui;
+
+		GenericTile owner = (GenericTile) ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost();
+
+		if (owner == null) {
+			return;
+		}
+
+		ItemStack stack = screen.getMenu().getCarried();
+
+		GasStack drainedGasSource = tank.getGas().copy();
+
+		IGasHandlerItem handler = stack.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
+
+		if (handler == null) {
+			return;
+		}
+
+		int taken = handler.fill(drainedGasSource, GasAction.EXECUTE);
+
+		//drain this gas gauge if the amount taken was greater than zero
+		if (taken > 0) {
+
+			tank.drain(taken, GasAction.EXECUTE);
+
+			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
+
+			stack = handler.getContainer();
+
+			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost().getBlockPos(), Minecraft.getInstance().player.getUUID()));
+
+			return;
+		}
+		//we didn't drain the gauge, now we try to fill it
+		for(int i = 0; i < handler.getTanks(); i++){
+			drainedGasSource = handler.getGasInTank(i);
+			taken = tank.fill(drainedGasSource, GasAction.EXECUTE);
+			if(taken <= 0) {
+				continue;
+			}
+			handler.drain(taken, GasAction.EXECUTE);
+
+			Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(ElectrodynamicsSounds.SOUND_PRESSURERELEASE.get(), 1.0F));
+
+			stack = handler.getContainer();
+
+			PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost().getBlockPos(), Minecraft.getInstance().player.getUUID()));
+
+			return;
+		}
+
+
+	}
+
+		public enum GasGaugeTextures implements ITexture {
 		BACKGROUND_DEFAULT(14, 49, 0, 0, 256, 256, TEXTURE),
 		LEVEL_DEFAULT(14, 49, 14, 0, 256, 256, TEXTURE);
 

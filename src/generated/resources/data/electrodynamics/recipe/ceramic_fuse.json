@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "electrodynamics:ceramiccooked"
+    },
+    "P": {
+      "item": "electrodynamics:ceramicplate"
+    },
+    "W": {
+      "item": "electrodynamics:wirecopper"
+    }
+  },
+  "pattern": [
+    "#P#",
+    " W ",
+    "#P#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:ceramicfuse"
+  }
+}

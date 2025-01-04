@@ -1,0 +1,25 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.10000000149011612,
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/salt"
+      }
+    },
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:dusts/sulfur"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:oxidesulfurdichloride"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

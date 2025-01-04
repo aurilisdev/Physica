@@ -5,7 +5,7 @@ import java.util.Set;
 
 import electrodynamics.prefab.inventory.container.GenericContainer;
 import electrodynamics.prefab.screen.GenericScreen;
-import electrodynamics.prefab.screen.component.AbstractScreenComponent;
+import electrodynamics.prefab.screen.component.utils.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
 import net.minecraft.network.chat.Component;
@@ -26,12 +26,12 @@ public class GenericMaterialScreen<T extends GenericContainer> extends GenericSc
 	private Set<ScreenComponentFluidGauge> fluidGauges = new HashSet<>();
 	private Set<ScreenComponentGasGauge> gasGauges = new HashSet<>();
 
-	public GenericMaterialScreen(T screenContainer, Inventory inv, Component titleIn) {
-		super(screenContainer, inv, titleIn);
+	public GenericMaterialScreen(T container, Inventory inv, Component titleIn) {
+		super(container, inv, titleIn);
 	}
 
 	@Override
-	public void addComponent(AbstractScreenComponent component) {
+	public AbstractScreenComponent addComponent(AbstractScreenComponent component) {
 		super.addComponent(component);
 
 		if (component instanceof ScreenComponentFluidGauge gauge) {
@@ -39,7 +39,7 @@ public class GenericMaterialScreen<T extends GenericContainer> extends GenericSc
 		} else if (component instanceof ScreenComponentGasGauge gauge) {
 			gasGauges.add(gauge);
 		}
-
+		return component;
 	}
 
 	public Set<ScreenComponentFluidGauge> getFluidGauges() {

@@ -2,6 +2,7 @@ package electrodynamics.datagen.server.tags.types;
 
 import java.util.concurrent.CompletableFuture;
 
+import electrodynamics.Electrodynamics;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.References;
@@ -28,11 +29,16 @@ public class ElectrodynamicsGasTagsProvider extends IntrinsicHolderTagsProvider<
 
 	@Override
 	protected void addTags(Provider pProvider) {
-		tag(ElectrodynamicsTags.Gases.HYDROGEN).add(ElectrodynamicsGases.HYDROGEN.get());
-		tag(ElectrodynamicsTags.Gases.OXYGEN).add(ElectrodynamicsGases.OXYGEN.get());
-		tag(ElectrodynamicsTags.Gases.STEAM).add(ElectrodynamicsGases.STEAM.get());
+		tag(ElectrodynamicsTags.Gases.HYDROGEN).add(ElectrodynamicsGases.HYDROGEN.value());
+		tag(ElectrodynamicsTags.Gases.OXYGEN).add(ElectrodynamicsGases.OXYGEN.value());
+		tag(ElectrodynamicsTags.Gases.STEAM).add(ElectrodynamicsGases.STEAM.value());
+		tag(ElectrodynamicsTags.Gases.NITROGEN).add(ElectrodynamicsGases.NITROGEN.value());
+		tag(ElectrodynamicsTags.Gases.ARGON).add(ElectrodynamicsGases.ARGON.value());
+		tag(ElectrodynamicsTags.Gases.CARBON_DIOXIDE).add(ElectrodynamicsGases.CARBON_DIOXIDE.value());
+		tag(ElectrodynamicsTags.Gases.SULFUR_DIOXIDE).add(ElectrodynamicsGases.SULFUR_DIOXIDE.value());
+		tag(ElectrodynamicsTags.Gases.AMMONIA).add(ElectrodynamicsGases.AMMONIA.value());
 
-		tag(ElectrodynamicsTags.Gases.IS_CORROSIVE);
+		tag(ElectrodynamicsTags.Gases.IS_CORROSIVE).add(ElectrodynamicsGases.SULFUR_DIOXIDE.value());
 	}
 
 }

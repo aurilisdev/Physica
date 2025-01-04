@@ -72,7 +72,7 @@
 			"children": [59, 60, 61, 62]
 		}
 	],
-	"loader": "forge:composite",
+	"loader": "neoforge:composite",
 	"children": {
 		"solid": {
 			"render_type": "minecraft:solid",

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/elite"
+    },
+    "L": {
+      "item": "electrodynamics:chargerlv"
+    },
+    "P": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "W": {
+      "tag": "c:wires/thick_gold"
+    }
+  },
+  "pattern": [
+    "W W",
+    "PLP",
+    "PCP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:chargermv"
+  }
+}

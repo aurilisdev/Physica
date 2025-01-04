@@ -5,11 +5,10 @@ import java.util.List;
 
 import electrodynamics.common.item.subtype.SubtypeCeramic;
 import electrodynamics.prefab.utilities.ItemUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
 import electrodynamics.registers.ElectrodynamicsCreativeTabs;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsSounds;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -22,7 +21,7 @@ public class ItemCeramic extends ItemElectrodynamics {
 	public SubtypeCeramic subtype;
 
 	public ItemCeramic(SubtypeCeramic subtype) {
-		super(new Item.Properties().stacksTo(64), () -> ElectrodynamicsCreativeTabs.MAIN.get());
+		super(new Item.Properties().stacksTo(64), ElectrodynamicsCreativeTabs.MAIN);
 		this.subtype = subtype;
 	}
 
@@ -31,7 +30,7 @@ public class ItemCeramic extends ItemElectrodynamics {
 
 		ItemStack handStack = player.getItemInHand(hand);
 
-		if (world.isClientSide || !ItemUtils.testItems(handStack.getItem(), ElectrodynamicsItems.SUBTYPEITEMREGISTER_MAPPINGS.get(SubtypeCeramic.plate).get())) {
+		if (world.isClientSide || !ItemUtils.testItems(handStack.getItem(), ElectrodynamicsItems.ITEMS_CERAMIC.getValue(SubtypeCeramic.plate))) {
 			return InteractionResultHolder.pass(player.getItemInHand(hand));
 		}
 
@@ -40,11 +39,10 @@ public class ItemCeramic extends ItemElectrodynamics {
 
 		ItemStack chestplate = armorPieces.get(2);
 		if (chestplate.getItem() == ElectrodynamicsItems.ITEM_COMPOSITECHESTPLATE.get() || chestplate.getItem() == ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get()) {
-			CompoundTag tag = chestplate.getOrCreateTag();
-			int stored = tag.getInt(NBTUtils.PLATES);
+			int stored = chestplate.getOrDefault(ElectrodynamicsDataComponentTypes.PLATES, 0);
 			if (stored < 2) {
 				world.playSound(null, player.getOnPos(), ElectrodynamicsSounds.SOUND_CERAMICPLATEADDED.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
-				tag.putInt(NBTUtils.PLATES, stored + 1);
+				chestplate.set(ElectrodynamicsDataComponentTypes.PLATES, stored + 1);
 				if (!player.isCreative()) {
 					handStack.shrink(1);
 					player.setItemInHand(hand, handStack);

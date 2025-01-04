@@ -1,0 +1,26 @@
+{
+  "type": "electrodynamics:chemical_reactor_recipe",
+  "gasinputs": [
+    {
+      "amount": 1000,
+      "pressure": 1,
+      "tag": "c:sulfurdioxide",
+      "temp": 373
+    }
+  ],
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:oxides/vanadium"
+      }
+    }
+  ],
+  "itemoutput": {
+    "count": 1,
+    "id": "electrodynamics:oxidetrisulfur"
+  },
+  "ticks": 200,
+  "usagepertick": 500.0
+}

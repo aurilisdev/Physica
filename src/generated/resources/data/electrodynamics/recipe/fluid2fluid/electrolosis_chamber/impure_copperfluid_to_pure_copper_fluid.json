@@ -1,0 +1,16 @@
+{
+  "type": "electrodynamics:electrolosis_chamber_recipe",
+  "fluidinputs": [
+    {
+      "amount": 1,
+      "fluid": "electrodynamics:fluidimpuremineralcopper"
+    }
+  ],
+  "group": "electrodynamics",
+  "output": {
+    "amount": 1,
+    "id": "electrodynamics:fluidpuremineralcopper"
+  },
+  "ticks": 0,
+  "usagepertick": 0.0
+}

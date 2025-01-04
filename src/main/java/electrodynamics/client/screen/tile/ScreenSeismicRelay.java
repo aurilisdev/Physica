@@ -8,6 +8,7 @@ import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.types.ScreenComponentMultiLabel;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -17,10 +18,10 @@ public class ScreenSeismicRelay extends GenericScreen<ContainerSeismicRelay> {
 
 	public ScreenSeismicRelay(ContainerSeismicRelay container, Inventory inv, Component titleIn) {
 		super(container, inv, titleIn);
-		addComponent(new ScreenComponentSimpleLabel(70, 20, 10, 4210752, ElectroTextUtils.gui("seismicrelay.dataheader")));
+		addComponent(new ScreenComponentSimpleLabel(70, 20, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("seismicrelay.dataheader")));
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
 
-			TileSeismicRelay relay = menu.getHostFromIntArray();
+			TileSeismicRelay relay = menu.getSafeHost();
 
 			if (relay != null) {
 				List<BlockPos> markers = relay.markerLocs.get();
@@ -54,11 +55,11 @@ public class ScreenSeismicRelay extends GenericScreen<ContainerSeismicRelay> {
 	}
 
 	private void renderNotFound(GuiGraphics graphics, int offset, int index) {
-		graphics.drawString(font, ElectroTextUtils.gui("seismicrelay.posnotfound", index), 80, 30 + offset, 4210752, false);
+		graphics.drawString(font, ElectroTextUtils.gui("seismicrelay.posnotfound", index), 80, 30 + offset, Color.TEXT_GRAY.color(), false);
 	}
 
 	private void renderCoordinate(GuiGraphics graphics, BlockPos pos, int offset, int index) {
-		graphics.drawString(font, ElectroTextUtils.gui("seismicrelay.posfound", index, pos.toShortString()), 80, 30 + offset, 4210752, false);
+		graphics.drawString(font, ElectroTextUtils.gui("seismicrelay.posfound", index, pos.toShortString()), 80, 30 + offset, Color.TEXT_GRAY.color(), false);
 	}
 
 }

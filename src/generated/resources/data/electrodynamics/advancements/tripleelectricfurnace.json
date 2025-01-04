@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:electricfurnacetriple"
-            ]
+            "items": "electrodynamics:electricfurnacetriple"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.tripleelectricfurnace.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:electricfurnacetriple"
+      "count": 1,
+      "id": "electrodynamics:electricfurnacetriple"
     },
-    "show_toast": true,
     "title": {
       "color": "red",
       "translate": "advancement.electrodynamics.tripleelectricfurnace.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 100
-  },
-  "sends_telemetry_event": false
+  }
 }

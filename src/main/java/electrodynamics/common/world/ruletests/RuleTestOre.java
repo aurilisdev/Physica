@@ -3,6 +3,7 @@ package electrodynamics.common.world.ruletests;
 import javax.annotation.Nullable;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import electrodynamics.common.block.BlockOre;
@@ -30,12 +31,12 @@ public class RuleTestOre extends RuleTest {
 
 	private final TagKey<Block> canSpawnIn;
 
-	public static final Codec<RuleTestOre> CODEC = RecordCodecBuilder.create(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("block").forGetter(instance0 -> {
+	public static final MapCodec<RuleTestOre> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(BuiltInRegistries.BLOCK.byNameCodec().fieldOf("block").forGetter(instance0 -> {
 		if (instance0.thisOre != null) {
-			return ElectrodynamicsBlocks.SUBTYPEBLOCKREGISTER_MAPPINGS.get(instance0.thisOre).get();
+			return ElectrodynamicsBlocks.BLOCKS_ORE.getValue(instance0.thisOre);
 		}
 		if (instance0.thisDeepOre != null) {
-			return ElectrodynamicsBlocks.SUBTYPEBLOCKREGISTER_MAPPINGS.get(instance0.thisDeepOre).get();
+			return ElectrodynamicsBlocks.BLOCKS_DEEPSLATEORE.getValue(instance0.thisDeepOre);
 		}
 		return Blocks.AIR;
 	}), TagKey.codec(Registries.BLOCK).fieldOf("canspawnintag").forGetter(instance0 -> instance0.canSpawnIn)).apply(instance, (block, tag) -> {

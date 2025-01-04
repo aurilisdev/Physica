@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:raworechromium"
-            ]
+            "items": "electrodynamics:raworechromium"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.rawchromium.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:raworechromium"
+      "count": 1,
+      "id": "electrodynamics:raworechromium"
     },
-    "show_toast": true,
     "title": {
       "color": "gray",
       "translate": "advancement.electrodynamics.rawchromium.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 10
-  },
-  "sends_telemetry_event": false
+  }
 }

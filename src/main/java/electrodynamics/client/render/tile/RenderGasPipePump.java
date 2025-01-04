@@ -62,7 +62,7 @@ public class RenderGasPipePump extends AbstractTileRenderer<TileGasPipePump> {
 			box2 = aabb(9, 13 - offset2, 12, 11, 17 - offset2, 14);
 		}
 
-		TextureAtlasSprite whiteTexture = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_WHITE);
+		TextureAtlasSprite whiteTexture = ClientRegister.getSprite(ClientRegister.TEXTURE_WHITE);
 		float u0 = whiteTexture.getU0();
 		float u1 = whiteTexture.getU1();
 		float v0 = whiteTexture.getV0();
@@ -70,8 +70,8 @@ public class RenderGasPipePump extends AbstractTileRenderer<TileGasPipePump> {
 
 		VertexConsumer builder = bufferSource.getBuffer(Sheets.solidBlockSheet());
 
-		RenderingUtils.renderFilledBox(poseStack, builder, box1, 67.0F / 256.0F, 67.0F / 256.0F, 67.0F / 256.0F, 1, u0, v0, u1, v1, packedLight, packedOverlay);
-		RenderingUtils.renderFilledBox(poseStack, builder, box2, 67.0F / 256.0F, 67.0F / 256.0F, 67.0F / 256.0F, 1, u0, v0, u1, v1, packedLight, packedOverlay);
+		RenderingUtils.renderFilledBox(poseStack, builder, box1, 67.0F / 256.0F, 67.0F / 256.0F, 67.0F / 256.0F, 1, u0, v0, u1, v1, packedLight, packedOverlay, RenderingUtils.ALL_FACES);
+		RenderingUtils.renderFilledBox(poseStack, builder, box2, 67.0F / 256.0F, 67.0F / 256.0F, 67.0F / 256.0F, 1, u0, v0, u1, v1, packedLight, packedOverlay, RenderingUtils.ALL_FACES);
 
 		poseStack.popPose();
 

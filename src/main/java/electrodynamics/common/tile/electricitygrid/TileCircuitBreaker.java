@@ -1,6 +1,6 @@
 package electrodynamics.common.tile.electricitygrid;
 
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.core.HolderLookup;
 
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
@@ -11,7 +11,7 @@ import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,9 +32,14 @@ public class TileCircuitBreaker extends GenericTile {
 
     private boolean isLocked = false;
 
+    public static final BlockEntityUtils.MachineDirection OUTPUT = BlockEntityUtils.MachineDirection.FRONT;
+    public static final BlockEntityUtils.MachineDirection INPUT = BlockEntityUtils.MachineDirection.BACK;
+
     public TileCircuitBreaker(BlockPos worldPosition, BlockState blockState) {
-        super(ElectrodynamicsBlockTypes.TILE_CIRCUITBREAKER.get(), worldPosition, blockState);
-        addComponent(new ComponentElectrodynamic(this, true, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setOutputDirections(Direction.SOUTH).setInputDirections(Direction.NORTH).voltage(-1).getAmpacity(this::getAmpacity).getMinimumVoltage(this::getMinimumVoltage));
+        super(ElectrodynamicsTiles.TILE_CIRCUITBREAKER.get(), worldPosition, blockState);
+        addComponent(new ComponentElectrodynamic(this, true, true).receivePower(this::receivePower).getConnectedLoad(this::getConnectedLoad).setOutputDirections(OUTPUT).setInputDirections(INPUT)
+                //
+                .voltage(-1).getAmpacity(this::getAmpacity).getMinimumVoltage(this::getMinimumVoltage));
         addComponent(new ComponentTickable(this).tickServer(this::tickServer));
     }
 
@@ -58,7 +63,7 @@ public class TileCircuitBreaker extends GenericTile {
             return TransferPack.EMPTY;
         }
 
-        Direction output = BlockEntityUtils.getRelativeSide(getFacing(), Direction.SOUTH);
+        Direction output = BlockEntityUtils.getRelativeSide(getFacing(), OUTPUT.mappedDir);
 
         BlockEntity tile = level.getBlockEntity(worldPosition.relative(output));
 
@@ -126,9 +131,9 @@ public class TileCircuitBreaker extends GenericTile {
             return TransferPack.EMPTY;
         }
 
-        Direction output = BlockEntityUtils.getRelativeSide(getFacing(), Direction.SOUTH);
+        Direction output = BlockEntityUtils.getRelativeSide(getFacing(), OUTPUT.mappedDir);
 
-        if (dir.getOpposite() != output) {
+        if (dir != output.getOpposite()) {
             return TransferPack.EMPTY;
         }
 
@@ -191,7 +196,7 @@ public class TileCircuitBreaker extends GenericTile {
         }
         isLocked = true;
 
-        ICapabilityElectrodynamic electro = output.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, output.getBlockPos(), output.getBlockState(), output, facing);
+        ICapabilityElectrodynamic electro = output.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, output.getBlockPos(), output.getBlockState(), output, facing.getOpposite());
 
         if (electro == null) {
             isLocked = false;
@@ -215,7 +220,7 @@ public class TileCircuitBreaker extends GenericTile {
         }
         isLocked = true;
 
-        ICapabilityElectrodynamic electro = output.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, output.getBlockPos(), output.getBlockState(), output, facing);
+        ICapabilityElectrodynamic electro = output.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, output.getBlockPos(), output.getBlockState(), output, facing.getOpposite());
 
         if (electro == null) {
             isLocked = false;
@@ -227,16 +232,16 @@ public class TileCircuitBreaker extends GenericTile {
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag compound) {
-        super.saveAdditional(compound);
+    public void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.saveAdditional(compound, registries);
         compound.putBoolean("hasredstonesignal", recievedRedstoneSignal);
         compound.putBoolean("tripped", tripped);
         compound.putInt("timer", tripCurveTimer);
     }
 
     @Override
-    public void load(@NotNull CompoundTag compound) {
-        super.load(compound);
+    protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+        super.loadAdditional(compound, registries);
         recievedRedstoneSignal = compound.getBoolean("hasredstonesignal");
         tripped = compound.getBoolean("tripped");
         tripCurveTimer = compound.getInt("timer");

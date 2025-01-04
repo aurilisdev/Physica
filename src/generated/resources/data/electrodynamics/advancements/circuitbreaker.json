@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:circuitbreaker"
-            ]
+            "items": "electrodynamics:circuitbreaker"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.circuitbreaker.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:circuitbreaker"
+      "count": 1,
+      "id": "electrodynamics:circuitbreaker"
     },
-    "show_toast": true,
     "title": {
       "color": "gray",
       "translate": "advancement.electrodynamics.circuitbreaker.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 30
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -15,8 +15,6 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.item.crafting.Ingredient;
 
 public abstract class FluidItem2GasRecipe extends AbstractMaterialRecipe {
 
@@ -57,18 +55,6 @@ public abstract class FluidItem2GasRecipe extends AbstractMaterialRecipe {
 
     public List<CountableIngredient> getCountedIngredients() {
         return ingredients;
-    }
-
-    @Override
-    public NonNullList<Ingredient> getIngredients() {
-        NonNullList<Ingredient> list = NonNullList.create();
-        for (Ingredient ing : ingredients) {
-            list.add(ing);
-        }
-        for (Ingredient ing : fluidIngredients) {
-            list.add(ing);
-        }
-        return list;
     }
 
     public interface Factory<T extends FluidItem2GasRecipe> {

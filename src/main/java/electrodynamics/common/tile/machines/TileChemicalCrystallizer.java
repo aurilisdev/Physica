@@ -15,7 +15,8 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
@@ -29,12 +30,14 @@ public class TileChemicalCrystallizer extends GenericMaterialTile implements ITi
 	private boolean isSoundPlaying = false;
 
 	public TileChemicalCrystallizer(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_CHEMICALCRYSTALLIZER.get(), worldPosition, blockState);
+		super(ElectrodynamicsTiles.TILE_CHEMICALCRYSTALLIZER.get(), worldPosition, blockState);
 		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentTickable(this).tickClient(this::tickClient));
-		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.NORTH).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2));
-		addComponent(new ComponentFluidHandlerMulti(this).setInputTanks(1, MAX_TANK_CAPACITY).setInputDirections(Direction.EAST, Direction.WEST).setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_CRYSTALIZER_TYPE.get()));
-		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().processors(1, 0, 1, 0).bucketInputs(1).upgrades(3)).setDirectionsBySlot(0, Direction.UP, Direction.NORTH, Direction.DOWN).validUpgrades(ContainerChemicalCrystallizer.VALID_UPGRADES).valid(machineValidator()));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BACK).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2));
+		addComponent(new ComponentFluidHandlerMulti(this).setInputTanks(1, MAX_TANK_CAPACITY).setInputDirections(BlockEntityUtils.MachineDirection.LEFT, BlockEntityUtils.MachineDirection.RIGHT).setRecipeType(ElectrodynamicsRecipeInit.CHEMICAL_CRYSTALIZER_TYPE.get()));
+		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().processors(1, 0, 1, 0).bucketInputs(1).upgrades(3))
+				//
+				.setDirectionsBySlot(0, BlockEntityUtils.MachineDirection.TOP, BlockEntityUtils.MachineDirection.BOTTOM, BlockEntityUtils.MachineDirection.FRONT).validUpgrades(ContainerChemicalCrystallizer.VALID_UPGRADES).valid(machineValidator()));
 		addComponent(new ComponentProcessor(this).canProcess(component -> component.consumeBucket().canProcessFluid2ItemRecipe(component, ElectrodynamicsRecipeInit.CHEMICAL_CRYSTALIZER_TYPE.get())).process(component -> component.processFluid2ItemRecipe(component)));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.chemicalcrystallizer, this).createMenu((id, player) -> new ContainerChemicalCrystallizer(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}

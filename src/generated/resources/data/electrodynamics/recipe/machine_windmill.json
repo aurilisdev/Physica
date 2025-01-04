@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "tag": "c:gears/iron"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    " GM",
+    " S ",
+    "ISI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:windmill"
+  }
+}

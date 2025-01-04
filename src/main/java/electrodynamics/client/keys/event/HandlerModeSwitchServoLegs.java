@@ -20,7 +20,7 @@ public class HandlerModeSwitchServoLegs extends AbstractKeyPressHandler {
         if (KeyBinds.switchServoLeggingsMode.matches(event.getKey(), event.getScanCode()) && KeyBinds.switchServoLeggingsMode.isDown()) {
             ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
             if (ItemUtils.testItems(legs.getItem(), ElectrodynamicsItems.ITEM_SERVOLEGGINGS.get()) || ItemUtils.testItems(legs.getItem(), ElectrodynamicsItems.ITEM_COMBATLEGGINGS.get())) {
-                PacketDistributor.SERVER.noArg().send(new PacketModeSwitchServer(player.getUUID(), Mode.SERVOLEGS));
+                PacketDistributor.sendToServer(new PacketModeSwitchServer(player.getUUID(), Mode.SERVOLEGS));
             }
         }
     }

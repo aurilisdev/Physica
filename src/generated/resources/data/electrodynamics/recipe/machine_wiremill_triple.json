@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/advanced"
+    },
+    "G": {
+      "tag": "c:gears/steel"
+    },
+    "M": {
+      "item": "electrodynamics:wiremilldouble"
+    },
+    "W": {
+      "tag": "c:wires/ceramic_silver"
+    }
+  },
+  "pattern": [
+    "CGC",
+    "WMW",
+    "CGC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:wiremilltriple"
+  }
+}

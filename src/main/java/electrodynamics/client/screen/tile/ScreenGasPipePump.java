@@ -6,6 +6,7 @@ import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,13 +20,13 @@ public class ScreenGasPipePump extends GenericScreen<ContainerGasPipePump> {
 	public ScreenGasPipePump(ContainerGasPipePump screenContainer, Inventory inv, Component titleIn) {
 		super(screenContainer, inv, titleIn);
 
-		addComponent(priority = new ScreenComponentEditBox(94, 35, 59, 16, getFontRenderer()).setTextColor(-1).setTextColorUneditable(-1).setMaxLength(1).setResponder(this::setPriority).setFilter(ScreenComponentEditBox.POSITIVE_INTEGER));
-		addComponent(new ScreenComponentSimpleLabel(20, 39, 10, 4210752, ElectroTextUtils.gui("prioritypump.priority")));
+		addComponent(priority = new ScreenComponentEditBox(94, 35, 59, 16, getFontRenderer()).setTextColor(Color.WHITE).setTextColorUneditable(Color.WHITE).setMaxLength(1).setResponder(this::setPriority).setFilter(ScreenComponentEditBox.POSITIVE_INTEGER));
+		addComponent(new ScreenComponentSimpleLabel(20, 39, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("prioritypump.priority")));
 	}
 
 	private void setPriority(String prior) {
 
-		TileGasPipePump pump = menu.getHostFromIntArray();
+		TileGasPipePump pump = menu.getSafeHost();
 
 		if (pump == null) {
 			return;
@@ -53,8 +54,6 @@ public class ScreenGasPipePump extends GenericScreen<ContainerGasPipePump> {
 
 		pump.priority.set(priority);
 
-		pump.priority.updateServer();
-
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public class ScreenGasPipePump extends GenericScreen<ContainerGasPipePump> {
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			TileGasPipePump pump = menu.getHostFromIntArray();
+			TileGasPipePump pump = menu.getSafeHost();
 			if (pump != null) {
 				priority.setValue("" + pump.priority.get());
 			}

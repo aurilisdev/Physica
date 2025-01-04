@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:mineral_grinder_recipe",
+  "experience": 0.30000001192092896,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.1,
+      "item": {
+        "count": 1,
+        "id": "minecraft:cobblestone"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "minecraft:iron_ores"
+      }
+    }
+  ],
+  "output": {
+    "count": 2,
+    "id": "electrodynamics:dustiron"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

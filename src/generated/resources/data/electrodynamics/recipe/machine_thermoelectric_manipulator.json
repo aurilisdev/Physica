@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "G": {
+      "item": "electrodynamics:pressuregauge"
+    },
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "O": {
+      "item": "electrodynamics:coil"
+    },
+    "P": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "T": {
+      "item": "electrodynamics:compressoraddontank"
+    },
+    "V": {
+      "item": "electrodynamics:mechanicalvalve"
+    }
+  },
+  "pattern": [
+    "PGP",
+    "TVT",
+    "MOC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:thermoelectricmanipulator"
+  }
+}

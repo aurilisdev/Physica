@@ -1,0 +1,28 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "experience": 0.5,
+  "group": "electrodynamics",
+  "itembi": [
+    {
+      "chance": 0.3,
+      "item": {
+        "count": 1,
+        "id": "electrodynamics:impuredustiron"
+      }
+    }
+  ],
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:ores/titanium"
+      }
+    }
+  ],
+  "output": {
+    "count": 3,
+    "id": "electrodynamics:oxidedititanium"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

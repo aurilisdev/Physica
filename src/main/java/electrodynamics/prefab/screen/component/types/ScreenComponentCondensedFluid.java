@@ -3,9 +3,10 @@ package electrodynamics.prefab.screen.component.types;
 import java.util.function.Supplier;
 
 import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.screen.GenericScreen;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.IconType;
 import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.client.Minecraft;
@@ -77,7 +78,7 @@ public class ScreenComponentCondensedFluid extends ScreenComponentGeneric {
 
         GenericScreen<?> screen = (GenericScreen<?>) gui;
 
-        GenericTile owner = (GenericTile) ((GenericContainerBlockEntity<?>) screen.getMenu()).getHostFromIntArray();
+        GenericTile owner = (GenericTile) ((GenericContainerBlockEntity<?>) screen.getMenu()).getSafeHost();
 
         if (owner == null) {
             return;
@@ -101,11 +102,9 @@ public class ScreenComponentCondensedFluid extends ScreenComponentGeneric {
 
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.BUCKET_FILL, 1.0F));
 
-        fluidProperty.updateServer();
-
         stack = handler.getContainer();
 
-        PacketDistributor.SERVER.noArg().send(new PacketUpdateCarriedItemServer(stack.copy(), owner.getBlockPos(), Minecraft.getInstance().player.getUUID()));
+        PacketDistributor.sendToServer(new PacketUpdateCarriedItemServer(stack.copy(), owner.getBlockPos(), Minecraft.getInstance().player.getUUID()));
 
     }
 

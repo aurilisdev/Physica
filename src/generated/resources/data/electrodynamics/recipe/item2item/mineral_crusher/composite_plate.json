@@ -1,0 +1,19 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "experience": 1.0,
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "electrodynamics:compositeplatingraw"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:compositeplating"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

@@ -1,6 +1,6 @@
 package electrodynamics.common.entity.projectile;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -53,7 +53,7 @@ public abstract class EntityCustomProjectile extends ThrowableItemProjectile imp
 	}
 
 	@Override
-	public void writeSpawnData(FriendlyByteBuf buffer) {
+	public void writeSpawnData(RegistryFriendlyByteBuf buffer) {
 		buffer.writeDouble(getDeltaMovement().x);
 		buffer.writeDouble(getDeltaMovement().y);
 		buffer.writeDouble(getDeltaMovement().z);
@@ -62,7 +62,7 @@ public abstract class EntityCustomProjectile extends ThrowableItemProjectile imp
 	}
 
 	@Override
-	public void readSpawnData(FriendlyByteBuf additionalData) {
+	public void readSpawnData(RegistryFriendlyByteBuf additionalData) {
 		clientDeltaX = new Vec3(additionalData.readDouble(), additionalData.readDouble(), additionalData.readDouble());
 		setXRot(additionalData.readFloat());
 		setYRot(additionalData.readFloat());

@@ -8,7 +8,7 @@ import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.tile.pipelines.GenericTileValve;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.CapabilityUtils;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +20,7 @@ public class TileGasValve extends GenericTileValve {
     private boolean isLocked = false;
 
     public TileGasValve(BlockPos pos, BlockState state) {
-        super(ElectrodynamicsBlockTypes.TILE_GASVALVE.get(), pos, state);
+        super(ElectrodynamicsTiles.TILE_GASVALVE.get(), pos, state);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class TileGasValve extends GenericTileValve {
 
         Direction facing = getFacing();
 
-        if (BlockEntityUtils.getRelativeSide(facing, INPUT_DIR) == side || BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR) == side) {
+        if (BlockEntityUtils.getRelativeSide(facing, INPUT_DIR.mappedDir) == side || BlockEntityUtils.getRelativeSide(facing, OUTPUT_DIR.mappedDir) == side) {
 
             BlockEntity relative = level.getBlockEntity(worldPosition.relative(side.getOpposite()));
 
@@ -82,23 +82,23 @@ public class TileGasValve extends GenericTileValve {
         }
 
         @Override
-        public double getTankCapacity(int tank) {
+        public int getTankCapacity(int tank) {
             if (isClosed || isLocked) {
                 return 0;
             }
             isLocked = true;
-            double cap = parent.getTankCapacity(tank);
+            int cap = parent.getTankCapacity(tank);
             isLocked = false;
             return cap;
         }
 
         @Override
-        public double getTankMaxTemperature(int tank) {
+        public int getTankMaxTemperature(int tank) {
             if (isClosed || isLocked) {
                 return 0;
             }
             isLocked = true;
-            double temp = parent.getTankMaxTemperature(tank);
+            int temp = parent.getTankMaxTemperature(tank);
             isLocked = false;
             return temp;
         }
@@ -126,56 +126,56 @@ public class TileGasValve extends GenericTileValve {
         }
 
         @Override
-        public double fillTank(int tank, GasStack gas, GasAction action) {
+        public int fill(GasStack gas, GasAction action) {
             if (isClosed || isLocked) {
                 return 0;
             }
             isLocked = true;
-            double fill = parent.fillTank(tank, gas, action);
+            int fill = parent.fill(gas, action);
             isLocked = false;
             return fill;
         }
 
         @Override
-        public GasStack drainTank(int tank, GasStack gas, GasAction action) {
+        public GasStack drain(GasStack gas, GasAction action) {
             if (isClosed || isLocked) {
                 return GasStack.EMPTY;
             }
             isLocked = true;
-            GasStack drain = parent.drainTank(tank, tank, action);
+            GasStack drain = parent.drain(gas, action);
             isLocked = false;
             return drain;
         }
 
         @Override
-        public GasStack drainTank(int tank, double maxFill, GasAction action) {
+        public GasStack drain(int maxFill, GasAction action) {
             if (isClosed || isLocked) {
                 return GasStack.EMPTY;
             }
             isLocked = true;
-            GasStack drain = parent.drainTank(tank, maxFill, action);
+            GasStack drain = parent.drain(maxFill, action);
             isLocked = false;
             return drain;
         }
 
         @Override
-        public double heat(int tank, double deltaTemperature, GasAction action) {
+        public int heat(int tank, int deltaTemperature, GasAction action) {
             if (isClosed || isLocked) {
                 return -1;
             }
             isLocked = true;
-            double heat = parent.heat(tank, deltaTemperature, action);
+            int heat = parent.heat(tank, deltaTemperature, action);
             isLocked = false;
             return heat;
         }
 
         @Override
-        public double bringPressureTo(int tank, int atm, GasAction action) {
+        public int bringPressureTo(int tank, int atm, GasAction action) {
             if (isClosed || isLocked) {
                 return -1;
             }
             isLocked = true;
-            double pres = parent.bringPressureTo(tank, atm, action);
+            int pres = parent.bringPressureTo(tank, atm, action);
             isLocked = false;
             return pres;
         }

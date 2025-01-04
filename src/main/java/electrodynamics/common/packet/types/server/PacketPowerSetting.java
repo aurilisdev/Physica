@@ -1,15 +1,24 @@
 package electrodynamics.common.packet.types.server;
 
 import electrodynamics.common.packet.NetworkHandler;
-import electrodynamics.common.tile.electricitygrid.generators.TileCreativePowerSource;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class PacketPowerSetting implements CustomPacketPayload {
+
+    public static final ResourceLocation PACKET_POWERSETTING_PACKETID = NetworkHandler.id("packetpowersetting");
+    public static final Type<PacketPowerSetting> TYPE = new Type<>(PACKET_POWERSETTING_PACKETID);
+    public static final StreamCodec<ByteBuf, PacketPowerSetting> CODEC = StreamCodec.composite(
+            ByteBufCodecs.INT, instance -> instance.voltage,
+            ByteBufCodecs.INT, instance -> instance.power,
+            BlockPos.STREAM_CODEC, instance -> instance.pos,
+            PacketPowerSetting::new
+    );
 
     private final int voltage;
     private final int power;
@@ -22,33 +31,12 @@ public class PacketPowerSetting implements CustomPacketPayload {
         pos = target;
     }
 
-    public static void handle(PacketPowerSetting message, PlayPayloadContext context) {
-        ServerLevel world = (ServerLevel) context.level().get();
-        if (world == null) {
-            return;
-        }
-        TileCreativePowerSource tile = (TileCreativePowerSource) world.getBlockEntity(message.pos);
-        if (tile == null) {
-            return;
-        }
-        tile.voltage.set(message.voltage);
-        tile.power.set(message.power);
-    }
-
-    public static PacketPowerSetting read(FriendlyByteBuf buf) {
-        return new PacketPowerSetting(buf.readInt(), buf.readInt(), buf.readBlockPos());
+    public static void handle(PacketPowerSetting message, IPayloadContext context) {
+        ServerBarrierMethods.handlePacketPowerSetting(message.voltage, message.power, message.pos, context.player().level());
     }
 
     @Override
-    public void write(FriendlyByteBuf buf) {
-        buf.writeInt(voltage);
-        buf.writeInt(power);
-        buf.writeBlockPos(pos);
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
-
-    @Override
-    public ResourceLocation id() {
-        return NetworkHandler.PACKET_POWERSETTING_PACKETID;
-    }
-
 }

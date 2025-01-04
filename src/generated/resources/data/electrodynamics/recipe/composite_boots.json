@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "electrodynamics:compositeplating"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "pattern": [
+    "P P",
+    "PSP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:compositearmorboots"
+  }
+}

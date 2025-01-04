@@ -1,0 +1,24 @@
+{
+  "type": "electrodynamics:mineral_washer_recipe",
+  "fluidinputs": [
+    {
+      "amount": 1000,
+      "tag": "minecraft:lava"
+    }
+  ],
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "item": "minecraft:magma_block"
+      }
+    }
+  ],
+  "output": {
+    "amount": 1500,
+    "id": "minecraft:lava"
+  },
+  "ticks": 200,
+  "usagepertick": 400.0
+}

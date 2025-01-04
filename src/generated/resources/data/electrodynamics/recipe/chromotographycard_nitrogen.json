@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "G": {
+      "tag": "c:gems/emerald"
+    },
+    "P": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "W": {
+      "item": "electrodynamics:wireiron"
+    }
+  },
+  "pattern": [
+    " G ",
+    "WPW",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:chromotographycardnitrogen"
+  }
+}

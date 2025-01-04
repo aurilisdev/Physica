@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChapterTips extends Chapter {
 
-	private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, new ResourceLocation(References.ID, "textures/item/nugget/nuggetsilver.png"));
+	private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/item/nugget/nuggetsilver.png"));
 
 	public ChapterTips(Module module) {
 		super(module);

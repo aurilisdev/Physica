@@ -33,10 +33,10 @@ public class RenderSeismicRelay extends AbstractTileRenderer<TileSeismicRelay> {
 		if (tile.markerLocs.get().size() > 3) {
 			Minecraft minecraft = Minecraft.getInstance();
 			VertexConsumer sheetBuilder = source.getBuffer(RenderingUtils.beaconType());
-			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, LEFT, 1.0F, 0F, 0F, 1.0F, 255, 0);
-			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, UP, 1.0F, 0F, 0F, 1.0F, 255, 0);
-			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, RIGHT, 1.0F, 0F, 0F, 1.0F, 255, 0);
-			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, DOWN, 1.0F, 0F, 0F, 1.0F, 255, 0);
+			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, LEFT, 1.0F, 0F, 0F, 1.0F, 255, 0, RenderingUtils.ALL_FACES);
+			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, UP, 1.0F, 0F, 0F, 1.0F, 255, 0, RenderingUtils.ALL_FACES);
+			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, RIGHT, 1.0F, 0F, 0F, 1.0F, 255, 0, RenderingUtils.ALL_FACES);
+			RenderingUtils.renderSolidColorBox(stack, minecraft, sheetBuilder, DOWN, 1.0F, 0F, 0F, 1.0F, 255, 0, RenderingUtils.ALL_FACES);
 
 			Direction facing = tile.getFacing().getOpposite();
 
@@ -83,9 +83,9 @@ public class RenderSeismicRelay extends AbstractTileRenderer<TileSeismicRelay> {
 				alpha = 1.0F - alpha / half;
 			}
 
-			TextureAtlasSprite whiteTexture = ClientRegister.CACHED_TEXTUREATLASSPRITES.get(ClientRegister.TEXTURE_WHITE);
+			TextureAtlasSprite whiteTexture = ClientRegister.getSprite(ClientRegister.TEXTURE_WHITE);
 
-			RenderingUtils.renderFilledBoxNoOverlay(stack, sheetBuilder, beam, 1.0F, 0, 0, alpha, whiteTexture.getU0(), whiteTexture.getV0(), whiteTexture.getV1(), whiteTexture.getV1(), 255);
+			RenderingUtils.renderFilledBoxNoOverlay(stack, sheetBuilder, beam, 1.0F, 0, 0, alpha, whiteTexture.getU0(), whiteTexture.getV0(), whiteTexture.getV1(), whiteTexture.getV1(), 255, RenderingUtils.ALL_FACES);
 		}
 	}
 

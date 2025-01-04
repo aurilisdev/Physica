@@ -2,10 +2,11 @@ package electrodynamics.api.fluid;
 
 import java.util.function.Predicate;
 
+import electrodynamics.prefab.properties.PropertyTypes;
+import net.minecraft.core.HolderLookup;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.nbt.CompoundTag;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -26,15 +27,15 @@ public class PropertyFluidTank extends FluidTank {
 	public PropertyFluidTank(int capacity, GenericTile holder, String key) {
 		super(capacity);
 		this.holder = holder;
-		fluidStackProperty = holder.property(new Property<>(PropertyType.Fluidstack, "propertyfluidtankstack" + key, FluidStack.EMPTY));
-		capacityProperty = holder.property(new Property<>(PropertyType.Integer, "propertyfluidtankcapacity" + key, capacity));
+		fluidStackProperty = holder.property(new Property<>(PropertyTypes.FLUID_STACK, "propertyfluidtankstack" + key, FluidStack.EMPTY));
+		capacityProperty = holder.property(new Property<>(PropertyTypes.INTEGER, "propertyfluidtankcapacity" + key, capacity));
 	}
 
 	public PropertyFluidTank(int capacity, Predicate<FluidStack> validator, GenericTile holder, String key) {
 		super(capacity, validator);
 		this.holder = holder;
-		fluidStackProperty = holder.property(new Property<>(PropertyType.Fluidstack, "propertyfluidtankstack" + key, FluidStack.EMPTY));
-		capacityProperty = holder.property(new Property<>(PropertyType.Integer, "propertyfluidtankcapacity" + key, capacity));
+		fluidStackProperty = holder.property(new Property<>(PropertyTypes.FLUID_STACK, "propertyfluidtankstack" + key, FluidStack.EMPTY));
+		capacityProperty = holder.property(new Property<>(PropertyTypes.INTEGER, "propertyfluidtankcapacity" + key, capacity));
 	}
 
 	protected PropertyFluidTank(PropertyFluidTank other) {
@@ -50,22 +51,22 @@ public class PropertyFluidTank extends FluidTank {
 
 	@Override
 	public String toString() {
-		return "Fluid: " + getFluid().getTranslationKey() + "\nAmount: " + getFluidAmount() + "\nCapacity: " + getCapacity();
+		return "Fluid: " + getFluid().getFluidType().getDescriptionId() + "\nAmount: " + getFluidAmount() + "\nCapacity: " + getCapacity();
 	}
 
 	@Override
-	public CompoundTag writeToNBT(CompoundTag nbt) {
+	public CompoundTag writeToNBT(HolderLookup.Provider lookupProvider, CompoundTag nbt) {
 		CompoundTag tag = new CompoundTag();
-		getFluid().writeToNBT(tag);
+		tag.put("fluid", getFluid().save(lookupProvider));
 		tag.putInt("capacity", getCapacity());
 		nbt.put(fluidStackProperty.getName() + "tank", tag);
 		return nbt;
 	}
 
 	@Override
-	public PropertyFluidTank readFromNBT(CompoundTag nbt) {
+	public FluidTank readFromNBT(HolderLookup.Provider lookupProvider, CompoundTag nbt) {
 		CompoundTag tag = nbt.getCompound(fluidStackProperty.getName() + "name");
-		setFluid(FluidStack.loadFluidStackFromNBT(tag));
+		setFluid(FluidStack.parseOptional(lookupProvider, tag.getCompound("fluid")));
 		setCapacity(tag.getInt("capacity"));
 		return this;
 	}
@@ -102,27 +103,27 @@ public class PropertyFluidTank extends FluidTank {
 			if (getFluid().isEmpty()) {
 				return Math.min(getCapacity(), resource.getAmount());
 			}
-			if (!getFluid().isFluidEqual(resource)) {
+			if (!FluidStack.isSameFluidSameComponents(getFluid(), resource)) {
 				return 0;
 			}
 			return Math.min(getCapacity() - getFluidAmount(), resource.getAmount());
 		}
 		if (isEmpty()) {
-			setFluid(new FluidStack(resource, Math.min(getCapacity(), resource.getAmount())));
+			setFluid(new FluidStack(resource.getFluid(), Math.min(getCapacity(), resource.getAmount())));
 			onContentsChanged();
 			return getFluidAmount();
 		}
-		if (!getFluid().isFluidEqual(resource)) {
+		if (!FluidStack.isSameFluidSameComponents(getFluid(), resource)) {
 			return 0;
 		}
 		int filled = getCapacity() - getFluidAmount();
 
 		if (resource.getAmount() < filled) {
-			FluidStack stack = new FluidStack(getFluid(), resource.getAmount() + getFluidAmount());
+			FluidStack stack = new FluidStack(getFluid().getFluid(), resource.getAmount() + getFluidAmount());
 			setFluid(stack);
 			filled = resource.getAmount();
 		} else {
-			setFluid(new FluidStack(getFluid(), getCapacity()));
+			setFluid(new FluidStack(getFluid().getFluid(), getCapacity()));
 		}
 		if (filled > 0) {
 			onContentsChanged();
@@ -133,7 +134,7 @@ public class PropertyFluidTank extends FluidTank {
 	@NotNull
 	@Override
 	public FluidStack drain(FluidStack resource, FluidAction action) {
-		if (resource.isEmpty() || !resource.isFluidEqual(getFluid())) {
+		if (resource.isEmpty() || !FluidStack.isSameFluidSameComponents(getFluid(), resource)) {
 			return FluidStack.EMPTY;
 		}
 		return drain(resource.getAmount(), action);
@@ -146,9 +147,9 @@ public class PropertyFluidTank extends FluidTank {
 		if (getFluidAmount() < drained) {
 			drained = getFluidAmount();
 		}
-		FluidStack stack = new FluidStack(getFluid(), drained);
+		FluidStack stack = new FluidStack(getFluid().getFluid(), drained);
 		if (action.execute() && drained > 0) {
-			setFluid(new FluidStack(getFluid(), getFluidAmount() - drained));
+			setFluid(new FluidStack(getFluid().getFluid(), getFluidAmount() - drained));
 			onContentsChanged();
 		}
 		return stack;
@@ -175,18 +176,6 @@ public class PropertyFluidTank extends FluidTank {
 		if (holder != null) {
 			holder.onFluidTankChange(this);
 		}
-	}
-
-	// this must be called to update the server if interacted with on the client
-	public void updateServer() {
-
-		if (fluidStackProperty.isDirty()) {
-			fluidStackProperty.updateServer();
-		}
-		if (capacityProperty.isDirty()) {
-			capacityProperty.updateServer();
-		}
-
 	}
 
 }

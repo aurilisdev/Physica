@@ -5,7 +5,7 @@ import electrodynamics.common.inventory.container.tile.ContainerHydroelectricGen
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -15,10 +15,11 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,20 +31,20 @@ import net.minecraft.world.level.material.Fluids;
 
 public class TileHydroelectricGenerator extends GenericGeneratorTile implements ITickableSound {
 	protected CachedTileOutput output;
-	public Property<Boolean> isGenerating = property(new Property<>(PropertyType.Boolean, "isGenerating", false));
-	public Property<Boolean> directionFlag = property(new Property<>(PropertyType.Boolean, "directionFlag", false));
-	public Property<Double> multiplier = property(new Property<>(PropertyType.Double, "multiplier", 1.0));
-	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+	public Property<Boolean> isGenerating = property(new Property<>(PropertyTypes.BOOLEAN, "isGenerating", false));
+	public Property<Boolean> directionFlag = property(new Property<>(PropertyTypes.BOOLEAN, "directionFlag", false));
+	public Property<Double> multiplier = property(new Property<>(PropertyTypes.DOUBLE, "multiplier", 1.0));
+	private Property<Boolean> hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 	public double savedTickRotation;
 	public double rotationSpeed;
 
 	private boolean isSoundPlaying = false;
 
 	public TileHydroelectricGenerator(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_HYDROELECTRICGENERATOR.get(), worldPosition, blockState, 2.25, SubtypeItemUpgrade.stator);
+		super(ElectrodynamicsTiles.TILE_HYDROELECTRICGENERATOR.get(), worldPosition, blockState, 2.25, SubtypeItemUpgrade.stator);
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickCommon(this::tickCommon).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.NORTH));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.BACK));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().upgrades(1)).validUpgrades(ContainerHydroelectricGenerator.VALID_UPGRADES).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider(SubtypeMachine.hydroelectricgenerator, this).createMenu((id, player) -> new ContainerHydroelectricGenerator(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}

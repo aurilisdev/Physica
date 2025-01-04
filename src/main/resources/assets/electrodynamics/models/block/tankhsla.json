@@ -6,7 +6,7 @@
     "1" : "electrodynamics:block/model/tankhsla",
     "particle" : "electrodynamics:block/steelcasing"
   },
-  "loader" : "forge:composite",
+  "loader" : "neoforge:composite",
   "children" : {
     "solid" : {
       "render_type" : "minecraft:solid",

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:gems/amethyst"
+    },
+    "B": {
+      "item": "electrodynamics:battery"
+    },
+    "C": {
+      "tag": "c:circuits/basic"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "Q": {
+      "tag": "c:gems/quartz"
+    }
+  },
+  "pattern": [
+    "PQP",
+    "ABA",
+    "PCP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:seismicscanner"
+  }
+}

@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:raworeuranium"
-            ]
+            "items": "electrodynamics:raworeuranium"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.rawuranium.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:raworeuranium"
+      "count": 1,
+      "id": "electrodynamics:raworeuranium"
     },
-    "show_toast": true,
     "title": {
       "color": "gray",
       "translate": "advancement.electrodynamics.rawuranium.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 10
-  },
-  "sends_telemetry_event": false
+  }
 }

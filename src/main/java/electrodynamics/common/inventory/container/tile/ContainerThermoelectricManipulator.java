@@ -1,8 +1,8 @@
 package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileThermoelectricManipulator;
-import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
+import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.GenericTileThermoelectricManipulator;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotFluid;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotGas;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotUpgrade;
@@ -13,7 +13,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 
-public class ContainerThermoelectricManipulator extends GenericContainerBlockEntity<TileThermoelectricManipulator> {
+public class ContainerThermoelectricManipulator extends GenericContainerBlockEntity<GenericTileThermoelectricManipulator> {
 
 	public static final SubtypeItemUpgrade[] VALID_UPGRADES = new SubtypeItemUpgrade[] { SubtypeItemUpgrade.advancedspeed, SubtypeItemUpgrade.basicspeed };
 
@@ -27,7 +27,7 @@ public class ContainerThermoelectricManipulator extends GenericContainerBlockEnt
 
 	@Override
 	public void addInventorySlots(Container inv, Inventory playerinv) {
-		playerInvOffset = 30;
+		setPlayerInvOffset(30);
 		addSlot(new SlotFluid(inv, nextIndex(), 27, 19));
 		addSlot(new SlotFluid(inv, nextIndex(), 113, 19));
 		addSlot(new SlotGas(inv, nextIndex(), 27, 50));

@@ -1,7 +1,8 @@
 package electrodynamics.datagen.server.recipe.types.custom.fluiditem2fluid;
 
 import electrodynamics.api.References;
-import electrodynamics.common.fluid.types.liquid.subtype.SubtypeSulfateFluid;
+import electrodynamics.common.fluid.subtype.SubtypeRoyalMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import electrodynamics.common.recipe.categories.fluiditem2fluid.specificmachines.MineralWasherRecipe;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
@@ -20,7 +21,7 @@ public class ElectrodynamicsMineralWasherRecipes extends AbstractRecipeGenerator
 	public static double MINERALWASHER_USAGE_PER_TICK = 400.0;
 	public static int MINERALWASHER_REQUIRED_TICKS = 200;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsMineralWasherRecipes(String modID) {
 		this.modID = modID;
@@ -43,11 +44,23 @@ public class ElectrodynamicsMineralWasherRecipes extends AbstractRecipeGenerator
 
 		for (SubtypeSulfateFluid fluid : SubtypeSulfateFluid.values()) {
 			if (fluid.source != null) {
-				newRecipe(new FluidStack(ElectrodynamicsFluids.SUBTYPEFLUID_REGISTRY_MAP.get(fluid).get(), 1000), 0, 200, 400.0, "sulfate_" + fluid.name(), modID)
+				newRecipe(new FluidStack(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(fluid), 1000), 0, 200, 400.0, "sulfate_" + fluid.name(), modID)
 						//
 						.addItemTagInput(fluid.source, 1)
 						//
 						.addFluidTagInput(ElectrodynamicsTags.Fluids.SULFURIC_ACID, 1000)
+						//
+						.save(output);
+			}
+		}
+
+		for (SubtypeRoyalMineralFluid fluid : SubtypeRoyalMineralFluid.values()) {
+			if (fluid.source != null) {
+				newRecipe(new FluidStack(ElectrodynamicsFluids.FLUIDS_ROYALMINERAL.getValue(fluid), 3000), 0, 200, 400.0, "royalmineral_" + fluid.name(), modID)
+						//
+						.addItemTagInput(fluid.source, 1)
+						//
+						.addFluidTagInput(ElectrodynamicsTags.Fluids.AQUA_REGIA, 1000)
 						//
 						.save(output);
 			}

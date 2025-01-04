@@ -1,0 +1,24 @@
+{
+  "type": "electrodynamics:mineral_washer_recipe",
+  "fluidinputs": [
+    {
+      "amount": 1000,
+      "tag": "c:sulfuric_acid"
+    }
+  ],
+  "group": "electrodynamics",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "minecraft:gold_ores"
+      }
+    }
+  ],
+  "output": {
+    "amount": 1000,
+    "id": "electrodynamics:fluidsulfategold"
+  },
+  "ticks": 200,
+  "usagepertick": 400.0
+}

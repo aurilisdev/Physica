@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import electrodynamics.datagen.server.recipe.types.custom.ElectrodynamicsChemicalReactorRecipes;
+import electrodynamics.datagen.server.recipe.types.custom.fluid2fluid.ElectrodynamicsElectrolosisChamberRecipes;
 import electrodynamics.datagen.server.recipe.types.custom.fluid2gas.ElectrodynamicsElectrolyticSeparatorRecipes;
 import electrodynamics.datagen.server.recipe.types.custom.fluid2item.ElectrodynamicsChemicalCrystallizerRecipes;
 import electrodynamics.datagen.server.recipe.types.custom.fluiditem2fluid.ElectrodynamicsChemicalMixerRecipes;
@@ -26,33 +28,39 @@ import net.minecraft.data.recipes.RecipeProvider;
 
 public class ElectrodynamicsRecipeProvider extends RecipeProvider {
 
-	public final List<AbstractRecipeGenerator> GENERATORS = new ArrayList<>();
+    public final List<AbstractRecipeGenerator> generators = new ArrayList<>();
+    private final CompletableFuture<HolderLookup.Provider> lookupProvider;
 
-	public ElectrodynamicsRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-		super(output, lookupProvider);
-		addRecipes();
-	}
 
-	public void addRecipes() {
-		GENERATORS.add(new ElectrodynamicsCraftingTableRecipes());
-		GENERATORS.add(new ElectrodynamicsSmeltingRecipes());
-		GENERATORS.add(new ElectrodynamicsElectrolyticSeparatorRecipes());
-		GENERATORS.add(new ElectrodynamicsChemicalCrystallizerRecipes());
-		GENERATORS.add(new ElectrodynamicsMineralWasherRecipes());
-		GENERATORS.add(new ElectrodynamicsFermentationPlantRecipes());
-		GENERATORS.add(new ElectrodynamicsChemicalMixerRecipes());
-		GENERATORS.add(new ElectrodynamicsEnergizedAlloyerRecipes());
-		GENERATORS.add(new ElectrodynamicsLatheRecipes());
-		GENERATORS.add(new ElectrodynamicsMineralCrusherRecipes());
-		GENERATORS.add(new ElectrodynamicsMineralGrinderRecipes());
-		GENERATORS.add(new ElectrodynamicsOxidationFurnaceRecipes());
-		GENERATORS.add(new ElectrodynamicsReinforcedAlloyerRecipes());
-		GENERATORS.add(new ElectrodynamicsWireMillRecipes());
-	}
+    public ElectrodynamicsRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider);
+        this.lookupProvider = lookupProvider;
+        addRecipes();
+    }
+
+    public void addRecipes() {
+        generators.add(new ElectrodynamicsCraftingTableRecipes());
+        generators.add(new ElectrodynamicsSmeltingRecipes());
+        generators.add(new ElectrodynamicsElectrolyticSeparatorRecipes());
+        generators.add(new ElectrodynamicsChemicalCrystallizerRecipes());
+        generators.add(new ElectrodynamicsMineralWasherRecipes());
+        generators.add(new ElectrodynamicsFermentationPlantRecipes());
+        generators.add(new ElectrodynamicsChemicalMixerRecipes());
+        generators.add(new ElectrodynamicsEnergizedAlloyerRecipes());
+        generators.add(new ElectrodynamicsLatheRecipes());
+        generators.add(new ElectrodynamicsMineralCrusherRecipes());
+        generators.add(new ElectrodynamicsMineralGrinderRecipes());
+        generators.add(new ElectrodynamicsOxidationFurnaceRecipes());
+        generators.add(new ElectrodynamicsReinforcedAlloyerRecipes());
+        generators.add(new ElectrodynamicsWireMillRecipes());
+        generators.add(new ElectrodynamicsChemicalReactorRecipes());
+        generators.add(new ElectrodynamicsElectrolosisChamberRecipes());
+    }
 
     @Override
     protected void buildRecipes(RecipeOutput output) {
-        for (AbstractRecipeGenerator generator : GENERATORS) {
+
+        for (AbstractRecipeGenerator generator : generators) {
             generator.addRecipes(output);
         }
     }

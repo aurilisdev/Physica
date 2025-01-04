@@ -22,7 +22,7 @@ public class SlotItemHandlerUpgrade extends SlotItemHandlerGeneric implements IU
 
 		items.clear();
 		for (SubtypeItemUpgrade upg : upgrades) {
-			items.add(ElectrodynamicsItems.SUBTYPEITEMREGISTER_MAPPINGS.get(upg).get());
+			items.add(ElectrodynamicsItems.ITEMS_UPGRADE.getValue(upg));
 		}
 
 	}

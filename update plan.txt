@@ -1,0 +1,47 @@
+I have one last major content patch for Electro that I want to do to for the next version update. I would like to add another higher
+tier of ore processing as it will allow me to finish fleshing out the gas system as a concept as well as help diversify us a bit from
+Mekanism. There's nothing wrong with the sulfuric acid method we have now, however it has always felt a little on the nose so to speak.
+However that's beside the point. 
+
+My concept is an ore processing method based around electricity, that being electrolysis. Ore processing in mods is typically limited
+by a scant resource like Mekanism's 5x needing sulfur which is non-replenishable. However. my concept is this one will be limited by 
+how much power you can throw at it. IMO this fits a mod based around realistic electricity rather well.
+
+My process idea is this:
+
+Make Aqua Regia.
+A) We add atmospheric gas collection via a new Block called the "Gas Collector". I plan to make the block use JSON recipes so that way the 
+dependent mods can add their own gases should they need it. This gets us the Nitrogen Gas needed for Nitric Acid.
+B) Add a block called the "Chemical Reactor". It is a 1x1x3 block that accepts two item inputs, two fluid inputs, and two gas inputs and can
+produce up to two items, two fluids, and two gases. This allows us to have myriads of new recipes involving gases as well as new fluid recipes 
+perhaps without needing to add tons of new machines. Electro is supposed to be a base mod, so IMO this is a good compromise.
+C) The Nitric Acid and Hydrochloric Acid are made using the Chemical Reactor. We already have Salt and Hydrogen Gas. I would like to make
+the acids at the least a two step process as compared to Sulfuric which is currently a one step process.
+D) The Aqua Regia is made combining the two acids in the Chemical Reactor.
+E) I would also like to insert the Chemical Reactor into the current Sulfuric Process (hear me out please). It would only be one step, 
+that being a washing step with the Sulfate <insert ore name> Fluid with water. The washing step would produce Pure <insert ore name> Solution 
+as well as Sulfuric Acid. The Pure <insert ore name> Solution would then be processed in the Chemical Crystallizer as per usual. This allows 
+us to move the Sulfuric Acid regeneration step to a spot that is more controllable verses its current spot with with the Mineral Crusher. 
+Instead of having to balance RNG around 5 items, you can be precise with a single recipe iteration.
+Wash the ores in Aqua Regia using the Mineral Washer, producing Royal <insert ore name> Solution.
+
+The Royal Solution is combined with water in the Chemical Reactor to produce Cruse <insert ore name> Compound and Aqua Regia. The trick
+is the washing process will produce the exact amount of Aqua Regia that went in. 
+
+The Crude <insert ore name> Compound is combined with Sulfuric Acid in the Chemical Reactor to make Dirty <insert ore name> Compound.
+
+The Dirty <insert ore name> Compound is combined with water in the Chemical Reactor to make Pure <insert ore name> Compound and the
+same amount of Sulfuric Acid that went in as well as a byproduct perhaps. This allows for Sulfuric Acid to still be an integral part of
+the process but not feel like its just there to be there.
+
+The Pure <insert ore name> Compound is processed in a new block called the Electrolysis Chamber along with an electode of the metal in
+question. This is where the balance to the process comes in. The Electrolysis Chamber does not have a processing time based on ticks, 
+but rather how much power it can receive. In other words, the more power you throw at it, the faster it goes. Granted, it will need to be
+a lot of power to make it go fast in order for it to be balanced. 
+A) I envision the electrodes to have infinite durability, as having them lose durability is a nuisance mechanic IMO and doesn't add anything
+beneficial to the game.
+B) The Electrolysis Chamber produces Pure <insert ore name> Solution which is then inserted into the Chemical Crystallizer.
+
+So there, a late game ore-processing method that doesn't add a dozen new machines, fits the mod well, and uses the existing machines you need
+for the current 5x, so none of them become obsolete. I currently see this as a 10x processing method for all metal ores. This will add an
+option for increasing yield from ores like Chromium and Rutile in the late game.

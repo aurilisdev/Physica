@@ -5,16 +5,14 @@ import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.screen.ITexture.Textures;
 import electrodynamics.common.inventory.container.tile.ContainerThermoelectricManipulator;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.GenericTileGasTransformer;
-import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.TileThermoelectricManipulator;
+import electrodynamics.common.settings.Constants;
+import electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator.GenericTileThermoelectricManipulator;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.editbox.ScreenComponentEditBox;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGaugeInput;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGaugeInput;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasTemperature;
@@ -23,6 +21,7 @@ import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.tile.components.type.ComponentGasHandlerMulti;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
@@ -37,29 +36,29 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 		super(container, inv, titleIn);
 		imageHeight += 30;
 		inventoryLabelY += 30;
-		addComponent(new ScreenComponentFluidGaugeInput(() -> {
-			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
+		addComponent(new ScreenComponentFluidGauge(() -> {
+			GenericTileThermoelectricManipulator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getInputTanks()[0];
 			}
 			return null;
 		}, 10, 18));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerMulti>getComponent(IComponentType.FluidHandler).getOutputTanks()[0];
 			}
 			return null;
 		}, 96, 18));
-		addComponent(new ScreenComponentGasGaugeInput(() -> {
-			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
+		addComponent(new ScreenComponentGasGauge(() -> {
+			GenericTileThermoelectricManipulator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getInputTanks()[0];
 			}
 			return null;
 		}, 46, 18));
 		addComponent(new ScreenComponentGasGauge(() -> {
-			TileThermoelectricManipulator boiler = container.getHostFromIntArray();
+			GenericTileThermoelectricManipulator boiler = container.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentGasHandlerMulti>getComponent(IComponentType.GasHandler).getOutputTanks()[0];
 			}
@@ -70,15 +69,15 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 		addComponent(new ScreenComponentElectricInfo(-AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentGeneric(Textures.CONDENSER_COLUMN, 62, 19));
 
-		addEditBox(temperature = new ScreenComponentEditBox(94, 75, 59, 16, getFontRenderer()).setTextColor(-1).setTextColorUneditable(-1).setMaxLength(20).setResponder(this::setTemperature).setFilter(ScreenComponentEditBox.POSITIVE_DECIMAL));
+		addEditBox(temperature = new ScreenComponentEditBox(94, 75, 59, 16, getFontRenderer()).setTextColor(Color.WHITE).setTextColorUneditable(Color.WHITE).setMaxLength(20).setResponder(this::setTemperature).setFilter(ScreenComponentEditBox.POSITIVE_INTEGER));
 
-		addComponent(new ScreenComponentSimpleLabel(10, 80, 10, 4210752, ElectroTextUtils.gui("thermoelectricmanipulator.temp")));
-		addComponent(new ScreenComponentSimpleLabel(155, 80, 10, 4210752, DisplayUnit.TEMPERATURE_KELVIN.getSymbol()));
+		addComponent(new ScreenComponentSimpleLabel(10, 80, 10, Color.TEXT_GRAY, ElectroTextUtils.gui("thermoelectricmanipulator.temp")));
+		addComponent(new ScreenComponentSimpleLabel(155, 80, 10, Color.TEXT_GRAY, DisplayUnit.TEMPERATURE_KELVIN.getSymbol()));
 	}
 
 	private void setTemperature(String temp) {
 
-		TileThermoelectricManipulator manipulator = menu.getHostFromIntArray();
+		GenericTileThermoelectricManipulator manipulator = menu.getSafeHost();
 
 		if (manipulator == null) {
 			return;
@@ -88,24 +87,22 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 			return;
 		}
 
-		double temperature = Gas.ROOM_TEMPERATURE;
+		int temperature = Gas.ROOM_TEMPERATURE;
 
 		try {
-			temperature = Double.parseDouble(temp);
+			temperature = Integer.parseInt(temp);
 		} catch (Exception e) {
 
 		}
 
 		if (temperature < GasStack.ABSOLUTE_ZERO) {
 			temperature = Gas.ROOM_TEMPERATURE;
-		} else if (temperature > GenericTileGasTransformer.OUTPUT_TEMPERATURE) {
-			temperature = GenericTileGasTransformer.OUTPUT_TEMPERATURE;
+		} else if (temperature > Constants.GAS_TRANSFORMER_OUTPUT_TEMP_CAP) {
+			temperature = Constants.GAS_TRANSFORMER_OUTPUT_TEMP_CAP;
 			this.temperature.setValue("" + temperature);
 		}
 
 		manipulator.targetTemperature.set(temperature);
-
-		manipulator.targetTemperature.updateServer();
 
 	}
 
@@ -114,7 +111,7 @@ public class ScreenThermoelectricManipulator extends GenericScreen<ContainerTher
 		super.render(graphics, mouseX, mouseY, partialTicks);
 		if (needsUpdate) {
 			needsUpdate = false;
-			TileThermoelectricManipulator manipulator = menu.getHostFromIntArray();
+			GenericTileThermoelectricManipulator manipulator = menu.getSafeHost();
 			if (manipulator != null) {
 				temperature.setValue("" + manipulator.targetTemperature.get());
 			}

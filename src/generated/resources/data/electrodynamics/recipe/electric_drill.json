@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "electrodynamics:battery"
+    },
+    "D": {
+      "item": "electrodynamics:drillheadsteel"
+    },
+    "M": {
+      "item": "electrodynamics:motor"
+    },
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "R": {
+      "tag": "c:rods/steel"
+    }
+  },
+  "pattern": [
+    "DMP",
+    " RB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:electricdrill"
+  }
+}

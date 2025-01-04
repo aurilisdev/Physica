@@ -1,8 +1,8 @@
 package electrodynamics.client.screen.tile;
 
 import electrodynamics.common.inventory.container.tile.ContainerFluidTankGeneric;
-import electrodynamics.common.tile.pipelines.tanks.fluid.GenericTileFluidTank;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.common.tile.pipelines.fluid.tank.GenericTileFluidTank;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressTextures;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
 import electrodynamics.prefab.screen.types.GenericMaterialScreen;
@@ -19,7 +19,7 @@ public class ScreenFluidTankGeneric extends GenericMaterialScreen<ContainerFluid
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_RIGHT_OFF, 52, 33));
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_RIGHT_OFF, 102, 33));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			GenericTileFluidTank boiler = menu.getHostFromIntArray();
+			GenericTileFluidTank boiler = menu.getSafeHost();
 			if (boiler != null) {
 				return boiler.<ComponentFluidHandlerSimple>getComponent(IComponentType.FluidHandler);
 			}

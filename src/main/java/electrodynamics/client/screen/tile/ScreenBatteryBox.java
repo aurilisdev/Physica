@@ -27,7 +27,7 @@ public class ScreenBatteryBox extends GenericScreen<ContainerBatteryBox> {
 		super(container, playerInventory, title);
 		addComponent(new ScreenComponentElectricInfo(this::getElectricInformation, -AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
-			TileBatteryBox box = menu.getHostFromIntArray();
+			TileBatteryBox box = menu.getSafeHost();
 			if (box == null) {
 				return;
 			}
@@ -41,7 +41,7 @@ public class ScreenBatteryBox extends GenericScreen<ContainerBatteryBox> {
 
 	private List<? extends FormattedCharSequence> getElectricInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileBatteryBox box = menu.getHostFromIntArray();
+		TileBatteryBox box = menu.getSafeHost();
 		if (box == null) {
 			return list;
 		}

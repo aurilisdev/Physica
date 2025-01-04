@@ -1,0 +1,36 @@
+/time set day
+/time set night
+/time set noon
+/gamemode creative
+/time set day
+/gamerule doDaylightCycle false
+/time set noon
+/gamerule doTraderSpawning false
+/gamerule doDaylightCycle false
+/time set night
+/time set noon
+/gamerule doWeatherCycle false
+/weather clear
+/kill @e[type=electrodynamics:metalrod]
+/gamemode survival
+/gamemode creative
+/gamemode spectator
+/gamemode survival
+/gamemode creative
+/electrodynamics multiblock -64.51 -59.00 -65.70
+/electrodynamics multiblock -64.51 -59.00 -65.70 -60.60 -57.00 -69.62 true electrolosischamber
+/electrodynamics multiblock -64.51 -59.00 -65.70 -60.60 -57.00 -69.62 "true" "electrolosischamber"
+/electrodynamics multiblock -62.71 -57.07 -66.00 -64.51 -59.00 -65.70 -60.60 -57.00 -69.62 true testing
+/electrodynamics multiblock -62.71 -57.07 -66.00 -64.51 -59.00 -65.70 -60.60 -57.00 -69.62 1 testing
+/electrodynamics multiblock -63 -57 -66 -65 -59 -66 -61 -57 -70 1 testing
+/electrodynamics multiblock -63 -58 -66 -65 -59 -66 -61 -57 -70 1 testing
+/electrodynamics multiblock -63 -59 -66 -65 -60 -66 -61 -58 -70 1 testing
+/clone -66 -62 -65
+/clone -66 -62 -65 ~ ~ ~
+/clone -66 -62 -65 ~ ~ ~ to minecraft:overworld
+/time set noon
+/time set night
+/time set noon
+/time set da
+/time set day
+/gamerule doDaylightCycle false

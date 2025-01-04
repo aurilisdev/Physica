@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "tag": "c:raw_materials/uranium"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RRR",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "electrodynamics:raworeblockuranium"
+  }
+}

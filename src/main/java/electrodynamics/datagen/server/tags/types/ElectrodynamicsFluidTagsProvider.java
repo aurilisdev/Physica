@@ -3,7 +3,8 @@ package electrodynamics.datagen.server.tags.types;
 import java.util.concurrent.CompletableFuture;
 
 import electrodynamics.api.References;
-import electrodynamics.common.fluid.types.liquid.subtype.SubtypeSulfateFluid;
+import electrodynamics.common.fluid.subtype.SubtypePureMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.registers.ElectrodynamicsFluids;
 import net.minecraft.core.HolderLookup;
@@ -20,16 +21,23 @@ public class ElectrodynamicsFluidTagsProvider extends FluidTagsProvider {
 
 	@Override
 	protected void addTags(Provider pProvider) {
-		tag(ElectrodynamicsTags.Fluids.CLAY).add(ElectrodynamicsFluids.fluidClay);
-		tag(ElectrodynamicsTags.Fluids.ETHANOL).add(ElectrodynamicsFluids.fluidEthanol);
-		tag(ElectrodynamicsTags.Fluids.HYDRAULIC_FLUID).add(ElectrodynamicsFluids.fluidHydraulic);
-		tag(ElectrodynamicsTags.Fluids.HYDROGEN).add(ElectrodynamicsFluids.fluidHydrogen);
-		tag(ElectrodynamicsTags.Fluids.HYDROGEN_FLUORIDE).add(ElectrodynamicsFluids.fluidHydrogenFluoride);
-		tag(ElectrodynamicsTags.Fluids.OXYGEN).add(ElectrodynamicsFluids.fluidOxygen);
-		tag(ElectrodynamicsTags.Fluids.POLYETHLYENE).add(ElectrodynamicsFluids.fluidPolyethylene);
-		tag(ElectrodynamicsTags.Fluids.SULFURIC_ACID).add(ElectrodynamicsFluids.fluidSulfuricAcid);
+		tag(ElectrodynamicsTags.Fluids.CLAY).add(ElectrodynamicsFluids.FLUID_CLAY.get());
+		tag(ElectrodynamicsTags.Fluids.ETHANOL).add(ElectrodynamicsFluids.FLUID_ETHANOL.get());
+		tag(ElectrodynamicsTags.Fluids.HYDRAULIC_FLUID).add(ElectrodynamicsFluids.FLUID_HYDRAULIC.get());
+		tag(ElectrodynamicsTags.Fluids.HYDROGEN).add(ElectrodynamicsFluids.FLUID_HYDROGEN.get());
+		tag(ElectrodynamicsTags.Fluids.HYDROFLUORIC_ACID).add(ElectrodynamicsFluids.FLUID_HYDROFLUORICACID.get());
+		tag(ElectrodynamicsTags.Fluids.OXYGEN).add(ElectrodynamicsFluids.FLUID_OXYGEN.get());
+		tag(ElectrodynamicsTags.Fluids.POLYETHLYENE).add(ElectrodynamicsFluids.FLUID_POLYETHYLENE.get());
+		tag(ElectrodynamicsTags.Fluids.SULFURIC_ACID).add(ElectrodynamicsFluids.FLUID_SULFURICACID.get());
+		tag(ElectrodynamicsTags.Fluids.NITRIC_ACID).add(ElectrodynamicsFluids.FLUID_NITRICACID.get());
+		tag(ElectrodynamicsTags.Fluids.HYDROCHLORIC_ACID).add(ElectrodynamicsFluids.FLUID_HYDROCHLORICACID.get());
+		tag(ElectrodynamicsTags.Fluids.AMMONIA).add(ElectrodynamicsFluids.FLUID_AMMONIA.get());
+		tag(ElectrodynamicsTags.Fluids.AQUA_REGIA).add(ElectrodynamicsFluids.FLUID_AQUAREGIA.get());
 		for (SubtypeSulfateFluid sulfate : SubtypeSulfateFluid.values()) {
-			tag(sulfate.tag).add(ElectrodynamicsFluids.SUBTYPEFLUID_REGISTRY_MAP.get(sulfate).get());
+			tag(sulfate.tag).add(ElectrodynamicsFluids.FLUIDS_SULFATE.getValue(sulfate));
+		}
+		for (SubtypePureMineralFluid pure : SubtypePureMineralFluid.values()) {
+			tag(pure.tag).add(ElectrodynamicsFluids.FLUIDS_PUREMINERAL.getValue(pure));
 		}
 	}
 

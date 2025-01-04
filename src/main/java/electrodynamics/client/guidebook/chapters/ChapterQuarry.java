@@ -17,7 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ChapterQuarry extends Chapter {
 
-	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.getItem(SubtypeMachine.quarry));
+	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.quarry));
 
 	public ChapterQuarry(Module module) {
 		super(module);
@@ -41,37 +41,37 @@ public class ChapterQuarry extends Chapter {
 		// Step 1
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step", 1).withStyle(ChatFormatting.BOLD)).setSeparateStart().setNewPage());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step1l1")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/markerring.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/markerring.png")));
 
 		// Step 2
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step", 2).withStyle(ChatFormatting.BOLD)).setSeparateStart().setNewPage());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step2l1")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/seismicrelay1.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/seismicrelay2.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/seismicrelay3.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/seismicrelay1.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/seismicrelay2.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/seismicrelay3.png")));
 
 		// Step 3
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step", 3).withStyle(ChatFormatting.BOLD)).setSeparateStart().setNewPage());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step3l1")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/quarryplacement.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/quarryplacement.png")));
 
 		// Step 4
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step", 4).withStyle(ChatFormatting.BOLD)).setSeparateStart().setNewPage());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step4l1")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/coolantresplacement.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/coolantresplacement.png")));
 
 		// Step 5
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step", 5).withStyle(ChatFormatting.BOLD)).setSeparateStart().setNewPage());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step5l1")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/motorcomplex1.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/motorcomplex2.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/motorcomplex1.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/motorcomplex2.png")));
 
 		// Step 6
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step", 6).withStyle(ChatFormatting.BOLD)).setSeparateStart().setNewPage());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step6l1")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/quarrypower1.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/quarrypower2.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/quarrypower3.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/quarrypower1.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/quarrypower2.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/quarrypower3.png")));
 
 		// Step 7
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step", 7).withStyle(ChatFormatting.BOLD)).setSeparateStart().setNewPage());
@@ -82,22 +82,22 @@ public class ChapterQuarry extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.drillhead", ElectroTextUtils.guidebook("chapter.quarry.titaniumhead"), SubtypeDrillHead.titanium.durability)).setIndentions(1).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.drillhead", ElectroTextUtils.guidebook("chapter.quarry.carbidehead"), ElectroTextUtils.guidebook("chapter.quarry.infinitedurability"))).setIndentions(1).setSeparateStart());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step7l2")).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeItemUpgrade.unbreaking).getDescription()).setIndentions(1).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeItemUpgrade.fortune).getDescription()).setIndentions(1).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeItemUpgrade.silktouch).getDescription()).setIndentions(1).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectrodynamicsItems.getItem(SubtypeItemUpgrade.itemvoid).getDescription()).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_UPGRADE.getValue(SubtypeItemUpgrade.unbreaking).getDescription()).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_UPGRADE.getValue(SubtypeItemUpgrade.fortune).getDescription()).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_UPGRADE.getValue(SubtypeItemUpgrade.silktouch).getDescription()).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectrodynamicsItems.ITEMS_UPGRADE.getValue(SubtypeItemUpgrade.itemvoid).getDescription()).setIndentions(1).setSeparateStart());
 		blankLine();
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step7unbreaking", ElectrodynamicsItems.getItem(SubtypeItemUpgrade.unbreaking).getDescription().copy().withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step7fortune", ElectrodynamicsItems.getItem(SubtypeItemUpgrade.fortune).getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step7silktouch", ElectrodynamicsItems.getItem(SubtypeItemUpgrade.silktouch).getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step7void", ElectrodynamicsItems.getItem(SubtypeItemUpgrade.itemvoid).getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, new ResourceLocation(References.ID, "textures/screen/guidebook/quarrygui1.png")));
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step7unbreaking", ElectrodynamicsItems.ITEMS_UPGRADE.getValue(SubtypeItemUpgrade.unbreaking).getDescription().copy().withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step7fortune", ElectrodynamicsItems.ITEMS_UPGRADE.getValue(SubtypeItemUpgrade.fortune).getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step7silktouch", ElectrodynamicsItems.ITEMS_UPGRADE.getValue(SubtypeItemUpgrade.silktouch).getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step7void", ElectrodynamicsItems.ITEMS_UPGRADE.getValue(SubtypeItemUpgrade.itemvoid).getDescription().copy().withStyle(ChatFormatting.BOLD))).setIndentions(1).setSeparateStart());
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/quarrygui1.png")));
 
 		// Step 8
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step", 8).withStyle(ChatFormatting.BOLD)).setSeparateStart().setNewPage());
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.quarry.step8l1")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/logisticalmanager1.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, new ResourceLocation(References.ID, "textures/screen/guidebook/logisticalmanager2.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/logisticalmanager1.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/logisticalmanager2.png")));
 
 	}
 

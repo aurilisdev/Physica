@@ -20,7 +20,7 @@ public class HandlerToggleNVGoggles extends AbstractKeyPressHandler {
         if (KeyBinds.toggleNvgs.matches(event.getKey(), event.getScanCode()) && KeyBinds.toggleNvgs.isDown()) {
             ItemStack playerHead = player.getItemBySlot(EquipmentSlot.HEAD);
             if (ItemUtils.testItems(playerHead.getItem(), ElectrodynamicsItems.ITEM_NIGHTVISIONGOGGLES.get()) || ItemUtils.testItems(playerHead.getItem(), ElectrodynamicsItems.ITEM_COMBATHELMET.get())) {
-                PacketDistributor.SERVER.noArg().send(new PacketToggleOnServer(player.getUUID(), Type.NVGS));
+                PacketDistributor.sendToServer(new PacketToggleOnServer(player.getUUID(), Type.NVGS));
             }
         }
     }

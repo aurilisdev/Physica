@@ -11,13 +11,6 @@ import net.minecraft.world.level.block.Block;
 
 public class ItemUtils {
 
-	/**
-	 * Item analouge to ItemStack.areItemsEqual(stackA,stackB)
-	 * 
-	 * @param itemA
-	 * @param itemB
-	 * @return boolean if the items are equal or not
-	 */
 	public static boolean testItems(Item comparator, Item... itemsToCompare) {
 		ItemStack stack = new ItemStack(comparator);
 		for (Item item : itemsToCompare) {
@@ -37,7 +30,7 @@ public class ItemUtils {
 	 */
 	@Nullable
 	public static Ingredient getIngredientFromTag(String location, String tag) {
-		return Ingredient.of(ItemTags.create(new ResourceLocation(location, tag)));
+		return Ingredient.of(ItemTags.create(ResourceLocation.fromNamespaceAndPath(location, tag)));
 	}
 
 	public static Item fromBlock(Block block) {

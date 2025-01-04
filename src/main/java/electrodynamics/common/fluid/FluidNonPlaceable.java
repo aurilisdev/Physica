@@ -2,6 +2,7 @@ package electrodynamics.common.fluid;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
@@ -12,19 +13,21 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.fluids.FluidType;
 
-public abstract class FluidNonPlaceable extends Fluid {
+public class FluidNonPlaceable extends Fluid {
 
-	private final java.util.function.Supplier<DeferredHolder<Item, Item>> itemSupplier;
+	private final Holder<Item> bucket;
+	private final FluidType type;
 
-	protected FluidNonPlaceable(java.util.function.Supplier<DeferredHolder<Item, Item>> itemSupplier) {
-		this.itemSupplier = itemSupplier;
+	public FluidNonPlaceable(Holder<Item> bucket, FluidType type) {
+		this.bucket = bucket;
+		this.type = type;
 	}
 
 	@Override
 	public Item getBucket() {
-		return itemSupplier.get().get();
+		return bucket.value();
 	}
 
 	@Override
@@ -75,5 +78,10 @@ public abstract class FluidNonPlaceable extends Fluid {
 	@Override
 	public VoxelShape getShape(FluidState state, BlockGetter getter, BlockPos pos) {
 		return Shapes.block();
+	}
+
+	@Override
+	public FluidType getFluidType() {
+		return type;
 	}
 }

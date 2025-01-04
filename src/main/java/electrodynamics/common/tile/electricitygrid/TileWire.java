@@ -1,13 +1,13 @@
 package electrodynamics.common.tile.electricitygrid;
 
-import org.jetbrains.annotations.NotNull;
+import electrodynamics.prefab.properties.PropertyTypes;
+import net.minecraft.core.HolderLookup;
 
 import electrodynamics.common.block.connect.BlockWire;
 import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.block.subtype.SubtypeWire.WireColor;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -15,13 +15,13 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TileWire extends GenericTileWire {
 
-	public Property<Double> transmit = property(new Property<>(PropertyType.Double, "transmit", 0.0));
+	public Property<Double> transmit = property(new Property<>(PropertyTypes.DOUBLE, "transmit", 0.0));
 
 	public SubtypeWire wire = null;
 	public WireColor color = null;
 
 	public TileWire(BlockPos pos, BlockState state) {
-		super(ElectrodynamicsBlockTypes.TILE_WIRE.get(), pos, state);
+		super(ElectrodynamicsTiles.TILE_WIRE.get(), pos, state);
 	}
 
 	public TileWire(BlockEntityType<TileLogisticalWire> tileEntityType, BlockPos pos, BlockState state) {
@@ -45,15 +45,15 @@ public class TileWire extends GenericTileWire {
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag compound) {
+	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
 		compound.putInt("ord", getWireType().ordinal());
 		compound.putInt("color", getWireColor().ordinal());
-		super.saveAdditional(compound);
+		super.saveAdditional(compound, registries);
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag compound) {
-		super.load(compound);
+	protected void loadAdditional(CompoundTag compound, HolderLookup.Provider registries) {
+		super.loadAdditional(compound, registries);
 		wire = SubtypeWire.values()[compound.getInt("ord")];
 		color = WireColor.values()[compound.getInt("color")];
 	}

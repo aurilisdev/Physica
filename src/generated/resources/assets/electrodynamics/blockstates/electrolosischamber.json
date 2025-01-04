@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "electrodynamics:block/electrolosischamber",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "electrodynamics:block/electrolosischamber"
+    },
+    "facing=south": {
+      "model": "electrodynamics:block/electrolosischamber",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "electrodynamics:block/electrolosischamber",
+      "y": 270
+    }
+  }
+}

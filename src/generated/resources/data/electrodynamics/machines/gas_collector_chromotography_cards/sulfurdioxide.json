@@ -1,0 +1,8 @@
+{
+  "amount": 1,
+  "biome": "#minecraft:is_nether",
+  "gas": "electrodynamics:sulfurdioxide",
+  "item": "electrodynamics:chromotographycardsulfurdioxide",
+  "pressure": 1,
+  "temperature": 373
+}

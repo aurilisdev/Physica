@@ -1,7 +1,7 @@
 package electrodynamics.datagen.server.recipe.types.custom.fluid2item;
 
 import electrodynamics.api.References;
-import electrodynamics.common.fluid.types.liquid.subtype.SubtypeSulfateFluid;
+import electrodynamics.common.fluid.subtype.SubtypePureMineralFluid;
 import electrodynamics.common.recipe.categories.fluid2item.specificmachines.ChemicalCrystalizerRecipe;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
@@ -18,7 +18,7 @@ public class ElectrodynamicsChemicalCrystallizerRecipes extends AbstractRecipeGe
 	public static double CHEMICALCRYSTALLIZER_USAGE_PER_TICK = 800.0;
 	public static int CHEMICALCRYSTALLIZER_REQUIRED_TICKS = 200;
 
-	private final String modID;
+	public final String modID;
 
 	public ElectrodynamicsChemicalCrystallizerRecipes(String modID) {
 		this.modID = modID;
@@ -49,9 +49,9 @@ public class ElectrodynamicsChemicalCrystallizerRecipes extends AbstractRecipeGe
 				//
 				.save(output);
 
-		for (SubtypeSulfateFluid fluid : SubtypeSulfateFluid.values()) {
-			if (fluid.crystal != null) {
-				newRecipe(new ItemStack(fluid.crystal.get()), 0, 200, 800.0, "crystal_" + fluid.name() + "_from_sulfate", modID)
+		for (SubtypePureMineralFluid fluid : SubtypePureMineralFluid.values()) {
+			if (fluid.result != null) {
+				newRecipe(new ItemStack(fluid.result.get()), 0, 200, 800.0, "crystal_" + fluid.name() + "_from_pure_fluid", modID)
 						//
 						.addFluidTagInput(fluid.tag, 200)
 						//

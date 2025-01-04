@@ -1,8 +1,7 @@
 package electrodynamics.common.tile.electricitygrid.generators;
 
-import electrodynamics.api.multiblock.Subnode;
-import electrodynamics.api.multiblock.parent.IMultiblockParentTile;
-import electrodynamics.common.block.BlockMachine;
+import electrodynamics.api.multiblock.subnodebased.Subnode;
+import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentTile;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerSolarPanel;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
@@ -13,14 +12,16 @@ import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.utilities.object.TargetValue;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsBlockTypes;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -29,7 +30,7 @@ public class TileAdvancedSolarPanel extends TileSolarPanel implements IMultibloc
 	public final TargetValue currentRotation = new TargetValue();
 
 	public TileAdvancedSolarPanel(BlockPos worldPosition, BlockState blockState) {
-		super(ElectrodynamicsBlockTypes.TILE_ADVANCEDSOLARPANEL.get(), worldPosition, blockState, 2.25, SubtypeItemUpgrade.improvedsolarcell);
+		super(ElectrodynamicsTiles.TILE_ADVANCEDSOLARPANEL.get(), worldPosition, blockState, 2.25, SubtypeItemUpgrade.improvedsolarcell);
 		this.<ComponentElectrodynamic>getComponent(IComponentType.Electrodynamic).voltage(ElectrodynamicsCapabilities.DEFAULT_VOLTAGE * 2);
 		forceComponent(new ComponentContainerProvider(SubtypeMachine.advancedsolarpanel, this).createMenu((id, player) -> new ContainerSolarPanel(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 	}
@@ -44,7 +45,7 @@ public class TileAdvancedSolarPanel extends TileSolarPanel implements IMultibloc
 
 	@Override
 	public Subnode[] getSubNodes() {
-		return BlockMachine.advancedsolarpanelsubnodes;
+		return SubtypeMachine.Subnodes.SUBNODES_ADVANCEDSOLARPANEL;
 	}
 
 	@Override
@@ -53,8 +54,13 @@ public class TileAdvancedSolarPanel extends TileSolarPanel implements IMultibloc
 	}
 
 	@Override
-	public InteractionResult onSubnodeUse(Player player, InteractionHand hand, BlockHitResult hit, TileMultiSubnode subnode) {
-		return use(player, hand, hit);
+	public InteractionResult onSubnodeUseWithoutItem(Player player, BlockHitResult hit, TileMultiSubnode subnode) {
+		return useWithoutItem(player, hit);
+	}
+
+	@Override
+	public ItemInteractionResult onSubnodeUseWithItem(ItemStack used, Player player, InteractionHand hand, BlockHitResult hit, TileMultiSubnode subnode) {
+		return useWithItem(used, player, hand, hit);
 	}
 
 	@Override

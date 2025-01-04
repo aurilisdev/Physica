@@ -1,5 +1,5 @@
 {
-  "fluid_tag": "forge:ethanol",
+  "fluid_tag": "c:ethanol",
   "power_multiplier": 1.0,
   "usage_per_burn": 1
 }

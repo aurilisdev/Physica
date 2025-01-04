@@ -5,7 +5,7 @@ import java.util.HashSet;
 import com.mojang.serialization.MapCodec;
 
 import electrodynamics.api.References;
-import electrodynamics.common.block.BlockMachine;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.tile.electricitygrid.TileLogisticalWire;
 import electrodynamics.prefab.utilities.math.Color;
@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 public class BlockLogisticalWire extends BlockWire {
@@ -31,19 +31,19 @@ public class BlockLogisticalWire extends BlockWire {
     public BlockLogisticalWire(SubtypeWire wire) {
         super(wire);
         WIRES.add(this);
-        stateDefinition.any().setValue(BlockMachine.ON, false);
+        stateDefinition.any().setValue(ElectrodynamicsBlockStates.LIT, false);
     }
 
     @Override
     public void createBlockStateDefinition(Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockMachine.ON);
+        builder.add(ElectrodynamicsBlockStates.LIT);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState superState = super.getStateForPlacement(context);
-        return superState.setValue(BlockMachine.ON, false);
+        return superState.setValue(ElectrodynamicsBlockStates.LIT, false);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class BlockLogisticalWire extends BlockWire {
         throw new UnsupportedOperationException("Need to implement CODEC");
     }
 
-    @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
     private static class ColorHandler {
 
         @SubscribeEvent
@@ -68,7 +68,7 @@ public class BlockLogisticalWire extends BlockWire {
                 if (tintIndex != 1) {
                     return 0xFFFFFFFF;
                 }
-                if (state.getValue(BlockMachine.ON)) {
+                if (state.getValue(ElectrodynamicsBlockStates.LIT)) {
                     return REDSTONE_ON.color();
                 }
                 return REDSTONE_OFF.color();

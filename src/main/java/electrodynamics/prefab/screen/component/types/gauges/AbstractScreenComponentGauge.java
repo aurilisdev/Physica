@@ -6,7 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import electrodynamics.api.References;
 import electrodynamics.api.screen.ITexture;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -20,10 +20,16 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractScreenComponentGauge extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/fluid.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/fluid.png");
 
 	public AbstractScreenComponentGauge(int x, int y) {
 		super(GaugeTextures.BACKGROUND_DEFAULT, x, y);
+		onTooltip((graphics, component, xAxis, yAxis) -> {
+			List<? extends FormattedCharSequence> tooltips = getTooltips();
+			if (!tooltips.isEmpty()) {
+				graphics.renderTooltip(gui.getFontRenderer(), tooltips, xAxis, yAxis);
+			}
+		});
 	}
 
 	@Override
@@ -56,17 +62,6 @@ public abstract class AbstractScreenComponentGauge extends ScreenComponentGeneri
 	}
 
 	protected abstract void applyColor();
-
-	@Override
-	public void renderForeground(GuiGraphics graphics, int xAxis, int yAxis, int guiWidth, int guiHeight) {
-		if (isPointInRegion(xLocation, yLocation, xAxis, yAxis, super.texture.textureWidth(), super.texture.textureHeight())) {
-			List<? extends FormattedCharSequence> tooltips = getTooltips();
-
-			if (!tooltips.isEmpty()) {
-				graphics.renderTooltip(gui.getFontRenderer(), tooltips, xAxis, yAxis);
-			}
-		}
-	}
 
 	protected abstract int getScaledLevel();
 

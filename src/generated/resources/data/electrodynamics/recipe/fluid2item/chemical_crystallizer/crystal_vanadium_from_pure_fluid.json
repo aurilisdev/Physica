@@ -1,0 +1,16 @@
+{
+  "type": "electrodynamics:chemical_crystallizer_recipe",
+  "fluidinputs": [
+    {
+      "amount": 200,
+      "tag": "c:puremineral/vanadium"
+    }
+  ],
+  "group": "electrodynamics",
+  "output": {
+    "count": 1,
+    "id": "electrodynamics:crystalvanadium"
+  },
+  "ticks": 200,
+  "usagepertick": 800.0
+}

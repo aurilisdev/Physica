@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:thermoelectricgenerator"
-            ]
+            "items": "electrodynamics:thermoelectricgenerator"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.thermoelectricgenerator.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:thermoelectricgenerator"
+      "count": 1,
+      "id": "electrodynamics:thermoelectricgenerator"
     },
-    "show_toast": true,
     "title": {
       "color": "red",
       "translate": "advancement.electrodynamics.thermoelectricgenerator.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 20
-  },
-  "sends_telemetry_event": false
+  }
 }

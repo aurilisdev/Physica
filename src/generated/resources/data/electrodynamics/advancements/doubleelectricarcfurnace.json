@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "electrodynamics:electricarcfurnacedouble"
-            ]
+            "items": "electrodynamics:electricarcfurnacedouble"
           }
         ]
       },
@@ -15,16 +13,13 @@
     }
   },
   "display": {
-    "announce_to_chat": true,
     "description": {
       "translate": "advancement.electrodynamics.doubleelectricarcfurnace.desc"
     },
-    "frame": "task",
-    "hidden": false,
     "icon": {
-      "item": "electrodynamics:electricarcfurnacedouble"
+      "count": 1,
+      "id": "electrodynamics:electricarcfurnacedouble"
     },
-    "show_toast": true,
     "title": {
       "color": "blue",
       "translate": "advancement.electrodynamics.doubleelectricarcfurnace.title"
@@ -37,6 +32,5 @@
   ],
   "rewards": {
     "experience": 50
-  },
-  "sends_telemetry_event": false
+  }
 }

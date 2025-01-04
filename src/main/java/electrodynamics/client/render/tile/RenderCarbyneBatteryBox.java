@@ -6,7 +6,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import electrodynamics.client.ClientRegister;
 import electrodynamics.common.tile.electricitygrid.batteries.TileCarbyneBatteryBox;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.utilities.RenderingUtils;
@@ -38,7 +37,7 @@ public class RenderCarbyneBatteryBox extends AbstractTileRenderer<TileCarbyneBat
 		default -> getModel(ClientRegister.MODEL_BATTERYBOX);
 		};
 
-		switch (tileEntityIn.getBlockState().getValue(GenericEntityBlock.FACING)) {
+		switch (tileEntityIn.getFacing()) {
 		case NORTH -> {
 			matrixStackIn.mulPose(MathUtils.rotQuaternionDeg(0, 90, 0));
 			// matrixStackIn.mulPose(new Quaternion(0, 90, 0, true));

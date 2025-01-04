@@ -1,6 +1,6 @@
 /bin
 /out
-/run
+/runs
 /classes
 *.classpath
 *.project
@@ -55,3 +55,4 @@ runData.launch
 
 runServer.launch
 *.launch
+runs*

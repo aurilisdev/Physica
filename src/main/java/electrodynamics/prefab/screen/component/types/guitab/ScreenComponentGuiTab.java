@@ -15,7 +15,7 @@ import net.minecraft.util.FormattedCharSequence;
 
 public class ScreenComponentGuiTab extends AbstractScreenComponentInfo {
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(References.ID + ":textures/screen/component/screentabs.png");
+	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/screentabs.png");
 	private final ITexture iconType;
 
 	public ScreenComponentGuiTab(ITexture texture, ITexture icon, @Nonnull TextPropertySupplier infoHandler, int x, int y) {
@@ -40,7 +40,8 @@ public class ScreenComponentGuiTab extends AbstractScreenComponentInfo {
 	}
 
 	public enum GuiInfoTabTextures implements ITexture {
-		REGULAR(26, 26, 0, 0, 26, 26, "tab_regular");
+		REGULAR(26, 26, 0, 0, 26, 26, "tab_regular"),
+		REGULAR_RIGHT(26, 26, 0, 0, 26, 26, "tab_regular_right");
 
 		private final int textureWidth;
 		private final int textureHeight;
@@ -57,7 +58,7 @@ public class ScreenComponentGuiTab extends AbstractScreenComponentInfo {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = new ResourceLocation(References.ID + ":textures/screen/component/guitab/" + name + ".png");
+			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/guitab/" + name + ".png");
 		}
 
 		@Override
