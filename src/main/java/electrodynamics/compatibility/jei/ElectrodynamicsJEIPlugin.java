@@ -1,6 +1,7 @@
 package electrodynamics.compatibility.jei;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +24,7 @@ import electrodynamics.client.screen.tile.ScreenO2OProcessorDouble;
 import electrodynamics.client.screen.tile.ScreenO2OProcessorTriple;
 import electrodynamics.client.screen.tile.ScreenThermoelectricManipulator;
 import electrodynamics.common.block.subtype.SubtypeMachine;
+import electrodynamics.common.fluid.FluidNonPlaceable;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
 import electrodynamics.common.settings.Constants;
@@ -54,6 +56,7 @@ import electrodynamics.prefab.screen.types.GenericMaterialScreen;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.object.CombustionFuelSource;
 import electrodynamics.registers.ElectrodynamicsBlocks;
+import electrodynamics.registers.ElectrodynamicsFluids;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -65,6 +68,7 @@ import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.IExtraIngredientRegistration;
 //import mezz.jei.api.runtime.IJeiRuntime;
 //import mezz.jei.common.runtime.JeiRuntime;
 import net.minecraft.client.Minecraft;
@@ -74,8 +78,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.RegistryObject;
 
 @JeiPlugin
 public class ElectrodynamicsJEIPlugin implements IModPlugin {
@@ -86,6 +92,25 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 	private static final int FULL_FLUID_SQUARE = 1600;
 
 	// private static IJeiRuntime RUNTIME = null;
+
+	private static FluidStack makeFluidStack(RegistryObject<Fluid> fluid)
+	{
+		FluidStack fluidStack;
+		fluidStack = new FluidStack(fluid.get(), 1000);
+		return fluidStack;
+	}
+
+	@Override
+	public void registerExtraIngredients(IExtraIngredientRegistration registration)
+	{
+		Collection<RegistryObject<Fluid>> fluids = ElectrodynamicsFluids.FLUIDS.getEntries();
+		Collection<FluidStack> modFluids = new ArrayList<>();
+		for (RegistryObject<Fluid> fluid : fluids)
+		{
+			modFluids.add(makeFluidStack(fluid));
+		}
+		registration.addExtraIngredients(ForgeTypes.FLUID_STACK, modFluids);
+	}
 
 	@Override
 	public ResourceLocation getPluginUid() {
