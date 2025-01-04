@@ -160,7 +160,7 @@ public class ItemServoLeggings extends ItemElectrodynamicsArmor implements IItem
                         break;
                     case 3:
                         stack.set(ElectrodynamicsDataComponentTypes.SUCESS, false);
-                        if (!stack.set(ElectrodynamicsDataComponentTypes.RESET, false)) {
+                        if (!stack.getOrDefault(ElectrodynamicsDataComponentTypes.RESET, false)) {
                             player.getAttribute(Attributes.STEP_HEIGHT).removeModifier(ElectrodynamicsAttributeModifiers.SERVO_LEGGINGS_STEP);
                         }
                         break;
@@ -169,7 +169,7 @@ public class ItemServoLeggings extends ItemElectrodynamicsArmor implements IItem
                 }
             } else {
                 stack.set(ElectrodynamicsDataComponentTypes.SUCESS, false);
-                if (!stack.set(ElectrodynamicsDataComponentTypes.RESET, false)) {
+                if (!stack.getOrDefault(ElectrodynamicsDataComponentTypes.RESET, false)) {
                     player.getAttribute(Attributes.STEP_HEIGHT).removeModifier(ElectrodynamicsAttributeModifiers.SERVO_LEGGINGS_STEP);
 
                 }

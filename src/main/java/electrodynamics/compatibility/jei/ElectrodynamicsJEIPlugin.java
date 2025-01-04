@@ -110,7 +110,9 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(ReinforcedAlloyerRecipeCategory.INPUT_MACHINE, ReinforcedAlloyerRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(ElectrolyticSeparatorRecipeCategory.INPUT_MACHINE, ElectrolyticSeparatorRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(CondensingGasRecipeCategory.INPUT_MACHINE, CondensingGasRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get()), CondensingGasRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(EvaporatingFluidRecipeCategory.INPUT_MACHINE, EvaporatingFluidRecipeCategory.RECIPE_TYPE);
+        registration.addRecipeCatalyst(new ItemStack(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get()), EvaporatingFluidRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(ChemicalReactorRecipeCategory.INPUT_MACHINE, ChemicalReactorRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(GasCollectorRecipeCategory.INPUT_MACHINE, GasCollectorRecipeCategory.RECIPE_TYPE);
         registration.addRecipeCatalyst(ElectrolosisChamberRecipeCategory.INPUT_MACHINE, ElectrolosisChamberRecipeCategory.RECIPE_TYPE);
