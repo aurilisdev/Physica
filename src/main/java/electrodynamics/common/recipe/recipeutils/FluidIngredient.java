@@ -177,7 +177,7 @@ public class FluidIngredient implements Predicate<FluidStack>, ICustomIngredient
 
     @Override
     public boolean test(@Nullable FluidStack t) {
-        if(t == null){
+        if(t == null || t.isEmpty()){
             return false;
         }
 

@@ -165,7 +165,7 @@ public interface IItemElectric {
 
     static boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
 
-        if (action == null || action == ClickAction.PRIMARY) {
+        if (action == null || action == ClickAction.PRIMARY || other.isEmpty()) {
             return false;
         }
 
@@ -269,7 +269,7 @@ public interface IItemElectric {
                                 //
                                 Codec.DOUBLE.fieldOf(EXTRACT_LIMIT).forGetter(instance0 -> instance0.extractCap),
                                 //
-                                ItemStack.CODEC.fieldOf(CURRENT_BATTERY).forGetter(instance0 -> instance0.battery)
+                                ItemStack.OPTIONAL_CODEC.fieldOf(CURRENT_BATTERY).forGetter(instance0 -> instance0.battery)
 //
 
                         ).apply(instance, ElectricItemData::new)
@@ -283,7 +283,7 @@ public interface IItemElectric {
                 ByteBufCodecs.DOUBLE, instance0 -> instance0.voltage,
                 ByteBufCodecs.DOUBLE, instance0 -> instance0.receiveCap,
                 ByteBufCodecs.DOUBLE, instance0 -> instance0.extractCap,
-                ItemStack.STREAM_CODEC, instance0 -> instance0.battery,
+                ItemStack.OPTIONAL_STREAM_CODEC, instance0 -> instance0.battery,
                 ElectricItemData::new
         );
 

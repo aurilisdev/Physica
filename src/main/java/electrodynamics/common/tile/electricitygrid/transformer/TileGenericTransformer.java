@@ -123,7 +123,7 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
         TransferPack returner = TransferPack.EMPTY;
 
         if (electro != null) {
-            electro.getConnectedLoad(transformed, dir);
+            returner = electro.getConnectedLoad(transformed, dir);
         }
 
         // TransferPack returner = ((BlockEntity) output.getSafe()).getCapability(ElectrodynamicsCapabilities.ELECTRODYNAMIC,

@@ -21,11 +21,11 @@ public class TileMultimeterBlock extends GenericTile {
 
 	//TODO Flip it so it places facing towards the player
 
-	public Property<Double> voltage = property(new Property<>(PropertyTypes.DOUBLE, "voltageNew", 0.0).setNoSave());
-	public Property<Double> minVoltage = property(new Property<>(PropertyTypes.DOUBLE, "minvoltage", 0.0).setNoSave());
-	public Property<Double> joules = property(new Property<>(PropertyTypes.DOUBLE, "joulesNew", 0.0).setNoSave());
-	public Property<Double> resistance = property(new Property<>(PropertyTypes.DOUBLE, "resistanceNew", 0.0).setNoSave());
-	public Property<Double> loss = property(new Property<>(PropertyTypes.DOUBLE, "lossNew", 0.0).setNoSave());
+	public Property<Double> voltage = property(new Property<>(PropertyTypes.DOUBLE, "voltageNew", 0.0));
+	public Property<Double> minVoltage = property(new Property<>(PropertyTypes.DOUBLE, "minvoltage", 0.0));
+	public Property<Double> joules = property(new Property<>(PropertyTypes.DOUBLE, "joulesNew", 0.0));
+	public Property<Double> resistance = property(new Property<>(PropertyTypes.DOUBLE, "resistanceNew", 0.0));
+	public Property<Double> loss = property(new Property<>(PropertyTypes.DOUBLE, "lossNew", 0.0));
 
 	public CachedTileOutput input;
 

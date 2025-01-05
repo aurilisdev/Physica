@@ -69,6 +69,10 @@ public class GasUtilities {
 
             for (GasTank gasTank : tanks) {
 
+                if(gasTank.isEmpty()) {
+
+                }
+
                 for (int i = 0; i < handler.getTanks(); i++) {
 
                     GasStack tankGas = gasTank.getGas().copy();

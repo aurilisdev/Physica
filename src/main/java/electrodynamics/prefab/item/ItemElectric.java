@@ -38,7 +38,7 @@ public class ItemElectric extends ItemElectrodynamics implements IItemElectric {
 	public void addCreativeModeItems(CreativeModeTab group, List<ItemStack> items) {
 
 		ItemStack empty = new ItemStack(this);
-		IItemElectric.setEnergyStored(empty, 0);
+		//IItemElectric.setEnergyStored(empty, 0);
 		items.add(empty);
 		ItemStack charged = new ItemStack(this);
 		IItemElectric.setEnergyStored(charged, getMaximumCapacity(charged));

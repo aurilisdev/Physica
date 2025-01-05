@@ -3,6 +3,7 @@ package electrodynamics.api.gas;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -101,7 +102,7 @@ public class GasStack {
     }
 
     public Gas getGas() {
-        return gas;
+        return isEmpty() ? ElectrodynamicsGases.EMPTY.get() : gas;
     }
 
     public Holder<Gas> getGasHolder() {
