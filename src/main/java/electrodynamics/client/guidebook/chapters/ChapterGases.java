@@ -138,7 +138,7 @@ public class ChapterGases extends Chapter {
 		// condensed gases
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l9")).setIndentions(1).setSeparateStart());
 		for (DeferredHolder<Gas, ? extends Gas> gas : ElectrodynamicsGases.GASES.getEntries()) {
-			if (gas.get().isEmpty() || gas.get().getCondensedFluid().isSame(Fluids.EMPTY)) {
+			if (gas.get().isEmpty() || gas.get().noCondensedFluid()) {
 				continue;
 			}
 			blankLine();

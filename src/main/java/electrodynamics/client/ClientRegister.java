@@ -35,6 +35,7 @@ import electrodynamics.common.fluid.SimpleWaterBasedFluidType;
 import electrodynamics.common.item.gear.tools.electric.ItemElectricBaton;
 import electrodynamics.common.item.gear.tools.electric.ItemElectricChainsaw;
 import electrodynamics.common.item.gear.tools.electric.ItemElectricDrill;
+import electrodynamics.compatibility.mekanism.MekanismClientHandler;
 import electrodynamics.registers.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
@@ -52,6 +53,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.event.ModelEvent.RegisterAdditional;
@@ -253,6 +255,10 @@ public class ClientRegister {
         event.register(ElectrodynamicsMenuTypes.CONTAINER_CHEMICALREACTOR.get(), ScreenChemicalReactor::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_CREATIVEGASSOURCE.get(), ScreenCreativeGasSource::new);
         event.register(ElectrodynamicsMenuTypes.CONTAINER_ELECTROLOSISCHAMBER.get(), ScreenElectrolosisChamber::new);
+
+        if(ModList.get().isLoaded(References.MEKANISM_ID)) {
+            MekanismClientHandler.registerMenus(event);
+        }
     }
 
     @SubscribeEvent

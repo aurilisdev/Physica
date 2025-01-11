@@ -167,9 +167,9 @@ public class GasStack {
             throw new UnsupportedOperationException("The temperature cannot drop below absolute zero");
         }
 
-        int change = (int) ((deltaTemp + (double) temperature) / (double) temperature);
+        double change = (deltaTemp + (double) temperature) / (double) temperature;
 
-        return amount * change;
+        return (int) Math.ceil(amount * change);
 
     }
 
@@ -180,7 +180,7 @@ public class GasStack {
 
         double change = (double) atm / (double) pressure;
 
-        return (int) (amount / change);
+        return (int) Math.ceil(amount / change);
     }
 
     public boolean isEmpty() {
@@ -358,7 +358,7 @@ public class GasStack {
             return stack2.getAmount();
         }
 
-        return (int) (remaining / deltaT2Factor * deltaP2Factor);
+        return (int) Math.ceil(remaining / deltaT2Factor * deltaP2Factor);
 
     }
 

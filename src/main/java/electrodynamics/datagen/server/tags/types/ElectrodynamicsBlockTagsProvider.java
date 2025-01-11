@@ -79,7 +79,9 @@ public class ElectrodynamicsBlockTagsProvider extends BlockTagsProvider {
                 //
                 .add(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get())
                 //
-                .add(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_TOP.get());
+                .add(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOREXTRA_TOP.get())
+                //
+                .add(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER.get());
 
         tag(BlockTags.MINEABLE_WITH_HOE)
                 //
@@ -149,7 +151,9 @@ public class ElectrodynamicsBlockTagsProvider extends BlockTagsProvider {
                 //
                 .add(ElectrodynamicsBlocks.BLOCK_ADVANCEDDECOMPRESSOR.get())
                 //
-                .add(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get());
+                .add(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get())
+                //
+                .add(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER.get());
 
         tag(BlockTags.NEEDS_IRON_TOOL)
                 //

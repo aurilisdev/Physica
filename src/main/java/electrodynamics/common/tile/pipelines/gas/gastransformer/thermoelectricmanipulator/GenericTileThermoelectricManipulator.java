@@ -18,6 +18,7 @@ import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -68,14 +69,13 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
         if (result.canProcess()) {
 
             isFluid = false;
-            changeState = result.changeState();
 
         } else {
 
             result = checkFluidConditions(processor);
             isFluid = result.canProcess();
-            changeState = result.changeState();
         }
+        changeState = result.changeState();
 
         boolean isHeating = result.status() == ElectrodynamicsBlockStates.ManipulatorHeatingStatus.HEAT && result.canProcess();
 
@@ -121,11 +121,11 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
                 return new ManipulatorStatusCheckWrapper(false, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF, false);
             }
 
-            Fluid condensedFluid = inputTank.getGas().getGas().getCondensedFluid();
-
-            if (condensedFluid == null) {
+            if (inputTank.getGas().getGas().noCondensedFluid()) {
                 return new ManipulatorStatusCheckWrapper(false, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF, false);
             }
+
+            Fluid condensedFluid = inputTank.getGas().getGas().getCondensedFluid();
 
             if (!outputTank.isEmpty() && !outputTank.getFluid().getFluid().isSame(condensedFluid)) {
                 return new ManipulatorStatusCheckWrapper(false, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF, false);
@@ -195,7 +195,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
             return new ManipulatorStatusCheckWrapper(false, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF, false);
         }
 
-        evaporatedGas = ElectrodynamicsGases.MAPPED_GASSES.getOrDefault(inputTank.getFluid().getFluid(), ElectrodynamicsGases.EMPTY.value());
+        evaporatedGas = ElectrodynamicsGases.MAPPED_GASSES.getOrDefault(BuiltInRegistries.FLUID.wrapAsHolder(inputTank.getFluid().getFluid()), ElectrodynamicsGases.EMPTY.value());
 
         if (evaporatedGas.isEmpty()) {
             return new ManipulatorStatusCheckWrapper(false, ElectrodynamicsBlockStates.ManipulatorHeatingStatus.OFF, false);
@@ -249,7 +249,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
 
             evaporatedPotential.heat(-deltaT);
 
-            inputTank.drain((int) Math.ceil(evaporatedPotential.getAmount()), IFluidHandler.FluidAction.EXECUTE);
+            inputTank.drain(evaporatedPotential.getAmount(), IFluidHandler.FluidAction.EXECUTE);
 
             // gas to fluid
         } else if (changeState) {
@@ -273,7 +273,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
 
             condensedPotential.heat(deltaT);
 
-            int fluidAmount = (int) Math.floor(Math.min(conversionRate, condensedPotential.getAmount()));
+            int fluidAmount = Math.min(conversionRate, condensedPotential.getAmount());
 
             if (fluidAmount == 0) {
                 return;

@@ -357,6 +357,8 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addBlock(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR, "GTL Chamber");
 			addBlock(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR, "GTL Chamber MK2");
 
+			addBlock(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER, "Rotary Unifier");
+
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gasvalve), "Gas Valve");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.fluidvalve), "Fluid Valve");
 			addBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.gaspipepump), "Gas Pipe Pump");
@@ -807,6 +809,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addContainer(SubtypeMachine.advanceddowngradetransformer, "Downgrade Transformer Mk 2");
 			addContainer(SubtypeMachine.advancedupgradetransformer, "Upgrade Transformer Mk 2");
 			addContainer(SubtypeMachine.circuitmonitor, "Circuit Monitor");
+			addContainer("rotaryunifier", "Rotary Unifier");
 
 			addTooltip("itemwire.resistance", "Resistance: %s");
 			addTooltip("itemwire.maxamps", "Ampacity: %s");
@@ -930,6 +933,10 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 
 			addTooltip("electrolosischamber.satisfaction", "Satisfaction: %s");
 			addTooltip("electrolosischamber.procamount", "Processing Amount: %s");
+
+			addTooltip("rotaryunifier.toggle", "Toggle Conversion");
+			addTooltip("rotaryunifier.use1", "Gas must be 1 degree above");
+			addTooltip("rotaryunifier.use2", "condensation temperature");
 
 			addGuiLabel("creativepowersource.voltage", "Voltage: ");
 			addGuiLabel("creativepowersource.power", "Power: ");

@@ -77,6 +77,8 @@ public class UnifiedElectrodynamicsRegister {
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastanksteel), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(8, DisplayUnit.BUCKETS)));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastankreinforced), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(32, DisplayUnit.BUCKETS)));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastankhsla), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(128, DisplayUnit.BUCKETS)));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER, ElectroTextUtils.tooltip("rotaryunifier.use1"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER, ElectroTextUtils.tooltip("rotaryunifier.use2"));
 
 		// generators
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.solarpanel), ElectroTextUtils.voltageTooltip(120));

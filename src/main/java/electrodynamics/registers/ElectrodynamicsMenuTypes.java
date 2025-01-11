@@ -70,6 +70,7 @@ public class ElectrodynamicsMenuTypes {
 	public static final DeferredHolder<MenuType<?>, MenuType<ContainerChemicalReactor>> CONTAINER_CHEMICALREACTOR = register("chemicalreactor", ContainerChemicalReactor::new);
 	public static final DeferredHolder<MenuType<?>, MenuType<ContainerCreativeGasSource>> CONTAINER_CREATIVEGASSOURCE = register("creativegassource", ContainerCreativeGasSource::new);
 	public static final DeferredHolder<MenuType<?>, MenuType<ContainerElectrolosisChamber>> CONTAINER_ELECTROLOSISCHAMBER = register("electrolosischamber", ContainerElectrolosisChamber::new);
+	public static final DeferredHolder<MenuType<?>, MenuType<ContainerRotaryUnifier>> CONTAINER_ROTARYUNIFIER = register("rotaryunifier", ContainerRotaryUnifier::new);
 
 	private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>,MenuType<T>> register(String id, MenuSupplier<T> supplier) {
 		return MENU_TYPES.register(id, () -> new MenuType<>(supplier, FeatureFlags.DEFAULT_FLAGS));

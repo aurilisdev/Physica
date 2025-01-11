@@ -307,6 +307,8 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
                 //
                 90, 0, true);
 
+        horrRotatedBlock(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER, existingBlock(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER), true);
+
 
         genWires();
         genFluidPipes();

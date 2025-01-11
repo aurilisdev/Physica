@@ -48,11 +48,13 @@ import electrodynamics.prefab.item.ItemElectric;
 import electrodynamics.prefab.utilities.object.TransferPack;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ArmorItem.Type;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -77,6 +79,15 @@ public class ElectrodynamicsItems {
 	});
 
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_CHEMICALREACTOR = ITEMS.register("chemicalreactor", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR.get(), new Item.Properties().stacksTo(64), ElectrodynamicsCreativeTabs.MAIN));
+	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_ROTARYUNIFIER = ITEMS.register("rotaryunifier", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN) {
+		@Override
+		public boolean isAllowedInCreativeTab(CreativeModeTab tab) {
+			if(ModList.get().isLoaded(References.MEKANISM_ID)) {
+				return super.isAllowedInCreativeTab(tab);
+			}
+			return false;
+		}
+	});
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_STEELSCAFFOLD = ITEMS.register("steelscaffold", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING.get(), new Item.Properties().stacksTo(64), ElectrodynamicsCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_FRAME = ITEMS.register("frame", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_FRAME.get(), new Item.Properties().stacksTo(64), null));
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_FRAMECORNER = ITEMS.register("framecorner", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER.get(), new Item.Properties().stacksTo(64), null));

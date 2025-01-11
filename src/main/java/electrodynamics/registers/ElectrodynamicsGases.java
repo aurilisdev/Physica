@@ -7,6 +7,7 @@ import electrodynamics.api.gas.Gas;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -27,7 +28,7 @@ public class ElectrodynamicsGases {
     public static final DeferredHolder<Gas, Gas> EMPTY = GASES.register("empty", () -> new Gas(new Holder.Direct<>(Items.AIR), ElectroTextUtils.gas("empty")));
     public static final DeferredHolder<Gas, Gas> HYDROGEN = GASES.register("hydrogen", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectroTextUtils.gas("hydrogen"), 33, ElectrodynamicsFluids.FLUID_HYDROGEN));
     public static final DeferredHolder<Gas, Gas> OXYGEN = GASES.register("oxygen", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectroTextUtils.gas("oxygen"), 90, ElectrodynamicsFluids.FLUID_OXYGEN));
-    public static final DeferredHolder<Gas, Gas> STEAM = GASES.register("steam", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectroTextUtils.gas("steam"), 373, new Holder.Direct<>(Fluids.WATER)));
+    public static final DeferredHolder<Gas, Gas> STEAM = GASES.register("steam", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectroTextUtils.gas("steam"), 373, BuiltInRegistries.FLUID.wrapAsHolder(Fluids.WATER)));
     public static final DeferredHolder<Gas, Gas> NITROGEN = GASES.register("nitrogen", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectroTextUtils.gas("nitrogen")));
     public static final DeferredHolder<Gas, Gas> CARBON_DIOXIDE = GASES.register("carbondioxide", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectroTextUtils.gas("carbondioxide")));
     public static final DeferredHolder<Gas, Gas> ARGON = GASES.register("argon", () -> new Gas(ElectrodynamicsItems.ITEM_PORTABLECYLINDER, ElectroTextUtils.gas("argon")));

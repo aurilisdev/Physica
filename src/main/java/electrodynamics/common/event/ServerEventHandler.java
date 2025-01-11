@@ -23,7 +23,9 @@ import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
 import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
 import electrodynamics.common.reloadlistener.ThermoelectricGeneratorHeatRegister;
+import electrodynamics.compatibility.mekanism.MekanismHandler;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -98,6 +100,11 @@ public class ServerEventHandler {
 		event.addListener(CoalGeneratorFuelRegister.INSTANCE);
 		event.addListener(ThermoelectricGeneratorHeatRegister.INSTANCE);
 		event.addListener(GasCollectorChromoCardsRegister.INSTANCE);
+
+		if(ModList.get().isLoaded(References.MEKANISM_ID)) {
+			MekanismHandler.addDataListener(event);
+		}
+
 	}
 
 	@SubscribeEvent

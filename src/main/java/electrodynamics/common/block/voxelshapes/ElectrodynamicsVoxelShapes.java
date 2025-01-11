@@ -1145,6 +1145,66 @@ public class ElectrodynamicsVoxelShapes {
             //
     );
 
+    public static final VoxelShapeProvider ROTARY_UNIFIER = VoxelShapeProvider.createDirectional(
+            //
+            Direction.EAST,
+            //
+            Stream.of(
+                    //
+                    Stream.of(
+                            //
+                            Block.box(0, 0, 0, 16, 5, 16),
+                            //
+                            Block.box(0, 15, 0, 16, 16, 16),
+                            //
+                            Block.box(1, 5, 1, 15, 15, 7),
+                            //
+                            Block.box(1, 5, 9, 15, 15, 15),
+                            //
+                            Block.box(3, 5, 7, 13, 15, 9),
+                            //
+                            Block.box(4, 5, 0, 12, 12, 1),
+                            //
+                            Block.box(4, 5, 15, 12, 12, 16),
+                            //
+                            Block.box(0, 13, 0, 16, 14, 1),
+                            //
+                            Block.box(0, 13, 15, 16, 14, 16),
+                            //
+                            Block.box(0, 13, 1, 1, 14, 15),
+                            //
+                            Block.box(15, 13, 1, 16, 14, 15)
+                            //
+                    ).reduce(Shapes::or).get(),
+                    //
+                    Stream.of(
+                            //
+                            Block.box(1.5, 6, 7, 2.5, 7, 9),
+                            //
+                            Block.box(1.5, 8, 7, 2.5, 9, 9),
+                            //
+                            Block.box(1.5, 10, 7, 2.5, 11, 9),
+                            //
+                            Block.box(1.5, 12, 7, 2.5, 13, 9)
+                            //
+                    ).reduce(Shapes::or).get(),
+                    //
+                    Stream.of(
+                            //
+                            Block.box(13.5, 6, 7, 14.5, 7, 9),
+                            //
+                            Block.box(13.5, 8, 7, 14.5, 9, 9),
+                            //
+                            Block.box(13.5, 10, 7, 14.5, 11, 9),
+                            //
+                            Block.box(13.5, 12, 7, 14.5, 13, 9)
+                            //
+                    ).reduce(Shapes::or).get()
+                    //
+            ).reduce(Shapes::or).get()
+            //
+    );
+
     public static final VoxelShapeProvider SOLAR_PANEL = VoxelShapeProvider.createOmni(
             //
             Stream.of(

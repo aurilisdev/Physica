@@ -10,6 +10,7 @@ import electrodynamics.common.block.connect.BlockLogisticalWire;
 import electrodynamics.common.block.connect.BlockWire;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.tile.TileMultiSubnode;
+import electrodynamics.common.tile.compatibility.TileRotaryUnifier;
 import electrodynamics.common.tile.electricitygrid.TileCircuitBreaker;
 import electrodynamics.common.tile.electricitygrid.TileCircuitMonitor;
 import electrodynamics.common.tile.electricitygrid.TileCurrentRegulator;
@@ -196,4 +197,5 @@ public class ElectrodynamicsTiles {
 
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileMultiblockSlave>> TILE_MULTIBLOCK_SLAVE = BLOCK_ENTITY_TYPES.register("multiblockslave", () -> new BlockEntityType<>(TileMultiblockSlave::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get()), null));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileElectrolosisChamber>> TILE_ELECTROLOSISCHAMBER = BLOCK_ENTITY_TYPES.register(SubtypeMachine.electrolosischamber.tag(), () -> new BlockEntityType<>(TileElectrolosisChamber::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber)), null));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileRotaryUnifier>> TILE_ROTARYUNIFIER = BLOCK_ENTITY_TYPES.register("rotaryunifier", () -> new BlockEntityType<>(TileRotaryUnifier::new, Sets.newHashSet(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER.get()), null));
 }
