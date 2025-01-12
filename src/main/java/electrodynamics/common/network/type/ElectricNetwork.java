@@ -1,16 +1,11 @@
 package electrodynamics.common.network.type;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
-import electrodynamics.api.network.cable.type.IConductor;
 import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.network.NetworkRegistry;
+import electrodynamics.common.tile.electricitygrid.GenericTileWire;
 import electrodynamics.prefab.network.AbstractNetwork;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.Scheduler;
@@ -21,7 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
-public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, BlockEntity, TransferPack> implements ICapabilityElectrodynamic {
+public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWire, TransferPack, ElectricNetwork> implements ICapabilityElectrodynamic {
 
     public static final int MAXIMUM_OVERLOAD_PERIOD_TICKS = 20;
 
@@ -30,14 +25,14 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
     private double voltage = 0.0;
     private double lastEnergyLoss = 0;
     private double lastVoltage = 0.0;
-    private HashSet<BlockEntity> producersToIgnore = new HashSet<>();
+    private final HashSet<BlockEntity> producersToIgnore = new HashSet<>();
     private double transferBuffer = 0;
     private double maxTransferBuffer = 0;
 
     private double minimumVoltage = -1.0D;
 
-    private HashMap<BlockEntity, HashMap<Direction, TransferPack>> lastTransfer = new HashMap<>();
-    private HashSet<BlockEntity> noUsage = new HashSet<>();
+    private final HashMap<BlockEntity, HashMap<Direction, TransferPack>> lastTransfer = new HashMap<>();
+    private final HashSet<BlockEntity> noUsage = new HashSet<>();
 
     private boolean locked = false;
 
@@ -45,56 +40,23 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
 
     // private long numTicks = 0;
 
-    public double getLastEnergyLoss() {
-        return lastEnergyLoss;
-    }
-
-    @Override
-    public double getVoltage() {
-        return voltage;
-    }
-
-    public double getActiveVoltage() {
-        return lastVoltage;
-    }
-
-    public double getResistance() {
-        return resistance;
-    }
-
-    public ElectricNetwork() {
-        this(new HashSet<IConductor>());
-    }
-
-    public ElectricNetwork(Collection<? extends IConductor> varCables) {
+    public ElectricNetwork(Collection<GenericTileWire> varCables) {
         conductorSet.addAll(varCables);
         NetworkRegistry.register(this);
     }
 
-    public ElectricNetwork(Set<AbstractNetwork<IConductor, SubtypeWire, BlockEntity, TransferPack>> networks) {
-        for (AbstractNetwork<IConductor, SubtypeWire, BlockEntity, TransferPack> net : networks) {
-            if (net != null) {
-                conductorSet.addAll(net.conductorSet);
-                net.deregister();
-            }
-        }
-        refresh();
-        NetworkRegistry.register(this);
-    }
-
-    public ElectricNetwork(Set<ElectricNetwork> networks, boolean special) {
+    public ElectricNetwork(Set<ElectricNetwork> networks) {
         for (ElectricNetwork net : networks) {
             if (net != null) {
                 conductorSet.addAll(net.conductorSet);
                 net.deregister();
             }
         }
-        refresh();
         NetworkRegistry.register(this);
     }
 
     @Override
-    public void refresh() {
+    public void refreshNewNetwork() {
         ticksOverloaded = 0;
         resistance = 0;
         energyLoss = 0;
@@ -110,7 +72,7 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
         lastTransfer.clear();
         noUsage.clear();
 
-        super.refresh();
+        super.refreshNewNetwork();
     }
 
     private TransferPack sendToReceivers(TransferPack maxTransfer, ArrayList<BlockEntity> ignored, boolean debug) {
@@ -134,6 +96,7 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
             double localUsage = 0;
             if (acceptorInputMap.containsKey(receiver)) {
                 boolean shouldRemove = true;
+                acceptorInputMap.get(receiver);
                 for (Direction connection : acceptorInputMap.get(receiver)) {
                     TransferPack pack = ElectricityUtils.receivePower(receiver, connection, TransferPack.joulesVoltage(maxTransfer.getJoules(), maxTransfer.getVoltage()), true);
                     if (pack.getJoules() != 0) {
@@ -201,7 +164,7 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
         }
 
         for (SubtypeWire index : checkList) {
-            for (IConductor conductor : conductorTypeMap.get(index)) {
+            for (GenericTileWire conductor : conductorTypeMap.get(index)) {
                 Scheduler.schedule(1, conductor::destroyViolently);
             }
         }
@@ -210,9 +173,14 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
     }
 
     @Override
-    public void updateConductorStatistics(IConductor cable) {
-        super.updateConductorStatistics(cable);
-        resistance += cable.getWireType().resistance;
+    public void updateConductorStatistics(GenericTileWire cable, boolean removed) {
+        super.updateConductorStatistics(cable, removed);
+
+        if (removed) {
+            resistance -= cable.getCableType().resistance;
+        } else {
+            resistance += cable.getCableType().resistance;
+        }
 
     }
 
@@ -233,9 +201,15 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
     }
 
     @Override
-    public void updateStatistics() {
+    public void resetReceiverStatistics() {
+        minimumVoltage = -1;
+        super.resetReceiverStatistics();
+    }
+
+    @Override
+    public void resetConductorStatistics() {
         resistance = 0;
-        super.updateStatistics();
+        super.resetConductorStatistics();
     }
 
     public void addProducer(BlockEntity tile, double d, boolean isEnergyReceiver) {
@@ -253,7 +227,7 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
          * Electrodynamics.LOGGER.info("ticks " + numTicks); Electrodynamics.LOGGER.info("length " + conductorSet.size());
          * Electrodynamics.LOGGER.info("voltage " + voltage); Electrodynamics.LOGGER.info("trans " + transferBuffer);
          * Electrodynamics.LOGGER.info("max trans " + maxTransferBuffer);
-         * 
+         *
          * }
          */
         lastTransfer.clear();
@@ -292,7 +266,9 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
 
         maxTransferBuffer = getConnectedLoad(new LoadProfile(TransferPack.joulesVoltage(transmittedLastTick, lastVoltage), TransferPack.joulesVoltage(transmittedLastTick, lastVoltage)), Direction.UP).getJoules();
 
-        Iterator<IConductor> it = conductorSet.iterator();
+        /*
+
+        Iterator<GenericTileWire> it = conductorSet.iterator();
         boolean broken = false;
         while (it.hasNext()) {
             IConductor conductor = it.next();
@@ -307,6 +283,8 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
         if (getSize() == 0) {
             deregister();
         }
+
+         */
         // Electrodynamics.LOGGER.info("");
         // Electrodynamics.LOGGER.info("End of tick");
         // Electrodynamics.LOGGER.info("length " + conductorSet.size());
@@ -316,51 +294,25 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
         // Electrodynamics.LOGGER.info("");
         /*
          * if (conductorSet.size() > 10) { Electrodynamics.LOGGER.info(""); numTicks++;
-         * 
+         *
          * }
          */
 
     }
 
     @Override
-    public boolean isConductor(BlockEntity tile, IConductor requesterCable) {
+    public boolean isConductor(BlockEntity tile, GenericTileWire requesterCable) {
         return ElectricityUtils.isConductor(tile, requesterCable);
     }
 
     @Override
-    public boolean isConductorClass(BlockEntity tile) {
-        return tile instanceof IConductor;
-    }
-
-    @Override
-    public boolean isAcceptor(BlockEntity acceptor, Direction orientation) {
-        return ElectricityUtils.isElectricReceiver(acceptor, orientation.getOpposite());
-    }
-
-    @Override
-    public AbstractNetwork<IConductor, SubtypeWire, BlockEntity, TransferPack> createInstance() {
-        return new ElectricNetwork();
-    }
-
-    @Override
-    public AbstractNetwork<IConductor, SubtypeWire, BlockEntity, TransferPack> createInstanceConductor(Set<IConductor> conductors) {
+    public ElectricNetwork createInstanceConductor(Set<GenericTileWire> conductors) {
         return new ElectricNetwork(conductors);
-    }
-
-    @Override
-    public AbstractNetwork<IConductor, SubtypeWire, BlockEntity, TransferPack> createInstance(Set<AbstractNetwork<IConductor, SubtypeWire, BlockEntity, TransferPack>> networks) {
-        return new ElectricNetwork(networks);
-
     }
 
     @Override
     public SubtypeWire[] getConductorTypes() {
         return SubtypeWire.values();
-    }
-
-    @Override
-    public boolean canConnect(BlockEntity acceptor, Direction orientation) {
-        return ElectricityUtils.isElectricReceiver(acceptor, orientation.getOpposite());
     }
 
     @Override
@@ -392,6 +344,23 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
     @Override
     public double getAmpacity() {
         return networkMaxTransfer;
+    }
+
+    public double getLastEnergyLoss() {
+        return lastEnergyLoss;
+    }
+
+    @Override
+    public double getVoltage() {
+        return voltage;
+    }
+
+    public double getActiveVoltage() {
+        return lastVoltage;
+    }
+
+    public double getResistance() {
+        return resistance;
     }
 
     @Override
@@ -472,4 +441,8 @@ public class ElectricNetwork extends AbstractNetwork<IConductor, SubtypeWire, Bl
         return true;
     }
 
+    @Override
+    public TransferPack emit(TransferPack transfer, ArrayList<BlockEntity> ignored, boolean debug) {
+        throw new UnsupportedOperationException("No");
+    }
 }

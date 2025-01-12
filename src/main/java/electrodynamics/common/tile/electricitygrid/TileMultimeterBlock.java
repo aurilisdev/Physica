@@ -1,7 +1,6 @@
 package electrodynamics.common.tile.electricitygrid;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic.LoadProfile;
-import electrodynamics.api.network.cable.type.IConductor;
 import electrodynamics.common.network.type.ElectricNetwork;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
@@ -43,15 +42,13 @@ public class TileMultimeterBlock extends GenericTile {
 			if (input == null) {
 				input = new CachedTileOutput(level, worldPosition.relative(facing));
 			}
-			if (input.getSafe() instanceof IConductor) {
-				IConductor cond = input.getSafe();
-				if (cond.getAbstractNetwork() instanceof ElectricNetwork net) {
-					joules.set(net.getActiveTransmitted());
-					voltage.set(net.getActiveVoltage());
-					minVoltage.set(net.getMinimumVoltage());
-					resistance.set(net.getResistance());
-					loss.set(net.getLastEnergyLoss());
-				}
+			if (input.getSafe() instanceof GenericTileWire cond) {
+				ElectricNetwork network = cond.getNetwork();
+				joules.set(network.getActiveTransmitted());
+				voltage.set(network.getActiveVoltage());
+				minVoltage.set(network.getMinimumVoltage());
+				resistance.set(network.getResistance());
+				loss.set(network.getLastEnergyLoss());
 			} else {
 				joules.set(0.0);
 				voltage.set(0.0);

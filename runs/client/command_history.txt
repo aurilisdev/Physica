@@ -37,3 +37,7 @@
 /time set night
 /time set mid
 /time set midnight
+/tps
+/neoforge tps
+/setblock 11 -62 -5 air
+/setblock 11 -61 -5 air

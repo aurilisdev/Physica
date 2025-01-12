@@ -6,8 +6,6 @@ import com.mojang.serialization.MapCodec;
 
 import electrodynamics.api.References;
 import electrodynamics.api.electricity.IInsulator;
-import electrodynamics.api.network.cable.IRefreshableCable;
-import electrodynamics.api.network.cable.type.IConductor;
 import electrodynamics.common.block.connect.util.AbstractRefreshingConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
@@ -21,7 +19,6 @@ import electrodynamics.common.tile.electricitygrid.GenericTileWire;
 import electrodynamics.common.tile.electricitygrid.TileLogisticalWire;
 import electrodynamics.common.tile.electricitygrid.TileWire;
 import electrodynamics.common.tile.electricitygrid.transformer.TileGenericTransformer;
-import electrodynamics.prefab.tile.types.GenericConnectTile;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.Scheduler;
 import electrodynamics.prefab.utilities.math.Color;
@@ -60,7 +57,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.common.Tags;
 
-public class BlockWire extends AbstractRefreshingConnectBlock {
+public class BlockWire extends AbstractRefreshingConnectBlock<GenericTileWire> {
 
     public static final HashSet<Block> WIRES = new HashSet<>();
 
@@ -355,14 +352,10 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
     }
 
     @Override
-    public BlockState refreshConnections(BlockState otherState, BlockEntity otherTile, BlockState state, BlockEntity thisTile, Direction dir) {
-        if(!(thisTile instanceof GenericConnectTile)) {
-            return state;
-        }
-        GenericConnectTile thisConnect = (GenericConnectTile) thisTile;
+    public EnumConnectType getConnection(BlockState otherState, BlockEntity otherTile, GenericTileWire thisConductor, Direction dir) {
         EnumConnectType connection = EnumConnectType.NONE;
-        if (otherTile instanceof IConductor conductor) {
-            if(conductor.getWireType().isDefaultColor() || wire.isDefaultColor() || conductor.getWireColor() == wire.color) {
+        if (otherTile instanceof GenericTileWire conductor) {
+            if(conductor.getCableType().isDefaultColor() || wire.isDefaultColor() || conductor.getWireColor() == wire.color) {
                 connection = EnumConnectType.WIRE;
             } else {
                 connection = EnumConnectType.NONE;
@@ -370,8 +363,7 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
         } else if (ElectricityUtils.isElectricReceiver(otherTile, dir.getOpposite()) || checkRedstone(otherState)) {
             connection = EnumConnectType.INVENTORY;
         }
-        thisConnect.writeConnection(dir, connection);
-        return state;
+        return connection;
     }
 
     private boolean checkRedstone(BlockState otherState) {
@@ -379,8 +371,8 @@ public class BlockWire extends AbstractRefreshingConnectBlock {
     }
 
     @Override
-    public IRefreshableCable getCableIfValid(BlockEntity tile) {
-        if (tile instanceof IConductor conductor && (conductor.getWireType().isDefaultColor() || wire.isDefaultColor() || conductor.getWireColor() == wire.color)) {
+    public GenericTileWire getCableIfValid(BlockEntity tile) {
+        if (tile instanceof GenericTileWire conductor && (conductor.getCableType().isDefaultColor() || wire.isDefaultColor() || conductor.getWireColor() == wire.color)) {
             return conductor;
         }
         return null;

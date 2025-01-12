@@ -21,7 +21,7 @@ public class TileFluidPipe extends GenericTileFluidPipe {
 	public SubtypeFluidPipe pipe = null;
 
 	@Override
-	public SubtypeFluidPipe getPipeType() {
+	public SubtypeFluidPipe getCableType() {
 		if (pipe == null) {
 			pipe = ((BlockFluidPipe) getBlockState().getBlock()).pipe;
 		}
@@ -30,7 +30,7 @@ public class TileFluidPipe extends GenericTileFluidPipe {
 
 	@Override
 	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		compound.putInt("ord", getPipeType().ordinal());
+		compound.putInt("ord", getCableType().ordinal());
 		super.saveAdditional(compound, registries);
 	}
 
@@ -40,4 +40,8 @@ public class TileFluidPipe extends GenericTileFluidPipe {
 		pipe = SubtypeFluidPipe.values()[compound.getInt("ord")];
 	}
 
+	@Override
+	public void destroyViolently() {
+
+	}
 }

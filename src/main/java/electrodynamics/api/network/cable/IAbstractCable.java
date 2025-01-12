@@ -1,19 +1,24 @@
 package electrodynamics.api.network.cable;
 
 import electrodynamics.prefab.network.AbstractNetwork;
+import electrodynamics.prefab.tile.types.GenericRefreshingConnectTile;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
-public interface IAbstractCable {
+public interface IAbstractCable<CONDUCTORTYPE, T extends AbstractNetwork<? extends GenericRefreshingConnectTile<?, ?, ?>, ?, ?, ?>> {
 
 	void removeFromNetwork();
 
-	AbstractNetwork<?, ?, ?, ?> getAbstractNetwork();
+	T getNetwork();
 
-	void setNetwork(AbstractNetwork<?, ?, ?, ?> aValueNetwork);
+	void createNetworkFromThis();
 
-	BlockEntity[] getAdjacentConnections();
+	void setNetwork(T aValueNetwork);
 
-	Object getConductorType();
+	BlockEntity[] getConectedRecievers();
+
+	BlockEntity[] getConnectedCables();
+
+	CONDUCTORTYPE getCableType();
 
 	double getMaxTransfer();
 }

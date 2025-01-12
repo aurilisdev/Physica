@@ -29,7 +29,7 @@ public class TileWire extends GenericTileWire {
 	}
 
 	@Override
-	public SubtypeWire getWireType() {
+	public SubtypeWire getCableType() {
 		if (wire == null) {
 			wire = ((BlockWire) getBlockState().getBlock()).wire;
 		}
@@ -46,7 +46,7 @@ public class TileWire extends GenericTileWire {
 
 	@Override
 	protected void saveAdditional(CompoundTag compound, HolderLookup.Provider registries) {
-		compound.putInt("ord", getWireType().ordinal());
+		compound.putInt("ord", getCableType().ordinal());
 		compound.putInt("color", getWireColor().ordinal());
 		super.saveAdditional(compound, registries);
 	}
