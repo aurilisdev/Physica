@@ -5,22 +5,17 @@ import java.util.HashSet;
 import com.mojang.serialization.MapCodec;
 
 import electrodynamics.api.gas.Gas;
+import electrodynamics.api.network.cable.type.IGasPipe;
 import electrodynamics.common.block.connect.util.AbstractRefreshingConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
-import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
-import electrodynamics.common.block.subtype.SubtypeGasPipe.InsulationMaterial;
 import electrodynamics.common.network.type.GasNetwork;
 import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.common.tile.pipelines.gas.GenericTileGasPipe;
 import electrodynamics.common.tile.pipelines.gas.TileGasPipe;
-import electrodynamics.prefab.utilities.Scheduler;
-import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -31,10 +26,10 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock<GenericTileGasP
 
     public static final HashSet<Block> PIPESET = new HashSet<>();
 
-    public final SubtypeGasPipe pipe;
+    public final IGasPipe pipe;
 
-    public BlockGasPipe(SubtypeGasPipe pipe) {
-        super(pipe.material.sound(pipe.soundType).strength(0.15f).dynamicShape().noOcclusion(), pipe.radius);
+    public BlockGasPipe(IGasPipe pipe) {
+        super(pipe.getProperties().sound(pipe.getSoundType()).strength(0.15f).dynamicShape().noOcclusion(), pipe.getRadius());
 
         this.pipe = pipe;
 
@@ -42,6 +37,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock<GenericTileGasP
 
     }
 
+    /*
     @Override
     public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return pipe.insulationMaterial.canCombust;
@@ -71,6 +67,8 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock<GenericTileGasP
         Scheduler.schedule(5, () -> world.setBlockAndUpdate(pos, ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(SubtypeGasPipe.getPipeForType(pipe.pipeMaterial, InsulationMaterial.NONE)).defaultBlockState()));
     }
 
+     */
+
     @Override
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
         TileGasPipe tile = (TileGasPipe) worldIn.getBlockEntity(pos);
@@ -79,7 +77,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock<GenericTileGasP
         }
         GasNetwork network = tile.getNetwork();
 
-        double multipler = pipe.insulationMaterial == InsulationMaterial.NONE ? 1.0 : 1.2;
+        double multipler = 1.0;//pipe.insulationMaterial == InsulationMaterial.NONE ? 1.0 : 1.2;
 
         if (network.temperatureOfTransmitted >= Gas.MINIMUM_HEAT_BURN_TEMP * multipler) {
 

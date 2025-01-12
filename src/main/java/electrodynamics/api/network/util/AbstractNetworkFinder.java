@@ -12,15 +12,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class AbstractNetworkFinder<C extends GenericRefreshingConnectTile<T, C, ?>, T, P> {
 	private final Level level;
-	private final C reqester;
 	private final BlockPos start;
 	private final AbstractNetwork<C, T, P, ?> net;
 	private final HashSet<C> iteratedTiles = new HashSet<>();
 	private final HashSet<BlockPos> toIgnore = new HashSet<>();
 
-	public AbstractNetworkFinder(Level world, C requester, BlockPos start, AbstractNetwork<C, T, P, ?> net, BlockPos... ignore) {
+	public AbstractNetworkFinder(Level world, BlockPos start, AbstractNetwork<C, T, P, ?> net, BlockPos... ignore) {
 		level = world;
-		this.reqester = requester;
 		this.start = start;
 		this.net = net;
 		if (ignore.length > 0) {
@@ -28,9 +26,10 @@ public class AbstractNetworkFinder<C extends GenericRefreshingConnectTile<T, C, 
 		}
 	}
 
-	private void loopAll(C reqester, BlockPos location) {
-		if (net.isConductor(reqester, reqester)) {
-			iteratedTiles.add(reqester);
+	private void loopAll(BlockPos location) {
+		BlockEntity curr = level.getBlockEntity(location);
+		if (net.isConductor(curr, (C) curr)) {
+			iteratedTiles.add((C) curr);
 		}
 		for (Direction direction : Direction.values()) {
 			BlockPos relative = new BlockPos(location).relative(direction);
@@ -38,7 +37,7 @@ public class AbstractNetworkFinder<C extends GenericRefreshingConnectTile<T, C, 
 				continue;
 			}
 			BlockEntity tileEntity = level.getBlockEntity(relative);
-			if(tileEntity == null || tileEntity.isRemoved() || !net.isConductor(tileEntity, reqester)) {
+			if(iteratedTiles.contains(tileEntity) || !net.isConductor(tileEntity, (C) curr)) {
 				continue;
 			}
 			loopAll((C) tileEntity);
@@ -53,7 +52,6 @@ public class AbstractNetworkFinder<C extends GenericRefreshingConnectTile<T, C, 
 				continue;
 			}
 			BlockPos pos = connection.getBlockPos();
-
 			if (iteratedTiles.contains(connection) || toIgnore.contains(pos) || !net.isConductor(connection, cable)) {
 				continue;
 			}
@@ -62,7 +60,7 @@ public class AbstractNetworkFinder<C extends GenericRefreshingConnectTile<T, C, 
 	}
 
 	public HashSet<C> exploreNetwork() {
-		loopAll(reqester, start);
+		loopAll(start);
 		return iteratedTiles;
 	}
 }

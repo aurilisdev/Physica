@@ -1,7 +1,7 @@
 package electrodynamics.common.tile.pipelines.fluid;
 
 import com.google.common.collect.Lists;
-import electrodynamics.common.block.subtype.SubtypeFluidPipe;
+import electrodynamics.api.network.cable.type.IFluidPipe;
 import electrodynamics.common.network.type.FluidNetwork;
 import electrodynamics.prefab.tile.types.GenericRefreshingConnectTile;
 import net.minecraft.core.BlockPos;
@@ -14,7 +14,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import java.util.Set;
 
-public abstract class GenericTileFluidPipe extends GenericRefreshingConnectTile<SubtypeFluidPipe, GenericTileFluidPipe, FluidNetwork> {
+public abstract class GenericTileFluidPipe extends GenericRefreshingConnectTile<IFluidPipe, GenericTileFluidPipe, FluidNetwork> {
 
     private final IFluidHandler[] handler = new IFluidHandler[6];
 
@@ -84,7 +84,7 @@ public abstract class GenericTileFluidPipe extends GenericRefreshingConnectTile<
 
     @Override
     public double getMaxTransfer() {
-        return getCableType().maxTransfer;
+        return getCableType().getMaxTransfer();
     }
 
     @Override

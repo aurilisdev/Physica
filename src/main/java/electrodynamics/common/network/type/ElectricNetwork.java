@@ -3,7 +3,7 @@ package electrodynamics.common.network.type;
 import java.util.*;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
-import electrodynamics.common.block.subtype.SubtypeWire;
+import electrodynamics.api.network.cable.type.IWire;
 import electrodynamics.common.network.NetworkRegistry;
 import electrodynamics.common.tile.electricitygrid.GenericTileWire;
 import electrodynamics.prefab.network.AbstractNetwork;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 
-public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWire, TransferPack, ElectricNetwork> implements ICapabilityElectrodynamic {
+public class ElectricNetwork extends AbstractNetwork<GenericTileWire, IWire, TransferPack, ElectricNetwork> implements ICapabilityElectrodynamic {
 
     public static final int MAXIMUM_OVERLOAD_PERIOD_TICKS = 20;
 
@@ -31,6 +31,8 @@ public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWir
 
     private double minimumVoltage = -1.0D;
 
+
+    private final HashMap<Long, HashSet<GenericTileWire>> ampacityToWireMap = new HashMap<>();
     private final HashMap<BlockEntity, HashMap<Direction, TransferPack>> lastTransfer = new HashMap<>();
     private final HashSet<BlockEntity> noUsage = new HashSet<>();
 
@@ -71,6 +73,7 @@ public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWir
 
         lastTransfer.clear();
         noUsage.clear();
+        ampacityToWireMap.clear();
 
         super.refreshNewNetwork();
     }
@@ -143,14 +146,14 @@ public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWir
             return false;
         }
 
-        HashSet<SubtypeWire> checkList = new HashSet<>();
-        for (SubtypeWire type : SubtypeWire.values()) {
-            if (type.conductor.ampacity <= transmittedLastTick / voltage * 20 && type.conductor.ampacity <= transmittedThisTick / voltage * 20) {
-                checkList.add(type);
+        HashSet<GenericTileWire> overloaded = new HashSet<>();
+        for (Map.Entry<Long, HashSet<GenericTileWire>> entry : ampacityToWireMap.entrySet()) {
+            if (entry.getKey() <= transmittedLastTick / voltage * 20 && entry.getKey() <= transmittedThisTick / voltage * 20) {
+                overloaded.addAll(entry.getValue());
             }
         }
 
-        if (checkList.isEmpty()) {
+        if (overloaded.isEmpty()) {
 
             ticksOverloaded = 0;
             return false;
@@ -163,10 +166,8 @@ public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWir
             return true;
         }
 
-        for (SubtypeWire index : checkList) {
-            for (GenericTileWire conductor : conductorTypeMap.get(index)) {
-                Scheduler.schedule(1, conductor::destroyViolently);
-            }
+        for (GenericTileWire wire : overloaded) {
+            Scheduler.schedule(1, wire::destroyViolently);
         }
         return true;
 
@@ -177,9 +178,29 @@ public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWir
         super.updateConductorStatistics(cable, removed);
 
         if (removed) {
-            resistance -= cable.getCableType().resistance;
+
+            long ampacity = cable.getCableType().getAmpacity();
+
+            if(ampacityToWireMap.containsKey(ampacity)) {
+                HashSet<GenericTileWire> set = ampacityToWireMap.get(ampacity);
+                set.remove(cable);
+                ampacityToWireMap.put(ampacity, set);
+            }
+
+
+            resistance -= cable.getCableType().getResistance();
         } else {
-            resistance += cable.getCableType().resistance;
+            resistance += cable.getCableType().getResistance();
+
+            long ampacity = cable.getCableType().getAmpacity();
+
+            HashSet<GenericTileWire> set = ampacityToWireMap.getOrDefault(ampacity, new HashSet<>());
+
+            set.add(cable);
+
+            ampacityToWireMap.put(ampacity, set);
+
+
         }
 
     }
@@ -209,6 +230,7 @@ public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWir
     @Override
     public void resetConductorStatistics() {
         resistance = 0;
+        ampacityToWireMap.clear();
         super.resetConductorStatistics();
     }
 
@@ -217,6 +239,12 @@ public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWir
             producersToIgnore.add(tile);
         }
         voltage = Math.max(voltage, d);
+    }
+
+    @Override
+    public void deregister() {
+        ampacityToWireMap.clear();
+        super.deregister();
     }
 
     @Override
@@ -271,20 +299,22 @@ public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWir
         Iterator<GenericTileWire> it = conductorSet.iterator();
         boolean broken = false;
         while (it.hasNext()) {
-            IConductor conductor = it.next();
+            GenericTileWire conductor = it.next();
             if (conductor instanceof BlockEntity entity && entity.isRemoved() || conductor.getNetwork() != this) {
                 broken = true;
                 break;
             }
         }
         if (broken) {
-            refresh();
+            refreshNewNetwork();
         }
+
+         */
         if (getSize() == 0) {
             deregister();
         }
 
-         */
+
         // Electrodynamics.LOGGER.info("");
         // Electrodynamics.LOGGER.info("End of tick");
         // Electrodynamics.LOGGER.info("length " + conductorSet.size());
@@ -308,11 +338,6 @@ public class ElectricNetwork extends AbstractNetwork<GenericTileWire, SubtypeWir
     @Override
     public ElectricNetwork createInstanceConductor(Set<GenericTileWire> conductors) {
         return new ElectricNetwork(conductors);
-    }
-
-    @Override
-    public SubtypeWire[] getConductorTypes() {
-        return SubtypeWire.values();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package electrodynamics.common.tile.pipelines.gas;
 
+import electrodynamics.api.network.cable.type.IGasPipe;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
 import electrodynamics.common.network.type.GasNetwork;
 import electrodynamics.prefab.tile.types.GenericRefreshingConnectTile;
@@ -19,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Set;
 
-public abstract class GenericTileGasPipe extends GenericRefreshingConnectTile<SubtypeGasPipe, GenericTileGasPipe, GasNetwork> {
+public abstract class GenericTileGasPipe extends GenericRefreshingConnectTile<IGasPipe, GenericTileGasPipe, GasNetwork> {
     private final IGasHandler[] capability = new IGasHandler[6];
 
     public GenericTileGasPipe(BlockEntityType<?> tileEntityTypeIn, BlockPos worldPos, BlockState blockState) {
@@ -99,7 +100,7 @@ public abstract class GenericTileGasPipe extends GenericRefreshingConnectTile<Su
 
     @Override
     public double getMaxTransfer() {
-        return getCableType().maxTransfer;
+        return getCableType().getMaxTransfer();
     }
 
     @Override

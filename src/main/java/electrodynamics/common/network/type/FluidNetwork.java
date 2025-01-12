@@ -9,7 +9,7 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 
-import electrodynamics.common.block.subtype.SubtypeFluidPipe;
+import electrodynamics.api.network.cable.type.IFluidPipe;
 import electrodynamics.common.network.NetworkRegistry;
 import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.common.tile.pipelines.fluid.GenericTileFluidPipe;
@@ -19,7 +19,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.fluids.FluidStack;
 
-public class FluidNetwork extends AbstractNetwork<GenericTileFluidPipe, SubtypeFluidPipe, FluidStack, FluidNetwork> {
+public class FluidNetwork extends AbstractNetwork<GenericTileFluidPipe, IFluidPipe, FluidStack, FluidNetwork> {
 
     public HashMap<Integer, HashSet<TileFluidPipePump>> priorityPumpMap = new HashMap<>();
 
@@ -254,8 +254,8 @@ public class FluidNetwork extends AbstractNetwork<GenericTileFluidPipe, SubtypeF
 
         if (!remove) {
 
-            if (networkMaxTransfer == 0 || cable.getCableType().maxTransfer < networkMaxTransfer) {
-                networkMaxTransfer = cable.getCableType().maxTransfer;
+            if (networkMaxTransfer == 0 || cable.getCableType().getMaxTransfer() < networkMaxTransfer) {
+                networkMaxTransfer = cable.getCableType().getMaxTransfer();
             }
 
         }
@@ -289,11 +289,6 @@ public class FluidNetwork extends AbstractNetwork<GenericTileFluidPipe, SubtypeF
     @Override
     public FluidNetwork createInstanceConductor(Set<GenericTileFluidPipe> conductors) {
         return new FluidNetwork(conductors);
-    }
-
-    @Override
-    public SubtypeFluidPipe[] getConductorTypes() {
-        return SubtypeFluidPipe.values();
     }
 
 }

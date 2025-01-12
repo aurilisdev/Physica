@@ -9,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -45,12 +44,14 @@ public abstract class AbstractRefreshingConnectBlock<CONDUCTOR extends GenericCo
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos neighbor, boolean isMoving) {
-        super.neighborChanged(state, level, pos, block, neighbor, isMoving);
-        if (level.isClientSide()) {
+    public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
+
+        super.onNeighborChange(state, world, pos, neighbor);
+
+        if (world.isClientSide()) {
             return;
         }
-        BlockEntity tile = level.getBlockEntity(pos);
+        BlockEntity tile = world.getBlockEntity(pos);
         CONDUCTOR conductor = getCableIfValid(tile);
         if (conductor == null || conductor.isRemoved()) {
             return;
@@ -58,15 +59,13 @@ public abstract class AbstractRefreshingConnectBlock<CONDUCTOR extends GenericCo
 
         Direction facing = WorldUtils.getDirectionFromPosDelta(pos, neighbor);
 
-        EnumConnectType connection = getConnection(level.getBlockState(neighbor), level.getBlockEntity(neighbor), conductor, facing);
+        EnumConnectType currConnection = conductor.readConnections()[facing.ordinal()];
 
-        if (conductor.writeConnection(facing, connection)) {
+        EnumConnectType connection = getConnection(world.getBlockState(neighbor), world.getBlockEntity(neighbor), conductor, facing);
+
+        if (currConnection != connection && conductor.writeConnection(facing, connection)) {
             conductor.updateNetwork(facing);
         }
-    }
-
-    @Override
-    public void onNeighborChange(BlockState state, LevelReader world, BlockPos pos, BlockPos neighbor) {
 
     }
 

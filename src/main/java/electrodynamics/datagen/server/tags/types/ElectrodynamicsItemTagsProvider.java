@@ -7,8 +7,7 @@ import electrodynamics.common.block.subtype.SubtypeOre;
 import electrodynamics.common.block.subtype.SubtypeOreDeepslate;
 import electrodynamics.common.block.subtype.SubtypeRawOreBlock;
 import electrodynamics.common.block.subtype.SubtypeResourceBlock;
-import electrodynamics.common.block.subtype.SubtypeWire;
-import electrodynamics.common.block.subtype.SubtypeWire.Conductor;
+import electrodynamics.common.block.subtype.SubtypeWire.WireMaterial;
 import electrodynamics.common.block.subtype.SubtypeWire.InsulationMaterial;
 import electrodynamics.common.block.subtype.SubtypeWire.WireClass;
 import electrodynamics.common.block.subtype.SubtypeWire.WireColor;
@@ -24,6 +23,7 @@ import electrodynamics.common.item.subtype.SubtypePlate;
 import electrodynamics.common.item.subtype.SubtypeRawOre;
 import electrodynamics.common.item.subtype.SubtypeRod;
 import electrodynamics.common.tags.ElectrodynamicsTags;
+import electrodynamics.datagen.DataGenerators;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
@@ -124,53 +124,53 @@ public class ElectrodynamicsItemTagsProvider extends ItemTagsProvider {
 
 		tag(ElectrodynamicsTags.Items.INSULATES_PLAYER_FEET).add(ElectrodynamicsItems.ITEM_RUBBERBOOTS.get(), ElectrodynamicsItems.ITEM_COMPOSITEBOOTS.get(), ElectrodynamicsItems.ITEM_COMBATBOOTS.get());
 
-		tag(ElectrodynamicsTags.Items.INSULATED_TIN_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.TIN }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.INSULATED_TIN_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.TIN }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.SILVER }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.SILVER }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.COPPER }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.COPPER }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.GOLD }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.GOLD }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.INSULATED_IRON_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.IRON }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.INSULATED_IRON_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.IRON }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.SUPERCONDUCTIVE }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.SUPERCONDUCTIVE }, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.THICK_TIN_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.TIN }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.THICK_TIN_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.TIN }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.THICK_SILVER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.SILVER }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.THICK_SILVER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.SILVER }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.THICK_COPPER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.COPPER }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.THICK_COPPER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.COPPER }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.THICK_GOLD_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.GOLD }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.THICK_GOLD_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.GOLD }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.THICK_IRON_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.IRON }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.THICK_IRON_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.IRON }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.SUPERCONDUCTIVE }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.SUPERCONDUCTIVE }, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.TIN }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.TIN }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.SILVER }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.SILVER }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.COPPER }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.COPPER }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.GOLD }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.GOLD }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.IRON }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.IRON }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.SUPERCONDUCTIVE }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.SUPERCONDUCTIVE }, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.TIN }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.TIN }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.SILVER }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.SILVER }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.COPPER }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.COPPER }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.GOLD }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.GOLD }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.IRON }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.IRON }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
 
-		tag(ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], SubtypeWire.getWires(new Conductor[] { Conductor.SUPERCONDUCTIVE }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
+		tag(ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES).add(ElectrodynamicsItems.ITEMS_WIRE.getSpecificValuesArray(new BlockItemWire[0], DataGenerators.getWires(new WireMaterial[] { WireMaterial.SUPERCONDUCTIVE }, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())));
 
 	}
 

@@ -1,27 +1,25 @@
 package electrodynamics.common.network.type;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.mojang.datafixers.util.Pair;
 
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
-import electrodynamics.common.block.subtype.SubtypeGasPipe;
+import electrodynamics.api.network.cable.type.IGasPipe;
 import electrodynamics.common.network.NetworkRegistry;
 import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.common.tile.pipelines.gas.GenericTileGasPipe;
 import electrodynamics.common.tile.pipelines.gas.TileGasPipePump;
 import electrodynamics.prefab.network.AbstractNetwork;
+import electrodynamics.prefab.utilities.Scheduler;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 // NOTE to add in pipe heat loss, uncomment commented code
-public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, SubtypeGasPipe, GasStack, GasNetwork> {
+public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, IGasPipe, GasStack, GasNetwork> {
 
     // public double heatLossPerBlock = 0;
     public int maxPressure = 0;
@@ -30,6 +28,8 @@ public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, SubtypeGasPi
     public double temperatureOfTransmitted = 0;
 
     public ConcurrentHashMap<Integer, HashSet<TileGasPipePump>> priorityPumpMap = new ConcurrentHashMap<>();
+    private final HashMap<Integer, HashSet<GenericTileGasPipe>> pressureToGasPipeMap = new HashMap<>();
+    private final HashSet<GenericTileGasPipe> destroyedByCorrosion = new HashSet<>();
 
     public GasNetwork(Collection<GenericTileGasPipe> pipes) {
         conductorSet.addAll(pipes);
@@ -51,6 +51,8 @@ public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, SubtypeGasPi
         priorityPumpMap.clear();
         maxPressure = 0;
         networkMaxTransfer = 0;
+        pressureToGasPipeMap.clear();
+        destroyedByCorrosion.clear();
         super.refreshNewNetwork();
     }
 
@@ -314,28 +316,35 @@ public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, SubtypeGasPi
             return false;
         }
 
-        boolean exploded = false;
-        HashSet<SubtypeGasPipe> overloadedPipes = new HashSet<>();
+        HashSet<GenericTileGasPipe> overloadedPipes = new HashSet<>();
 
-        for (SubtypeGasPipe pipe : SubtypeGasPipe.values()) {
+        for (Map.Entry<Integer, HashSet<GenericTileGasPipe>> entry : pressureToGasPipeMap.entrySet()) {
 
-            if (pipe.pipeMaterial.maxPressure < stack.getPressure() || (pipe.pipeMaterial.corrodedByAcid && isCorrosive)) {
+            if (entry.getKey() < stack.getPressure()) {
 
-                overloadedPipes.add(pipe);
+                overloadedPipes.addAll(entry.getValue());
 
             }
 
         }
-        for (SubtypeGasPipe pipe : overloadedPipes) {
-            for (GenericTileGasPipe gasPipe : conductorTypeMap.getOrDefault(pipe, new HashSet<>())) {
-                if (live) {
-                    gasPipe.destroyViolently();
-                }
-                exploded = true;
-            }
+
+        if(isCorrosive) {
+            overloadedPipes.addAll(destroyedByCorrosion);
         }
 
-        return exploded;
+        if(overloadedPipes.isEmpty()) {
+            return false;
+        }
+
+        if(!live) {
+            return true;
+        }
+
+        for(GenericTileGasPipe pipe : overloadedPipes) {
+            Scheduler.schedule(1, pipe::destroyViolently);
+        }
+
+        return true;
 
     }
 
@@ -344,8 +353,20 @@ public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, SubtypeGasPi
 
         super.updateConductorStatistics(cable, remove);
 
-        if (!remove) {
-            SubtypeGasPipe pipe = cable.getCableType();
+        if (remove) {
+
+            int pressure = cable.getCableType().getPipeMaterial().getMaxPressuire();
+
+            if(pressureToGasPipeMap.containsKey(pressure)) {
+                HashSet<GenericTileGasPipe> set = pressureToGasPipeMap.get(pressure);
+                set.remove(cable);
+                pressureToGasPipeMap.put(pressure, set);
+            }
+
+            destroyedByCorrosion.remove(cable);
+
+        } else {
+            IGasPipe pipe = cable.getCableType();
 
             // if (heatLossPerBlock == 0) {
             // heatLossPerBlock = pipe.effectivePipeHeatLoss;
@@ -353,13 +374,23 @@ public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, SubtypeGasPi
 
             // heatLossPerBlock = (heatLossPerBlock + pipe.effectivePipeHeatLoss) / 2.0;
 
-            if (networkMaxTransfer == 0 || networkMaxTransfer < pipe.maxTransfer) {
-                networkMaxTransfer = pipe.maxTransfer;
+            if (networkMaxTransfer == 0 || networkMaxTransfer < pipe.getMaxTransfer()) {
+                networkMaxTransfer = pipe.getMaxTransfer();
             }
 
-            if (maxPressure == 0 || pipe.pipeMaterial.maxPressure < maxPressure) {
-                maxPressure = pipe.pipeMaterial.maxPressure;
+            if (maxPressure == 0 || pipe.getPipeMaterial().getMaxPressuire() < maxPressure) {
+                maxPressure = pipe.getPipeMaterial().getMaxPressuire();
             }
+
+            int pressure = pipe.getPipeMaterial().getMaxPressuire();
+
+            HashSet<GenericTileGasPipe> set = pressureToGasPipeMap.getOrDefault(pressure, new HashSet<>());
+
+            set.add(cable);
+
+            pressureToGasPipeMap.put(pressure, set);
+
+
         }
     }
 
@@ -380,6 +411,8 @@ public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, SubtypeGasPi
     public void resetConductorStatistics() {
         networkMaxTransfer = 0;
         maxPressure = 0;
+        pressureToGasPipeMap.clear();
+        destroyedByCorrosion.clear();
         super.resetConductorStatistics();
     }
 
@@ -428,6 +461,12 @@ public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, SubtypeGasPi
     }
 
     @Override
+    public void deregister() {
+        pressureToGasPipeMap.clear();
+        super.deregister();
+    }
+
+    @Override
     public boolean isConductor(BlockEntity tile, GenericTileGasPipe requesterCable) {
         return tile instanceof GenericTileGasPipe;
     }
@@ -435,11 +474,6 @@ public class GasNetwork extends AbstractNetwork<GenericTileGasPipe, SubtypeGasPi
     @Override
     public GasNetwork createInstanceConductor(Set<GenericTileGasPipe> conductors) {
         return new GasNetwork(conductors);
-    }
-
-    @Override
-    public SubtypeGasPipe[] getConductorTypes() {
-        return SubtypeGasPipe.values();
     }
 
 }

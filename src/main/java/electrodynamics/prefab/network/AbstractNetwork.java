@@ -32,7 +32,6 @@ public abstract class AbstractNetwork<C extends GenericRefreshingConnectTile<T, 
     public final HashSet<C> conductorSet = new HashSet<>();
     public final HashSet<BlockEntity> acceptorSet = new HashSet<>();
     public final HashMap<BlockEntity, HashSet<Direction>> acceptorInputMap = new HashMap<>();
-    public final HashMap<T, HashSet<C>> conductorTypeMap = new HashMap<>();
     public double networkMaxTransfer;
     public double transmittedLastTick;
     public double transmittedThisTick;
@@ -160,29 +159,13 @@ public abstract class AbstractNetwork<C extends GenericRefreshingConnectTile<T, 
 
         if(remove) {
 
-            if(conductorTypeMap.containsKey(conductor.getCableType())) {
-
-                HashSet<C> typeSet = conductorTypeMap.get(conductor.getCableType());
-
-                typeSet.remove(conductor);
-
-                conductorTypeMap.put(conductor.getCableType(), typeSet);
-
-                updateConductorStatistics = true;
-
-            }
+            updateConductorStatistics = true;
 
         } else {
 
             conductorSet.add(conductor);
 
             conductor.setNetwork((TYPE) this);
-
-            HashSet<C> typeSet = conductorTypeMap.getOrDefault(conductor.getCableType(), new HashSet<>());
-
-            typeSet.add(conductor);
-
-            conductorTypeMap.put(conductor.getCableType(), typeSet);
 
             updateConductorStatistics(conductor, false);
 
@@ -263,14 +246,9 @@ public abstract class AbstractNetwork<C extends GenericRefreshingConnectTile<T, 
      * Updates the statics of the entire network
      */
     public void updateNewNetworkStatistics() {
-        conductorTypeMap.clear();
-        for (T type : getConductorTypes()) {
-            conductorTypeMap.put(type, new HashSet<>());
-        }
         for (C wire : conductorSet) {
-            conductorTypeMap.get(wire.getCableType()).add(wire);
             networkMaxTransfer = networkMaxTransfer == 0 ? wire.getMaxTransfer() : Math.min(networkMaxTransfer, wire.getMaxTransfer());
-            updateConductorStatistics(wire, true);
+            updateConductorStatistics(wire, false);
         }
         for (BlockEntity reciever : acceptorSet) {
             for (Direction dir : acceptorInputMap.getOrDefault(reciever, new HashSet<>())) {
@@ -346,18 +324,23 @@ public abstract class AbstractNetwork<C extends GenericRefreshingConnectTile<T, 
             }
 
             connectedTiles[ordinal] = sideTile;
+        }
 
-            if (!isConductor(sideTile, splitPoint) || dealtWith[ordinal]) {
+        for(int index = 0; index < 6; index++) {
+
+            BlockEntity tile = connectedTiles[index];
+
+            if (tile == null || !isConductor(tile, splitPoint) || dealtWith[index]) {
                 continue;
             }
 
-            Set<C> explored = new AbstractNetworkFinder<>(world, splitPoint, splitPoint.getBlockPos(), this, splitPoint.getBlockPos()).exploreNetwork();
+            Set<C> explored = new AbstractNetworkFinder<>(world, tile.getBlockPos(), this, splitPoint.getBlockPos()).exploreNetwork();
 
-            for (int i = ordinal + 1; i < connectedTiles.length; i++) {
+            for (int i = index + 1; i < 6; i++) {
 
                 BlockEntity connection = connectedTiles[i];
 
-                if (isConductor(connection, (C) sideTile) && !dealtWith[i] && explored.contains(connection)) {
+                if (isConductor(connection, (C) tile) && !dealtWith[i] && explored.contains(connection)) {
 
                     dealtWith[i] = true;
 
@@ -382,11 +365,7 @@ public abstract class AbstractNetwork<C extends GenericRefreshingConnectTile<T, 
      */
     public void removeFromNetwork(C conductor) {
         conductorSet.remove(conductor);
-        if(conductorTypeMap.containsKey(conductor.getCableType())) {
-            HashSet<C> set = conductorTypeMap.get(conductor.getCableType());
-            set.remove(conductor);
-            conductorTypeMap.put((T) conductor.getCableType(), set);
-        }
+        updateConductorStatistics(conductor, true);
         if (conductorSet.isEmpty()) {
             deregister();
         }
@@ -399,7 +378,6 @@ public abstract class AbstractNetwork<C extends GenericRefreshingConnectTile<T, 
         conductorSet.clear();
         acceptorSet.clear();
         acceptorInputMap.clear();
-        conductorTypeMap.clear();
         NetworkRegistry.deregister(this);
     }
 
@@ -469,13 +447,6 @@ public abstract class AbstractNetwork<C extends GenericRefreshingConnectTile<T, 
      * @return a new instance of this network
      */
     public abstract TYPE createInstanceConductor(Set<C> conductors);
-
-    /**
-     * returns the valid conductor types for this network
-     *
-     * @return the conductor types
-     */
-    public abstract T[] getConductorTypes();
 
     @Override
     public boolean equals(Object obj) {

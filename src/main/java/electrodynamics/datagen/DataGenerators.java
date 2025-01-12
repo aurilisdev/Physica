@@ -1,11 +1,11 @@
 package electrodynamics.datagen;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 import electrodynamics.api.References;
+import electrodynamics.api.network.cable.type.IWire;
+import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.datagen.client.ElectrodynamicsBlockModelsProvider;
 import electrodynamics.datagen.client.ElectrodynamicsBlockStateProvider;
 import electrodynamics.datagen.client.ElectrodynamicsItemModelsProvider;
@@ -33,54 +33,95 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
+import javax.annotation.Nullable;
+
 @EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
-	@SubscribeEvent
-	public static void gatherData(GatherDataEvent event) {
+    public static final HashMap<IWire.IWireClass, HashSet<SubtypeWire>> WIRES = new HashMap<>();
 
-		DataGenerator generator = event.getGenerator();
+    static {
+        for (SubtypeWire wire : SubtypeWire.values()) {
+            HashSet<SubtypeWire> wireSet = WIRES.getOrDefault(wire.getWireClass(), new HashSet<>());
+            wireSet.add(wire);
+            WIRES.put(wire.getWireClass(), wireSet);
+        }
+    }
 
-		PackOutput output = generator.getPackOutput();
+    @Nullable
+    public static SubtypeWire getWire(IWire.IWireMaterial conductor, SubtypeWire.InsulationMaterial insulation, SubtypeWire.WireClass wireClass, SubtypeWire.WireColor color) {
 
-		ExistingFileHelper helper = event.getExistingFileHelper();
+        for (SubtypeWire wire : WIRES.getOrDefault(wireClass, new HashSet<>())) {
+            if (wire.getWireMaterial() == conductor && wire.getInsulation() == insulation && wire.getWireClass() == wireClass && wire.getWireColor() == color) {
+                return wire;
+            }
+        }
+        return null;
+    }
 
-		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+    public static SubtypeWire[] getWires(IWire.IWireMaterial[] conductors, SubtypeWire.InsulationMaterial insulation, SubtypeWire.WireClass wireClass, SubtypeWire.WireColor... colors) {
+
+        List<SubtypeWire> list = new ArrayList<>();
+
+        SubtypeWire wire;
+        for (IWire.IWireMaterial conductor : conductors) {
+            for (SubtypeWire.WireColor color : colors) {
+                wire = getWire(conductor, insulation, wireClass, color);
+                if (wire != null) {
+                    list.add(wire);
+                }
+            }
+        }
+
+        return list.toArray(new SubtypeWire[0]);
+    }
 
 
-		if (event.includeServer()) {
-			generator.addProvider(true, new LootTableProvider(output, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(ElectrodynamicsLootTablesProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+    @SubscribeEvent
+    public static void gatherData(GatherDataEvent event) {
 
-			generator.addProvider(true, new CombustionChamberFuelSourceProvider(output));
-			generator.addProvider(true, new CoalGeneratorFuelSourceProvider(output));
-			generator.addProvider(true, new ThermoelectricGenHeatSourceProvider(output));
-			generator.addProvider(true, new GasCollectorChromoCardsProvider(output));
+        DataGenerator generator = event.getGenerator();
 
-			DatapackBuiltinEntriesProvider datapacks = new DatapackBuiltinEntriesProvider(output, lookupProvider, new RegistrySetBuilder()
-					//
-					.add(Registries.DAMAGE_TYPE, ElectrodynamicsDamageTypes::registerTypes)
-					//
-					.add(Registries.CONFIGURED_FEATURE, context -> ElectrodynamicsFeatures.registerConfigured(context))
-					//
-					.add(Registries.PLACED_FEATURE, ElectrodynamicsFeatures::registerPlaced)
-					//
-					.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ElectrodynamicsFeatures::registerModifiers)
-			//
-					, Set.of(References.ID));
+        PackOutput output = generator.getPackOutput();
 
-			generator.addProvider(true, datapacks);
-			ElectrodynamicsTagsProvider.addTagProviders(generator, output, datapacks.getRegistryProvider(), helper);
-			generator.addProvider(true, new ElectrodynamicsRecipeProvider(output, lookupProvider));
-			generator.addProvider(true, new ElectrodynamicsAdvancementProvider(output, datapacks.getRegistryProvider()));
-			generator.addProvider(true, new ElectrodynamicsMultiblockProvider(output, datapacks.getRegistryProvider(), helper));
-		}
-		if (event.includeClient()) {
-			generator.addProvider(true, new ElectrodynamicsBlockStateProvider(output, helper));
-			generator.addProvider(true, new ElectrodynamicsBlockModelsProvider(output, helper));
-			generator.addProvider(true, new ElectrodynamicsItemModelsProvider(output, helper));
-			generator.addProvider(true, new ElectrodynamicsLangKeyProvider(output, Locale.EN_US));
-			generator.addProvider(true, new ElectrodynamicsSoundProvider(output, helper));
-		}
-	}
+        ExistingFileHelper helper = event.getExistingFileHelper();
+
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+
+
+        if (event.includeServer()) {
+            generator.addProvider(true, new LootTableProvider(output, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(ElectrodynamicsLootTablesProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+
+            generator.addProvider(true, new CombustionChamberFuelSourceProvider(output));
+            generator.addProvider(true, new CoalGeneratorFuelSourceProvider(output));
+            generator.addProvider(true, new ThermoelectricGenHeatSourceProvider(output));
+            generator.addProvider(true, new GasCollectorChromoCardsProvider(output));
+
+            DatapackBuiltinEntriesProvider datapacks = new DatapackBuiltinEntriesProvider(output, lookupProvider, new RegistrySetBuilder()
+                    //
+                    .add(Registries.DAMAGE_TYPE, ElectrodynamicsDamageTypes::registerTypes)
+                    //
+                    .add(Registries.CONFIGURED_FEATURE, context -> ElectrodynamicsFeatures.registerConfigured(context))
+                    //
+                    .add(Registries.PLACED_FEATURE, ElectrodynamicsFeatures::registerPlaced)
+                    //
+                    .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ElectrodynamicsFeatures::registerModifiers)
+                    //
+                    , Set.of(References.ID));
+
+            generator.addProvider(true, datapacks);
+            ElectrodynamicsTagsProvider.addTagProviders(generator, output, datapacks.getRegistryProvider(), helper);
+            generator.addProvider(true, new ElectrodynamicsRecipeProvider(output, lookupProvider));
+            generator.addProvider(true, new ElectrodynamicsAdvancementProvider(output, datapacks.getRegistryProvider()));
+            generator.addProvider(true, new ElectrodynamicsMultiblockProvider(output, datapacks.getRegistryProvider(), helper));
+        }
+        if (event.includeClient()) {
+            generator.addProvider(true, new ElectrodynamicsBlockStateProvider(output, helper));
+            generator.addProvider(true, new ElectrodynamicsBlockModelsProvider(output, helper));
+            generator.addProvider(true, new ElectrodynamicsItemModelsProvider(output, helper));
+            generator.addProvider(true, new ElectrodynamicsLangKeyProvider(output, Locale.EN_US));
+            generator.addProvider(true, new ElectrodynamicsSoundProvider(output, helper));
+        }
+    }
 
 }

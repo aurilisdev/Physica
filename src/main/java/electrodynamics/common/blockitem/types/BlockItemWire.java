@@ -35,17 +35,17 @@ public class BlockItemWire extends BlockItemDescriptable {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
 		super.appendHoverText(stack, context, tooltip, flagIn);
-		tooltip.add(ElectroTextUtils.tooltip("itemwire.resistance", ChatFormatter.getChatDisplayShort(wire.wire.resistance, DisplayUnit.RESISTANCE)).withStyle(ChatFormatting.GRAY));
-		tooltip.add(ElectroTextUtils.tooltip("itemwire.maxamps", ChatFormatter.getChatDisplayShort(wire.wire.conductor.ampacity, DisplayUnit.AMPERE)).withStyle(ChatFormatting.GRAY));
-		if (wire.wire.insulation.shockVoltage == 0) {
+		tooltip.add(ElectroTextUtils.tooltip("itemwire.resistance", ChatFormatter.getChatDisplayShort(wire.wire.getResistance(), DisplayUnit.RESISTANCE)).withStyle(ChatFormatting.GRAY));
+		tooltip.add(ElectroTextUtils.tooltip("itemwire.maxamps", ChatFormatter.getChatDisplayShort(wire.wire.getAmpacity(), DisplayUnit.AMPERE)).withStyle(ChatFormatting.GRAY));
+		if (wire.wire.getInsulation().shockVoltage() == 0) {
 			tooltip.add(ElectroTextUtils.tooltip("itemwire.info.uninsulated"));
 		} else {
-			tooltip.add(ElectroTextUtils.tooltip("itemwire.info.insulationrating", ChatFormatter.getChatDisplayShort(wire.wire.insulation.shockVoltage, DisplayUnit.VOLTAGE)));
+			tooltip.add(ElectroTextUtils.tooltip("itemwire.info.insulationrating", ChatFormatter.getChatDisplayShort(wire.wire.getInsulation().shockVoltage(), DisplayUnit.VOLTAGE)));
 		}
-		if (wire.wire.insulation.fireProof) {
+		if (wire.wire.getInsulation().fireproof()) {
 			ElectroTextUtils.tooltip("itemwire.info.fireproof");
 		}
-		if (wire.wire.wireClass.conductsRedstone) {
+		if (wire.wire.getWireClass().conductsRedstone()) {
 			ElectroTextUtils.tooltip("itemwire.info.redstone");
 		}
 	}
@@ -57,7 +57,7 @@ public class BlockItemWire extends BlockItemDescriptable {
 		public static void registerColoredBlocks(RegisterColorHandlersEvent.Item event) {
 			WIRES.forEach(item -> event.register((stack, index) -> {
 				if (index == 1) {
-					return item.wire.wire.color.color.color();
+					return item.wire.wire.getWireColor().getColor().color();
 				}
 				return Color.WHITE.color();
 			}, item));

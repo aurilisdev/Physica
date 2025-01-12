@@ -92,7 +92,7 @@ public class ElectrodynamicsBlocks {
         }
     }));
     public static final BulkDeferredHolder<Block, BlockWire, SubtypeWire> BLOCKS_WIRE = new BulkDeferredHolder<>(SubtypeWire.values(), subtype -> {
-        if(subtype.wireClass == WireClass.LOGISTICAL) {
+        if(subtype.getWireClass() == WireClass.LOGISTICAL) {
             return BLOCKS.register(subtype.tag(), () -> new BlockLogisticalWire(subtype));
         } else {
             return BLOCKS.register(subtype.tag(), () -> new BlockWire(subtype));

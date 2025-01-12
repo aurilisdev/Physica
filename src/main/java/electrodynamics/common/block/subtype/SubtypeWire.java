@@ -9,280 +9,316 @@ import java.util.Locale;
 import javax.annotation.Nullable;
 
 import electrodynamics.api.ISubtype;
+import electrodynamics.api.network.cable.type.IWire;
+import electrodynamics.common.block.connect.BlockWire;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.neoforged.neoforge.common.Tags;
-
-// Calculated using https://www.omnicalculator.com/physics/wire-resistance
-// Area is actually 0.125 = 15625mm^2
-// Length is 1 meter + 2 meters of wire - 2 * center length -> 3 - 2 * 0.125 = 2.75 meters per wire block. this is static and isnt calculated dynamically even though
-// wires are rarely connected in all directions.
-// Also manipulated uniformally
+import org.jetbrains.annotations.NotNull;
 
 //Storing the color on the enum was the cleanest solution...
-public enum SubtypeWire implements ISubtype {
+public enum SubtypeWire implements ISubtype, IWire {
 
     /* UNINSULATED */
 
-    tin(Conductor.TIN, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
-    iron(Conductor.IRON, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
-    copper(Conductor.COPPER, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
-    silver(Conductor.SILVER, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
-    gold(Conductor.GOLD, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
-    superconductive(Conductor.SUPERCONDUCTIVE, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
+    tin(WireMaterial.TIN, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
+    iron(WireMaterial.IRON, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
+    copper(WireMaterial.COPPER, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
+    silver(WireMaterial.SILVER, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
+    gold(WireMaterial.GOLD, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
+    superconductive(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE, WireColor.NONE),
 
     /* INSULATED */
 
     // black
-    insulatedtinblack(Conductor.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
-    insulatedironblack(Conductor.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
-    insulatedcopperblack(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
-    insulatedsilverblack(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
-    insulatedgoldblack(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
-    insulatedsuperconductiveblack(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
+    insulatedtinblack(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
+    insulatedironblack(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
+    insulatedcopperblack(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
+    insulatedsilverblack(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
+    insulatedgoldblack(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
+    insulatedsuperconductiveblack(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
     // red
-    insulatedtinred(Conductor.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
-    insulatedironred(Conductor.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
-    insulatedcopperred(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
-    insulatedsilverred(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
-    insulatedgoldred(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
-    insulatedsuperconductivered(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
+    insulatedtinred(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
+    insulatedironred(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
+    insulatedcopperred(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
+    insulatedsilverred(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
+    insulatedgoldred(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
+    insulatedsuperconductivered(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
     // white
-    insulatedtinwhite(Conductor.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
-    insulatedironwhite(Conductor.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
-    insulatedcopperwhite(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
-    insulatedsilverwhite(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
-    insulatedgoldwhite(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
-    insulatedsuperconductivewhite(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
+    insulatedtinwhite(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
+    insulatedironwhite(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
+    insulatedcopperwhite(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
+    insulatedsilverwhite(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
+    insulatedgoldwhite(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
+    insulatedsuperconductivewhite(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
     // green
-    insulatedtingreen(Conductor.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
-    insulatedirongreen(Conductor.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
-    insulatedcoppergreen(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
-    insulatedsilvergreen(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
-    insulatedgoldgreen(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
-    insulatedsuperconductivegreen(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
+    insulatedtingreen(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
+    insulatedirongreen(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
+    insulatedcoppergreen(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
+    insulatedsilvergreen(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
+    insulatedgoldgreen(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
+    insulatedsuperconductivegreen(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
     // blue
-    insulatedtinblue(Conductor.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
-    insulatedironblue(Conductor.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
-    insulatedcopperblue(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
-    insulatedsilverblue(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
-    insulatedgoldblue(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
-    insulatedsuperconductiveblue(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
+    insulatedtinblue(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
+    insulatedironblue(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
+    insulatedcopperblue(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
+    insulatedsilverblue(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
+    insulatedgoldblue(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
+    insulatedsuperconductiveblue(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
     // yellow
-    insulatedtinyellow(Conductor.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
-    insulatedironyellow(Conductor.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
-    insulatedcopperyellow(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
-    insulatedsilveryellow(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
-    insulatedgoldyellow(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
-    insulatedsuperconductiveyellow(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
+    insulatedtinyellow(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
+    insulatedironyellow(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
+    insulatedcopperyellow(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
+    insulatedsilveryellow(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
+    insulatedgoldyellow(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
+    insulatedsuperconductiveyellow(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
     // brown
-    insulatedtinbrown(Conductor.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
-    insulatedironbrown(Conductor.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
-    insulatedcopperbrown(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
-    insulatedsilverbrown(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
-    insulatedgoldbrown(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
-    insulatedsuperconductivebrown(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
+    insulatedtinbrown(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_TIN_WIRES),
+    insulatedironbrown(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_IRON_WIRES),
+    insulatedcopperbrown(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_COPPER_WIRES),
+    insulatedsilverbrown(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SILVER_WIRES),
+    insulatedgoldbrown(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_GOLD_WIRES),
+    insulatedsuperconductivebrown(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.INSULATED_SUPERCONDUCTIVE_WIRES),
 
     /* HIGHLY INSULATED */
 
     // black
-    highlyinsulatedtinblack(Conductor.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
-    highlyinsulatedironblack(Conductor.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
-    highlyinsulatedcopperblack(Conductor.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
-    highlyinsulatedsilverblack(Conductor.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
-    highlyinsulatedgoldblack(Conductor.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
-    highlyinsulatedsuperconductiveblack(Conductor.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
+    highlyinsulatedtinblack(WireMaterial.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
+    highlyinsulatedironblack(WireMaterial.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
+    highlyinsulatedcopperblack(WireMaterial.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
+    highlyinsulatedsilverblack(WireMaterial.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
+    highlyinsulatedgoldblack(WireMaterial.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
+    highlyinsulatedsuperconductiveblack(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLACK, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
     // red
-    highlyinsulatedtinred(Conductor.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
-    highlyinsulatedironred(Conductor.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
-    highlyinsulatedcopperred(Conductor.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
-    highlyinsulatedsilverred(Conductor.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
-    highlyinsulatedgoldred(Conductor.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
-    highlyinsulatedsuperconductivered(Conductor.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
+    highlyinsulatedtinred(WireMaterial.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
+    highlyinsulatedironred(WireMaterial.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
+    highlyinsulatedcopperred(WireMaterial.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
+    highlyinsulatedsilverred(WireMaterial.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
+    highlyinsulatedgoldred(WireMaterial.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
+    highlyinsulatedsuperconductivered(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.RED, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
     // white
-    highlyinsulatedtinwhite(Conductor.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
-    highlyinsulatedironwhite(Conductor.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
-    highlyinsulatedcopperwhite(Conductor.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
-    highlyinsulatedsilverwhite(Conductor.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
-    highlyinsulatedgoldwhite(Conductor.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
-    highlyinsulatedsuperconductivewhite(Conductor.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
+    highlyinsulatedtinwhite(WireMaterial.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
+    highlyinsulatedironwhite(WireMaterial.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
+    highlyinsulatedcopperwhite(WireMaterial.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
+    highlyinsulatedsilverwhite(WireMaterial.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
+    highlyinsulatedgoldwhite(WireMaterial.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
+    highlyinsulatedsuperconductivewhite(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.WHITE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
     // green
-    highlyinsulatedtingreen(Conductor.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
-    highlyinsulatedirongreen(Conductor.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
-    highlyinsulatedcoppergreen(Conductor.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
-    highlyinsulatedsilvergreen(Conductor.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
-    highlyinsulatedgoldgreen(Conductor.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
-    highlyinsulatedsuperconductivegreen(Conductor.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
+    highlyinsulatedtingreen(WireMaterial.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
+    highlyinsulatedirongreen(WireMaterial.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
+    highlyinsulatedcoppergreen(WireMaterial.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
+    highlyinsulatedsilvergreen(WireMaterial.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
+    highlyinsulatedgoldgreen(WireMaterial.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
+    highlyinsulatedsuperconductivegreen(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.GREEN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
     // blue
-    highlyinsulatedtinblue(Conductor.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
-    highlyinsulatedironblue(Conductor.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
-    highlyinsulatedcopperblue(Conductor.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
-    highlyinsulatedsilverblue(Conductor.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
-    highlyinsulatedgoldblue(Conductor.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
-    highlyinsulatedsuperconductiveblue(Conductor.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
+    highlyinsulatedtinblue(WireMaterial.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
+    highlyinsulatedironblue(WireMaterial.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
+    highlyinsulatedcopperblue(WireMaterial.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
+    highlyinsulatedsilverblue(WireMaterial.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
+    highlyinsulatedgoldblue(WireMaterial.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
+    highlyinsulatedsuperconductiveblue(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BLUE, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
     // yellow
-    highlyinsulatedtinyellow(Conductor.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
-    highlyinsulatedironyellow(Conductor.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
-    highlyinsulatedcopperyellow(Conductor.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
-    highlyinsulatedsilveryellow(Conductor.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
-    highlyinsulatedgoldyellow(Conductor.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
-    highlyinsulatedsuperconductiveyellow(Conductor.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
+    highlyinsulatedtinyellow(WireMaterial.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
+    highlyinsulatedironyellow(WireMaterial.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
+    highlyinsulatedcopperyellow(WireMaterial.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
+    highlyinsulatedsilveryellow(WireMaterial.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
+    highlyinsulatedgoldyellow(WireMaterial.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
+    highlyinsulatedsuperconductiveyellow(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.YELLOW, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
     // brown
-    highlyinsulatedtinbrown(Conductor.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
-    highlyinsulatedironbrown(Conductor.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
-    highlyinsulatedcopperbrown(Conductor.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
-    highlyinsulatedsilverbrown(Conductor.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
-    highlyinsulatedgoldbrown(Conductor.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
-    highlyinsulatedsuperconductivebrown(Conductor.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
+    highlyinsulatedtinbrown(WireMaterial.TIN, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_TIN_WIRES),
+    highlyinsulatedironbrown(WireMaterial.IRON, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_IRON_WIRES),
+    highlyinsulatedcopperbrown(WireMaterial.COPPER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_COPPER_WIRES),
+    highlyinsulatedsilverbrown(WireMaterial.SILVER, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SILVER_WIRES),
+    highlyinsulatedgoldbrown(WireMaterial.GOLD, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_GOLD_WIRES),
+    highlyinsulatedsuperconductivebrown(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.BROWN, WireColor.BLACK, 4.0, ElectrodynamicsTags.Items.THICK_SUPERCONDUCTIVE_WIRES),
 
     /* CERAMIC INSULATED */
 
     // black
-    ceramicinsulatedtinblack(Conductor.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
-    ceramicinsulatedironblack(Conductor.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
-    ceramicinsulatedcopperblack(Conductor.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
-    ceramicinsulatedsilverblack(Conductor.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
-    ceramicinsulatedgoldblack(Conductor.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
-    ceramicinsulatedsuperconductiveblack(Conductor.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
+    ceramicinsulatedtinblack(WireMaterial.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
+    ceramicinsulatedironblack(WireMaterial.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
+    ceramicinsulatedcopperblack(WireMaterial.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
+    ceramicinsulatedsilverblack(WireMaterial.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
+    ceramicinsulatedgoldblack(WireMaterial.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
+    ceramicinsulatedsuperconductiveblack(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLACK, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
     // red
-    ceramicinsulatedtinred(Conductor.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
-    ceramicinsulatedironred(Conductor.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
-    ceramicinsulatedcopperred(Conductor.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
-    ceramicinsulatedsilverred(Conductor.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
-    ceramicinsulatedgoldred(Conductor.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
-    ceramicinsulatedsuperconductivered(Conductor.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
+    ceramicinsulatedtinred(WireMaterial.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
+    ceramicinsulatedironred(WireMaterial.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
+    ceramicinsulatedcopperred(WireMaterial.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
+    ceramicinsulatedsilverred(WireMaterial.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
+    ceramicinsulatedgoldred(WireMaterial.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
+    ceramicinsulatedsuperconductivered(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.RED, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
     // white
-    ceramicinsulatedtinwhite(Conductor.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
-    ceramicinsulatedironwhite(Conductor.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
-    ceramicinsulatedcopperwhite(Conductor.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
-    ceramicinsulatedsilverwhite(Conductor.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
-    ceramicinsulatedgoldwhite(Conductor.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
-    ceramicinsulatedsuperconductivewhite(Conductor.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
+    ceramicinsulatedtinwhite(WireMaterial.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
+    ceramicinsulatedironwhite(WireMaterial.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
+    ceramicinsulatedcopperwhite(WireMaterial.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
+    ceramicinsulatedsilverwhite(WireMaterial.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
+    ceramicinsulatedgoldwhite(WireMaterial.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
+    ceramicinsulatedsuperconductivewhite(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.WHITE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
     // green
-    ceramicinsulatedtingreen(Conductor.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
-    ceramicinsulatedirongreen(Conductor.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
-    ceramicinsulatedcoppergreen(Conductor.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
-    ceramicinsulatedsilvergreen(Conductor.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
-    ceramicinsulatedgoldgreen(Conductor.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
-    ceramicinsulatedsuperconductivegreen(Conductor.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
+    ceramicinsulatedtingreen(WireMaterial.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
+    ceramicinsulatedirongreen(WireMaterial.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
+    ceramicinsulatedcoppergreen(WireMaterial.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
+    ceramicinsulatedsilvergreen(WireMaterial.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
+    ceramicinsulatedgoldgreen(WireMaterial.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
+    ceramicinsulatedsuperconductivegreen(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.GREEN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
     // blue
-    ceramicinsulatedtinblue(Conductor.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
-    ceramicinsulatedironblue(Conductor.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
-    ceramicinsulatedcopperblue(Conductor.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
-    ceramicinsulatedsilverblue(Conductor.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
-    ceramicinsulatedgoldblue(Conductor.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
-    ceramicinsulatedsuperconductiveblue(Conductor.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
+    ceramicinsulatedtinblue(WireMaterial.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
+    ceramicinsulatedironblue(WireMaterial.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
+    ceramicinsulatedcopperblue(WireMaterial.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
+    ceramicinsulatedsilverblue(WireMaterial.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
+    ceramicinsulatedgoldblue(WireMaterial.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
+    ceramicinsulatedsuperconductiveblue(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BLUE, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
     // yellow
-    ceramicinsulatedtinyellow(Conductor.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
-    ceramicinsulatedironyellow(Conductor.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
-    ceramicinsulatedcopperyellow(Conductor.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
-    ceramicinsulatedsilveryellow(Conductor.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
-    ceramicinsulatedgoldyellow(Conductor.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
-    ceramicinsulatedsuperconductiveyellow(Conductor.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
+    ceramicinsulatedtinyellow(WireMaterial.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
+    ceramicinsulatedironyellow(WireMaterial.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
+    ceramicinsulatedcopperyellow(WireMaterial.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
+    ceramicinsulatedsilveryellow(WireMaterial.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
+    ceramicinsulatedgoldyellow(WireMaterial.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
+    ceramicinsulatedsuperconductiveyellow(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.YELLOW, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
     // brown
-    ceramicinsulatedtinbrown(Conductor.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
-    ceramicinsulatedironbrown(Conductor.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
-    ceramicinsulatedcopperbrown(Conductor.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
-    ceramicinsulatedsilverbrown(Conductor.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
-    ceramicinsulatedgoldbrown(Conductor.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
-    ceramicinsulatedsuperconductivebrown(Conductor.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
+    ceramicinsulatedtinbrown(WireMaterial.TIN, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_TIN_WIRES),
+    ceramicinsulatedironbrown(WireMaterial.IRON, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_IRON_WIRES),
+    ceramicinsulatedcopperbrown(WireMaterial.COPPER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_COPPER_WIRES),
+    ceramicinsulatedsilverbrown(WireMaterial.SILVER, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SILVER_WIRES),
+    ceramicinsulatedgoldbrown(WireMaterial.GOLD, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_GOLD_WIRES),
+    ceramicinsulatedsuperconductivebrown(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.BROWN, WireColor.BROWN, ElectrodynamicsTags.Items.CERAMIC_SUPERCONDUCTIVE_WIRES),
 
     /* LOGISTICAL */
 
     // black
-    logisticstinblack(Conductor.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
-    logisticsironblack(Conductor.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
-    logisticscopperblack(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
-    logisticssilverblack(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
-    logisticsgoldblack(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
-    logisticssuperconductiveblack(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
+    logisticstinblack(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
+    logisticsironblack(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
+    logisticscopperblack(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
+    logisticssilverblack(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
+    logisticsgoldblack(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
+    logisticssuperconductiveblack(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLACK, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
     // red
-    logisticstinred(Conductor.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
-    logisticsironred(Conductor.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
-    logisticscopperred(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
-    logisticssilverred(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
-    logisticsgoldred(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
-    logisticssuperconductivered(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
+    logisticstinred(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
+    logisticsironred(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
+    logisticscopperred(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
+    logisticssilverred(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
+    logisticsgoldred(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
+    logisticssuperconductivered(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.RED, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
     // white
-    logisticstinwhite(Conductor.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
-    logisticsironwhite(Conductor.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
-    logisticscopperwhite(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
-    logisticssilverwhite(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
-    logisticsgoldwhite(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
-    logisticssuperconductivewhite(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
+    logisticstinwhite(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
+    logisticsironwhite(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
+    logisticscopperwhite(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
+    logisticssilverwhite(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
+    logisticsgoldwhite(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
+    logisticssuperconductivewhite(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.WHITE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
     // green
-    logisticstingreen(Conductor.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
-    logisticsirongreen(Conductor.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
-    logisticscoppergreen(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
-    logisticssilvergreen(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
-    logisticsgoldgreen(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
-    logisticssuperconductivegreen(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
+    logisticstingreen(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
+    logisticsirongreen(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
+    logisticscoppergreen(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
+    logisticssilvergreen(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
+    logisticsgoldgreen(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
+    logisticssuperconductivegreen(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.GREEN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
     // blue
-    logisticstinblue(Conductor.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
-    logisticsironblue(Conductor.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
-    logisticscopperblue(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
-    logisticssilverblue(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
-    logisticsgoldblue(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
-    logisticssuperconductiveblue(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
+    logisticstinblue(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
+    logisticsironblue(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
+    logisticscopperblue(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
+    logisticssilverblue(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
+    logisticsgoldblue(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
+    logisticssuperconductiveblue(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BLUE, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
     // yellow
-    logisticstinyellow(Conductor.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
-    logisticsironyellow(Conductor.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
-    logisticscopperyellow(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
-    logisticssilveryellow(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
-    logisticsgoldyellow(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
-    logisticssuperconductiveyellow(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
+    logisticstinyellow(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
+    logisticsironyellow(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
+    logisticscopperyellow(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
+    logisticssilveryellow(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
+    logisticsgoldyellow(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
+    logisticssuperconductiveyellow(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.YELLOW, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES),
     // brown
-    logisticstinbrown(Conductor.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
-    logisticsironbrown(Conductor.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
-    logisticscopperbrown(Conductor.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
-    logisticssilverbrown(Conductor.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
-    logisticsgoldbrown(Conductor.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
-    logisticssuperconductivebrown(Conductor.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES);
+    logisticstinbrown(WireMaterial.TIN, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_TIN_WIRES),
+    logisticsironbrown(WireMaterial.IRON, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_IRON_WIRES),
+    logisticscopperbrown(WireMaterial.COPPER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_COPPER_WIRES),
+    logisticssilverbrown(WireMaterial.SILVER, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SILVER_WIRES),
+    logisticsgoldbrown(WireMaterial.GOLD, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_GOLD_WIRES),
+    logisticssuperconductivebrown(WireMaterial.SUPERCONDUCTIVE, InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.BROWN, WireColor.BLACK, ElectrodynamicsTags.Items.LOGISTICAL_SUPERCONDUCTIVE_WIRES);
 
-    public static final HashMap<WireClass, HashSet<SubtypeWire>> WIRES = new HashMap<>();
+    public static final HashMap<IWire.IWireMaterial, HashMap<IWire.IInsulationMaterial, HashMap<IWire.IWireClass, HashMap<IWire.IWireColor, BlockWire>>>> WIRES = new HashMap<>();
+    public static final HashSet<IWireMaterial> WIRE_MATERIALS = new HashSet<>();
 
-    static {
-        for (SubtypeWire wire : SubtypeWire.values()) {
-            HashSet<SubtypeWire> wireSet = WIRES.getOrDefault(wire.wireClass, new HashSet<>());
-            wireSet.add(wire);
-            WIRES.put(wire.wireClass, wireSet);
-        }
-    }
-
-    public final double resistance;
-    public final WireClass wireClass;
-    public final InsulationMaterial insulation;
-    public final Conductor conductor;
-    public final WireColor color;
-    public final WireColor defaultColor;
+    private final double resistance;
+    private final long ampacity;
+    private final WireClass wireClass;
+    private final InsulationMaterial insulation;
+    private final WireMaterial conductor;
+    private final WireColor color;
+    private final WireColor defaultColor;
+    private final boolean isDefaultColor;
     @Nullable
-    public TagKey<Item> itemTag = null;
+    private final TagKey<Item> itemTag;
 
-    private SubtypeWire(Conductor conductor, InsulationMaterial insulation, WireClass wireClass, WireColor color, WireColor defaultColor, double dividend, TagKey<Item> tag) {
+    private SubtypeWire(WireMaterial conductor, InsulationMaterial insulation, WireClass wireClass, WireColor color, WireColor defaultColor, double dividend, TagKey<Item> tag) {
         resistance = conductor.resistance / dividend;
+        this.ampacity = conductor.ampacity;
         this.conductor = conductor;
         this.insulation = insulation;
         this.wireClass = wireClass;
         this.color = color;
         this.defaultColor = defaultColor;
+        isDefaultColor = color == defaultColor;
         itemTag = tag;
     }
 
-    private SubtypeWire(Conductor conductor, InsulationMaterial insulation, WireClass wireClass, WireColor color, WireColor defaultColor, TagKey<Item> tag) {
+    private SubtypeWire(WireMaterial conductor, InsulationMaterial insulation, WireClass wireClass, WireColor color, WireColor defaultColor, TagKey<Item> tag) {
         this(conductor, insulation, wireClass, color, defaultColor, 1, tag);
     }
 
-    private SubtypeWire(Conductor conductor, InsulationMaterial insulation, WireClass wireClass, WireColor color, WireColor defaultColor, double dividend) {
+    private SubtypeWire(WireMaterial conductor, InsulationMaterial insulation, WireClass wireClass, WireColor color, WireColor defaultColor, double dividend) {
         this(conductor, insulation, wireClass, color, defaultColor, dividend, null);
     }
 
-    private SubtypeWire(Conductor conductor, InsulationMaterial insulation, WireClass wireClass, WireColor color, WireColor defaultColor) {
+    private SubtypeWire(WireMaterial conductor, InsulationMaterial insulation, WireClass wireClass, WireColor color, WireColor defaultColor) {
         this(conductor, insulation, wireClass, color, defaultColor, 1, null);
+    }
+
+    @Override
+    public double getResistance() {
+        return resistance;
+    }
+
+    @Override
+    public long getAmpacity() {
+        return ampacity;
+    }
+
+    @Override
+    public IWireClass getWireClass() {
+        return wireClass;
+    }
+
+    @Override
+    public IInsulationMaterial getInsulation() {
+        return insulation;
+    }
+
+    @Override
+    public IWireMaterial getWireMaterial() {
+        return conductor;
+    }
+
+    @Override
+    public IWireColor getWireColor() {
+        return color;
+    }
+
+    @Override
+    public IWireColor getDefaultColor() {
+        return defaultColor;
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public TagKey<Item> getItemTag() {
+        return itemTag;
     }
 
     @Override
@@ -300,29 +336,24 @@ public enum SubtypeWire implements ISubtype {
         return false;
     }
 
+    @Override
     public boolean isDefaultColor() {
-        return color == defaultColor;
+        return isDefaultColor;
     }
 
     @Nullable
-    public static SubtypeWire getWire(Conductor conductor, InsulationMaterial insulation, WireClass wireClass, WireColor color) {
+    public static BlockWire getWire(IWireMaterial wireMaterial, IInsulationMaterial insulation, IWireClass wireClass, IWireColor color) {
 
-        for (SubtypeWire wire : WIRES.getOrDefault(wireClass, new HashSet<>())) {
-            if (wire.conductor == conductor && wire.insulation == insulation && wire.wireClass == wireClass && wire.color == color) {
-                return wire;
-            }
-        }
-
-        return null;
+        return WIRES.getOrDefault(wireMaterial, new HashMap<>()).getOrDefault(insulation, new HashMap<>()).getOrDefault(wireClass, new HashMap<>()).getOrDefault(color, null);
     }
 
-    public static SubtypeWire[] getWires(Conductor[] conductors, InsulationMaterial insulation, WireClass wireClass, WireColor... colors) {
+    public static BlockWire[] getWires(WireMaterial[] conductors, InsulationMaterial insulation, WireClass wireClass, WireColor... colors) {
 
-        List<SubtypeWire> list = new ArrayList<>();
+        List<BlockWire> list = new ArrayList<>();
 
-        SubtypeWire wire;
+        BlockWire wire;
 
-        for (Conductor conductor : conductors) {
+        for (WireMaterial conductor : conductors) {
             for (WireColor color : colors) {
                 wire = SubtypeWire.getWire(conductor, insulation, wireClass, color);
                 if (wire != null) {
@@ -331,29 +362,28 @@ public enum SubtypeWire implements ISubtype {
             }
         }
 
-        return list.toArray(new SubtypeWire[] {});
+        return list.toArray(new BlockWire[0]);
     }
 
     /**
      * A distinction is made between this and WireClass, as there can be multiple different wires with the same insulation
      * but different properties like the Logistical Wire. It shares the same insulation value as the standard Insulated wire
-     * 
-     * @author skip999
      *
+     * @author skip999
      */
-    public static enum InsulationMaterial {
+    public static enum InsulationMaterial implements IInsulationMaterial {
 
         BARE(false, true, 0, 1, Blocks.IRON_BLOCK.properties(), SoundType.METAL),
         WOOL(true, false, 240, 2, Blocks.WHITE_WOOL.properties(), SoundType.WOOL),
         THICK_WOOL(true, false, 960, 3, Blocks.WHITE_WOOL.properties(), SoundType.WOOL),
         CERAMIC(true, true, 480, 3, Blocks.STONE.properties(), SoundType.TUFF);
 
-        public final boolean insulated;
-        public final boolean fireProof;
-        public final int shockVoltage;
-        public final double radius;
-        public final Properties material;
-        public final SoundType soundType;
+        private final boolean insulated;
+        private final boolean fireProof;
+        private final int shockVoltage;
+        private final double radius;
+        private final Properties material;
+        private final SoundType soundType;
 
         InsulationMaterial(boolean insulated, boolean fireProof, int shockVoltage, double radius, Properties material, SoundType sounndType) {
             this.insulated = insulated;
@@ -363,15 +393,44 @@ public enum SubtypeWire implements ISubtype {
             this.material = material;
             this.soundType = sounndType;
         }
+
+        @Override
+        public boolean insulated() {
+            return insulated;
+        }
+
+        @Override
+        public boolean fireproof() {
+            return fireProof;
+        }
+
+        @Override
+        public int shockVoltage() {
+            return shockVoltage;
+        }
+
+        @Override
+        public double wireRadius() {
+            return radius;
+        }
+
+        @Override
+        public Properties getProperties() {
+            return material;
+        }
+
+        @Override
+        public SoundType getSoundType() {
+            return soundType;
+        }
     }
 
     /**
      * This is a category enum to make distinctions between the different types of wires
-     * 
-     * @author skip999
      *
+     * @author skip999
      */
-    public static enum WireClass {
+    public static enum WireClass implements IWireClass {
 
         BARE(false),
         INSULATED(false),
@@ -379,28 +438,42 @@ public enum SubtypeWire implements ISubtype {
         CERAMIC(false),
         LOGISTICAL(true);
 
-        public final boolean conductsRedstone;
+        private final boolean conductsRedstone;
 
         WireClass(boolean conductsRedstone) {
             this.conductsRedstone = conductsRedstone;
         }
+
+        @Override
+        public boolean conductsRedstone() {
+            return conductsRedstone;
+        }
     }
 
-    public static enum Conductor {
+    // Calculated using https://www.omnicalculator.com/physics/wire-resistance
+    // Area is actually 0.125 = 15625mm^2
+    // Length is 1 meter + 2 meters of wire - 2 * center length -> 3 - 2 * 0.125 = 2.75 meters per wire block. this is static and isnt calculated dynamically even though
+    // wires are rarely connected in all directions.
+    // Also manipulated uniformally
+    public static enum WireMaterial implements IWireMaterial {
 
-        COPPER(0.0030096, 360), // annealed copper
-        GOLD(0.004294, 1000),
-        IRON(0.01709, 100),
-        SILVER(0.0027984, 600),
-        SUPERCONDUCTIVE(0, Long.MAX_VALUE),
-        TIN(0.020064, 60); // Tin has 15% the conductivity of copper. Tin resistance = copper / 0.15
+        COPPER(0.0030096, 360, 1.68E-8D), // annealed copper
+        GOLD(0.004294, 1000, 2.44E-8D),
+        IRON(0.01709, 100, 1.0E-7D),
+        SILVER(0.0027984, 600, 1.59E-8D),
+        SUPERCONDUCTIVE(0, Long.MAX_VALUE, 0D),
+        TIN(0.020064, 60, 1.09E-7D); // Tin has 15% the conductivity of copper. Tin resistance = copper / 0.15
 
-        public final double resistance;
-        public final long ampacity;
+        public static final double BASELINE_TEMP_K = 293.15D;
 
-        Conductor(double resistance, long ampacity) {
+        private final double resistance;
+        private final long ampacity;
+        private final double resistivity;
+
+        WireMaterial(double resistance, long ampacity, double resistivity) {
             this.resistance = resistance;
             this.ampacity = ampacity;
+            this.resistivity = resistivity;
         }
 
         @Override
@@ -408,10 +481,66 @@ public enum SubtypeWire implements ISubtype {
             return super.toString().toLowerCase(Locale.ROOT);
         }
 
+        @Override
+        public double resistance() {
+            return resistance;
+        }
+
+        @Override
+        public long ampacity() {
+            return ampacity;
+        }
+
+        @Override
+        public double materialResistivity() {
+            return resistivity;
+        }
+
+
+        /**
+         * All units assumed to be in units of meters and its equivalent powers
+         *
+         * @param resistivity unitless
+         * @param area        meter^2
+         * @param length      meter
+         * @return the resistance per meter
+         */
+        public static double calculateResistance(double resistivity, double area, double length) {
+            return (resistivity * length) / area;
+        }
+
+        /**
+         * Returns the maximum permissible ampacity of a conductor based on its resistance
+         *
+         * @param maxOperatingTemp   units of Kelvin
+         * @param resistance         units of ohm / meter
+         * @param dialectricLoss     units of watts / meter
+         * @param thermalResistance1 units of kelvin * meter / watts
+         * @param thermalResistance2 units of kelvin * meter / watts
+         * @param thermalResistance3 units of kelvin * meter / watts
+         * @param thermalResistance4 units of kelvin * meter / watts
+         * @param numConductors      unitless
+         * @param ratioOfLosses1     unitless
+         * @param ratioOfLosses2     unitless
+         * @return the ampacity of this conductor as a long
+         */
+        public static long calculateAmpacity(double maxOperatingTemp, double resistance, double dialectricLoss, double thermalResistance1, double thermalResistance2, double thermalResistance3, double thermalResistance4, double numConductors, double ratioOfLosses1, double ratioOfLosses2) {
+
+            double deltaT = maxOperatingTemp - BASELINE_TEMP_K;
+
+            double top = deltaT - dialectricLoss * (0.5 * thermalResistance1 + numConductors * (thermalResistance2 + thermalResistance3 + thermalResistance4));
+
+            double bottom = resistance * thermalResistance1 + numConductors * resistance * (1 + ratioOfLosses1) * thermalResistance2 + numConductors * resistance * (1 + ratioOfLosses1 + ratioOfLosses2) * (thermalResistance3 + thermalResistance4);
+
+            double ampacity = Math.sqrt(top / bottom);
+
+            return (long) ampacity;
+
+        }
     }
 
     // based on NEC wire colors
-    public static enum WireColor {
+    public static enum WireColor implements IWireColor {
 
         NONE(255, 255, 255, 255, null),
         BLACK(40, 40, 40, 255, Tags.Items.DYES_BLACK),
@@ -426,6 +555,8 @@ public enum SubtypeWire implements ISubtype {
         @Nullable
         public final TagKey<Item> dyeTag;
 
+        public static final HashSet<IWireColor> WIRE_COLORS = new HashSet<>();
+
         private WireColor(int r, int g, int b, int a, TagKey<Item> dyeTag) {
             color = new Color(r, g, b, a);
             this.dyeTag = dyeTag;
@@ -437,13 +568,25 @@ public enum SubtypeWire implements ISubtype {
         }
 
         @Nullable
-        public static WireColor getColorFromDye(Item item) {
-            for (WireColor color : values()) {
-                if (color.dyeTag != null && item.builtInRegistryHolder().is(color.dyeTag)) {
+        public static IWireColor getColorFromDye(ItemStack item) {
+            for (IWireColor color : WIRE_COLORS) {
+                if (color.getDyeTag() != null && item.is(color.getDyeTag())) {
                     return color;
                 }
             }
             return null;
+        }
+
+        @NotNull
+        @Override
+        public Color getColor() {
+            return color;
+        }
+
+        @NotNull
+        @Override
+        public TagKey<Item> getDyeTag() {
+            return dyeTag;
         }
     }
 

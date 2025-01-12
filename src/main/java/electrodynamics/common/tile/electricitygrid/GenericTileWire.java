@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
-import electrodynamics.common.block.subtype.SubtypeWire;
+import electrodynamics.api.network.cable.type.IWire;
 import electrodynamics.common.network.type.ElectricNetwork;
 import electrodynamics.prefab.tile.types.GenericRefreshingConnectTile;
 import electrodynamics.prefab.utilities.object.TransferPack;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-public abstract class GenericTileWire extends GenericRefreshingConnectTile<SubtypeWire, GenericTileWire, ElectricNetwork> {
+public abstract class GenericTileWire extends GenericRefreshingConnectTile<IWire, GenericTileWire, ElectricNetwork> {
 
     private final ICapabilityElectrodynamic[] handler = new ICapabilityElectrodynamic[6];
 
@@ -116,7 +116,7 @@ public abstract class GenericTileWire extends GenericRefreshingConnectTile<Subty
 
     @Override
     public double getMaxTransfer() {
-        return getCableType().conductor.ampacity;
+        return getCableType().getAmpacity();
     }
 
     @Override
@@ -129,6 +129,6 @@ public abstract class GenericTileWire extends GenericRefreshingConnectTile<Subty
         return new ElectricNetwork(genericTileWires);
     }
 
-    public abstract SubtypeWire.WireColor getWireColor();
+    public abstract IWire.IWireColor getWireColor();
 
 }

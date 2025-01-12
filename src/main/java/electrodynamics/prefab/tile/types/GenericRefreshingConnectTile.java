@@ -243,14 +243,6 @@ public abstract class GenericRefreshingConnectTile<CABLETYPE, CONDUCTOR extends 
     }
 
     @Override
-    public void onBlockDestroyed() {
-        super.onBlockDestroyed();
-        if (!level.isClientSide && network != null) {
-            getNetwork().split((CONDUCTOR) this);
-        }
-    }
-
-    @Override
     public void onChunkUnloaded() {
         if (!level.isClientSide && network != null) {
             getNetwork().split((CONDUCTOR) this);

@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 import com.mojang.serialization.MapCodec;
 
+import electrodynamics.api.network.cable.type.IFluidPipe;
 import electrodynamics.common.block.connect.util.AbstractRefreshingConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
@@ -23,9 +24,9 @@ public class BlockFluidPipe extends AbstractRefreshingConnectBlock<GenericTileFl
 
     public static final HashSet<Block> PIPESET = new HashSet<>();
 
-    public final SubtypeFluidPipe pipe;
+    public final IFluidPipe pipe;
 
-    public BlockFluidPipe(SubtypeFluidPipe pipe) {
+    public BlockFluidPipe(IFluidPipe pipe) {
         super(Blocks.IRON_BLOCK.properties().sound(SoundType.METAL).strength(0.15f).dynamicShape().noOcclusion(), 3);
         this.pipe = pipe;
         PIPESET.add(this);
