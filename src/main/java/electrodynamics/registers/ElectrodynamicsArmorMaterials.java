@@ -32,7 +32,7 @@ public class ElectrodynamicsArmorMaterials {
 
     public static final DeferredHolder<ArmorMaterial, ArmorMaterial> HYDRAULIC_BOOTS = register("hydraulic_boots", ItemHydraulicBoots.DEFENSE_MAP, 0, 0, 0, SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.EMPTY, ResourceLocation.parse(References.ID + ":textures/model/armor/hydraulicboots.png"));
 
-    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> RUBBER_BOOTS = register("rubber_boots", ItemRubberArmor.DEFENSE_MAP, 0, 0, 0, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ElectrodynamicsItems.ITEM_INSULATION.get()), ResourceLocation.parse(References.ID + ":textures/model/armor/rubberarmor.png"));
+    public static final DeferredHolder<ArmorMaterial, ArmorMaterial> RUBBER_BOOTS = register("rubber_boots", ItemRubberArmor.DEFENSE_MAP, 0, 0, 0, SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ElectrodynamicsItems.ITEM_INSULATION.get()), ResourceLocation.parse(References.ID + ":rubberarmor"));
 
     private static DeferredHolder<ArmorMaterial, ArmorMaterial> register(String name, Map<ArmorItem.Type, Integer> slotMap, int enchantValue, float toughness, float knockbackResistance, Holder<SoundEvent> sound, Supplier<Ingredient> repairIngredient, ResourceLocation texture) {
         return ARMOR_MATERIALS.register(name, () -> new ArmorMaterial(slotMap, enchantValue, sound, repairIngredient, List.of(new ArmorMaterial.Layer(texture)), toughness, knockbackResistance));
