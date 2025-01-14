@@ -7,6 +7,7 @@ import electrodynamics.common.blockitem.types.BlockItemDescriptable;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import net.minecraft.ChatFormatting;
 import net.neoforged.bus.api.IEventBus;
 
 public class UnifiedElectrodynamicsRegister {
@@ -68,17 +69,17 @@ public class UnifiedElectrodynamicsRegister {
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_DECOMPRESSOR, ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ADVANCEDCOMPRESSOR, ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ADVANCEDDECOMPRESSOR, ElectroTextUtils.voltageTooltip(120));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK, ElectroTextUtils.tooltip("addontankcap", ChatFormatter.formatFluidMilibuckets(Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY)));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK, ElectroTextUtils.tooltip("addontankcap", ChatFormatter.formatFluidMilibuckets(Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_THERMOELECTRICMANIPULATOR, ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR, ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gaspipepump), ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.fluidpipepump), ElectroTextUtils.voltageTooltip(120));
 
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastanksteel), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(8, DisplayUnit.BUCKETS)));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastankreinforced), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(32, DisplayUnit.BUCKETS)));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastankhsla), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(128, DisplayUnit.BUCKETS)));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER, ElectroTextUtils.tooltip("rotaryunifier.use1"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER, ElectroTextUtils.tooltip("rotaryunifier.use2"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastanksteel), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(8, DisplayUnit.BUCKETS).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastankreinforced), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(32, DisplayUnit.BUCKETS).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gastankhsla), ElectroTextUtils.tooltip("gastank.capacity", ChatFormatter.getChatDisplayShort(128, DisplayUnit.BUCKETS).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER, ElectroTextUtils.tooltip("rotaryunifier.use1").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER, ElectroTextUtils.tooltip("rotaryunifier.use2").withStyle(ChatFormatting.DARK_GRAY));
 
 		// generators
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.solarpanel), ElectroTextUtils.voltageTooltip(120));
@@ -90,32 +91,37 @@ public class UnifiedElectrodynamicsRegister {
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.coalgenerator), ElectroTextUtils.voltageTooltip(120));
 
 		// misc
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.downgradetransformer), ElectroTextUtils.tooltip("transformer.energyloss"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.upgradetransformer), ElectroTextUtils.tooltip("transformer.energyloss"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.downgradetransformer), ElectroTextUtils.tooltip("transformer.energyloss", ChatFormatter.getChatDisplayShort(Constants.TRANSFORMER_EFFICIENCY * 100, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.upgradetransformer), ElectroTextUtils.tooltip("transformer.energyloss", ChatFormatter.getChatDisplayShort(Constants.TRANSFORMER_EFFICIENCY * 100, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.advanceddowngradetransformer), ElectroTextUtils.tooltip("transformer.energyloss", ChatFormatter.getChatDisplayShort(Constants.TRANSFORMER_EFFICIENCY * 100, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.advancedupgradetransformer), ElectroTextUtils.tooltip("transformer.energyloss", ChatFormatter.getChatDisplayShort(Constants.TRANSFORMER_EFFICIENCY * 100, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.circuitbreaker), ElectroTextUtils.tooltip("transformer.energyloss", ChatFormatter.getChatDisplayShort(Constants.CIRCUITBREAKER_EFFICIENCY * 100, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.relay), ElectroTextUtils.tooltip("transformer.energyloss", ChatFormatter.getChatDisplayShort(Constants.RELAY_EFFICIENCY * 100, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.currentregulator), ElectroTextUtils.tooltip("transformer.energyloss", ChatFormatter.getChatDisplayShort(Constants.CURRENTREGULATOR_EFFICIENCY * 100, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.batterybox), ElectroTextUtils.voltageTooltip(120));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.lithiumbatterybox), ElectroTextUtils.voltageTooltip(240));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.carbynebatterybox), ElectroTextUtils.voltageTooltip(480));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.creativepowersource), ElectroTextUtils.tooltip("creativepowersource.joke"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.creativefluidsource), ElectroTextUtils.tooltip("creativefluidsource.joke"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.creativegassource), ElectroTextUtils.tooltip("creativegassource.joke"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.fluidvoid), ElectroTextUtils.tooltip("fluidvoid"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.tanksteel), ElectroTextUtils.tooltip("fluidtank.capacity", ChatFormatter.getChatDisplayShort(8, DisplayUnit.BUCKETS)));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.tankreinforced), ElectroTextUtils.tooltip("fluidtank.capacity", ChatFormatter.getChatDisplayShort(32, DisplayUnit.BUCKETS)));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.tankhsla), ElectroTextUtils.tooltip("fluidtank.capacity", ChatFormatter.getChatDisplayShort(128, DisplayUnit.BUCKETS)));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_SEISMICMARKER, ElectroTextUtils.tooltip("seismicmarker.redstone"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.seismicrelay), ElectroTextUtils.tooltip("seismicrelay.use"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.coolantresavoir), ElectroTextUtils.tooltip("coolantresavoir.place"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.motorcomplex), ElectroTextUtils.tooltip("motorcomplex.use"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_FRAME, ElectroTextUtils.tooltip("blockframe.joke"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER, ElectroTextUtils.tooltip("blockframe.joke"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.quarry), ElectroTextUtils.tooltip("quarry.power"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_LOGISTICALMANAGER, ElectroTextUtils.tooltip("logisticalmanager.use"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.creativepowersource), ElectroTextUtils.tooltip("creativepowersource.joke").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.creativefluidsource), ElectroTextUtils.tooltip("creativefluidsource.joke").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.creativegassource), ElectroTextUtils.tooltip("creativegassource.joke").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.fluidvoid), ElectroTextUtils.tooltip("fluidvoid").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.tanksteel), ElectroTextUtils.tooltip("fluidtank.capacity", ChatFormatter.getChatDisplayShort(8, DisplayUnit.BUCKETS).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.tankreinforced), ElectroTextUtils.tooltip("fluidtank.capacity", ChatFormatter.getChatDisplayShort(32, DisplayUnit.BUCKETS).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.tankhsla), ElectroTextUtils.tooltip("fluidtank.capacity", ChatFormatter.getChatDisplayShort(128, DisplayUnit.BUCKETS).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_SEISMICMARKER, ElectroTextUtils.tooltip("seismicmarker.redstone").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.seismicrelay), ElectroTextUtils.tooltip("seismicrelay.use").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.coolantresavoir), ElectroTextUtils.tooltip("coolantresavoir.place").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.motorcomplex), ElectroTextUtils.tooltip("motorcomplex.use").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_FRAME, ElectroTextUtils.tooltip("blockframe.joke").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_FRAME_CORNER, ElectroTextUtils.tooltip("blockframe.joke").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.quarry), ElectroTextUtils.tooltip("quarry.power").withStyle(ChatFormatting.DARK_GRAY));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_LOGISTICALMANAGER, ElectroTextUtils.tooltip("logisticalmanager.use").withStyle(ChatFormatting.DARK_GRAY));
 
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gasvent), ElectroTextUtils.tooltip("gasvent"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gasvent), ElectroTextUtils.tooltip("gasvent").withStyle(ChatFormatting.DARK_GRAY));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gascollector), ElectroTextUtils.voltageTooltip(240));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gasvalve), ElectroTextUtils.tooltip("gasvalve"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.fluidvalve), ElectroTextUtils.tooltip("fluidvalve"));
-		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.potentiometer), ElectroTextUtils.tooltip("potentiometer.use"));
+		//BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.gasvalve), ElectroTextUtils.tooltip("gasvalve").withStyle(ChatFormatting.DARK_GRAY));
+		//BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.fluidvalve), ElectroTextUtils.tooltip("fluidvalve"));
+		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCKS_MACHINE.getHolder(SubtypeMachine.potentiometer), ElectroTextUtils.tooltip("potentiometer.use").withStyle(ChatFormatting.DARK_GRAY));
 		BlockItemDescriptable.addDescription(ElectrodynamicsBlocks.BLOCK_CHEMICALREACTOR, ElectroTextUtils.voltageTooltip(480));
 	}
 

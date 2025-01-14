@@ -32,7 +32,7 @@ public class GasCollectorRecipeCategory extends AbstractRecipeCategory<PsuedoGas
 
     public static final ItemSlotObject INPUT_SLOT = new ItemSlotObject(ScreenComponentSlot.SlotType.NORMAL, 25, 26, RecipeIngredientRole.INPUT);
 
-    public static final GasGaugeObject OUTPUT_GAUGE = new GasGaugeObject(90, 10, 5000);
+    public static final GasGaugeObject OUTPUT_GAUGE = new GasGaugeObject(90, 10);
 
     public static final PowerLabelWrapperConstant POWER_LABEL = new PowerLabelWrapperConstant(2, 55, Constants.GAS_COLLECTOR_USAGE_PER_TICK, 240);
 

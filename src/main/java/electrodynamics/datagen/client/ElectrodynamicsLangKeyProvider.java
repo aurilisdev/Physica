@@ -817,9 +817,11 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addTooltip("itemwire.info.uninsulated", "Uninsulated!");
 			addTooltip("itemwire.info.fireproof", "Fire-proof");
 			addTooltip("itemwire.info.redstone", "Conducts Redstone");
-			addTooltip("info.capacityupgrade", "Multiplies Energy Capacity and Transfer by %sx");
-			addTooltip("info.capacityupgradevoltage", "Will upgrade machine voltage up to %s");
-			addTooltip("info.speedupgrade", "Multiplies Speed by %sx");
+			addTooltip("info.upgradecapacity", "Capacity: %s");
+			addTooltip("info.upgradeenergytransfer", "Energy Transfer: %s");
+			addTooltip("info.upgradevoltage", "Voltage: %s");
+			addTooltip("info.upgradespeed", "Speed: %s");
+			addTooltip("info.upgradeenergyusage", "Usage: %s");
 			addTooltip("info.itemoutputupgrade", "Ejects items into adjacent inventories");
 			addTooltip("info.iteminputupgrade", "Injects items from adjacent inventories");
 			addTooltip("info.dirlist", "Current Directions:");
@@ -833,11 +835,10 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addTooltip("info.xpusage", "Shift+Right-Click to dispense");
 			addTooltip("info.range", "Increases raduis by 1");
 			addTooltip("info.broken", "NOT WORKING");
-			addTooltip("transformer.energyloss", "Efficiency: 99.25%");
+			addTooltip("transformer.energyloss", "Efficiency: %s");
 			addTooltip("machine.voltage", "Voltage: %s");
-			addTooltip("item.electric.info", "Energy Stored: %s");
-			addTooltip("item.electric.voltage", "I/O Voltage: %s");
-			addTooltip("itemcanister", "1000 mB");
+			addTooltip("item.electric.info", "Stored: %s");
+			addTooltip("item.electric.voltage", "Voltage: %s");
 			addTooltip("railguntemp", "Temperature %s");
 			addTooltip("railgunmaxtemp", "Max Temp: %s");
 			addTooltip("railgunoverheat", "WARNING : OVERHEATING");
@@ -886,6 +887,8 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addTooltip("pipematerialcopper", "Copper");
 			addTooltip("pipematerialsteel", "Steel");
 			addTooltip("pipematerialplastic", "Plastic");
+
+			addTooltip("pipethroughput", "Throughput: %s");
 
 			addTooltip("pipeinsulationnone", "None");
 			addTooltip("pipeinsulationwool", "Wool");

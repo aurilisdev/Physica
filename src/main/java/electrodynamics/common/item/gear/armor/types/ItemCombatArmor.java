@@ -150,14 +150,14 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
         super.appendHoverText(stack, context, tooltips, flagin);
         switch (((ArmorItem) stack.getItem()).getEquipmentSlot()) {
             case HEAD:
-                tooltips.add(ElectroTextUtils.tooltip("item.electric.info", ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY));
-                tooltips.add(ElectroTextUtils.tooltip("item.electric.voltage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE), ChatFormatter.getChatDisplayShort(properties.extract.getVoltage(), DisplayUnit.VOLTAGE))).withStyle(ChatFormatting.RED));
-                if (stack.getOrDefault(ElectrodynamicsDataComponentTypes.ON, false)) {
-                    tooltips.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.on").withStyle(ChatFormatting.GREEN)));
-                } else {
-                    tooltips.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.off").withStyle(ChatFormatting.RED)));
-                }
+                tooltips.add(ElectroTextUtils.tooltip("item.electric.info", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES), ChatFormatter.getChatDisplayShort(getMaximumCapacity(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+                tooltips.add(ElectroTextUtils.tooltip("item.electric.voltage", ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
                 IItemElectric.addBatteryTooltip(stack, context, tooltips);
+                if (stack.getOrDefault(ElectrodynamicsDataComponentTypes.ON, false)) {
+                    tooltips.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.on").withStyle(ChatFormatting.GREEN)));
+                } else {
+                    tooltips.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.off").withStyle(ChatFormatting.RED)));
+                }
                 GasStack gas = stack.getOrDefault(ElectrodynamicsDataComponentTypes.GAS_STACK.get(), GasStack.EMPTY);
                 tooltips.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(gas.getAmount()), ChatFormatter.formatFluidMilibuckets(HELMET_CAPACITY)).withStyle(ChatFormatting.GRAY));
                 if (Screen.hasShiftDown()) {
@@ -170,8 +170,8 @@ public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemEl
                 ItemCompositeArmor.staticAppendHoverText(stack, context, tooltips, flagin);
                 break;
             case LEGS:
-                tooltips.add(ElectroTextUtils.tooltip("item.electric.info", ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY));
-                tooltips.add(ElectroTextUtils.tooltip("item.electric.voltage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE), ChatFormatter.getChatDisplayShort(properties.extract.getVoltage(), DisplayUnit.VOLTAGE))).withStyle(ChatFormatting.RED));
+                tooltips.add(ElectroTextUtils.tooltip("item.electric.info", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES), ChatFormatter.getChatDisplayShort(getMaximumCapacity(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+                tooltips.add(ElectroTextUtils.tooltip("item.electric.voltage", ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
                 ItemServoLeggings.staticAppendTooltips(stack, context, tooltips, flagin);
                 gas = stack.getOrDefault(ElectrodynamicsDataComponentTypes.GAS_STACK.get(), GasStack.EMPTY);
                 tooltips.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(gas.getAmount()), ChatFormatter.formatFluidMilibuckets(HELMET_CAPACITY)).withStyle(ChatFormatting.GRAY));

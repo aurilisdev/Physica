@@ -14,8 +14,7 @@ import electrodynamics.compatibility.jei.utils.gui.types.gasgauge.AbstractGasGau
 import electrodynamics.compatibility.jei.utils.ingredients.ElectrodynamicsJeiTypes;
 import electrodynamics.compatibility.jei.utils.ingredients.IngredientRendererGasStack;
 import electrodynamics.compatibility.jei.utils.label.AbstractLabelWrapper;
-import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
-import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
+import electrodynamics.prefab.utilities.math.MathUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -248,21 +247,27 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
         AbstractFluidGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.INPUT;
         FluidStack stack;
+
+        int maxGaugeCap = 0;
+
+        for (List<FluidStack> stacks : inputs) {
+            stack = stacks.get(0);
+            int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(stack.getAmount(), true));
+            if (gaugeCap > maxGaugeCap) {
+                maxGaugeCap = gaugeCap;
+            }
+        }
+
+
         for (int i = 0; i < fluidInputWrappers.length; i++) {
             wrapper = fluidInputWrappers[i];
             stack = inputs.get(i).get(0);
 
             int amt = stack.getAmount();
 
-            int gaugeCap = wrapper.getAmount();
+            //int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(amt, true));
 
-            if (amt > gaugeCap) {
-
-                gaugeCap = (amt / IComponentFluidHandler.TANK_MULTIPLER) * IComponentFluidHandler.TANK_MULTIPLER + IComponentFluidHandler.TANK_MULTIPLER;
-
-            }
-
-            int height = (int) Math.ceil((float) amt / (float) gaugeCap * wrapper.getFluidTextHeight());
+            int height = (int) Math.ceil((float) amt / (float) maxGaugeCap * wrapper.getFluidTextHeight());
 
             builder.addSlot(role, wrapper.getFluidXPos(), wrapper.getFluidYPos() - height).setFluidRenderer(stack.getAmount(), false, wrapper.getFluidTextWidth(), height).addIngredients(NeoForgeTypes.FLUID_STACK, inputs.get(i));
         }
@@ -272,21 +277,25 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
         AbstractFluidGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.OUTPUT;
         FluidStack stack;
+
+        int maxGaugeCap = 0;
+
+        for (FluidStack s : outputs) {
+            int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(s.getAmount(), true));
+            if (gaugeCap > maxGaugeCap) {
+                maxGaugeCap = gaugeCap;
+            }
+        }
+
         for (int i = 0; i < fluidOutputWrappers.length; i++) {
             wrapper = fluidOutputWrappers[i];
             stack = outputs.get(i);
 
             int amt = stack.getAmount();
 
-            int gaugeCap = wrapper.getAmount();
+            //int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(amt, true));
 
-            if (amt > gaugeCap) {
-
-                gaugeCap = (amt / IComponentFluidHandler.TANK_MULTIPLER) * IComponentFluidHandler.TANK_MULTIPLER + IComponentFluidHandler.TANK_MULTIPLER;
-
-            }
-
-            int height = (int) Math.ceil((float) amt / (float) gaugeCap * wrapper.getFluidTextHeight());
+            int height = (int) Math.ceil((float) amt / (float) maxGaugeCap * wrapper.getFluidTextHeight());
             builder.addSlot(role, wrapper.getFluidXPos(), wrapper.getFluidYPos() - height).setFluidRenderer(stack.getAmount(), false, wrapper.getFluidTextWidth(), height).addIngredient(NeoForgeTypes.FLUID_STACK, stack);
         }
     }
@@ -296,6 +305,17 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
         AbstractGasGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.INPUT;
         List<GasStack> stacks;
+
+        int maxGaugeCap = 0;
+
+        for (List<GasStack> stackz : inputs) {
+            GasStack stack = stackz.get(0);
+            int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(stack.getAmount(), true));
+            if (gaugeCap > maxGaugeCap) {
+                maxGaugeCap = gaugeCap;
+            }
+        }
+
         for (int i = 0; i < gasInputWrappers.length; i++) {
 
             wrapper = gasInputWrappers[i];
@@ -303,30 +323,13 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 
             double amt = stacks.get(0).getAmount();
 
-            double gaugeCap = wrapper.getAmount();
+            //double gaugeCap = Math.pow(10, MathUtils.nearestPowerOf10(amt, true));
 
-            if (amt < gaugeCap / 50) {
-                double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));
-                if (amtPowTen == 0) {
-                    amtPowTen = 1;
-                }
-                double gaugePowTen = Math.log10(Math.pow(10, Math.round(Math.log10(gaugeCap) - Math.log10(5.5) + 0.5)));
-                double logAmtPowTen = Math.log10(amtPowTen);
-
-                double delta = gaugePowTen - logAmtPowTen;
-
-                amt *= Math.pow(10, delta);
-            }
-
-            if (amt > gaugeCap) {
-                gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;
-            }
-
-            int height = (int) (Math.ceil(amt / gaugeCap * (wrapper.getHeight() - 2)));
+            int height = (int) (Math.ceil(amt / maxGaugeCap * (wrapper.getHeight() - 2)));
 
             int oneMinusHeight = wrapper.getHeight() - height;
 
-            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) gaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
         }
 
     }
@@ -336,6 +339,16 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
         AbstractGasGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.OUTPUT;
         GasStack stack;
+
+        int maxGaugeCap = 0;
+
+        for (GasStack s : outputs) {
+            int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(s.getAmount(), true));
+            if (gaugeCap > maxGaugeCap) {
+                maxGaugeCap = gaugeCap;
+            }
+        }
+
         for (int i = 0; i < gasOutputWrappers.length; i++) {
 
             wrapper = gasOutputWrappers[i];
@@ -343,30 +356,13 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 
             double amt = stack.getAmount();
 
-            double gaugeCap = wrapper.getAmount();
+            //double gaugeCap = Math.pow(10, MathUtils.nearestPowerOf10(amt, true));
 
-            if (amt < gaugeCap / 50) {
-                double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));
-                if (amtPowTen == 0) {
-                    amtPowTen = 1;
-                }
-                double gaugePowTen = Math.log10(Math.pow(10, Math.round(Math.log10(gaugeCap) - Math.log10(5.5) + 0.5)));
-                double logAmtPowTen = Math.log10(amtPowTen);
-
-                double delta = gaugePowTen - logAmtPowTen;
-
-                amt *= Math.pow(10, delta);
-            }
-
-            if (amt > gaugeCap) {
-                gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;
-            }
-
-            int height = (int) (Math.ceil(amt / gaugeCap * (wrapper.getHeight() - 2)));
+            int height = (int) (Math.ceil(amt / maxGaugeCap * (wrapper.getHeight() - 2)));
 
             int oneMinusHeight = wrapper.getHeight() - height;
 
-            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) gaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
         }
     }
 

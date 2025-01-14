@@ -4,8 +4,8 @@ import electrodynamics.compatibility.jei.utils.gui.JeiTextures;
 
 public class FluidGaugeObject extends AbstractFluidGaugeObject {
 
-	public FluidGaugeObject(int x, int y, int amount) {
-		super(JeiTextures.FLUID_GAUGE_DEFAULT, amount, x, y);
+	public FluidGaugeObject(int x, int y) {
+		super(JeiTextures.FLUID_GAUGE_DEFAULT, x, y);
 	}
 
 	@Override

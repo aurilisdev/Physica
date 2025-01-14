@@ -59,6 +59,15 @@ public class MathUtils {
 		return (int) (Math.log(value) / Math.log(2) + 1e-10);
 	}
 
+	public static int nearestPowerOf10(double value, boolean roundUp) {
+		double power = Math.log10(value);
+		if(roundUp) {
+			return (int) Math.ceil(power);
+		} else {
+			return (int) Math.floor(power);
+		}
+	}
+
 	/**
 	 * Performs the same function the vanilla class contructor had
 	 * 

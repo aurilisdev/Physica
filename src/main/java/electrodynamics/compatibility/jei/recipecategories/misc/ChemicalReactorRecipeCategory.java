@@ -20,9 +20,8 @@ import electrodynamics.compatibility.jei.utils.label.types.PowerLabelWrapperElec
 import electrodynamics.compatibility.jei.utils.label.types.TimeLabelWrapperElectroRecipe;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot;
-import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
-import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
+import electrodynamics.prefab.utilities.math.MathUtils;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
@@ -46,14 +45,14 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
     public static final ItemSlotObject BIPRODUCT_SLOT1 = new ItemSlotObject(ScreenComponentSlot.SlotType.NORMAL, 83, 67, RecipeIngredientRole.OUTPUT);
     public static final ItemSlotObject BIPRODUCT_SLOT2 = new ItemSlotObject(ScreenComponentSlot.SlotType.NORMAL, 83, 85, RecipeIngredientRole.OUTPUT);
     public static final ItemSlotObject BIPRODUCT_SLOT3 = new ItemSlotObject(ScreenComponentSlot.SlotType.NORMAL, 83, 103, RecipeIngredientRole.OUTPUT);
-    public static final FluidGaugeObject IN_FLUIDGAUGE1 = new FluidGaugeObject(3, 3, 5000);
-    public static final FluidGaugeObject IN_FLUIDGAUGE2 = new FluidGaugeObject(17, 3, 5000);
-    public static final FluidGaugeObject OUT_FLUIDGAUGE1 = new FluidGaugeObject(73, 3, 5000);
-    public static final FluidGaugeObject OUT_FLUIDGAUGE2 = new FluidGaugeObject(87, 3, 5000);
-    public static final GasGaugeObject IN_GASGAUGE1 = new GasGaugeObject(31, 3, 5000);
-    public static final GasGaugeObject IN_GASGAUGE2 = new GasGaugeObject(45, 3, 5000);
-    public static final GasGaugeObject OUT_GASGAUGE1 = new GasGaugeObject(101, 3, 5000);
-    public static final GasGaugeObject OUT_GASGAUGE2 = new GasGaugeObject(115, 3, 5000);
+    public static final FluidGaugeObject IN_FLUIDGAUGE1 = new FluidGaugeObject(3, 3);
+    public static final FluidGaugeObject IN_FLUIDGAUGE2 = new FluidGaugeObject(17, 3);
+    public static final FluidGaugeObject OUT_FLUIDGAUGE1 = new FluidGaugeObject(73, 3);
+    public static final FluidGaugeObject OUT_FLUIDGAUGE2 = new FluidGaugeObject(87, 3);
+    public static final GasGaugeObject IN_GASGAUGE1 = new GasGaugeObject(31, 3);
+    public static final GasGaugeObject IN_GASGAUGE2 = new GasGaugeObject(45, 3);
+    public static final GasGaugeObject OUT_GASGAUGE1 = new GasGaugeObject(101, 3);
+    public static final GasGaugeObject OUT_GASGAUGE2 = new GasGaugeObject(115, 3);
 
 
     public static final ArrowAnimatedObject ANIM_ARROW = new ArrowAnimatedObject(ScreenComponentProgress.ProgressBars.PROGRESS_ARROW_RIGHT, 32, 85, IDrawableAnimated.StartDirection.LEFT);
@@ -229,6 +228,22 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         AbstractFluidGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.INPUT;
         FluidStack stack;
+
+        int maxGaugeCap = 0;
+
+        for (List<FluidStack> stacks : inputs) {
+
+            if(stacks.isEmpty()) {
+                continue;
+            }
+
+            stack = stacks.get(0);
+            int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(stack.getAmount(), true));
+            if (gaugeCap > maxGaugeCap) {
+                maxGaugeCap = gaugeCap;
+            }
+        }
+        
         for (int i = 0; i < fluidInputWrappers.length; i++) {
             wrapper = fluidInputWrappers[i];
 
@@ -243,15 +258,9 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
 
             int amt = stack.getAmount();
 
-            int gaugeCap = wrapper.getAmount();
+            //int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(amt, true));
 
-            if (amt > gaugeCap) {
-
-                gaugeCap = (amt / IComponentFluidHandler.TANK_MULTIPLER) * IComponentFluidHandler.TANK_MULTIPLER + IComponentFluidHandler.TANK_MULTIPLER;
-
-            }
-
-            int height = (int) Math.ceil((float) amt / (float) gaugeCap * wrapper.getFluidTextHeight());
+            int height = (int) Math.ceil((float) amt / (float) maxGaugeCap * wrapper.getFluidTextHeight());
 
             builder.addSlot(role, wrapper.getFluidXPos(), wrapper.getFluidYPos() - height).setFluidRenderer(stack.getAmount(), false, wrapper.getFluidTextWidth(), height).addIngredients(NeoForgeTypes.FLUID_STACK, inputs.get(i));
         }
@@ -261,6 +270,16 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         AbstractFluidGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.OUTPUT;
         FluidStack stack;
+
+        int maxGaugeCap = 0;
+
+        for (FluidStack s : outputs) {
+            int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(s.getAmount(), true));
+            if (gaugeCap > maxGaugeCap) {
+                maxGaugeCap = gaugeCap;
+            }
+        }
+
         for (int i = 0; i < fluidOutputWrappers.length; i++) {
             wrapper = fluidOutputWrappers[i];
             stack = outputs.get(i);
@@ -271,15 +290,9 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
 
             int amt = stack.getAmount();
 
-            int gaugeCap = wrapper.getAmount();
+            //int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(amt, true));
 
-            if (amt > gaugeCap) {
-
-                gaugeCap = (amt / IComponentFluidHandler.TANK_MULTIPLER) * IComponentFluidHandler.TANK_MULTIPLER + IComponentFluidHandler.TANK_MULTIPLER;
-
-            }
-
-            int height = (int) Math.ceil((float) amt / (float) gaugeCap * wrapper.getFluidTextHeight());
+            int height = (int) Math.ceil((float) amt / (float) maxGaugeCap * wrapper.getFluidTextHeight());
             builder.addSlot(role, wrapper.getFluidXPos(), wrapper.getFluidYPos() - height).setFluidRenderer(stack.getAmount(), false, wrapper.getFluidTextWidth(), height).addIngredient(NeoForgeTypes.FLUID_STACK, stack);
         }
     }
@@ -289,6 +302,22 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         AbstractGasGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.INPUT;
         List<GasStack> stacks;
+
+        int maxGaugeCap = 0;
+
+        for (List<GasStack> stackz : inputs) {
+
+            if(stackz.isEmpty()) {
+                continue;
+            }
+
+            GasStack stack = stackz.get(0);
+            int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(stack.getAmount(), true));
+            if (gaugeCap > maxGaugeCap) {
+                maxGaugeCap = gaugeCap;
+            }
+        }
+
         for (int i = 0; i < gasInputWrappers.length; i++) {
 
             wrapper = gasInputWrappers[i];
@@ -300,30 +329,13 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
 
             double amt = stacks.get(0).getAmount();
 
-            double gaugeCap = wrapper.getAmount();
+            //double gaugeCap = Math.pow(10, MathUtils.nearestPowerOf10(amt, true));
 
-            if (amt < gaugeCap / 50) {
-                double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));
-                if (amtPowTen == 0) {
-                    amtPowTen = 1;
-                }
-                double gaugePowTen = Math.log10(Math.pow(10, Math.round(Math.log10(gaugeCap) - Math.log10(5.5) + 0.5)));
-                double logAmtPowTen = Math.log10(amtPowTen);
-
-                double delta = gaugePowTen - logAmtPowTen;
-
-                amt *= Math.pow(10, delta);
-            }
-
-            if (amt > gaugeCap) {
-                gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;
-            }
-
-            int height = (int) (Math.ceil(amt / gaugeCap * (wrapper.getHeight() - 2)));
+            int height = (int) (Math.ceil(amt / maxGaugeCap * (wrapper.getHeight() - 2)));
 
             int oneMinusHeight = wrapper.getHeight() - height;
 
-            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) gaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
         }
 
     }
@@ -333,6 +345,16 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         AbstractGasGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.OUTPUT;
         GasStack stack;
+
+        int maxGaugeCap = 0;
+
+        for (GasStack s : outputs) {
+            int gaugeCap = (int) Math.pow(10, MathUtils.nearestPowerOf10(s.getAmount(), true));
+            if (gaugeCap > maxGaugeCap) {
+                maxGaugeCap = gaugeCap;
+            }
+        }
+
         for (int i = 0; i < gasOutputWrappers.length; i++) {
 
             wrapper = gasOutputWrappers[i];
@@ -344,30 +366,13 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
 
             double amt = stack.getAmount();
 
-            double gaugeCap = wrapper.getAmount();
+            //double gaugeCap = Math.pow(10, MathUtils.nearestPowerOf10(amt, true));
 
-            if (amt < gaugeCap / 50) {
-                double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));
-                if (amtPowTen == 0) {
-                    amtPowTen = 1;
-                }
-                double gaugePowTen = Math.log10(Math.pow(10, Math.round(Math.log10(gaugeCap) - Math.log10(5.5) + 0.5)));
-                double logAmtPowTen = Math.log10(amtPowTen);
-
-                double delta = gaugePowTen - logAmtPowTen;
-
-                amt *= Math.pow(10, delta);
-            }
-
-            if (amt > gaugeCap) {
-                gaugeCap = (((int) Math.ceil(amt)) * IComponentGasHandler.TANK_MULTIPLIER) * IComponentGasHandler.TANK_MULTIPLIER + IComponentGasHandler.TANK_MULTIPLIER;
-            }
-
-            int height = (int) (Math.ceil(amt / gaugeCap * (wrapper.getHeight() - 2)));
+            int height = (int) (Math.ceil(amt / maxGaugeCap * (wrapper.getHeight() - 2)));
 
             int oneMinusHeight = wrapper.getHeight() - height;
 
-            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) gaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
         }
     }
 }

@@ -32,8 +32,8 @@ public class MineralWasherRecipeCategory extends FluidItem2FluidRecipeCategory<M
     public static final ArrowAnimatedObject ANIM_RIGHT_ARROW_1 = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT, 30, 17, StartDirection.LEFT);
     public static final ArrowAnimatedObject ANIM_RIGHT_ARROW_2 = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT, 80, 17, StartDirection.LEFT);
 
-    public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(10, 5, 5000);
-    public static final FluidGaugeObject OUT_GAUGE = new FluidGaugeObject(108, 5, 5000);
+    public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(10, 5);
+    public static final FluidGaugeObject OUT_GAUGE = new FluidGaugeObject(108, 5);
 
     public static final PowerLabelWrapperElectroRecipe POWER_LABEL = new PowerLabelWrapperElectroRecipe(2, 55, 480);
     public static final TimeLabelWrapperElectroRecipe TIME_LABEL = new TimeLabelWrapperElectroRecipe(130, 55);

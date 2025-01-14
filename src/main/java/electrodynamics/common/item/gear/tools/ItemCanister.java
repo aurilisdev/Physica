@@ -2,7 +2,6 @@ package electrodynamics.common.item.gear.tools;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.api.capability.types.fluid.RestrictedFluidHandlerItemStack;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
@@ -100,8 +99,10 @@ public class ItemCanister extends ItemElectrodynamics {
 
         RestrictedFluidHandlerItemStack restricted = (RestrictedFluidHandlerItemStack) handler;
 
-        tooltip.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(restricted.getFluidInTank(0).getAmount()), ChatFormatter.formatFluidMilibuckets(MAX_FLUID_CAPACITY)).withStyle(ChatFormatting.GRAY));
-        tooltip.add(restricted.getFluid().getFluidType().getDescription().copy().withStyle(ChatFormatting.DARK_GRAY));
+        if(!restricted.getFluid().isEmpty()) {
+            tooltip.add(restricted.getFluid().getFluidType().getDescription().copy().withStyle(ChatFormatting.GRAY));
+        }
+        tooltip.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(restricted.getFluidInTank(0).getAmount()), ChatFormatter.formatFluidMilibuckets(MAX_FLUID_CAPACITY)).withStyle(ChatFormatting.DARK_GRAY));
 
         super.appendHoverText(stack, context, tooltip, flagIn);
     }

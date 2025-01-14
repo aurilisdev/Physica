@@ -230,7 +230,7 @@ public interface IItemElectric {
     Item getDefaultStorageBattery();
 
     static void addBatteryTooltip(ItemStack stack, Item.TooltipContext context, List<Component> tooltip) {
-        tooltip.add(ElectroTextUtils.tooltip("currbattery", ((IItemElectric) stack.getItem()).getCurrentBattery(stack).getDisplayName()).withStyle(ChatFormatting.GRAY));
+        tooltip.add(ElectroTextUtils.tooltip("currbattery", ((IItemElectric) stack.getItem()).getCurrentBattery(stack).getDisplayName().copy().withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
     }
 
     public static class ElectricItemData {

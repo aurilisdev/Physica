@@ -1,14 +1,12 @@
 package electrodynamics.common.item.gear.tools;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.common.inventory.container.item.ContainerGuidebook;
 import electrodynamics.common.item.ItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -31,19 +29,14 @@ public class ItemGuidebook extends ItemElectrodynamics {
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltips, TooltipFlag flag) {
-		tooltips.add(ElectroTextUtils.tooltip("info.guidebookuse").withStyle(ChatFormatting.LIGHT_PURPLE));
-		tooltips.add(ElectroTextUtils.tooltip("guidebookname").withStyle(ChatFormatting.GRAY));
+		//tooltips.add(ElectroTextUtils.tooltip("info.guidebookuse").withStyle(ChatFormatting.LIGHT_PURPLE));
+		tooltips.add(ElectroTextUtils.tooltip("guidebookname").withStyle(ChatFormatting.LIGHT_PURPLE));
 		super.appendHoverText(stack, context, tooltips, flag);
 	}
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand handIn) {
-		if (world.isClientSide) {
-			if (player.isShiftKeyDown()) {
-				player.sendSystemMessage(ElectroTextUtils.chatMessage("guidebookclick").withStyle(ChatFormatting.BOLD, ChatFormatting.RED).withStyle(style -> style.withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, LINK))));
-				return InteractionResultHolder.pass(player.getItemInHand(handIn));
-			}
-		} else {
+		if (!world.isClientSide) {
 			player.openMenu(getMenuProvider(world, player));
 		}
 		return super.use(world, player, handIn);

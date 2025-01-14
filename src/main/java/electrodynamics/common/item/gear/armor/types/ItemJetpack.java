@@ -107,11 +107,11 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
                 GasStack gas = handler.getGasInTank(0);
                 // tooltips.add(gas.getGas().getDescription());
                 if (gas.isEmpty()) {
-                    tooltips.add(ElectroTextUtils.ratio(Component.literal("0"), ChatFormatter.formatFluidMilibuckets(MAX_CAPACITY)));
+                    tooltips.add(ElectroTextUtils.ratio(Component.literal("0"), ChatFormatter.formatFluidMilibuckets(MAX_CAPACITY)).withStyle(ChatFormatting.GRAY));
                 } else {
-                    tooltips.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(gas.getAmount()), ChatFormatter.formatFluidMilibuckets(MAX_CAPACITY)));
-                    tooltips.add(ChatFormatter.getChatDisplayShort(gas.getTemperature(), DisplayUnit.TEMPERATURE_KELVIN));
-                    tooltips.add(ChatFormatter.getChatDisplayShort(gas.getPressure(), DisplayUnit.PRESSURE_ATM));
+                    tooltips.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(gas.getAmount()), ChatFormatter.formatFluidMilibuckets(MAX_CAPACITY)).withStyle(ChatFormatting.GRAY));
+                    tooltips.add(ChatFormatter.getChatDisplayShort(gas.getTemperature(), DisplayUnit.TEMPERATURE_KELVIN).withStyle(ChatFormatting.GRAY));
+                    tooltips.add(ChatFormatter.getChatDisplayShort(gas.getPressure(), DisplayUnit.PRESSURE_ATM).withStyle(ChatFormatting.GRAY));
                 }
 
             }
@@ -127,10 +127,10 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
 
     public static Component getModeText(int mode) {
         return switch (mode) {
-        case 0 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("jetpack.moderegular").withStyle(ChatFormatting.GREEN));
-        case 1 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("jetpack.modehover").withStyle(ChatFormatting.AQUA));
-        case 2 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("jetpack.modeelytra").withStyle(ChatFormatting.YELLOW));
-        case 3 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("jetpack.modeoff").withStyle(ChatFormatting.RED));
+        case 0 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("jetpack.moderegular").withStyle(ChatFormatting.GREEN));
+        case 1 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("jetpack.modehover").withStyle(ChatFormatting.AQUA));
+        case 2 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("jetpack.modeelytra").withStyle(ChatFormatting.YELLOW));
+        case 3 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("jetpack.modeoff").withStyle(ChatFormatting.RED));
         default -> Component.empty();
         };
     }

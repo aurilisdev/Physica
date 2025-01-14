@@ -5,15 +5,8 @@ import electrodynamics.compatibility.jei.utils.gui.ScreenObject;
 
 public abstract class AbstractFluidGaugeObject extends ScreenObject {
 
-	private int amount;
-
-	public AbstractFluidGaugeObject(ITexture texture, int amount, int x, int y) {
+	public AbstractFluidGaugeObject(ITexture texture, int x, int y) {
 		super(texture, x, y);
-		this.amount = amount;
-	}
-
-	public int getAmount() {
-		return amount;
 	}
 
 	public abstract int getFluidTextWidth();

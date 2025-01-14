@@ -37,9 +37,9 @@ public class CondensingGasRecipeCategory extends AbstractRecipeCategory<PsuedoGa
 	private static final ScreenObject CONDENSER_COLUMN = new ScreenObject(Textures.CONDENSER_COLUMN, 50, 6);
 
 	private static final ScreenObject IN_FLUID_GAUGE = new ScreenObject(JeiTextures.FLUID_GAUGE_DEFAULT, 10, 5);
-	private static final FluidGaugeObject OUT_FLUID_GAUGE = new FluidGaugeObject(88, 5, 5000);
+	private static final FluidGaugeObject OUT_FLUID_GAUGE = new FluidGaugeObject(88, 5);
 
-	private static final GasGaugeObject IN_GAS_GAUGE = new GasGaugeObject(30, 5, 5000);
+	private static final GasGaugeObject IN_GAS_GAUGE = new GasGaugeObject(30, 5);
 	private static final ScreenObject OUT_GAS_GAUGE = new ScreenObject(JeiTextures.FAKE_GAS_GAUGE, 108, 5);
 
 	private static final PowerLabelWrapperConstant POWER_LABEL = new PowerLabelWrapperConstant(2, 60, Constants.THERMOELECTRIC_MANIPULATOR_USAGE_PER_TICK, 120);

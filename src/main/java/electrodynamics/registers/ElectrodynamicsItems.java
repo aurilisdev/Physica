@@ -16,6 +16,7 @@ import electrodynamics.common.block.subtype.SubtypeRawOreBlock;
 import electrodynamics.common.block.subtype.SubtypeResourceBlock;
 import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.blockitem.types.BlockItemDescriptable;
+import electrodynamics.common.blockitem.types.BlockItemFluidPipe;
 import electrodynamics.common.blockitem.types.BlockItemGasPipe;
 import electrodynamics.common.blockitem.types.BlockItemWire;
 import electrodynamics.common.item.ItemBoneMeal;
@@ -101,7 +102,7 @@ public class ElectrodynamicsItems {
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_ADVANCED_THERMOELECTRIC_MANIPULATOR = ITEMS.register("advancedthermoelectricmanipulator", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, BlockItemDescriptable> ITEM_COMPRESSOR_ADDONTANK = ITEMS.register("compressoraddontank", () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCK_COMPRESSOR_ADDONTANK.get(), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
 	public static final BulkDeferredHolder<Item, BlockItemWire, SubtypeWire> ITEMS_WIRE = new BulkDeferredHolder<>(SubtypeWire.values(), subtype -> ITEMS.register(subtype.tag(), () -> new BlockItemWire(ElectrodynamicsBlocks.BLOCKS_WIRE.getValue(subtype), new Item.Properties(), ElectrodynamicsCreativeTabs.GRID)));
-	public static final BulkDeferredHolder<Item, BlockItemDescriptable, SubtypeFluidPipe> ITEMS_PIPE = new BulkDeferredHolder<>(SubtypeFluidPipe.values(), subtype -> ITEMS.register(subtype.tag(), () -> new BlockItemDescriptable(ElectrodynamicsBlocks.BLOCKS_FLUIDPIPE.getValue(subtype), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN)));
+	public static final BulkDeferredHolder<Item, BlockItemFluidPipe, SubtypeFluidPipe> ITEMS_PIPE = new BulkDeferredHolder<>(SubtypeFluidPipe.values(), subtype -> ITEMS.register(subtype.tag(), () -> new BlockItemFluidPipe(ElectrodynamicsBlocks.BLOCKS_FLUIDPIPE.getValue(subtype), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN)));
 	public static final BulkDeferredHolder<Item, BlockItemGasPipe, SubtypeGasPipe> ITEMS_GASPIPE = new BulkDeferredHolder<>(SubtypeGasPipe.values(), subtype -> ITEMS.register(subtype.tag(), () -> new BlockItemGasPipe(ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(subtype), new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN)));
 
 
@@ -145,10 +146,8 @@ public class ElectrodynamicsItems {
 	public static final DeferredHolder<Item, ItemElectric> ITEM_LITHIUMBATTERY = ITEMS.register("lithiumbattery", () -> new ItemElectric((ElectricItemProperties) new ElectricItemProperties().capacity(4 * 1666666.66667).extract(TransferPack.joulesVoltage(4 * 1666666.66667 / (120.0 * 20.0), 240)).receive(TransferPack.joulesVoltage(4 * 1666666.66667 / (120.0 * 20.0), 240)).setIsEnergyStorageOnly().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN, item -> Items.AIR));
 	public static final DeferredHolder<Item, ItemElectric> ITEM_CARBYNEBATTERY = ITEMS.register("carbynebattery", () -> new ItemElectric((ElectricItemProperties) new ElectricItemProperties().capacity(8 * 1666666.66667).extract(TransferPack.joulesVoltage(8 * 1666666.66667 / (120.0 * 20.0), 480)).receive(TransferPack.joulesVoltage(8 * 1666666.66667 / (120.0 * 20.0), 480)).setIsEnergyStorageOnly().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN, item -> Items.AIR));
 
-	public static final DeferredHolder<Item, ItemWrench> ITEM_WRENCH = ITEMS.register("wrench", () -> new ItemWrench(new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
+	public static final DeferredHolder<Item, ItemWrench> ITEM_WRENCH = ITEMS.register("wrench", () -> new ItemWrench(new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, ItemMultimeter> ITEM_MULTIMETER = ITEMS.register("multimeter", () -> new ItemMultimeter(new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN));
-	public static final DeferredHolder<Item, ItemCanister> ITEM_CANISTERREINFORCED = ITEMS.register("canisterreinforced", () -> new ItemCanister(new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN));
-	public static final DeferredHolder<Item, ItemPortableCylinder> ITEM_PORTABLECYLINDER = ITEMS.register("portablecylinder", () -> new ItemPortableCylinder(new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN));
 
 	public static final DeferredHolder<Item, ItemGuidebook> GUIDEBOOK = ITEMS.register("guidebook", () -> new ItemGuidebook(new Item.Properties(), ElectrodynamicsCreativeTabs.MAIN));
 
@@ -176,6 +175,9 @@ public class ElectrodynamicsItems {
 	public static final DeferredHolder<Item, ItemCombatArmor> ITEM_COMBATCHESTPLATE = ITEMS.register("combatarmorchestplate", () -> new ItemCombatArmor(new Item.Properties().stacksTo(1).fireResistant(), Type.CHESTPLATE, ElectrodynamicsCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, ItemCombatArmor> ITEM_COMBATLEGGINGS = ITEMS.register("combatarmorleggings", () -> new ItemCombatArmor(new ElectricItemProperties().capacity(1666666.66667).extract(TransferPack.joulesVoltage(1666666.66667 / (120.0 * 20.0), 120)).receive(TransferPack.joulesVoltage(1666666.66667 / (120.0 * 20.0), 120)).stacksTo(1).fireResistant(), Type.LEGGINGS, ElectrodynamicsCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, ItemCombatArmor> ITEM_COMBATBOOTS = ITEMS.register("combatarmorboots", () -> new ItemCombatArmor(new Item.Properties().stacksTo(1), Type.BOOTS, ElectrodynamicsCreativeTabs.MAIN));
+
+	public static final DeferredHolder<Item, ItemCanister> ITEM_CANISTERREINFORCED = ITEMS.register("canisterreinforced", () -> new ItemCanister(new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN));
+	public static final DeferredHolder<Item, ItemPortableCylinder> ITEM_PORTABLECYLINDER = ITEMS.register("portablecylinder", () -> new ItemPortableCylinder(new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN));
 
 
 	@EventBusSubscriber(value = Dist.CLIENT, modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
