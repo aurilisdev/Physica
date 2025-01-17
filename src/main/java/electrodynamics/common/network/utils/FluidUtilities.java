@@ -1,6 +1,6 @@
 package electrodynamics.common.network.utils;
 
-import electrodynamics.api.network.cable.type.IFluidPipe;
+import electrodynamics.common.tile.pipelines.gas.GenericTileGasPipe;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
@@ -24,7 +24,7 @@ public class FluidUtilities {
 	}
 
 	public static boolean isConductor(BlockEntity acceptor) {
-		return acceptor instanceof IFluidPipe;
+		return acceptor instanceof GenericTileGasPipe;
 	}
 
 	public static int receiveFluid(BlockEntity acceptor, Direction direction, FluidStack perReceiver, boolean debug) {

@@ -89,28 +89,28 @@ public class ItemServoLeggings extends ItemElectrodynamicsArmor implements IItem
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, context, tooltip, flagIn);
-        tooltip.add(ElectroTextUtils.tooltip("item.electric.info", ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY));
-        tooltip.add(ElectroTextUtils.tooltip("item.electric.voltage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE), ChatFormatter.getChatDisplayShort(properties.extract.getVoltage(), DisplayUnit.VOLTAGE))).withStyle(ChatFormatting.RED));
+        tooltip.add(ElectroTextUtils.tooltip("item.electric.info", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES), ChatFormatter.getChatDisplayShort(getMaximumCapacity(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+        tooltip.add(ElectroTextUtils.tooltip("item.electric.voltage", ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
         staticAppendTooltips(stack, context, tooltip, flagIn);
     }
 
     protected static void staticAppendTooltips(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
+        IItemElectric.addBatteryTooltip(stack, context, tooltip);
         if (stack.getOrDefault(ElectrodynamicsDataComponentTypes.ON, false)) {
-            tooltip.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.on").withStyle(ChatFormatting.GREEN)));
+            tooltip.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.on").withStyle(ChatFormatting.GREEN)));
         } else {
-            tooltip.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.off").withStyle(ChatFormatting.RED)));
+            tooltip.add(ElectroTextUtils.tooltip("nightvisiongoggles.status").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("nightvisiongoggles.off").withStyle(ChatFormatting.RED)));
         }
 
         tooltip.add(getModeText(stack.getOrDefault(ElectrodynamicsDataComponentTypes.MODE, 0)));
-        IItemElectric.addBatteryTooltip(stack, context, tooltip);
     }
 
     public static Component getModeText(int mode) {
         return switch (mode) {
-            case 0 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("servolegs.step").withStyle(ChatFormatting.GREEN));
-            case 1 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("servolegs.both").withStyle(ChatFormatting.AQUA));
-            case 2 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("servolegs.speed").withStyle(ChatFormatting.GREEN));
-            case 3 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.GRAY).append(ElectroTextUtils.tooltip("servolegs.none").withStyle(ChatFormatting.RED));
+            case 0 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("servolegs.step").withStyle(ChatFormatting.GREEN));
+            case 1 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("servolegs.both").withStyle(ChatFormatting.AQUA));
+            case 2 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("servolegs.speed").withStyle(ChatFormatting.GREEN));
+            case 3 -> ElectroTextUtils.tooltip("jetpack.mode").withStyle(ChatFormatting.DARK_GRAY).append(ElectroTextUtils.tooltip("servolegs.none").withStyle(ChatFormatting.RED));
             default -> Component.literal("");
         };
     }

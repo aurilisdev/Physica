@@ -188,7 +188,7 @@ public class GasIngredient implements Predicate<GasStack>, ICustomIngredient {
     }
 
     public boolean testGas(@Nullable GasStack gas, boolean checkTemperature, boolean checkPressure) {
-        if (gas == null) {
+        if (gas == null || gas.isEmpty()) {
             return false;
         }
         for (GasStack g : getMatchingGases()) {

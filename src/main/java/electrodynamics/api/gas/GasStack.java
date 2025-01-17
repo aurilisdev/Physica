@@ -3,6 +3,7 @@ package electrodynamics.api.gas;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -101,7 +102,7 @@ public class GasStack {
     }
 
     public Gas getGas() {
-        return gas;
+        return isEmpty() ? ElectrodynamicsGases.EMPTY.get() : gas;
     }
 
     public Holder<Gas> getGasHolder() {
@@ -166,9 +167,9 @@ public class GasStack {
             throw new UnsupportedOperationException("The temperature cannot drop below absolute zero");
         }
 
-        int change = (int) ((deltaTemp + (double) temperature) / (double) temperature);
+        double change = (deltaTemp + (double) temperature) / (double) temperature;
 
-        return amount * change;
+        return (int) Math.ceil(amount * change);
 
     }
 
@@ -179,7 +180,7 @@ public class GasStack {
 
         double change = (double) atm / (double) pressure;
 
-        return (int) (amount / change);
+        return (int) Math.ceil(amount / change);
     }
 
     public boolean isEmpty() {
@@ -357,7 +358,7 @@ public class GasStack {
             return stack2.getAmount();
         }
 
-        return (int) (remaining / deltaT2Factor * deltaP2Factor);
+        return (int) Math.ceil(remaining / deltaT2Factor * deltaP2Factor);
 
     }
 

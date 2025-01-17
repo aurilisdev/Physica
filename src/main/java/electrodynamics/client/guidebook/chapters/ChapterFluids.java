@@ -126,8 +126,8 @@ public class ChapterFluids extends Chapter {
 
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l4", ElectroTextUtils.guidebook("chapter.fluids.pipes").withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
         blankLine();
-        pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.pipecapacity", ElectroTextUtils.guidebook("chapter.fluids.pipecopper"), SubtypeFluidPipe.copper.maxTransfer)).setSeparateStart().setIndentions(1));
-        pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.pipecapacity", ElectroTextUtils.guidebook("chapter.fluids.pipesteel"), SubtypeFluidPipe.steel.maxTransfer)).setSeparateStart().setIndentions(1));
+        pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.pipecapacity", ElectroTextUtils.guidebook("chapter.fluids.pipecopper"), SubtypeFluidPipe.copper.getMaxTransfer())).setSeparateStart().setIndentions(1));
+        pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.pipecapacity", ElectroTextUtils.guidebook("chapter.fluids.pipesteel"), SubtypeFluidPipe.steel.getMaxTransfer())).setSeparateStart().setIndentions(1));
 
         /* Fluid Tools */
 

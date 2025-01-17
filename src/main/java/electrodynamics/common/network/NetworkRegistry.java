@@ -1,8 +1,6 @@
 package electrodynamics.common.network;
 
-import java.util.ConcurrentModificationException;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 import electrodynamics.api.References;
 import electrodynamics.api.network.ITickableNetwork;
@@ -13,16 +11,16 @@ import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 @EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.GAME)
 public class NetworkRegistry {
-	private static final HashSet<ITickableNetwork> NETWORKS = new HashSet<>();
-	private static final HashSet<ITickableNetwork> TO_REMOVE = new HashSet<>();
+	private static final HashMap<UUID, ITickableNetwork> NETWORKS = new HashMap<>();
+	private static final HashSet<UUID> TO_REMOVE = new HashSet<>();
 
 	public static void register(ITickableNetwork network) {
-		NETWORKS.add(network);
+		NETWORKS.put(network.getId(), network);
 	}
 
 	public static void deregister(ITickableNetwork network) {
-		if (NETWORKS.contains(network)) {
-			TO_REMOVE.add(network);
+		if (NETWORKS.containsKey(network.getId())) {
+			TO_REMOVE.add(network.getId());
 		}
 	}
 
@@ -30,17 +28,17 @@ public class NetworkRegistry {
 	public static void update(ServerTickEvent.Post event) {
 
 		try {
-			NETWORKS.removeAll(TO_REMOVE);
-			TO_REMOVE.clear();
-			Iterator<ITickableNetwork> it = NETWORKS.iterator();
-			while (it.hasNext()) {
-				ITickableNetwork net = it.next();
-				if (net.getSize() == 0) {
-					deregister(net);
-				} else {
-					net.tick();
-				}
+			for(UUID id : TO_REMOVE) {
+				NETWORKS.remove(id);
 			}
+			TO_REMOVE.clear();
+            for (ITickableNetwork net : NETWORKS.values()) {
+                if (net.getSize() == 0) {
+                    deregister(net);
+                } else {
+                    net.tick();
+                }
+            }
 		} catch (ConcurrentModificationException exception) {
 			exception.printStackTrace();
 		}

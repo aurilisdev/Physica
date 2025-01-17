@@ -138,7 +138,7 @@ public class ChapterGases extends Chapter {
 		// condensed gases
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l9")).setIndentions(1).setSeparateStart());
 		for (DeferredHolder<Gas, ? extends Gas> gas : ElectrodynamicsGases.GASES.getEntries()) {
-			if (gas.get().isEmpty() || gas.get().getCondensedFluid().isSame(Fluids.EMPTY)) {
+			if (gas.get().isEmpty() || gas.get().noCondensedFluid()) {
 				continue;
 			}
 			blankLine();
@@ -183,16 +183,16 @@ public class ChapterGases extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l13.1")).setIndentions(1).setSeparateStart());
 		blankLine();
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipecopper").withStyle(ChatFormatting.ITALIC)).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipecapacity", ChatFormatter.formatFluidMilibuckets(SubtypeGasPipe.UNINSULATEDCOPPER.maxTransfer))).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipepressure", ChatFormatter.getChatDisplayShort(SubtypeGasPipe.UNINSULATEDCOPPER.pipeMaterial.maxPressure, DisplayUnit.PRESSURE_ATM))).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipecapacity", ChatFormatter.formatFluidMilibuckets(SubtypeGasPipe.UNINSULATEDCOPPER.getMaxTransfer()))).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipepressure", ChatFormatter.getChatDisplayShort(SubtypeGasPipe.UNINSULATEDCOPPER.getPipeMaterial().getMaxPressuire(), DisplayUnit.PRESSURE_ATM))).setSeparateStart());
 		blankLine();
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipesteel").withStyle(ChatFormatting.ITALIC)).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipecapacity", ChatFormatter.formatFluidMilibuckets(SubtypeGasPipe.UNINSULATEDSTEEL.maxTransfer))).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipepressure", ChatFormatter.getChatDisplayShort(SubtypeGasPipe.UNINSULATEDSTEEL.pipeMaterial.maxPressure, DisplayUnit.PRESSURE_ATM))).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipecapacity", ChatFormatter.formatFluidMilibuckets(SubtypeGasPipe.UNINSULATEDSTEEL.getMaxTransfer()))).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipepressure", ChatFormatter.getChatDisplayShort(SubtypeGasPipe.UNINSULATEDSTEEL.getPipeMaterial().getMaxPressuire(), DisplayUnit.PRESSURE_ATM))).setSeparateStart());
 		blankLine();
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipeplastic").withStyle(ChatFormatting.ITALIC)).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipecapacity", ChatFormatter.formatFluidMilibuckets(SubtypeGasPipe.UNINSULATEDPLASTIC.maxTransfer))).setSeparateStart());
-		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipepressure", ChatFormatter.getChatDisplayShort(SubtypeGasPipe.UNINSULATEDPLASTIC.pipeMaterial.maxPressure, DisplayUnit.PRESSURE_ATM))).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipecapacity", ChatFormatter.formatFluidMilibuckets(SubtypeGasPipe.UNINSULATEDPLASTIC.getMaxTransfer()))).setSeparateStart());
+		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.pipepressure", ChatFormatter.getChatDisplayShort(SubtypeGasPipe.UNINSULATEDPLASTIC.getPipeMaterial().getMaxPressuire(), DisplayUnit.PRESSURE_ATM))).setSeparateStart());
 		blankLine();
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.gases.l13.2")).setSeparateStart());
 		blankLine();

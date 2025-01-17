@@ -4,13 +4,14 @@ import java.util.Locale;
 
 import electrodynamics.api.ISubtype;
 import electrodynamics.api.gas.Gas;
+import electrodynamics.api.network.cable.type.IGasPipe;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
-public enum SubtypeGasPipe implements ISubtype {
+public enum SubtypeGasPipe implements ISubtype, IGasPipe {
 
     /*
      * UNINSULATED
@@ -33,16 +34,16 @@ public enum SubtypeGasPipe implements ISubtype {
     // WOOLINSULATEDSTEEL(PipeMaterial.STEEL, InsulationMaterial.WOOL, 30000, 3, Material.METAL, SoundType.WOOL),
     // WOOLINSULATEDPLASTIC(PipeMaterial.HDPE, InsulationMaterial.WOOL, 1000, 3, Material.STONE, SoundType.WOOL);
 
-    public final PipeMaterial pipeMaterial;
-    public final InsulationMaterial insulationMaterial;
-    public final double maxTransfer;
-    public final double effectivePipeHeatLoss;
+    private final PipeMaterial pipeMaterial;
+    private final InsulationMaterial insulationMaterial;
+    private final long maxTransfer;
+    private final double effectivePipeHeatLoss;
 
-    public final double radius;
-    public final Properties material;
-    public final SoundType soundType;
+    private final double radius;
+    private final Properties material;
+    private final SoundType soundType;
 
-    private SubtypeGasPipe(PipeMaterial pipeMaterial, InsulationMaterial insulationMaterial, double maxTransfer, double radius, Properties material, SoundType soundType) {
+    private SubtypeGasPipe(PipeMaterial pipeMaterial, InsulationMaterial insulationMaterial, long maxTransfer, double radius, Properties material, SoundType soundType) {
         this.pipeMaterial = pipeMaterial;
         this.insulationMaterial = insulationMaterial;
         this.maxTransfer = maxTransfer;
@@ -51,6 +52,31 @@ public enum SubtypeGasPipe implements ISubtype {
         this.radius = radius;
         this.material = material;
         this.soundType = soundType;
+    }
+
+    @Override
+    public long getMaxTransfer() {
+        return maxTransfer;
+    }
+
+    @Override
+    public double getRadius() {
+        return radius;
+    }
+
+    @Override
+    public Properties getProperties() {
+        return material;
+    }
+
+    @Override
+    public SoundType getSoundType() {
+        return soundType;
+    }
+
+    @Override
+    public IPipeMaterial getPipeMaterial() {
+        return pipeMaterial;
     }
 
     @Override
@@ -122,16 +148,16 @@ public enum SubtypeGasPipe implements ISubtype {
      * @author skip999
      *
      */
-    public static enum PipeMaterial {
+    public static enum PipeMaterial implements IPipeMaterial {
 
         COPPER(10, 16, true, "pipematerialcopper"), // Them Con: 383, Ten Str: 70MPa (690 ATM)
         STEEL(1, 128, true, "pipematerialsteel"), // Them Con: 54, Ten Str: 250MPa (2467 ATM)
         HDPE(0.05, 16, false, "pipematerialplastic"); // Them Con: 0.48, Ten Str: 31MPa (305 ATM)
 
-        public final double heatLoss;// degree Kelvin per Pipe
-        public final int maxPressure;// atm
+        private final double heatLoss;// degree Kelvin per Pipe
+        private final int maxPressure;// atm
 
-        public final boolean corrodedByAcid;
+        private final boolean corrodedByAcid;
 
         private final String tooltipName;
 
@@ -144,10 +170,20 @@ public enum SubtypeGasPipe implements ISubtype {
 
         }
 
-        public Component getTranslatedName() {
+        @Override
+        public Component getName() {
             return ElectroTextUtils.tooltip(tooltipName);
         }
 
+        @Override
+        public int getMaxPressuire() {
+            return maxPressure;
+        }
+
+        @Override
+        public boolean canBeCorroded() {
+            return canBeCorroded();
+        }
     }
 
     /**

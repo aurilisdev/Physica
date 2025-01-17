@@ -1,32 +1,38 @@
 package electrodynamics.api.network.cable.type;
 
-import electrodynamics.api.network.cable.IRefreshableCable;
-import electrodynamics.common.block.subtype.SubtypeGasPipe;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
-public interface IGasPipe extends IRefreshableCable {
+public interface IGasPipe {
 
-	SubtypeGasPipe getPipeType();
+    long getMaxTransfer();
 
-	@Override
-	default Object getConductorType() {
-		return getPipeType();
-	}
+    double getRadius();
 
-	@Override
-	default double getMaxTransfer() {
-		return getPipeType().maxTransfer;
-	}
+    BlockBehaviour.Properties getProperties();
 
-	default boolean isInsulationFlammable() {
-		return getPipeType().insulationMaterial.canCombust;
-	}
+    SoundType getSoundType();
 
-	default double getEffectiveHeatLoss() {
-		return getPipeType().effectivePipeHeatLoss;
-	}
+    IPipeMaterial getPipeMaterial();
 
-	default boolean canCorrodeFromAcid() {
-		return getPipeType().pipeMaterial.corrodedByAcid;
-	}
+    public static interface IPipeMaterial {
+
+        /**
+         * units of ATM
+         * @return
+         */
+        int getMaxPressuire();
+
+
+        /**
+         * returns whether this pipe material can be destroyed by corrosive gasses.
+         * @return
+         */
+        boolean canBeCorroded();
+
+        Component getName();
+
+    }
 
 }

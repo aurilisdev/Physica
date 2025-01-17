@@ -28,8 +28,8 @@ public class ElectrolosisChamberRecipeCategory extends Fluid2FluidRecipeCategory
 
     public static final ArrowAnimatedObject ANIM_RIGHT_ARROW = new ArrowAnimatedObject(ScreenComponentProgress.ProgressBars.PROGRESS_ARROW_RIGHT_BIG, 34, 17, IDrawableAnimated.StartDirection.LEFT);
 
-    public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(10, 5, 1);
-    public static final FluidGaugeObject OUT_GAUGE = new FluidGaugeObject(108, 5, 1);
+    public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(10, 5);
+    public static final FluidGaugeObject OUT_GAUGE = new FluidGaugeObject(108, 5);
 
     public static final PowerLabelWrapperConstant POWER_LABEL = new PowerLabelWrapperConstant(2, 55, Constants.ELECTROLOSIS_CHAMBER_TARGET_JOULES, 1920);
 

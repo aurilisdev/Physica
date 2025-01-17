@@ -3,6 +3,7 @@ package electrodynamics.prefab.utilities;
 import electrodynamics.api.References;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -101,7 +102,7 @@ public class ElectroTextUtils {
 	}
 
 	public static MutableComponent voltageTooltip(int voltage) {
-		return tooltip("machine.voltage", ChatFormatter.getChatDisplayShort(voltage, DisplayUnit.VOLTAGE));
+		return tooltip("machine.voltage", ChatFormatter.getChatDisplayShort(voltage, DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY);
 	}
 
 	public static MutableComponent ratio(Component numerator, Component denominator) {

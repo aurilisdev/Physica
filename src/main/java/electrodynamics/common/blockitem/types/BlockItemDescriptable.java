@@ -1,15 +1,13 @@
 package electrodynamics.common.blockitem.types;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.common.blockitem.BlockItemElectrodynamics;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -21,8 +19,8 @@ import net.minecraft.world.level.block.Block;
 
 public class BlockItemDescriptable extends BlockItemElectrodynamics {
 
-    private static final HashMap<Holder<Block>, HashSet<MutableComponent>> DESCRIPTION_MAPPINGS = new HashMap<>();
-    private final static HashMap<Block, HashSet<MutableComponent>> PROCESSED_DESCRIPTION_MAPPINGS = new HashMap<>();
+    private static final HashMap<Holder<Block>, ArrayList<MutableComponent>> DESCRIPTION_MAPPINGS = new HashMap<>();
+    private final static HashMap<Block, ArrayList<MutableComponent>> PROCESSED_DESCRIPTION_MAPPINGS = new HashMap<>();
 
     private static boolean initialized = false;
 
@@ -43,11 +41,9 @@ public class BlockItemDescriptable extends BlockItemElectrodynamics {
             });
 
         }
-        HashSet<MutableComponent> gotten = PROCESSED_DESCRIPTION_MAPPINGS.get(getBlock());
+        ArrayList<MutableComponent> gotten = PROCESSED_DESCRIPTION_MAPPINGS.get(getBlock());
         if (gotten != null) {
-            for (MutableComponent s : gotten) {
-                tooltip.add(s.withStyle(ChatFormatting.GRAY));
-            }
+            tooltip.addAll(gotten);
         }
 
         if (stack.has(DataComponents.BLOCK_ENTITY_DATA)) {
@@ -68,7 +64,7 @@ public class BlockItemDescriptable extends BlockItemElectrodynamics {
 
     public static void addDescription(Holder<Block> block, MutableComponent description) {
 
-        HashSet<MutableComponent> set = DESCRIPTION_MAPPINGS.getOrDefault(block, new HashSet<>());
+        ArrayList<MutableComponent> set = DESCRIPTION_MAPPINGS.getOrDefault(block, new ArrayList<>());
 
         set.add(description);
 

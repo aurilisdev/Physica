@@ -3,8 +3,11 @@ package electrodynamics;
 import java.util.Random;
 import java.util.function.Consumer;
 
+import electrodynamics.api.electricity.RegisterWiresEvent;
+import electrodynamics.common.block.connect.BlockWire;
 import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
 import electrodynamics.prefab.properties.PropertyTypes;
+import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -66,6 +69,7 @@ public class Electrodynamics {
         CoalGeneratorFuelRegister.INSTANCE = new CoalGeneratorFuelRegister().subscribeAsSyncable();
         GasCollectorChromoCardsRegister.INSTANCE = new GasCollectorChromoCardsRegister().subscribeAsSyncable();
         ThermoelectricGeneratorHeatRegister.INSTANCE = new ThermoelectricGeneratorHeatRegister().subscribeAsSyncable();
+
         NeoForge.EVENT_BUS.addListener(getGuidebookListener());
         ElectrodynamicsTags.init();
         // CraftingHelper.register(ConfigCondition.Serializer.INSTANCE); // Probably wrong location after update from 1.18.2 to
@@ -81,6 +85,12 @@ public class Electrodynamics {
             ModLoader.postEvent(properties);
 
             PropertyManager.registerProperties(properties.getRegisteredProperties());
+
+            RegisterWiresEvent wiresEvent = new RegisterWiresEvent();
+
+            ModLoader.postEvent(wiresEvent);
+
+            wiresEvent.process();
         });
 
     }
@@ -120,13 +130,20 @@ public class Electrodynamics {
 
         return event -> {
             ServerPlayer player = event.getPlayer();
-            if(player == null){
+            if (player == null) {
                 PacketDistributor.sendToAllPlayers(PacketResetGuidebookPages.PACKET);
             } else {
                 PacketDistributor.sendToPlayer(player, PacketResetGuidebookPages.PACKET);
             }
         };
 
+    }
+
+    @SubscribeEvent
+    public static void registerWires(RegisterWiresEvent event) {
+        for (BlockWire wire : ElectrodynamicsBlocks.BLOCKS_WIRE.getAllValues()) {
+            event.registerWire(wire);
+        }
     }
 
 }

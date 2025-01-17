@@ -1,0 +1,6 @@
+{
+  "electrodynamics:hydrogen": "mekanism:hydrogen",
+  "electrodynamics:oxygen": "mekanism:oxygen",
+  "electrodynamics:steam": "mekanism:steam",
+  "electrodynamics:sulfurdioxide": "mekanism:sulfur_dioxide"
+}

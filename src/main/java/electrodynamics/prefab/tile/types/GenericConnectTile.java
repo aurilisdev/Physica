@@ -25,13 +25,27 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
     public static final int WEST_MASK = 0b00000000000011110000000000000000;
     public static final int EAST_MASK = 0b00000000111100000000000000000000;
 
+    protected EnumConnectType[] connectionsArr = {
+            EnumConnectType.NONE,
+            EnumConnectType.NONE,
+            EnumConnectType.NONE,
+            EnumConnectType.NONE,
+            EnumConnectType.NONE,
+            EnumConnectType.NONE
+    };
+
 
     public final Property<Integer> connections = property(new Property<>(PropertyTypes.INTEGER, "connections", 0).setShouldUpdateOnChange().onChange((property, old) -> {
         requestModelDataUpdate();
-        if(level != null && level.isClientSide()){
+        if (level != null && level.isClientSide()) {
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 8); //
         }
-    }).onTileLoaded(property -> requestModelDataUpdate()));
+        connectionsArr = readConnectionsInternal(property.get());
+
+    }).onTileLoaded(property -> {
+        requestModelDataUpdate();
+        connectionsArr = readConnectionsInternal(property.get());
+    }).setNoUpdateServer());
 
     public final Property<BlockState> camoflaugedBlock = property(new Property<>(PropertyTypes.BLOCK_STATE, "camoflaugedblock", Blocks.AIR.defaultBlockState())).setShouldUpdateOnChange().onChange((property, block) -> {
         if (level == null) {
@@ -82,34 +96,31 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
         return getScaffoldBlock().isAir();
     }
 
-    public EnumConnectType readConnection(Direction dir) {
+    public EnumConnectType readConnection(Direction dir, int connections) {
 
-
-        int connectionData = connections.get();
-
-        if (connectionData == 0) {
+        if (connections == 0) {
             return EnumConnectType.NONE;
         }
 
         int extracted = 0;
         switch (dir) {
             case DOWN:
-                extracted = connectionData & DOWN_MASK;
+                extracted = connections & DOWN_MASK;
                 break;
             case UP:
-                extracted = connectionData & UP_MASK;
+                extracted = connections & UP_MASK;
                 break;
             case NORTH:
-                extracted = connectionData & NORTH_MASK;
+                extracted = connections & NORTH_MASK;
                 break;
             case SOUTH:
-                extracted = connectionData & SOUTH_MASK;
+                extracted = connections & SOUTH_MASK;
                 break;
             case WEST:
-                extracted = connectionData & WEST_MASK;
+                extracted = connections & WEST_MASK;
                 break;
             case EAST:
-                extracted = connectionData & EAST_MASK;
+                extracted = connections & EAST_MASK;
                 break;
             default:
                 break;
@@ -121,10 +132,48 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
 
     }
 
-    public void writeConnection(Direction dir, EnumConnectType connection) {
+    public boolean writeConnections(Direction[] dirs, EnumConnectType[] connections) {
 
         int connectionData = this.connections.get();
         int masked;
+
+        for (Direction dir : dirs) {
+            switch (dir) {
+                case DOWN:
+                    masked = connectionData & ~DOWN_MASK;
+                    break;
+                case UP:
+                    masked = connectionData & ~UP_MASK;
+                    break;
+                case NORTH:
+                    masked = connectionData & ~NORTH_MASK;
+                    break;
+                case SOUTH:
+                    masked = connectionData & ~SOUTH_MASK;
+                    break;
+                case WEST:
+                    masked = connectionData & ~WEST_MASK;
+                    break;
+                case EAST:
+                    masked = connectionData & ~EAST_MASK;
+                    break;
+                default:
+                    masked = 0;
+                    break;
+            }
+            connectionData = masked | (connections[dir.ordinal()].ordinal() << (dir.ordinal() * 4));
+        }
+
+        this.connections.set(connectionData);
+
+        return this.connections.isDirty();
+
+    }
+
+    public boolean writeConnection(Direction dir, EnumConnectType connection) {
+        int connectionData = this.connections.get();
+        int masked;
+
 
         switch (dir) {
             case DOWN:
@@ -149,22 +198,30 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
                 masked = 0;
                 break;
         }
+        connectionData = masked | (connection.ordinal() << (dir.ordinal() * 4));
 
-        connections.set(masked | (connection.ordinal() << (dir.ordinal() * 4)));
 
+        this.connections.set(connectionData);
+
+        return this.connections.isDirty();
     }
 
     public EnumConnectType[] readConnections() {
-        EnumConnectType[] connections = new EnumConnectType[6];
+        return connectionsArr;
+    }
+
+    private EnumConnectType[] readConnectionsInternal(int connections) {
+        EnumConnectType[] arr = new EnumConnectType[6];
         for (Direction dir : Direction.values()) {
-            connections[dir.ordinal()] = readConnection(dir);
+            arr[dir.ordinal()] = readConnection(dir, connections);
         }
-        return connections;
+        return arr;
     }
 
     @Override
     public @NotNull ModelData getModelData() {
         return ModelData.builder().with(ModelPropertyConnections.INSTANCE, () -> readConnections()).build();
     }
+
 
 }

@@ -455,7 +455,7 @@ public class ComponentFluidHandlerMulti implements IComponentFluidHandler {
         @Override
         public int fill(FluidStack resource, FluidAction action) {
             for (PropertyFluidTank tank : tanks) {
-                if (tank.getFluid().getFluid().isSame(resource.getFluid())) {
+                if (tank.getFluid().is(resource.getFluid())) {
                     return tank.fill(resource, action);
                 }
             }
@@ -521,7 +521,7 @@ public class ComponentFluidHandlerMulti implements IComponentFluidHandler {
         @Override
         public @NotNull FluidStack drain(FluidStack resource, FluidAction action) {
             for (PropertyFluidTank tank : tanks) {
-                if (tank.getFluid().getFluid().isSame(resource.getFluid())) {
+                if (tank.getFluid().is(resource.getFluid())) {
                     return tank.drain(resource, action);
                 }
             }

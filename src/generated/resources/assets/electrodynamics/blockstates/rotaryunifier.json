@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "electrodynamics:block/rotaryunifier"
+    },
+    "facing=north": {
+      "model": "electrodynamics:block/rotaryunifier",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "electrodynamics:block/rotaryunifier",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "electrodynamics:block/rotaryunifier",
+      "y": 180
+    }
+  }
+}

@@ -1,8 +1,8 @@
 package electrodynamics.prefab.utilities;
 
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
-import electrodynamics.api.network.cable.type.IConductor;
 import electrodynamics.common.tags.ElectrodynamicsTags;
+import electrodynamics.common.tile.electricitygrid.GenericTileWire;
 import electrodynamics.prefab.utilities.object.TransferPack;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsDamageTypes;
@@ -44,9 +44,9 @@ public class ElectricityUtils {
         return tile != null && (tile.getLevel().getCapability(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, tile.getBlockPos(), tile.getBlockState(), tile, dir) != null || tile.getLevel().getCapability(Capabilities.EnergyStorage.BLOCK, tile.getBlockPos(), tile.getBlockState(), tile, dir) != null);
     }
 
-    public static boolean isConductor(BlockEntity acceptor, IConductor requesterWire) {
-        if (acceptor instanceof IConductor conductor) {
-            return conductor.getWireType().isDefaultColor() || requesterWire.getWireType().isDefaultColor() || conductor.getWireColor() == requesterWire.getWireColor();
+    public static boolean isConductor(BlockEntity acceptor, GenericTileWire requesterWire) {
+        if (acceptor instanceof GenericTileWire conductor) {
+            return conductor.getCableType().isDefaultColor() || requesterWire.getCableType().isDefaultColor() || conductor.getWireColor() == requesterWire.getWireColor();
         }
         return false;
     }

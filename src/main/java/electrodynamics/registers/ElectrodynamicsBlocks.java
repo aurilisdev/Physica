@@ -2,6 +2,7 @@ package electrodynamics.registers;
 
 import electrodynamics.api.References;
 import electrodynamics.api.registration.BulkDeferredHolder;
+import electrodynamics.api.tile.IMachine;
 import electrodynamics.common.block.*;
 import electrodynamics.common.block.chemicalreactor.BlockChemicalReactor;
 import electrodynamics.common.block.chemicalreactor.BlockChemicalReactorExtra;
@@ -26,10 +27,17 @@ import electrodynamics.common.block.subtype.SubtypeRawOreBlock;
 import electrodynamics.common.block.subtype.SubtypeResourceBlock;
 import electrodynamics.common.block.subtype.SubtypeWire;
 import electrodynamics.common.block.subtype.SubtypeWire.WireClass;
+import electrodynamics.common.block.voxelshapes.ElectrodynamicsVoxelShapes;
+import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
+import electrodynamics.common.tile.compatibility.TileRotaryUnifier;
+import electrodynamics.prefab.block.GenericMachineBlock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -42,8 +50,49 @@ public class ElectrodynamicsBlocks {
     public static final BulkDeferredHolder<Block, Block, SubtypeRawOreBlock> BLOCKS_RAWORE = new BulkDeferredHolder<>(SubtypeRawOreBlock.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new Block(Blocks.STONE.properties().requiresCorrectToolForDrops().strength(5.0F, 6.0F))));
     public static final BulkDeferredHolder<Block, BlockMachine, SubtypeMachine> BLOCKS_MACHINE = new BulkDeferredHolder<>(SubtypeMachine.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockMachine(subtype)));
     public static final DeferredHolder<Block, BlockChemicalReactor> BLOCK_CHEMICALREACTOR = BLOCKS.register("chemicalreactor", BlockChemicalReactor::new);
+    public static final DeferredHolder<Block, GenericMachineBlock> BLOCK_ROTARYUNIFIER = BLOCKS.register("rotaryunifier", () -> new BlockMachine(new IMachine() {
+        @Override
+        public BlockEntityType.BlockEntitySupplier<BlockEntity> getBlockEntitySupplier() {
+            return TileRotaryUnifier::new;
+        }
+
+        @Override
+        public int getLitBrightness() {
+            return 15;
+        }
+
+        @Override
+        public RenderShape getRenderShape() {
+            return RenderShape.MODEL;
+        }
+
+        @Override
+        public boolean isMultiblock() {
+            return false;
+        }
+
+        @Override
+        public boolean propegatesLightDown() {
+            return false;
+        }
+
+        @Override
+        public boolean isPlayerStorable() {
+            return false;
+        }
+
+        @Override
+        public VoxelShapeProvider getVoxelShapeProvider() {
+            return ElectrodynamicsVoxelShapes.ROTARY_UNIFIER;
+        }
+
+        @Override
+        public boolean usesLit() {
+            return true;
+        }
+    }));
     public static final BulkDeferredHolder<Block, BlockWire, SubtypeWire> BLOCKS_WIRE = new BulkDeferredHolder<>(SubtypeWire.values(), subtype -> {
-        if(subtype.wireClass == WireClass.LOGISTICAL) {
+        if(subtype.getWireClass() == WireClass.LOGISTICAL) {
             return BLOCKS.register(subtype.tag(), () -> new BlockLogisticalWire(subtype));
         } else {
             return BLOCKS.register(subtype.tag(), () -> new BlockWire(subtype));

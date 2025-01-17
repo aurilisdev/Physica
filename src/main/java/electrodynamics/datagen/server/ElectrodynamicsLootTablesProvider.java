@@ -189,6 +189,8 @@ public class ElectrodynamicsLootTablesProvider extends AbstractLootTableProvider
 
         addSimpleBlock(ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber));
 
+        addSimpleBlock(ElectrodynamicsBlocks.BLOCK_ROTARYUNIFIER);
+
     }
 
     public <T extends GenericTile> void addMachineTable(Block block, DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> tilereg, boolean items, boolean fluids, boolean gases, boolean energy, boolean additional) {

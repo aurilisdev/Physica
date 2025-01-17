@@ -39,12 +39,15 @@ public class ItemUpgrade extends ItemElectrodynamics {
 		super.appendHoverText(stack, context, tooltip, flagIn);
 		if (subtype == SubtypeItemUpgrade.advancedcapacity || subtype == SubtypeItemUpgrade.basiccapacity) {
 			double capacityMultiplier = subtype == SubtypeItemUpgrade.advancedcapacity ? 2.25 : 1.5;
-			tooltip.add(ElectroTextUtils.tooltip("info.capacityupgrade", capacityMultiplier).withStyle(ChatFormatting.GRAY));
-			tooltip.add(ElectroTextUtils.tooltip("info.capacityupgradevoltage", (capacityMultiplier == 2.25 ? 4 : 2) + "x").withStyle(ChatFormatting.RED));
+			double voltageMultiplier = subtype == SubtypeItemUpgrade.advancedcapacity ? 4 : 2;
+			tooltip.add(ElectroTextUtils.tooltip("info.upgradecapacity", Component.literal(capacityMultiplier + "x").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY));
+			tooltip.add(ElectroTextUtils.tooltip("info.upgradeenergytransfer", Component.literal(capacityMultiplier + "x").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY));
+			tooltip.add(ElectroTextUtils.tooltip("info.upgradevoltage", Component.literal(capacityMultiplier + "x").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY));
 		}
 		if (subtype == SubtypeItemUpgrade.advancedspeed || subtype == SubtypeItemUpgrade.basicspeed) {
 			double speedMultiplier = subtype == SubtypeItemUpgrade.advancedspeed ? 2.25 : 1.5;
-			tooltip.add(ElectroTextUtils.tooltip("info.speedupgrade", speedMultiplier).withStyle(ChatFormatting.GRAY));
+			tooltip.add(ElectroTextUtils.tooltip("info.upgradespeed", Component.literal(speedMultiplier + "x").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY));
+			tooltip.add(ElectroTextUtils.tooltip("info.upgradeenergyusage", Component.literal(speedMultiplier + "x").withStyle(ChatFormatting.RED)).withStyle(ChatFormatting.GRAY));
 		}
 		if (subtype == SubtypeItemUpgrade.itemoutput || subtype == SubtypeItemUpgrade.iteminput) {
 			if (subtype == SubtypeItemUpgrade.itemoutput) {

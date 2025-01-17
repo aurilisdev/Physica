@@ -65,7 +65,10 @@ public class Gas {
 		return condensationTemp;
 	}
 
-	@Nullable
+	public boolean noCondensedFluid() {
+		return condensedFluid == null || condensedFluid.value() == Fluids.EMPTY;
+	}
+
 	public Fluid getCondensedFluid() {
 		return condensedFluid.value();
 	}

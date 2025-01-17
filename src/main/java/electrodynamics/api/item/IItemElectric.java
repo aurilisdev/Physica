@@ -165,7 +165,7 @@ public interface IItemElectric {
 
     static boolean overrideOtherStackedOnMe(ItemStack stack, ItemStack other, Slot slot, ClickAction action, Player player, SlotAccess access) {
 
-        if (action == null || action == ClickAction.PRIMARY) {
+        if (action == null || action == ClickAction.PRIMARY || other.isEmpty()) {
             return false;
         }
 
@@ -230,7 +230,7 @@ public interface IItemElectric {
     Item getDefaultStorageBattery();
 
     static void addBatteryTooltip(ItemStack stack, Item.TooltipContext context, List<Component> tooltip) {
-        tooltip.add(ElectroTextUtils.tooltip("currbattery", ((IItemElectric) stack.getItem()).getCurrentBattery(stack).getDisplayName()).withStyle(ChatFormatting.GRAY));
+        tooltip.add(ElectroTextUtils.tooltip("currbattery", ((IItemElectric) stack.getItem()).getCurrentBattery(stack).getDisplayName().copy().withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
     }
 
     public static class ElectricItemData {
@@ -269,7 +269,7 @@ public interface IItemElectric {
                                 //
                                 Codec.DOUBLE.fieldOf(EXTRACT_LIMIT).forGetter(instance0 -> instance0.extractCap),
                                 //
-                                ItemStack.CODEC.fieldOf(CURRENT_BATTERY).forGetter(instance0 -> instance0.battery)
+                                ItemStack.OPTIONAL_CODEC.fieldOf(CURRENT_BATTERY).forGetter(instance0 -> instance0.battery)
 //
 
                         ).apply(instance, ElectricItemData::new)
@@ -283,7 +283,7 @@ public interface IItemElectric {
                 ByteBufCodecs.DOUBLE, instance0 -> instance0.voltage,
                 ByteBufCodecs.DOUBLE, instance0 -> instance0.receiveCap,
                 ByteBufCodecs.DOUBLE, instance0 -> instance0.extractCap,
-                ItemStack.STREAM_CODEC, instance0 -> instance0.battery,
+                ItemStack.OPTIONAL_STREAM_CODEC, instance0 -> instance0.battery,
                 ElectricItemData::new
         );
 

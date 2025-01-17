@@ -1,24 +1,13 @@
 package electrodynamics.api.network.cable;
 
-import electrodynamics.api.network.INetwork;
 import electrodynamics.prefab.network.AbstractNetwork;
+import electrodynamics.prefab.tile.types.GenericRefreshingConnectTile;
+import net.minecraft.core.Direction;
 
-public interface IRefreshableCable extends IAbstractCable {
+public interface IRefreshableCable<CONDUCTORTYPE, T extends AbstractNetwork<? extends GenericRefreshingConnectTile<?, ?, ?>, ?, ?, ?>> extends IAbstractCable<CONDUCTORTYPE, T> {
 
-	INetwork getNetwork();
-
-	INetwork getNetwork(boolean createIfNull);
-
-	void refreshNetwork();
-
-	void refreshNetworkIfChange();
-
-	@Override
-	void removeFromNetwork();
+	void updateNetwork(Direction...dirs);
 
 	void destroyViolently();
-
-	@Override
-	void setNetwork(AbstractNetwork<?, ?, ?, ?> aValueNetwork);
 
 }

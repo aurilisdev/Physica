@@ -1,5 +1,10 @@
 package electrodynamics.prefab.utilities.math;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
@@ -23,6 +28,13 @@ public class MathUtils {
 	public static final Vector3f ZERO = new Vector3f(0.0F, 0.0F, 0.0F);
 	public static final Vector3f ONE = new Vector3f(1.0F, 1.0F, 1.0F);
 
+	public static final CollisionContext EMPTY = new EntityCollisionContext(false, -Double.MAX_VALUE, ItemStack.EMPTY, fluidState -> false, null) {
+		@Override
+		public boolean isAbove(VoxelShape shape, BlockPos pos, boolean canAscend) {
+			return canAscend;
+		}
+	};
+
 	public static Location getRaytracedBlock(Entity entity) {
 		return getRaytracedBlock(entity, 100);
 	}
@@ -37,7 +49,7 @@ public class MathUtils {
 		// consideration for more math.
 		Vec3 rayPath = direction.normalize().scale(rayLength);
 		Vec3 to = from.add(rayPath);
-		ClipContext rayContext = new ClipContext(from, to, ClipContext.Block.OUTLINE, ClipContext.Fluid.ANY, (Entity) null);
+		ClipContext rayContext = new ClipContext(from, to, ClipContext.Block.OUTLINE, ClipContext.Fluid.ANY, EMPTY);
 		BlockHitResult rayHit = world.clip(rayContext);
 
 		return rayHit.getType() != Type.BLOCK ? null : new Location(rayHit.getBlockPos());
@@ -45,6 +57,15 @@ public class MathUtils {
 
 	public static int logBase2(int value) {
 		return (int) (Math.log(value) / Math.log(2) + 1e-10);
+	}
+
+	public static int nearestPowerOf10(double value, boolean roundUp) {
+		double power = Math.log10(value);
+		if(roundUp) {
+			return (int) Math.ceil(power);
+		} else {
+			return (int) Math.floor(power);
+		}
 	}
 
 	/**

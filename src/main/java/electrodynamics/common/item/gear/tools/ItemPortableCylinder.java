@@ -88,7 +88,7 @@ public class ItemPortableCylinder extends ItemElectrodynamics {
 
         GasStack gas = handler.getGasInTank(0);
         if (gas.isEmpty()) {
-            tooltips.add(ElectroTextUtils.ratio(Component.literal("0"), ChatFormatter.formatFluidMilibuckets(MAX_GAS_CAPCITY)).withStyle(ChatFormatting.GRAY));
+            tooltips.add(ElectroTextUtils.ratio(Component.literal("0"), ChatFormatter.formatFluidMilibuckets(MAX_GAS_CAPCITY)).withStyle(ChatFormatting.DARK_GRAY));
         } else {
             tooltips.add(gas.getGas().getDescription().copy().withStyle(ChatFormatting.GRAY));
             tooltips.add(ElectroTextUtils.ratio(ChatFormatter.formatFluidMilibuckets(gas.getAmount()), ChatFormatter.formatFluidMilibuckets(MAX_GAS_CAPCITY)).withStyle(ChatFormatting.DARK_GRAY));

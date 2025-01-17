@@ -31,7 +31,7 @@ public class ChemicalCrystallizerRecipeCategory extends Fluid2ItemRecipeCategory
 
     public static final ArrowAnimatedObject ANIM_RIGHT_ARROW = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT_BIG, 32, 17, StartDirection.LEFT);
 
-    public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(14, 5, 5000);
+    public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(14, 5);
 
     public static final PowerLabelWrapperElectroRecipe POWER_LABEL = new PowerLabelWrapperElectroRecipe(2, 55, 240);
     public static final TimeLabelWrapperElectroRecipe TIME_LABEL = new TimeLabelWrapperElectroRecipe(130, 55);

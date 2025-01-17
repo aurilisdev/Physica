@@ -41,6 +41,10 @@ public class Constants {
 	public static int ELECTRICARCFURNACE_REQUIRED_TICKS = 50;
 	@DoubleValue(def = 125.0)
 	public static double WIREMILL_USAGE_PER_TICK = 125.0;
+	@DoubleValue(def = 1000)
+	public static double ROTARY_UNIFIER_USAGE = 1000;
+	@IntValue(def = 1)
+	public static int ROTARY_UNIFIER_CONVERSION_RATE = 1;
 	@IntValue(def = 200)
 	public static int WIREMILL_REQUIRED_TICKS = 200;
 	@DoubleValue(def = 350.0)

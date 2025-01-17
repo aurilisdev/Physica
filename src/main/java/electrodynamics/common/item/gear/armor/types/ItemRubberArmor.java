@@ -2,12 +2,19 @@ package electrodynamics.common.item.gear.armor.types;
 
 import java.util.EnumMap;
 
+import electrodynamics.api.References;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.registers.ElectrodynamicsArmorMaterials;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 public class ItemRubberArmor extends ItemElectrodynamicsArmor {
 
@@ -18,10 +25,16 @@ public class ItemRubberArmor extends ItemElectrodynamicsArmor {
 		map.put(Type.BOOTS, 2);
 	});
 
+	public static final ResourceLocation ARMOR_TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/rubberarmor.png");
+
 	public ItemRubberArmor(ArmorItem.Type type, Properties properties, Holder<CreativeModeTab> creativeTab) {
 		super(ElectrodynamicsArmorMaterials.RUBBER_BOOTS, type, properties, creativeTab);
 	}
 
+	@Override
+	public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+		return ARMOR_TEXTURE_LOCATION;
+	}
 
 	/*
 	public enum ArmorMaterialRubber implements ArmorMaterial {

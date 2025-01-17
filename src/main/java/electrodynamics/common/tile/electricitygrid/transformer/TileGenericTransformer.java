@@ -61,7 +61,7 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
     }
 
     public void tickClient(ComponentTickable tickable) {
-        if (level.getGameTime() - lastTransferTime.get() > 20) {
+        if (level.getGameTime() - lastTransferTime.get() > 20L) {
             lastTransfer.set(TransferPack.EMPTY);
         }
         if (!isPlayingSound && shouldPlaySound()) {
@@ -123,7 +123,7 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
         TransferPack returner = TransferPack.EMPTY;
 
         if (electro != null) {
-            electro.getConnectedLoad(transformed, dir);
+            returner = electro.getConnectedLoad(transformed, dir);
         }
 
         // TransferPack returner = ((BlockEntity) output.getSafe()).getCapability(ElectrodynamicsCapabilities.ELECTRODYNAMIC,
@@ -192,12 +192,12 @@ public abstract class TileGenericTransformer extends GenericTile implements ITic
 
     @Override
     public void onEntityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (level.isClientSide || lastTransfer.get().getJoules() <= 0 || level.getGameTime() - lastTransferTime.get() > 20) {
+        if (level.isClientSide || lastTransfer.get().getJoules() <= 0 || level.getGameTime() - lastTransferTime.get() > 20L) {
             return;
         }
         ElectricityUtils.electrecuteEntity(entity, lastTransfer.get());
         lastTransfer.set(TransferPack.EMPTY);
-        lastTransferTime.set(0);
+        lastTransferTime.set(0L);
     }
 
     @Override

@@ -63,7 +63,7 @@ public class BlockLogisticalWire extends BlockWire {
         public static void registerColoredBlocks(RegisterColorHandlersEvent.Block event) {
             WIRES.forEach(block -> event.register((state, level, pos, tintIndex) -> {
                 if (tintIndex == 0) {
-                    return ((BlockLogisticalWire) block).wire.color.color.color();
+                    return ((BlockLogisticalWire) block).wire.getWireColor().getColor().color();
                 }
                 if (tintIndex != 1) {
                     return 0xFFFFFFFF;

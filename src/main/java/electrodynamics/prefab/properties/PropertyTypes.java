@@ -278,9 +278,13 @@ public class PropertyTypes {
             //
             Location.STREAM_CODEC,
             //
-            writer -> writer.prop().get().writeToNBT(writer.tag(), writer.prop().getName()),
+            writer -> {
+                CompoundTag tag = new CompoundTag();
+                writer.prop().get().writeToNBT(tag, "");
+                writer.tag().put(writer.prop().getName(), tag);
+            },
             //
-            reader -> Location.readFromNBT(reader.tag(), reader.prop().getName())
+            reader -> Location.readFromNBT(reader.tag().getCompound(reader.prop().getName()), "")
             //
     );
 

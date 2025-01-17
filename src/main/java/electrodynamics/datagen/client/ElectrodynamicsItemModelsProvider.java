@@ -10,11 +10,12 @@ import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.block.subtype.SubtypeWire;
-import electrodynamics.common.block.subtype.SubtypeWire.Conductor;
+import electrodynamics.common.block.subtype.SubtypeWire.WireMaterial;
 import electrodynamics.common.block.subtype.SubtypeWire.InsulationMaterial;
 import electrodynamics.common.block.subtype.SubtypeWire.WireClass;
 import electrodynamics.common.block.subtype.SubtypeWire.WireColor;
 import electrodynamics.common.item.subtype.*;
+import electrodynamics.datagen.DataGenerators;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -154,28 +155,28 @@ public class ElectrodynamicsItemModelsProvider extends ItemModelProvider {
 		}
 
 		// bare
-		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE)) {
+		for (SubtypeWire wire : DataGenerators.getWires(WireMaterial.values(), InsulationMaterial.BARE, WireClass.BARE, WireColor.NONE)) {
 			layeredBuilder(name(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire)), Parent.GENERATED, itemLoc("wire/" + wire.tag())).transforms().transform(ItemDisplayContext.GUI).scale(0.7F).end();
 		}
 
 		// insulated
-		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())) {
-			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wireinsulated" + wire.conductor.toString()), itemLoc("wire/wireinsulatedcoil"));
+		for (SubtypeWire wire : DataGenerators.getWires(WireMaterial.values(), InsulationMaterial.WOOL, WireClass.INSULATED, WireColor.values())) {
+			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wireinsulated" + wire.getWireMaterial().toString()), itemLoc("wire/wireinsulatedcoil"));
 		}
 
 		// logistical
-		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())) {
-			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wirelogistics" + wire.conductor.toString()), itemLoc("wire/wirelogisticscoil"), itemLoc("wire/wirelogisticsredstone"));
+		for (SubtypeWire wire : DataGenerators.getWires(WireMaterial.values(), InsulationMaterial.WOOL, WireClass.LOGISTICAL, WireColor.values())) {
+			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wirelogistics" + wire.getWireMaterial().toString()), itemLoc("wire/wirelogisticscoil"), itemLoc("wire/wirelogisticsredstone"));
 		}
 
 		// ceramic
-		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())) {
-			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wireceramicinsulated" + wire.conductor.toString()), itemLoc("wire/wireceramicinsulatedcolortips"), itemLoc("wire/wireceramicinsulatedcoil"));
+		for (SubtypeWire wire : DataGenerators.getWires(WireMaterial.values(), InsulationMaterial.CERAMIC, WireClass.CERAMIC, WireColor.values())) {
+			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wireceramicinsulated" + wire.getWireMaterial().toString()), itemLoc("wire/wireceramicinsulatedcolortips"), itemLoc("wire/wireceramicinsulatedcoil"));
 		}
 
 		// highly insulated
-		for (SubtypeWire wire : SubtypeWire.getWires(Conductor.values(), InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())) {
-			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wirehighlyinsulated" + wire.conductor.toString()), itemLoc("wire/wirehighlyinsulatedcoil"));
+		for (SubtypeWire wire : DataGenerators.getWires(WireMaterial.values(), InsulationMaterial.THICK_WOOL, WireClass.THICK, WireColor.values())) {
+			layeredItem(ElectrodynamicsItems.ITEMS_WIRE.getValue(wire), Parent.GENERATED, itemLoc("wire/wirehighlyinsulated" + wire.getWireMaterial().toString()), itemLoc("wire/wirehighlyinsulatedcoil"));
 		}
 
 		for (SubtypeFluidPipe pipe : SubtypeFluidPipe.values()) {

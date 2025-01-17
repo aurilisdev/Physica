@@ -562,7 +562,7 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         @Override
         public int fill(GasStack gas, GasAction action) {
             for(PropertyGasTank tank : tanks){
-                if(tank.getGas().getGas().equals(gas.getGas())){
+                if(tank.getGas().is(gas.getGas())){
                     return tank.fill(gas, action);
                 }
             }
@@ -642,7 +642,7 @@ public class ComponentGasHandlerMulti implements IComponentGasHandler {
         @Override
         public GasStack drain(GasStack gas, GasAction action) {
             for(PropertyGasTank tank : tanks) {
-                if(tank.getGas().getGas().equals(gas.getGas())){
+                if(tank.getGas().is(gas.getGas())){
                     return tank.drain(gas, action);
                 }
             }

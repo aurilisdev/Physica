@@ -5,38 +5,31 @@ import java.util.HashSet;
 import com.mojang.serialization.MapCodec;
 
 import electrodynamics.api.gas.Gas;
-import electrodynamics.api.network.cable.IRefreshableCable;
 import electrodynamics.api.network.cable.type.IGasPipe;
 import electrodynamics.common.block.connect.util.AbstractRefreshingConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
-import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
-import electrodynamics.common.block.subtype.SubtypeGasPipe.InsulationMaterial;
 import electrodynamics.common.network.type.GasNetwork;
 import electrodynamics.common.network.utils.GasUtilities;
+import electrodynamics.common.tile.pipelines.gas.GenericTileGasPipe;
 import electrodynamics.common.tile.pipelines.gas.TileGasPipe;
-import electrodynamics.prefab.tile.types.GenericConnectTile;
-import electrodynamics.prefab.utilities.Scheduler;
-import electrodynamics.registers.ElectrodynamicsBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class BlockGasPipe extends AbstractRefreshingConnectBlock {
+public class BlockGasPipe extends AbstractRefreshingConnectBlock<GenericTileGasPipe> {
 
     public static final HashSet<Block> PIPESET = new HashSet<>();
 
-    public final SubtypeGasPipe pipe;
+    public final IGasPipe pipe;
 
-    public BlockGasPipe(SubtypeGasPipe pipe) {
-        super(pipe.material.sound(pipe.soundType).strength(0.15f).dynamicShape().noOcclusion(), pipe.radius);
+    public BlockGasPipe(IGasPipe pipe) {
+        super(pipe.getProperties().sound(pipe.getSoundType()).strength(0.15f).dynamicShape().noOcclusion(), pipe.getRadius());
 
         this.pipe = pipe;
 
@@ -44,6 +37,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
 
     }
 
+    /*
     @Override
     public boolean isFlammable(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
         return pipe.insulationMaterial.canCombust;
@@ -73,6 +67,8 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
         Scheduler.schedule(5, () -> world.setBlockAndUpdate(pos, ElectrodynamicsBlocks.BLOCKS_GASPIPE.getValue(SubtypeGasPipe.getPipeForType(pipe.pipeMaterial, InsulationMaterial.NONE)).defaultBlockState()));
     }
 
+     */
+
     @Override
     public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
         TileGasPipe tile = (TileGasPipe) worldIn.getBlockEntity(pos);
@@ -81,7 +77,7 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
         }
         GasNetwork network = tile.getNetwork();
 
-        double multipler = pipe.insulationMaterial == InsulationMaterial.NONE ? 1.0 : 1.2;
+        double multipler = 1.0;//pipe.insulationMaterial == InsulationMaterial.NONE ? 1.0 : 1.2;
 
         if (network.temperatureOfTransmitted >= Gas.MINIMUM_HEAT_BURN_TEMP * multipler) {
 
@@ -96,24 +92,19 @@ public class BlockGasPipe extends AbstractRefreshingConnectBlock {
     }
 
     @Override
-    public BlockState refreshConnections(BlockState otherState, BlockEntity otherTile, BlockState state, BlockEntity thisTile, Direction dir) {
-        if(!(thisTile instanceof GenericConnectTile)) {
-            return state;
-        }
-        GenericConnectTile thisConnect = (GenericConnectTile) thisTile;
+    public EnumConnectType getConnection(BlockState otherState, BlockEntity otherTile, GenericTileGasPipe thisConductor, Direction dir) {
         EnumConnectType connection = EnumConnectType.NONE;
-        if (otherTile instanceof IGasPipe) {
+        if (otherTile instanceof GenericTileGasPipe) {
             connection = EnumConnectType.WIRE;
         } else if (GasUtilities.isGasReciever(otherTile, dir.getOpposite())) {
             connection = EnumConnectType.INVENTORY;
         }
-        thisConnect.writeConnection(dir, connection);
-        return state;
+        return connection;
     }
 
     @Override
-    public IRefreshableCable getCableIfValid(BlockEntity tile) {
-        if (tile instanceof IGasPipe pipe) {
+    public GenericTileGasPipe getCableIfValid(BlockEntity tile) {
+        if (tile instanceof GenericTileGasPipe pipe) {
             return pipe;
         }
         return null;

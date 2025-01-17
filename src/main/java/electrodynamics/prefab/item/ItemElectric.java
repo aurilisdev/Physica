@@ -2,7 +2,6 @@ package electrodynamics.prefab.item;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
@@ -21,7 +20,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
 public class ItemElectric extends ItemElectrodynamics implements IItemElectric {
 
@@ -38,7 +36,7 @@ public class ItemElectric extends ItemElectrodynamics implements IItemElectric {
 	public void addCreativeModeItems(CreativeModeTab group, List<ItemStack> items) {
 
 		ItemStack empty = new ItemStack(this);
-		IItemElectric.setEnergyStored(empty, 0);
+		//IItemElectric.setEnergyStored(empty, 0);
 		items.add(empty);
 		ItemStack charged = new ItemStack(this);
 		IItemElectric.setEnergyStored(charged, getMaximumCapacity(charged));
@@ -59,8 +57,8 @@ public class ItemElectric extends ItemElectrodynamics implements IItemElectric {
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flagIn) {
 		super.appendHoverText(stack, context, tooltip, flagIn);
-		tooltip.add(ElectroTextUtils.tooltip("item.electric.info", ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY));
-		tooltip.add(ElectroTextUtils.tooltip("item.electric.voltage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE), ChatFormatter.getChatDisplayShort(properties.extract.getVoltage(), DisplayUnit.VOLTAGE))).withStyle(ChatFormatting.RED));
+		tooltip.add(ElectroTextUtils.tooltip("item.electric.info", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(getJoulesStored(stack), DisplayUnit.JOULES), ChatFormatter.getChatDisplayShort(getMaximumCapacity(stack), DisplayUnit.JOULES)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
+		tooltip.add(ElectroTextUtils.tooltip("item.electric.voltage", ChatFormatter.getChatDisplayShort(properties.receive.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY));
 		if (getDefaultStorageBattery() != Items.AIR) {
 			IItemElectric.addBatteryTooltip(stack, context, tooltip);
 		}

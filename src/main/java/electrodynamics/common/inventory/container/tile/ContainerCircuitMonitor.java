@@ -23,4 +23,8 @@ public class ContainerCircuitMonitor extends GenericContainerBlockEntity<TileCir
 		setPlayerInvOffset(40);
 	}
 
+	@Override
+	public void addPlayerInventory(Inventory playerinv) {
+
+	}
 }

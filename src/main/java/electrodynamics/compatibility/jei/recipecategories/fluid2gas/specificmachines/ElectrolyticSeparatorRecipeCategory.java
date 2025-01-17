@@ -33,9 +33,9 @@ public class ElectrolyticSeparatorRecipeCategory extends Fluid2GasRecipeCategory
     public static final ArrowAnimatedObject ANIM_RIGHT_ARROW_1 = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT, 24, 17, StartDirection.LEFT);
     public static final ArrowAnimatedObject ANIM_RIGHT_ARROW_2 = new ArrowAnimatedObject(ProgressBars.PROGRESS_ARROW_RIGHT, 64, 17, StartDirection.LEFT);
 
-    public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(8, 5, 5000);
-    public static final GasGaugeObject OUT_GAUGE = new GasGaugeObject(48, 5, 5000);
-    public static final GasGaugeObject BIPRODUCT_GAUGE = new GasGaugeObject(88, 5, 5000);
+    public static final FluidGaugeObject IN_GAUGE = new FluidGaugeObject(8, 5);
+    public static final GasGaugeObject OUT_GAUGE = new GasGaugeObject(48, 5);
+    public static final GasGaugeObject BIPRODUCT_GAUGE = new GasGaugeObject(88, 5);
 
     public static final PowerLabelWrapperElectroRecipe POWER_LABEL = new PowerLabelWrapperElectroRecipe(2, 55, 240);
     public static final TimeLabelWrapperElectroRecipe TIME_LABEL = new TimeLabelWrapperElectroRecipe(130, 55);
