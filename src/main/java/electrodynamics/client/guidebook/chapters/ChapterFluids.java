@@ -3,6 +3,7 @@ package electrodynamics.client.guidebook.chapters;
 import java.util.ArrayList;
 import java.util.List;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import electrodynamics.client.guidebook.ScreenGuidebook;
 import electrodynamics.client.guidebook.utils.components.Chapter;
@@ -32,7 +33,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ChapterFluids extends Chapter {
 
-    private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/item/pipe/pipesteel.png"));
+    private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, Electrodynamics.rl("textures/item/pipe/pipesteel.png"));
 
     public ChapterFluids(Module module) {
         super(module);
@@ -106,7 +107,7 @@ public class ChapterFluids extends Chapter {
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.fluidoutput")).setIndentions(1).setSeparateStart());
         blankLine();
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l3.2")).setSeparateStart());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fluidio.png")).onTooltip(new OnTooltip() {
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/fluidio.png")).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -194,8 +195,8 @@ public class ChapterFluids extends Chapter {
         }));
 
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidvalve.1")).setSeparateStart().setIndentions(1));
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fluidvalveoff.png")));
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fluidvalveon.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, Electrodynamics.rl("textures/screen/guidebook/fluidvalveoff.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, Electrodynamics.rl("textures/screen/guidebook/fluidvalveon.png")));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidvalve.2")).setSeparateStart());
 
         // Fluid Pipe Pump
@@ -227,9 +228,9 @@ public class ChapterFluids extends Chapter {
         }));
 
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidpipepump.1")).setSeparateStart().setIndentions(1));
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fluidpipepump.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/fluidpipepump.png")));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidpipepump.2")).setSeparateStart());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fluidpipepumpgui.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/fluidpipepumpgui.png")));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidpipepump.3")).setSeparateStart());
 
         // Fluid Pipe Filter
@@ -261,13 +262,13 @@ public class ChapterFluids extends Chapter {
         }));
 
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidfilterpipe.1")).setSeparateStart().setIndentions(1));
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fluidfilterpipe.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/fluidfilterpipe.png")));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidfilterpipe.2")).setSeparateStart());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fluidfilterpipegui1.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/fluidfilterpipegui1.png")));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidfilterpipe.3", ElectroTextUtils.guidebook("chapter.fluids.blacklist").withStyle(ChatFormatting.BOLD), ElectroTextUtils.guidebook("chapter.fluids.whitelist").withStyle(ChatFormatting.BOLD))).setSeparateStart());
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidfilterpipe.4")).setSeparateStart().setIndentions(1));
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fluidfilterpipegui2.png")));
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/fluidfilterpipegui3.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, Electrodynamics.rl("textures/screen/guidebook/fluidfilterpipegui2.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, Electrodynamics.rl("textures/screen/guidebook/fluidfilterpipegui3.png")));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.fluids.l5.fluidfilterpipe.5")).setSeparateStart());
 
         // Fluid Void

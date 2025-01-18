@@ -1,6 +1,6 @@
 package electrodynamics.prefab.screen.component.button.type;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -57,7 +57,7 @@ public class ButtonModuleSelector extends ButtonSpecificPage {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = ResourceLocation.parse(References.ID + ":textures/screen/guidebook/buttons/" + name + ".png");
+			loc = Electrodynamics.rl("textures/screen/guidebook/buttons/" + name + ".png");
 		}
 
 		@Override

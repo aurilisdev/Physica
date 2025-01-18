@@ -1,7 +1,7 @@
 package electrodynamics.common.recipe.categories.chemicalreactor;
 
 import com.mojang.datafixers.util.Pair;
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.recipe.recipeutils.*;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ChemicalReactorRecipe extends AbstractMaterialRecipe {
 
     public static final String RECIPE_GROUP = "chemical_reactor_recipe";
-    public static final ResourceLocation RECIPE_ID = ResourceLocation.fromNamespaceAndPath(References.ID, RECIPE_GROUP);
+    public static final ResourceLocation RECIPE_ID = Electrodynamics.rl(RECIPE_GROUP);
 
     private List<CountableIngredient> itemIngredients;
     private List<FluidIngredient> fluidIngredients;

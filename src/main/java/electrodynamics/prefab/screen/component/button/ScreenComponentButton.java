@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.utilities.RenderingUtils;
@@ -14,7 +15,6 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 
@@ -30,7 +30,7 @@ import java.util.function.Supplier;
  */
 public class ScreenComponentButton<T extends ScreenComponentButton<?>> extends ScreenComponentGeneric {
 
-    public static final WidgetSprites VANILLA_BUTTON_SPRITES = new WidgetSprites(ResourceLocation.withDefaultNamespace("widget/button"), ResourceLocation.withDefaultNamespace("widget/button_disabled"), ResourceLocation.withDefaultNamespace("widget/button_highlighted"));
+    public static final WidgetSprites VANILLA_BUTTON_SPRITES = new WidgetSprites(Electrodynamics.vanillarl("widget/button"), Electrodynamics.vanillarl("widget/button_disabled"), Electrodynamics.vanillarl("widget/button_highlighted"));
 
     public boolean isPressed = false;
 

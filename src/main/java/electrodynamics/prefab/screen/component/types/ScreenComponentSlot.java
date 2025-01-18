@@ -3,7 +3,7 @@ package electrodynamics.prefab.screen.component.types;
 import java.util.ArrayList;
 import java.util.List;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.api.screen.component.ISlotTexture;
 import electrodynamics.api.screen.component.TextSupplier;
@@ -124,7 +124,7 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/slot/" + name + ".png");
+			loc = Electrodynamics.rl("textures/screen/component/slot/" + name + ".png");
 
 			this.xOffset = xOffset;
 			this.yOffset = yOffset;
@@ -216,7 +216,7 @@ public class ScreenComponentSlot extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/icon/" + name + ".png");
+			loc = Electrodynamics.rl("textures/screen/component/icon/" + name + ".png");
 		}
 
 		@Override

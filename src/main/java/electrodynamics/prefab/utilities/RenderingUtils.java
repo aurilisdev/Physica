@@ -3,6 +3,7 @@ package electrodynamics.prefab.utilities;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import org.joml.Matrix4f;
 
@@ -124,7 +125,7 @@ public class RenderingUtils {
     }
 
     public static void renderSolidColorBox(PoseStack stack, Minecraft minecraft, VertexConsumer builder, AABB box, float r, float g, float b, float a, int light, int overlay, @Nonnull boolean[] renderedFaces) {
-        TextureAtlasSprite sp = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(ResourceLocation.withDefaultNamespace("block/white_wool"));
+        TextureAtlasSprite sp = minecraft.getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(Electrodynamics.vanillarl("block/white_wool"));
         renderFilledBox(stack, builder, box, r, g, b, a, sp.getU0(), sp.getV0(), sp.getU1(), sp.getV1(), light, overlay, renderedFaces);
     }
 
@@ -352,7 +353,7 @@ public class RenderingUtils {
     }
 
     public static RenderType beaconType() {
-        return RenderType.beaconBeam(ResourceLocation.withDefaultNamespace("textures/entity/beacon_beam.png"), true);
+        return RenderType.beaconBeam(Electrodynamics.vanillarl("textures/entity/beacon_beam.png"), true);
     }
 
     public static void resetShaderColor() {

@@ -1,12 +1,12 @@
 package electrodynamics.compatibility.jei.utils.gui.types.gasgauge;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import net.minecraft.resources.ResourceLocation;
 
 public enum JeiGasGaugeTextures implements IGasGaugeTexture {
 
-	BACKGROUND_DEFAULT(14, 49, 0, 0, 41, 49, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/gas_gauge_default.png")),
-	LEVEL_DEFAULT(14, 49, 14, 0, 41, 49, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/gas_gauge_default.png"), -1, -1);
+	BACKGROUND_DEFAULT(14, 49, 0, 0, 41, 49, Electrodynamics.rl("textures/screen/jei/gas_gauge_default.png")),
+	LEVEL_DEFAULT(14, 49, 14, 0, 41, 49, Electrodynamics.rl("textures/screen/jei/gas_gauge_default.png"), -1, -1);
 
 	private final int textureWidth;
 	private final int textureHeight;

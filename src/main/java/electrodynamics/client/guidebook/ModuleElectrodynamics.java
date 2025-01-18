@@ -1,16 +1,16 @@
 package electrodynamics.client.guidebook;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import electrodynamics.client.guidebook.chapters.*;
 import electrodynamics.client.guidebook.utils.components.Module;
 import electrodynamics.client.guidebook.utils.pagedata.graphics.ImageWrapperObject;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 
 public final class ModuleElectrodynamics extends Module {
 
-	private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrodynamicslogo.png"));
+	private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, Electrodynamics.rl("textures/screen/guidebook/electrodynamicslogo.png"));
 
 	@Override
 	public ImageWrapperObject getLogo() {

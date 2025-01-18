@@ -1,6 +1,6 @@
 package electrodynamics.api.screen;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -27,9 +27,9 @@ public interface ITexture {
 
 	enum Textures implements ITexture {
 		NONE(0, 0, 0, 0, 0, 0, null),
-		CONDENSER_COLUMN(32, 47, 0, 0, 32, 47, ResourceLocation.parse(References.ID + ":textures/screen/component/condensercolumn.png")),
-		TRANSFORMER_SYMBOL(25, 33, 0, 0, 25, 33, ResourceLocation.parse(References.ID + ":textures/screen/component/transformercoil.png")),
-		WHITE(10, 10, 0, 0 ,10, 10, ResourceLocation.fromNamespaceAndPath("neoforge", "textures/white.png"));
+		CONDENSER_COLUMN(32, 47, 0, 0, 32, 47, Electrodynamics.rl("textures/screen/component/condensercolumn.png")),
+		TRANSFORMER_SYMBOL(25, 33, 0, 0, 25, 33, Electrodynamics.rl("textures/screen/component/transformercoil.png")),
+		WHITE(10, 10, 0, 0 ,10, 10, Electrodynamics.forgerl("textures/white.png"));
 
 		private final int textureWidth;
 		private final int textureHeight;

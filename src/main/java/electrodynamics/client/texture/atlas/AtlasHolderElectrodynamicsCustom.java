@@ -1,5 +1,6 @@
 package electrodynamics.client.texture.atlas;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -17,7 +18,7 @@ public class AtlasHolderElectrodynamicsCustom extends TextureAtlasHolder {
 //	public static final ResourceLocation TEXTURE_GAS = create("gastexture");
 
 	public AtlasHolderElectrodynamicsCustom(TextureManager textureManager) {
-		super(textureManager, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/" + References.ID + "/" + ElectrodynamicsTextureAtlases.ELECTRODYNAMICS_CUSTOM_NAME + ".png"), ElectrodynamicsTextureAtlases.ELECTRODYNAMICS_CUSTOM);
+		super(textureManager, Electrodynamics.rl("textures/" + References.ID + "/" + ElectrodynamicsTextureAtlases.ELECTRODYNAMICS_CUSTOM_NAME + ".png"), ElectrodynamicsTextureAtlases.ELECTRODYNAMICS_CUSTOM);
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class AtlasHolderElectrodynamicsCustom extends TextureAtlasHolder {
 
 	@SuppressWarnings("unused")
 	private static ResourceLocation create(String name) {
-		return ResourceLocation.fromNamespaceAndPath(References.ID, "custom/" + name);
+		return Electrodynamics.rl("custom/" + name);
 	}
 
 }

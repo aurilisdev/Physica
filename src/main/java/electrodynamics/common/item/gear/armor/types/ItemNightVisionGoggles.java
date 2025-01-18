@@ -4,7 +4,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.item.IItemElectric;
@@ -46,8 +46,8 @@ public class ItemNightVisionGoggles extends ItemElectrodynamicsArmor implements 
 	public static final int JOULES_PER_TICK = 5;
 	public static final int DURATION_SECONDS = 12;
 
-	private static final ResourceLocation ARMOR_TEXTURE_OFF = ResourceLocation.parse(References.ID + ":textures/model/armor/nightvisiongogglesoff.png");
-	private static final ResourceLocation ARMOR_TEXTURE_ON = ResourceLocation.parse(References.ID + ":textures/model/armor/nightvisiongoggleson.png");
+	private static final ResourceLocation ARMOR_TEXTURE_OFF = Electrodynamics.rl("textures/model/armor/nightvisiongogglesoff.png");
+	private static final ResourceLocation ARMOR_TEXTURE_ON = Electrodynamics.rl("textures/model/armor/nightvisiongoggleson.png");
 
 	public ItemNightVisionGoggles(ElectricItemProperties properties, Holder<CreativeModeTab> creativeTab) {
 		super(ElectrodynamicsArmorMaterials.NVGS, Type.HELMET, properties, creativeTab);

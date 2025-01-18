@@ -2,6 +2,7 @@ package electrodynamics.common.item.subtype;
 
 import java.util.Locale;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.ISubtype;
 import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +23,7 @@ public enum SubtypeDrillHead implements ISubtype {
 	SubtypeDrillHead(int durability, boolean unbreakable, Color color, double speedBoost) {
 		this.durability = durability;
 		isUnbreakable = unbreakable;
-		blockTextureLoc = ResourceLocation.parse("electrodynamics:block/resource/resourceblock" + toString().toLowerCase(Locale.ROOT));
+		blockTextureLoc = Electrodynamics.rl("block/resource/resourceblock" + toString().toLowerCase(Locale.ROOT));
 		this.color = color;
 		this.speedBoost = speedBoost;
 	}

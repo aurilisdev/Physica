@@ -3,7 +3,6 @@ package electrodynamics.prefab.properties;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 
 /**
  * Interface to allow for custom property types in dependent mods
@@ -22,8 +21,6 @@ public interface IPropertyType<TYPE, BUFFERTYPE> {
     public void writeToTag(TagWriter<TYPE> writer);
 
     public TYPE readFromTag(TagReader<TYPE> reader);
-
-    public ResourceLocation getId();
 
     public static final record TagWriter<TYPE>(Property<TYPE> prop, CompoundTag tag, HolderLookup.Provider registries) {
 

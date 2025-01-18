@@ -2,7 +2,7 @@ package electrodynamics.prefab.screen.component.types;
 
 import java.util.function.DoubleSupplier;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,7 +13,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ScreenComponentProgress extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/progress.png");
+	public static final ResourceLocation TEXTURE = Electrodynamics.rl("textures/screen/component/progress.png");
 
 	private final DoubleSupplier progressInfoHandler;
 	private final ProgressBars bar;
@@ -102,7 +102,7 @@ public class ScreenComponentProgress extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/progress/" + name + ".png");
+			loc = Electrodynamics.rl("textures/screen/component/progress/" + name + ".png");
 		}
 
 		@Override

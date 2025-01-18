@@ -1,6 +1,5 @@
 package electrodynamics.prefab.properties;
 
-import electrodynamics.api.References;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.prefab.utilities.object.Location;
 import electrodynamics.prefab.utilities.object.TransferPack;
@@ -27,6 +26,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import static net.minecraft.world.level.block.Block.BLOCK_STATE_REGISTRY;
@@ -35,9 +35,7 @@ public class PropertyTypes {
 
     public static final PropertyType<Byte, ByteBuf> BYTE = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "byte"),
-            //
-            null,
+            Objects::equals,
             //
             ByteBufCodecs.BYTE,
             //
@@ -49,9 +47,7 @@ public class PropertyTypes {
 
     public static final PropertyType<Boolean, ByteBuf> BOOLEAN = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "boolean"),
-            //
-            null,
+            Objects::equals,
             //
             ByteBufCodecs.BOOL,
             //
@@ -63,9 +59,7 @@ public class PropertyTypes {
 
     public static final PropertyType<Integer, ByteBuf> INTEGER = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "integer"),
-            //
-            null,
+            Objects::equals,
             //
             ByteBufCodecs.INT,
             //
@@ -77,9 +71,7 @@ public class PropertyTypes {
 
     public static final PropertyType<Long, ByteBuf> LONG = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "long"),
-            //
-            null,
+            Objects::equals,
             //
             ByteBufCodecs.VAR_LONG,
             //
@@ -91,9 +83,7 @@ public class PropertyTypes {
 
     public static final PropertyType<Float, ByteBuf> FLOAT = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "float"),
-            //
-            null,
+            Objects::equals,
             //
             ByteBufCodecs.FLOAT,
             //
@@ -103,11 +93,9 @@ public class PropertyTypes {
             //
     );
 
-    public static final PropertyType<Double, ByteBuf> DOUBLE = new PropertyType<>(ResourceLocation.fromNamespaceAndPath(
+    public static final PropertyType<Double, ByteBuf> DOUBLE = new PropertyType<>(
             //
-            References.ID, "double"),
-            //
-            null,
+            Objects::equals,
             //
             ByteBufCodecs.DOUBLE,
             //
@@ -119,9 +107,7 @@ public class PropertyTypes {
 
     public static final PropertyType<UUID, ByteBuf> UUID = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "uuid"),
-            //
-            null,
+            Objects::equals,
             //
             UUIDUtil.STREAM_CODEC,
             //
@@ -133,9 +119,7 @@ public class PropertyTypes {
 
     public static final PropertyType<CompoundTag, ByteBuf> COMPOUND_TAG = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "compoundtag"),
-            //
-            null,
+            Objects::equals,
             //
             ByteBufCodecs.fromCodec(CompoundTag.CODEC),
             //
@@ -147,9 +131,7 @@ public class PropertyTypes {
 
     public static final PropertyType<BlockPos, ByteBuf> BLOCK_POS = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "blockpos"),
-            //
-            null,
+            Objects::equals,
             //
             BlockPos.STREAM_CODEC,
             //
@@ -160,8 +142,6 @@ public class PropertyTypes {
     );
 
     public static final PropertyType<NonNullList<ItemStack>, ByteBuf> INVENTORY_ITEMS = new PropertyType<>(
-            //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "inventoryitems"),
             //
             (thisList, otherList) -> {
                 if (thisList.size() != otherList.size()) {
@@ -205,8 +185,6 @@ public class PropertyTypes {
 
     public static final PropertyType<FluidStack, RegistryFriendlyByteBuf> FLUID_STACK = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "fluidstack"),
-            //
             (thisStack, otherStack) -> {
                 if (thisStack.getAmount() != otherStack.getAmount()) {
                     return false;
@@ -228,8 +206,6 @@ public class PropertyTypes {
     );
 
     public static final PropertyType<List<BlockPos>, ByteBuf> BLOCK_POS_LIST = new PropertyType<>(
-            //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "blockposlist"),
             //
             (thisList, otherList) -> {
                 if (thisList.size() != otherList.size()) {
@@ -272,9 +248,7 @@ public class PropertyTypes {
 
     public static final PropertyType<Location, FriendlyByteBuf> LOCATION = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "location"),
-            //
-            null,
+            Objects::equals,
             //
             Location.STREAM_CODEC,
             //
@@ -290,9 +264,7 @@ public class PropertyTypes {
 
     public static final PropertyType<GasStack, RegistryFriendlyByteBuf> GAS_STACK = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "gasstack"),
-            //
-            null,
+            Objects::equals,
             //
             GasStack.STREAM_CODEC,
             //
@@ -303,8 +275,6 @@ public class PropertyTypes {
     );
 
     public static final PropertyType<ItemStack, RegistryFriendlyByteBuf> ITEM_STACK = new PropertyType<>(
-            //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "itemstack"),
             //
             ItemStack::matches,
             //
@@ -318,9 +288,7 @@ public class PropertyTypes {
 
     public static final PropertyType<Block, ByteBuf> BLOCK = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "block"),
-            //
-            null,
+            Objects::equals,
             //
             ByteBufCodecs.fromCodec(BuiltInRegistries.BLOCK.byNameCodec()),
             //
@@ -340,9 +308,7 @@ public class PropertyTypes {
 
     public static final PropertyType<BlockState, ByteBuf> BLOCK_STATE = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "blockstate"),
-            //
-            null,
+            Objects::equals,
             //
             ByteBufCodecs.fromCodec(BlockState.CODEC),
             //
@@ -354,9 +320,7 @@ public class PropertyTypes {
 
     public static final PropertyType<TransferPack, FriendlyByteBuf> TRANSFER_PACK = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "transferpack"),
-            //
-            null,
+            Objects::equals,
             //
             TransferPack.STREAM_CODEC,
             //
@@ -368,9 +332,7 @@ public class PropertyTypes {
 
     public static final PropertyType<ResourceLocation, ByteBuf> RESOURCE_LOCATION = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "modelresourcelocation"),
-            //
-            null,
+            Objects::equals,
             //
             ResourceLocation.STREAM_CODEC,
             //

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
@@ -172,7 +172,7 @@ public class ScreenComponentInventoryIO extends ScreenComponentGeneric {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			this.loc = ResourceLocation.parse(References.ID + ":textures/screen/component/io/" + name + ".png");
+			this.loc = Electrodynamics.rl("textures/screen/component/io/" + name + ".png");
 		}
 
 		@Override

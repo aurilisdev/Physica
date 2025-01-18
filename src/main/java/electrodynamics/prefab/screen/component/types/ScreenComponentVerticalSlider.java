@@ -1,6 +1,6 @@
 package electrodynamics.prefab.screen.component.types;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import net.minecraft.client.gui.GuiGraphics;
@@ -126,9 +126,9 @@ public class ScreenComponentVerticalSlider extends ScreenComponentGeneric {
     }
 
     public static enum VerticalSliderTextures implements ITexture {
-        SLIDER_BACKGROUND(14, 30, 0, 0, 14, 30, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/component/verticalslider/vertical_slider_bg.png")),
-        SLIDER_ACTIVE(12, 15, 0, 0, 12, 15, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/component/verticalslider/vertical_slider_active.png")),
-        SLIDER_INACTIVE(12, 15, 0, 0, 12, 15, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/component/verticalslider/vertical_slider_inactive.png"));
+        SLIDER_BACKGROUND(14, 30, 0, 0, 14, 30, Electrodynamics.rl("textures/screen/component/verticalslider/vertical_slider_bg.png")),
+        SLIDER_ACTIVE(12, 15, 0, 0, 12, 15, Electrodynamics.rl("textures/screen/component/verticalslider/vertical_slider_active.png")),
+        SLIDER_INACTIVE(12, 15, 0, 0, 12, 15, Electrodynamics.rl("textures/screen/component/verticalslider/vertical_slider_inactive.png"));
 
         private final int textureWidth;
         private final int textureHeight;

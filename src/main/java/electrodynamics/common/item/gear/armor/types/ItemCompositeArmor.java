@@ -4,7 +4,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.registers.*;
@@ -31,7 +31,7 @@ public class ItemCompositeArmor extends ItemElectrodynamicsArmor {
 		map.put(Type.BOOTS, 6);
 	});
 
-	public static final ResourceLocation ARMOR_TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/compositearmor.png");
+	public static final ResourceLocation ARMOR_TEXTURE_LOCATION = Electrodynamics.rl("textures/model/armor/compositearmor.png");
 
 	public ItemCompositeArmor(Type slot) {
 		super(ElectrodynamicsArmorMaterials.COMPOSITE_ARMOR, slot, new Item.Properties().stacksTo(1).fireResistant().setNoRepair().durability(2000), ElectrodynamicsCreativeTabs.MAIN);

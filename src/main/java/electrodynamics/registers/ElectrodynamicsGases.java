@@ -2,6 +2,7 @@ package electrodynamics.registers;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import electrodynamics.api.gas.Gas;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
@@ -20,7 +21,7 @@ public class ElectrodynamicsGases {
 
     public static final ConcurrentHashMap<Holder<Fluid>, Gas> MAPPED_GASSES = new ConcurrentHashMap<>();
 
-    public static final ResourceLocation GAS_REGISTRY_LOC = ResourceLocation.fromNamespaceAndPath(References.ID, "gases");
+    public static final ResourceLocation GAS_REGISTRY_LOC = Electrodynamics.rl("gases");
     public static final ResourceKey<Registry<Gas>> GAS_REGISTRY_KEY = ResourceKey.createRegistryKey(GAS_REGISTRY_LOC);
     public static final DeferredRegister<Gas> GASES = DeferredRegister.create(GAS_REGISTRY_KEY, References.ID);
     public static final Registry<Gas> GAS_REGISTRY = ElectrodynamicsGases.GASES.makeRegistry(builder -> builder.sync(true));

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -25,7 +26,7 @@ import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 public record Multiblock(Map<Direction, List<MultiblockSlaveNode>> nodes) {
 
     public static final String FOLDER = "multiblock";
-    public static final ResourceKey<Registry<Multiblock>> REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(References.ID, FOLDER));
+    public static final ResourceKey<Registry<Multiblock>> REGISTRY_KEY = ResourceKey.createRegistryKey(Electrodynamics.rl(FOLDER));
 
     public static final String MEMBER_FIELD = "members";
 
@@ -35,7 +36,7 @@ public record Multiblock(Map<Direction, List<MultiblockSlaveNode>> nodes) {
 
                     Codec.unboundedMap(Direction.CODEC, MultiblockSlaveNode.CODEC.listOf()).fieldOf(MEMBER_FIELD).forGetter(Multiblock::nodes)
 
-            ).apply(instance, nodes -> new Multiblock(nodes)));
+            ).apply(instance, Multiblock::new));
 
     public static List<MultiblockSlaveNode> getNodes(Level world, ResourceKey<Multiblock> id, Direction facing) {
         return world.registryAccess().lookupOrThrow(Multiblock.REGISTRY_KEY).getOrThrow(id).value().nodes().get(facing);

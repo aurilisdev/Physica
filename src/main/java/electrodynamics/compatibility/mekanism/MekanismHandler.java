@@ -1,6 +1,5 @@
 package electrodynamics.compatibility.mekanism;
 
-import electrodynamics.api.References;
 import electrodynamics.api.gas.*;
 import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.common.settings.Constants;
@@ -21,20 +20,18 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class MekanismHandler {
 
     public static final PropertyType<ChemicalStack, RegistryFriendlyByteBuf> CHEMICAL_STACK = new PropertyType<>(
             //
-            ResourceLocation.fromNamespaceAndPath(References.ID, "chemicalstack"),
-            //
-            null,
+            Objects::equals,
             //
             ChemicalStack.OPTIONAL_STREAM_CODEC,
             //

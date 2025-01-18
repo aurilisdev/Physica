@@ -1,5 +1,6 @@
 package electrodynamics.registers;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.common.item.gear.armor.types.ItemCombatArmor;
 import electrodynamics.common.item.gear.tools.electric.utils.ItemRailgun;
 import electrodynamics.compatibility.mekanism.MekanismHandler;
@@ -30,7 +31,6 @@ import electrodynamics.common.item.gear.tools.electric.ItemElectricDrill;
 import electrodynamics.common.item.gear.tools.electric.ItemSeismicScanner;
 import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.capabilities.BlockCapability;
@@ -44,12 +44,12 @@ public class ElectrodynamicsCapabilities {
     public static final double DEFAULT_VOLTAGE = 120.0;
     public static final String LOCATION_KEY = "location";
 
-    public static final BlockCapability<ICapabilityElectrodynamic, @Nullable Direction> CAPABILITY_ELECTRODYNAMIC_BLOCK = BlockCapability.createSided(id("electrodynamicblock"), ICapabilityElectrodynamic.class);
+    public static final BlockCapability<ICapabilityElectrodynamic, @Nullable Direction> CAPABILITY_ELECTRODYNAMIC_BLOCK = BlockCapability.createSided(Electrodynamics.rl("electrodynamicblock"), ICapabilityElectrodynamic.class);
 
-    public static final ItemCapability<ILocationStorage, Void> CAPABILITY_LOCATIONSTORAGE_ITEM = ItemCapability.createVoid(id("locationstorageitem"), ILocationStorage.class);
+    public static final ItemCapability<ILocationStorage, Void> CAPABILITY_LOCATIONSTORAGE_ITEM = ItemCapability.createVoid(Electrodynamics.rl("locationstorageitem"), ILocationStorage.class);
 
-    public static final ItemCapability<IGasHandlerItem, Void> CAPABILITY_GASHANDLER_ITEM = ItemCapability.createVoid(id("gashandleritem"), IGasHandlerItem.class);
-    public static final BlockCapability<IGasHandler, @Nullable Direction> CAPABILITY_GASHANDLER_BLOCK = BlockCapability.createSided(id("gashandlerblock"), IGasHandler.class);
+    public static final ItemCapability<IGasHandlerItem, Void> CAPABILITY_GASHANDLER_ITEM = ItemCapability.createVoid(Electrodynamics.rl("gashandleritem"), IGasHandlerItem.class);
+    public static final BlockCapability<IGasHandler, @Nullable Direction> CAPABILITY_GASHANDLER_BLOCK = BlockCapability.createSided(Electrodynamics.rl("gashandlerblock"), IGasHandler.class);
 
     @SubscribeEvent
     public static void register(RegisterCapabilitiesEvent event) {
@@ -209,7 +209,4 @@ public class ElectrodynamicsCapabilities {
 
     }
 
-    private static final ResourceLocation id(String name) {
-        return ResourceLocation.fromNamespaceAndPath(References.ID, name);
-    }
 }

@@ -103,23 +103,23 @@ public class ElectrodynamicsBlocks {
     public static final BulkDeferredHolder<Block, Block, SubtypeResourceBlock> BLOCKS_RESOURCE = new BulkDeferredHolder<>(SubtypeResourceBlock.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new Block(subtype.getProperties().strength(subtype.getHardness(), subtype.getResistance()).sound(subtype.getSoundType()))));
     public static final BulkDeferredHolder<Block, BlockGasPipe, SubtypeGasPipe> BLOCKS_GASPIPE = new BulkDeferredHolder<>(SubtypeGasPipe.values(), subtype -> BLOCKS.register(subtype.tag(), () -> new BlockGasPipe(subtype)));
 
-    public static final DeferredHolder<Block, BlockMultiSubnode> BLOCK_MULTISUBNODE = BLOCKS.register("multisubnode", () -> new BlockMultiSubnode());
-    public static final DeferredHolder<Block, BlockSeismicMarker> BLOCK_SEISMICMARKER = BLOCKS.register("seismicmarker", () -> new BlockSeismicMarker());
+    public static final DeferredHolder<Block, BlockMultiSubnode> BLOCK_MULTISUBNODE = BLOCKS.register("multisubnode", BlockMultiSubnode::new);
+    public static final DeferredHolder<Block, BlockSeismicMarker> BLOCK_SEISMICMARKER = BLOCKS.register("seismicmarker", BlockSeismicMarker::new);
     public static final DeferredHolder<Block, BlockFrame> BLOCK_FRAME = BLOCKS.register("frame", () -> new BlockFrame(0));
     public static final DeferredHolder<Block, BlockFrame> BLOCK_FRAME_CORNER = BLOCKS.register("framecorner", () -> new BlockFrame(1));
-    public static final DeferredHolder<Block, BlockLogisticalManager> BLOCK_LOGISTICALMANAGER = BLOCKS.register("logisticalmanager", () -> new BlockLogisticalManager());
+    public static final DeferredHolder<Block, BlockLogisticalManager> BLOCK_LOGISTICALMANAGER = BLOCKS.register("logisticalmanager", BlockLogisticalManager::new);
     public static final DeferredHolder<Block, BlockCompressor> BLOCK_COMPRESSOR = BLOCKS.register("compressor", () -> new BlockCompressor(false));
     public static final DeferredHolder<Block, BlockCompressor> BLOCK_DECOMPRESSOR = BLOCKS.register("decompressor", () -> new BlockCompressor(true));
     public static final DeferredHolder<Block, BlockAdvancedCompressor> BLOCK_ADVANCEDCOMPRESSOR = BLOCKS.register("advancedcompressor", () -> new BlockAdvancedCompressor(false));
     public static final DeferredHolder<Block, BlockAdvancedCompressor> BLOCK_ADVANCEDDECOMPRESSOR = BLOCKS.register("advanceddecompressor", () -> new BlockAdvancedCompressor(true));
-    public static final DeferredHolder<Block, BlockGasTransformerSide> BLOCK_COMPRESSOR_SIDE = BLOCKS.register("compressorside", () -> new BlockGasTransformerSide());
-    public static final DeferredHolder<Block, BlockGasTransformerAddonTank> BLOCK_COMPRESSOR_ADDONTANK = BLOCKS.register("compressoraddontank", () -> new BlockGasTransformerAddonTank());
-    public static final DeferredHolder<Block, BlockThermoelectricManipulator> BLOCK_THERMOELECTRICMANIPULATOR = BLOCKS.register("thermoelectricmanipulator", () -> new BlockThermoelectricManipulator());
-    public static final DeferredHolder<Block, BlockAdvancedThermoelectricManipulator> BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR = BLOCKS.register("advancedthermoelectricmanipulator", () -> new BlockAdvancedThermoelectricManipulator());
+    public static final DeferredHolder<Block, BlockGasTransformerSide> BLOCK_COMPRESSOR_SIDE = BLOCKS.register("compressorside", BlockGasTransformerSide::new);
+    public static final DeferredHolder<Block, BlockGasTransformerAddonTank> BLOCK_COMPRESSOR_ADDONTANK = BLOCKS.register("compressoraddontank", BlockGasTransformerAddonTank::new);
+    public static final DeferredHolder<Block, BlockThermoelectricManipulator> BLOCK_THERMOELECTRICMANIPULATOR = BLOCKS.register("thermoelectricmanipulator", BlockThermoelectricManipulator::new);
+    public static final DeferredHolder<Block, BlockAdvancedThermoelectricManipulator> BLOCK_ADVANCED_THERMOELECTRICMANIPULATOR = BLOCKS.register("advancedthermoelectricmanipulator", BlockAdvancedThermoelectricManipulator::new);
     public static final DeferredHolder<Block, BlockScaffold> BLOCK_STEELSCAFFOLDING = BLOCKS.register("steelscaffold", () -> new BlockScaffold(Blocks.IRON_BLOCK.properties().requiresCorrectToolForDrops().strength(2.0F, 3.0F).sound(SoundType.METAL).noOcclusion()));
     public static final DeferredHolder<Block, BlockChemicalReactorExtra> BLOCK_CHEMICALREACTOREXTRA_MIDDLE = BLOCKS.register("chemicalreactorextramiddle", () -> new BlockChemicalReactorExtra(BlockChemicalReactorExtra.Location.MIDDLE));
     public static final DeferredHolder<Block, BlockChemicalReactorExtra> BLOCK_CHEMICALREACTOREXTRA_TOP = BLOCKS.register("chemicalreactorextratop", () -> new BlockChemicalReactorExtra(BlockChemicalReactorExtra.Location.TOP));
 
-    public static final DeferredHolder<Block, BlockMultiblockSlave> BLOCK_MULTIBLOCK_SLAVE = BLOCKS.register("multiblockslave", () -> new BlockMultiblockSlave());
+    public static final DeferredHolder<Block, BlockMultiblockSlave> BLOCK_MULTIBLOCK_SLAVE = BLOCKS.register("multiblockslave", BlockMultiblockSlave::new);
 
 }

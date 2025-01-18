@@ -2,6 +2,7 @@ package electrodynamics.datagen.client;
 
 import javax.annotation.Nullable;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates.AddonTankNeighborType;
@@ -483,7 +484,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
     }
 
     public ItemModelBuilder glassBlock(Block block, ResourceLocation texture, boolean registerItem) {
-        return simpleBlockCustomRenderType(block, texture, ResourceLocation.withDefaultNamespace("cutout"), registerItem);
+        return simpleBlockCustomRenderType(block, texture, Electrodynamics.vanillarl("cutout"), registerItem);
     }
 
     public ItemModelBuilder simpleBlockCustomRenderType(Block block, ResourceLocation texture, ResourceLocation renderType, boolean registerItem) {
@@ -598,7 +599,7 @@ public class ElectrodynamicsBlockStateProvider extends BlockStateProvider {
      *
      */
     public void wire(Block block, ModelFile none, ModelFile side, boolean registerItem) {
-        ModelFile model = models().withExistingParent(name(block), ResourceLocation.withDefaultNamespace("cube")).customLoader(WireModelBuilder::begin).models(none, side, side).end().renderType(ResourceLocation.withDefaultNamespace("cutout"));
+        ModelFile model = models().withExistingParent(name(block), Electrodynamics.vanillarl("cube")).customLoader(WireModelBuilder::begin).models(none, side, side).end().renderType(Electrodynamics.vanillarl("cutout"));
 
         getVariantBuilder(block).partialState().addModels(new ConfiguredModel(model));
 

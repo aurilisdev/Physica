@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import net.neoforged.neoforge.client.ChunkRenderTypeSet;
 import net.neoforged.neoforge.client.model.IDynamicBakedModel;
 import net.neoforged.neoforge.client.model.data.ModelData;
@@ -44,7 +44,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class CableModelLoader implements IGeometryLoader<CableModelLoader.WirePartGeometry> {
 
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(References.ID, "electrodynamicscableloader");
+    public static final ResourceLocation ID = Electrodynamics.rl("electrodynamicscableloader");
 
     public static final CableModelLoader INSTANCE = new CableModelLoader();
 

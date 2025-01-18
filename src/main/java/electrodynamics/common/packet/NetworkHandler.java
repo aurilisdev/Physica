@@ -2,6 +2,7 @@ package electrodynamics.common.packet;
 
 import java.util.HashMap;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import electrodynamics.common.packet.types.client.*;
 import electrodynamics.common.packet.types.server.*;
@@ -55,7 +56,7 @@ public class NetworkHandler {
     }
 
     public static ResourceLocation id(String name) {
-        return ResourceLocation.fromNamespaceAndPath(References.ID, name);
+        return Electrodynamics.rl(name);
     }
 
 

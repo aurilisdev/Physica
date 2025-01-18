@@ -2,6 +2,7 @@ package electrodynamics.client.render.shader;
 
 import java.io.IOException;
 
+import electrodynamics.Electrodynamics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +11,6 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 
-import electrodynamics.api.References;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
@@ -30,7 +30,7 @@ public class ElectrodynamicsShaders extends RenderType {
 	private static Uniform uniformAlphaCutoff;
 
 	/* SHADER RESOURCE LOCS */
-	private static final ResourceLocation GREATER_ALPHA_LOC = ResourceLocation.fromNamespaceAndPath(References.ID, "plasmaorb");
+	private static final ResourceLocation GREATER_ALPHA_LOC = Electrodynamics.rl("plasmaorb");
 
 	/* SHADER STATE SHARDS */
 

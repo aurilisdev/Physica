@@ -1,8 +1,8 @@
 package electrodynamics.common.tile.machines;
 
 import com.mojang.datafixers.util.Pair;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.IWrenchItem;
-import electrodynamics.api.References;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.multiblock.assemblybased.Multiblock;
 import electrodynamics.api.multiblock.assemblybased.TileMultiblockController;
@@ -47,7 +47,7 @@ import java.util.List;
 
 public class TileElectrolosisChamber extends TileMultiblockController {
 
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(References.ID, "electrolosischamber");
+    public static final ResourceLocation ID = Electrodynamics.rl("electrolosischamber");
     public static final ResourceKey<Multiblock> RESOURCE_KEY = Multiblock.makeKey(ID);
 
     public static final int MAX_INPUT_TANK_CAPACITY = 5000;
