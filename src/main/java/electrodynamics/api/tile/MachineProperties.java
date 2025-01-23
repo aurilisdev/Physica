@@ -1,6 +1,7 @@
 package electrodynamics.api.tile;
 
 import electrodynamics.api.multiblock.subnodebased.Subnode;
+import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
 import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import net.minecraft.world.level.block.RenderShape;
 
@@ -12,7 +13,7 @@ public class MachineProperties {
     public RenderShape renderShape = RenderShape.MODEL;
     public boolean propegatesLightDown = false;
     public boolean isPlayerStorable = false;
-    public Subnode[] subnodes = new Subnode[0];
+    public IMultiblockParentBlock.SubnodeWrapper wrapper = IMultiblockParentBlock.SubnodeWrapper.EMPTY;
     public VoxelShapeProvider provider = VoxelShapeProvider.DEFAULT;
 
     public static final MachineProperties DEFAULT = new MachineProperties();
@@ -41,9 +42,9 @@ public class MachineProperties {
         return this;
     }
 
-    public MachineProperties setSubnodes(Subnode[] subnodes) {
+    public MachineProperties setSubnodes(IMultiblockParentBlock.SubnodeWrapper wrapper) {
         isMultiblock = true;
-        this.subnodes = subnodes;
+        this.wrapper = wrapper;
         return this;
     }
 

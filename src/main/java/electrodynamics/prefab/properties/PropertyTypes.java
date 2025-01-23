@@ -22,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.ArrayList;
@@ -339,6 +340,18 @@ public class PropertyTypes {
             writer -> writer.tag().putString(writer.prop().getName(), writer.prop().get().toString()),
             //
             reader -> ResourceLocation.parse(reader.tag().getString(reader.prop().getName()))
+            //
+    );
+
+    public static final PropertyType<Vec3, ByteBuf> VEC3 = new PropertyType<>(
+            //
+            Objects::equals,
+            //
+            ByteBufCodecs.fromCodec(Vec3.CODEC),
+            //
+            writer -> Vec3.CODEC.encodeStart(NbtOps.INSTANCE, writer.prop().get()).ifSuccess(tag -> writer.tag().put(writer.prop().getName(), tag)),
+            //
+            reader -> Vec3.CODEC.decode(NbtOps.INSTANCE, reader.tag().get(reader.prop().getName())).getOrThrow().getFirst()
             //
     );
 

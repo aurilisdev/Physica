@@ -85,7 +85,7 @@ public class TileMultiSubnode extends GenericTile {
 
 		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile node) {
 
-			return shapeCache = node.getSubNodes()[nodeIndex.get()].getShape(node.getFacingDirection());
+			return shapeCache = node.getSubNodes().getSubnodes(node.getFacingDirection())[nodeIndex.get()].getShape(node.getFacingDirection());
 
 		}
 

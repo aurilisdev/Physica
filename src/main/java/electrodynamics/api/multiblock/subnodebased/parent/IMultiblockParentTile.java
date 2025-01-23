@@ -37,7 +37,7 @@ public interface IMultiblockParentTile {
 
     default void onNodeReplaced(Level world, BlockPos pos, boolean update) {
 
-        Subnode[] subnodes = getSubNodes();
+        Subnode[] subnodes = getSubNodes().getSubnodes(getFacingDirection());
 
         Subnode subnode;
 
@@ -79,7 +79,7 @@ public interface IMultiblockParentTile {
         onNodeReplaced(world, pos, true);
     }
 
-    Subnode[] getSubNodes();
+    IMultiblockParentBlock.SubnodeWrapper getSubNodes();
 
     default void onSubnodeNeighborChange(TileMultiSubnode subnode, BlockPos subnodeChangingNeighbor, boolean blockStateTrigger) {
 
@@ -103,9 +103,7 @@ public interface IMultiblockParentTile {
 
     void onSubnodeDestroyed(TileMultiSubnode subnode);
 
-    default Direction getFacingDirection() {
-        return Direction.NORTH;
-    }
+    Direction getFacingDirection();
 
     default int getDirectSignal(TileMultiSubnode subnode, Direction dir) {
         return 0;

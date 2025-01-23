@@ -2,15 +2,14 @@ package electrodynamics.common.block;
 
 import com.mojang.serialization.MapCodec;
 
-import electrodynamics.api.multiblock.subnodebased.Subnode;
 import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
 import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentTile;
 import electrodynamics.api.tile.IMachine;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
-import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.tile.machines.quarry.TileQuarry;
 import electrodynamics.prefab.block.GenericMachineBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,11 +24,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BlockMachine extends GenericMachineBlock implements IMultiblockParentBlock {
-    public static final VoxelShape[] STANDARD_CUBE = new VoxelShape[]{Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block(), Shapes.block()};
 
     private final IMachine machine;
 
@@ -54,7 +50,7 @@ public class BlockMachine extends GenericMachineBlock implements IMultiblockPare
     public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 
         if(machine.isMultiblock()) {
-            return isValidMultiblockPlacement(state, worldIn, pos, machine.getSubnodes());
+            return isValidMultiblockPlacement(state, worldIn, pos, machine.getSubnodes().getSubnodes(state.hasProperty(ElectrodynamicsBlockStates.FACING) ? state.getValue(ElectrodynamicsBlockStates.FACING) : Direction.NORTH));
         }
         return super.canSurvive(state, worldIn, pos);
 
