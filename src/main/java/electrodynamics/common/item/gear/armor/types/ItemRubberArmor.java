@@ -2,7 +2,7 @@ package electrodynamics.common.item.gear.armor.types;
 
 import java.util.EnumMap;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.registers.ElectrodynamicsArmorMaterials;
 import net.minecraft.Util;
@@ -25,7 +25,7 @@ public class ItemRubberArmor extends ItemElectrodynamicsArmor {
 		map.put(Type.BOOTS, 2);
 	});
 
-	public static final ResourceLocation ARMOR_TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/rubberarmor.png");
+	public static final ResourceLocation ARMOR_TEXTURE_LOCATION = Electrodynamics.rl("textures/model/armor/rubberarmor.png");
 
 	public ItemRubberArmor(ArmorItem.Type type, Properties properties, Holder<CreativeModeTab> creativeTab) {
 		super(ElectrodynamicsArmorMaterials.RUBBER_BOOTS, type, properties, creativeTab);

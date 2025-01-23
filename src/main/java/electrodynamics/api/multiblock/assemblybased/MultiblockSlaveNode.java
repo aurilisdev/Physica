@@ -3,6 +3,7 @@ package electrodynamics.api.multiblock.assemblybased;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Vec3i;
@@ -35,8 +36,8 @@ import net.minecraft.world.phys.shapes.Shapes;
  *
  */
 public record MultiblockSlaveNode(BlockState placeState, BlockState replaceState, TagKey<Block> taggedBlocks, Vec3i offset, VoxelShape renderShape, ResourceLocation model) {
-	public static final TagKey<Block> NOTAG =BlockTags.create(ResourceLocation.fromNamespaceAndPath(References.ID, "notag"));
-	public static final ResourceLocation NOMODEL = ResourceLocation.fromNamespaceAndPath(References.ID, "nomodel");
+	public static final TagKey<Block> NOTAG = BlockTags.create(Electrodynamics.rl("notag"));
+	public static final ResourceLocation NOMODEL = Electrodynamics.rl("nomodel");
 
 	public static final Codec<AABB> AABB_CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			//
@@ -53,11 +54,11 @@ public record MultiblockSlaveNode(BlockState placeState, BlockState replaceState
 			Codec.DOUBLE.fieldOf("zMax").forGetter(aabb -> aabb.maxZ)
 	//
 
-	).apply(instance, (minX, minY, minZ, maxX, maxY, maxZ) -> new AABB(minX, minY, minZ, maxX, maxY, maxZ)));
+	).apply(instance, AABB::new));
 
 	public static final Codec<VoxelShape> VOXELSHAPE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			//
-			AABB_CODEC.listOf().fieldOf("aabbs").forGetter(voxelShape -> voxelShape.toAabbs())).apply(instance, list -> {
+			AABB_CODEC.listOf().fieldOf("aabbs").forGetter(VoxelShape::toAabbs)).apply(instance, list -> {
 				VoxelShape shape = Shapes.empty();
 				for (AABB aabb : list) {
 					shape = Shapes.or(shape, Shapes.create(aabb));
@@ -92,7 +93,7 @@ public record MultiblockSlaveNode(BlockState placeState, BlockState replaceState
 			ResourceLocation.CODEC.optionalFieldOf(MODEL_FIELD, NOMODEL).forGetter(MultiblockSlaveNode::model)
 
 	//
-	).apply(instance, (placeState, replaceState, blockTag, offset, shape, id) -> new MultiblockSlaveNode(placeState, replaceState, blockTag, offset, shape, id)));
+	).apply(instance, MultiblockSlaveNode::new));
 
 	public static final MultiblockSlaveNode EMPTY = new MultiblockSlaveNode(Blocks.AIR.defaultBlockState(), Blocks.AIR.defaultBlockState(), NOTAG, Vec3i.ZERO, Shapes.empty(), NOMODEL);
 

@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import com.mojang.blaze3d.platform.InputConstants;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.client.guidebook.utils.components.Chapter;
 import electrodynamics.client.guidebook.utils.components.Module;
 import electrodynamics.client.guidebook.utils.components.Page;
@@ -99,8 +99,8 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 	public static final HashSet<Object> JEI_INGREDIENTS = new HashSet<>();
 
-	private static final ResourceLocation PAGE_TEXTURE_LEFT = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/resources/guidebookpageleft.png");
-	private static final ResourceLocation PAGE_TEXTURE_RIGHT = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/resources/guidebookpageright.png");
+	private static final ResourceLocation PAGE_TEXTURE_LEFT = Electrodynamics.rl("textures/screen/guidebook/resources/guidebookpageleft.png");
+	private static final ResourceLocation PAGE_TEXTURE_RIGHT = Electrodynamics.rl("textures/screen/guidebook/resources/guidebookpageright.png");
 
 	private static ButtonGuidebook forward;
 	private static ButtonGuidebook back;
@@ -779,7 +779,7 @@ public class ScreenGuidebook extends GenericScreen<ContainerGuidebook> {
 
 		int xOffset = (TEXT_WIDTH - 74) / 2;
 
-		page.graphics.add(new GraphicWrapper(TEXT_START_X, y, new ImageWrapperObject(xOffset, 0, 0, 0, 74, 100, 74, 100, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/resources/guidebookcover.png")), null, null, null));
+		page.graphics.add(new GraphicWrapper(TEXT_START_X, y, new ImageWrapperObject(xOffset, 0, 0, 0, 74, 100, 74, 100, Electrodynamics.rl("textures/screen/guidebook/resources/guidebookcover.png")), null, null, null));
 
 		y += 105;
 

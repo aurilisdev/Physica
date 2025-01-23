@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
 import electrodynamics.api.multiblock.assemblybased.TileMultiblockSlave;
 import electrodynamics.client.ClientRegister;
@@ -39,7 +39,7 @@ import java.util.function.Function;
  */
 public class SlaveNodeModelLoader implements IGeometryLoader<SlaveNodeModelLoader.SlaveNodeGeometry> {
 
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(References.ID, "electrodynamicsslavenodeloader");
+    public static final ResourceLocation ID = Electrodynamics.rl("electrodynamicsslavenodeloader");
 
     public static final SlaveNodeModelLoader INSTANCE = new SlaveNodeModelLoader();
 

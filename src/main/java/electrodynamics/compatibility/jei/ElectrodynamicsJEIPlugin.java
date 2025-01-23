@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.gas.Gas;
@@ -67,6 +68,8 @@ import org.jetbrains.annotations.NotNull;
 @JeiPlugin
 public class ElectrodynamicsJEIPlugin implements IModPlugin {
 
+    public static final ResourceLocation ID = Electrodynamics.rl( "jei");
+
     public static List<mezz.jei.api.recipe.RecipeType<?>> O2O_CLICK_AREAS = new ArrayList<>();
     public static List<mezz.jei.api.recipe.RecipeType<?>> DO2O_CLICK_AREAS = new ArrayList<>();
 
@@ -74,7 +77,7 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return ResourceLocation.fromNamespaceAndPath(electrodynamics.api.References.ID, "jei");
+        return ID;
     }
 
     @Override

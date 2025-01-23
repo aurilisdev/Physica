@@ -1,6 +1,7 @@
 package electrodynamics.api.tile;
 
 import electrodynamics.api.multiblock.subnodebased.Subnode;
+import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
 import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -20,8 +21,8 @@ public interface IMachine {
 
     public boolean isPlayerStorable();
 
-    public default Subnode[] getSubnodes() {
-        return new Subnode[]{};
+    public default IMultiblockParentBlock.SubnodeWrapper getSubnodes() {
+        return IMultiblockParentBlock.SubnodeWrapper.EMPTY;
     }
 
     public VoxelShapeProvider getVoxelShapeProvider();

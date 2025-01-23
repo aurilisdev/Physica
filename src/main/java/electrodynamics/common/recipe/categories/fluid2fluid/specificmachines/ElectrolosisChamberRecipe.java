@@ -1,6 +1,6 @@
 package electrodynamics.common.recipe.categories.fluid2fluid.specificmachines;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.recipe.categories.fluid2fluid.Fluid2FluidRecipe;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ElectrolosisChamberRecipe extends Fluid2FluidRecipe {
 
     public static final String RECIPE_GROUP = "electrolosis_chamber_recipe";
-    public static final ResourceLocation RECIPE_ID = ResourceLocation.fromNamespaceAndPath(References.ID, RECIPE_GROUP);
+    public static final ResourceLocation RECIPE_ID = Electrodynamics.rl(RECIPE_GROUP);
     public ElectrolosisChamberRecipe(String recipeGroup, List<FluidIngredient> inputFluids, FluidStack outputFluid, double experience, int ticks, double usagePerTick, List<ProbableItem> itemBiproducts, List<ProbableFluid> fluidBiproducts, List<ProbableGas> gasBiproducts) {
         super(recipeGroup, inputFluids, outputFluid, experience, ticks, usagePerTick, itemBiproducts, fluidBiproducts, gasBiproducts);
     }

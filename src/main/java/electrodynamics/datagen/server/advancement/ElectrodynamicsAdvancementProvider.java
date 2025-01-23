@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.block.subtype.SubtypeOre;
@@ -99,7 +100,7 @@ public class ElectrodynamicsAdvancementProvider implements DataProvider {
                 //
                 .addCriterion("SpawnIn", PlayerTrigger.TriggerInstance.tick())
                 //
-                .rewards(Builder.loot(ResourceKey.create(Registries.LOOT_TABLE, ResourceLocation.withDefaultNamespace("advancement_reward/electroguidebook"))))
+                .rewards(Builder.loot(ResourceKey.create(Registries.LOOT_TABLE, Electrodynamics.vanillarl("advancement_reward/electroguidebook"))))
                 //
                 .condition(new ConfigCondition());
 

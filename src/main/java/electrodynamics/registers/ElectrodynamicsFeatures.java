@@ -2,7 +2,7 @@ package electrodynamics.registers;
 
 import java.util.List;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.common.block.subtype.SubtypeOre;
 import electrodynamics.common.block.subtype.SubtypeOreDeepslate;
 import electrodynamics.common.settings.OreConfig;
@@ -15,7 +15,6 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.biome.Biome;
@@ -79,7 +78,7 @@ public class ElectrodynamicsFeatures {
 	}
 
 	private static ResourceKey<ConfiguredFeature<?, ?>> configured(String name) {
-		return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(References.ID, name));
+		return ResourceKey.create(Registries.CONFIGURED_FEATURE, Electrodynamics.rl(name));
 	}
 
 	private static OreConfiguration dualOre(SubtypeOre ore, SubtypeOreDeepslate deepOre) {
@@ -131,7 +130,7 @@ public class ElectrodynamicsFeatures {
 	}
 
 	private static ResourceKey<PlacedFeature> placed(String name) {
-		return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(References.ID, name));
+		return ResourceKey.create(Registries.PLACED_FEATURE, Electrodynamics.rl(name));
 	}
 
 	private static List<PlacementModifier> orePlacement(int count, int minY, int maxY) {
@@ -185,7 +184,7 @@ public class ElectrodynamicsFeatures {
 	}
 
 	private static ResourceKey<BiomeModifier> modifier(String name) {
-		return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(References.ID, name));
+		return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Electrodynamics.rl(name));
 	}
 
 }

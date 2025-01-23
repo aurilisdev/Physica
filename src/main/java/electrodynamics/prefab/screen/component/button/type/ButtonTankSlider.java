@@ -1,6 +1,6 @@
 package electrodynamics.prefab.screen.component.button.type;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.button.ScreenComponentButton;
 import electrodynamics.prefab.utilities.RenderingUtils;
@@ -63,7 +63,7 @@ public class ButtonTankSlider extends ScreenComponentButton<ButtonTankSlider> {
             this.textureV = textureV;
             this.imageWidth = imageWidth;
             this.imageHeight = imageHeight;
-            loc = ResourceLocation.parse(References.ID + ":textures/screen/component/button/tankarrows.png");
+            loc = Electrodynamics.rl("textures/screen/component/button/tankarrows.png");
         }
 
         @Override

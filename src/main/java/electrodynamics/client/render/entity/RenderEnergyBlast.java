@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import electrodynamics.Electrodynamics;
-import electrodynamics.api.References;
 import electrodynamics.common.entity.projectile.types.EntityEnergyBlast;
 import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -63,7 +62,7 @@ public class RenderEnergyBlast extends EntityRenderer<EntityEnergyBlast> {
 
 	@Override
 	public @NotNull ResourceLocation getTextureLocation(@NotNull EntityEnergyBlast entity) {
-		return ResourceLocation.fromNamespaceAndPath(References.ID, "custom/plasmaorb");
+		return Electrodynamics.rl("custom/plasmaorb");
 	}
 
 }

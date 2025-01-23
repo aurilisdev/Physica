@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.capability.types.fluid.RestrictedFluidHandlerItemStack;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
@@ -37,7 +37,7 @@ public class ItemHydraulicBoots extends ItemElectrodynamicsArmor {
     });
     public static final int MAX_CAPACITY = 2000;
 
-    private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/hydraulicboots.png");
+    private static final ResourceLocation TEXTURE_LOCATION = Electrodynamics.rl("textures/model/armor/hydraulicboots.png");
 
     public ItemHydraulicBoots() {
         super(ElectrodynamicsArmorMaterials.HYDRAULIC_BOOTS, Type.BOOTS, new Item.Properties().stacksTo(1), ElectrodynamicsCreativeTabs.MAIN);

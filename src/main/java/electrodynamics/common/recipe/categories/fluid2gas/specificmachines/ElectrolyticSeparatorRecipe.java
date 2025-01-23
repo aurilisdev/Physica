@@ -2,7 +2,7 @@ package electrodynamics.common.recipe.categories.fluid2gas.specificmachines;
 
 import java.util.List;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.recipe.categories.fluid2gas.Fluid2GasRecipe;
@@ -17,7 +17,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 public class ElectrolyticSeparatorRecipe extends Fluid2GasRecipe {
 
 	public static final String RECIPE_GROUP = "electrolytic_separator_recipe";
-	public static final ResourceLocation RECIPE_ID = ResourceLocation.fromNamespaceAndPath(References.ID, RECIPE_GROUP);
+	public static final ResourceLocation RECIPE_ID = Electrodynamics.rl(RECIPE_GROUP);
 
 	public ElectrolyticSeparatorRecipe(String recipeGroup, List<FluidIngredient> inputFluidIngredients, GasStack outputGasStack, double experience, int ticks, double usagePerTick, List<ProbableItem> itemBiproducts, List<ProbableFluid> fluidBiproducts, List<ProbableGas> gasBiproducts) {
 		super(recipeGroup, inputFluidIngredients, outputGasStack, experience, ticks, usagePerTick, itemBiproducts, fluidBiproducts, gasBiproducts);

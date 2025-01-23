@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
@@ -55,7 +55,7 @@ public class ItemJetpack extends ItemElectrodynamicsArmor {
     public static final int MAX_PRESSURE = 4;
     public static final int MAX_TEMPERATURE = Gas.ROOM_TEMPERATURE;
 
-    private static final ResourceLocation ARMOR_TEXTURE_LOCATION = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/jetpack.png");
+    private static final ResourceLocation ARMOR_TEXTURE_LOCATION = Electrodynamics.rl("textures/model/armor/jetpack.png");
 
     public static final float OFFSET = 0.1F;
 

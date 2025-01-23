@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.PropertyGasTank;
@@ -26,7 +27,6 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
-import electrodynamics.api.References;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.gas.GasStack;
@@ -46,7 +46,7 @@ import net.minecraft.util.FormattedCharSequence;
 
 public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/gas.png");
+	public static final ResourceLocation TEXTURE = Electrodynamics.rl("textures/screen/component/gas.png");
 
 	public final Supplier<IGasTank> gasTank;
 

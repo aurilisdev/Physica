@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
 import electrodynamics.api.multiblock.assemblybased.Multiblock;
 import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
@@ -46,33 +47,33 @@ public class ElectrodynamicsMultiblockProvider extends JsonCodecProvider<Multibl
         BlockState slave = ElectrodynamicsBlocks.BLOCK_MULTIBLOCK_SLAVE.get().defaultBlockState().setValue(ElectrodynamicsBlockStates.WATERLOGGED, false);
         BlockState scaffold = ElectrodynamicsBlocks.BLOCK_STEELSCAFFOLDING.get().defaultBlockState();
 
-        ResourceLocation ecWindow = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindow");
-        ResourceLocation ecWindowTopC1 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindowc1");
-        ResourceLocation ecWindowTopC2 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindowc2");
-        ResourceLocation ecWindowTopC3 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindowc3");
-        ResourceLocation ecWindowTopC4 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindowc4");
-        ResourceLocation ecWindowTopS1 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindows1");
-        ResourceLocation ecWindowTopS2 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindows2");
-        ResourceLocation ecWindowTopS3 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindows3");
-        ResourceLocation ecWindowTopS4 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberwindows4");
-        ResourceLocation ecCorner = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercorner");
-        ResourceLocation ecVertSide = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambervertside");
-        ResourceLocation ecHorSideFB = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberhorsidefb");
-        ResourceLocation ecHorSideLR = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberhorsidelr");
-        ResourceLocation ecBottom = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberbottom");
-        ResourceLocation ecPowerIn = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberpowerin");
-        ResourceLocation ecFluidIn = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberfluidin");
-        ResourceLocation ecFluidOut = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischamberfluidout");
-        ResourceLocation ecCoilC1 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoilc1");
-        ResourceLocation ecCoilC2 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoilc2");
-        ResourceLocation ecCoilC3 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoilc3");
-        ResourceLocation ecCoilC4 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoilc4");
-        ResourceLocation ecCoilS1 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoils1");
-        ResourceLocation ecCoilS2 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoils2");
-        ResourceLocation ecCoilS3 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoils3");
-        ResourceLocation ecCoilS4 = ResourceLocation.fromNamespaceAndPath(References.ID, "multiblockmodels/electrolosischambercoils4");
+        ResourceLocation ecWindow = Electrodynamics.rl("multiblockmodels/electrolosischamberwindow");
+        ResourceLocation ecWindowTopC1 = Electrodynamics.rl("multiblockmodels/electrolosischamberwindowc1");
+        ResourceLocation ecWindowTopC2 = Electrodynamics.rl("multiblockmodels/electrolosischamberwindowc2");
+        ResourceLocation ecWindowTopC3 = Electrodynamics.rl("multiblockmodels/electrolosischamberwindowc3");
+        ResourceLocation ecWindowTopC4 = Electrodynamics.rl("multiblockmodels/electrolosischamberwindowc4");
+        ResourceLocation ecWindowTopS1 = Electrodynamics.rl("multiblockmodels/electrolosischamberwindows1");
+        ResourceLocation ecWindowTopS2 = Electrodynamics.rl("multiblockmodels/electrolosischamberwindows2");
+        ResourceLocation ecWindowTopS3 = Electrodynamics.rl("multiblockmodels/electrolosischamberwindows3");
+        ResourceLocation ecWindowTopS4 = Electrodynamics.rl("multiblockmodels/electrolosischamberwindows4");
+        ResourceLocation ecCorner = Electrodynamics.rl("multiblockmodels/electrolosischambercorner");
+        ResourceLocation ecVertSide = Electrodynamics.rl("multiblockmodels/electrolosischambervertside");
+        ResourceLocation ecHorSideFB = Electrodynamics.rl("multiblockmodels/electrolosischamberhorsidefb");
+        ResourceLocation ecHorSideLR = Electrodynamics.rl("multiblockmodels/electrolosischamberhorsidelr");
+        ResourceLocation ecBottom = Electrodynamics.rl("multiblockmodels/electrolosischamberbottom");
+        ResourceLocation ecPowerIn = Electrodynamics.rl("multiblockmodels/electrolosischamberpowerin");
+        ResourceLocation ecFluidIn = Electrodynamics.rl("multiblockmodels/electrolosischamberfluidin");
+        ResourceLocation ecFluidOut = Electrodynamics.rl("multiblockmodels/electrolosischamberfluidout");
+        ResourceLocation ecCoilC1 = Electrodynamics.rl("multiblockmodels/electrolosischambercoilc1");
+        ResourceLocation ecCoilC2 = Electrodynamics.rl("multiblockmodels/electrolosischambercoilc2");
+        ResourceLocation ecCoilC3 = Electrodynamics.rl("multiblockmodels/electrolosischambercoilc3");
+        ResourceLocation ecCoilC4 = Electrodynamics.rl("multiblockmodels/electrolosischambercoilc4");
+        ResourceLocation ecCoilS1 = Electrodynamics.rl("multiblockmodels/electrolosischambercoils1");
+        ResourceLocation ecCoilS2 = Electrodynamics.rl("multiblockmodels/electrolosischambercoils2");
+        ResourceLocation ecCoilS3 = Electrodynamics.rl("multiblockmodels/electrolosischambercoils3");
+        ResourceLocation ecCoilS4 = Electrodynamics.rl("multiblockmodels/electrolosischambercoils4");
 
-        addMultiblock(ResourceLocation.fromNamespaceAndPath(References.ID, "testing"), List.of(new MultiblockSlaveNode(slave, Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block(), ClientRegister.MODEL_BATTERYBOX.id())));
+        addMultiblock(Electrodynamics.rl("testing"), List.of(new MultiblockSlaveNode(slave, Blocks.OAK_LOG.defaultBlockState(), BlockTags.ACACIA_LOGS, new Vec3i(0, 0, 1), Shapes.block(), ClientRegister.MODEL_BATTERYBOX.id())));
 
         addMultiblock(TileElectrolosisChamber.ID, List.of(
 

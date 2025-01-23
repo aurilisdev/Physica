@@ -6,8 +6,8 @@ import java.util.function.Consumer;
 import electrodynamics.api.electricity.RegisterWiresEvent;
 import electrodynamics.common.block.connect.BlockWire;
 import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
-import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.registers.ElectrodynamicsBlocks;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,7 +18,6 @@ import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.voxelshapes.ElectrodynamicsVoxelShapes;
 import electrodynamics.common.entity.ElectrodynamicsAttributeModifiers;
 import electrodynamics.common.event.ServerEventHandler;
-import electrodynamics.common.eventbus.RegisterPropertiesEvent;
 import electrodynamics.common.packet.types.client.PacketResetGuidebookPages;
 import electrodynamics.common.reloadlistener.CoalGeneratorFuelRegister;
 import electrodynamics.common.reloadlistener.CombustionFuelRegister;
@@ -27,7 +26,6 @@ import electrodynamics.common.settings.Constants;
 import electrodynamics.common.settings.OreConfig;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.prefab.configuration.ConfigurationHandler;
-import electrodynamics.prefab.properties.PropertyManager;
 import electrodynamics.registers.UnifiedElectrodynamicsRegister;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.api.distmarker.Dist;
@@ -80,11 +78,6 @@ public class Electrodynamics {
         // ElectrodynamicsGases.MAPPED_GASSES.putAll(map.fluidToGasMap);
 
         event.enqueueWork(() -> {
-            RegisterPropertiesEvent properties = new RegisterPropertiesEvent();
-
-            ModLoader.postEvent(properties);
-
-            PropertyManager.registerProperties(properties.getRegisteredProperties());
 
             RegisterWiresEvent wiresEvent = new RegisterWiresEvent();
 
@@ -93,27 +86,6 @@ public class Electrodynamics {
             wiresEvent.process();
         });
 
-    }
-
-    @SubscribeEvent
-    public static void registerProperties(RegisterPropertiesEvent event) {
-        event.registerProperty(PropertyTypes.BYTE);
-        event.registerProperty(PropertyTypes.BOOLEAN);
-        event.registerProperty(PropertyTypes.INTEGER);
-        event.registerProperty(PropertyTypes.LONG);
-        event.registerProperty(PropertyTypes.FLOAT);
-        event.registerProperty(PropertyTypes.DOUBLE);
-        event.registerProperty(PropertyTypes.UUID);
-        event.registerProperty(PropertyTypes.COMPOUND_TAG);
-        event.registerProperty(PropertyTypes.BLOCK_POS);
-        event.registerProperty(PropertyTypes.INVENTORY_ITEMS);
-        event.registerProperty(PropertyTypes.FLUID_STACK);
-        event.registerProperty(PropertyTypes.BLOCK_POS_LIST);
-        event.registerProperty(PropertyTypes.LOCATION);
-        event.registerProperty(PropertyTypes.GAS_STACK);
-        event.registerProperty(PropertyTypes.ITEM_STACK);
-        event.registerProperty(PropertyTypes.BLOCK_STATE);
-        event.registerProperty(PropertyTypes.TRANSFER_PACK);
     }
 
     // I wonder how long this bug has been there
@@ -144,6 +116,22 @@ public class Electrodynamics {
         for (BlockWire wire : ElectrodynamicsBlocks.BLOCKS_WIRE.getAllValues()) {
             event.registerWire(wire);
         }
+    }
+
+    public static final ResourceLocation rl(String path) {
+        return ResourceLocation.fromNamespaceAndPath(References.ID, path);
+    }
+
+    public static final ResourceLocation vanillarl(String path) {
+        return ResourceLocation.withDefaultNamespace(path);
+    }
+
+    public static final ResourceLocation forgerl(String path) {
+        return ResourceLocation.fromNamespaceAndPath("neoforge", path);
+    }
+
+    public static final ResourceLocation commonrl(String path) {
+        return ResourceLocation.fromNamespaceAndPath("c", path);
     }
 
 }

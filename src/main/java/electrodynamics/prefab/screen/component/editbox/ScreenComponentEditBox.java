@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.utilities.math.Color;
@@ -35,7 +35,7 @@ import net.neoforged.api.distmarker.OnlyIn;
  */
 public class ScreenComponentEditBox extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/textinputbar.png");
+	public static final ResourceLocation TEXTURE = Electrodynamics.rl("textures/screen/component/textinputbar.png");
 
 	public static final char[] POSITIVE_DECIMAL = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.' };
 	public static final char[] DECIMAL = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '-' };

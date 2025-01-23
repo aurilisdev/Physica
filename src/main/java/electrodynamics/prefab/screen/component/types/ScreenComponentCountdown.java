@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.DoubleSupplier;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.screen.ITexture;
@@ -20,7 +20,7 @@ public class ScreenComponentCountdown extends AbstractScreenComponentInfo {
 	private final DoubleSupplier progressInfoHandler;
 	private TextPropertySupplier tooltip;
 
-	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/countdown.png");
+	public static final ResourceLocation TEXTURE = Electrodynamics.rl("textures/screen/component/countdown.png");
 
 	public ScreenComponentCountdown(TextPropertySupplier tooltip, DoubleSupplier progressInfoHandler, int x, int y) {
 		super(CountdownTextures.BACKGROUND_DEFAULT, AbstractScreenComponentInfo.EMPTY, x, y);

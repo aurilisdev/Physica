@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.api.screen.component.TextPropertySupplier;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.IconType;
@@ -15,7 +15,7 @@ import net.minecraft.util.FormattedCharSequence;
 
 public class ScreenComponentGuiTab extends AbstractScreenComponentInfo {
 
-	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/screentabs.png");
+	public static final ResourceLocation TEXTURE = Electrodynamics.rl("textures/screen/component/screentabs.png");
 	private final ITexture iconType;
 
 	public ScreenComponentGuiTab(ITexture texture, ITexture icon, @Nonnull TextPropertySupplier infoHandler, int x, int y) {
@@ -58,7 +58,7 @@ public class ScreenComponentGuiTab extends AbstractScreenComponentInfo {
 			this.textureV = textureV;
 			this.imageWidth = imageWidth;
 			this.imageHeight = imageHeight;
-			loc = ResourceLocation.parse(References.ID + ":textures/screen/component/guitab/" + name + ".png");
+			loc = Electrodynamics.rl("textures/screen/component/guitab/" + name + ".png");
 		}
 
 		@Override

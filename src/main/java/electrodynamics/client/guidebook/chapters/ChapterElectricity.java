@@ -3,7 +3,7 @@ package electrodynamics.client.guidebook.chapters;
 import java.util.ArrayList;
 import java.util.List;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.client.guidebook.ScreenGuidebook;
 import electrodynamics.client.guidebook.utils.components.Chapter;
 import electrodynamics.client.guidebook.utils.components.Module;
@@ -20,13 +20,12 @@ import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 
 public class ChapterElectricity extends Chapter {
 
-	private static final ImageWrapperObject LOGO = new ImageWrapperObject(2, 2, 0, 0, 28, 28, 28, 28, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/item/wire/wiregold.png"));
+	private static final ImageWrapperObject LOGO = new ImageWrapperObject(2, 2, 0, 0, 28, 28, 28, 28, Electrodynamics.rl("textures/item/wire/wiregold.png"));
 
 	public ChapterElectricity(Module module) {
 		super(module);
@@ -70,7 +69,7 @@ public class ChapterElectricity extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.topic.machinefundamentals").withStyle(ChatFormatting.BOLD, ChatFormatting.UNDERLINE)).setNewPage());
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l3.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/voltagetooltipinventory.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/voltagetooltipinventory.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l3.2")).setSeparateStart());
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l4")).setSeparateStart().setIndentions(1));
@@ -84,7 +83,7 @@ public class ChapterElectricity extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l5")).setSeparateStart());
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.voltageexample", 120)).setCentered().setNewPage());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/120vmachines.png")).onTooltip(new OnTooltip() {
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/120vmachines.png")).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -100,7 +99,7 @@ public class ChapterElectricity extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.voltageexamplenote")));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.voltageexample", 240)).setCentered().setNewPage());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/240vmachines.png")).onTooltip(new OnTooltip() {
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/240vmachines.png")).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -116,7 +115,7 @@ public class ChapterElectricity extends Chapter {
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.voltageexample", 480)).setCentered().setNewPage());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/480vmachines.png")).onTooltip(new OnTooltip() {
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/480vmachines.png")).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -131,7 +130,7 @@ public class ChapterElectricity extends Chapter {
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.voltageexample", 960)).setCentered().setNewPage());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/960vmachines.png")).onTooltip(new OnTooltip() {
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/960vmachines.png")).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -146,8 +145,8 @@ public class ChapterElectricity extends Chapter {
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l6")).setNewPage().setIndentions(1));
 
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/voltagetooltip1.png")).setNewPage());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 55, 150, 55, 60, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/voltagetooltip2.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 50, 150, 50, 55, Electrodynamics.rl("textures/screen/guidebook/voltagetooltip1.png")).setNewPage());
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 55, 150, 55, 60, Electrodynamics.rl("textures/screen/guidebook/voltagetooltip2.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.guivoltagenote")));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l7")).setNewPage().setIndentions(1));
@@ -156,7 +155,7 @@ public class ChapterElectricity extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.energyinput")).setSeparateStart().setIndentions(1));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.energyoutput")).setSeparateStart().setIndentions(1));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l9")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/energyio.png")).onTooltip(new OnTooltip() {
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/energyio.png")).onTooltip(new OnTooltip() {
 
 			@Override
 			public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -175,7 +174,7 @@ public class ChapterElectricity extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.topic.wirebasics").withStyle(ChatFormatting.BOLD, ChatFormatting.UNDERLINE)).setNewPage());
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l10", ElectroTextUtils.guidebook("chapter.electricity.wires").withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 72, 150, 72, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/wiretooltip1.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 72, 150, 72, 75, Electrodynamics.rl("textures/screen/guidebook/wiretooltip1.png")));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l11.1", ElectroTextUtils.guidebook("chapter.electricity.resistance").withStyle(ChatFormatting.BOLD), ElectroTextUtils.guidebook("chapter.electricity.powerfromcurrent").withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l11.2", ElectroTextUtils.guidebook("chapter.electricity.ampacity").withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
@@ -190,17 +189,17 @@ public class ChapterElectricity extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l12.2", ElectrodynamicsItems.ITEM_RUBBERBOOTS.get().getDescription().copy().withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l13.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/woolwire.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/woolwire.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l13.2")).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/logisticalwire.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/logisticalwire.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l13.3")).setSeparateStart());
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l13.4")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/ceramicwire.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/ceramicwire.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l13.5")).setSeparateStart());
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l14.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/coloredwires.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/coloredwires.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l14.2")).setSeparateStart());
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l15")).setSeparateStart().setIndentions(1));
@@ -227,11 +226,11 @@ public class ChapterElectricity extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l18.1", ElectroTextUtils.guidebook("chapter.electricity.grid").withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l18.2")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrodynamicsmodel.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/electrodynamicsmodel.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l18.3")).setSeparateStart());
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l18.4", ElectroTextUtils.guidebook("chapter.electricity.neutralcurrent").withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/neutralwire.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/neutralwire.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.neutralwirenote").withStyle(ChatFormatting.ITALIC)));
 		blankLine();
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l18.5", ElectroTextUtils.guidebook("chapter.electricity.neutralloss").withStyle(ChatFormatting.BOLD))).setSeparateStart());
@@ -239,7 +238,7 @@ public class ChapterElectricity extends Chapter {
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l18.6")).setSeparateStart().setIndentions(1));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l18.7", ElectroTextUtils.guidebook("chapter.electricity.inrushcurrent").withStyle(ChatFormatting.BOLD))).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/inrushcurrent.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, Electrodynamics.rl("textures/screen/guidebook/inrushcurrent.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l18.8")).setSeparateStart());
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l18.9", ElectricNetwork.MAXIMUM_OVERLOAD_PERIOD_TICKS)).setSeparateStart().setIndentions(1));
@@ -283,7 +282,7 @@ public class ChapterElectricity extends Chapter {
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l19.handheldmultimeter.1")).setIndentions(1).setSeparateStart());
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 40, 150, 40, 45, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/multimeterdisplay1.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 40, 150, 40, 45, Electrodynamics.rl("textures/screen/guidebook/multimeterdisplay1.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l19.handheldmultimeter.2")).setSeparateStart());
 
 		// block multimeter
@@ -345,8 +344,8 @@ public class ChapterElectricity extends Chapter {
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l19.relay.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/relayoff.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/relayon.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, Electrodynamics.rl("textures/screen/guidebook/relayoff.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, Electrodynamics.rl("textures/screen/guidebook/relayon.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l19.relay.2")).setSeparateStart());
 
 		// circuit breaker
@@ -378,8 +377,8 @@ public class ChapterElectricity extends Chapter {
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l19.circuitbreaker.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/breakeroff.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/breakeron.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, Electrodynamics.rl("textures/screen/guidebook/breakeroff.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, Electrodynamics.rl("textures/screen/guidebook/breakeron.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l19.circuitbreaker.2")));
 
 		// current regulator
@@ -441,8 +440,8 @@ public class ChapterElectricity extends Chapter {
 		}));
 
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l19.circuitmonitor.1")).setSeparateStart().setIndentions(1));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/circuitmonitor.png")));
-		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 150, 150, 150, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/circuitmonitorgui.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, Electrodynamics.rl("textures/screen/guidebook/circuitmonitor.png")));
+		pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 150, 150, 150, Electrodynamics.rl("textures/screen/guidebook/circuitmonitorgui.png")));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l19.circuitmonitor.2", ElectroTextUtils.gui("networkwattage").withStyle(ChatFormatting.BOLD), ElectroTextUtils.gui("networkvoltage").withStyle(ChatFormatting.BOLD), ElectroTextUtils.gui("networkampacity").withStyle(ChatFormatting.BOLD), ElectroTextUtils.gui("networkminimumvoltage").withStyle(ChatFormatting.BOLD), ElectroTextUtils.gui("networkresistance").withStyle(ChatFormatting.BOLD), ElectroTextUtils.gui("networkload").withStyle(ChatFormatting.BOLD), ElectroTextUtils.gui("networkwattage"))).setSeparateStart().setIndentions(1));
 		pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electricity.l19.circuitmonitor.3")).setSeparateStart().setIndentions(1));
 

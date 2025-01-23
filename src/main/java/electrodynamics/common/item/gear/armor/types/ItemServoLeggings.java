@@ -4,7 +4,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.function.Consumer;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.item.IItemElectric;
@@ -47,7 +47,7 @@ public class ItemServoLeggings extends ItemElectrodynamicsArmor implements IItem
 
     public static final float DEFAULT_VANILLA_STEPUP = 0.6F;
 
-    private static final ResourceLocation ARMOR_TEXTURE = ResourceLocation.fromNamespaceAndPath(References.ID, "textures/model/armor/servoleggings.png");
+    private static final ResourceLocation ARMOR_TEXTURE = Electrodynamics.rl("textures/model/armor/servoleggings.png");
 
     final ElectricItemProperties properties;
 

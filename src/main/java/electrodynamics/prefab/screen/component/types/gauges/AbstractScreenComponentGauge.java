@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.utilities.RenderingUtils;
@@ -20,7 +20,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public abstract class AbstractScreenComponentGauge extends ScreenComponentGeneric {
 
-	public static final ResourceLocation TEXTURE = ResourceLocation.parse(References.ID + ":textures/screen/component/fluid.png");
+	public static final ResourceLocation TEXTURE = Electrodynamics.rl("textures/screen/component/fluid.png");
 
 	public AbstractScreenComponentGauge(int x, int y) {
 		super(GaugeTextures.BACKGROUND_DEFAULT, x, y);

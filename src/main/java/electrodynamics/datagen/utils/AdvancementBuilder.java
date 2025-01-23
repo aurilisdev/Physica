@@ -13,6 +13,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 
+import electrodynamics.Electrodynamics;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -195,11 +196,11 @@ public class AdvancementBuilder implements IAdvancementBuilderExtension {
 
         NONE(null),
         // Vanilla
-        ADVENTURE(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/adventure.png")), //
-        END(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/end.png")), //
-        HUSBANDRY(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/husbandry.png")), //
-        NETHER(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/nether.png")), //
-        STONE(ResourceLocation.withDefaultNamespace("textures/gui/advancements/backgrounds/stone.png")); //
+        ADVENTURE(Electrodynamics.vanillarl("textures/gui/advancements/backgrounds/adventure.png")), //
+        END(Electrodynamics.vanillarl("textures/gui/advancements/backgrounds/end.png")), //
+        HUSBANDRY(Electrodynamics.vanillarl("textures/gui/advancements/backgrounds/husbandry.png")), //
+        NETHER(Electrodynamics.vanillarl("textures/gui/advancements/backgrounds/nether.png")), //
+        STONE(Electrodynamics.vanillarl("textures/gui/advancements/backgrounds/stone.png")); //
 
         public final ResourceLocation loc;
 

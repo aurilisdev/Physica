@@ -2,6 +2,7 @@ package electrodynamics.common.block.subtype;
 
 import electrodynamics.api.ISubtype;
 import electrodynamics.api.multiblock.subnodebased.Subnode;
+import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
 import electrodynamics.api.tile.IMachine;
 import electrodynamics.api.tile.MachineProperties;
 import electrodynamics.common.block.voxelshapes.ElectrodynamicsVoxelShapes;
@@ -93,13 +94,13 @@ public enum SubtypeMachine implements ISubtype, IMachine {
     downgradetransformer(true, TileDowngradeTransformer::new, MachineProperties.builder().setShapeProvider(ElectrodynamicsVoxelShapes.DOWNGRADE_TRANSFORMER)),
     upgradetransformer(true, TileUpgradeTransformer::new, MachineProperties.builder().setShapeProvider(ElectrodynamicsVoxelShapes.UPGRADE_TRANSFORMER)),
     solarpanel(true, TileSolarPanel::new, MachineProperties.builder().setShapeProvider(ElectrodynamicsVoxelShapes.SOLAR_PANEL)),
-    advancedsolarpanel(true, TileAdvancedSolarPanel::new, MachineProperties.builder().setSubnodes(Subnodes.SUBNODES_ADVANCEDSOLARPANEL).setShapeProvider(ElectrodynamicsVoxelShapes.ADVANCED_SOLAR_PANEL)),
+    advancedsolarpanel(true, TileAdvancedSolarPanel::new, MachineProperties.builder().setSubnodes(Subnodes.ADVANCEDSOLARPANEL).setShapeProvider(ElectrodynamicsVoxelShapes.ADVANCED_SOLAR_PANEL)),
     electricpump(true, TileElectricPump::new, MachineProperties.builder().setShapeProvider(ElectrodynamicsVoxelShapes.ELECTRIC_PUMP)),
     thermoelectricgenerator(true, TileThermoelectricGenerator::new, MachineProperties.builder().setShapeProvider(ElectrodynamicsVoxelShapes.THERMOELECTRIC_GENERATOR)),
     fermentationplant(true, TileFermentationPlant::new, MachineProperties.builder().setShapeProvider(ElectrodynamicsVoxelShapes.FERMENTATION_PLANT)),
     combustionchamber(true, TileCombustionChamber::new, MachineProperties.builder().setShapeProvider(ElectrodynamicsVoxelShapes.COMBUSTION_CHAMBER)),
     hydroelectricgenerator(true, TileHydroelectricGenerator::new, MachineProperties.builder().setShapeProvider(ElectrodynamicsVoxelShapes.HYDROELECTRIC_GENERATOR)),
-    windmill(true, TileWindmill::new, MachineProperties.builder().setSubnodes(Subnodes.SUBNODES_WINDMILL).setShapeProvider(ElectrodynamicsVoxelShapes.WINDMILL)),
+    windmill(true, TileWindmill::new, MachineProperties.builder().setSubnodes(Subnodes.WINDMILL).setShapeProvider(ElectrodynamicsVoxelShapes.WINDMILL)),
     mineralwasher(true, TileMineralWasher::new),
     chemicalmixer(true, TileChemicalMixer::new, MachineProperties.builder().setRenderShape(RenderShape.ENTITYBLOCK_ANIMATED)),
     chemicalcrystallizer(true, TileChemicalCrystallizer::new, MachineProperties.builder().setShapeProvider(ElectrodynamicsVoxelShapes.CHEMICAL_CRYSTALIZER)),
@@ -201,8 +202,8 @@ public enum SubtypeMachine implements ISubtype, IMachine {
     }
 
     @Override
-    public Subnode[] getSubnodes() {
-        return properties.subnodes;
+    public IMultiblockParentBlock.SubnodeWrapper getSubnodes() {
+        return properties.wrapper;
     }
 
     @Override
@@ -222,27 +223,33 @@ public enum SubtypeMachine implements ISubtype, IMachine {
 
     public static class Subnodes {
 
-        public static final Subnode[] SUBNODES_WINDMILL = {new Subnode(
+        public static final IMultiblockParentBlock.SubnodeWrapper WINDMILL = IMultiblockParentBlock.SubnodeWrapper.createOmni(
                 //
-                new BlockPos(0, 1, 0),
+                new Subnode[]{
+                        //
+                        new Subnode(
+                                //
+                                new BlockPos(0, 1, 0),
+                                //
+                                new VoxelShape[]{
+                                        //
+                                        Shapes.block(),
+                                        //
+                                        Shapes.block(),
+                                        //
+                                        Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)),
+                                        //
+                                        Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)),
+                                        //
+                                        Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11)),
+                                        //
+                                        Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11))
+                                })
+                        //
+                }
                 //
-                new VoxelShape[]{
-                        //
-                        Shapes.block(),
-                        //
-                        Shapes.block(),
-                        //
-                        Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)),
-                        //
-                        Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(5, 10, 3, 11, 16, 13)),
-                        //
-                        Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11)),
-                        //
-                        Shapes.or(Block.box(5, 0, 5, 11, 16, 11), Block.box(3, 10, 5, 13, 16, 11))
-                })
-        };
-
-        public static final Subnode[] SUBNODES_ADVANCEDSOLARPANEL = make(() -> {
+        );
+        public static final IMultiblockParentBlock.SubnodeWrapper ADVANCEDSOLARPANEL = IMultiblockParentBlock.SubnodeWrapper.createOmni(make(() -> {
 
             Subnode[] subnodes = new Subnode[9];
 
@@ -269,7 +276,7 @@ public enum SubtypeMachine implements ISubtype, IMachine {
 
             return subnodes;
 
-        });
+        }));
 
 
         public static Subnode[] make(Supplier<Subnode[]> maker) {

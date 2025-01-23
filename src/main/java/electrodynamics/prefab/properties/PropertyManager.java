@@ -2,14 +2,11 @@ package electrodynamics.prefab.properties;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import electrodynamics.Electrodynamics;
 import electrodynamics.prefab.tile.GenericTile;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
 
 /**
  * A wrapper class designed to manage data properties on a tile
@@ -21,13 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 public class PropertyManager {
 
 	public static final String NBT_KEY = "propertydata";
-
-	public static final ConcurrentHashMap<ResourceLocation, IPropertyType> REGISTERED_PROPERTIES = new ConcurrentHashMap<>();
-
-	public static void registerProperties(Map<ResourceLocation, IPropertyType> propeties) {
-		REGISTERED_PROPERTIES.clear();
-		REGISTERED_PROPERTIES.putAll(propeties);
-	}
 
 	private final GenericTile owner;
 

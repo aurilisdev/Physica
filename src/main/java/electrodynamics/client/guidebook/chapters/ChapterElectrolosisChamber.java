@@ -1,6 +1,6 @@
 package electrodynamics.client.guidebook.chapters;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.client.guidebook.ScreenGuidebook;
@@ -21,7 +21,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.level.block.Blocks;
 
@@ -59,7 +58,7 @@ public class ChapterElectrolosisChamber extends Chapter {
                 ElectrodynamicsBlocks.BLOCKS_MACHINE.getValue(SubtypeMachine.electrolosischamber).getName()
         )).setIndentions(1).setSeparateStart());
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.step", 1).withStyle(ChatFormatting.BOLD)).setNewPage());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber1.png")).onTooltip(new OnTooltip() {
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber1.png")).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -69,7 +68,7 @@ public class ChapterElectrolosisChamber extends Chapter {
 
         }));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.step", 2).withStyle(ChatFormatting.BOLD)).setNewPage());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber2.png")).onTooltip(new OnTooltip() {
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber2.png")).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -82,7 +81,7 @@ public class ChapterElectrolosisChamber extends Chapter {
 
         }));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.step", 3).withStyle(ChatFormatting.BOLD)).setNewPage());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber3.png")).onTooltip(new OnTooltip() {
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber3.png")).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -92,7 +91,7 @@ public class ChapterElectrolosisChamber extends Chapter {
 
         }));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.step", 4).withStyle(ChatFormatting.BOLD)).setNewPage());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber4.png")).onTooltip(new OnTooltip() {
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber4.png")).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -106,7 +105,7 @@ public class ChapterElectrolosisChamber extends Chapter {
         }));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.seperatororient").withStyle(ChatFormatting.ITALIC)));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.step", 5).withStyle(ChatFormatting.BOLD)).setNewPage());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber5.png")).onTooltip(new OnTooltip() {
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber5.png")).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -116,7 +115,7 @@ public class ChapterElectrolosisChamber extends Chapter {
 
         }));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.step", 6).withStyle(ChatFormatting.BOLD)).setNewPage());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber6.png")).onTooltip(new OnTooltip() {
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber6.png")).onTooltip(new OnTooltip() {
 
             @Override
             public void onTooltip(GuiGraphics graphics, int xAxis, int yAxis, ScreenGuidebook screen) {
@@ -126,14 +125,14 @@ public class ChapterElectrolosisChamber extends Chapter {
 
         }));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.l4")).setSeparateStart());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber7.png")));
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, 75, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber8.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, 75, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber7.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 75, 150, 75, 75, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber8.png")));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.l5")).setIndentions(1).setSeparateStart());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber9.png")));
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischamber10.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber9.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/electrolosischamber10.png")));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.l6")).setSeparateStart());
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.l7")).setIndentions(1).setSeparateStart());
-        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/electrolosischambergui1.png")));
+        pageData.add(new ImageWrapperObject(0, 0, 0, 0, 150, 79, 150, 79, 81, Electrodynamics.rl("textures/screen/guidebook/electrolosischambergui1.png")));
         pageData.add(new TextWrapperObject(ElectroTextUtils.guidebook("chapter.electrolosischamber.l8")).setIndentions(1).setSeparateStart());
 
 

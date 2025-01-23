@@ -3,7 +3,7 @@ package electrodynamics.prefab.screen;
 import java.util.ArrayList;
 import java.util.List;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.IScreenWrapper;
 import electrodynamics.api.screen.component.ISlotTexture;
 import electrodynamics.prefab.inventory.container.GenericContainer;
@@ -29,7 +29,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class GenericScreen<T extends GenericContainer> extends AbstractContainerScreen<T> implements IScreenWrapper {
 
-	protected ResourceLocation defaultResource = ResourceLocation.parse(References.ID + ":textures/screen/component/base.png");
+	protected ResourceLocation defaultResource = Electrodynamics.rl("textures/screen/component/base.png");
 	private List<AbstractScreenComponent> components = new ArrayList<>();
 	public List<ScreenComponentSlot> slots = new ArrayList<>();
 	private List<ScreenComponentEditBox> editBoxes = new ArrayList<>();

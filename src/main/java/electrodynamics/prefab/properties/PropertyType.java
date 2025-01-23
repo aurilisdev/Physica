@@ -1,16 +1,13 @@
 package electrodynamics.prefab.properties;
 
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class PropertyType<TYPE, BUFFERTYPE> implements IPropertyType<TYPE, BUFFERTYPE> {
-
-    private final ResourceLocation id;
 
     private final BiPredicate<TYPE, TYPE> comparison;
 
@@ -20,14 +17,9 @@ public class PropertyType<TYPE, BUFFERTYPE> implements IPropertyType<TYPE, BUFFE
     private final StreamCodec<BUFFERTYPE, TYPE> packetCodec;
 
 
-    public PropertyType(ResourceLocation id, @Nullable BiPredicate<TYPE, TYPE> comparison, StreamCodec<BUFFERTYPE, TYPE> packetCodec, Consumer<TagWriter<TYPE>> tagWriter, Function<TagReader<TYPE>, TYPE> tagReader) {
+    public PropertyType(@Nonnull BiPredicate<TYPE, TYPE> comparison, StreamCodec<BUFFERTYPE, TYPE> packetCodec, Consumer<TagWriter<TYPE>> tagWriter, Function<TagReader<TYPE>, TYPE> tagReader) {
 
-        this.id = id;
-        if (comparison == null) {
-            this.comparison = (thisObject, otherObject) -> thisObject.equals(otherObject);
-        } else {
-            this.comparison = comparison;
-        }
+        this.comparison = comparison;
         this.packetCodec = packetCodec;
         this.writeToNbt = tagWriter;
         this.readFromNbt = tagReader;
@@ -53,8 +45,4 @@ public class PropertyType<TYPE, BUFFERTYPE> implements IPropertyType<TYPE, BUFFE
         return comparison.test(currentValue, newValue);
     }
 
-    @Override
-    public ResourceLocation getId() {
-        return id;
-    }
 }

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.multiblock.assemblybased.MultiblockSlaveNode;
 import electrodynamics.client.modelbakers.ModelStateRotation;
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertySlaveNode;
@@ -35,7 +35,7 @@ import java.util.function.Function;
 
 public class MultiblockModelLoader implements IGeometryLoader<MultiblockModelLoader.MultiblockModelGeometry> {
 
-    public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(References.ID, "electrodynamicsmultiblockmodelloader");
+    public static final ResourceLocation ID = Electrodynamics.rl("electrodynamicsmultiblockmodelloader");
 
     public static final MultiblockModelLoader INSTANCE = new MultiblockModelLoader();
 

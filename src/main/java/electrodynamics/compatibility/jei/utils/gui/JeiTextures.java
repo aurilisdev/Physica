@@ -1,14 +1,14 @@
 package electrodynamics.compatibility.jei.utils.gui;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import net.minecraft.resources.ResourceLocation;
 
 public enum JeiTextures implements ITexture {
 
-	BACKGROUND_DEFAULT(0, 0, 512, 512, 512, 512, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/background.png")),
-	FLUID_GAUGE_DEFAULT(0, 0, 14, 49, 14, 49, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/fluid_gauge_default.png")),
-	FAKE_GAS_GAUGE(0, 0, 14, 49, 14, 49, ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/jei/fake_gas_gauge.png"));
+	BACKGROUND_DEFAULT(0, 0, 512, 512, 512, 512, Electrodynamics.rl("textures/screen/jei/background.png")),
+	FLUID_GAUGE_DEFAULT(0, 0, 14, 49, 14, 49, Electrodynamics.rl("textures/screen/jei/fluid_gauge_default.png")),
+	FAKE_GAS_GAUGE(0, 0, 14, 49, 14, 49, Electrodynamics.rl("textures/screen/jei/fake_gas_gauge.png"));
 
 	private final int u;
 	private final int v;

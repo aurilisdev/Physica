@@ -1,6 +1,6 @@
 package electrodynamics.prefab.screen.component.button.type;
 
-import electrodynamics.api.References;
+import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.button.ScreenComponentButton;
 import net.minecraft.client.gui.GuiGraphics;
@@ -67,7 +67,7 @@ public class ButtonGuidebook extends ScreenComponentButton<ButtonGuidebook> {
 		private final ResourceLocation loc;
 
 		private GuidebookButtonTextures(int textureWidth, int textureHeight, int textureU, int textureV, int imageWidth, int imageHeight, String name) {
-			this(textureWidth, textureHeight, textureU, textureV, imageWidth, imageHeight, ResourceLocation.parse(References.ID + ":textures/screen/guidebook/buttons/" + name + ".png"));
+			this(textureWidth, textureHeight, textureU, textureV, imageWidth, imageHeight, Electrodynamics.rl("textures/screen/guidebook/buttons/" + name + ".png"));
 		}
 
 		private GuidebookButtonTextures(int textureWidth, int textureHeight, int textureU, int textureV, int imageWidth, int imageHeight, ResourceLocation loc) {
