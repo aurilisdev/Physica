@@ -109,9 +109,7 @@ public class Property<T> {
                 }
                 manager.setDirty(this);
             } else if(shouldUpdateServer) {
-                CompoundTag data = new CompoundTag();
-                saveToTag(data, manager.getOwner().getLevel().registryAccess());
-                PacketDistributor.sendToServer(new PacketSendUpdatePropertiesServer(data, getIndex(), manager.getOwner().getBlockPos()));
+                updateServer();
             }
             onChange.accept(this, old);
         }
@@ -229,6 +227,12 @@ public class Property<T> {
             Electrodynamics.LOGGER.info("Property " + getName() + " was impropertly cast");
         }
 
+    }
+
+    public void updateServer() {
+        CompoundTag data = new CompoundTag();
+        saveToTag(data, manager.getOwner().getLevel().registryAccess());
+        PacketDistributor.sendToServer(new PacketSendUpdatePropertiesServer(data, getIndex(), manager.getOwner().getBlockPos()));
     }
 
 }
