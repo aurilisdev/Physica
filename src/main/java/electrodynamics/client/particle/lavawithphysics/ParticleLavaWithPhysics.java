@@ -44,7 +44,7 @@ public class ParticleLavaWithPhysics extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float scaleFactor) {
-        float f = ((float) this.age + scaleFactor) / (float) this.lifetime;
+        float f = (this.age + scaleFactor) / this.lifetime;
         return this.quadSize * (1.0F - f * f);
     }
 

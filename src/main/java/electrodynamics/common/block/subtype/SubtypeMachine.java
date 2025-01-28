@@ -216,6 +216,7 @@ public enum SubtypeMachine implements ISubtype, IMachine {
         return false;
     }
 
+    @Override
     public boolean isPlayerStorable() {
         return this == quarry;
     }

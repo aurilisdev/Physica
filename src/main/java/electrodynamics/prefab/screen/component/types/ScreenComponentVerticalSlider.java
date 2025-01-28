@@ -31,6 +31,7 @@ public class ScreenComponentVerticalSlider extends ScreenComponentGeneric {
         return this;
     }
 
+    @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
         if (isValidClick(button)) {
             this.onMouseDrag(mouseX, mouseY, dragX, dragY);
@@ -75,7 +76,7 @@ public class ScreenComponentVerticalSlider extends ScreenComponentGeneric {
 
         graphics.blit(bg.getLocation(), guiWidth + xLocation - 1, guiHeight + yLocation, width, 1, bg.textureU(), bg.textureV(), bg.textureWidth(), 1, bg.imageWidth(), bg.imageHeight());
 
-        int permutations = (int) ((double) (height - 2) / 28.0D);
+        int permutations = (int) ((height - 2) / 28.0D);
 
         int remainder = height - permutations * 28 - 2;
 
@@ -148,31 +149,38 @@ public class ScreenComponentVerticalSlider extends ScreenComponentGeneric {
             this.loc = loc;
         }
 
-        public ResourceLocation getLocation() {
+        @Override
+	public ResourceLocation getLocation() {
             return this.loc;
         }
 
-        public int imageHeight() {
+        @Override
+	public int imageHeight() {
             return this.imageHeight;
         }
 
-        public int imageWidth() {
+        @Override
+	public int imageWidth() {
             return this.imageWidth;
         }
 
-        public int textureHeight() {
+        @Override
+	public int textureHeight() {
             return this.textureHeight;
         }
 
-        public int textureU() {
+        @Override
+	public int textureU() {
             return this.textureU;
         }
 
-        public int textureV() {
+        @Override
+	public int textureV() {
             return this.textureV;
         }
 
-        public int textureWidth() {
+        @Override
+	public int textureWidth() {
             return this.textureWidth;
         }
 

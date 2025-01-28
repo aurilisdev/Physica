@@ -123,7 +123,7 @@ public abstract class ItemRailgun extends ItemElectric implements IItemTemperate
 
 				double maxHeat = item.getMaxTemp();
 
-				double amtPerTier = maxHeat / (double) HEAT_COLORS.length;
+				double amtPerTier = maxHeat / HEAT_COLORS.length;
 
 				int threshhold = (int) (currHeat / amtPerTier);
 

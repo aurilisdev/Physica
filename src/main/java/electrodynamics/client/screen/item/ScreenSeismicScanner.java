@@ -60,7 +60,7 @@ public class ScreenSeismicScanner extends GenericScreen<ContainerSeismicScanner>
             graphics.renderComponentTooltip(getFontRenderer(), tooltips, xAxis, yAxis);
         }).setOnPress(but -> {
 
-            ScreenComponentButton<?> button = (ScreenComponentButton<?>) but;
+            ScreenComponentButton<?> button = but;
 
             componentsToHide.forEach(component -> {
                 component.setActive(button.isPressed);

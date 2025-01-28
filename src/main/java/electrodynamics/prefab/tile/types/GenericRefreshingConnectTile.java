@@ -157,7 +157,7 @@ public abstract class GenericRefreshingConnectTile<CABLETYPE, CONDUCTOR extends 
                     continue;
                 }
 
-                adjacentNetworks.add((NETWORK) wire.conductor().getNetwork());
+                adjacentNetworks.add(wire.conductor().getNetwork());
 
             }
 

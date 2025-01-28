@@ -37,6 +37,7 @@ public class TileMultiSubnode extends GenericTile {
 		addComponent(new ComponentPacketHandler(this));
 	}
 
+	@Override
 	@Nullable
 	public ICapabilityElectrodynamic getElectrodynamicCapability(@Nullable Direction side) {
 		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile node) {
@@ -45,6 +46,7 @@ public class TileMultiSubnode extends GenericTile {
 		return null;
 	}
 
+	@Override
 	@Nullable
 	public IFluidHandler getFluidHandlerCapability(@Nullable Direction side) {
 		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile node) {
@@ -53,6 +55,7 @@ public class TileMultiSubnode extends GenericTile {
 		return null;
 	}
 
+	@Override
 	@Nullable
 	public IGasHandler getGasHandlerCapability(@Nullable Direction side) {
 		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile node) {
@@ -61,6 +64,7 @@ public class TileMultiSubnode extends GenericTile {
 		return null;
 	}
 
+	@Override
 	@Nullable
 	public IItemHandler getItemHandlerCapability(@Nullable Direction side) {
 		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile node) {

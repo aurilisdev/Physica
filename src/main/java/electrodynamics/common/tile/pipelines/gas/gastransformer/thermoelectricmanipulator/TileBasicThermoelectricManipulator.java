@@ -40,7 +40,7 @@ public class TileBasicThermoelectricManipulator extends GenericTileThermoelectri
 
     @Override
     public IComponentFluidHandler getFluidHandler() {
-        return new ComponentFluidHandlerMulti(this).setInputTanks(1, (int) Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY).setInputDirections(BlockEntityUtils.MachineDirection.BACK).setOutputTanks(1, (int) Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY).setOutputDirections(BlockEntityUtils.MachineDirection.FRONT);
+        return new ComponentFluidHandlerMulti(this).setInputTanks(1, Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY).setInputDirections(BlockEntityUtils.MachineDirection.BACK).setOutputTanks(1, Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY).setOutputDirections(BlockEntityUtils.MachineDirection.FRONT);
     }
 
     @Override
@@ -97,9 +97,9 @@ public class TileBasicThermoelectricManipulator extends GenericTileThermoelectri
         }
         ComponentGasHandlerMulti handler = getComponent(IComponentType.GasHandler);
         ComponentFluidHandlerMulti multi = getComponent(IComponentType.FluidHandler);
-        multi.getInputTanks()[0].setCapacity((int) (Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount));
+        multi.getInputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount);
         handler.getInputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount);
-        multi.getOutputTanks()[0].setCapacity((int) (Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount));
+        multi.getOutputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount);
         handler.getOutputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * tankCount);
 
     }

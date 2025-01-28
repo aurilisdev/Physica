@@ -251,6 +251,7 @@ public class TileLogisticalManager extends GenericTile implements IConnectTile {
         connections.set(masked | (connection.ordinal() << (dir.ordinal() * 4)));
     }
 
+    @Override
     public EnumConnectType[] readConnections() {
         EnumConnectType[] connections = new EnumConnectType[6];
         for (Direction dir : Direction.values()) {

@@ -50,7 +50,7 @@ public class GenericGasTile extends GenericMaterialTile {
 
                 int room = Math.max(0, MAX_CONDENSED_AMOUNT - currentCondensate.getAmount());
 
-                int taken = Math.min(room, (int) tankGas.getAmount());
+                int taken = Math.min(room, tankGas.getAmount());
 
                 currentCondensate.setAmount(currentCondensate.getAmount() + taken);
 
@@ -58,7 +58,7 @@ public class GenericGasTile extends GenericMaterialTile {
 
             } else {
 
-                FluidStack newFluid = new FluidStack(condensedFluid, Math.min((int) tankGas.getAmount(), MAX_CONDENSED_AMOUNT));
+                FluidStack newFluid = new FluidStack(condensedFluid, Math.min(tankGas.getAmount(), MAX_CONDENSED_AMOUNT));
 
                 condensedFluidFromGas.set(newFluid);
 

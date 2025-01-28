@@ -202,6 +202,7 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         return outputs;
     }
 
+    @Override
     public void setItemInputs(List<List<ItemStack>> inputs, IRecipeLayoutBuilder builder) {
         SlotDataWrapper wrapper;
         for (int i = 0; i < inputSlotWrappers.length; i++) {
@@ -214,6 +215,7 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         }
     }
 
+    @Override
     public void setItemOutputs(List<ItemStack> outputs, IRecipeLayoutBuilder builder) {
         SlotDataWrapper wrapper;
         for (int i = 0; i < outputSlotWrappers.length; i++) {
@@ -228,6 +230,7 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         }
     }
 
+    @Override
     public void setFluidInputs(List<List<FluidStack>> inputs, IRecipeLayoutBuilder builder) {
         AbstractFluidGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.INPUT;
@@ -270,6 +273,7 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         }
     }
 
+    @Override
     public void setFluidOutputs(List<FluidStack> outputs, IRecipeLayoutBuilder builder) {
         AbstractFluidGaugeObject wrapper;
         RecipeIngredientRole role = RecipeIngredientRole.OUTPUT;
@@ -301,6 +305,7 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
         }
     }
 
+    @Override
     public void setGasInputs(List<List<GasStack>> inputs, IRecipeLayoutBuilder builder) {
 
         AbstractGasGaugeObject wrapper;
@@ -339,11 +344,12 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
 
             int oneMinusHeight = wrapper.getHeight() - height;
 
-            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack(maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
         }
 
     }
 
+    @Override
     public void setGasOutputs(List<GasStack> outputs, IRecipeLayoutBuilder builder) {
 
         AbstractGasGaugeObject wrapper;
@@ -376,7 +382,7 @@ public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<Chemic
 
             int oneMinusHeight = wrapper.getHeight() - height;
 
-            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack(maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
         }
     }
 }

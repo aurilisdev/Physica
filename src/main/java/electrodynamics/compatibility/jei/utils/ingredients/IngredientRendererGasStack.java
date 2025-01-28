@@ -54,7 +54,7 @@ public class IngredientRendererGasStack implements IIngredientRenderer<GasStack>
 
 		stack.pushPose();
 
-		float amt = (float) ingredient.getAmount();
+		float amt = ingredient.getAmount();
 
 		if (amt < tankAmount / 50) {
 			double amtPowTen = Math.pow(10, Math.round(Math.log10(amt) - Math.log10(5.5) + 0.5));

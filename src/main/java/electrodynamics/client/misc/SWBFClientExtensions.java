@@ -15,6 +15,7 @@ public class SWBFClientExtensions implements IClientFluidTypeExtensions {
         this.fluidType = fluidType;
     }
 
+    @Override
     public ResourceLocation getStillTexture() {
         return fluidType.texture;
     }

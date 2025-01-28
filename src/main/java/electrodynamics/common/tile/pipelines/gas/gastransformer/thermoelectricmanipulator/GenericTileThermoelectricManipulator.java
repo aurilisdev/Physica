@@ -360,7 +360,7 @@ public abstract class GenericTileThermoelectricManipulator extends GenericTileGa
 
             tankGas.bringPressureTo(Gas.PRESSURE_AT_SEA_LEVEL);
 
-            FluidStack fluidStack = new FluidStack(fluid, (int) tankGas.getAmount());
+            FluidStack fluidStack = new FluidStack(fluid, tankGas.getAmount());
 
             outputTank.fill(fluidStack, IFluidHandler.FluidAction.EXECUTE);
 

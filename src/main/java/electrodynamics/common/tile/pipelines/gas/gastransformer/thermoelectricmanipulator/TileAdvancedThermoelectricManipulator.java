@@ -89,10 +89,10 @@ public class TileAdvancedThermoelectricManipulator extends GenericTileThermoelec
         ComponentGasHandlerMulti handler = getComponent(IComponentType.GasHandler);
         ComponentFluidHandlerMulti multi = getComponent(IComponentType.FluidHandler);
         if (isLeft) {
-            multi.getInputTanks()[0].setCapacity((int) (Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * count));
+            multi.getInputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * count);
             handler.getInputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * count);
         } else {
-            multi.getOutputTanks()[0].setCapacity((int) (Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * count));
+            multi.getOutputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * count);
             handler.getOutputTanks()[0].setCapacity(Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY + Constants.GAS_TRANSFORMER_ADDON_TANK_CAPCITY * count);
         }
     }
@@ -193,7 +193,7 @@ public class TileAdvancedThermoelectricManipulator extends GenericTileThermoelec
 
     @Override
     public IComponentFluidHandler getFluidHandler() {
-        return new ComponentFluidHandlerMulti.ComponentFluidHandlerMultiBiDirec(this).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).setInputTanks(1, arr((int) Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY)).setOutputDirections(BlockEntityUtils.MachineDirection.BOTTOM).setOutputTanks(1, arr((int) Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY));
+        return new ComponentFluidHandlerMulti.ComponentFluidHandlerMultiBiDirec(this).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).setInputTanks(1, arr(Constants.GAS_TRANSFORMER_BASE_INPUT_CAPCITY)).setOutputDirections(BlockEntityUtils.MachineDirection.BOTTOM).setOutputTanks(1, arr(Constants.GAS_TRANSFORMER_BASE_OUTPUT_CAPCITY));
     }
 
     @Override

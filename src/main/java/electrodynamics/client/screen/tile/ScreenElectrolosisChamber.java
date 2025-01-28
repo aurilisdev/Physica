@@ -51,12 +51,12 @@ public class ScreenElectrolosisChamber extends GenericMaterialScreen<ContainerEl
             int width = getFontRenderer().width(text);
             float scale = 1;
             if(width >  70) {
-                scale = 70.0F / (float) width;
+                scale = 70.0F / width;
                 width = 70;
             }
             int diff = 70 - width;
             int half = diff / 2;
-            int x = (int) Math.ceil((float) (52 + half) / scale) + 1;
+            int x = (int) Math.ceil((52 + half) / scale) + 1;
             int y = (int) Math.ceil(52.0F / scale);
             graphics.pose().pushPose();
             graphics.pose().scale(scale, scale, scale);

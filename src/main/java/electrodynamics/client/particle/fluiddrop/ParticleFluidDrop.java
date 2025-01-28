@@ -25,7 +25,7 @@ public class ParticleFluidDrop extends TextureSheetParticle {
         setSpriteFromAge(sprites);
         setColor(options.r, options.g, options.b);
         int i = (int)(8.0 / (this.random.nextDouble() * 0.8 + 0.2));
-        this.lifetime = (int)Math.max((float)i * options.scale, 1.0F);
+        this.lifetime = (int)Math.max(i * options.scale, 1.0F);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ParticleFluidDrop extends TextureSheetParticle {
 
     @Override
     public float getQuadSize(float scaleFactor) {
-        return this.quadSize * Mth.clamp(((float)this.age + scaleFactor) / (float)this.lifetime * 32.0F, 0.0F, 1.0F);
+        return this.quadSize * Mth.clamp((this.age + scaleFactor) / this.lifetime * 32.0F, 0.0F, 1.0F);
     }
 
     @Override

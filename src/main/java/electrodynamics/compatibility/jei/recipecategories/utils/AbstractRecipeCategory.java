@@ -329,7 +329,7 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 
             int oneMinusHeight = wrapper.getHeight() - height;
 
-            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredients(ElectrodynamicsJeiTypes.GAS_STACK, stacks).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack(maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
         }
 
     }
@@ -362,7 +362,7 @@ public abstract class AbstractRecipeCategory<T> implements IRecipeCategory<T> {
 
             int oneMinusHeight = wrapper.getHeight() - height;
 
-            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack((int) maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
+            builder.addSlot(role, wrapper.getX() + 1, wrapper.getY() + wrapper.getHeight() - height).addIngredient(ElectrodynamicsJeiTypes.GAS_STACK, stack).setCustomRenderer(ElectrodynamicsJeiTypes.GAS_STACK, new IngredientRendererGasStack(maxGaugeCap, -oneMinusHeight + 1, height, wrapper.getBarsTexture()));
         }
     }
 

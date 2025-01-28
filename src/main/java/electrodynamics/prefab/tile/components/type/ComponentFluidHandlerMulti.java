@@ -230,6 +230,7 @@ public class ComponentFluidHandlerMulti implements IComponentFluidHandler {
         return IComponentType.FluidHandler;
     }
 
+    @Override
     public IFluidHandler getCapability(@Nullable Direction side, CapabilityInputType inputType) {
         if (side == null || !isSided) {
             return null;

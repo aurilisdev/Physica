@@ -207,6 +207,7 @@ public abstract class GenericConnectTile extends GenericTile implements IConnect
         return this.connections.isDirty();
     }
 
+    @Override
     public EnumConnectType[] readConnections() {
         return connectionsArr;
     }
