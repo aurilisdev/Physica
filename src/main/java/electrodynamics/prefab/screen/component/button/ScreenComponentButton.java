@@ -1,5 +1,7 @@
 package electrodynamics.prefab.screen.component.button;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nullable;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -17,8 +19,6 @@ import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-
-import java.util.function.Supplier;
 
 /**
  * A modification of the vanilla button to integrate it with the Electrodynamics system of doing GUI components as the

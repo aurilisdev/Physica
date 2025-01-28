@@ -1,7 +1,6 @@
 package electrodynamics.common.item;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;

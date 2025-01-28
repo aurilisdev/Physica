@@ -3,12 +3,12 @@ package electrodynamics.common.tile.pipelines.fluid;
 import java.util.ArrayList;
 import java.util.List;
 
-import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.common.inventory.container.tile.ContainerFluidPipeFilter;
 import electrodynamics.prefab.properties.Property;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;

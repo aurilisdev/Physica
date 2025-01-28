@@ -1,5 +1,7 @@
 package electrodynamics.common.tile.machines.quarry;
 
+import org.jetbrains.annotations.NotNull;
+
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertyConnections;
 import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.common.item.ItemDrillHead;
@@ -22,7 +24,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.items.IItemHandler;
-import org.jetbrains.annotations.NotNull;
 
 public class TileLogisticalManager extends GenericTile implements IConnectTile {
 

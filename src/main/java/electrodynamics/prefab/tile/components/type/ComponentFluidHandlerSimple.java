@@ -5,10 +5,10 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.api.fluid.PropertyFluidTank;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;

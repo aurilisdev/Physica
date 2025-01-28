@@ -5,11 +5,9 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import electrodynamics.api.ISubtype;
-import electrodynamics.common.item.subtype.SubtypeCrystal;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.prefab.utilities.math.Color;
 import electrodynamics.registers.ElectrodynamicsFluids;
-import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;

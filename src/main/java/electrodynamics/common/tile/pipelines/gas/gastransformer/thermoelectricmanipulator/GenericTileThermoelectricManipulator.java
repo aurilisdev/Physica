@@ -1,5 +1,7 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer.thermoelectricmanipulator;
 
+import java.util.function.BiConsumer;
+
 import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
@@ -11,7 +13,11 @@ import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
-import electrodynamics.prefab.tile.components.type.*;
+import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
+import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
+import electrodynamics.prefab.tile.components.type.ComponentGasHandlerMulti;
+import electrodynamics.prefab.tile.components.type.ComponentInventory;
+import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
@@ -26,8 +32,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
-
-import java.util.function.BiConsumer;
 
 public abstract class GenericTileThermoelectricManipulator extends GenericTileGasTransformer {
 

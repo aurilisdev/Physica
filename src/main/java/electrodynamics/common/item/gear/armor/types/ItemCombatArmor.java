@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.capability.types.fluid.RestrictedFluidHandlerItemStack;
 import electrodynamics.api.capability.types.gas.IGasHandlerItem;
@@ -18,7 +20,12 @@ import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.prefab.item.ElectricItemProperties;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
-import electrodynamics.registers.*;
+import electrodynamics.registers.ElectrodynamicsArmorMaterials;
+import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
+import electrodynamics.registers.ElectrodynamicsFluids;
+import electrodynamics.registers.ElectrodynamicsGases;
+import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
@@ -32,12 +39,17 @@ import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
-import org.jetbrains.annotations.Nullable;
 
 public class ItemCombatArmor extends ItemElectrodynamicsArmor implements IItemElectric {
 

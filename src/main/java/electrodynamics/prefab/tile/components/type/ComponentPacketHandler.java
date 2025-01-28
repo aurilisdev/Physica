@@ -1,17 +1,8 @@
 package electrodynamics.prefab.tile.components.type;
 
-import java.util.List;
-
-import electrodynamics.common.packet.types.client.PacketSendUpdatePropertiesClient;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponent;
 import electrodynamics.prefab.tile.components.IComponentType;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 //Defunct class should be removed at some point
 public class ComponentPacketHandler implements IComponent {

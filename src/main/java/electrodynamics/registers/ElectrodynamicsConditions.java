@@ -1,8 +1,7 @@
 package electrodynamics.registers;
 
-import com.mojang.serialization.Codec;
-
 import com.mojang.serialization.MapCodec;
+
 import electrodynamics.api.References;
 import electrodynamics.common.condition.ConfigCondition;
 import net.neoforged.neoforge.common.conditions.ICondition;

@@ -1,6 +1,9 @@
 package electrodynamics.client.render.tile;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.fluid.PropertyFluidTank;
 import electrodynamics.client.ClientRegister;
@@ -24,7 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
-import org.jetbrains.annotations.NotNull;
 
 public class RenderChemicalReactor extends AbstractTileRenderer<TileChemicalReactor> {
     public RenderChemicalReactor(BlockEntityRendererProvider.Context context) {

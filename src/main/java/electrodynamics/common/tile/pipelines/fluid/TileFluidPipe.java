@@ -1,10 +1,9 @@
 package electrodynamics.common.tile.pipelines.fluid;
 
 import electrodynamics.api.network.cable.type.IFluidPipe;
-import electrodynamics.prefab.properties.PropertyTypes;
-
 import electrodynamics.common.block.connect.BlockFluidPipe;
 import electrodynamics.prefab.properties.Property;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;

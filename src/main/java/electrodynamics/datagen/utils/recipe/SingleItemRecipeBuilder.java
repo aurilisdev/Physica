@@ -10,8 +10,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.SingleItemRecipe;
-import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.item.crafting.SingleItemRecipe.Factory;
+import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
 /**

@@ -1,6 +1,9 @@
 package electrodynamics.common.network;
 
-import java.util.*;
+import java.util.ConcurrentModificationException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.UUID;
 
 import electrodynamics.api.References;
 import electrodynamics.api.network.ITickableNetwork;

@@ -1,7 +1,6 @@
 package electrodynamics.common.item.gear.tools.electric;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.api.creativetab.CreativeTabSupplier;
 import electrodynamics.api.electricity.formatting.ChatFormatter;

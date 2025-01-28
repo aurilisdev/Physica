@@ -1,5 +1,7 @@
 package electrodynamics.common.tile;
 
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentTile;
@@ -22,7 +24,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public class TileMultiSubnode extends GenericTile {
 

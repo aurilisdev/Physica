@@ -1,6 +1,7 @@
 package electrodynamics.datagen.utils.model;
 
 import com.google.gson.JsonObject;
+
 import electrodynamics.client.modelbakers.bakerytypes.SlaveNodeModelLoader;
 import net.neoforged.neoforge.client.model.generators.CustomLoaderBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelBuilder;

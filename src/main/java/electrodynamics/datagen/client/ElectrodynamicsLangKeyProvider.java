@@ -11,8 +11,27 @@ import electrodynamics.common.block.subtype.SubtypeOreDeepslate;
 import electrodynamics.common.block.subtype.SubtypeRawOreBlock;
 import electrodynamics.common.block.subtype.SubtypeResourceBlock;
 import electrodynamics.common.block.subtype.SubtypeWire;
-import electrodynamics.common.fluid.subtype.*;
-import electrodynamics.common.item.subtype.*;
+import electrodynamics.common.fluid.subtype.SubtypeCrudeMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeDirtyMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeImpureMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypePureMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeRoyalMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
+import electrodynamics.common.item.subtype.SubtypeCeramic;
+import electrodynamics.common.item.subtype.SubtypeChromotographyCard;
+import electrodynamics.common.item.subtype.SubtypeCircuit;
+import electrodynamics.common.item.subtype.SubtypeCrystal;
+import electrodynamics.common.item.subtype.SubtypeDrillHead;
+import electrodynamics.common.item.subtype.SubtypeDust;
+import electrodynamics.common.item.subtype.SubtypeGear;
+import electrodynamics.common.item.subtype.SubtypeImpureDust;
+import electrodynamics.common.item.subtype.SubtypeIngot;
+import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
+import electrodynamics.common.item.subtype.SubtypeNugget;
+import electrodynamics.common.item.subtype.SubtypeOxide;
+import electrodynamics.common.item.subtype.SubtypePlate;
+import electrodynamics.common.item.subtype.SubtypeRawOre;
+import electrodynamics.common.item.subtype.SubtypeRod;
 import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
 import electrodynamics.common.recipe.categories.fluid2fluid.specificmachines.ElectrolosisChamberRecipe;
 import electrodynamics.common.recipe.categories.fluid2gas.specificmachines.ElectrolyticSeparatorRecipe;
@@ -2016,6 +2035,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 		add("gui." + modID + "." + key, translation);
 	}
 
+	@Override
 	public void addDimension(ResourceKey<Level> dim, String translation) {
 		addDimension(dim.location().getPath(), translation);
 	}

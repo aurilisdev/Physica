@@ -1,5 +1,7 @@
 package electrodynamics.common.blockitem.types;
 
+import java.util.List;
+
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.common.block.connect.BlockFluidPipe;
@@ -11,8 +13,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-
-import java.util.List;
 
 public class BlockItemFluidPipe extends BlockItemElectrodynamics {
 

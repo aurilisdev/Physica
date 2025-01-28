@@ -17,8 +17,8 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ScreenComponentCondensedFluid extends ScreenComponentGeneric {
 

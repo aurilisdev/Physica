@@ -2,12 +2,6 @@ package electrodynamics.prefab.tile;
 
 import java.util.UUID;
 
-import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.ItemInteractionResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +10,7 @@ import electrodynamics.api.References;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasTank;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.item.ItemUpgrade;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyManager;
@@ -32,10 +27,15 @@ import electrodynamics.prefab.utilities.ItemUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;

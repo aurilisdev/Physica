@@ -3,8 +3,8 @@ package electrodynamics.prefab.utilities;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import electrodynamics.Electrodynamics;
-import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
+import javax.annotation.Nonnull;
+
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.platform.Lighting;
@@ -17,6 +17,8 @@ import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
+import electrodynamics.Electrodynamics;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.utilities.math.Color;
 import electrodynamics.prefab.utilities.math.MathUtils;
 import net.minecraft.CrashReport;
@@ -48,8 +50,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import javax.annotation.Nonnull;
 
 public class RenderingUtils {
 

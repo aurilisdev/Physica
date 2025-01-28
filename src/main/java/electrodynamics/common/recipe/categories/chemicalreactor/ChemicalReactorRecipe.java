@@ -1,10 +1,19 @@
 package electrodynamics.common.recipe.categories.chemicalreactor;
 
+import java.util.List;
+
 import com.mojang.datafixers.util.Pair;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
-import electrodynamics.common.recipe.recipeutils.*;
+import electrodynamics.common.recipe.recipeutils.AbstractMaterialRecipe;
+import electrodynamics.common.recipe.recipeutils.CountableIngredient;
+import electrodynamics.common.recipe.recipeutils.FluidIngredient;
+import electrodynamics.common.recipe.recipeutils.GasIngredient;
+import electrodynamics.common.recipe.recipeutils.ProbableFluid;
+import electrodynamics.common.recipe.recipeutils.ProbableGas;
+import electrodynamics.common.recipe.recipeutils.ProbableItem;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.tile.components.type.ComponentGasHandlerMulti;
@@ -15,8 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import java.util.List;
 
 public class ChemicalReactorRecipe extends AbstractMaterialRecipe {
 

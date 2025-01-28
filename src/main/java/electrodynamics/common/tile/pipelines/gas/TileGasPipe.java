@@ -1,7 +1,6 @@
 package electrodynamics.common.tile.pipelines.gas;
 
 import electrodynamics.api.network.cable.type.IGasPipe;
-
 import electrodynamics.common.block.connect.BlockGasPipe;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;

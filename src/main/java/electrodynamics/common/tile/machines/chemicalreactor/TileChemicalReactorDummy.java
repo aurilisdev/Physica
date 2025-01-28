@@ -1,5 +1,7 @@
 package electrodynamics.common.tile.machines.chemicalreactor;
 
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.common.block.chemicalreactor.BlockChemicalReactorExtra;
 import electrodynamics.prefab.tile.GenericTile;
@@ -20,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public class TileChemicalReactorDummy extends GenericTile {
 

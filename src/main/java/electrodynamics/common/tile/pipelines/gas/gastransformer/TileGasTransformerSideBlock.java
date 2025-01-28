@@ -1,31 +1,30 @@
 package electrodynamics.common.tile.pipelines.gas.gastransformer;
 
-import electrodynamics.common.settings.Constants;
-import electrodynamics.prefab.utilities.BlockEntityUtils;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.item.ItemStack;
+import java.util.Optional;
 
 import electrodynamics.api.capability.types.gas.IGasHandler;
+import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
-import electrodynamics.registers.ElectrodynamicsTiles;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsBlocks;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-
-import java.util.Optional;
 
 public class TileGasTransformerSideBlock extends GenericTile implements IAddonTankManager {
 

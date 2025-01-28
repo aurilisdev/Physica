@@ -1,11 +1,11 @@
 package electrodynamics.api.registration;
 
-import net.neoforged.neoforge.registries.DeferredHolder;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
+
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 /**
  * A wrapper class intended to house much of the functionality of the Subtype HashMaps

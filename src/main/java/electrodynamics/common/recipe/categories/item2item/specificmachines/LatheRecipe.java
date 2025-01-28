@@ -2,15 +2,12 @@ package electrodynamics.common.recipe.categories.item2item.specificmachines;
 
 import java.util.List;
 
-import electrodynamics.Electrodynamics;
-import electrodynamics.api.References;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.recipe.categories.item2item.Item2ItemRecipe;
 import electrodynamics.common.recipe.recipeutils.CountableIngredient;
 import electrodynamics.common.recipe.recipeutils.ProbableFluid;
 import electrodynamics.common.recipe.recipeutils.ProbableGas;
 import electrodynamics.common.recipe.recipeutils.ProbableItem;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;

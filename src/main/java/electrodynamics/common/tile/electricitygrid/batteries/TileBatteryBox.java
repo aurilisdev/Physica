@@ -1,7 +1,5 @@
 package electrodynamics.common.tile.electricitygrid.batteries;
 
-import electrodynamics.prefab.properties.PropertyTypes;
-import electrodynamics.prefab.utilities.BlockEntityUtils;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.common.block.subtype.SubtypeMachine;
@@ -10,6 +8,7 @@ import electrodynamics.common.item.ItemUpgrade;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.prefab.item.ItemElectric;
 import electrodynamics.prefab.properties.Property;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -18,13 +17,14 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.CapabilityUtils.FEInputDispatcher;
 import electrodynamics.prefab.utilities.CapabilityUtils.FEOutputDispatcher;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
-import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;

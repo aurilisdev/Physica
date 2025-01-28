@@ -8,6 +8,8 @@ import java.util.Locale;
 
 import javax.annotation.Nullable;
 
+import org.jetbrains.annotations.NotNull;
+
 import electrodynamics.api.ISubtype;
 import electrodynamics.api.network.cable.type.IWire;
 import electrodynamics.common.block.connect.BlockWire;
@@ -20,7 +22,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.neoforged.neoforge.common.Tags;
-import org.jetbrains.annotations.NotNull;
 
 //Storing the color on the enum was the cleanest solution...
 public enum SubtypeWire implements ISubtype, IWire {

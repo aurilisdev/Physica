@@ -14,7 +14,6 @@ import electrodynamics.common.reloadlistener.GasCollectorChromoCardsRegister;
 import electrodynamics.common.reloadlistener.ThermoelectricGeneratorHeatRegister;
 //import electrodynamics.prefab.properties.PropertyManager.PropertyWrapper;
 import electrodynamics.prefab.sound.tickable.TickableSoundJetpack;
-import electrodynamics.prefab.tile.IPropertyHolderTile;
 import electrodynamics.prefab.utilities.object.CombustionFuelSource;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -22,7 +21,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluid;
 
 /**

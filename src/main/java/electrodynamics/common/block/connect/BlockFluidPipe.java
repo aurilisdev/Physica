@@ -7,7 +7,6 @@ import com.mojang.serialization.MapCodec;
 import electrodynamics.api.network.cable.type.IFluidPipe;
 import electrodynamics.common.block.connect.util.AbstractRefreshingConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
-import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.common.tile.pipelines.fluid.GenericTileFluidPipe;
 import electrodynamics.common.tile.pipelines.fluid.TileFluidPipe;

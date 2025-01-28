@@ -1,5 +1,7 @@
 package electrodynamics.compatibility.jei.recipecategories.misc;
 
+import java.util.List;
+
 import electrodynamics.api.References;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.block.subtype.SubtypeMachine;
@@ -23,8 +25,6 @@ import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.List;
 
 public class GasCollectorRecipeCategory extends AbstractRecipeCategory<PsuedoGasCollectorRecipe> {
 

@@ -1,11 +1,11 @@
 package electrodynamics.client.render.model.armor.types;
 
-import electrodynamics.Electrodynamics;
 import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
+import electrodynamics.Electrodynamics;
 import electrodynamics.client.render.model.armor.GenericArmorModel;
 import electrodynamics.common.item.gear.armor.types.ItemCompositeArmor;
 import net.minecraft.client.model.geom.ModelLayerLocation;

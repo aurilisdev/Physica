@@ -1,5 +1,7 @@
 package electrodynamics.prefab.inventory.container.types;
 
+import javax.annotation.Nullable;
+
 import electrodynamics.api.capability.types.itemhandler.CapabilityItemStackHandler;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
@@ -9,8 +11,6 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
-
-import javax.annotation.Nullable;
 
 public abstract class GenericContainerItem extends GenericContainerSlotData<CapabilityItemStackHandler> {
 

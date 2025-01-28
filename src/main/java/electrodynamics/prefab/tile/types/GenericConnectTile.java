@@ -1,5 +1,7 @@
 package electrodynamics.prefab.tile.types;
 
+import org.jetbrains.annotations.NotNull;
+
 import electrodynamics.client.modelbakers.modelproperties.ModelPropertyConnections;
 import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.prefab.properties.Property;
@@ -12,7 +14,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class GenericConnectTile extends GenericTile implements IConnectTile {
 

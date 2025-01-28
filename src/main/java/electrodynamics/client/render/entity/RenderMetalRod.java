@@ -1,10 +1,9 @@
 package electrodynamics.client.render.entity;
 
-import com.mojang.math.Axis;
-import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 
 import electrodynamics.client.ClientRegister;
 import electrodynamics.common.entity.projectile.types.EntityMetalRod;
@@ -16,6 +15,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;

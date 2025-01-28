@@ -1,14 +1,14 @@
 package electrodynamics.common.event.types.living.incomingdamage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HandlerCombatArmor extends AbstractIncomingDamageHandler {
 

@@ -3,13 +3,13 @@ package electrodynamics.common.item;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import org.apache.commons.lang3.StringUtils;
 
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.NBTUtils;
 import electrodynamics.registers.ElectrodynamicsCreativeTabs;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;

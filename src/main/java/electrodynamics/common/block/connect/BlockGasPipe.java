@@ -8,7 +8,6 @@ import electrodynamics.api.gas.Gas;
 import electrodynamics.api.network.cable.type.IGasPipe;
 import electrodynamics.common.block.connect.util.AbstractRefreshingConnectBlock;
 import electrodynamics.common.block.connect.util.EnumConnectType;
-import electrodynamics.common.block.subtype.SubtypeGasPipe;
 import electrodynamics.common.network.type.GasNetwork;
 import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.common.tile.pipelines.gas.GenericTileGasPipe;

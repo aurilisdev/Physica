@@ -1,8 +1,5 @@
 package electrodynamics.compatibility.jei.utils.label.types;
 
-import java.util.Arrays;
-import java.util.List;
-
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.common.recipe.ElectrodynamicsRecipe;

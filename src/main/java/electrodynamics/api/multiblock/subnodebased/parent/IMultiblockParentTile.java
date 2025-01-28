@@ -1,5 +1,7 @@
 package electrodynamics.api.multiblock.subnodebased.parent;
 
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.multiblock.subnodebased.Subnode;
@@ -21,7 +23,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public interface IMultiblockParentTile {
 

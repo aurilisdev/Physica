@@ -1,6 +1,16 @@
 package electrodynamics.datagen.server;
 
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+
+import javax.annotation.Nullable;
+
 import com.google.gson.JsonObject;
+
 import electrodynamics.api.References;
 import electrodynamics.api.gas.Gas;
 import electrodynamics.common.item.subtype.SubtypeChromotographyCard;
@@ -15,14 +25,6 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
-
-import javax.annotation.Nullable;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 public class GasCollectorChromoCardsProvider implements DataProvider {
 

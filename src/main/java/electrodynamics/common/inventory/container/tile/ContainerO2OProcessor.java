@@ -1,10 +1,10 @@
 package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
-import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotUpgrade;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.utilities.math.Color;
 import electrodynamics.registers.ElectrodynamicsMenuTypes;

@@ -6,8 +6,8 @@ import java.util.List;
 
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
-import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.SlotGeneric;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.tile.GenericTile;

@@ -1,5 +1,7 @@
 package electrodynamics.common.packet.types.server;
 
+import java.util.UUID;
+
 import electrodynamics.api.item.IItemElectric;
 import electrodynamics.api.tile.IPacketServerUpdateTile;
 import electrodynamics.common.item.gear.armor.types.ItemNightVisionGoggles;
@@ -22,8 +24,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-
-import java.util.UUID;
 
 public class ServerBarrierMethods {
 

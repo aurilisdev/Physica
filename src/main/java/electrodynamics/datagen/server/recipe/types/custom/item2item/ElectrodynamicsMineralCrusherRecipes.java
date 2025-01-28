@@ -11,8 +11,8 @@ import electrodynamics.common.recipe.categories.item2item.specificmachines.Miner
 import electrodynamics.common.recipe.recipeutils.ProbableItem;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
-import electrodynamics.datagen.utils.recipe.builders.Item2ItemBuilder;
 import electrodynamics.datagen.utils.recipe.builders.ElectrodynamicsRecipeBuilder.RecipeCategory;
+import electrodynamics.datagen.utils.recipe.builders.Item2ItemBuilder;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.ItemTags;

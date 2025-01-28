@@ -1,7 +1,10 @@
 package electrodynamics.client.render.tile;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.common.tile.machines.TileElectrolosisChamber;
 import electrodynamics.prefab.tile.components.IComponentType;
@@ -16,7 +19,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.fluids.FluidStack;
-import org.jetbrains.annotations.NotNull;
 
 public class RenderElectrolosisChamber extends AbstractTileRenderer<TileElectrolosisChamber> {
 

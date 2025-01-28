@@ -1,11 +1,12 @@
 package electrodynamics.prefab.properties;
 
-import net.minecraft.network.codec.StreamCodec;
-
-import javax.annotation.Nonnull;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
+
+import javax.annotation.Nonnull;
+
+import net.minecraft.network.codec.StreamCodec;
 
 public class PropertyType<TYPE, BUFFERTYPE> implements IPropertyType<TYPE, BUFFERTYPE> {
 

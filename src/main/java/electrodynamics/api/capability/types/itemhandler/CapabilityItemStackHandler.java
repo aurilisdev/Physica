@@ -7,9 +7,8 @@ import java.util.function.Consumer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.level.Level;
-
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 
 public class CapabilityItemStackHandler extends ComponentItemHandler {

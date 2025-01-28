@@ -1,6 +1,11 @@
 package electrodynamics.common.tile.machines;
 
+import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
+
 import com.mojang.datafixers.util.Pair;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.IWrenchItem;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
@@ -18,7 +23,11 @@ import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponentType;
-import electrodynamics.prefab.tile.components.type.*;
+import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
+import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
+import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
+import electrodynamics.prefab.tile.components.type.ComponentInventory;
+import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.components.utils.IComponentFluidHandler;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
@@ -41,9 +50,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class TileElectrolosisChamber extends TileMultiblockController {
 

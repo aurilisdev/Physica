@@ -1,11 +1,7 @@
 package electrodynamics.common.tile.pipelines.gas;
 
-import electrodynamics.api.network.cable.type.IGasPipe;
-import electrodynamics.common.block.subtype.SubtypeGasPipe;
-import electrodynamics.common.network.type.GasNetwork;
-import electrodynamics.prefab.tile.types.GenericRefreshingConnectTile;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import java.util.Set;
+
 import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.Lists;
@@ -13,12 +9,15 @@ import com.google.common.collect.Lists;
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
+import electrodynamics.api.network.cable.type.IGasPipe;
+import electrodynamics.common.network.type.GasNetwork;
+import electrodynamics.prefab.tile.types.GenericRefreshingConnectTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Set;
 
 public abstract class GenericTileGasPipe extends GenericRefreshingConnectTile<IGasPipe, GenericTileGasPipe, GasNetwork> {
     private final IGasHandler[] capability = new IGasHandler[6];

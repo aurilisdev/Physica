@@ -1,8 +1,8 @@
 package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.tile.pipelines.gas.TileGasVent;
-import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotGas;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.registers.ElectrodynamicsMenuTypes;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;

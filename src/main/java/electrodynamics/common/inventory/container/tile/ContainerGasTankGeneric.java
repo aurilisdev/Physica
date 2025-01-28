@@ -1,9 +1,9 @@
 package electrodynamics.common.inventory.container.tile;
 
 import electrodynamics.common.tile.pipelines.gas.tank.GenericTileGasTank;
-import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotGas;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.IconType;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSlot.SlotType;
 import electrodynamics.registers.ElectrodynamicsItems;

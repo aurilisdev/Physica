@@ -2,8 +2,8 @@ package electrodynamics.client.screen.tile;
 
 import electrodynamics.common.inventory.container.tile.ContainerGasTankGeneric;
 import electrodynamics.common.tile.pipelines.gas.tank.GenericTileGasTank;
-import electrodynamics.prefab.screen.component.types.ScreenComponentCondensedFluid;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.types.ScreenComponentCondensedFluid;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressTextures;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentGasPressure;

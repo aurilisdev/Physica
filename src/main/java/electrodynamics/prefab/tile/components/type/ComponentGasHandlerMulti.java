@@ -7,7 +7,6 @@ import java.util.function.BiConsumer;
 
 import javax.annotation.Nullable;
 
-import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.api.capability.types.gas.IGasHandler;
@@ -16,6 +15,7 @@ import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.api.gas.PropertyGasTank;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.recipe.ElectrodynamicsRecipe;
 import electrodynamics.common.recipe.recipeutils.AbstractMaterialRecipe;
 import electrodynamics.common.recipe.recipeutils.GasIngredient;

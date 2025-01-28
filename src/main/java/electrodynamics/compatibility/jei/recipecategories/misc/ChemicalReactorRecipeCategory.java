@@ -1,5 +1,11 @@
 package electrodynamics.compatibility.jei.recipecategories.misc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
 import electrodynamics.api.References;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
@@ -32,8 +38,6 @@ import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import java.util.*;
 
 public class ChemicalReactorRecipeCategory extends AbstractRecipeCategory<ChemicalReactorRecipe> {
 

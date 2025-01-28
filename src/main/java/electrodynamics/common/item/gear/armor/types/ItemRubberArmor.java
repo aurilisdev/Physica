@@ -2,6 +2,8 @@ package electrodynamics.common.item.gear.armor.types;
 
 import java.util.EnumMap;
 
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.common.item.gear.armor.ItemElectrodynamicsArmor;
 import electrodynamics.registers.ElectrodynamicsArmorMaterials;
@@ -14,7 +16,6 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 public class ItemRubberArmor extends ItemElectrodynamicsArmor {
 

@@ -1,14 +1,12 @@
 package electrodynamics.client.guidebook.chapters;
 
 import electrodynamics.Electrodynamics;
-import electrodynamics.api.References;
 import electrodynamics.client.guidebook.utils.components.Chapter;
 import electrodynamics.client.guidebook.utils.components.Module;
 import electrodynamics.client.guidebook.utils.pagedata.graphics.ImageWrapperObject;
 import electrodynamics.client.guidebook.utils.pagedata.text.TextWrapperObject;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 
 public class ChapterMisc extends Chapter {
 

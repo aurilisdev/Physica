@@ -1,10 +1,10 @@
 package electrodynamics.client.render.tile;
 
-import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import org.jetbrains.annotations.NotNull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.tile.electricitygrid.TileLogisticalWire;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;

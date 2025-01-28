@@ -2,8 +2,6 @@ package electrodynamics.client.render.event.guipost;
 
 import java.util.List;
 
-import com.mojang.blaze3d.platform.Window;
-
 import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
@@ -23,7 +21,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;

@@ -2,12 +2,12 @@ package electrodynamics.api.fluid;
 
 import java.util.function.Predicate;
 
-import electrodynamics.prefab.properties.PropertyTypes;
-import net.minecraft.core.HolderLookup;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.prefab.properties.Property;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;

@@ -9,12 +9,12 @@ import electrodynamics.common.event.types.living.equipmentchange.AbstractEquipme
 import electrodynamics.common.event.types.living.equipmentchange.HandlerJetpackEquiped;
 import electrodynamics.common.event.types.living.incomingdamage.AbstractIncomingDamageHandler;
 import electrodynamics.common.event.types.living.incomingdamage.HandlerCombatArmor;
+import electrodynamics.common.event.types.living.knockback.AbstractLivingKnockbackHandler;
+import electrodynamics.common.event.types.living.knockback.HandlerJetpackKnockbackImpulse;
 import electrodynamics.common.event.types.living.livingdamage.AbstractLivingDamageHandler;
 import electrodynamics.common.event.types.living.livingdamage.HandlerCompositeArmor;
 import electrodynamics.common.event.types.living.livingdamage.HandlerHydraulicBoots;
 import electrodynamics.common.event.types.living.livingdamage.HandlerJetpackDamage;
-import electrodynamics.common.event.types.living.knockback.AbstractLivingKnockbackHandler;
-import electrodynamics.common.event.types.living.knockback.HandlerJetpackKnockbackImpulse;
 import electrodynamics.common.event.types.player.rightclick.AbstractRightClickBlockHandler;
 import electrodynamics.common.event.types.player.rightclick.HandlerWrench;
 import electrodynamics.common.event.types.player.starttracking.AbstractPlayerStartTrackingHandler;

@@ -1,7 +1,5 @@
 package electrodynamics.common.tile.machines;
 
-import electrodynamics.prefab.utilities.BlockEntityUtils;
-
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.inventory.container.tile.ContainerMineralWasher;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
@@ -15,8 +13,9 @@ import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericMaterialTile;
-import electrodynamics.registers.ElectrodynamicsTiles;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.block.state.BlockState;

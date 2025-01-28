@@ -2,21 +2,20 @@ package electrodynamics.common.item.gear.tools.electric;
 
 import java.util.List;
 
-import electrodynamics.api.fluid.FluidStackComponent;
-import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
-import net.minecraft.core.Holder;
-import net.neoforged.neoforge.fluids.FluidStack;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+import electrodynamics.api.fluid.FluidStackComponent;
 import electrodynamics.api.item.IItemTemperate;
 import electrodynamics.common.entity.projectile.EntityCustomProjectile;
 import electrodynamics.common.entity.projectile.types.EntityMetalRod;
 import electrodynamics.common.item.gear.tools.electric.utils.ItemRailgun;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.prefab.item.ElectricItemProperties;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;
 import electrodynamics.registers.ElectrodynamicsSounds;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -26,6 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class ItemRailgunKinetic extends ItemRailgun {
 

@@ -3,6 +3,7 @@ package electrodynamics.client.particle.fluiddrop;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
 import electrodynamics.registers.ElectrodynamicsParticles;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;

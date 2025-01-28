@@ -1,5 +1,9 @@
 package electrodynamics.common.fluid.subtype;
 
+import java.util.function.Supplier;
+
+import javax.annotation.Nullable;
+
 import electrodynamics.api.ISubtype;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.prefab.utilities.math.Color;
@@ -9,9 +13,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.common.Tags;
-
-import javax.annotation.Nullable;
-import java.util.function.Supplier;
 
 public enum SubtypeRoyalMineralFluid implements ISubtype {
     copper(() -> ElectrodynamicsFluids.FLUIDS_CRUDEMINERAL.getValue(SubtypeCrudeMineralFluid.copper), ItemTags.COPPER_ORES, Color.WHITE),

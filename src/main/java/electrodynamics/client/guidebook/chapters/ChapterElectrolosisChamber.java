@@ -1,5 +1,8 @@
 package electrodynamics.client.guidebook.chapters;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
@@ -23,9 +26,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.level.block.Blocks;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChapterElectrolosisChamber extends Chapter {
 

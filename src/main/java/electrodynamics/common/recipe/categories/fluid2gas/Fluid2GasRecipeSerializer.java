@@ -1,14 +1,7 @@
 package electrodynamics.common.recipe.categories.fluid2gas;
 
-import java.util.List;
-
-import com.mojang.serialization.MapCodec;
-import electrodynamics.prefab.utilities.CodecUtils;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import electrodynamics.api.gas.GasStack;
@@ -17,6 +10,10 @@ import electrodynamics.common.recipe.recipeutils.FluidIngredient;
 import electrodynamics.common.recipe.recipeutils.ProbableFluid;
 import electrodynamics.common.recipe.recipeutils.ProbableGas;
 import electrodynamics.common.recipe.recipeutils.ProbableItem;
+import electrodynamics.prefab.utilities.CodecUtils;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 public class Fluid2GasRecipeSerializer<T extends Fluid2GasRecipe> extends ElectrodynamicsRecipeSerializer<T> {
 

@@ -1,6 +1,10 @@
 package electrodynamics.compatibility.mekanism;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mojang.blaze3d.systems.RenderSystem;
+
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.common.tile.compatibility.TileRotaryUnifier;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
@@ -15,9 +19,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ScreenComponentChemicalGauge extends ScreenComponentGeneric {
 

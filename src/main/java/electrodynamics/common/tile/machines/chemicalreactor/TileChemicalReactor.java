@@ -1,16 +1,31 @@
 package electrodynamics.common.tile.machines.chemicalreactor;
 
+import java.util.List;
+
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.common.block.chemicalreactor.BlockChemicalReactorExtra;
 import electrodynamics.common.inventory.container.tile.ContainerChemicalReactor;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
-import electrodynamics.common.recipe.recipeutils.*;
+import electrodynamics.common.recipe.recipeutils.FluidIngredient;
+import electrodynamics.common.recipe.recipeutils.GasIngredient;
+import electrodynamics.common.recipe.recipeutils.ProbableFluid;
+import electrodynamics.common.recipe.recipeutils.ProbableGas;
+import electrodynamics.common.recipe.recipeutils.ProbableItem;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.IComponentType;
-import electrodynamics.prefab.tile.components.type.*;
+import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
+import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
+import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
+import electrodynamics.prefab.tile.components.type.ComponentGasHandlerMulti;
+import electrodynamics.prefab.tile.components.type.ComponentInventory;
+import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
+import electrodynamics.prefab.tile.components.type.ComponentProcessor;
+import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.types.GenericGasTile;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ItemUtils;
@@ -26,9 +41,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class TileChemicalReactor extends GenericGasTile {
 

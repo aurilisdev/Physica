@@ -1,9 +1,6 @@
 package electrodynamics.common.packet.types.server;
 
 import electrodynamics.common.packet.NetworkHandler;
-import electrodynamics.prefab.properties.IPropertyType;
-import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyManager;
 //import electrodynamics.prefab.properties.PropertyManager.PropertyWrapper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

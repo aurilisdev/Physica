@@ -1,13 +1,13 @@
 package electrodynamics.api.fluid;
 
+import java.util.Objects;
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import electrodynamics.prefab.utilities.CodecUtils;
+
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import java.util.Objects;
 
 public class FluidStackComponent {
 

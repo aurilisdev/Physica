@@ -1,5 +1,7 @@
 package electrodynamics.api.multiblock.assemblybased;
 
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.capability.types.gas.IGasHandler;
@@ -32,7 +34,6 @@ import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * @author skip999

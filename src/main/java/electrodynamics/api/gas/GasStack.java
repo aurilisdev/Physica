@@ -1,9 +1,15 @@
 package electrodynamics.api.gas;
 
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Predicate;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsGases;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -14,12 +20,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
-import java.util.Optional;
-import java.util.function.Predicate;
 
 /**
  * An implementation of a FluidStack-like object for gases

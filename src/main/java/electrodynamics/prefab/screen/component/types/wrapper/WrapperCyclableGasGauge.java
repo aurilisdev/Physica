@@ -1,19 +1,19 @@
 package electrodynamics.prefab.screen.component.types.wrapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
 import electrodynamics.prefab.screen.GenericScreen;
-import electrodynamics.prefab.screen.component.utils.AbstractScreenComponent;
 import electrodynamics.prefab.screen.component.button.type.ButtonTankSlider;
 import electrodynamics.prefab.screen.component.types.ScreenComponentSimpleLabel;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentGasGauge;
+import electrodynamics.prefab.screen.component.utils.AbstractScreenComponent;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.utils.IComponentGasHandler;
 import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.network.chat.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class WrapperCyclableGasGauge {
 

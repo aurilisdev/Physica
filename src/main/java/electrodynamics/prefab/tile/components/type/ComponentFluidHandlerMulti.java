@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import org.jetbrains.annotations.NotNull;
 
 import electrodynamics.api.fluid.PropertyFluidTank;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.recipe.ElectrodynamicsRecipe;
 import electrodynamics.common.recipe.recipeutils.AbstractMaterialRecipe;
 import electrodynamics.common.recipe.recipeutils.FluidIngredient;

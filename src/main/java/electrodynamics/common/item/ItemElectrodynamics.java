@@ -1,7 +1,6 @@
 package electrodynamics.common.item;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 import electrodynamics.api.creativetab.CreativeTabSupplier;
 import net.minecraft.core.Holder;

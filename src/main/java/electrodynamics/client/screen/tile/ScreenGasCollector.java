@@ -1,5 +1,8 @@
 package electrodynamics.client.screen.tile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.api.gas.GasStack;
@@ -25,9 +28,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ScreenGasCollector extends GenericMaterialScreen<ContainerGasCollector> {
     public ScreenGasCollector(ContainerGasCollector container, Inventory inv, Component titleIn) {

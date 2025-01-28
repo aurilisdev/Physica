@@ -1,9 +1,9 @@
 package electrodynamics.prefab.screen.component.types;
 
+import java.util.function.Consumer;
+
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponent;
 import net.minecraft.client.gui.GuiGraphics;
-
-import java.util.function.Consumer;
 
 public class ScreenComponentCustomRender extends AbstractScreenComponent {
 

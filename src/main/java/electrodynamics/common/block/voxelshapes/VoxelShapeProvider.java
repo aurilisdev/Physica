@@ -1,10 +1,10 @@
 package electrodynamics.common.block.voxelshapes;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.core.Direction;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import javax.annotation.Nullable;
 
 public class VoxelShapeProvider {
 

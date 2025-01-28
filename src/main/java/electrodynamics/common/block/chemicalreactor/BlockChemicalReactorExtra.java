@@ -1,5 +1,8 @@
 package electrodynamics.common.block.chemicalreactor;
 
+import java.util.Collections;
+import java.util.List;
+
 import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactorDummy;
 import electrodynamics.prefab.block.GenericMachineBlock;
@@ -14,9 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * We have to do this because of how Mojank handles rendering

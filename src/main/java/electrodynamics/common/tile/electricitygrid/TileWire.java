@@ -1,10 +1,9 @@
 package electrodynamics.common.tile.electricitygrid;
 
 import electrodynamics.api.network.cable.type.IWire;
-import electrodynamics.prefab.properties.PropertyTypes;
-
 import electrodynamics.common.block.connect.BlockWire;
 import electrodynamics.prefab.properties.Property;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;

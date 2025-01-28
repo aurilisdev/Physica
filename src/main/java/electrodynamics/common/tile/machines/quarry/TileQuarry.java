@@ -11,12 +11,6 @@ import java.util.stream.Stream;
 
 import javax.annotation.Nullable;
 
-import electrodynamics.prefab.properties.PropertyTypes;
-import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.prefab.utilities.ItemUtils;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
-
 import electrodynamics.api.tile.IPlayerStorable;
 import electrodynamics.client.render.event.levelstage.HandlerQuarryArm;
 import electrodynamics.common.block.BlockFrame;
@@ -29,6 +23,7 @@ import electrodynamics.common.item.subtype.SubtypeDrillHead;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.prefab.block.GenericMachineBlock;
 import electrodynamics.prefab.properties.Property;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -37,11 +32,15 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
-import electrodynamics.registers.ElectrodynamicsTiles;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
+import electrodynamics.prefab.utilities.ItemUtils;
 import electrodynamics.registers.ElectrodynamicsBlocks;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.server.level.ServerLevel;

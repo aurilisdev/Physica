@@ -1,6 +1,7 @@
 package electrodynamics.datagen.server.recipe.types.vanilla;
 
 import com.google.common.collect.Lists;
+
 import electrodynamics.api.References;
 import electrodynamics.common.block.subtype.SubtypeFluidPipe;
 import electrodynamics.common.block.subtype.SubtypeGasPipe;
@@ -9,11 +10,21 @@ import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.block.subtype.SubtypeRawOreBlock;
 import electrodynamics.common.block.subtype.SubtypeResourceBlock;
 import electrodynamics.common.block.subtype.SubtypeWire;
-import electrodynamics.common.block.subtype.SubtypeWire.WireMaterial;
 import electrodynamics.common.block.subtype.SubtypeWire.InsulationMaterial;
 import electrodynamics.common.block.subtype.SubtypeWire.WireClass;
 import electrodynamics.common.block.subtype.SubtypeWire.WireColor;
-import electrodynamics.common.item.subtype.*;
+import electrodynamics.common.block.subtype.SubtypeWire.WireMaterial;
+import electrodynamics.common.item.subtype.SubtypeCeramic;
+import electrodynamics.common.item.subtype.SubtypeChromotographyCard;
+import electrodynamics.common.item.subtype.SubtypeCircuit;
+import electrodynamics.common.item.subtype.SubtypeCrystal;
+import electrodynamics.common.item.subtype.SubtypeDrillHead;
+import electrodynamics.common.item.subtype.SubtypeDust;
+import electrodynamics.common.item.subtype.SubtypeGear;
+import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
+import electrodynamics.common.item.subtype.SubtypeNugget;
+import electrodynamics.common.item.subtype.SubtypeOxide;
+import electrodynamics.common.item.subtype.SubtypePlate;
 import electrodynamics.common.recipe.recipeutils.EnchantmentIngredient;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.DataGenerators;

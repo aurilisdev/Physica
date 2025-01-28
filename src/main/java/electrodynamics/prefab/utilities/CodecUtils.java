@@ -1,9 +1,16 @@
 package electrodynamics.prefab.utilities;
 
-import com.mojang.datafixers.util.*;
-import net.minecraft.network.codec.StreamCodec;
-
 import java.util.function.Function;
+
+import com.mojang.datafixers.util.Function10;
+import com.mojang.datafixers.util.Function11;
+import com.mojang.datafixers.util.Function12;
+import com.mojang.datafixers.util.Function13;
+import com.mojang.datafixers.util.Function7;
+import com.mojang.datafixers.util.Function8;
+import com.mojang.datafixers.util.Function9;
+
+import net.minecraft.network.codec.StreamCodec;
 
 /**
  * Utility class for Codecs

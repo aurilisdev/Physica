@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.capability.types.fluid.RestrictedFluidHandlerItemStack;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
@@ -21,11 +23,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
-import org.jetbrains.annotations.Nullable;
 
 public class ItemHydraulicBoots extends ItemElectrodynamicsArmor {
 

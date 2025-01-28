@@ -1,6 +1,9 @@
 package electrodynamics.registers;
 
+import java.util.List;
+
 import com.mojang.serialization.Codec;
+
 import electrodynamics.api.References;
 import electrodynamics.api.fluid.FluidStackComponent;
 import electrodynamics.api.gas.GasStack;
@@ -17,8 +20,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.List;
 
 public class ElectrodynamicsDataComponentTypes {
 

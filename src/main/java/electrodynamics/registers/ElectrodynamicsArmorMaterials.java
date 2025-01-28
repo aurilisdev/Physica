@@ -1,8 +1,18 @@
 package electrodynamics.registers;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Supplier;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.References;
-import electrodynamics.common.item.gear.armor.types.*;
+import electrodynamics.common.item.gear.armor.types.ItemCombatArmor;
+import electrodynamics.common.item.gear.armor.types.ItemCompositeArmor;
+import electrodynamics.common.item.gear.armor.types.ItemHydraulicBoots;
+import electrodynamics.common.item.gear.armor.types.ItemJetpack;
+import electrodynamics.common.item.gear.armor.types.ItemNightVisionGoggles;
+import electrodynamics.common.item.gear.armor.types.ItemRubberArmor;
+import electrodynamics.common.item.gear.armor.types.ItemServoLeggings;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -13,10 +23,6 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
 
 public class ElectrodynamicsArmorMaterials {
 

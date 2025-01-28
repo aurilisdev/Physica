@@ -1,5 +1,7 @@
 package electrodynamics.common.block.subtype;
 
+import java.util.function.Supplier;
+
 import electrodynamics.api.ISubtype;
 import electrodynamics.api.multiblock.subnodebased.Subnode;
 import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
@@ -28,7 +30,16 @@ import electrodynamics.common.tile.electricitygrid.transformer.TileAdvancedTrans
 import electrodynamics.common.tile.electricitygrid.transformer.TileAdvancedTransformer.TileAdvancedUpgradeTransformer;
 import electrodynamics.common.tile.electricitygrid.transformer.TileGenericTransformer.TileDowngradeTransformer;
 import electrodynamics.common.tile.electricitygrid.transformer.TileGenericTransformer.TileUpgradeTransformer;
-import electrodynamics.common.tile.machines.*;
+import electrodynamics.common.tile.machines.TileChemicalCrystallizer;
+import electrodynamics.common.tile.machines.TileChemicalMixer;
+import electrodynamics.common.tile.machines.TileElectrolosisChamber;
+import electrodynamics.common.tile.machines.TileElectrolyticSeparator;
+import electrodynamics.common.tile.machines.TileEnergizedAlloyer;
+import electrodynamics.common.tile.machines.TileFermentationPlant;
+import electrodynamics.common.tile.machines.TileLathe;
+import electrodynamics.common.tile.machines.TileMineralWasher;
+import electrodynamics.common.tile.machines.TileOxidationFurnace;
+import electrodynamics.common.tile.machines.TileReinforcedAlloyer;
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnace;
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnaceDouble;
 import electrodynamics.common.tile.machines.arcfurnace.TileElectricArcFurnaceTriple;
@@ -51,11 +62,21 @@ import electrodynamics.common.tile.machines.quarry.TileSeismicRelay;
 import electrodynamics.common.tile.machines.wiremill.TileWireMill;
 import electrodynamics.common.tile.machines.wiremill.TileWireMillDouble;
 import electrodynamics.common.tile.machines.wiremill.TileWireMillTriple;
-import electrodynamics.common.tile.pipelines.fluid.*;
-import electrodynamics.common.tile.pipelines.gas.*;
+import electrodynamics.common.tile.pipelines.fluid.TileCreativeFluidSource;
+import electrodynamics.common.tile.pipelines.fluid.TileElectricPump;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidPipeFilter;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidPipePump;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidValve;
+import electrodynamics.common.tile.pipelines.fluid.TileFluidVoid;
 import electrodynamics.common.tile.pipelines.fluid.tank.TileFluidTankHSLA;
 import electrodynamics.common.tile.pipelines.fluid.tank.TileFluidTankReinforced;
 import electrodynamics.common.tile.pipelines.fluid.tank.TileFluidTankSteel;
+import electrodynamics.common.tile.pipelines.gas.TileCreativeGasSource;
+import electrodynamics.common.tile.pipelines.gas.TileGasCollector;
+import electrodynamics.common.tile.pipelines.gas.TileGasPipeFilter;
+import electrodynamics.common.tile.pipelines.gas.TileGasPipePump;
+import electrodynamics.common.tile.pipelines.gas.TileGasValve;
+import electrodynamics.common.tile.pipelines.gas.TileGasVent;
 import electrodynamics.common.tile.pipelines.gas.tank.TileGasTankHSLA;
 import electrodynamics.common.tile.pipelines.gas.tank.TileGasTankReinforced;
 import electrodynamics.common.tile.pipelines.gas.tank.TileGasTankSteel;
@@ -66,8 +87,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
-import java.util.function.Supplier;
 
 public enum SubtypeMachine implements ISubtype, IMachine {
 

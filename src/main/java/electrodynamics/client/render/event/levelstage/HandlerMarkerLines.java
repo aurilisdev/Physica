@@ -3,7 +3,6 @@ package electrodynamics.client.render.event.levelstage;
 import java.util.HashMap;
 import java.util.List;
 
-import net.minecraft.client.DeltaTracker;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -11,6 +10,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.client.Camera;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;

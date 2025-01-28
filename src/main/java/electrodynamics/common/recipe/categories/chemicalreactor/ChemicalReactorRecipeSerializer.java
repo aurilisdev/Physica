@@ -1,19 +1,25 @@
 package electrodynamics.common.recipe.categories.chemicalreactor;
 
+import java.util.Collections;
+
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeSerializer;
-import electrodynamics.common.recipe.recipeutils.*;
+import electrodynamics.common.recipe.recipeutils.CountableIngredient;
+import electrodynamics.common.recipe.recipeutils.FluidIngredient;
+import electrodynamics.common.recipe.recipeutils.GasIngredient;
+import electrodynamics.common.recipe.recipeutils.ProbableFluid;
+import electrodynamics.common.recipe.recipeutils.ProbableGas;
+import electrodynamics.common.recipe.recipeutils.ProbableItem;
 import electrodynamics.prefab.utilities.CodecUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import java.util.Collections;
 
 public class ChemicalReactorRecipeSerializer extends ElectrodynamicsRecipeSerializer<ChemicalReactorRecipe> {
 

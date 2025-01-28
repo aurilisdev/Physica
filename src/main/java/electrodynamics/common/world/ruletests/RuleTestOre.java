@@ -2,7 +2,6 @@ package electrodynamics.common.world.ruletests;
 
 import javax.annotation.Nullable;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 

@@ -1,13 +1,13 @@
 package electrodynamics.api.electricity;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import electrodynamics.api.network.cable.type.IWire;
 import electrodynamics.common.block.connect.BlockWire;
 import electrodynamics.common.block.subtype.SubtypeWire;
 import net.neoforged.bus.api.Event;
 import net.neoforged.fml.event.IModBusEvent;
-
-import java.util.HashMap;
-import java.util.HashSet;
 
 public class RegisterWiresEvent extends Event implements IModBusEvent {
 

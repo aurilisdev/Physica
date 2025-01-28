@@ -1,13 +1,14 @@
 package electrodynamics.api.multiblock.subnodebased.parent;
 
+import java.util.HashMap;
+
+import javax.annotation.Nullable;
+
 import electrodynamics.api.multiblock.subnodebased.Subnode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
-
-import javax.annotation.Nullable;
-import java.util.HashMap;
 
 public interface IMultiblockParentBlock {
 

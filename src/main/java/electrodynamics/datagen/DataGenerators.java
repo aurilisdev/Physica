@@ -1,7 +1,14 @@
 package electrodynamics.datagen;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+
+import javax.annotation.Nullable;
 
 import electrodynamics.api.References;
 import electrodynamics.api.network.cable.type.IWire;
@@ -12,7 +19,11 @@ import electrodynamics.datagen.client.ElectrodynamicsItemModelsProvider;
 import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider;
 import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider.Locale;
 import electrodynamics.datagen.client.ElectrodynamicsSoundProvider;
-import electrodynamics.datagen.server.*;
+import electrodynamics.datagen.server.CoalGeneratorFuelSourceProvider;
+import electrodynamics.datagen.server.CombustionChamberFuelSourceProvider;
+import electrodynamics.datagen.server.ElectrodynamicsLootTablesProvider;
+import electrodynamics.datagen.server.GasCollectorChromoCardsProvider;
+import electrodynamics.datagen.server.ThermoelectricGenHeatSourceProvider;
 import electrodynamics.datagen.server.advancement.ElectrodynamicsAdvancementProvider;
 import electrodynamics.datagen.server.multiblock.ElectrodynamicsMultiblockProvider;
 import electrodynamics.datagen.server.recipe.ElectrodynamicsRecipeProvider;
@@ -32,8 +43,6 @@ import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-
-import javax.annotation.Nullable;
 
 @EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {

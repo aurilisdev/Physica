@@ -1,7 +1,5 @@
 package electrodynamics.common.recipe.categories.fluiditem2gas;
 
-import java.util.List;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

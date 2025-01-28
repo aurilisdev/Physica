@@ -1,5 +1,7 @@
 package electrodynamics.common.block.chemicalreactor;
 
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import electrodynamics.common.tile.machines.chemicalreactor.TileChemicalReactor;
@@ -14,7 +16,6 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
-import org.jetbrains.annotations.Nullable;
 
 public class BlockChemicalReactor extends GenericMachineBlock {
     public BlockChemicalReactor() {

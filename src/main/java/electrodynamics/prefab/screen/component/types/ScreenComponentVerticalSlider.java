@@ -1,12 +1,12 @@
 package electrodynamics.prefab.screen.component.types;
 
+import java.util.function.Consumer;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-
-import java.util.function.Consumer;
 
 public class ScreenComponentVerticalSlider extends ScreenComponentGeneric {
     private int sliderYOffset = 0;

@@ -1,12 +1,6 @@
 package electrodynamics.common.packet.types.client;
 
-import java.util.HashSet;
-
 import electrodynamics.common.packet.NetworkHandler;
-import electrodynamics.prefab.properties.IPropertyType;
-import electrodynamics.prefab.properties.PropertyManager;
-//import electrodynamics.prefab.properties.PropertyManager.PropertyWrapper;
-import electrodynamics.prefab.tile.IPropertyHolderTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

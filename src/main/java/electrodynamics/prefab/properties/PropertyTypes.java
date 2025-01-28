@@ -1,5 +1,12 @@
 package electrodynamics.prefab.properties;
 
+import static net.minecraft.world.level.block.Block.BLOCK_STATE_REGISTRY;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.prefab.utilities.object.Location;
 import electrodynamics.prefab.utilities.object.TransferPack;
@@ -24,13 +31,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
-
-import static net.minecraft.world.level.block.Block.BLOCK_STATE_REGISTRY;
 
 public class PropertyTypes {
 

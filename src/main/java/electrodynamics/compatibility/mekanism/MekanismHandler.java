@@ -1,6 +1,12 @@
 package electrodynamics.compatibility.mekanism;
 
-import electrodynamics.api.gas.*;
+import java.util.Objects;
+import java.util.function.Predicate;
+
+import electrodynamics.api.gas.Gas;
+import electrodynamics.api.gas.GasAction;
+import electrodynamics.api.gas.GasStack;
+import electrodynamics.api.gas.PropertyGasTank;
 import electrodynamics.common.network.utils.GasUtilities;
 import electrodynamics.common.settings.Constants;
 import electrodynamics.common.tile.compatibility.TileRotaryUnifier;
@@ -23,9 +29,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
-
-import java.util.Objects;
-import java.util.function.Predicate;
 
 public class MekanismHandler {
 

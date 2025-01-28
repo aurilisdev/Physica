@@ -2,10 +2,10 @@ package electrodynamics.api.capability.types.fluid;
 
 import java.util.function.Predicate;
 
-import electrodynamics.api.fluid.FluidStackComponent;
-import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import org.jetbrains.annotations.NotNull;
 
+import electrodynamics.api.fluid.FluidStackComponent;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;

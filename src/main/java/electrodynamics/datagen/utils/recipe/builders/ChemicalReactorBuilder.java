@@ -1,6 +1,10 @@
 package electrodynamics.datagen.utils.recipe.builders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mojang.datafixers.util.Pair;
+
 import electrodynamics.api.gas.Gas;
 import electrodynamics.api.gas.GasStack;
 import electrodynamics.common.recipe.categories.chemicalreactor.ChemicalReactorRecipe;
@@ -13,9 +17,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChemicalReactorBuilder extends ElectrodynamicsRecipeBuilder<ChemicalReactorRecipe, ChemicalReactorBuilder> {
 

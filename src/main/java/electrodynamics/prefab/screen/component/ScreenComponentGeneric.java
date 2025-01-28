@@ -1,13 +1,13 @@
 package electrodynamics.prefab.screen.component;
 
+import javax.annotation.Nullable;
+
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.api.screen.ITexture.Textures;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponent;
 import electrodynamics.prefab.utilities.RenderingUtils;
 import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.client.gui.GuiGraphics;
-
-import javax.annotation.Nullable;
 
 /**
  * simple implementation of AbstractScreenComponent that allows custom images to be drawn to the screen

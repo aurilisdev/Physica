@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import electrodynamics.Electrodynamics;
-import electrodynamics.api.References;
 import electrodynamics.client.guidebook.ScreenGuidebook;
 import electrodynamics.client.guidebook.utils.components.Chapter;
 import electrodynamics.client.guidebook.utils.components.Module;
@@ -24,7 +23,6 @@ import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;

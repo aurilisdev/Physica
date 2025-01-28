@@ -2,7 +2,6 @@ package electrodynamics.client.render.event.levelstage;
 
 import java.util.HashMap;
 
-import net.minecraft.client.DeltaTracker;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -16,6 +15,7 @@ import electrodynamics.prefab.utilities.math.MathUtils;
 import electrodynamics.prefab.utilities.math.PrecisionVector;
 import electrodynamics.prefab.utilities.object.QuarryArmDataHolder;
 import net.minecraft.client.Camera;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;

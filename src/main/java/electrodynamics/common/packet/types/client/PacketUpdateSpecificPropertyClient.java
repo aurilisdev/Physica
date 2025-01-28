@@ -1,8 +1,6 @@
 package electrodynamics.common.packet.types.client;
 
 import electrodynamics.common.packet.NetworkHandler;
-import electrodynamics.prefab.properties.IPropertyType;
-import electrodynamics.prefab.properties.PropertyManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

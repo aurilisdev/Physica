@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
-import electrodynamics.prefab.properties.PropertyTypes;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.capability.types.itemhandler.IndexedSidedInvWrapper;
+import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.common.item.subtype.SubtypeItemUpgrade;
 import electrodynamics.prefab.properties.Property;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.CapabilityInputType;
 import electrodynamics.prefab.tile.components.IComponent;

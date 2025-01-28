@@ -1,6 +1,10 @@
 package electrodynamics.client.render.tile;
 
+import org.jetbrains.annotations.NotNull;
+import org.joml.Matrix4f;
+
 import com.mojang.blaze3d.vertex.PoseStack;
+
 import electrodynamics.common.tile.electricitygrid.transformer.TileAdvancedTransformer;
 import electrodynamics.prefab.utilities.math.Color;
 import electrodynamics.prefab.utilities.math.MathUtils;
@@ -10,8 +14,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import org.jetbrains.annotations.NotNull;
-import org.joml.Matrix4f;
 
 public abstract class RenderAdvancedTransformer extends AbstractTileRenderer<TileAdvancedTransformer> {
 

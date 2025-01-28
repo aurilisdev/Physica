@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import org.apache.logging.log4j.util.TriConsumer;
 
 import electrodynamics.api.ISubtype;
@@ -14,6 +13,7 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentProcessor;
 import electrodynamics.prefab.utilities.ItemUtils;
 import electrodynamics.prefab.utilities.NBTUtils;
+import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;

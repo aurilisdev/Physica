@@ -3,11 +3,12 @@ package electrodynamics.api.multiblock.assemblybased;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import electrodynamics.api.capability.types.electrodynamic.ICapabilityElectrodynamic;
 import electrodynamics.api.capability.types.gas.IGasHandler;
 import electrodynamics.api.gas.GasTank;
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
-import electrodynamics.prefab.block.GenericEntityBlock;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
@@ -35,8 +36,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
-
-import javax.annotation.Nullable;
 
 /**
  * @author skip999

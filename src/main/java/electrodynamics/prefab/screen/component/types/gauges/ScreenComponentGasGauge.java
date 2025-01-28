@@ -4,20 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import electrodynamics.Electrodynamics;
-import electrodynamics.api.capability.types.gas.IGasHandlerItem;
-import electrodynamics.api.gas.GasAction;
-import electrodynamics.api.gas.PropertyGasTank;
-import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
-import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
-import electrodynamics.prefab.screen.GenericScreen;
-import electrodynamics.prefab.tile.GenericTile;
-import electrodynamics.registers.ElectrodynamicsCapabilities;
-import electrodynamics.registers.ElectrodynamicsSounds;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Matrix4f;
 
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -27,22 +13,36 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 
+import electrodynamics.Electrodynamics;
+import electrodynamics.api.capability.types.gas.IGasHandlerItem;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
+import electrodynamics.api.gas.GasAction;
 import electrodynamics.api.gas.GasStack;
+import electrodynamics.api.gas.PropertyGasTank;
 import electrodynamics.api.gas.utils.IGasTank;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.client.ClientRegister;
+import electrodynamics.common.packet.types.server.PacketUpdateCarriedItemServer;
+import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
+import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
+import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import electrodynamics.prefab.utilities.RenderingUtils;
+import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsSounds;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class ScreenComponentGasGauge extends ScreenComponentGeneric {
 

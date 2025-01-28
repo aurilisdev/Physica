@@ -1,14 +1,30 @@
 package electrodynamics.registers;
 
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_AMMONIA;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_AQUAREGIA;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_CLAY;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_ETHANOL;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_HYDRAULIC;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_HYDROCHLORICACID;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_HYDROFLUORICACID;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_HYDROGEN;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_NITRICACID;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_OXYGEN;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_POLYETHYLENE;
+import static electrodynamics.registers.ElectrodynamicsFluids.FLUID_SULFURICACID;
+
 import electrodynamics.api.References;
 import electrodynamics.api.registration.BulkDeferredHolder;
-import electrodynamics.common.fluid.subtype.*;
+import electrodynamics.common.fluid.subtype.SubtypeCrudeMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeDirtyMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeImpureMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypePureMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeRoyalMineralFluid;
+import electrodynamics.common.fluid.subtype.SubtypeSulfateFluid;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-
-import static electrodynamics.registers.ElectrodynamicsFluids.*;
 
 public class ElectrodynamicsFluidTypes {
 	public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, References.ID);

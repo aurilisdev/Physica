@@ -1,7 +1,13 @@
 package electrodynamics.prefab.tile.types;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
+
 import electrodynamics.api.network.cable.IRefreshableCable;
 import electrodynamics.common.block.connect.util.EnumConnectType;
 import electrodynamics.prefab.network.AbstractNetwork;
@@ -11,11 +17,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public abstract class GenericRefreshingConnectTile<CABLETYPE, CONDUCTOR extends GenericRefreshingConnectTile<CABLETYPE, CONDUCTOR, NETWORK>, NETWORK extends AbstractNetwork<CONDUCTOR, CABLETYPE, ?, NETWORK>> extends GenericConnectTile implements IRefreshableCable<CABLETYPE, NETWORK> {
 

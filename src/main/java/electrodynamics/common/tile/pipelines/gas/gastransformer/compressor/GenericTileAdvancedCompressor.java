@@ -12,7 +12,10 @@ import electrodynamics.common.tile.pipelines.gas.gastransformer.TileGasTransform
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.tile.components.IComponentType;
-import electrodynamics.prefab.tile.components.type.*;
+import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
+import electrodynamics.prefab.tile.components.type.ComponentGasHandlerMulti;
+import electrodynamics.prefab.tile.components.type.ComponentProcessor;
+import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
 import electrodynamics.registers.ElectrodynamicsSounds;

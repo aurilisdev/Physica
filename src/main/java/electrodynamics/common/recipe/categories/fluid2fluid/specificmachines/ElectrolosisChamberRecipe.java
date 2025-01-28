@@ -1,5 +1,7 @@
 package electrodynamics.common.recipe.categories.fluid2fluid.specificmachines;
 
+import java.util.List;
+
 import electrodynamics.Electrodynamics;
 import electrodynamics.common.recipe.ElectrodynamicsRecipeInit;
 import electrodynamics.common.recipe.categories.fluid2fluid.Fluid2FluidRecipe;
@@ -11,8 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import java.util.List;
 
 public class ElectrolosisChamberRecipe extends Fluid2FluidRecipe {
 

@@ -3,7 +3,6 @@ package electrodynamics.prefab.sound.tickable;
 import java.util.UUID;
 
 import electrodynamics.prefab.utilities.ItemUtils;
-import electrodynamics.prefab.utilities.NBTUtils;
 import electrodynamics.prefab.utilities.WorldUtils;
 import electrodynamics.registers.ElectrodynamicsDataComponentTypes;
 import electrodynamics.registers.ElectrodynamicsItems;

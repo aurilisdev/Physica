@@ -2,14 +2,12 @@ package electrodynamics.datagen.server.tags.types;
 
 import java.util.concurrent.CompletableFuture;
 
-import electrodynamics.Electrodynamics;
 import org.jetbrains.annotations.Nullable;
 
 import electrodynamics.api.References;
 import electrodynamics.api.gas.Gas;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.registers.ElectrodynamicsGases;
-import electrodynamics.registers.ElectrodynamicsRegistries;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;

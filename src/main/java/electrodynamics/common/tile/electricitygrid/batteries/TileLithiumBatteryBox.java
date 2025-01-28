@@ -1,8 +1,8 @@
 package electrodynamics.common.tile.electricitygrid.batteries;
 
 import electrodynamics.common.block.subtype.SubtypeMachine;
-import electrodynamics.registers.ElectrodynamicsTiles;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
+import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
