@@ -12,13 +12,19 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.phys.AABB;
 
 public class RenderAdvancedSolarPanel extends AbstractTileRenderer<TileAdvancedSolarPanel> {
 
 	public RenderAdvancedSolarPanel(BlockEntityRendererProvider.Context context) {
 		super(context);
 	}
-
+	
+        @Override
+        public AABB getRenderBoundingBox(TileAdvancedSolarPanel blockEntity) {
+            return new AABB(blockEntity.getBlockPos()).inflate(1);
+        }
+        
 	@Override
 	public void render(TileAdvancedSolarPanel solarPanel, float partialTicks, PoseStack matrixStackIn, @NotNull MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
 
