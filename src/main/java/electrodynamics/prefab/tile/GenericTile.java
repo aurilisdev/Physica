@@ -2,6 +2,7 @@ package electrodynamics.prefab.tile;
 
 import java.util.UUID;
 
+import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -460,6 +461,10 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
                 component.refreshIfUpdate(oldState, newState);
             }
         }
+    }
+
+    public void setPlacedBy(LivingEntity player, ItemStack stack) {
+
     }
 
 }
