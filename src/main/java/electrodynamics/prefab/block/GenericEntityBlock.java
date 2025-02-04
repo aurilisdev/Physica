@@ -3,6 +3,8 @@ package electrodynamics.prefab.block;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
+
 import electrodynamics.common.block.states.ElectrodynamicsBlockStates;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.IWrenchable;
@@ -36,7 +38,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams.Builder;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class GenericEntityBlock extends BaseEntityBlock implements IWrenchable {
 
