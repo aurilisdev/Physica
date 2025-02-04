@@ -663,6 +663,7 @@
   "gui.electrodynamics.machine.current": "Current: %s",
   "gui.electrodynamics.machine.heat": "Heat: %s",
   "gui.electrodynamics.machine.output": "Output: %s",
+  "gui.electrodynamics.machine.satisfaction": "Satisfaction: %s",
   "gui.electrodynamics.machine.stored": "Stored: %s",
   "gui.electrodynamics.machine.temperature": "Temperature: %s",
   "gui.electrodynamics.machine.transfer": "Transfer: %s",

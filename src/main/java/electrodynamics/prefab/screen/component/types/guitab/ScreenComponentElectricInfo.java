@@ -64,18 +64,34 @@ public class ScreenComponentElectricInfo extends ScreenComponentGuiTab {
 						list.add(ElectroTextUtils.gui("machine.output", ChatFormatter.getChatDisplayShort(transfer.getWatts(), DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 						list.add(ElectroTextUtils.gui("machine.voltage", ChatFormatter.getChatDisplayShort(transfer.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 					} else {
+						double satisfaction = 0;
 						if (wattage == null) {
-							double usage = tile.getComponent(IComponentType.Processor) instanceof ComponentProcessor proc ? proc.getUsage() * 20 : 0;
+							double perTick = tile.getComponent(IComponentType.Processor) instanceof ComponentProcessor proc ? proc.getUsage() : 0;
 							for (ComponentProcessor proc : tile.getProcessors()) {
 								if (proc != null) {
-									usage += proc.getUsage() * 20;
+									perTick += proc.getUsage();
 								}
 							}
-							list.add(ElectroTextUtils.gui("machine.usage", ChatFormatter.getChatDisplayShort(usage, DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+							list.add(ElectroTextUtils.gui("machine.usage", ChatFormatter.getChatDisplayShort(perTick * 20, DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+							if(perTick == 0) {
+								satisfaction = 1;
+							} else if(electro.getJoulesStored() > 0) {
+								satisfaction = electro.getJoulesStored() >= perTick ? 1 : electro.getJoulesStored() / perTick;
+							}
 						} else {
-							list.add(ElectroTextUtils.gui("machine.usage", ChatFormatter.getChatDisplayShort(wattage.apply(electro), DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+							double watts = wattage.apply(electro);
+							double perTick = watts / 20.0;
+
+							if(perTick == 0) {
+								satisfaction = 1;
+							} else if(electro.getJoulesStored() > 0) {
+								satisfaction = electro.getJoulesStored() >= perTick ? 1 : electro.getJoulesStored() / perTick;
+							}
+
+							list.add(ElectroTextUtils.gui("machine.usage", ChatFormatter.getChatDisplayShort(watts, DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 						}
 						list.add(ElectroTextUtils.gui("machine.voltage", ChatFormatter.getChatDisplayShort(electro.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+						list.add(ElectroTextUtils.gui("machine.satisfaction", ChatFormatter.getChatDisplayShort(satisfaction * 100.0, DisplayUnit.PERCENTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 					}
 				}
 			}

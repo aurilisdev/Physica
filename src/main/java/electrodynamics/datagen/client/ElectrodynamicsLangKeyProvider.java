@@ -972,6 +972,7 @@ public class ElectrodynamicsLangKeyProvider extends LanguageProvider {
 			addGuiLabel("machine.stored", "Stored: %s");
 			addGuiLabel("machine.temperature", "Temperature: %s");
 			addGuiLabel("machine.heat", "Heat: %s");
+			addGuiLabel("machine.satisfaction", "Satisfaction: %s");
 			addGuiLabel("coalgenerator.timeleft", "Time Left: %s");
 			addGuiLabel("seismicscanner.dataheader", "Scan Results:");
 			addGuiLabel("seismicscanner.notfound", "Block not found!");
