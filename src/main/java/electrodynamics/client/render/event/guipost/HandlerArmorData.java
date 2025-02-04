@@ -94,9 +94,11 @@ public class HandlerArmorData extends AbstractPostGuiOverlayHandler {
 
         if (ItemUtils.testItems(chestplate.getItem(), ElectrodynamicsItems.ITEM_JETPACK.get())) {
             renderItem = true;
-            Component mode = ItemJetpack.getModeText(chestplate.getOrDefault(ElectrodynamicsDataComponentTypes.MODE, -1));
+            Component mode = ItemJetpack.getModeText(chestplate.getOrDefault(ElectrodynamicsDataComponentTypes.MODE, 0));
 
             IGasHandlerItem handler = chestplate.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
+
+            graphics.pose().pushPose();
 
             if (handler != null) {
                 GasStack gas = handler.getGasInTank(0);
@@ -113,10 +115,12 @@ public class HandlerArmorData extends AbstractPostGuiOverlayHandler {
         }
 
         if (ItemUtils.testItems(chestplate.getItem(), ElectrodynamicsItems.ITEM_COMBATCHESTPLATE.get())) {
+
             graphics.pose().pushPose();
+
             graphics.pose().scale(0.8F, 0.8F, 0.8F);
             renderItem = true;
-            Component mode = ItemJetpack.getModeText(chestplate.getOrDefault(ElectrodynamicsDataComponentTypes.MODE, -1));
+            Component mode = ItemJetpack.getModeText(chestplate.getOrDefault(ElectrodynamicsDataComponentTypes.MODE, 0));
 
             IGasHandlerItem handler = chestplate.getCapability(ElectrodynamicsCapabilities.CAPABILITY_GASHANDLER_ITEM);
 
