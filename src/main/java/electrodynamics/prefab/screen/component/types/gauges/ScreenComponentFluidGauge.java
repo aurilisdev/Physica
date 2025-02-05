@@ -114,7 +114,8 @@ public class ScreenComponentFluidGauge extends AbstractScreenComponentGauge {
 	@Override
 	public void onMouseClick(double mouseX, double mouseY) {
 
-		PropertyFluidTank tank = (PropertyFluidTank) fluidInfoHandler.getTank();
+	    	
+		PropertyFluidTank tank = fluidInfoHandler.getTank() instanceof PropertyFluidTank x ? x : null;
 
 		if (tank == null) {
 			return;
