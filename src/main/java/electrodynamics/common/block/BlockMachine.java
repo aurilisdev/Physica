@@ -27,7 +27,7 @@ import net.minecraft.world.phys.HitResult;
 
 public class BlockMachine extends GenericMachineBlock implements IMultiblockParentBlock {
 
-    private final IMachine machine;
+    protected final IMachine machine;
 
     public BlockMachine(IMachine machine) {
         super(machine.getBlockEntitySupplier(), machine.getVoxelShapeProvider());

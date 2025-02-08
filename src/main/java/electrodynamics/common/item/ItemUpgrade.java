@@ -42,7 +42,7 @@ public class ItemUpgrade extends ItemElectrodynamics {
 			double voltageMultiplier = subtype == SubtypeItemUpgrade.advancedcapacity ? 4 : 2;
 			tooltip.add(ElectroTextUtils.tooltip("info.upgradecapacity", Component.literal(capacityMultiplier + "x").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY));
 			tooltip.add(ElectroTextUtils.tooltip("info.upgradeenergytransfer", Component.literal(capacityMultiplier + "x").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY));
-			tooltip.add(ElectroTextUtils.tooltip("info.upgradevoltage", Component.literal(capacityMultiplier + "x").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY));
+			tooltip.add(ElectroTextUtils.tooltip("info.upgradevoltage", Component.literal(voltageMultiplier + "x").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY));
 		}
 		if (subtype == SubtypeItemUpgrade.advancedspeed || subtype == SubtypeItemUpgrade.basicspeed) {
 			double speedMultiplier = subtype == SubtypeItemUpgrade.advancedspeed ? 2.25 : 1.5;

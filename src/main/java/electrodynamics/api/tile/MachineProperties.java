@@ -18,7 +18,6 @@ public class MachineProperties {
     public static final MachineProperties DEFAULT = new MachineProperties();
 
     private MachineProperties() {
-
     }
 
     public MachineProperties setLitBrightness(int brightness) {
