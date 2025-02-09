@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,163 +52,180 @@ public class CableModelLoader implements IGeometryLoader<CableModelLoader.WirePa
     @Override
     public WirePartGeometry read(JsonObject json, JsonDeserializationContext context) throws JsonParseException {
 
-        BlockModel none = context.deserialize(GsonHelper.getAsJsonObject(json, EnumConnectType.NONE.toString()), BlockModel.class);
-        BlockModel wire = context.deserialize(GsonHelper.getAsJsonObject(json, EnumConnectType.WIRE.toString()), BlockModel.class);
-        BlockModel inventory = context.deserialize(GsonHelper.getAsJsonObject(json, EnumConnectType.INVENTORY.toString()), BlockModel.class);
-        return new WirePartGeometry(none, wire, inventory);
+	BlockModel none = context.deserialize(GsonHelper.getAsJsonObject(json, EnumConnectType.NONE.toString()),
+		BlockModel.class);
+	BlockModel wire = context.deserialize(GsonHelper.getAsJsonObject(json, EnumConnectType.WIRE.toString()),
+		BlockModel.class);
+	BlockModel inventory = context
+		.deserialize(GsonHelper.getAsJsonObject(json, EnumConnectType.INVENTORY.toString()), BlockModel.class);
+	return new WirePartGeometry(none, wire, inventory);
     }
 
     public static class WirePartGeometry implements IUnbakedGeometry<WirePartGeometry> {
 
-        private final BlockModel none;
-        private final BlockModel wire;
-        private final BlockModel inventory;
+	private final BlockModel none;
+	private final BlockModel wire;
+	private final BlockModel inventory;
 
-        public WirePartGeometry(BlockModel none, BlockModel wire, BlockModel inventory) {
-            this.none = none;
-            this.wire = wire;
-            this.inventory = inventory;
+	public WirePartGeometry(BlockModel none, BlockModel wire, BlockModel inventory) {
+	    this.none = none;
+	    this.wire = wire;
+	    this.inventory = inventory;
 
-        }
+	}
 
-        @Override
-        public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
-            boolean useBlockLight = context.useBlockLight();
+	@Override
+	public BakedModel bake(IGeometryBakingContext context, ModelBaker baker,
+		Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
+	    boolean useBlockLight = context.useBlockLight();
 
-            BakedModel none = this.none.bake(baker, this.none, spriteGetter, modelState, useBlockLight);
+	    BakedModel none = this.none.bake(baker, this.none, spriteGetter, modelState, useBlockLight);
 
-            BakedModel[] wires = new BakedModel[6];
-            BakedModel[] inventories = new BakedModel[6];
+	    BakedModel[] wires = new BakedModel[6];
+	    BakedModel[] inventories = new BakedModel[6];
 
-            for (Direction dir : Direction.values()) {
+	    for (Direction dir : Direction.values()) {
 
-                ModelState transform = ModelStateRotation.ROTATIONS.get(dir);
+		ModelState transform = ModelStateRotation.ROTATIONS.get(dir);
 
-                wires[dir.ordinal()] = this.wire.bake(baker, this.wire, spriteGetter, transform, useBlockLight);
-                inventories[dir.ordinal()] = this.inventory.bake(baker, this.inventory, spriteGetter, transform, useBlockLight);
+		wires[dir.ordinal()] = this.wire.bake(baker, this.wire, spriteGetter, transform, useBlockLight);
+		inventories[dir.ordinal()] = this.inventory.bake(baker, this.inventory, spriteGetter, transform,
+			useBlockLight);
 
-            }
+	    }
 
-            return new CableModel(context.useAmbientOcclusion(), context.isGui3d(), useBlockLight, spriteGetter.apply(this.none.getMaterial("particle")), none, wires, inventories);
-        }
+	    return new CableModel(context.useAmbientOcclusion(), context.isGui3d(), useBlockLight,
+		    spriteGetter.apply(this.none.getMaterial("particle")), none, wires, inventories);
+	}
 
-        @Override
-        public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter, IGeometryBakingContext context) {
-            this.none.resolveParents(modelGetter);
-            this.wire.resolveParents(modelGetter);
-            this.inventory.resolveParents(modelGetter);
-        }
+	@Override
+	public void resolveParents(Function<ResourceLocation, UnbakedModel> modelGetter,
+		IGeometryBakingContext context) {
+	    this.none.resolveParents(modelGetter);
+	    this.wire.resolveParents(modelGetter);
+	    this.inventory.resolveParents(modelGetter);
+	}
 
-        @Override
-        public Set<String> getConfigurableComponentNames() {
-            return IUnbakedGeometry.super.getConfigurableComponentNames();
-        }
+	@Override
+	public Set<String> getConfigurableComponentNames() {
+	    return IUnbakedGeometry.super.getConfigurableComponentNames();
+	}
 
     }
 
     public static class CableModel implements IDynamicBakedModel {
 
-        private static final List<BakedQuad> NO_QUADS = ImmutableList.of();
+	private static final List<BakedQuad> NO_QUADS = ImmutableList.of();
 
-        private final boolean isAmbientOcclusion;
-        private final boolean isGui3d;
-        private final boolean isSideLit;
-        private final TextureAtlasSprite particle;
-        // render type for general model defined by this one
-        private final BakedModel none;
-        private final BakedModel[] wires;
-        private final BakedModel[] inventories;
+	private final boolean isAmbientOcclusion;
+	private final boolean isGui3d;
+	private final boolean isSideLit;
+	private final TextureAtlasSprite particle;
+	// render type for general model defined by this one
+	private final BakedModel none;
+	private final BakedModel[] wires;
+	private final BakedModel[] inventories;
 
-        public CableModel(boolean isAmbientOcclusion, boolean isGui3d, boolean isSideLit, TextureAtlasSprite particle, BakedModel none, BakedModel[] wires, BakedModel[] inventories) {
-            this.isAmbientOcclusion = isAmbientOcclusion;
-            this.isGui3d = isGui3d;
-            this.isSideLit = isSideLit;
-            this.particle = particle;
-            this.none = none;
-            this.wires = wires;
-            this.inventories = inventories;
-        }
+	public CableModel(boolean isAmbientOcclusion, boolean isGui3d, boolean isSideLit, TextureAtlasSprite particle,
+		BakedModel none, BakedModel[] wires, BakedModel[] inventories) {
+	    this.isAmbientOcclusion = isAmbientOcclusion;
+	    this.isGui3d = isGui3d;
+	    this.isSideLit = isSideLit;
+	    this.particle = particle;
+	    this.none = none;
+	    this.wires = wires;
+	    this.inventories = inventories;
+	}
 
-        @Override
-        public boolean useAmbientOcclusion() {
-            return this.isAmbientOcclusion;
-        }
+	@Override
+	public boolean useAmbientOcclusion() {
+	    return this.isAmbientOcclusion;
+	}
 
-        @Override
-        public boolean isGui3d() {
-            return this.isGui3d;
-        }
+	@Override
+	public boolean isGui3d() {
+	    return this.isGui3d;
+	}
 
-        @Override
-        public boolean usesBlockLight() {
-            return isSideLit;
-        }
+	@Override
+	public boolean usesBlockLight() {
+	    return isSideLit;
+	}
 
-        @Override
-        public boolean isCustomRenderer() {
-            return false;
-        }
+	@Override
+	public boolean isCustomRenderer() {
+	    return false;
+	}
 
-        @Override
-        public TextureAtlasSprite getParticleIcon() {
-            return this.particle;
-        }
+	@Override
+	public TextureAtlasSprite getParticleIcon() {
+	    return this.particle;
+	}
 
-        @Override
-        public ItemOverrides getOverrides() {
-            return ItemOverrides.EMPTY;
-        }
+	@Override
+	public ItemOverrides getOverrides() {
+	    return ItemOverrides.EMPTY;
+	}
 
-        @Override
-        public ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource rand, @NotNull ModelData data) {
+	@Override
+	public ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource rand,
+		@NotNull ModelData data) {
 
-            return none.getRenderTypes(state, rand, data);
+	    return none.getRenderTypes(state, rand, data);
 
-        }
+	}
 
-        @Override
-        public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, @NotNull RandomSource rand, @NotNull ModelData extraData, @Nullable RenderType renderType) {
-            EnumConnectType[] data = extraData.get(ModelPropertyConnections.INSTANCE).get();
-            if (data == null) {
-                return NO_QUADS;
-            }
+	@Override
+	public @NotNull List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side,
+		@NotNull RandomSource rand, @NotNull ModelData extraData, @Nullable RenderType renderType) {
+	    @Nullable
+	    Supplier<EnumConnectType[]> m = extraData.get(ModelPropertyConnections.INSTANCE);
+	    if (m == null) {
+		return NO_QUADS;
+	    }
+	    EnumConnectType[] data = m.get();
+	    if (data == null) {
+		return NO_QUADS;
+	    }
 
-            boolean none = false;
+	    boolean none = false;
 
-            List<BakedQuad> quads = new ArrayList<>();
+	    List<BakedQuad> quads = new ArrayList<>();
 
-            for (int i = 0; i < data.length; i++) {
+	    for (int i = 0; i < data.length; i++) {
 
-                switch (data[i]) {
-                    case NONE:
-                        none = true;
-                        break;
-                    case WIRE:
-                        quads.addAll(this.wires[i].getQuads(state, side, rand, extraData, renderType));
-                        break;
-                    case INVENTORY:
-                        quads.addAll(this.inventories[i].getQuads(state, side, rand, extraData, renderType));
-                        break;
-                    default:
-                        none = true;
-                        break;
-                }
-            }
+		switch (data[i]) {
+		case NONE:
+		    none = true;
+		    break;
+		case WIRE:
+		    quads.addAll(this.wires[i].getQuads(state, side, rand, extraData, renderType));
+		    break;
+		case INVENTORY:
+		    quads.addAll(this.inventories[i].getQuads(state, side, rand, extraData, renderType));
+		    break;
+		default:
+		    none = true;
+		    break;
+		}
+	    }
 
-            if (none) {
-                quads.addAll(this.none.getQuads(state, side, rand, extraData, renderType));
-            }
+	    if (none) {
+		quads.addAll(this.none.getQuads(state, side, rand, extraData, renderType));
+	    }
 
-            return quads;
-        }
+	    return quads;
+	}
 
-        @Override
-        public @NotNull ModelData getModelData(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull ModelData modelData) {
-            if (level.getBlockEntity(pos) instanceof IConnectTile tile) {
-                return ModelData.builder().with(ModelPropertyConnections.INSTANCE, () -> tile.readConnections()).build();
-            }
-            return modelData;
-        }
+	@Override
+	public @NotNull ModelData getModelData(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos,
+		@NotNull BlockState state, @NotNull ModelData modelData) {
+	    if (level.getBlockEntity(pos) instanceof IConnectTile tile) {
+		return ModelData.builder().with(ModelPropertyConnections.INSTANCE, () -> tile.readConnections())
+			.build();
+	    }
+	    return modelData;
+	}
 
     }
 
