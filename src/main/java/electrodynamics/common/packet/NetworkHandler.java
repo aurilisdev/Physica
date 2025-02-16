@@ -17,7 +17,6 @@ import electrodynamics.common.packet.types.client.PacketSpawnSmokeParticle;
 import electrodynamics.common.packet.types.client.PacketUpdateSpecificPropertyClient;
 import electrodynamics.common.packet.types.server.PacketJetpackFlightServer;
 import electrodynamics.common.packet.types.server.PacketModeSwitchServer;
-import electrodynamics.common.packet.types.server.PacketPlayerInformation;
 import electrodynamics.common.packet.types.server.PacketPowerSetting;
 import electrodynamics.common.packet.types.server.PacketSeismicScanner;
 import electrodynamics.common.packet.types.server.PacketSendUpdatePropertiesServer;
@@ -59,7 +58,6 @@ public class NetworkHandler {
 
         registry.playToServer(PacketJetpackFlightServer.TYPE, PacketJetpackFlightServer.CODEC, PacketJetpackFlightServer::handle);
         registry.playToServer(PacketModeSwitchServer.TYPE, PacketModeSwitchServer.CODEC, PacketModeSwitchServer::handle);
-        registry.playToServer(PacketPlayerInformation.TYPE, PacketPlayerInformation.CODEC, PacketPlayerInformation::handle);
         registry.playToServer(PacketPowerSetting.TYPE, PacketPowerSetting.CODEC, PacketPowerSetting::handle);
         registry.playToServer(PacketSendUpdatePropertiesServer.TYPE, PacketSendUpdatePropertiesServer.CODEC, PacketSendUpdatePropertiesServer::handle);
         registry.playToServer(PacketServerUpdateTile.TYPE, PacketServerUpdateTile.CODEC, PacketServerUpdateTile::handle);
