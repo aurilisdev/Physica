@@ -31,7 +31,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class GenericScreen<T extends GenericContainer> extends AbstractContainerScreen<T> implements IScreenWrapper {
 
 	protected ResourceLocation defaultResource = new ResourceLocation(References.ID + ":textures/screen/component/base.png");
-	private Set<AbstractScreenComponent> components = new HashSet<>();
+	private List<AbstractScreenComponent> components = new ArrayList<>();
 	public List<ScreenComponentSlot> slots = new ArrayList<>();
 	private Set<ScreenComponentEditBox> editBoxes = new HashSet<>();
 	protected int playerInvOffset = 0;
@@ -164,7 +164,7 @@ public class GenericScreen<T extends GenericContainer> extends AbstractContainer
 	}
 
 	public Set<AbstractScreenComponent> getComponents() {
-		return components;
+		return new HashSet<>(components);
 	}
 
 	public void addEditBox(ScreenComponentEditBox box) {

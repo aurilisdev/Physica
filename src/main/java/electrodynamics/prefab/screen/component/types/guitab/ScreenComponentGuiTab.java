@@ -40,7 +40,8 @@ public class ScreenComponentGuiTab extends AbstractScreenComponentInfo {
 	}
 
 	public enum GuiInfoTabTextures implements ITexture {
-		REGULAR(26, 26, 0, 0, 26, 26, "tab_regular");
+		REGULAR(26, 26, 0, 0, 26, 26, "tab_regular"),
+		REGULAR_RIGHT(26, 26, 0, 0, 26, 26, "tab_regular_right");;
 
 		private final int textureWidth;
 		private final int textureHeight;
