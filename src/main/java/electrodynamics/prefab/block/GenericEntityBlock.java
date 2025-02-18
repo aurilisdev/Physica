@@ -15,6 +15,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -199,6 +200,14 @@ public abstract class GenericEntityBlock extends BaseEntityBlock implements IWre
 		super.entityInside(state, level, pos, entity);
 		if (level.getBlockEntity(pos) instanceof GenericTile tile) {
 			tile.onEntityInside(state, level, pos, entity);
+		}
+	}
+	
+	@Override
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(level, pos, state, placer, stack);
+		if (level.getBlockEntity(pos) instanceof GenericTile tile) {
+			tile.setPlacedBy(placer, stack);
 		}
 	}
 

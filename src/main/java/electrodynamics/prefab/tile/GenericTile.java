@@ -30,6 +30,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.Nameable;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
@@ -391,6 +392,10 @@ public abstract class GenericTile extends BlockEntity implements Nameable, IProp
 
 	public void onEntityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
 
+	}
+	
+	public void setPlacedBy(LivingEntity placer, ItemStack stack) {
+		
 	}
 
 	public void updateCarriedItemInContainer(ItemStack stack, UUID playerId) {
