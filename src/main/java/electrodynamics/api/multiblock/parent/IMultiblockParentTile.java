@@ -1,5 +1,7 @@
 package electrodynamics.api.multiblock.parent;
 
+import org.jetbrains.annotations.NotNull;
+
 import electrodynamics.api.multiblock.Subnode;
 import electrodynamics.api.multiblock.child.IMultiblockChildBlock;
 import electrodynamics.common.tile.TileMultiSubnode;
@@ -16,6 +18,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 
 public interface IMultiblockParentTile {
 
@@ -109,4 +113,9 @@ public interface IMultiblockParentTile {
 	default int getSignal(TileMultiSubnode subnode, Direction dir) {
 		return 0;
 	}
+	
+	default public <T> @NotNull LazyOptional<T> getSubnodeCapability(@NotNull Capability<T> cap, Direction side) {
+		return LazyOptional.empty();
+	}
+	
 }

@@ -1,5 +1,7 @@
 package electrodynamics.common.tile;
 
+import org.jetbrains.annotations.NotNull;
+
 import electrodynamics.api.multiblock.parent.IMultiblockParentTile;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyType;
@@ -15,6 +17,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 
 public class TileMultiSubnode extends GenericTile {
 	
@@ -105,6 +109,14 @@ public class TileMultiSubnode extends GenericTile {
 			return parent.getSignal(this, dir);
 		}
 		return 0;
+	}
+	
+	@Override
+	public <T> @NotNull LazyOptional<T> getCapability(@NotNull Capability<T> cap, Direction side) {
+		if (level.getBlockEntity(parentPos.get()) instanceof IMultiblockParentTile parent) {
+			return parent.getSubnodeCapability(cap, side);
+		}
+		return super.getCapability(cap, side);
 	}
 
 }

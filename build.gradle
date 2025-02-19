@@ -33,7 +33,7 @@ distsDirName = "../output"
 def	version_minor="8"
 def	version_revision='1'
 def	minecraft_version='1.19.2'
-def	version_build='1'
+def	version_build='2'
 def	version_major='0'
 
 version = minecraft_version+'-'+version_major+'.'+version_minor+'.'+version_revision+'-'+version_build
