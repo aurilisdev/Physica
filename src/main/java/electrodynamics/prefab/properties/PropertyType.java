@@ -7,6 +7,7 @@ import electrodynamics.prefab.utilities.object.TransferPack;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.ContainerHelper;
@@ -175,7 +176,134 @@ public enum PropertyType implements IPropertyType {
 	//
 	Transferpack(writer -> ((TransferPack) writer.value()).writeToBuffer(writer.buf()), reader -> TransferPack.readFromBuffer(reader.buf()), writer -> writer.tag().put(writer.prop().getName(), ((TransferPack) writer.prop().get()).writeToTag()), reader -> TransferPack.readFromTag(reader.tag().getCompound(reader.prop().getName()))),
 	//
-	;
+	Vec3(
+			//
+			writer -> {
+				net.minecraft.world.phys.Vec3 val = (net.minecraft.world.phys.Vec3) writer.value();
+				writer.buf().writeDouble(val.x);
+				writer.buf().writeDouble(val.y);
+				writer.buf().writeDouble(val.z);
+			}, reader -> {
+				return new net.minecraft.world.phys.Vec3(reader.buf().readDouble(), reader.buf().readDouble(), reader.buf().readDouble());
+			},
+			//
+			writer -> net.minecraft.world.phys.Vec3.CODEC.encodeStart(NbtOps.INSTANCE, (net.minecraft.world.phys.Vec3) writer.prop().get()).result().ifPresent(tag -> writer.tag().put(writer.prop().getName(), tag)),
+			//
+			reader -> net.minecraft.world.phys.Vec3.CODEC.decode(NbtOps.INSTANCE, reader.tag().get(reader.prop().getName())).result().get().getFirst()
+	//
+	),
+	//
+	IntegerList(
+			//
+			(thisList, otherList) -> {
+				List<Integer> thisCasted = (List<Integer>) thisList;
+				List<Integer> otherCasted = (List<Integer>) otherList;
+				if (thisCasted.size() != otherCasted.size()) {
+					return false;
+				}
+				int a, b;
+				for (int i = 0; i < thisCasted.size(); i++) {
+					a = thisCasted.get(i);
+					b = otherCasted.get(i);
+					if (a != b) {
+						return false;
+					}
+				}
+				return true;
+			},
+			//
+			writer -> {
+				List<Integer> list = (List<java.lang.Integer>) writer.value();
+				writer.buf().writeInt(list.size());
+				for (int i : list) {
+					writer.buf().writeInt(i);
+				}
+			}, reader -> {
+				List<Integer> list = new ArrayList<>();
+				int size = reader.buf().readInt();
+				for (int i = 0; i < size; i++) {
+					list.add(reader.buf().readInt());
+				}
+				return list;
+			},
+			//
+			writer -> {
+				List<Integer> list = (List<java.lang.Integer>) writer.prop().get();
+				CompoundTag data = new CompoundTag();
+				data.putInt("size", list.size());
+				for (int i = 0; i < list.size(); i++) {
+					data.putInt("" + i, list.get(i));
+				}
+				writer.tag().put(writer.prop().getName(), data);
+			},
+			//
+			reader -> {
+				List<Integer> list = new ArrayList<>();
+				CompoundTag data = reader.tag().getCompound(reader.prop().getName());
+				int size = data.getInt("size");
+				for (int i = 0; i < size; i++) {
+					list.add(data.getInt("" + i));
+				}
+				return list;
+			}
+	//
+	),
+	//
+	StringList(
+			///
+			(thisList, otherList) -> {
+				List<String> thisCasted = (List<String>) thisList;
+				List<String> otherCasted = (List<String>) otherList;
+				if (thisCasted.size() != otherCasted.size()) {
+					return false;
+				}
+				String a, b;
+				for (int i = 0; i < thisCasted.size(); i++) {
+					a = thisCasted.get(i);
+					b = otherCasted.get(i);
+					if (a != b) {
+						return false;
+					}
+				}
+				return true;
+			},
+			//
+			writer -> {
+				List<String> list = (List<String>) writer.value();
+				writer.buf().writeInt(list.size());
+				for (String i : list) {
+					writer.buf().writeUtf(i);
+				}
+			}, reader -> {
+				List<String> list = new ArrayList<>();
+				int size = reader.buf().readInt();
+				for (int i = 0; i < size; i++) {
+					list.add(reader.buf().readUtf());
+				}
+				return list;
+			},
+			//
+			writer -> {
+				List<String> list = (List<String>) writer.prop().get();
+				CompoundTag data = new CompoundTag();
+				data.putInt("size", list.size());
+				for (int i = 0; i < list.size(); i++) {
+					data.putString("" + i, list.get(i));
+				}
+				writer.tag().put(writer.prop().getName(), data);
+			},
+			//
+			reader -> {
+				List<String> list = new ArrayList<>();
+				CompoundTag data = reader.tag().getCompound(reader.prop().getName());
+				int size = data.getInt("size");
+				for (int i = 0; i < size; i++) {
+					list.add(data.getString("" + i));
+				}
+				return list;
+			}
+	//
+	);
 
 	private final ResourceLocation id;
 

@@ -68,8 +68,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.RegistryObject;
 
 @JeiPlugin
 public class ElectrodynamicsJEIPlugin implements IModPlugin {
@@ -80,6 +82,27 @@ public class ElectrodynamicsJEIPlugin implements IModPlugin {
 	private static final int FULL_FLUID_SQUARE = 1600;
 
 	// private static IJeiRuntime RUNTIME = null;
+	
+	private static FluidStack makeFluidStack(RegistryObject<Fluid> fluid)
+	{
+		FluidStack fluidStack;
+		fluidStack = new FluidStack(fluid.get(), 1000);
+		return fluidStack;
+	}
+
+	/*
+	@Override
+	public void registerExtraIngredients(IExtraIngredientRegistration registration)
+	{
+		Collection<RegistryObject<Fluid>> fluids = ElectrodynamicsFluids.FLUIDS.getEntries();
+		Collection<FluidStack> modFluids = new ArrayList<>();
+		for (RegistryObject<Fluid> fluid : fluids)
+		{
+			modFluids.add(makeFluidStack(fluid));
+		}
+		registration.addExtraIngredients(ForgeTypes.FLUID_STACK, modFluids);
+	}
+	*/
 
 	@Override
 	public ResourceLocation getPluginUid() {
