@@ -13,7 +13,6 @@ import electrodynamics.common.packet.types.client.PacketSetClientCoalGenFuels;
 import electrodynamics.common.packet.types.client.PacketSetClientCombustionFuel;
 import electrodynamics.common.packet.types.client.PacketSetClientGasCollectorCards;
 import electrodynamics.common.packet.types.client.PacketSetClientThermoGenSources;
-import electrodynamics.common.packet.types.client.PacketSpawnSmokeParticle;
 import electrodynamics.common.packet.types.client.PacketUpdateSpecificPropertyClient;
 import electrodynamics.common.packet.types.server.PacketJetpackFlightServer;
 import electrodynamics.common.packet.types.server.PacketModeSwitchServer;
@@ -52,7 +51,6 @@ public class NetworkHandler {
         registry.playToClient(PacketSetClientCombustionFuel.TYPE, PacketSetClientCombustionFuel.CODEC, PacketSetClientCombustionFuel::handle);
         registry.playToClient(PacketSetClientGasCollectorCards.TYPE, PacketSetClientGasCollectorCards.CODEC, PacketSetClientGasCollectorCards::handle);
         registry.playToClient(PacketSetClientThermoGenSources.TYPE, PacketSetClientThermoGenSources.CODEC, PacketSetClientThermoGenSources::handle);
-        registry.playToClient(PacketSpawnSmokeParticle.TYPE, PacketSpawnSmokeParticle.CODEC, PacketSpawnSmokeParticle::handle);
         registry.playToClient(PacketUpdateSpecificPropertyClient.TYPE, PacketUpdateSpecificPropertyClient.CODEC, PacketUpdateSpecificPropertyClient::handle);
 
         // SERVER
